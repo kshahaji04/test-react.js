@@ -26,6 +26,23 @@
   width: 60%;
 }
 
-/* .delete-link {
-  padding: 2px 0px !important;
-} */
+
+.input-fields {
+  background-color: #E0E1F5;
+    padding: 9px;
+    /* border: none; */
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+    border: 1px solid #2f308c6e;
+}
+.search-btn {
+  background-color: #2f308c;
+  padding: 9px;
+  color: white;
+}
+.table-heading {
+  background-color: #2f308c;
+  color: white;
+}
+.sr-width {
+  width: 6%
+}
