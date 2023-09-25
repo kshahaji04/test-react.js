@@ -1,12 +1,13 @@
-import './App.css';
-import Navbar from './components/Header/Navbar';
+// import './App.css';
+import './index.css';
 import AppRoutes from './routes/routes';
 
 const App = () => {
   return (
     <>
       <div>
-        <Navbar />
+        {/* <Navbar /> */}
+        {/* <ChittiMaster /> */}
         <AppRoutes />
       </div>
     </>

@@ -1,9 +1,15 @@
-import React from 'react'
+import CreateChitti from './CreateChitti';
+import ChallanItemsTable from './ChallanItemsTable';
+import NarrationTable from './NarrationTable';
 
 const Chitti = () => {
   return (
-    <div>Chitti</div>
-  )
-}
+    <div>
+      <CreateChitti />
+      <ChallanItemsTable />
+      <NarrationTable />
+    </div>
+  );
+};
 
-export default Chitti
+export default Chitti;
