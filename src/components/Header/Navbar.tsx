@@ -1,7 +1,13 @@
-import React from 'react';
 
+import MainNavigationTab from './MainNavigationTab';
+import TopNavbar from './TopNavbar';
 const Navbar = () => {
-  return <div>Navbar</div>;
+  return (
+    <>
+     <TopNavbar/>
+     <MainNavigationTab/>
+    </>
+  );
 };
 
 export default Navbar;
