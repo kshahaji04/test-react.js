@@ -1,13 +1,10 @@
-// import './App.css';
-import './index.css';
-import AppRoutes from './routes/routes';
+import './App.css';
+import AppRoutes from './routes/AppRoutes';
 
 const App = () => {
   return (
     <>
       <div>
-        {/* <Navbar /> */}
-        {/* <ChittiMaster /> */}
         <AppRoutes />
       </div>
     </>
