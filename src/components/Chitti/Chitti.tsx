@@ -7,9 +7,9 @@ import NarrationTable from './NarrationTable';
 const Chitti = () => {
   return (
     <>
-      <div className="container mt-5">
+      <div className="container mt-3">
         <div className="row justify-content-center">
-          <div className="col-lg-12">
+          <div className="col-lg-12 chitti-nav-tabs">
             <Tabs
               defaultActiveKey="profile"
               id="justify-tab-example"

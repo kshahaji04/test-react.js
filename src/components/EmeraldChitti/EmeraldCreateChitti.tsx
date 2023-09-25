@@ -1,6 +1,7 @@
 import { Formik } from 'formik';
+import React from 'react';
 
-const CreateChitti = () => {
+const EmeraldCreateChitti = () => {
   const initialFormValues = {
     date: '',
     customer: '',
@@ -11,7 +12,7 @@ const CreateChitti = () => {
   };
   return (
     <>
-      <div className="container  border rounded-3 px-2 py-2">
+      <div className="container mt-2 border rounded-3 px-2 py-1">
         <Formik
           initialValues={initialFormValues}
           //  validate={values => {
@@ -158,12 +159,34 @@ const CreateChitti = () => {
                     />
                   </div>
                 </div>
+                <div className="col-lg-4 col-md-6 py-2">
+                  <label className="form-Form.Label fs-6 text-dark pb-1 form-label-bold">
+                    Supplier :
+                  </label>
+                  <select
+                    id="supplier"
+                    name="supplier"
+                    className="form-select "
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-label=".form-select-sm example"
+                  >
+                    <option onChange={handleChange} selected>
+                      Select Supplier
+                    </option>
+                    <option>supplier 1</option>
+                    <option>supplier 2</option>
+                    <option>supplier 3</option>
+                  </select>
+
+                  {/* {errors.email && errors.email} */}
+                </div>
               </div>
               <div className="col-lg-4 d-flex justify-content-center">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className=" btn btn-outline-primary my-3 w-50"
+                  className=" btn btn-outline-primary my-2 w-50"
                 >
                   Submit
                 </button>
@@ -176,4 +199,4 @@ const CreateChitti = () => {
   );
 };
 
-export default CreateChitti;
+export default EmeraldCreateChitti;
