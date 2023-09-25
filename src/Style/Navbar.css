@@ -192,7 +192,7 @@
     }
     .card {
         box-shadow: #2f308c24 0px 8px 24px;
-        background-color: #b2abf2;
+        /* background-color: #b2abf2; */
         border: none !important;
     }
     .cards-links {
