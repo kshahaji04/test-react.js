@@ -1,6 +1,4 @@
-import React from 'react';
 import UserProfile from './UserProfile';
-import { Link } from 'react-router-dom';
 import '../../Style/Navbar.css';
 import logo from '../../assets/Logo.png';
 
@@ -11,7 +9,7 @@ const TopNavbar = () => {
         <div className="container flexstart_mobile">
           <i className="fa fa-bars toggle_bar" aria-hidden="true"></i>
           <a className="navbar-brand logo_color">
-            <img src={logo} alt="logo" height="70px" />
+            <img src={logo} alt="logo" height="65px" />
           </a>
           <div className="dropdown">
             <button

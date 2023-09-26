@@ -4,9 +4,10 @@ import { NavLink } from 'react-router-dom';
 const MainNavigationTab = () => {
   return (
     <>
-      <div className="container-fluid card-container">
-        <div className="row justify-content-center">
-          <div className="col-md-2">
+      <div className="container-fluid card-container-margin">
+        <hr className=" hr_line" />
+        <div className="row justify-content-center mt-2">
+          <div className="col-md-2 col-3">
             <NavLink
               to="/"
               className="text-decoration-none text-dark"
@@ -15,7 +16,7 @@ const MainNavigationTab = () => {
               // })}
             >
               <div className="card w-100">
-                <div className="card-body row ">
+                <div className="card-body row p-1">
                   <div className="col-md-3">
                     <i className="fa-regular fa-file icons-color"></i>
                   </div>
@@ -28,7 +29,7 @@ const MainNavigationTab = () => {
               </div>
             </NavLink>
           </div>
-          <div className="col-md-2">
+          <div className="col-md-2 col-3">
             <NavLink
               to="/chitti"
               className="text-decoration-none text-dark"
@@ -51,7 +52,7 @@ const MainNavigationTab = () => {
             </NavLink>
             {/* <a href="/chitti" className="cards-links"></a> */}
           </div>
-          <div className="col-md-2">
+          <div className="col-md-2 col-3">
             <NavLink
               to="/emerald"
               className="text-decoration-none text-dark"
@@ -73,7 +74,7 @@ const MainNavigationTab = () => {
               </div>
             </NavLink>
           </div>
-          <div className="col-md-2">
+          <div className="col-md-2 col-3">
             <NavLink
               to="/report"
               className="text-decoration-none text-dark"
@@ -95,7 +96,7 @@ const MainNavigationTab = () => {
               </div>
             </NavLink>
           </div>
-          <div className="col-md-2">
+          <div className="col-md-2 col-3">
             <NavLink
               to="/data-upload"
               className="text-decoration-none text-dark"

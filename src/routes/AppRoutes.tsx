@@ -1,13 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Chitti from '../components/Chitti/Chitti';
-import CreateChitti from '../components/Chitti/CreateChitti';
+import Chitti from '../components/Chitti/ChittiMaster';
 import Login from '../components/Auth/Login';
 import ProtectedRoute from './ProtectedRoute';
-import Master from '../components/master';
-
+import Master from '../components/Chitti/ChittiMaster';
 import Report from '../components/Report';
-import DataUpload from '../components/DataUpload';
 import EmeraldChittiMaster from '../components/EmeraldChitti/EmeraldChittiMaster';
+import DataUploadMaster from '../components/DataUpload/DataUploadMaster';
 
 const AppRoutes = () => {
   return (
@@ -49,7 +47,7 @@ const AppRoutes = () => {
           path="/data-upload"
           element={
             <ProtectedRoute>
-              <DataUpload />
+              <DataUploadMaster />
             </ProtectedRoute>
           }
         />

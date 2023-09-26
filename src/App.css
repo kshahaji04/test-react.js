@@ -4,24 +4,52 @@
   font-family: 'Nunito' !important;
 }
 
+.card-container-margin {
+  margin-top: 80px;
+}
+
+.hr_line {
+  height: 3px !important;
+  margin: 0px;
+}
+
 .chitti-nav-tabs .nav-justified .nav-item .nav-link {
   width: 90% ;
 }
 
+.chitti-listing-search-btn:hover{
+  color: white;
+}
+
+.chitti-listing-search-btn {
+  padding: 0px !important;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+ .chitti-nav-tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  background-color:#2f308c;
+  color: white;
+}
 .chitti-nav-tabs .nav-justified .nav-item {
   display: flex;
   justify-content: center;
 }
-
-.table-header-row {
-  background-color: #E0E1F5;
-}
-
 .form-control{
-  padding: 6px;
+  padding: 3px;
   border: 1px solid #2f308c6e;
+
 }
 
+.custom-input-field{
+  height: 45% !important;
+  
+}
+/* .custom-input-field-l{
+  height: 55% !important;
+} */
 .narration-table-product{
   width: 60%;
 }
@@ -29,9 +57,7 @@
 
 .input-fields {
   background-color: #E0E1F5;
-    padding: 9px;
-    /* border: none; */
-    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+    padding: 12px 10px;
     border: 1px solid #2f308c6e;
 }
 .search-btn {
@@ -45,4 +71,24 @@
 }
 .sr-width {
   width: 6%
+}
+
+.table-header-row {
+  /* background-color: #E0E1F5; */
+  background-color: #2f308c;
+  color: white;
+  line-height: 13px;
+}
+.table-heading-row{
+  line-height: 13px;
+}
+
+.form-submit-button {
+  width: 15%;
+}
+
+@media screen and (max-width: 480px) {
+  .form-submit-button {
+    width: 45%;
+  }
 }

@@ -10,26 +10,31 @@ const NarrationTable = () => {
     };
     setTableData([...tableData, newRow]);
   };
+
+  const HandleDeleteRow: any = (id: any) => {
+    if (tableData?.length > 1) {
+      const updatedData = tableData.filter((row) => row.id !== id);
+      setTableData(updatedData);
+    }
+  };
   return (
-    <div className="container mt-2 border rounded-3 p-3 py-4 mb-5">
-      <div className="d-flex justify-content-between mb-2">
+    <div className="container mt-2 border rounded-3 py-1  mb-5">
+      <div className="d-flex justify-content-between mb-2 table-heading-row">
         <caption>Narration- HUID</caption>
-        <button
-          className="btn btn-outline-primary py-1 px-2"
-          onClick={HandleAddRow}
-        >
+        <p className="cursor-pointer my-auto btn-link" onClick={HandleAddRow}>
           Add Row
-        </button>
+        </p>
       </div>
       <table className="table table-striped caption-top table-hover">
         <thead>
           <tr className="table-header-row">
-            <th scope="col">No</th>
+            <th scope="col">No.</th>
             <th scope="col" className="narration-table-product">
               Product
             </th>
             <th scope="col">HUID Pieces</th>
             <th scope="col">HUID Weight</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -40,7 +45,7 @@ const NarrationTable = () => {
                 <select
                   id="category"
                   name="category"
-                  className="form-select "
+                  className="form-select p-0 custom-input-field"
                   aria-label=".form-select-sm example"
                 >
                   <option></option>
@@ -52,7 +57,7 @@ const NarrationTable = () => {
               <td>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control custom-input-field"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-sm"
                 />
@@ -60,10 +65,18 @@ const NarrationTable = () => {
               <td>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control custom-input-field"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-sm"
                 />
+              </td>
+              <td>
+                <div
+                  className="d-flex align-items-center delete-link"
+                  onClick={() => HandleDeleteRow(row.id)}
+                >
+                  <i className="fa-solid fa-xmark fs-4"></i>
+                </div>
               </td>
             </tr>
           ))}

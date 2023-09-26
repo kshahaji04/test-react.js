@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 
-const CreateChitti = () => {
+const CreateChittiForm = () => {
   const initialFormValues = {
     date: '',
     customer: '',
@@ -44,8 +44,8 @@ const CreateChitti = () => {
           }) => (
             <form onSubmit={handleSubmit} className="d-flex flex-column">
               <div className="row ">
-                <div className="col-lg-4 col-md-6 py-2">
-                  <label className="form-Form.Label fs-6 text-dark pb-1 form-label-bold">
+                <div className="col-lg-4 col-md-6">
+                  <label className="form-Form.Label fs-6 text-dark form-label-bold">
                     Transaction Date :
                   </label>
                   <div className="d-flex justify-content-between h-100">
@@ -56,7 +56,7 @@ const CreateChitti = () => {
                       value="2018-07-22"
                       min="2011-01-01"
                       max="2028-12-31"
-                      className="form-control h-50"
+                      className="form-control custom-input-field py-0"
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-sm"
                       onChange={handleChange}
@@ -65,30 +65,29 @@ const CreateChitti = () => {
                     {/* <span className="d-flex px-3">(dd/mm/yy)</span> */}
                   </div>
                 </div>
-                <div className="col-lg-4 col-md-6 py-2">
-                  <label className="form-Form.Label fs-6 text-dark pb-1 form-label-bold">
-                    Customer :{/* <span className="red">*</span> */}
+                <div className="col-lg-4 col-md-6 ">
+                  <label className="form-Form.Label fs-6 text-dark form-label-bold">
+                    Customer :
                   </label>
+
                   <input
                     type="text"
                     name="customer"
-                    className="form-control h-50"
+                    className="form-control custom-input-field"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    // value={values.customer}
                   />
-                  {/* {errors.email && errors.email} */}
                 </div>
-                <div className="col-lg-4 col-md-6 py-2">
-                  <label className="form-Form.Label fs-6 text-dark pb-1 form-label-bold">
-                    Detail :{/* <span className="red">*</span> */}
+                <div className="col-lg-4 col-md-6">
+                  <label className="form-Form.Label fs-6 text-dark form-label-bold">
+                    Detail :
                   </label>
                   <input
                     type="text"
                     name="detail"
-                    className="form-control h-50"
+                    className="form-control custom-input-field"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
                     onChange={handleChange}
@@ -97,15 +96,15 @@ const CreateChitti = () => {
                   />
                   {/* {errors.email && errors.email} */}
                 </div>
-                <div className="col-lg-4 col-md-6 py-2">
-                  <label className="form-Form.Label fs-6 text-dark pb-1 form-label-bold">
-                    Cs category :{/* <span className="red">*</span> */}
+                <div className="col-lg-4 col-md-6">
+                  <label className="form-Form.Label fs-6 text-dark form-label-bold">
+                    Cs category :
                   </label>
 
                   <select
                     id="category"
                     name="category"
-                    className="form-select "
+                    className="form-select custom-input-field py-0"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-label=".form-select-sm example"
@@ -117,17 +116,15 @@ const CreateChitti = () => {
                     <option>Two</option>
                     <option>Three</option>
                   </select>
-
-                  {/* {errors.email && errors.email} */}
                 </div>
-                <div className="col-lg-4 col-md-6 py-2">
-                  <label className="form-Form.Label fs-6 text-dark pb-1 form-label-bold">
+                <div className="col-lg-4 col-md-6">
+                  <label className="form-Form.Label fs-6 text-dark form-label-bold">
                     kun Category :
                   </label>
                   <select
                     id="category2"
                     name="category2"
-                    className="form-select "
+                    className="form-select custom-input-field py-0"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-label=".form-select-sm example"
@@ -139,16 +136,14 @@ const CreateChitti = () => {
                     <option>Two</option>
                     <option>Three</option>
                   </select>
-
-                  {/* {errors.email && errors.email} */}
                 </div>
-                <div className="col-lg-4 col-md-6 py-2 d-flex align-items-end justify-content-center">
+                <div className="col-lg-4 col-md-6 d-flex align-items-end justify-content-center">
                   <div className="d-flex flex-column w-100">
-                    <label className="form-Form.Label fs-6 text-dark pb-1 form-label-bold">
+                    <label className="form-Form.Label fs-6 text-dark form-label-bold">
                       Barcode Scanning :
                     </label>
                     <input
-                      className="form-check-input mx-4 fs-5"
+                      className="form-check-input mx-4 fs-5 "
                       type="checkbox"
                       value=""
                       id="barcode"
@@ -159,15 +154,15 @@ const CreateChitti = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-4 d-flex justify-content-center">
+              {/* <div className=" d-flex justify-content-end">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className=" btn btn-outline-primary my-3 w-50"
+                  className=" btn btn-outline-primary mt-2 mx-5 py-1 form-submit-button"
                 >
                   Submit
                 </button>
-              </div>
+              </div> */}
             </form>
           )}
         </Formik>
@@ -176,4 +171,4 @@ const CreateChitti = () => {
   );
 };
 
-export default CreateChitti;
+export default CreateChittiForm;
