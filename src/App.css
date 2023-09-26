@@ -1,7 +1,32 @@
 #root {
-  /* max-width: 1280px; */
-  /* margin: 0 auto;  */
   font-family: 'Nunito' !important;
+  font-size: 0.9rem;
+}
+
+.header-card-container {
+  border: 1px solid rgb(180, 209, 235);
+  border-radius: 10px ;
+  margin: 0px 4px;
+}
+.header-card {
+  border-radius: 9px !important;
+}
+
+.listing-table td {
+  padding: 0px !important;
+}
+
+.button-section-td {
+  padding: 3px 0.1rem !important;
+}
+
+.button-section-td button {
+  line-height: 1.1 !important;
+}
+.icons-color{
+  height: 40px !important;
+  width: 35px !important;
+  font-size: 20px !important;
 }
 
 .card-container-margin {
@@ -13,10 +38,11 @@
   margin: 0px;
 }
 
-.chitti-nav-tabs .nav-justified .nav-item .nav-link {
-  width: 90% ;
-}
 
+.chitti-nav-tabs .nav-tabs .nav-item {
+  padding: 0px !important;
+  line-height: 13px !important;
+}
 .chitti-listing-search-btn:hover{
   color: white;
 }
@@ -45,11 +71,12 @@
 
 .custom-input-field{
   height: 45% !important;
-  
 }
-/* .custom-input-field-l{
-  height: 55% !important;
+
+/* .custom-input-field-c {
+  height: 45% !important;
 } */
+
 .narration-table-product{
   width: 60%;
 }
@@ -77,10 +104,16 @@
   /* background-color: #E0E1F5; */
   background-color: #2f308c;
   color: white;
-  line-height: 13px;
+  line-height: 7px;
+}
+.table-body-row {
+  line-height: 23px !important;
+}
+.table-body-row-em {
+  line-height: 8px !important;
 }
 .table-heading-row{
-  line-height: 13px;
+  line-height: 7px;
 }
 
 .form-submit-button {

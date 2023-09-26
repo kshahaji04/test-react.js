@@ -2,7 +2,6 @@ import { Tab } from 'react-bootstrap';
 import Tabs from 'react-bootstrap/Tabs';
 import EmeraldCreateChitti from './CreateEmeraldChitti/EmeraldCreateChitti';
 import EmeraldChittiTable from './CreateEmeraldChitti/EmeraldChittiTable';
-import ChittiListing from '../Chitti/ChittiListing/ChittiListing';
 import EmeraldListing from './EmeraldListing/EmeraldListing';
 
 const EmeraldChittiMaster = () => {
@@ -16,7 +15,7 @@ const EmeraldChittiMaster = () => {
             className="mb-1"
             justify
           >
-            <Tab eventKey="chitti-listing" title="Emerald Listing">
+            <Tab eventKey="chitti-listing" title="Emerald Chitti Listing">
               <div className="container">
                 <h4 className="text-center mt-2">Emerald Listing</h4>
 

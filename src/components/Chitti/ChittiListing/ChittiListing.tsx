@@ -1,10 +1,8 @@
-import React from 'react';
-
 const ChittiListing = () => {
   return (
     <>
       <div className="container">
-        <table className="table table table-striped table-hover mt-1">
+        <table className="table table table-striped table-hover listing-table">
           <thead className="table-heading">
             <tr className="table-heading-row">
               <th className="sr-width" scope="col">
@@ -23,12 +21,12 @@ const ChittiListing = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
+            <tr className="table-body-row">
+              <td scope="row">1</td>
               <td>20/09/2023</td>
               <td>001</td>
               <td>Jhon</td>
-              <td className="">
+              <td className="button-section-td">
                 <button className="btn btn-primary px-lg-2 py-0">Edit</button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
                   Print
@@ -37,11 +35,11 @@ const ChittiListing = () => {
               </td>
             </tr>
             <tr>
-              <th scope="row">2</th>
+              <td scope="row ">2</td>
               <td>04/06/2023</td>
               <td>002</td>
               <td>Reena</td>
-              <td className="">
+              <td className=" button-section-td">
                 <button className="btn btn-primary px-lg-2 py-0">Edit</button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
                   Print
@@ -50,11 +48,11 @@ const ChittiListing = () => {
               </td>
             </tr>
             <tr>
-              <th scope="row">3</th>
+              <td scope="row">3</td>
               <td>12/07/2023</td>
               <td>003</td>
               <td>Seema</td>
-              <td className="">
+              <td className="button-section-td">
                 <button className="btn btn-primary px-lg-2 py-0">Edit</button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
                   Print

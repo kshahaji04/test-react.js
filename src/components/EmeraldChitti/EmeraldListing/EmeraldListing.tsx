@@ -27,14 +27,14 @@ const EmeraldListing = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
+            <tr className="table-body-row-em">
+              <td scope="row">1</td>
               <td>BOM</td>
               <td>ANT AHM</td>
               <td>100</td>
               <td>100.00</td>
               <td>3000</td>
-              <td className="">
+              <td className="button-section-td">
                 <button className="btn btn-primary px-lg-2 py-0">Edit</button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
                   Print
@@ -42,14 +42,14 @@ const EmeraldListing = () => {
                 <button className="btn btn-danger px-lg-2 py-0">Delete</button>
               </td>
             </tr>
-            <tr>
-              <th scope="row">1</th>
+            <tr className="table-body-row-em">
+              <td scope="row">2</td>
               <td>BOM</td>
               <td>ANT AHM</td>
               <td>100</td>
               <td>100.00</td>
               <td>3000</td>
-              <td className="">
+              <td className="button-section-td">
                 <button className="btn btn-primary px-lg-2 py-0">Edit</button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
                   Print
@@ -57,14 +57,14 @@ const EmeraldListing = () => {
                 <button className="btn btn-danger px-lg-2 py-0">Delete</button>
               </td>
             </tr>
-            <tr>
-              <th scope="row">1</th>
+            <tr className="table-body-row-em">
+              <td scope="row">3</td>
               <td>BOM</td>
               <td>ANT AHM</td>
               <td>100</td>
               <td>100.00</td>
               <td>3000</td>
-              <td className="">
+              <td className="button-section-td">
                 <button className="btn btn-primary px-lg-2 py-0">Edit</button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
                   Print
@@ -100,14 +100,14 @@ const EmeraldListing = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
+            <tr className="table-body-row-em">
+              <td scope="row">1</td>
               <td>Emerald</td>
               <td>Antique</td>
               <td>200</td>
               <td>200.00</td>
               <td>3100</td>{' '}
-              <td className="">
+              <td className="button-section-td">
                 <button className="btn btn-primary px-lg-2 py-0">Edit</button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
                   Print
@@ -115,14 +115,14 @@ const EmeraldListing = () => {
                 <button className="btn btn-danger px-lg-2 py-0">Delete</button>
               </td>
             </tr>
-            <tr>
-              <th scope="row">1</th>
+            <tr className="table-body-row-em">
+              <td scope="row">2</td>
               <td>BOM</td>
               <td>ANT AHM</td>
               <td>100</td>
               <td>100.00</td>
               <td>3000</td>
-              <td className="">
+              <td className="button-section-td">
                 <button className="btn btn-primary px-lg-2 py-0">Edit</button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
                   Print
@@ -130,14 +130,14 @@ const EmeraldListing = () => {
                 <button className="btn btn-danger px-lg-2 py-0">Delete</button>
               </td>
             </tr>
-            <tr>
-              <th scope="row">1</th>
+            <tr className="table-body-row-em">
+              <td scope="row">3</td>
               <td>BOM</td>
               <td>ANT AHM</td>
               <td>100</td>
               <td>100.00</td>
               <td>3000</td>
-              <td className="">
+              <td className="button-section-td">
                 <button className="btn btn-primary px-lg-2 py-0">Edit</button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
                   Print

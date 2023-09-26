@@ -1,7 +1,7 @@
 import { Tab } from 'react-bootstrap';
 import Tabs from 'react-bootstrap/Tabs';
 import DataUpload from './DataUpload/DataUpload';
-import ViewUpload from './ViewUpload/ViewUpload';
+import ViewUploadedList from './ViewUpload/ViewUploadedList';
 
 const DataUploadMaster = () => {
   return (
@@ -19,7 +19,7 @@ const DataUploadMaster = () => {
                 <DataUpload />
               </Tab>
               <Tab eventKey="longer-tab" title="View uploaded list">
-                <ViewUpload />
+                <ViewUploadedList />
               </Tab>
             </Tabs>
           </div>

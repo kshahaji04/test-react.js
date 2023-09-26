@@ -18,17 +18,22 @@ const ChallanItemsTable = () => {
     }
   };
 
+  const handleKeyDown = (event: any, id: any) => {
+    if (event.key === 'Tab' && id === tableData[tableData.length - 1].id) {
+      HandleAddRow();
+    }
+  };
   return (
     <>
-      <div className="container mt-2 border rounded-3 py-1 ">
-        <div className="d-flex justify-content-between mb-1 table-heading-row">
+      <div className="container mt-1 border rounded-3">
+        <div className="d-flex justify-content-between table-heading-row">
           <caption>Challan Items</caption>
           <p className="cursor-pointer my-auto btn-link" onClick={HandleAddRow}>
             Add Row
           </p>
         </div>
         <div className="table-responsive">
-          <table className="table  table-striped caption-top table-hover">
+          <table className="table table-striped caption-top table-hover">
             <thead>
               <tr className="table-header-row">
                 <th scope="col">No.</th>
@@ -80,6 +85,7 @@ const ChallanItemsTable = () => {
                       className="form-control custom-input-field"
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-sm"
+                      onKeyDown={(e) => handleKeyDown(e, row.id)}
                     />
                   </td>
                   <td>

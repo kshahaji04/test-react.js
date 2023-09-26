@@ -19,7 +19,7 @@ const NarrationTable = () => {
   };
   return (
     <div className="container mt-2 border rounded-3 py-1  mb-5">
-      <div className="d-flex justify-content-between mb-2 table-heading-row">
+      <div className="d-flex justify-content-between table-heading-row ">
         <caption>Narration- HUID</caption>
         <p className="cursor-pointer my-auto btn-link" onClick={HandleAddRow}>
           Add Row

@@ -5,92 +5,120 @@ const MainNavigationTab = () => {
   return (
     <>
       <div className="container-fluid card-container-margin">
-        <hr className=" hr_line" />
-        <div className="row justify-content-center mt-2">
-          <div className="col-md-2 col-3">
+        <hr className="hr_line" />
+        <div className="container d-flex align-items-center justify-content-evenly mt-1">
+          <div className="header-card-container px-1">
+            <NavLink to="/" className="text-decoration-none text-dark">
+              <div className="d-flex align-items-center header-card">
+                <i className="fa-regular fa-file icons-color "></i>
+
+                <p className=" text-body-secondary my-auto px-1">Master</p>
+              </div>
+            </NavLink>
+          </div>
+          <div className="header-card-container px-1">
+            <NavLink to="/chitti" className="text-decoration-none text-dark">
+              <div className="d-flex align-items-center header-card">
+                <i className="fa-solid fa-file-invoice icons-color"></i>
+
+                <p className=" text-body-secondary my-auto px-1">Chitti</p>
+              </div>
+            </NavLink>
+          </div>
+          <div className="header-card-container px-1">
+            <NavLink to="/emerald" className="text-decoration-none text-dark">
+              <div className="d-flex align-items-center header-card">
+                <i className="fa-regular fa-gem icons-color"></i>
+
+                <p className=" text-body-secondary my-auto px-1">
+                  Emerald Chitti
+                </p>
+              </div>
+            </NavLink>
+          </div>
+          <div className="header-card-container px-1">
+            <NavLink to="/report" className="text-decoration-none text-dark">
+              <div className="d-flex align-items-center header-card">
+                <i className="fa-regular fa-file icons-color"></i>
+
+                <p className=" text-body-secondary my-auto px-1">Report</p>
+              </div>
+            </NavLink>
+          </div>
+          <div className="header-card-container px-1">
             <NavLink
-              to="/"
+              to="/data-upload"
               className="text-decoration-none text-dark"
-              // style={({ isActive }) => ({
-              //   color: isActive ? 'greenyellow' : 'white',
-              // })}
             >
+              <div className="d-flex align-items-center header-card">
+                <i className="fa-solid fa-upload icons-color"></i>
+
+                <p className=" text-body-secondary my-auto px-1">Data Upload</p>
+              </div>
+            </NavLink>
+          </div>
+        </div>
+
+        {/* <div className="row justify-content-center mt-2">
+          <div className="col-md-2 col-3">
+            <NavLink to="/" className="text-decoration-none text-dark">
               <div className="card w-100">
-                <div className="card-body row p-1">
+                <div className="card-body row header-card">
                   <div className="col-md-3">
                     <i className="fa-regular fa-file icons-color"></i>
                   </div>
                   <div className="col-md-9 mt-3">
-                    <h6 className="card-subtitle mb-2 text-body-secondary">
+                    <p className="card-subtitle mb-2 text-body-secondary">
                       Master
-                    </h6>
+                    </p>
                   </div>
                 </div>
               </div>
             </NavLink>
           </div>
           <div className="col-md-2 col-3">
-            <NavLink
-              to="/chitti"
-              className="text-decoration-none text-dark"
-              // style={({ isActive }) => ({
-              //   color: isActive ? 'greenyellow' : 'white',
-              // })}
-            >
+            <NavLink to="/chitti" className="text-decoration-none text-dark">
               <div className="card w-100">
                 <div className="card-body row">
                   <div className="col-md-3">
                     <i className="fa-solid fa-file-invoice icons-color"></i>
                   </div>
                   <div className="col-md-9 mt-3">
-                    <h6 className="card-subtitle mb-2 text-body-secondary">
+                    <p className="card-subtitle mb-2 text-body-secondary">
                       Chitti
-                    </h6>
+                    </p>
                   </div>
                 </div>
               </div>
             </NavLink>
-            {/* <a href="/chitti" className="cards-links"></a> */}
           </div>
           <div className="col-md-2 col-3">
-            <NavLink
-              to="/emerald"
-              className="text-decoration-none text-dark"
-              // style={({ isActive }) => ({
-              //   color: isActive ? 'greenyellow' : 'white',
-              // })}
-            >
+            <NavLink to="/emerald" className="text-decoration-none text-dark">
               <div className="card w-100">
                 <div className="card-body row">
                   <div className="col-md-3">
                     <i className="fa-regular fa-gem icons-color"></i>
                   </div>
                   <div className="col-md-9 mt-3">
-                    <h6 className="card-subtitle mb-2 text-body-secondary">
+                    <p className="card-subtitle mb-2 text-body-secondary">
                       Emerald Chitti
-                    </h6>
+                    </p>
                   </div>
                 </div>
               </div>
             </NavLink>
           </div>
           <div className="col-md-2 col-3">
-            <NavLink
-              to="/report"
-              className="text-decoration-none text-dark"
-              // style={({ isActive }) => ({
-              //   color: isActive ? 'greenyellow' : 'white',
-              // })}
-            >
+            <NavLink to="/report" className="text-decoration-none text-dark">
               <div className="card w-100">
                 <div className="card-body row">
                   <div className="col-md-3 ">
                     <i className="fa-regular fa-file icons-color"></i>
                   </div>
                   <div className="col-md-9 mt-3">
-                    <h6 className="card-subtitle mb-2 text-body-secondary">
+                    <p className="card-subtitle mb-2 text-body-secondary">
                       Report
-                    </h6>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -100,9 +128,6 @@ const MainNavigationTab = () => {
             <NavLink
               to="/data-upload"
               className="text-decoration-none text-dark"
-              // style={({ isActive }) => ({
-              //   color: isActive ? 'greenyellow' : 'white',
-              // })}
             >
               <div className="card w-100">
                 <div className="card-body row">
@@ -110,15 +135,15 @@ const MainNavigationTab = () => {
                     <i className="fa-solid fa-upload icons-color"></i>
                   </div>
                   <div className="col-md-9 mt-3">
-                    <h6 className="card-subtitle mb-2 text-body-secondary">
+                    <p className="card-subtitle mb-2 text-body-secondary">
                       Data Upload
-                    </h6>
+                    </p>
                   </div>
                 </div>
               </div>
             </NavLink>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -2,16 +2,14 @@ import { Formik } from 'formik';
 
 const CreateChittiForm = () => {
   const initialFormValues = {
+    gold: '',
     date: '',
-    customer: '',
-    detail: '',
-    category: '',
-    category2: '',
-    barcode: false,
+    client: '',
+    remark: '',
   };
   return (
     <>
-      <div className="container  border rounded-3 px-2 py-2">
+      <div className="container border rounded-3 px-2 py-1">
         <Formik
           initialValues={initialFormValues}
           //  validate={values => {
@@ -27,10 +25,7 @@ const CreateChittiForm = () => {
           //  }}
           onSubmit={(values, { setSubmitting }) => {
             console.log('submit values', values);
-            // setTimeout(() => {
-            //   alert(JSON.stringify(values, null, 2));
-            //   setSubmitting(false);
-            // }, 400);
+
             setSubmitting(false);
           }}
         >
@@ -44,9 +39,23 @@ const CreateChittiForm = () => {
           }) => (
             <form onSubmit={handleSubmit} className="d-flex flex-column">
               <div className="row ">
-                <div className="col-lg-4 col-md-6">
+                <div className="col-lg-3 col-md-6">
                   <label className="form-Form.Label fs-6 text-dark form-label-bold">
-                    Transaction Date :
+                    Gold Rate :
+                  </label>
+                  <input
+                    type="text"
+                    name="gold"
+                    className="form-control custom-input-field"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </div>
+                <div className="col-lg-3 col-md-6">
+                  <label className="form-Form.Label fs-6 text-dark form-label-bold">
+                    Date :
                   </label>
                   <div className="d-flex justify-content-between h-100">
                     <input
@@ -62,31 +71,16 @@ const CreateChittiForm = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    {/* <span className="d-flex px-3">(dd/mm/yy)</span> */}
                   </div>
                 </div>
-                <div className="col-lg-4 col-md-6 ">
-                  <label className="form-Form.Label fs-6 text-dark form-label-bold">
-                    Customer :
-                  </label>
 
-                  <input
-                    type="text"
-                    name="customer"
-                    className="form-control custom-input-field"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-sm"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </div>
-                <div className="col-lg-4 col-md-6">
+                <div className="col-lg-3 col-md-6">
                   <label className="form-Form.Label fs-6 text-dark form-label-bold">
-                    Detail :
+                    Client Name :
                   </label>
                   <input
                     type="text"
-                    name="detail"
+                    name="client"
                     className="form-control custom-input-field"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
@@ -96,28 +90,22 @@ const CreateChittiForm = () => {
                   />
                   {/* {errors.email && errors.email} */}
                 </div>
-                <div className="col-lg-4 col-md-6">
+                <div className="col-lg-3 col-md-6">
                   <label className="form-Form.Label fs-6 text-dark form-label-bold">
-                    Cs category :
+                    Remarks:
                   </label>
-
-                  <select
-                    id="category"
-                    name="category"
-                    className="form-select custom-input-field py-0"
+                  <input
+                    type="text"
+                    name="remark"
+                    className="form-control custom-input-field"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    aria-label=".form-select-sm example"
-                  >
-                    <option onChange={handleChange} selected>
-                      Select Cs Category
-                    </option>
-                    <option>One</option>
-                    <option>Two</option>
-                    <option>Three</option>
-                  </select>
+                    // value={values.email}
+                  />
                 </div>
-                <div className="col-lg-4 col-md-6">
+                {/* <div className="col-lg-4 col-md-6">
                   <label className="form-Form.Label fs-6 text-dark form-label-bold">
                     kun Category :
                   </label>
@@ -136,23 +124,7 @@ const CreateChittiForm = () => {
                     <option>Two</option>
                     <option>Three</option>
                   </select>
-                </div>
-                <div className="col-lg-4 col-md-6 d-flex align-items-end justify-content-center">
-                  <div className="d-flex flex-column w-100">
-                    <label className="form-Form.Label fs-6 text-dark form-label-bold">
-                      Barcode Scanning :
-                    </label>
-                    <input
-                      className="form-check-input mx-4 fs-5 "
-                      type="checkbox"
-                      value=""
-                      id="barcode"
-                      name="barcode"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                  </div>
-                </div>
+                </div> */}
               </div>
               {/* <div className=" d-flex justify-content-end">
                 <button
