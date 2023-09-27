@@ -18,7 +18,6 @@ const EmeraldChittiMaster = () => {
             <Tab eventKey="chitti-listing" title="Emerald Chitti Listing">
               <div className="container">
                 <h4 className="text-center mt-2">Emerald Listing</h4>
-
                 <EmeraldListing />
               </div>
             </Tab>

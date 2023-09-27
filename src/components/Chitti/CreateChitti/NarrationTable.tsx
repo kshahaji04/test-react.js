@@ -25,7 +25,7 @@ const NarrationTable = () => {
           Add Row
         </p>
       </div>
-      <table className="table table-striped caption-top table-hover">
+      <table className="table table-striped caption-top table-hover my-1">
         <thead>
           <tr className="table-header-row">
             <th scope="col">No.</th>

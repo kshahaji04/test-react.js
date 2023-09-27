@@ -15,7 +15,10 @@ const ChittiListing = () => {
                 Chitti No
               </th>
               <th className="" scope="col">
-                Customer
+                Client Name
+              </th>
+              <th className="" scope="col">
+                Status
               </th>
               <th className="w-25" scope="col"></th>
             </tr>
@@ -26,6 +29,7 @@ const ChittiListing = () => {
               <td>20/09/2023</td>
               <td>001</td>
               <td>Jhon</td>
+              <td>draft</td>
               <td className="button-section-td">
                 <button className="btn btn-primary px-lg-2 py-0">Edit</button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
@@ -39,6 +43,7 @@ const ChittiListing = () => {
               <td>04/06/2023</td>
               <td>002</td>
               <td>Reena</td>
+              <td>draft</td>
               <td className=" button-section-td">
                 <button className="btn btn-primary px-lg-2 py-0">Edit</button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
@@ -52,6 +57,7 @@ const ChittiListing = () => {
               <td>12/07/2023</td>
               <td>003</td>
               <td>Seema</td>
+              <td>draft</td>
               <td className="button-section-td">
                 <button className="btn btn-primary px-lg-2 py-0">Edit</button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">

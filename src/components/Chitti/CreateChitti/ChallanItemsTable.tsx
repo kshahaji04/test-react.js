@@ -33,7 +33,7 @@ const ChallanItemsTable = () => {
           </p>
         </div>
         <div className="table-responsive">
-          <table className="table table-striped caption-top table-hover">
+          <table className="table table-striped caption-top table-hover my-0">
             <thead>
               <tr className="table-header-row">
                 <th scope="col">No.</th>
@@ -66,7 +66,7 @@ const ChallanItemsTable = () => {
                   <td>
                     <input
                       type="text"
-                      className="form-control custom-input-field"
+                      className="form-control custom-input-field-t"
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-sm"
                     />
@@ -74,7 +74,7 @@ const ChallanItemsTable = () => {
                   <td>
                     <input
                       type="text"
-                      className="form-control custom-input-field"
+                      className="form-control custom-input-field-t"
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-sm"
                     />
@@ -82,7 +82,7 @@ const ChallanItemsTable = () => {
                   <td>
                     <input
                       type="text"
-                      className="form-control custom-input-field"
+                      className="form-control custom-input-field-t"
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-sm"
                       onKeyDown={(e) => handleKeyDown(e, row.id)}
