@@ -5,7 +5,7 @@ import NarrationTable from './NarrationTable';
 const CreateChittiMaster = () => {
   return (
     <div>
-      <div className="d-flex justify-content-end mb-1">
+      <div className="d-flex justify-content-end ">
         <button
           type="submit"
           className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"

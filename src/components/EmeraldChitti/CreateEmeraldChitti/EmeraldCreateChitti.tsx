@@ -12,7 +12,7 @@ const EmeraldCreateChitti = () => {
           <select
             id="supplier"
             name="supplier"
-            className="form-select custom-input-field py-0"
+            className="form-select custom-input-field py-0 emerald-input-field"
             // onChange={handleChange}
             // onBlur={handleBlur}
             aria-label=".form-select-sm example"
@@ -38,22 +38,13 @@ const EmeraldCreateChitti = () => {
               value="2018-07-22"
               min="2011-01-01"
               max="2028-12-31"
-              className="form-control custom-input-field"
+              className="form-control custom-input-field emerald-input-field"
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"
-              // onChange={handleChange}
-              // onBlur={handleBlur}
+            // onChange={handleChange}
+            // onBlur={handleBlur}
             />
           </div>
-        </div>
-        <div className="w-25 d-flex align-items-center">
-          <button
-            type="submit"
-            // disabled={isSubmitting}
-            className=" btn btn-outline-primary py-1 px-4 w-lg-50"
-          >
-            Submit
-          </button>
         </div>
       </div>
     </form>

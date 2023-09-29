@@ -4,9 +4,9 @@ import { NavLink } from 'react-router-dom';
 const MainNavigationTab = () => {
   return (
     <>
-      <div className="container-fluid card-container-margin">
+      <div className="container-fluid card-container-mrgin">
         <hr className="hr_line" />
-        <div className="container d-flex align-items-center justify-content-evenly mt-1">
+        <div className="container d-flex align-items-center justify-content-evenly flex-wrap mt-1">
           <div className="header-card-container px-1">
             <NavLink to="/" className="text-decoration-none text-dark">
               <div className="d-flex align-items-center header-card">

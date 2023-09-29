@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const ChallanItemsTable = () => {
-  const [tableData, setTableData] = useState([{ id: 1, name: '' }]);
+  const [tableData, setTableData] = useState<any>([{ id: 1, name: '' }]);
+  const [totalAmountValue, setTotalAmountValue] = useState<any>({ totalGrossWeight: 0, totalNetWeight: 0, totalAmount: 0 })
+
 
   const HandleAddRow: any = () => {
     const newRow = {
@@ -13,7 +15,7 @@ const ChallanItemsTable = () => {
 
   const HandleDeleteRow: any = (id: any) => {
     if (tableData?.length > 1) {
-      const updatedData = tableData.filter((row) => row.id !== id);
+      const updatedData = tableData.filter((row: any) => row.id !== id);
       setTableData(updatedData);
     }
   };
@@ -22,6 +24,55 @@ const ChallanItemsTable = () => {
     if (event.key === 'Tab' && id === tableData[tableData.length - 1].id) {
       HandleAddRow();
     }
+  };
+
+  useEffect(() => {
+    // Calculate column totals whenever tableData changes
+    const newColumnTotals = tableData.reduce(
+      (totals: any, row: any) => {
+        totals.totalGrossWeight += row.totalGrossWeight;
+        totals.totalNetWeight += row.totalNetWeight;
+        totals.totalAmount += row.totalAmount;
+        return totals;
+      },
+      { totalGrossWeight: 0, totalNetWeight: 0, totalAmount: 0 }
+    );
+    setTotalAmountValue(newColumnTotals);
+  }, [tableData]);
+
+  useEffect(() => {
+    // Calculate column totals whenever tableData changes
+    const newColumnTotals = tableData.reduce(
+      (totals: any, row: any) => {
+        totals.totalGrossWeight += row.totalGrossWeight;
+        totals.totalNetWeight += row.totalNetWeight;
+        totals.totalAmount += row.totalAmount;
+        return totals;
+      },
+      { totalGrossWeight: 0, totalNetWeight: 0, totalAmount: 0 }
+    );
+    setTotalAmountValue(newColumnTotals);
+  }, [tableData]);
+
+  const HandleGrossWeightValue = (e: any, id: any) => {
+    const updatedData = tableData.map((row: any) =>
+      row.id === id ? { ...row, totalGrossWeight: parseFloat(e.target.value) || 0 } : row
+    );
+    setTableData(updatedData);
+  };
+
+  const HandleNetWeightValue = (e: any, id: any) => {
+    const updatedData = tableData.map((row: any) =>
+      row.id === id ? { ...row, totalNetWeight: parseFloat(e.target.value) || 0 } : row
+    );
+    setTableData(updatedData);
+  };
+
+  const HandleAmountValue = (e: any, id: any) => {
+    const updatedData = tableData.map((row: any) =>
+      row.id === id ? { ...row, totalAmount: parseFloat(e.target.value) || 0 } : row
+    );
+    setTableData(updatedData);
   };
   return (
     <>
@@ -47,57 +98,107 @@ const ChallanItemsTable = () => {
               </tr>
             </thead>
             <tbody>
-              {tableData.map((row) => (
-                <tr key={row.id}>
-                  <td>{row.id}</td>
-                  <td>
-                    <select
-                      id="category"
-                      name="category"
-                      className="form-select p-0 custom-input-field"
-                      aria-label=".form-select-sm example"
-                    >
-                      <option></option>
-                      <option>One</option>
-                      <option>Two</option>
-                      <option>Three</option>
-                    </select>
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      className="form-control custom-input-field-t"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-sm"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      className="form-control custom-input-field-t"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-sm"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      className="form-control custom-input-field-t"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-sm"
-                      onKeyDown={(e) => handleKeyDown(e, row.id)}
-                    />
-                  </td>
-                  <td>
-                    <div
-                      className="d-flex align-items-center delete-link"
-                      onClick={() => HandleDeleteRow(row.id)}
-                    >
-                      <i className="fa-solid fa-xmark fs-4"></i>
-                    </div>
-                  </td>
-                </tr>
+              {tableData.map((row: any) => (
+                <>
+                  <tr key={row.id}>
+                    <td className='p-0'>{row.id}</td>
+                    <td className='table-data-input'>
+                      <select
+                        id="category"
+                        name="category"
+                        className="form-select p-0 custom-input-field "
+                        aria-label=".form-select-sm example"
+                      >
+                        <option></option>
+                        <option>One</option>
+                        <option>Two</option>
+                        <option>Three</option>
+                      </select>
+                    </td>
+                    <td className='table-data-input'>
+                      <input
+                        type="number"
+                        className="form-control custom-input-field-t"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm"
+                        onChange={(e) => HandleGrossWeightValue(e, row.id)}
+                      />
+                    </td>
+                    <td className='table-data-input'>
+                      <input
+                        type="number"
+                        className="form-control custom-input-field-t"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm"
+                        onChange={(e) => HandleNetWeightValue(e, row.id)}
+                      />
+                    </td>
+                    <td className='table-data-input'>
+                      <input
+                        type="number"
+                        className="form-control custom-input-field-t"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm"
+                        onKeyDown={(e) => handleKeyDown(e, row.id)}
+                        onChange={(e) => HandleAmountValue(e, row.id)}
+                      />
+                    </td>
+                    <td className='table-data-input'>
+                      <div
+                        className="d-flex align-items-center delete-link"
+                        onClick={() => HandleDeleteRow(row.id)}
+                      >
+                        <i className="fa-solid fa-xmark fs-5"></i>
+                      </div>
+                    </td>
+                  </tr>
+
+                </>
               ))}
+              <tr>
+                <td></td>
+                <td className='py-1 px-2'>
+                  <input
+                    type="text"
+                    className="form-control custom-input-field-t text-center p-0"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm"
+                    placeholder='Total'
+                    readOnly
+                  />
+                </td>
+                <td className='py-1 px-2'>
+                  <input
+                    type="number"
+                    className="form-control custom-input-field-t text-center p-0"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm"
+                    value={totalAmountValue.totalGrossWeight}
+                    readOnly
+                  />
+                </td>
+                <td className='py-1 px-2'>
+                  <input
+                    type="number"
+                    className="form-control custom-input-field-t text-center p-0"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm"
+                    value={totalAmountValue.totalNetWeight}
+
+                    readOnly
+                  />
+                </td>
+                <td className='py-1 px-2'>
+                  <input
+                    type="number"
+                    className="form-control custom-input-field-t text-center p-0"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm"
+                    value={totalAmountValue.totalAmount}
+                    readOnly
+                  />
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

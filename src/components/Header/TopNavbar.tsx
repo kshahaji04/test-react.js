@@ -5,11 +5,10 @@ import logo from '../../assets/Logo.png';
 const TopNavbar = () => {
   return (
     <>
-      <nav className=" Container-fluid navbar fixed-top navbar-light bg-light navbar_topbar mb-5">
-        <div className="container flexstart_mobile">
-          <i className="fa fa-bars toggle_bar" aria-hidden="true"></i>
-          <a className="navbar-brand logo_color">
-            <img src={logo} alt="logo" height="65px" />
+      <nav className="container navbar navbar-light bg-light p-0">
+        <div className="container-fluid">
+          <a className="navbar-brand">
+            <img src={logo} alt="" height="55px" width="auto" />
           </a>
           <div className="dropdown">
             <button

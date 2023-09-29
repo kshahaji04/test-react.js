@@ -1,4 +1,4 @@
-import './App.css';
+import './Style/index.css';
 import AppRoutes from './routes/AppRoutes';
 
 const App = () => {

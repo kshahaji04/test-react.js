@@ -31,11 +31,15 @@ const ChittiListing = () => {
               <td>Jhon</td>
               <td>draft</td>
               <td className="button-section-td">
-                <button className="btn btn-primary px-lg-2 py-0">Edit</button>
+                <button className="btn btn-primary px-lg-2 py-0"><span className="button-section-text">Edit</span></button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
-                  Print
+                  <span className="button-section-text">
+                    Print
+                  </span>
                 </button>
-                <button className="btn btn-danger px-lg-2 py-0">Delete</button>
+                <button className="btn btn-danger px-lg-2 py-0">
+                  <span className="button-section-text">Delete</span>
+                </button>
               </td>
             </tr>
             <tr>
@@ -44,12 +48,16 @@ const ChittiListing = () => {
               <td>002</td>
               <td>Reena</td>
               <td>draft</td>
-              <td className=" button-section-td">
-                <button className="btn btn-primary px-lg-2 py-0">Edit</button>
+              <td className="button-section-td">
+                <button className="btn btn-primary px-lg-2 py-0"><span className="button-section-text">Edit</span></button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
-                  Print
+                  <span className="button-section-text">
+                    Print
+                  </span>
                 </button>
-                <button className="btn btn-danger px-2 py-0">Delete</button>
+                <button className="btn btn-danger px-lg-2 py-0">
+                  <span className="button-section-text">Delete</span>
+                </button>
               </td>
             </tr>
             <tr>
@@ -59,11 +67,15 @@ const ChittiListing = () => {
               <td>Seema</td>
               <td>draft</td>
               <td className="button-section-td">
-                <button className="btn btn-primary px-lg-2 py-0">Edit</button>
+                <button className="btn btn-primary px-lg-2 py-0"><span className="button-section-text">Edit</span></button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
-                  Print
+                  <span className="button-section-text">
+                    Print
+                  </span>
                 </button>
-                <button className="btn btn-danger px-lg-2 py-0">Delete</button>
+                <button className="btn btn-danger px-lg-2 py-0">
+                  <span className="button-section-text">Delete</span>
+                </button>
               </td>
             </tr>
           </tbody>

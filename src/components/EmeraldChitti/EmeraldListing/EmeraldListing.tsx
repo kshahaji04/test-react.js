@@ -35,11 +35,15 @@ const EmeraldListing = () => {
               <td>100.00</td>
               <td>3000</td>
               <td className="button-section-td">
-                <button className="btn btn-primary px-lg-2 py-0">Edit</button>
+                <button className="btn btn-primary px-lg-2 py-0"><span className="button-section-text">Edit</span></button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
-                  Print
+                  <span className="button-section-text">
+                    Print
+                  </span>
                 </button>
-                <button className="btn btn-danger px-lg-2 py-0">Delete</button>
+                <button className="btn btn-danger px-lg-2 py-0">
+                  <span className="button-section-text">Delete</span>
+                </button>
               </td>
             </tr>
             <tr className="table-body-row-em">
@@ -50,11 +54,15 @@ const EmeraldListing = () => {
               <td>100.00</td>
               <td>3000</td>
               <td className="button-section-td">
-                <button className="btn btn-primary px-lg-2 py-0">Edit</button>
+                <button className="btn btn-primary px-lg-2 py-0"><span className="button-section-text">Edit</span></button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
-                  Print
+                  <span className="button-section-text">
+                    Print
+                  </span>
                 </button>
-                <button className="btn btn-danger px-lg-2 py-0">Delete</button>
+                <button className="btn btn-danger px-lg-2 py-0">
+                  <span className="button-section-text">Delete</span>
+                </button>
               </td>
             </tr>
             <tr className="table-body-row-em">
@@ -65,11 +73,15 @@ const EmeraldListing = () => {
               <td>100.00</td>
               <td>3000</td>
               <td className="button-section-td">
-                <button className="btn btn-primary px-lg-2 py-0">Edit</button>
+                <button className="btn btn-primary px-lg-2 py-0"><span className="button-section-text">Edit</span></button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
-                  Print
+                  <span className="button-section-text">
+                    Print
+                  </span>
                 </button>
-                <button className="btn btn-danger px-lg-2 py-0">Delete</button>
+                <button className="btn btn-danger px-lg-2 py-0">
+                  <span className="button-section-text">Delete</span>
+                </button>
               </td>
             </tr>
           </tbody>
@@ -108,11 +120,15 @@ const EmeraldListing = () => {
               <td>200.00</td>
               <td>3100</td>{' '}
               <td className="button-section-td">
-                <button className="btn btn-primary px-lg-2 py-0">Edit</button>
+                <button className="btn btn-primary px-lg-2 py-0"><span className="button-section-text">Edit</span></button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
-                  Print
+                  <span className="button-section-text">
+                    Print
+                  </span>
                 </button>
-                <button className="btn btn-danger px-lg-2 py-0">Delete</button>
+                <button className="btn btn-danger px-lg-2 py-0">
+                  <span className="button-section-text">Delete</span>
+                </button>
               </td>
             </tr>
             <tr className="table-body-row-em">
@@ -123,11 +139,15 @@ const EmeraldListing = () => {
               <td>100.00</td>
               <td>3000</td>
               <td className="button-section-td">
-                <button className="btn btn-primary px-lg-2 py-0">Edit</button>
+                <button className="btn btn-primary px-lg-2 py-0"><span className="button-section-text">Edit</span></button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
-                  Print
+                  <span className="button-section-text">
+                    Print
+                  </span>
                 </button>
-                <button className="btn btn-danger px-lg-2 py-0">Delete</button>
+                <button className="btn btn-danger px-lg-2 py-0">
+                  <span className="button-section-text">Delete</span>
+                </button>
               </td>
             </tr>
             <tr className="table-body-row-em">
@@ -138,11 +158,15 @@ const EmeraldListing = () => {
               <td>100.00</td>
               <td>3000</td>
               <td className="button-section-td">
-                <button className="btn btn-primary px-lg-2 py-0">Edit</button>
+                <button className="btn btn-primary px-lg-2 py-0"><span className="button-section-text">Edit</span></button>
                 <button className="btn btn-success px-lg-2 py-0 mx-2">
-                  Print
+                  <span className="button-section-text">
+                    Print
+                  </span>
                 </button>
-                <button className="btn btn-danger px-lg-2 py-0">Delete</button>
+                <button className="btn btn-danger px-lg-2 py-0">
+                  <span className="button-section-text">Delete</span>
+                </button>
               </td>
             </tr>
           </tbody>

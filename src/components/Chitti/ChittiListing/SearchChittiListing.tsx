@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import Select from 'react-select';
-import SelectedDropdown from '../../SelectedDropdown';
+import SelectedInputDropdown from '../../SelectedInputDropdown';
+
 
 const SearchChittiListing = () => {
-  const drowpdownlist = ['option1', 'option2', 'option3', 'option3'];
+  const ChittiNoList = ['001', '002', '003', '004'];
+  const ClientNamelist = ['Client1', 'Client2', 'Client3', 'Client4'];
+
 
   return (
     <>
@@ -18,19 +20,20 @@ const SearchChittiListing = () => {
           />
         </div>
         <div className="col-md-2">
-          <input
+          <SelectedInputDropdown drowpdownlist={ChittiNoList} placeholderValue="Chitti No" />
+
+          {/* <input
             type="text"
             className="form-control input-fields custom-input-field"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Chitti No"
-          />
+          /> */}
         </div>
 
         <div className="col-md-2 ">
-          {/* <div className=""> */}
-          <SelectedDropdown drowpdownlist={drowpdownlist} />
-          {/* </div> */}
+          <SelectedInputDropdown drowpdownlist={ClientNamelist} placeholderValue="Client Name" />
+
         </div>
         <div className="col-md-2 ">
           <button
