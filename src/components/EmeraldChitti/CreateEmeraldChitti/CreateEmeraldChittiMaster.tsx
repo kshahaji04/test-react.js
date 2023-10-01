@@ -1,8 +1,10 @@
 import React from 'react'
 import EmeraldCreateChitti from './EmeraldCreateChitti';
+import ListingTable from '../../ListingTable';
 import EmeraldChittiTable from './EmeraldChittiTable';
 
 const CreateEmeraldChittiMaster = () => {
+
     return (
         <>
             <div className="d-flex justify-content-end ">
@@ -15,6 +17,7 @@ const CreateEmeraldChittiMaster = () => {
             </div>
             <EmeraldCreateChitti />
             <EmeraldChittiTable />
+
         </>
     )
 }

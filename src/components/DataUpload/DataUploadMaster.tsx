@@ -2,8 +2,19 @@ import { Tab } from 'react-bootstrap';
 import Tabs from 'react-bootstrap/Tabs';
 import DataUpload from './DataUpload/DataUpload';
 import ViewUploadedList from './ViewUpload/ViewUploadedList';
+import { useState } from 'react';
+import ListingTable from '../ListingTable';
 
 const DataUploadMaster = () => {
+
+  // const [showButtons, setShowButtons] = useState<any>(false)
+  const TableListingData: any = [
+    { No: 1, TRANSFERID: "DTR-100040026	", RFID: "300163904", SKUNUMBER: "TSKU-0300163904	", PACKAGEID: "draft", Photonumber: "SPS1539-06A" },
+    { No: 2, TRANSFERID: "DTR-100040026	", RFID: "300163904", SKUNUMBER: "TSKU-0300163904	", PACKAGEID: "draft", Photonumber: "SPS1539-06A" },
+    { No: 3, TRANSFERID: "DTR-100040026	", RFID: "300163904", SKUNUMBER: "TSKU-0300163904	", PACKAGEID: "draft", Photonumber: "SPS1539-06A" },
+    { No: 4, TRANSFERID: "DTR-100040026	", RFID: "300163904", SKUNUMBER: "TSKU-0300163904	", PACKAGEID: "draft", Photonumber: "SPS1539-06A" },
+
+  ];
   return (
     <>
       <div className="container mt-3">
@@ -19,7 +30,8 @@ const DataUploadMaster = () => {
                 <DataUpload />
               </Tab>
               <Tab eventKey="longer-tab" title="View uploaded list">
-                <ViewUploadedList />
+                {/* <ViewUploadedList /> */}
+                <ListingTable tableListingData={TableListingData} />
               </Tab>
             </Tabs>
           </div>
