@@ -1,6 +1,11 @@
-.login-container { 
-background-image: url(../assets/login-bg.jpg);
-background-size: cover;
-background-position: center center;
-padding-bottom: 100px;
+.login-page-container {
+    margin-top: 70px;
+}
+
+.login-input-field {
+    line-height: 26px !important;
+}
+
+.login-form {
+    width: 85%;
 }

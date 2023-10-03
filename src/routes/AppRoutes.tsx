@@ -1,29 +1,32 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Chitti from '../components/Chitti/ChittiMaster';
 import Login from '../components/Auth/Login';
 import ProtectedRoute from './ProtectedRoute';
-import Master from '../components/Chitti/ChittiMaster';
-import Report from '../components/Report';
-import EmeraldChittiMaster from '../components/EmeraldChitti/EmeraldChittiMaster';
 import DataUploadMaster from '../components/DataUpload/DataUploadMaster';
+import MasterPage from '../pages/master';
+import ChittiPage from '../pages/chitti';
+import Report from '../pages/report';
+import Emerald from '../pages/emrald';
 
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Login />} />
+
         <Route
-          path="/"
+          path="/master"
           element={
             <ProtectedRoute>
-              <Master />
+              <MasterPage />
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/chitti"
           element={
             <ProtectedRoute>
-              <Chitti />
+              <ChittiPage />
             </ProtectedRoute>
           }
         />
@@ -39,7 +42,7 @@ const AppRoutes = () => {
           path="/emerald"
           element={
             <ProtectedRoute>
-              <EmeraldChittiMaster />
+              <Emerald />
             </ProtectedRoute>
           }
         />
@@ -52,7 +55,7 @@ const AppRoutes = () => {
           }
         />
 
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} /> */}
       </Routes>
     </Router>
   );
