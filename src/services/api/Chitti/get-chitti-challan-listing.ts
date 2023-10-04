@@ -1,12 +1,12 @@
-import axios from "axios";
-import { BASE_URL } from "../../Config/api-config";
+import axios from 'axios';
+import { BASE_URL } from '../../Config/api-config';
 
-const GetChallanList = async (token:any) => {
-  console.log("tokennnn",token)
+const GetChallanList = async (token: any) => {
+  console.log('tokennnn', token);
   let response: any;
-  const version = "v1";
-  const method = "get_challan";
-  const entity = "challan_api";
+  const version = 'v1';
+  const method = 'get_challan';
+  const entity = 'challan_api';
 
   const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}`;
 
@@ -16,15 +16,15 @@ const GetChallanList = async (token:any) => {
     },
   };
 
+  const url = 'http://192.168.29.54:8000';
+
   await axios
-    .get(
-      `${BASE_URL}${params}`,config
-    )
+    .get('`${url}${params}`', config)
     .then((res: any) => {
       response = res.data;
     })
     .catch((err: any) => {
-    console.log(err)
+      console.log(err);
     });
   return response;
 };

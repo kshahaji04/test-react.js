@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const SelectedInputDropdown = ({ drowpdownlist, placeholderValue }: any) => {
-  const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
+const SelectedInputDropdown = ({
+  drowpdownlist,
+  placeholderValue,
+  bgColor,
+  selectedDropdownValue,
+  setSelectedDropdownValue,
+}: any) => {
+  // const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
   const [showDropDown, setShowDropdown] = useState<any>(false);
   const [noRecords, setNoRecordsFound] = useState<any>(false);
   const [filterDropdownList, setFilterDropdownList] = useState<any>([]);
@@ -10,12 +16,11 @@ const SelectedInputDropdown = ({ drowpdownlist, placeholderValue }: any) => {
 
   const handleBlur = () => {
     setIsFocused(false);
-    console.log("no foucsss")
+    console.log('no foucsss');
 
     if (!isFocused) {
-      console.log("no foucs")
-      setShowDropdown(false)
-
+      console.log('no foucs');
+      setShowDropdown(false);
     }
   };
   // useEffect(() => {
@@ -24,7 +29,7 @@ const SelectedInputDropdown = ({ drowpdownlist, placeholderValue }: any) => {
   //   }
   // }, [isFocused])
 
-  console.log("focus", isFocused, showDropDown)
+  console.log('focus', isFocused, showDropDown);
 
   const handleSelectedOption = (data: any) => {
     setSelectedDropdownValue(data);
@@ -42,41 +47,42 @@ const SelectedInputDropdown = ({ drowpdownlist, placeholderValue }: any) => {
     setFilterDropdownList(UpdatedFilterList);
     setNoRecordsFound(true);
   };
-  console.log('selectedDropdownValue', selectedDropdownValue);
 
   const handleShowDropdown = () => {
     setShowDropdown(!showDropDown);
   };
 
-
   const handleKeyDown = (e: any) => {
     if (e.key === 'Tab') {
-      setShowDropdown(true)
+      setShowDropdown(true);
     }
     // if (e.key === 'Tab' && showDropDown === true) {
     //   setShowDropdown(false)
     // }
-  }
+  };
 
   return (
     <>
-      <div className='dropdown-input-container'>
+      <div className="dropdown-input-container">
         <input
           type="text"
-          className="form-control input-fields  dropdown-input"
+          // className="form-control input-fields  dropdown-input"
+          className={`${
+            bgColor === true
+              ? 'form-control dropdown-input client-name-input-chitti'
+              : 'form-control input-fields  dropdown-input'
+          }`}
           id="exampleInputEmail1"
           // onBlur={handleBlur}
           onFocus={() => setIsFocused(true)}
-          aria-describedby="emailHelp"
           placeholder={placeholderValue}
           onChange={HandleInputField}
           onClick={handleShowDropdown}
           value={selectedDropdownValue}
           onKeyDown={handleKeyDown}
-
+          autoComplete="off"
         />
         {showDropDown && (
-
           <ul
             className=" dropdown-ul-list border"
             aria-label="Default select example"
@@ -110,10 +116,8 @@ const SelectedInputDropdown = ({ drowpdownlist, placeholderValue }: any) => {
               <li className="dropdown-list p-1">No Records Found</li>
             )}
           </ul>
-
         )}
       </div>
-
     </>
   );
 };

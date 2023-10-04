@@ -7,14 +7,24 @@ import UseChittiHook from '../../hooks/Chitti/chitti-page-hook';
 import ListingTable from '../ListingTable';
 
 const ChittiMaster = () => {
-  const { chittiListingData }: any = UseChittiHook();
+  const {
+    chittiListingData,
+    HandleCreateChittiSubmit,
+    currentDate,
+    selectedDropdownValue,
+    HandleGoldRate,
+    HandleRemarks,
+    tableData,
+    setTableData,
+    narrationTableData,
+    setNarrationTableData,
+    setSelectedDropdownValue,
+    clientNameList,
+    subCategoryList,
+    productList,
+  }: any = UseChittiHook();
 
-  // const TableListingData: any = [
-  //   { No: 1, Date: "20/09/2023", Chitti_no: "001", Client_name: "john", Status: "draft" },
-  //   { No: 2, Date: "20/09/2023", Chitti_no: "002", Client_name: "Reena", Status: "submitted" },
-  //   { No: 3, Date: "20/09/2023", Chitti_no: "003", Client_name: "Seema", Status: "draft" },
-  //   { No: 4, Date: "20/09/2023", Chitti_no: "004", Client_name: "john", Status: "draft" },
-  // ];
+  console.log('chittiListingData in master', chittiListingData);
 
   return (
     <>
@@ -30,13 +40,26 @@ const ChittiMaster = () => {
               <Tab eventKey="chitti-listing" title="Chitti Listing">
                 <div className="container">
                   <h4 className="text-center mt-2">Chitti Listing</h4>
-                  <SearchChittiListing />
+                  <SearchChittiListing clientNameList={clientNameList} />
                   <ListingTable tableListingData={chittiListingData} />
-                  {/* <ChittiListing /> */}
                 </div>
               </Tab>
               <Tab eventKey="longer-tab" title="Create Chitti">
-                <CreateChittiMaster />
+                <CreateChittiMaster
+                  HandleCreateChittiSubmit={HandleCreateChittiSubmit}
+                  currentDate={currentDate}
+                  selectedDropdownValue={selectedDropdownValue}
+                  HandleGoldRate={HandleGoldRate}
+                  HandleRemarks={HandleRemarks}
+                  tableData={tableData}
+                  setTableData={setTableData}
+                  narrationTableData={narrationTableData}
+                  setNarrationTableData={setNarrationTableData}
+                  setSelectedDropdownValue={setSelectedDropdownValue}
+                  clientNameList={clientNameList}
+                  subCategoryList={subCategoryList}
+                  productList={productList}
+                />
               </Tab>
             </Tabs>
           </div>

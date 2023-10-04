@@ -1,21 +1,31 @@
 import { useState, useEffect } from 'react';
 
-const NarrationTable = () => {
-  const [tableData, setTableData] = useState([{ id: 1, name: '' }]);
-  const [totalAmountValue, setTotalAmountValue] = useState<any>({ totalPiecesAmount: 0, totalWeightAmount: 0 })
+const NarrationTable = ({
+  narrationTableData,
+  setNarrationTableData,
+  productList,
+}: any) => {
+  // const [tablData, etTableData] = useState([{ id: 1, name: '' }]);
+  const [totalAmountValue, setTotalAmountValue] = useState<any>({
+    product: '',
+    huid_pieces: 0,
+    huid_weight: 0,
+  });
 
   const HandleAddRow: any = () => {
     const newRow = {
-      id: tableData.length + 1,
-      name: `Row ${tableData.length + 1}`,
+      id: narrationTableData.length + 1,
+      // name: `Row ${narrationTableData.length + 1}`,
     };
-    setTableData([...tableData, newRow]);
+    setNarrationTableData([...narrationTableData, newRow]);
   };
 
   const HandleDeleteRow: any = (id: any) => {
-    if (tableData?.length > 1) {
-      const updatedData = tableData.filter((row) => row.id !== id);
-      setTableData(updatedData);
+    if (narrationTableData?.length > 1) {
+      const updatedData = narrationTableData.filter(
+        (row: any) => row.id !== id
+      );
+      setNarrationTableData(updatedData);
     }
   };
 
@@ -23,32 +33,52 @@ const NarrationTable = () => {
 
   useEffect(() => {
     // Calculate column totals whenever tableData changes
-    const newColumnTotals = tableData.reduce(
+    const newColumnTotals = narrationTableData.reduce(
       (totals: any, row: any) => {
-        totals.totalPiecesAmount += row.totalPiecesAmount;
-        totals.totalWeightAmount += row.totalWeightAmount;
+        totals.huid_pieces += row.huid_pieces;
+        totals.huid_weight += row.huid_weight;
 
         return totals;
       },
-      { totalPiecesAmount: 0, totalWeightAmount: 0 }
+      { huid_pieces: 0, huid_weight: 0 }
     );
     setTotalAmountValue(newColumnTotals);
-  }, [tableData]);
+  }, [narrationTableData]);
 
   const HandlePiecesAmount = (e: any, id: any) => {
-    const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, totalPiecesAmount: parseFloat(e.target.value) || 0 } : row
+    const updatedData = narrationTableData.map((row: any) =>
+      row.id === id
+        ? { ...row, huid_pieces: parseFloat(e.target.value) || 0 }
+        : row
     );
-    setTableData(updatedData);
+    setNarrationTableData(updatedData);
   };
 
   const HandleWeightAmount = (e: any, id: any) => {
-    const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, totalWeightAmount: parseFloat(e.target.value) || 0 } : row
+    const updatedData = narrationTableData.map((row: any) =>
+      row.id === id
+        ? { ...row, huid_weight: parseFloat(e.target.value) || 0 }
+        : row
     );
-    setTableData(updatedData);
+    setNarrationTableData(updatedData);
   };
 
+  const handleKeyDown = (event: any, id: any) => {
+    if (
+      event.key === 'Tab' &&
+      id === narrationTableData[narrationTableData.length - 1].id
+    ) {
+      HandleAddRow();
+    }
+  };
+
+  const HandleCategory = (e: any, id: any) => {
+    console.log('handlecategory', e.target.value);
+    const updatedData = narrationTableData.map((row: any) =>
+      row.id === id ? { ...row, product: e.target.value } : row
+    );
+    setNarrationTableData(updatedData);
+  };
 
   return (
     <div className="container mt-2 border rounded-3  mb-5">
@@ -71,23 +101,30 @@ const NarrationTable = () => {
           </tr>
         </thead>
         <tbody>
-          {tableData.map((row) => (
+          {narrationTableData.map((row: any) => (
             <tr key={row.id}>
-              <td className='p-0'>{row.id}</td>
-              <td className='table-data-input'>
+              <td className="p-0">{row.id}</td>
+              <td className="table-data-input">
                 <select
                   id="category"
                   name="category"
                   className="form-select p-0 custom-input-field"
                   aria-label=".form-select-sm example"
+                  onChange={(e) => HandleCategory(e, row.id)}
                 >
                   <option></option>
-                  <option>product 1</option>
-                  <option>product 2</option>
-                  <option>product 3</option>
+                  {productList?.length > 0 && productList !== null ? (
+                    <>
+                      {productList.map((product: any, index: any) => {
+                        return <option key={index}>{product}</option>;
+                      })}
+                    </>
+                  ) : (
+                    ''
+                  )}
                 </select>
               </td>
-              <td className='table-data-input'>
+              <td className="table-data-input">
                 <input
                   type="text"
                   className="form-control custom-input-field"
@@ -96,17 +133,17 @@ const NarrationTable = () => {
                   onChange={(e) => HandlePiecesAmount(e, row.id)}
                 />
               </td>
-              <td className='table-data-input'>
+              <td className="table-data-input">
                 <input
                   type="text"
                   className="form-control custom-input-field"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-sm"
+                  onKeyDown={(e) => handleKeyDown(e, row.id)}
                   onChange={(e) => HandleWeightAmount(e, row.id)}
-
                 />
               </td>
-              <td className='table-data-input'>
+              <td className="table-data-input">
                 <div
                   className="d-flex align-items-center delete-link"
                   onClick={() => HandleDeleteRow(row.id)}
@@ -118,37 +155,36 @@ const NarrationTable = () => {
           ))}
           <tr>
             <td></td>
-            <td className='py-1 px-2'>
+            <td className="py-1 px-2">
               <input
                 type="text"
                 className="form-control custom-input-field-t text-center p-0"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"
-                placeholder='Total'
+                placeholder="Total"
                 readOnly
               />
             </td>
-            <td className='py-1 px-2'>
+            <td className="py-1 px-2">
               <input
                 type="number"
                 className="form-control custom-input-field-t text-center p-0"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"
-                value={totalAmountValue.totalPiecesAmount}
+                value={totalAmountValue.huid_pieces}
                 readOnly
               />
             </td>
-            <td className='py-1 px-2'>
+            <td className="py-1 px-2">
               <input
                 type="number"
                 className="form-control custom-input-field-t text-center p-0"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"
-                value={totalAmountValue.totalWeightAmount}
+                value={totalAmountValue.huid_weight}
                 readOnly
               />
             </td>
-
           </tr>
         </tbody>
       </table>

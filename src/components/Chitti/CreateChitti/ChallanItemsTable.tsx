@@ -1,14 +1,22 @@
 import { useState, useEffect } from 'react';
 
-const ChallanItemsTable = () => {
-  const [tableData, setTableData] = useState<any>([{ id: 1, name: '' }]);
-  const [totalAmountValue, setTotalAmountValue] = useState<any>({ totalGrossWeight: 0, totalNetWeight: 0, totalAmount: 0 })
-
+const ChallanItemsTable = ({
+  tableData,
+  setTableData,
+  subCategoryList,
+}: any) => {
+  // const [tableData, setTableData] = useState<any>([{ id: 1 }]);
+  const [amountValue, setamountValue] = useState<any>({
+    sub_category: '',
+    gross_weight: 0,
+    net_weight: 0,
+    amount: 0,
+  });
 
   const HandleAddRow: any = () => {
     const newRow = {
       id: tableData.length + 1,
-      name: `Row ${tableData.length + 1}`,
+      // name: `Row ${tableData.length + 1}`,
     };
     setTableData([...tableData, newRow]);
   };
@@ -30,50 +38,65 @@ const ChallanItemsTable = () => {
     // Calculate column totals whenever tableData changes
     const newColumnTotals = tableData.reduce(
       (totals: any, row: any) => {
-        totals.totalGrossWeight += row.totalGrossWeight;
-        totals.totalNetWeight += row.totalNetWeight;
-        totals.totalAmount += row.totalAmount;
+        totals.gross_weight += row.gross_weight;
+        totals.net_weight += row.net_weight;
+        totals.amount += row.amount;
         return totals;
       },
-      { totalGrossWeight: 0, totalNetWeight: 0, totalAmount: 0 }
+      { gross_weight: 0, net_weight: 0, amount: 0 }
     );
-    setTotalAmountValue(newColumnTotals);
+    setamountValue(newColumnTotals);
   }, [tableData]);
 
   useEffect(() => {
     // Calculate column totals whenever tableData changes
     const newColumnTotals = tableData.reduce(
       (totals: any, row: any) => {
-        totals.totalGrossWeight += row.totalGrossWeight;
-        totals.totalNetWeight += row.totalNetWeight;
-        totals.totalAmount += row.totalAmount;
+        totals.gross_weight += row.gross_weight;
+        totals.net_weight += row.net_weight;
+        totals.amount += row.amount;
         return totals;
       },
-      { totalGrossWeight: 0, totalNetWeight: 0, totalAmount: 0 }
+      { gross_weight: 0, net_weight: 0, amount: 0 }
     );
-    setTotalAmountValue(newColumnTotals);
+    setamountValue(newColumnTotals);
   }, [tableData]);
+
+  const HandleCategory = (e: any, id: any) => {
+    console.log('handlecategory', e.target.value);
+    const updatedData = tableData.map((row: any) =>
+      row.id === id ? { ...row, sub_category: e.target.value } : row
+    );
+    setTableData(updatedData);
+  };
 
   const HandleGrossWeightValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, totalGrossWeight: parseFloat(e.target.value) || 0 } : row
+      row.id === id
+        ? { ...row, gross_weight: parseFloat(e.target.value) || 0 }
+        : row
     );
     setTableData(updatedData);
   };
 
   const HandleNetWeightValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, totalNetWeight: parseFloat(e.target.value) || 0 } : row
+      row.id === id
+        ? { ...row, net_weight: parseFloat(e.target.value) || 0 }
+        : row
     );
     setTableData(updatedData);
   };
 
   const HandleAmountValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, totalAmount: parseFloat(e.target.value) || 0 } : row
+      row.id === id ? { ...row, amount: parseFloat(e.target.value) || 0 } : row
     );
     setTableData(updatedData);
   };
+
+  console.log('updated tabledata', tableData);
+
   return (
     <>
       <div className="container mt-1 border rounded-3">
@@ -101,21 +124,31 @@ const ChallanItemsTable = () => {
               {tableData.map((row: any) => (
                 <>
                   <tr key={row.id}>
-                    <td className='p-0'>{row.id}</td>
-                    <td className='table-data-input'>
+                    <td className="p-0">{row.id}</td>
+                    <td className="table-data-input">
                       <select
                         id="category"
                         name="category"
                         className="form-select p-0 custom-input-field "
                         aria-label=".form-select-sm example"
+                        onChange={(e) => HandleCategory(e, row.id)}
                       >
                         <option></option>
-                        <option>One</option>
-                        <option>Two</option>
-                        <option>Three</option>
+                        {subCategoryList?.length > 0 &&
+                        subCategoryList !== null ? (
+                          <>
+                            {subCategoryList.map(
+                              (category: any, index: any) => {
+                                return <option key={index}>{category}</option>;
+                              }
+                            )}
+                          </>
+                        ) : (
+                          ''
+                        )}
                       </select>
                     </td>
-                    <td className='table-data-input'>
+                    <td className="table-data-input">
                       <input
                         type="number"
                         className="form-control custom-input-field-t"
@@ -124,7 +157,7 @@ const ChallanItemsTable = () => {
                         onChange={(e) => HandleGrossWeightValue(e, row.id)}
                       />
                     </td>
-                    <td className='table-data-input'>
+                    <td className="table-data-input">
                       <input
                         type="number"
                         className="form-control custom-input-field-t"
@@ -133,7 +166,7 @@ const ChallanItemsTable = () => {
                         onChange={(e) => HandleNetWeightValue(e, row.id)}
                       />
                     </td>
-                    <td className='table-data-input'>
+                    <td className="table-data-input">
                       <input
                         type="number"
                         className="form-control custom-input-field-t"
@@ -143,7 +176,7 @@ const ChallanItemsTable = () => {
                         onChange={(e) => HandleAmountValue(e, row.id)}
                       />
                     </td>
-                    <td className='table-data-input'>
+                    <td className="table-data-input">
                       <div
                         className="d-flex align-items-center delete-link"
                         onClick={() => HandleDeleteRow(row.id)}
@@ -152,49 +185,47 @@ const ChallanItemsTable = () => {
                       </div>
                     </td>
                   </tr>
-
                 </>
               ))}
               <tr>
                 <td></td>
-                <td className='py-1 px-2'>
+                <td className="py-1 px-2">
                   <input
                     type="text"
                     className="form-control custom-input-field-t text-center p-0"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
-                    placeholder='Total'
+                    placeholder="Total"
                     readOnly
                   />
                 </td>
-                <td className='py-1 px-2'>
+                <td className="py-1 px-2">
                   <input
                     type="number"
                     className="form-control custom-input-field-t text-center p-0"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
-                    value={totalAmountValue.totalGrossWeight}
+                    value={amountValue.gross_weight}
                     readOnly
                   />
                 </td>
-                <td className='py-1 px-2'>
+                <td className="py-1 px-2">
                   <input
                     type="number"
                     className="form-control custom-input-field-t text-center p-0"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
-                    value={totalAmountValue.totalNetWeight}
-
+                    value={amountValue.net_weight}
                     readOnly
                   />
                 </td>
-                <td className='py-1 px-2'>
+                <td className="py-1 px-2">
                   <input
                     type="number"
                     className="form-control custom-input-field-t text-center p-0"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
-                    value={totalAmountValue.totalAmount}
+                    value={amountValue.amount}
                     readOnly
                   />
                 </td>

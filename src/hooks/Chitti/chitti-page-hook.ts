@@ -1,33 +1,195 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getChittiChallan, get_chitti_challan } from '../../store/slices/Chitti/get-chitti-challan-list-slice';
+import {
+  getChittiChallan,
+  get_chitti_challan,
+} from '../../store/slices/Chitti/get-chitti-challan-list-slice';
 import { useSelector } from 'react-redux';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
-
+import CreateChittiApi from '../../services/api/Chitti/create-chitti-api';
+import { toast } from 'react-toastify';
+import {
+  getClientName,
+  get_client_name,
+} from '../../store/slices/Chitti/get-client-name-slice';
+import {
+  getSubCategoryList,
+  get_subcategory_list,
+} from '../../store/slices/Chitti/get-subcategory-slice';
+import {
+  getProductList,
+  get_product_list,
+} from '../../store/slices/Chitti/get-product-list-slice';
 
 const UseChittiHook = () => {
-    const dispatch = useDispatch();
-    const AccessToken: any = useSelector(get_access_token);
-    const ChittiChallanData: any = useSelector(get_chitti_challan);
-    console.log("ChittiChallanData",ChittiChallanData)
-    const [chittiListingData, setChittiListingData] = useState<any>([]);
+  const dispatch = useDispatch();
+  const AccessToken: any = useSelector(get_access_token);
+  const ChittiChallanData: any = useSelector(get_chitti_challan);
+  const ClientNameDataFromStore: any = useSelector(get_client_name);
+  const SubCategoryDataFromStore: any = useSelector(get_subcategory_list);
+  const ProductListDataFromStore: any = useSelector(get_product_list);
+  console.log(
+    'SubCategoryDataFromStore',
+    SubCategoryDataFromStore,
+    ProductListDataFromStore
+  );
+  const [chittiListingData, setChittiListingData] = useState<any>([]);
+  const [subCategoryList, setSubCategoryList] = useState<any>([]);
+  const [productList, setProductList] = useState<any>([]);
+  const [clientNameList, setClientNameList] = useState<any>([]);
+  const [tableData, setTableData] = useState<any>([{ id: 1 }]);
+  const [narrationTableData, setNarrationTableData] = useState<any>([
+    { id: 1 },
+  ]);
+  const [challanTableData, setChallanTableData] = useState<any>([{ id: 1 }]);
+  const [narrationUpdatedTableData, setNarrationUpdatedTableData] =
+    useState<any>([]);
+  const [currentDate, setCurrentDate] = useState<any>(new Date());
+  const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
+  const [goldRate, setGoldRate] = useState<any>('');
+  const [remarks, setRemarks] = useState<any>('');
 
-    
-    useEffect(()=>{
-        dispatch(getChittiChallan(AccessToken?.token))
-    },[])
+  let modifiedList: any;
 
-    useEffect(()=>{
-        if(ChittiChallanData?.data?.length > 0) {
-            setChittiListingData([...ChittiChallanData?.data])
-        }else{
-            setChittiListingData([])
-        }
-        
-    },[ChittiChallanData])
-    
-    console.log("chittiListingData in hook end",chittiListingData)
-    return {chittiListingData}
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const year = now.getFullYear();
+      const formattedDate: any = `${day}-${month}-${year}`;
+      setCurrentDate(formattedDate);
+    }, 1000); // Update the date every second
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
+  useEffect(() => {
+    dispatch(getChittiChallan(AccessToken?.token));
+    dispatch(getClientName(AccessToken?.token));
+    dispatch(getSubCategoryList(AccessToken?.token));
+    dispatch(getProductList(AccessToken?.token));
+  }, []);
+
+  useEffect(() => {
+    if (
+      ChittiChallanData?.data?.length > 0 &&
+      ChittiChallanData?.data !== null
+    ) {
+      setChittiListingData([...ChittiChallanData?.data]);
+    } else {
+      setChittiListingData([]);
+    }
+  }, [ChittiChallanData]);
+
+  useEffect(() => {
+    if (
+      ClientNameDataFromStore?.data?.length > 0 &&
+      ClientNameDataFromStore?.data !== null
+    ) {
+      setClientNameList([...ClientNameDataFromStore?.data]);
+    } else {
+      setClientNameList([]);
+    }
+  }, [ClientNameDataFromStore]);
+
+  useEffect(() => {
+    if (
+      SubCategoryDataFromStore?.data?.length > 0 &&
+      SubCategoryDataFromStore?.data !== null
+    ) {
+      setSubCategoryList([...SubCategoryDataFromStore?.data]);
+    } else {
+      setSubCategoryList([]);
+    }
+  }, [SubCategoryDataFromStore]);
+
+  useEffect(() => {
+    if (
+      ProductListDataFromStore?.data?.length > 0 &&
+      ProductListDataFromStore?.data !== null
+    ) {
+      setProductList([...ProductListDataFromStore?.data]);
+    } else {
+      setProductList([]);
+    }
+  }, [ProductListDataFromStore]);
+
+  const HandleGoldRate: any = (e: any) => {
+    setGoldRate(e.target.value);
+  };
+
+  const HandleRemarks: any = (e: any) => {
+    setRemarks(e.target.value);
+  };
+
+  useEffect(() => {
+    if (tableData?.length > 0 && tableData !== null) {
+      let modifiedList: any = tableData.map((obj: any) => {
+        const { id, ...rest } = obj;
+        return rest;
+      });
+      setChallanTableData(modifiedList);
+    }
+    if (narrationTableData?.length > 0 && narrationTableData !== null) {
+      let narrationmodifiedList: any = narrationTableData.map((obj: any) => {
+        const { id, ...rest } = obj;
+        return rest;
+      });
+      setNarrationUpdatedTableData(narrationmodifiedList);
+    }
+  }, [tableData, narrationTableData]);
+
+  const HandleCreateChittiSubmit: any = async () => {
+    console.log(
+      'submit create chitti',
+      selectedDropdownValue,
+      goldRate,
+      remarks
+    );
+    console.log(
+      'submit create chitti challan table',
+      challanTableData,
+      narrationUpdatedTableData
+    );
+    const BodyData: any = {
+      clientName: selectedDropdownValue,
+      goldRate: goldRate,
+      remarks: remarks,
+      challanTableData: challanTableData,
+      narrationTableData: narrationUpdatedTableData,
+      token: AccessToken?.token,
+    };
+    let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
+    console.log('Createchittiapires', CreateChittiApiRes);
+
+    if (
+      CreateChittiApiRes?.status === 200 &&
+      CreateChittiApiRes?.hasOwnProperty('data')
+    ) {
+      toast.success('Chitti Created');
+    } else {
+      toast.error('Failed to created chitti');
+    }
+  };
+  console.log('chittiListingData in hook end', chittiListingData);
+  return {
+    chittiListingData,
+    currentDate,
+    selectedDropdownValue,
+    setSelectedDropdownValue,
+    HandleGoldRate,
+    HandleRemarks,
+    tableData,
+    setTableData,
+    narrationTableData,
+    setNarrationTableData,
+    HandleCreateChittiSubmit,
+    clientNameList,
+    subCategoryList,
+    productList,
+  };
 };
 
 export default UseChittiHook;

@@ -35,6 +35,12 @@
 
 .button-section-text {
   font-size: 0.8rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.button-section-text:hover {
+  text-decoration: none;
 }
 
 .icons-color {
@@ -124,7 +130,7 @@
 .dropdown-ul-list {
   position: absolute;
   background-color: rgb(255, 255, 255);
-  border-radius: 2px 2px 9px 9px;
+  border-radius: 2px 2px 2px 2px;
   border: 1px solid #2f308c !important;
   list-style: none;
   width: 100%;
@@ -132,7 +138,8 @@
 }
 
 .dropdown-ul-list li {
-  padding: 4px;
+  padding: 0px 4px;
+  font-size: 0.8rem;
 }
 
 .dropdown-ul-list li:hover {
@@ -163,6 +170,11 @@
 .dropdown-input.open {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.client-name-input-chitti{
+  padding: 8px !important;
+  border: 1px solid #2f308c6e !important;
 }
 
 .dropdown-options {

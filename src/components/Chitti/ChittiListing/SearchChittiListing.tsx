@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import SelectedInputDropdown from '../../SelectedInputDropdown';
 
-
-const SearchChittiListing = () => {
+const SearchChittiListing = ({ clientNameList }: any) => {
   const ChittiNoList = ['001', '002', '003', '004'];
-  const ClientNamelist = ['Client1', 'Client2', 'Client3', 'Client4'];
-
 
   return (
     <>
@@ -20,7 +17,10 @@ const SearchChittiListing = () => {
           />
         </div>
         <div className="col-md-2">
-          <SelectedInputDropdown drowpdownlist={ChittiNoList} placeholderValue="Chitti No" />
+          <SelectedInputDropdown
+            drowpdownlist={ChittiNoList}
+            placeholderValue="Chitti No"
+          />
 
           {/* <input
             type="text"
@@ -32,8 +32,10 @@ const SearchChittiListing = () => {
         </div>
 
         <div className="col-md-2 ">
-          <SelectedInputDropdown drowpdownlist={ClientNamelist} placeholderValue="Client Name" />
-
+          <SelectedInputDropdown
+            drowpdownlist={clientNameList}
+            placeholderValue="Client Name"
+          />
         </div>
         <div className="col-md-2 ">
           <button
