@@ -3,9 +3,11 @@ import { Tab, Tabs } from 'react-bootstrap';
 import AddSubCategory from './AddSubCategory';
 import SubCategoryListing from './SubCategoryListing';
 import UseSubCategoryHook from '../../../../hooks/Master/sub-category-hook';
+import UseCategoryHook from '../../../../hooks/Master/category-hook';
 
 const SubCategoryMaster = () => {
-  const {subCategoryList}:any = UseSubCategoryHook();
+  const { subCategoryList }: any = UseSubCategoryHook();
+  const { CategoryList }: any = UseCategoryHook();
   return (
     <div className="container">
       <div className="container mt-3">
@@ -17,11 +19,12 @@ const SubCategoryMaster = () => {
               className="mb-1"
               justify
             >
-              <Tab eventKey="chitti-listing" title="Sub Category Listing">
-                <AddSubCategory />
+              <Tab eventKey="chitti-listing" title="Add Sub Category">
+                <AddSubCategory CategoryList={CategoryList} />
               </Tab>
-              <Tab eventKey="longer-tab" title="Add Sub Category">
-                <SubCategoryListing subCategoryList={subCategoryList}/>
+
+              <Tab eventKey="longer-tab" title="Sub Category Listing">
+                <SubCategoryListing subCategoryList={subCategoryList} />
               </Tab>
             </Tabs>
           </div>

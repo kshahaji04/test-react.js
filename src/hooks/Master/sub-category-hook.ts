@@ -15,10 +15,9 @@ const UseSubCategoryHook = () => {
   const subCategoryDataFromStore: any = useSelector(get_subcategory_list);
   const CategoryDataFromStore: any = useSelector(get_category_list);
   const [subCategoryList, setSubCategoryList] = useState<any>([]);
-
   useEffect(() => {
     dispatch(getSubCategoryList(AccessToken?.token));
-  
+
   }, []);
 
   useEffect(() => {

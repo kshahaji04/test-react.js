@@ -5,8 +5,8 @@ const GetEmeraldList = async (token: any) => {
   console.log('tokennnn', token);
   let response: any;
   const version = 'v1';
-  const method = 'get_challan';
-  const entity = 'challan_api';
+  const method = 'get_emerald';
+  const entity = 'emerald';
 
   const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}`;
 

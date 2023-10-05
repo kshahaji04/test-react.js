@@ -3,7 +3,7 @@ import EmeraldCreateChitti from './EmeraldCreateChitti';
 import ListingTable from '../../ListingTable';
 import EmeraldChittiTable from './EmeraldChittiTable';
 
-const CreateEmeraldChittiMaster = () => {
+const CreateEmeraldChittiMaster = ({ selectedDropdownValue, setSelectedDropdownValue, HandleClientGroup, HandleCreateChittiSubmit, clientGroupList, clientNameList }: any) => {
 
     return (
         <>
@@ -15,7 +15,8 @@ const CreateEmeraldChittiMaster = () => {
                     Submit
                 </button>
             </div>
-            <EmeraldCreateChitti />
+            <EmeraldCreateChitti selectedDropdownValue={selectedDropdownValue} setSelectedDropdownValue={setSelectedDropdownValue}
+                HandleClientGroup={HandleClientGroup} HandleCreateChittiSubmit={HandleCreateChittiSubmit} clientGroupList={clientGroupList} clientNameList={clientNameList} />
             <EmeraldChittiTable />
 
         </>

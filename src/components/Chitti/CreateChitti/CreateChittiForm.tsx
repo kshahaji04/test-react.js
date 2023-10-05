@@ -11,12 +11,12 @@ const CreateChittiForm = ({
   clientGroupList,
   HandleClientGroup,
   defaultData,
-  
+
 }: any) => {
 
-  console.log("defaultData",defaultData)
+  console.log("defaultData", defaultData)
   const ChittiNoList = ['client1', 'client2', 'client3', 'client4'];
-  const handleSubmit: any = () => {};
+  const handleSubmit: any = () => { };
   const [bgColor, setBgColor] = useState<any>(true);
   // const [currentDate, setCurrentDate] = useState<any>(new Date());
   // useEffect(() => {
@@ -54,7 +54,7 @@ const CreateChittiForm = ({
                 className="form-control custom-input-field py-0 px-2"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"
-                // onChange={handleChange}
+              // onChange={handleChange}
               />
             </div>
           </div>
@@ -62,6 +62,7 @@ const CreateChittiForm = ({
             <label className="form-Form.Label fs-6 text-dark form-label-bold">
               Client Name :
             </label>
+
             <SelectedInputDropdown
               drowpdownlist={clientNameList}
               bgColor={bgColor}
@@ -85,7 +86,7 @@ const CreateChittiForm = ({
               aria-describedby="inputGroup-sizing-sm"
               // defaultValue={defaultData}
               onChange={HandleGoldRate}
-              // onBlur={handleBlur}
+            // onBlur={handleBlur}
             />
           </div>
 
@@ -100,7 +101,7 @@ const CreateChittiForm = ({
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"
               onChange={HandleRemarks}
-              // onBlur={handleBlur}
+            // onBlur={handleBlur}
             />
           </div>
         </div>

@@ -172,7 +172,7 @@
   border-bottom-right-radius: 0;
 }
 
-.client-name-input-chitti{
+.client-name-input-chitti {
   padding: 8px !important;
   border: 1px solid #2f308c6e !important;
 }
@@ -290,4 +290,10 @@ table tr {
 .emerald-input-field {
   font-size: 0.9rem;
   padding: 1px 5px;
+}
+
+.select-field {
+  background-color: #E0E1F5 !important;
+  padding: 0px 5px !important;
+  height: 27px !important;
 }

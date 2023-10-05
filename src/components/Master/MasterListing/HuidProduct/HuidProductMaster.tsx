@@ -2,8 +2,11 @@ import React from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import HuidProductListing from './HuidProductListing';
 import AddHuidProduct from './AddHuidProduct';
+import UseHuidProductHook from '../../../../hooks/Master/huid-product-hook';
 
 const HuidProductMaster = () => {
+
+  const { huidProductData }: any = UseHuidProductHook();
   return (
     <div className="container">
       <div className="container mt-3">
@@ -15,12 +18,14 @@ const HuidProductMaster = () => {
               className="mb-1"
               justify
             >
-              <Tab eventKey="chitti-listing" title="HUID Product Listing">
-                <HuidProductListing />
-              </Tab>
+
               <Tab eventKey="longer-tab" title="Add HUID Product">
                 <AddHuidProduct />
               </Tab>
+              <Tab eventKey="chitti-listing" title="HUID Product Listing">
+                <HuidProductListing huidProductData={huidProductData} />
+              </Tab>
+
             </Tabs>
           </div>
         </div>

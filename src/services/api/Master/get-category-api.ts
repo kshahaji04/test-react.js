@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { BASE_URL } from '../../Config/api-config';
 
-const getCategoryApi: any = async (token:any) => {
+const getCategoryApi: any = async (token: any) => {
 
   let response: any;
   const version = 'v1';
@@ -13,17 +13,17 @@ const getCategoryApi: any = async (token:any) => {
 
   const config = {
     headers: {
-     
+
       Authorization: token,
     },
   };
 
-  
+
 
   await axios
-  .get(`${BASE_URL}${params}`, config)
+    .get(`${BASE_URL}${params}`, config)
     .then((res: any) => {
-  
+
       response = res;
     })
     .catch((err: any) => {

@@ -1,4 +1,8 @@
-const EmeraldCreateChitti = () => {
+import react, { useState } from 'react';
+import SelectedInputDropdown from "../../SelectedInputDropdown";
+
+const EmeraldCreateChitti = ({ selectedDropdownValue, setSelectedDropdownValue, HandleClientGroup, HandleCreateChittiSubmit, clientGroupList, clientNameList }: any) => {
+  const [bgColor, setBgColor] = useState<any>(true);
   return (
     <form
       //  onSubmit={handleSubmit}
@@ -9,22 +13,18 @@ const EmeraldCreateChitti = () => {
           <label className="form-Form.Label text-dark form-label-bold">
             Client Name :
           </label>
-          <select
-            id="supplier"
-            name="supplier"
-            className="form-select custom-input-field py-0 emerald-input-field"
-            // onChange={handleChange}
-            // onBlur={handleBlur}
-            aria-label=".form-select-sm example"
-          >
-            <option
-              // onChange={handleChange}
-              selected
-            >
-              Select Client
-            </option>
-            <option>TBZ jewels</option>
-          </select>
+          <div className="h-25">
+            <SelectedInputDropdown
+              drowpdownlist={clientNameList}
+              bgColor={bgColor}
+              placeholderValue="Client Name"
+              selectedDropdownValue={selectedDropdownValue}
+              setSelectedDropdownValue={setSelectedDropdownValue}
+              clientGroupList={clientGroupList}
+              HandleClientGroup={HandleClientGroup}
+            // defaultData={defaultData}
+            />
+          </div>
         </div>
         <div className="w-25 ">
           <label className="form-Form.Label text-dark form-label-bold">

@@ -42,7 +42,7 @@ const ChittiMaster = () => {
               <Tab eventKey="chitti-listing" title="Chitti Listing">
                 <div className="container">
                   <h4 className="text-center mt-2">Chitti Listing</h4>
-                  <SearchChittiListing clientNameList={clientNameList} />
+                  <SearchChittiListing clientNameList={clientNameList} chittiListingData={chittiListingData} selectedDropdownValue={selectedDropdownValue} setSelectedDropdownValue={setSelectedDropdownValue} />
                   <ListingTable
                     tableListingData={chittiListingData}
                     setTableData={setTableData}

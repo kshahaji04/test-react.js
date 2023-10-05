@@ -8,6 +8,8 @@ import GetSubCategoryListReducer from './slices/Chitti/get-subcategory-slice';
 import GetProductListReducer from './slices/Chitti/get-product-list-slice';
 import GetEmeraldChallanReducer from './slices/Emerald/get-emerald-list-slice';
 import GetCategoryListReducer from './slices/Master/get-category-slice';
+import GetHuidProductListReducer from './slices/Master/get-huid-product-slice';
+
 const appReducer = combineReducers({
   GetAccessTokenScreen: GetAccessTokenReducer,
   GetChittiChallanScreen: GetChittiChallanReducer,
@@ -16,8 +18,9 @@ const appReducer = combineReducers({
   GetSubCategoryListScreen: GetSubCategoryListReducer,
   GetProductListScreen: GetProductListReducer,
   GetClientGroupScreen: GetClientGroupReducer,
-  GetEmeraldChallanScreen:GetEmeraldChallanReducer,
-  GetCategoryListScreen:GetCategoryListReducer
+  GetEmeraldChallanScreen: GetEmeraldChallanReducer,
+  GetCategoryListScreen: GetCategoryListReducer,
+  GetHuidProductListScreen: GetHuidProductListReducer
 });
 
 const rootReducer = (state: any, action: any) => {

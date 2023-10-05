@@ -10,7 +10,7 @@ const SelectedInputDropdown = ({
   HandleClientGroup,
   defaultData
 }: any) => {
-  // const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
+
   const [showDropDown, setShowDropdown] = useState<any>(false);
   const [noRecords, setNoRecordsFound] = useState<any>(false);
   const [filterDropdownList, setFilterDropdownList] = useState<any>([]);
@@ -70,11 +70,10 @@ const SelectedInputDropdown = ({
         <input
           type="text"
           // className="form-control input-fields  dropdown-input"
-          className={`${
-            bgColor === true
-              ? 'form-control dropdown-input client-name-input-chitti'
-              : 'form-control input-fields  dropdown-input'
-          }`}
+          className={`${bgColor === true
+            ? 'form-control dropdown-input client-name-input-chitti'
+            : 'form-control input-fields  dropdown-input'
+            }`}
           id="exampleInputEmail1"
           // onBlur={handleBlur}
           onFocus={() => setIsFocused(true)}
@@ -116,26 +115,33 @@ const SelectedInputDropdown = ({
                 ))}
               </>
             )}
-            {noRecords === true && filterDropdownList?.length === 0 && (
-              <li className="dropdown-list p-1 mt-2">
-                <select
-                  className="form-select form-select-sm"
-                  aria-label="Default select example"
-                  onChange={HandleClientGroup}
-                >
-                  {clientGroupList?.length > 0 &&
-                    clientGroupList !== null &&
-                    clientGroupList.map((group: any, index: any) => {
-                      return (
-                        <>
-                          <option></option>
-                          <option>{group}</option>
-                        </>
-                      );
-                    })}
-                </select>
-              </li>
-            )}
+            {
+              clientGroupList?.length > 0 && (
+                <>
+                  {noRecords === true && filterDropdownList?.length === 0 && (
+                    <li className="dropdown-list p-1 mt-2">
+                      <select
+                        className="form-select form-select-sm"
+                        aria-label="Default select example"
+                        onChange={HandleClientGroup}
+                      >
+                        {clientGroupList?.length > 0 &&
+                          clientGroupList !== null &&
+                          clientGroupList.map((group: any, index: any) => {
+                            return (
+                              <>
+                                <option></option>
+                                <option>{group}</option>
+                              </>
+                            );
+                          })}
+                      </select>
+                    </li>
+                  )}
+                </>
+              )
+            }
+
           </ul>
         )}
       </div>

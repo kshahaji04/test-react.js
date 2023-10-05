@@ -4,38 +4,11 @@ import EmeraldListing from './EmeraldListing/EmeraldListing';
 import CreateEmeraldChittiMaster from './CreateEmeraldChitti/CreateEmeraldChittiMaster';
 import ListingTable from '../ListingTable';
 import useChittiHook from '../../hooks/Chitti/chitti-page-hook';
+import UseEmeraldHook from '../../hooks/Emerald/emrald-page-hook';
 
 const EmeraldChittiMaster = () => {
-  const EmbededTableListingData: any = [
-    {
-      No: 1,
-      Sub_category: '20/09/2023',
-      product: '001',
-      Gross_weight: 'john',
-      Amount: 'draft',
-    },
-    {
-      No: 2,
-      Sub_category: '20/09/2023',
-      product: '001',
-      Gross_weight: 'john',
-      Amount: 'draft',
-    },
-    {
-      No: 3,
-      Sub_category: '20/09/2023',
-      product: '001',
-      Gross_weight: 'john',
-      Amount: 'draft',
-    },
-    {
-      No: 4,
-      Sub_category: '20/09/2023',
-      product: '001',
-      Gross_weight: 'john',
-      Amount: 'draft',
-    },
-  ];
+  const { emeraldChittiData, selectedDropdownValue, setSelectedDropdownValue, HandleClientGroup, HandleCreateChittiSubmit, clientGroupList, clientNameList }: any = UseEmeraldHook();
+
   return (
     <div className="container mt-3">
       <div className="row justify-content-center">
@@ -50,11 +23,12 @@ const EmeraldChittiMaster = () => {
               <div className="container">
                 <h4 className="text-center mt-2">Emerald Listing</h4>
                 {/* <EmeraldListing /> */}
-                <ListingTable tableListingData={EmbededTableListingData} />
+                <ListingTable tableListingData={emeraldChittiData} />
               </div>
             </Tab>
             <Tab eventKey="longer-tab" title="Create Emerald Chitti">
-              <CreateEmeraldChittiMaster />
+              <CreateEmeraldChittiMaster selectedDropdownValue={selectedDropdownValue} setSelectedDropdownValue={setSelectedDropdownValue}
+                HandleClientGroup={HandleClientGroup} HandleCreateChittiSubmit={HandleCreateChittiSubmit} clientGroupList={clientGroupList} clientNameList={clientNameList} />
             </Tab>
           </Tabs>
         </div>
