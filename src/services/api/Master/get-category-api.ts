@@ -1,25 +1,30 @@
 import axios from 'axios';
 import { BASE_URL } from '../../Config/api-config';
 
-const GetChallanList = async (token: any) => {
-  console.log('tokennnn', token);
+const getCategoryApi: any = async (token:any) => {
+
   let response: any;
   const version = 'v1';
-  const method = 'get_challan';
-  const entity = 'challan_api';
+  const method = 'get_category';
+  const entity = 'category';
 
   const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}`;
 
+
   const config = {
     headers: {
+     
       Authorization: token,
     },
   };
 
+  
+
   await axios
-    .get(`${BASE_URL}${params}`, config)
+  .get(`${BASE_URL}${params}`, config)
     .then((res: any) => {
-      response = res.data;
+  
+      response = res;
     })
     .catch((err: any) => {
       console.log(err);
@@ -27,4 +32,4 @@ const GetChallanList = async (token: any) => {
   return response;
 };
 
-export default GetChallanList;
+export default getCategoryApi;

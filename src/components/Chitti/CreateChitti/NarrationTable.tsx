@@ -116,7 +116,7 @@ const NarrationTable = ({
                   {productList?.length > 0 && productList !== null ? (
                     <>
                       {productList.map((product: any, index: any) => {
-                        return <option key={index}>{product}</option>;
+                        return <option defaultValue={row.product} key={index}>{product}</option>;
                       })}
                     </>
                   ) : (
@@ -130,6 +130,7 @@ const NarrationTable = ({
                   className="form-control custom-input-field"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-sm"
+                  defaultValue={row.huid_pieces}
                   onChange={(e) => HandlePiecesAmount(e, row.id)}
                 />
               </td>
@@ -140,6 +141,8 @@ const NarrationTable = ({
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-sm"
                   onKeyDown={(e) => handleKeyDown(e, row.id)}
+                  defaultValue={row.huid_weight}
+
                   onChange={(e) => HandleWeightAmount(e, row.id)}
                 />
               </td>

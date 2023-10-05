@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import EditChittiChallan from './Modal/EditChittiChallan';
 
-const ListingTable = ({ tableListingData }: any) => {
+const ListingTable = ({
+  tableListingData,
+  setTableData,
+  subCategoryList,
+  narrationTableData,
+  setNarrationTableData,
+  productList,
+  selectedDropdownValue,
+  drowpdownlist
+  
+}: any) => {
   console.log('tableListingData', tableListingData);
   const [showEditModal, setshowEditModal] = useState<boolean>(false);
   const [modalData, setModalData] = useState<any>('');
   const handleEditModal: any = (data: any) => {
     setshowEditModal(!showEditModal);
-    setModalData(data);
+    setModalData(data?.challan_name);
   };
 
   const [headingData, setHeadingData] = useState<any>('');
@@ -40,26 +50,12 @@ const ListingTable = ({ tableListingData }: any) => {
     );
   };
 
-  const HandleRenderingData: any = (data: any) => {
-    if (data.docstatus === 0) {
-      return data.docstatus === 'draft';
-    } else if (data.docstatus === 1) {
-      return data.docstatus === 'draft';
-    } else {
-      return data.docstatus === 'draft';
-    }
-  };
-
   const TableBodyData: any = () => {
     return (
       <>
         {tableListingData?.length > 0 && tableListingData !== null ? (
           <>
             {tableListingData.map((data: any, i: any) => {
-              // {
-              //   HandleRenderingData(data);
-              // }
-
               return (
                 <tr className="table-body-row" key={i}>
                   {headingData?.length > 0 &&
@@ -72,7 +68,7 @@ const ListingTable = ({ tableListingData }: any) => {
                       );
                     })}
 
-                  {data.docstatus === 0 && (
+                  {data.docstatus === 'Draft' && (
                     <>
                       <td className="button-section-td border-0">
                         {/* <button
@@ -94,7 +90,7 @@ const ListingTable = ({ tableListingData }: any) => {
                       </td>
                     </>
                   )}
-                  {data.docstatus === 1 && (
+                  {data.docstatus === 'Submitted' && (
                     <>
                       <td className="button-section-td border-0">
                         {/* <button className="btn btn-outline-primary px-lg-2 py-0 "> */}
@@ -144,6 +140,13 @@ const ListingTable = ({ tableListingData }: any) => {
           show={showEditModal}
           toHide={handleEditModal}
           modalData={modalData}
+          setTableData={setTableData}
+          subCategoryList={subCategoryList}
+          narrationTableData={narrationTableData}
+          setNarrationTableData={setNarrationTableData}
+          productList={productList}
+          selectedDropdownValue={selectedDropdownValue}
+          drowpdownlist={drowpdownlist}
         />
       ) : null}
     </>

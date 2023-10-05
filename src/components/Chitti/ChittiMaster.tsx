@@ -22,6 +22,8 @@ const ChittiMaster = () => {
     clientNameList,
     subCategoryList,
     productList,
+    clientGroupList,
+    HandleClientGroup,
   }: any = UseChittiHook();
 
   console.log('chittiListingData in master', chittiListingData);
@@ -41,7 +43,16 @@ const ChittiMaster = () => {
                 <div className="container">
                   <h4 className="text-center mt-2">Chitti Listing</h4>
                   <SearchChittiListing clientNameList={clientNameList} />
-                  <ListingTable tableListingData={chittiListingData} />
+                  <ListingTable
+                    tableListingData={chittiListingData}
+                    setTableData={setTableData}
+                    subCategoryList={subCategoryList}
+                    narrationTableData={narrationTableData}
+                    setNarrationTableData={setNarrationTableData}
+                    productList={productList}
+                    selectedDropdownValue={selectedDropdownValue}
+                    drowpdownlist={clientNameList}
+                  />
                 </div>
               </Tab>
               <Tab eventKey="longer-tab" title="Create Chitti">
@@ -59,6 +70,8 @@ const ChittiMaster = () => {
                   clientNameList={clientNameList}
                   subCategoryList={subCategoryList}
                   productList={productList}
+                  clientGroupList={clientGroupList}
+                  HandleClientGroup={HandleClientGroup}
                 />
               </Tab>
             </Tabs>

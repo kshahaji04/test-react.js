@@ -5,6 +5,7 @@ const ChallanItemsTable = ({
   setTableData,
   subCategoryList,
 }: any) => {
+  console.log("tableDataaa initial",tableData)
   // const [tableData, setTableData] = useState<any>([{ id: 1 }]);
   const [amountValue, setamountValue] = useState<any>({
     sub_category: '',
@@ -133,13 +134,13 @@ const ChallanItemsTable = ({
                         aria-label=".form-select-sm example"
                         onChange={(e) => HandleCategory(e, row.id)}
                       >
-                        <option></option>
+                        <option defaultValue={row.sub_category} ></option>
                         {subCategoryList?.length > 0 &&
                         subCategoryList !== null ? (
                           <>
                             {subCategoryList.map(
                               (category: any, index: any) => {
-                                return <option key={index}>{category}</option>;
+                                return <option defaultValue={row.sub_category} key={index}>{category}</option>;
                               }
                             )}
                           </>
@@ -154,6 +155,7 @@ const ChallanItemsTable = ({
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
+                        defaultValue={row.gross_weight}
                         onChange={(e) => HandleGrossWeightValue(e, row.id)}
                       />
                     </td>
@@ -163,6 +165,7 @@ const ChallanItemsTable = ({
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
+                        defaultValue={row.net_weight}
                         onChange={(e) => HandleNetWeightValue(e, row.id)}
                       />
                     </td>
@@ -172,6 +175,7 @@ const ChallanItemsTable = ({
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
+                        defaultValue={row.amount}
                         onKeyDown={(e) => handleKeyDown(e, row.id)}
                         onChange={(e) => HandleAmountValue(e, row.id)}
                       />

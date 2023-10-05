@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { BASE_URL } from '../../Config/api-config';
 
-const GetChallanList = async (token: any) => {
+const GetEmeraldList = async (token: any) => {
   console.log('tokennnn', token);
   let response: any;
   const version = 'v1';
@@ -27,4 +27,4 @@ const GetChallanList = async (token: any) => {
   return response;
 };
 
-export default GetChallanList;
+export default GetEmeraldList;

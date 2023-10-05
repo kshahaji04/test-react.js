@@ -20,23 +20,26 @@ import {
   getProductList,
   get_product_list,
 } from '../../store/slices/Chitti/get-product-list-slice';
+import {
+  getClientGroupList,
+  get_client_group,
+} from '../../store/slices/Chitti/get-client-group-list-slice';
 
 const UseChittiHook = () => {
   const dispatch = useDispatch();
   const AccessToken: any = useSelector(get_access_token);
   const ChittiChallanData: any = useSelector(get_chitti_challan);
   const ClientNameDataFromStore: any = useSelector(get_client_name);
+  const ClientGroupDataFromStore: any = useSelector(get_client_group);
   const SubCategoryDataFromStore: any = useSelector(get_subcategory_list);
   const ProductListDataFromStore: any = useSelector(get_product_list);
-  console.log(
-    'SubCategoryDataFromStore',
-    SubCategoryDataFromStore,
-    ProductListDataFromStore
-  );
+  console.log('ChittiChallanData', ChittiChallanData);
   const [chittiListingData, setChittiListingData] = useState<any>([]);
   const [subCategoryList, setSubCategoryList] = useState<any>([]);
   const [productList, setProductList] = useState<any>([]);
   const [clientNameList, setClientNameList] = useState<any>([]);
+
+  const [clientGroupList, setClientGroupList] = useState<any>([]);
   const [tableData, setTableData] = useState<any>([{ id: 1 }]);
   const [narrationTableData, setNarrationTableData] = useState<any>([
     { id: 1 },
@@ -48,6 +51,7 @@ const UseChittiHook = () => {
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
   const [goldRate, setGoldRate] = useState<any>('');
   const [remarks, setRemarks] = useState<any>('');
+  const [clientGroupName, setClientGroupName] = useState<any>('');
 
   let modifiedList: any;
 
@@ -70,6 +74,7 @@ const UseChittiHook = () => {
     dispatch(getClientName(AccessToken?.token));
     dispatch(getSubCategoryList(AccessToken?.token));
     dispatch(getProductList(AccessToken?.token));
+    dispatch(getClientGroupList(AccessToken?.token));
   }, []);
 
   useEffect(() => {
@@ -116,12 +121,28 @@ const UseChittiHook = () => {
     }
   }, [ProductListDataFromStore]);
 
+  useEffect(() => {
+    if (
+      ClientGroupDataFromStore?.data?.length > 0 &&
+      ClientGroupDataFromStore?.data !== null
+    ) {
+      setClientGroupList([...ClientGroupDataFromStore?.data]);
+    } else {
+      setClientGroupList([]);
+    }
+  }, [ClientGroupDataFromStore]);
+
   const HandleGoldRate: any = (e: any) => {
     setGoldRate(e.target.value);
   };
 
   const HandleRemarks: any = (e: any) => {
     setRemarks(e.target.value);
+  };
+
+  const HandleClientGroup: any = (e: any) => {
+    console.log('clientgro', e.target.value);
+    setClientGroupName(e.target.value);
   };
 
   useEffect(() => {
@@ -146,7 +167,8 @@ const UseChittiHook = () => {
       'submit create chitti',
       selectedDropdownValue,
       goldRate,
-      remarks
+      remarks,
+      clientGroupName
     );
     console.log(
       'submit create chitti challan table',
@@ -155,6 +177,7 @@ const UseChittiHook = () => {
     );
     const BodyData: any = {
       clientName: selectedDropdownValue,
+      clientGroup: clientGroupName,
       goldRate: goldRate,
       remarks: remarks,
       challanTableData: challanTableData,
@@ -189,6 +212,8 @@ const UseChittiHook = () => {
     clientNameList,
     subCategoryList,
     productList,
+    clientGroupList,
+    HandleClientGroup,
   };
 };
 

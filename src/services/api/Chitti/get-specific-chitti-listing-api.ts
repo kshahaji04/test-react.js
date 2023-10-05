@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { BASE_URL } from '../../Config/api-config';
 
-const GetChallanList = async (token: any) => {
-  console.log('tokennnn', token);
+const GetSpecificChallanListData = async (request: any) => {
+  console.log('tokennnn', request);
   let response: any;
   const version = 'v1';
-  const method = 'get_challan';
-  const entity = 'challan_api';
+  const method = 'get_specific';
+  const entity = 'specific_challan';
 
-  const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}`;
+  const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}&name=${request.name}`;
 
   const config = {
     headers: {
-      Authorization: token,
+      Authorization: request.token,
     },
   };
 
@@ -27,4 +27,4 @@ const GetChallanList = async (token: any) => {
   return response;
 };
 
-export default GetChallanList;
+export default GetSpecificChallanListData;

@@ -6,6 +6,9 @@ const SelectedInputDropdown = ({
   bgColor,
   selectedDropdownValue,
   setSelectedDropdownValue,
+  clientGroupList,
+  HandleClientGroup,
+  defaultData
 }: any) => {
   // const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
   const [showDropDown, setShowDropdown] = useState<any>(false);
@@ -78,6 +81,7 @@ const SelectedInputDropdown = ({
           placeholder={placeholderValue}
           onChange={HandleInputField}
           onClick={handleShowDropdown}
+          defaultValue={defaultData?.client_name}
           value={selectedDropdownValue}
           onKeyDown={handleKeyDown}
           autoComplete="off"
@@ -113,7 +117,24 @@ const SelectedInputDropdown = ({
               </>
             )}
             {noRecords === true && filterDropdownList?.length === 0 && (
-              <li className="dropdown-list p-1">No Records Found</li>
+              <li className="dropdown-list p-1 mt-2">
+                <select
+                  className="form-select form-select-sm"
+                  aria-label="Default select example"
+                  onChange={HandleClientGroup}
+                >
+                  {clientGroupList?.length > 0 &&
+                    clientGroupList !== null &&
+                    clientGroupList.map((group: any, index: any) => {
+                      return (
+                        <>
+                          <option></option>
+                          <option>{group}</option>
+                        </>
+                      );
+                    })}
+                </select>
+              </li>
             )}
           </ul>
         )}

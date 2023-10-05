@@ -1,7 +1,14 @@
 import React from 'react';
+import MasterListing from './MasterListing';
+
 
 const Master = () => {
-  return <div>master</div>;
+  return (
+    <div>
+      <MasterListing />
+      
+    </div>
+  );
 };
 
 export default Master;

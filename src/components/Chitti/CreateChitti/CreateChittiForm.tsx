@@ -8,7 +8,13 @@ const CreateChittiForm = ({
   HandleRemarks,
   setSelectedDropdownValue,
   clientNameList,
+  clientGroupList,
+  HandleClientGroup,
+  defaultData,
+  
 }: any) => {
+
+  console.log("defaultData",defaultData)
   const ChittiNoList = ['client1', 'client2', 'client3', 'client4'];
   const handleSubmit: any = () => {};
   const [bgColor, setBgColor] = useState<any>(true);
@@ -43,6 +49,7 @@ const CreateChittiForm = ({
                 // type="date"
                 id="date"
                 name="date"
+                defaultValue={defaultData?.date}
                 value={currentDate}
                 className="form-control custom-input-field py-0 px-2"
                 aria-label="Sizing example input"
@@ -61,6 +68,9 @@ const CreateChittiForm = ({
               placeholderValue="Client Name"
               selectedDropdownValue={selectedDropdownValue}
               setSelectedDropdownValue={setSelectedDropdownValue}
+              clientGroupList={clientGroupList}
+              HandleClientGroup={HandleClientGroup}
+              defaultData={defaultData}
             />
           </div>
           <div className="col-lg-3 col-md-6">
@@ -73,6 +83,7 @@ const CreateChittiForm = ({
               className="form-control custom-input-field px-1"
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"
+              // defaultValue={defaultData}
               onChange={HandleGoldRate}
               // onBlur={handleBlur}
             />
