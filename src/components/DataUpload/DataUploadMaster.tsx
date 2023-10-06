@@ -4,8 +4,12 @@ import DataUpload from './DataUpload/DataUpload';
 import ViewUploadedList from './ViewUpload/ViewUploadedList';
 import { useState } from 'react';
 import ListingTable from '../ListingTable';
+import '../../Style/data-upload.css';
+import UseDataUploadHook from '../../hooks/dataUpload/data-upload-hook';
 
 const DataUploadMaster = () => {
+
+  const { supplierList } = UseDataUploadHook();
 
   // const [showButtons, setShowButtons] = useState<any>(false)
   const TableListingData: any = [
@@ -27,7 +31,7 @@ const DataUploadMaster = () => {
               justify
             >
               <Tab eventKey="chitti-listing" title="Upload">
-                <DataUpload />
+                <DataUpload supplierList={supplierList} />
               </Tab>
               <Tab eventKey="longer-tab" title="View uploaded list">
                 {/* <ViewUploadedList /> */}

@@ -1,0 +1,9 @@
+.master-ul-li {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.master-listing-card-body {
+    padding: 0.4rem 0.7rem !important;
+
+}

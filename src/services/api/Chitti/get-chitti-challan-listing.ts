@@ -5,7 +5,7 @@ const GetChallanList = async (token: any) => {
   console.log('tokennnn', token);
   let response: any;
   const version = 'v1';
-  const method = 'get_challan';
+  const method = 'get_custom_challan';
   const entity = 'challan_api';
 
   const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}`;

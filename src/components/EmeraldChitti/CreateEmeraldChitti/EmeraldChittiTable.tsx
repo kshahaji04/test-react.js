@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const EmeraldChittiTable = ({ tableData, setTableData, subCategoryList, HandleSubCategory }: any) => {
+const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCategoryList }: any) => {
   // const [tableData, setTableData] = useState<any>([{ id: 1, name: '' }]);
   const [amountValue, setamountValue] = useState<any>({ sub_category: '', product: "", gross_weight: 0, net_weight: 0, amount: 0 })
 
@@ -68,6 +68,25 @@ const EmeraldChittiTable = ({ tableData, setTableData, subCategoryList, HandleSu
     setTableData(updatedData);
   };
 
+  const HandleSubCategory = (e: any, id: any) => {
+    console.log('handlecategory', e.target.value);
+    const updatedData = tableData.map((row: any) =>
+      row.id === id ? { ...row, sub_category: e.target.value } : row
+    );
+    setTableData(updatedData);
+  };
+
+  const HandleProductItem = (e: any, id: any) => {
+    console.log('handlecategory', e.target.value);
+    const updatedData = tableData.map((row: any) =>
+      row.id === id ? { ...row, product: e.target.value } : row
+    );
+    setTableData(updatedData);
+  };
+
+
+
+
   const HandleAmountValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, amount: parseFloat(e.target.value) || 0 } : row
@@ -113,7 +132,8 @@ const EmeraldChittiTable = ({ tableData, setTableData, subCategoryList, HandleSu
                           name="category"
                           className="form-select p-0 custom-input-field "
                           aria-label=".form-select-sm example"
-                          onChange={HandleSubCategory}
+                          onChange={(e) => HandleSubCategory(e, row.id)}
+
                         >
                           <option></option>
                           {
@@ -135,8 +155,19 @@ const EmeraldChittiTable = ({ tableData, setTableData, subCategoryList, HandleSu
                           name="category"
                           className="form-select p-0 custom-input-field "
                           aria-label=".form-select-sm example"
+                          onChange={(e) => HandleProductItem(e, row.id)}
                         >
                           <option></option>
+                          {/* {productItemList?.length > 0 && productItemList !== null && (
+                            <>
+                              {
+                                productItemList.map((product: any, index: any) => (
+                                  <option key={index}>{product}</option>
+
+                                ))
+                              }
+                            </>
+                          )} */}
                           <option>One</option>
                           <option>Two</option>
                           <option>Three</option>

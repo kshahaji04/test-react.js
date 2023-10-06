@@ -52,6 +52,7 @@ const UseChittiHook = () => {
   const [goldRate, setGoldRate] = useState<any>('');
   const [remarks, setRemarks] = useState<any>('');
   const [clientGroupName, setClientGroupName] = useState<any>('');
+  const [date, setDate] = useState<any>('');
 
   let modifiedList: any;
 
@@ -145,6 +146,11 @@ const UseChittiHook = () => {
     setClientGroupName(e.target.value);
   };
 
+  const HandleDateChange: any = (e: any) => {
+    console.log('HandleDateChange', e.target.value);
+    setDate(e.target.value);
+  };
+
   useEffect(() => {
     if (tableData?.length > 0 && tableData !== null) {
       let modifiedList: any = tableData.map((obj: any) => {
@@ -168,7 +174,8 @@ const UseChittiHook = () => {
       selectedDropdownValue,
       goldRate,
       remarks,
-      clientGroupName
+      clientGroupName,
+      date
     );
     console.log(
       'submit create chitti challan table',
@@ -214,6 +221,8 @@ const UseChittiHook = () => {
     productList,
     clientGroupList,
     HandleClientGroup,
+    HandleDateChange,
+
   };
 };
 

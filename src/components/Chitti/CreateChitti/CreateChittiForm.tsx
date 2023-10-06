@@ -11,7 +11,7 @@ const CreateChittiForm = ({
   clientGroupList,
   HandleClientGroup,
   defaultData,
-
+  HandleDateChange
 }: any) => {
 
   console.log("defaultData", defaultData)
@@ -54,7 +54,7 @@ const CreateChittiForm = ({
                 className="form-control custom-input-field py-0 px-2"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"
-              // onChange={handleChange}
+                onChange={HandleDateChange}
               />
             </div>
           </div>

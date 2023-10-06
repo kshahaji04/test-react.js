@@ -8,7 +8,7 @@ import UseEmeraldHook from '../../hooks/Emerald/emrald-page-hook';
 import UseSubCategoryHook from '../../hooks/Master/sub-category-hook';
 
 const EmeraldChittiMaster = () => {
-  const { emeraldChittiData, selectedDropdownValue, setSelectedDropdownValue, HandleClientGroup, HandleCreateEmeraldChittiSubmit, clientGroupList, clientNameList, currentDate, handleDateChange, transactionDate, tableData, setTableData }: any = UseEmeraldHook();
+  const { emeraldChittiData, selectedDropdownValue, setSelectedDropdownValue, HandleClientGroup, HandleCreateEmeraldChittiSubmit, productItemList, clientGroupList, clientNameList, currentDate, handleDateChange, transactionDate, tableData, setTableData }: any = UseEmeraldHook();
   const { subCategoryList }: any = UseSubCategoryHook();
   // const { }: any = 
 
@@ -35,6 +35,7 @@ const EmeraldChittiMaster = () => {
                 clientNameList={clientNameList} currentDate={currentDate}
                 handleDateChange={handleDateChange} transactionDate={transactionDate}
                 tableData={tableData} setTableData={setTableData} subCategoryList={subCategoryList}
+                productItemList={productItemList}
               />
             </Tab>
           </Tabs>

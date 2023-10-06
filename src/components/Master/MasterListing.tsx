@@ -17,14 +17,12 @@ const MasterListing = () => {
           masterlist.map((data: any, index: any) => {
             const processedStr = data.replace(/\s+/g, '').toLowerCase();
             return (
-              <div className="mx-3" key={index}>
+              <div className="mx-3 border border-dark " key={index}>
                 <a href={`/master/${processedStr}`} className='master-title-heading'>
-                  <div className="card">
-                    <div className="card-body d-flex justify-content-center">
-                      <h5 className="card-title me-1">{data}</h5>
-                      {/* <button type="button" className="btn btn-outline-primary py-0 px-1 mx-1">
-                        View
-                      </button> */}
+                  <div className="card rounded-4">
+                    <div className="card-body d-flex justify-content-center master-listing-card-body">
+                      <h5 className="card-title me-1 m-0">{data}</h5>
+
                     </div>
                   </div>
                 </a>

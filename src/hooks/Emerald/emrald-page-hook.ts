@@ -20,6 +20,8 @@ import {
 } from '../../store/slices/Chitti/get-client-group-list-slice';
 import { getEmeraldChallan, get_Emerald_challan } from '../../store/slices/Emerald/get-emerald-list-slice';
 import { toast } from 'react-toastify';
+import { getProductItem, get_product_item } from '../../store/slices/Emerald/get-product-item-slice';
+import CreateEmeraldChittiApi from '../../services/api/Emerald/create-emerald-chitti-api';
 
 const UseEmeraldHook = () => {
   const dispatch = useDispatch();
@@ -29,7 +31,7 @@ const UseEmeraldHook = () => {
   const ClientNameDataFromStore: any = useSelector(get_client_name);
   const ClientGroupDataFromStore: any = useSelector(get_client_group);
   const SubCategoryDataFromStore: any = useSelector(get_subcategory_list);
-  const ProductListDataFromStore: any = useSelector(get_product_list);
+  const ProductItemDataFromStore: any = useSelector(get_product_item);
   const [clientNameList, setClientNameList] = useState<any>([]);
   const [emeraldChittiData, setEmeraldChittiData] = useState<any>([])
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
@@ -37,6 +39,7 @@ const UseEmeraldHook = () => {
   const [clientGroupList, setClientGroupList] = useState<any>([]);
   const [currentDate, setCurrentDate] = useState<any>(new Date());
   const [transactionDate, setTransactionDate] = useState<any>('');
+  const [productItemList, setProductItemList] = useState<any>([]);
 
   const [tableData, setTableData] = useState<any>([{ id: 1 }]);
   const [emeraldChittiTableData, setEmeraldChittiTableData] = useState<any>([]);
@@ -45,7 +48,7 @@ const UseEmeraldHook = () => {
     dispatch(getEmeraldChallan(AccessToken?.token));
     dispatch(getClientName(AccessToken?.token));
     dispatch(getSubCategoryList(AccessToken?.token));
-    dispatch(getProductList(AccessToken?.token));
+    dispatch(getProductItem(AccessToken?.token));
     dispatch(getClientGroupList(AccessToken?.token));
   }, []);
 
@@ -97,6 +100,17 @@ const UseEmeraldHook = () => {
     }
   }, [ClientGroupDataFromStore]);
 
+  useEffect(() => {
+    if (
+      ProductItemDataFromStore?.data?.length > 0 &&
+      ProductItemDataFromStore?.data !== null
+    ) {
+      setProductItemList([...ProductItemDataFromStore?.data]);
+    } else {
+      setProductItemList([]);
+    }
+  }, [ProductItemDataFromStore]);
+
 
   const HandleClientGroup: any = (e: any) => {
     console.log('clientgro', e.target.value);
@@ -123,11 +137,12 @@ const UseEmeraldHook = () => {
 
   const HandleCreateEmeraldChittiSubmit: any = async () => {
     console.log(
-      'submit create chitti',
-
+      'submit create emerald chitti',
       selectedDropdownValue,
       transactionDate,
-      clientGroupName
+
+
+      emeraldChittiTableData
     );
     console.log(
       'submit create chitti challan table',
@@ -136,26 +151,24 @@ const UseEmeraldHook = () => {
     );
     const BodyData: any = {
       clientName: selectedDropdownValue,
-      clientGroup: clientGroupName,
-
-      // challanTableData: challanTableData,
-      // narrationTableData: narrationUpdatedTableData,
+      date: transactionDate,
+      emeraldChittiTableData: emeraldChittiTableData,
       token: AccessToken?.token,
     };
-    let CreateChittiApiRes: any = await (BodyData);
-    console.log('Createchittiapires', CreateChittiApiRes);
+    let createEmeraldChittiApiRes: any = await CreateEmeraldChittiApi(BodyData);
+    console.log('Createchittiapires', createEmeraldChittiApiRes);
 
     if (
-      CreateChittiApiRes?.status === 200 &&
-      CreateChittiApiRes?.hasOwnProperty('data')
+      createEmeraldChittiApiRes?.status === 200 &&
+      createEmeraldChittiApiRes?.hasOwnProperty('data')
     ) {
-      toast.success('Chitti Created');
+      toast.success('Emerald Chitti Created');
     } else {
       toast.error('Failed to created chitti');
     }
   };
   return {
-    emeraldChittiData, selectedDropdownValue, setSelectedDropdownValue,
+    emeraldChittiData, selectedDropdownValue, setSelectedDropdownValue, productItemList,
     HandleClientGroup, HandleCreateEmeraldChittiSubmit, clientGroupList, clientNameList, currentDate, handleDateChange, tableData, setTableData
   };
 };

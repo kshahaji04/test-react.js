@@ -10,7 +10,7 @@ const ListingTable = ({
   productList,
   selectedDropdownValue,
   drowpdownlist
-  
+
 }: any) => {
   console.log('tableListingData', tableListingData);
   const [showEditModal, setshowEditModal] = useState<boolean>(false);
@@ -21,6 +21,8 @@ const ListingTable = ({
   };
 
   const [headingData, setHeadingData] = useState<any>('');
+
+  // const headingData:any = ["Sr no","Date","Chitti no","Client Name", ]
 
   useEffect(() => {
     if (Object?.keys(tableListingData)?.length > 0) {
@@ -56,11 +58,13 @@ const ListingTable = ({
         {tableListingData?.length > 0 && tableListingData !== null ? (
           <>
             {tableListingData.map((data: any, i: any) => {
+              console.log("dataaa", data)
+
               return (
                 <tr className="table-body-row" key={i}>
                   {headingData?.length > 0 &&
                     headingData !== null &&
-                    headingData.map((v: any) => {
+                    headingData.map((v: any, index: any) => {
                       return (
                         <td className="border-0" key={v}>
                           {data[v]}
@@ -68,7 +72,7 @@ const ListingTable = ({
                       );
                     })}
 
-                  {data.docstatus === 'Draft' && (
+                  {data.docstatus === 0 && (
                     <>
                       <td className="button-section-td border-0">
                         {/* <button
@@ -90,7 +94,7 @@ const ListingTable = ({
                       </td>
                     </>
                   )}
-                  {data.docstatus === 'Submitted' && (
+                  {data.docstatus === 1 && (
                     <>
                       <td className="button-section-td border-0">
                         {/* <button className="btn btn-outline-primary px-lg-2 py-0 "> */}

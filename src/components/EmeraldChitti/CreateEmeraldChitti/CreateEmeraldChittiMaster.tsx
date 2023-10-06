@@ -4,7 +4,7 @@ import ListingTable from '../../ListingTable';
 import EmeraldChittiTable from './EmeraldChittiTable';
 
 const CreateEmeraldChittiMaster = ({ selectedDropdownValue, setSelectedDropdownValue, HandleClientGroup, HandleCreateEmeraldChittiSubmit, clientGroupList, clientNameList,
-    currentDate, handleDateChange, transactionDate, tableData, setTableData, subCategoryList }: any) => {
+    currentDate, handleDateChange, transactionDate, tableData, setTableData, subCategoryList, productItemList }: any) => {
 
     return (
         <>
@@ -20,7 +20,8 @@ const CreateEmeraldChittiMaster = ({ selectedDropdownValue, setSelectedDropdownV
             <EmeraldCreateChitti selectedDropdownValue={selectedDropdownValue} setSelectedDropdownValue={setSelectedDropdownValue}
                 HandleClientGroup={HandleClientGroup} clientGroupList={clientGroupList}
                 clientNameList={clientNameList} currentDate={currentDate} handleDateChange={handleDateChange} transactionDate={transactionDate} />
-            <EmeraldChittiTable tableData={tableData} setTableData={setTableData} subCategoryList={subCategoryList} />
+
+            <EmeraldChittiTable tableData={tableData} setTableData={setTableData} subCategoryList={subCategoryList} productItemList={productItemList} />
 
         </>
     )
