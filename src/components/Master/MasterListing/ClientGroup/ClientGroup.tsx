@@ -19,10 +19,10 @@ const ClientGroup = () => {
               justify
             >
               {' '}
-              <Tab eventKey="longer-tab" title="Add Client Group">
+              <Tab eventKey="chitti-listing" title="Add Client Group">
                 <AddClientGroup />
               </Tab>
-              <Tab eventKey="chitti-listing" title="Client Group Listing">
+              <Tab eventKey="longer-tab" title="Client Group Listing">
                 <ClientGroupListing clientGroupList={clientGroupList} />
               </Tab>
             </Tabs>

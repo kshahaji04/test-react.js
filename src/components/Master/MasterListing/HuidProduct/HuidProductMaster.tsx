@@ -19,10 +19,10 @@ const HuidProductMaster = () => {
               justify
             >
 
-              <Tab eventKey="longer-tab" title="Add HUID Product">
+              <Tab eventKey="chitti-listing" title="Add HUID Product">
                 <AddHuidProduct />
               </Tab>
-              <Tab eventKey="chitti-listing" title="HUID Product Listing">
+              <Tab eventKey="longer-tab" title="HUID Product Listing">
                 <HuidProductListing huidProductData={huidProductData} />
               </Tab>
 

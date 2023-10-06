@@ -3,12 +3,13 @@ import { Tab, Tabs } from 'react-bootstrap';
 import ClientNameListing from './ClientNameListing';
 import AddClient from './AddClient';
 import UseClientNameHook from '../../../../hooks/Master/client-name-hook';
+import UseClientGroupHook from '../../../../hooks/Master/client-group-hook';
 
 
 
 const ClientName = () => {
   const { clientNameList }: any = UseClientNameHook();
-  // const {clientGroupList}:any = UseClientGroupHook();
+  const { clientGroupList }: any = UseClientGroupHook();
   return (
     <div className="container">
       <div className="container mt-3">
@@ -21,7 +22,7 @@ const ClientName = () => {
               justify
             >
               <Tab eventKey="chitti-listing" title="Add Client">
-                <AddClient/>
+                <AddClient clientGroupList={clientGroupList} />
               </Tab>
               <Tab eventKey="longer-tab" title="Client Name Listing">
                 <ClientNameListing clientNameList={clientNameList} />
