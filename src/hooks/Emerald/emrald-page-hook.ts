@@ -36,7 +36,10 @@ const UseEmeraldHook = () => {
   const [clientGroupName, setClientGroupName] = useState<any>('');
   const [clientGroupList, setClientGroupList] = useState<any>([]);
   const [currentDate, setCurrentDate] = useState<any>(new Date());
+  const [transactionDate, setTransactionDate] = useState<any>('');
 
+  const [tableData, setTableData] = useState<any>([{ id: 1 }]);
+  const [emeraldChittiTableData, setEmeraldChittiTableData] = useState<any>([]);
 
   useEffect(() => {
     dispatch(getEmeraldChallan(AccessToken?.token));
@@ -100,16 +103,35 @@ const UseEmeraldHook = () => {
     setClientGroupName(e.target.value);
   };
 
-  const HandleCreateChittiSubmit: any = async () => {
+
+  const handleDateChange: any = (e: any) => {
+    console.log('clientgro', e.target.value);
+    setTransactionDate(e.target.value);
+  };
+
+  useEffect(() => {
+    if (tableData?.length > 0 && tableData !== null) {
+      let modifiedList: any = tableData.map((obj: any) => {
+        const { id, ...rest } = obj;
+        return rest;
+      });
+      setEmeraldChittiTableData(modifiedList);
+    }
+
+  }, [tableData]);
+
+
+  const HandleCreateEmeraldChittiSubmit: any = async () => {
     console.log(
       'submit create chitti',
-      selectedDropdownValue,
 
+      selectedDropdownValue,
+      transactionDate,
       clientGroupName
     );
     console.log(
       'submit create chitti challan table',
-      // challanTableData,
+      emeraldChittiTableData,
       // narrationUpdatedTableData
     );
     const BodyData: any = {
@@ -134,7 +156,7 @@ const UseEmeraldHook = () => {
   };
   return {
     emeraldChittiData, selectedDropdownValue, setSelectedDropdownValue,
-    HandleClientGroup, HandleCreateChittiSubmit, clientGroupList, clientNameList, currentDate
+    HandleClientGroup, HandleCreateEmeraldChittiSubmit, clientGroupList, clientNameList, currentDate, handleDateChange, tableData, setTableData
   };
 };
 

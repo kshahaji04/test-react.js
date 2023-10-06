@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 
-const EmeraldChittiTable = () => {
-  const [tableData, setTableData] = useState<any>([{ id: 1, name: '' }]);
-  const [totalAmountValue, setTotalAmountValue] = useState<any>({ totalGrossWeight: 0, totalNetWeight: 0, totalAmount: 0 })
+const EmeraldChittiTable = ({ tableData, setTableData, subCategoryList, HandleSubCategory }: any) => {
+  // const [tableData, setTableData] = useState<any>([{ id: 1, name: '' }]);
+  const [amountValue, setamountValue] = useState<any>({ sub_category: '', product: "", gross_weight: 0, net_weight: 0, amount: 0 })
 
 
   const HandleAddRow: any = () => {
     const newRow = {
       id: tableData.length + 1,
-      name: `Row ${tableData.length + 1}`,
+      // name: `Row ${tableData.length + 1}`,
     };
     setTableData([...tableData, newRow]);
   };
@@ -30,47 +30,47 @@ const EmeraldChittiTable = () => {
     // Calculate column totals whenever tableData changes
     const newColumnTotals = tableData.reduce(
       (totals: any, row: any) => {
-        totals.totalGrossWeight += row.totalGrossWeight;
-        totals.totalNetWeight += row.totalNetWeight;
-        totals.totalAmount += row.totalAmount;
+        totals.gross_weight += row.gross_weight;
+        totals.net_weight += row.net_weight;
+        totals.amount += row.amount;
         return totals;
       },
-      { totalGrossWeight: 0, totalNetWeight: 0, totalAmount: 0 }
+      { gross_weight: 0, net_weight: 0, amount: 0 }
     );
-    setTotalAmountValue(newColumnTotals);
+    setamountValue(newColumnTotals);
   }, [tableData]);
 
   useEffect(() => {
     // Calculate column totals whenever tableData changes
     const newColumnTotals = tableData.reduce(
       (totals: any, row: any) => {
-        totals.totalGrossWeight += row.totalGrossWeight;
-        totals.totalNetWeight += row.totalNetWeight;
-        totals.totalAmount += row.totalAmount;
+        totals.gross_weight += row.gross_weight;
+        totals.net_weight += row.net_weight;
+        totals.amount += row.amount;
         return totals;
       },
-      { totalGrossWeight: 0, totalNetWeight: 0, totalAmount: 0 }
+      { gross_weight: 0, net_weight: 0, amount: 0 }
     );
-    setTotalAmountValue(newColumnTotals);
+    setamountValue(newColumnTotals);
   }, [tableData]);
 
   const HandleGrossWeightValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, totalGrossWeight: parseFloat(e.target.value) || 0 } : row
+      row.id === id ? { ...row, gross_weight: parseFloat(e.target.value) || 0 } : row
     );
     setTableData(updatedData);
   };
 
   const HandleNetWeightValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, totalNetWeight: parseFloat(e.target.value) || 0 } : row
+      row.id === id ? { ...row, net_weight: parseFloat(e.target.value) || 0 } : row
     );
     setTableData(updatedData);
   };
 
   const HandleAmountValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, totalAmount: parseFloat(e.target.value) || 0 } : row
+      row.id === id ? { ...row, amount: parseFloat(e.target.value) || 0 } : row
     );
     setTableData(updatedData);
   };
@@ -113,11 +113,20 @@ const EmeraldChittiTable = () => {
                           name="category"
                           className="form-select p-0 custom-input-field "
                           aria-label=".form-select-sm example"
+                          onChange={HandleSubCategory}
                         >
                           <option></option>
-                          <option>One</option>
-                          <option>Two</option>
-                          <option>Three</option>
+                          {
+                            subCategoryList?.length > 0 && subCategoryList !== null && (
+                              subCategoryList.map((subCategory: any, index: any) => {
+                                return (
+                                  <option>
+                                    {subCategory}
+                                  </option>
+                                )
+                              })
+                            )
+                          }
                         </select>
                       </td>
                       <td className='table-data-input'>
@@ -192,7 +201,7 @@ const EmeraldChittiTable = () => {
                       className="form-control custom-input-field-t text-center p-0"
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-sm"
-                      value={totalAmountValue.totalGrossWeight}
+                      value={amountValue.gross_weight}
                       readOnly
                     />
                   </td>
@@ -202,7 +211,7 @@ const EmeraldChittiTable = () => {
                       className="form-control custom-input-field-t text-center p-0"
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-sm"
-                      value={totalAmountValue.totalNetWeight}
+                      value={amountValue.net_weight}
 
                       readOnly
                     />
@@ -213,7 +222,7 @@ const EmeraldChittiTable = () => {
                       className="form-control custom-input-field-t text-center p-0"
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-sm"
-                      value={totalAmountValue.totalAmount}
+                      value={amountValue.amount}
                       readOnly
                     />
                   </td>

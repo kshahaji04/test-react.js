@@ -5,9 +5,12 @@ import CreateEmeraldChittiMaster from './CreateEmeraldChitti/CreateEmeraldChitti
 import ListingTable from '../ListingTable';
 import useChittiHook from '../../hooks/Chitti/chitti-page-hook';
 import UseEmeraldHook from '../../hooks/Emerald/emrald-page-hook';
+import UseSubCategoryHook from '../../hooks/Master/sub-category-hook';
 
 const EmeraldChittiMaster = () => {
-  const { emeraldChittiData, selectedDropdownValue, setSelectedDropdownValue, HandleClientGroup, HandleCreateChittiSubmit, clientGroupList, clientNameList, currentDate }: any = UseEmeraldHook();
+  const { emeraldChittiData, selectedDropdownValue, setSelectedDropdownValue, HandleClientGroup, HandleCreateEmeraldChittiSubmit, clientGroupList, clientNameList, currentDate, handleDateChange, transactionDate, tableData, setTableData }: any = UseEmeraldHook();
+  const { subCategoryList }: any = UseSubCategoryHook();
+  // const { }: any = 
 
   return (
     <div className="container mt-3">
@@ -28,8 +31,11 @@ const EmeraldChittiMaster = () => {
             </Tab>
             <Tab eventKey="longer-tab" title="Create Emerald Chitti">
               <CreateEmeraldChittiMaster selectedDropdownValue={selectedDropdownValue} setSelectedDropdownValue={setSelectedDropdownValue}
-                HandleClientGroup={HandleClientGroup} HandleCreateChittiSubmit={HandleCreateChittiSubmit} clientGroupList={clientGroupList}
-                clientNameList={clientNameList} currentDate={currentDate} />
+                HandleClientGroup={HandleClientGroup} HandleCreateEmeraldChittiSubmit={HandleCreateEmeraldChittiSubmit} clientGroupList={clientGroupList}
+                clientNameList={clientNameList} currentDate={currentDate}
+                handleDateChange={handleDateChange} transactionDate={transactionDate}
+                tableData={tableData} setTableData={setTableData} subCategoryList={subCategoryList}
+              />
             </Tab>
           </Tabs>
         </div>
