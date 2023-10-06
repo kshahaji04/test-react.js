@@ -14,7 +14,7 @@ const AddSubCategoryApi: any = async (token: any, title: any, category: any) => 
 
     let body = {
         title: title,
-        client_group: category
+        category: category
     };
 
     await axios

@@ -5,7 +5,7 @@ const getHuidProductApi: any = async (token: any) => {
 
     let response: any;
     const version = 'v1';
-    const method = 'get_huid';
+    const method = 'get_product';
     const entity = 'product';
 
     const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}`;

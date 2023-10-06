@@ -2,11 +2,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../root-reducer";
 import GetSubCategoryListApi from "../../../services/api/Chitti/get-subcategory-list";
 import getCategoryApi from "../../../services/api/Master/get-category-api";
+import getHuidProductApi from "../../../services/api/Master/get-huid-product-listing-api";
 
 
 
 export const getHuidProductList: any = createAsyncThunk("getHuidProductList/getHuidList", async (token: any) => {
-    const huidProudctListData: any = await getCategoryApi(token)
+    const huidProudctListData: any = await getHuidProductApi(token)
     console.log("huidProudctListData res", huidProudctListData)
     return huidProudctListData;
 });
