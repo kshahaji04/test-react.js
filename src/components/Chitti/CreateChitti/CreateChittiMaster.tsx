@@ -29,7 +29,7 @@ const CreateChittiMaster = ({
           onClick={HandleCreateChittiSubmit}
           className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
         >
-          Submit
+          Save
         </button>
       </div>
       <CreateChittiForm

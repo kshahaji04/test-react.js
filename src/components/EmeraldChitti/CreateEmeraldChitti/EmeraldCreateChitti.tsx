@@ -1,7 +1,7 @@
 import react, { useState } from 'react';
 import SelectedInputDropdown from "../../SelectedInputDropdown";
 
-const EmeraldCreateChitti = ({ selectedDropdownValue, setSelectedDropdownValue, HandleClientGroup, HandleCreateChittiSubmit, clientGroupList, clientNameList }: any) => {
+const EmeraldCreateChitti = ({ selectedDropdownValue, setSelectedDropdownValue, HandleClientGroup, HandleCreateChittiSubmit, clientGroupList, clientNameList, currentDate }: any) => {
   const [bgColor, setBgColor] = useState<any>(true);
   return (
     <form
@@ -35,9 +35,9 @@ const EmeraldCreateChitti = ({ selectedDropdownValue, setSelectedDropdownValue, 
               type="date"
               id="date"
               name="date"
-              value="2018-07-22"
-              min="2011-01-01"
-              max="2028-12-31"
+              value={currentDate}
+              defaultValue={currentDate}
+              // min="2011- 
               className="form-control custom-input-field emerald-input-field"
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"

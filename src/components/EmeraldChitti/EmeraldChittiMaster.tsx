@@ -7,7 +7,7 @@ import useChittiHook from '../../hooks/Chitti/chitti-page-hook';
 import UseEmeraldHook from '../../hooks/Emerald/emrald-page-hook';
 
 const EmeraldChittiMaster = () => {
-  const { emeraldChittiData, selectedDropdownValue, setSelectedDropdownValue, HandleClientGroup, HandleCreateChittiSubmit, clientGroupList, clientNameList }: any = UseEmeraldHook();
+  const { emeraldChittiData, selectedDropdownValue, setSelectedDropdownValue, HandleClientGroup, HandleCreateChittiSubmit, clientGroupList, clientNameList, currentDate }: any = UseEmeraldHook();
 
   return (
     <div className="container mt-3">
@@ -28,7 +28,8 @@ const EmeraldChittiMaster = () => {
             </Tab>
             <Tab eventKey="longer-tab" title="Create Emerald Chitti">
               <CreateEmeraldChittiMaster selectedDropdownValue={selectedDropdownValue} setSelectedDropdownValue={setSelectedDropdownValue}
-                HandleClientGroup={HandleClientGroup} HandleCreateChittiSubmit={HandleCreateChittiSubmit} clientGroupList={clientGroupList} clientNameList={clientNameList} />
+                HandleClientGroup={HandleClientGroup} HandleCreateChittiSubmit={HandleCreateChittiSubmit} clientGroupList={clientGroupList}
+                clientNameList={clientNameList} currentDate={currentDate} />
             </Tab>
           </Tabs>
         </div>

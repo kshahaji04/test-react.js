@@ -35,12 +35,30 @@ const UseEmeraldHook = () => {
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
   const [clientGroupName, setClientGroupName] = useState<any>('');
   const [clientGroupList, setClientGroupList] = useState<any>([]);
+  const [currentDate, setCurrentDate] = useState<any>(new Date());
+
+
   useEffect(() => {
     dispatch(getEmeraldChallan(AccessToken?.token));
     dispatch(getClientName(AccessToken?.token));
     dispatch(getSubCategoryList(AccessToken?.token));
     dispatch(getProductList(AccessToken?.token));
     dispatch(getClientGroupList(AccessToken?.token));
+  }, []);
+
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const year = now.getFullYear();
+      const formattedDate: any = `${day}-${month}-${year}`;
+      setCurrentDate(formattedDate);
+    }, 1000); // Update the date every second
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   useEffect(() => {
@@ -114,7 +132,10 @@ const UseEmeraldHook = () => {
       toast.error('Failed to created chitti');
     }
   };
-  return { emeraldChittiData, selectedDropdownValue, setSelectedDropdownValue, HandleClientGroup, HandleCreateChittiSubmit, clientGroupList, clientNameList };
+  return {
+    emeraldChittiData, selectedDropdownValue, setSelectedDropdownValue,
+    HandleClientGroup, HandleCreateChittiSubmit, clientGroupList, clientNameList, currentDate
+  };
 };
 
 export default UseEmeraldHook;
