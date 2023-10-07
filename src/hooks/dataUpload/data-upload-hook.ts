@@ -13,7 +13,9 @@ const UseDataUploadHook = () => {
     const SupplierDataFromStore: any = useSelector(get_supplier_list);
 
     const [supplierList, setSupplierList] = useState<any>([]);
+    const [supplier, setSupplier] = useState<any>("");
 
+    console.log("SupplierDataFromStore", SupplierDataFromStore)
     useEffect(() => {
         dispatch(getSupplierList(AccessToken?.token))
     }, [])
@@ -29,7 +31,12 @@ const UseDataUploadHook = () => {
         }
     }, [])
 
-    return { supplierList }
+    const HandleSupplier = (e: any) => {
+        setSupplier(e.target.value)
+    }
+
+
+    return { supplierList, HandleSupplier }
 }
 
 export default UseDataUploadHook;

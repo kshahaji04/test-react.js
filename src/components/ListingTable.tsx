@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import EditChittiChallan from './Modal/EditChittiChallan';
+import { NavLink } from 'react-router-dom';
+
 
 const ListingTable = ({
   tableListingData,
@@ -10,7 +12,6 @@ const ListingTable = ({
   productList,
   selectedDropdownValue,
   drowpdownlist
-
 }: any) => {
   console.log('tableListingData', tableListingData);
   const [showEditModal, setshowEditModal] = useState<boolean>(false);
@@ -20,9 +21,11 @@ const ListingTable = ({
     setModalData(data?.challan_name);
   };
 
+  console.log(window.location.pathname);
+
   const [headingData, setHeadingData] = useState<any>('');
 
-  // const headingData:any = ["Sr no","Date","Chitti no","Client Name", ]
+
 
   useEffect(() => {
     if (Object?.keys(tableListingData)?.length > 0) {
@@ -36,17 +39,20 @@ const ListingTable = ({
   const TableHeading: any = () => {
     return (
       <>
+        <th className="text-uppercase" scope="col">Sr No</th>
         {headingData?.length > 0 &&
           headingData !== null &&
           headingData.map((heading: any, index: any) => {
             console.log('headingData', heading.replace('_', ' '));
-            return (
-              <>
+            if (heading !== 'ate') { // Exclude 'date' key
+              console.log('headingData', heading.replace('_', ' '));
+              return (
                 <th className="text-uppercase" key={index} scope="col">
                   {heading?.replace('_', ' ')}
                 </th>
-              </>
-            );
+              );
+            }
+            return null;
           })}
       </>
     );
@@ -62,35 +68,40 @@ const ListingTable = ({
 
               return (
                 <tr className="table-body-row" key={i}>
+                  <td className="border-0">{i + 1}</td>
                   {headingData?.length > 0 &&
                     headingData !== null &&
                     headingData.map((v: any, index: any) => {
-                      return (
-                        <td className="border-0" key={v}>
-                          {data[v]}
-                        </td>
-                      );
+                      if (v !== 'dte') { // Exclude 'date' key
+                        return (
+                          <td className="border-0" key={v}>
+                            {v !== 'docstatus' ? data[v] :
+                              data[v] === 0
+                                ? 'Draft'
+                                : data[v] === 1
+                                  ? 'Submitted'
+                                  : data[v] === 2
+                                    ? 'Cancel'
+                                    : data[v]}
+                          </td>
+                        );
+                      }
+                      return null;
                     })}
-
                   {data.docstatus === 0 && (
                     <>
                       <td className="button-section-td border-0">
-                        {/* <button
-                          onClick={() => handleEditModal(data)}
-                          className="btn btn-outline-primary px-lg-2 py-0"
-                        > */}
-                        <span
-                          onClick={() => handleEditModal(data)}
+                        <NavLink
+                          to={`${data.number}`}
                           className="button-section-text text-info"
                         >
                           Edit
-                        </span>
-                        {/* </button> */}
-                        {/* <button className="btn btn-outline-danger px-lg-2 py-0 mx-2"> */}
-                        <span className="button-section-text text-danger mx-3 ">
+                        </NavLink>
+
+                        <NavLink to={`${data.number}`} className="button-section-text text-danger mx-3 ">
                           Delete
-                        </span>
-                        {/* </button> */}
+                        </NavLink>
+
                       </td>
                     </>
                   )}
@@ -98,14 +109,14 @@ const ListingTable = ({
                     <>
                       <td className="button-section-td border-0">
                         {/* <button className="btn btn-outline-primary px-lg-2 py-0 "> */}
-                        <span className="button-section-text text-primary">
+                        <NavLink to={`${data.number}`} className="button-section-text text-primary">
                           print
-                        </span>
+                        </NavLink>
                         {/* </button> */}
                         {/* <button className="btn btn-outline-danger px-lg-2 py-0 mx-2"> */}
-                        <span className="button-section-text text-danger mx-3">
+                        <NavLink to={`${data.number}`} className="button-section-text text-danger mx-3">
                           Cancel
-                        </span>
+                        </NavLink>
                         {/* </button> */}
                       </td>
                     </>
@@ -135,11 +146,15 @@ const ListingTable = ({
             <tbody>{TableBodyData()}</tbody>
           </table>
         ) : (
-          ''
+          <div className='text-center my-5'>
+            <div className="spinner-border text-secondary" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
         )}
       </div>
 
-      {showEditModal ? (
+      {/* {showEditModal ? (
         <EditChittiChallan
           show={showEditModal}
           toHide={handleEditModal}
@@ -152,7 +167,7 @@ const ListingTable = ({
           selectedDropdownValue={selectedDropdownValue}
           drowpdownlist={drowpdownlist}
         />
-      ) : null}
+      ) : null} */}
     </>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const MasterListing = () => {
   const masterlist: any = [
@@ -17,15 +18,15 @@ const MasterListing = () => {
           masterlist.map((data: any, index: any) => {
             const processedStr = data.replace(/\s+/g, '').toLowerCase();
             return (
-              <div className="mx-3 border border-dark " key={index}>
-                <a href={`/master/${processedStr}`} className='master-title-heading'>
-                  <div className="card rounded-4">
-                    <div className="card-body d-flex justify-content-center master-listing-card-body">
+              <div className="mx-3 master-heading" key={index}>
+                <NavLink to={`/master/${processedStr}`} className='master-title-heading'>
+                  <div className="rounded-4">
+                    <div className=" d-flex justify-content-center master-listing-card-body">
                       <h5 className="card-title me-1 m-0">{data}</h5>
-
+                      <i className="fa-solid fa-arrow-turn-down d-flex align-items-center master-head-icon"></i>
                     </div>
                   </div>
-                </a>
+                </NavLink>
               </div>
             );
           })}

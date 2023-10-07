@@ -16,6 +16,7 @@ import HuidProduct from '../components/Master/MasterListing/HuidProduct/HuidProd
 import EmeraldChitti from '../components/Master/MasterListing/EmeraldChitti';
 import EmeraldListing from '../components/Master/MasterListing/Emerald';
 import ClientNameListing from '../components/Master/MasterListing/ClientName/ClientNameListing';
+import EditChallanChitti from '../components/Chitti/ChittiListing/EditChallanChitti';
 
 const AppRoutes = () => {
   return (
@@ -35,8 +36,8 @@ const AppRoutes = () => {
           path="/master/challanlist"
           element={
             <ProtectedRoute>
-              <MasterPage/>
-              <ChallanList/>
+              <MasterPage />
+              <ChallanList />
             </ProtectedRoute>
           }
         />
@@ -44,8 +45,8 @@ const AppRoutes = () => {
           path="/master/clientgroup"
           element={
             <ProtectedRoute>
-              <MasterPage/>
-             <ClientGroup/>
+              <MasterPage />
+              <ClientGroup />
             </ProtectedRoute>
           }
         />
@@ -53,17 +54,17 @@ const AppRoutes = () => {
           path="/master/clientname"
           element={
             <ProtectedRoute>
-              <MasterPage/>
-              <ClientName/>
+              <MasterPage />
+              <ClientName />
             </ProtectedRoute>
           }
         />
-         <Route
+        <Route
           path="/master/category"
           element={
             <ProtectedRoute>
-              <MasterPage/>
-              <Category/>
+              <MasterPage />
+              <Category />
             </ProtectedRoute>
           }
         />
@@ -71,8 +72,8 @@ const AppRoutes = () => {
           path="/master/subcategory"
           element={
             <ProtectedRoute>
-              <MasterPage/>
-              <SubCategory/>
+              <MasterPage />
+              <SubCategory />
             </ProtectedRoute>
           }
         />
@@ -81,7 +82,7 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <MasterPage />
-              <HuidProduct/>
+              <HuidProduct />
             </ProtectedRoute>
           }
         />
@@ -90,21 +91,40 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <MasterPage />
-              <EmeraldChitti/>
+              <EmeraldChitti />
             </ProtectedRoute>
           }
         />
-       
+
         <Route
           path="/master/emerald"
           element={
             <ProtectedRoute>
               <MasterPage />
-              <EmeraldListing/>
+              <EmeraldListing />
             </ProtectedRoute>
           }
         />
-       
+
+        <Route
+          path="/chitti/:id"
+          element={
+            <ProtectedRoute>
+              <EditChallanChitti />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/emerald/:id"
+          element={
+            <ProtectedRoute>
+
+            </ProtectedRoute>
+          }
+        />
+
+
 
         <Route
           path="/chitti"

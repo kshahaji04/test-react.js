@@ -19,7 +19,7 @@ const GetSupplierList = async (token: any) => {
     await axios
         .get(`${BASE_URL}${params}`, config)
         .then((res: any) => {
-            response = res.data;
+            response = res;
         })
         .catch((err: any) => {
             console.log(err);

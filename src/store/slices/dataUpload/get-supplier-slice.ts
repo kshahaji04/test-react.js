@@ -31,9 +31,9 @@ export const GetSupplierListScreen = createSlice({
       state.data = "";
     });
     builder.addCase(getSupplierList.fulfilled, (state, action) => {
-      if (action?.payload?.message?.status === "success") {
-        if (action?.payload?.message?.hasOwnProperty("data")) {
-          state.data = action?.payload?.message?.data;
+      if (action?.payload?.status === 200) {
+        if (action?.payload?.data?.hasOwnProperty("data")) {
+          state.data = action?.payload?.data?.data;
           state.isLoading = "succeeded";
         }
       }

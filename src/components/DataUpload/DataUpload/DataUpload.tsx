@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import SelectedInputDropdown from '../../SelectedInputDropdown';
 
-const DataUpload = ({ supplierList }: any) => {
-  const HandleFileUpload: any = () => { };
+const DataUpload = ({ supplierList, HandleSupplier }: any) => {
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
 
   const handleFileUploadInput: any = (e: any) => {
@@ -24,19 +23,30 @@ const DataUpload = ({ supplierList }: any) => {
           <label htmlFor="basic-url " className="fs-6 mb-1 text-center form-label-bold">
             Supplier
           </label>
-          <div className="input-group mb-3 w-50 master-input-field">
+          <div className="input-group mb-3 w-50 ">
             <div className='w-100'>
 
-              {/* <SelectedInputDropdown
-                drowpdownlist={supplierList}
-                // bgColor={bgColor}
-                placeholderValue="Supplier Name"
-                selectedDropdownValue={selectedDropdownValue}
-                setSelectedDropdownValue={setSelectedDropdownValue}
-              // clientGroupList={clientGroupList}
-              // HandleClientGroup={HandleClientGroup}
+              <select
+                id="category"
+                name="category"
+                className="form-select p-0 px-2 ustom-input-field "
+                aria-label=".form-select-sm example"
+                onChange={HandleSupplier}
 
-              /> */}
+              >
+                <option></option>
+                {
+                  supplierList?.length > 0 && supplierList !== null && (
+                    supplierList.map((supplier: any, index: any) => {
+                      return (
+                        <option key={index}>
+                          {Object.values(supplier)}
+                        </option>
+                      )
+                    })
+                  )
+                }
+              </select>
             </div>
           </div>
           <label className="form-Form.Label fs-6 text-dark form-label-bold">
