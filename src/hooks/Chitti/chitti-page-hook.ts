@@ -183,6 +183,7 @@ const UseChittiHook = () => {
       narrationUpdatedTableData
     );
     const BodyData: any = {
+      date: date,
       clientName: selectedDropdownValue,
       clientGroup: clientGroupName,
       goldRate: goldRate,
@@ -222,7 +223,7 @@ const UseChittiHook = () => {
     clientGroupList,
     HandleClientGroup,
     HandleDateChange,
-
+    date
   };
 };
 

@@ -11,7 +11,8 @@ const CreateChittiForm = ({
   clientGroupList,
   HandleClientGroup,
   defaultData,
-  HandleDateChange
+  HandleDateChange,
+  date
 }: any) => {
 
   console.log("defaultData", defaultData)
@@ -46,11 +47,11 @@ const CreateChittiForm = ({
             </label>
             <div className="d-flex justify-content-between h-100">
               <input
-                // type="date"
+                type="date"
                 id="date"
                 name="date"
                 defaultValue={defaultData?.date}
-                value={currentDate}
+                value={date}
                 className="form-control custom-input-field py-0 px-2"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"

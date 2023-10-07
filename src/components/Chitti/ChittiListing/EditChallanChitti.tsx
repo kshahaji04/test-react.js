@@ -8,6 +8,7 @@ const EditChallanChitti = () => {
 
     const { challanDetail, setNarrationTableData, subCategoryList, setTableData, productList, selectedDropdownValue, drowpdownlist }: any = UseEditChallanChitti();
 
+    console.log("challanDetail", challanDetail)
     return (
         <div className='container'>
             <div>
@@ -28,27 +29,19 @@ const EditChallanChitti = () => {
 
                             return (
                                 <>
-                                    {data?.length > 0 &&
-                                        data !== null &&
-                                        data.map((values: any, i: any) => {
-                                            console.log('valuess', values);
-                                            return (
-                                                <>
-                                                    <CreateChittiForm defaultData={values} selectedDropdownValue={selectedDropdownValue} clientNameList={drowpdownlist} />
-                                                    <ChallanItemsTable
-                                                        tableData={values?.challan_table}
-                                                        setTableData={setTableData}
-                                                        subCategoryList={subCategoryList}
-                                                    />
-                                                    <NarrationTable
-                                                        narrationTableData={values?.narrations}
-                                                        setNarrationTableData={setNarrationTableData}
-                                                        productList={productList}
 
-                                                    />
-                                                </>
-                                            );
-                                        })}
+                                    <CreateChittiForm defaultData={data} selectedDropdownValue={selectedDropdownValue} clientNameList={drowpdownlist} />
+                                    <ChallanItemsTable
+                                        tableData={data?.challan_table}
+                                        setTableData={setTableData}
+                                        subCategoryList={subCategoryList}
+                                    />
+                                    <NarrationTable
+                                        narrationTableData={data?.narrations}
+                                        setNarrationTableData={setNarrationTableData}
+                                        productList={productList}
+
+                                    />
                                 </>
                             );
                         })}

@@ -43,15 +43,12 @@ const SearchChittiListing = ({ clientNameList, chittiListingData, selectedDropdo
               })
             ) : ""}
           </select>
-
-
         </div>
 
         <div className="col-md-2 ">
 
           <select className="form-select form-select-sm select-field" aria-label=".form-select-sm example">
             <option >Client Name</option>
-
             {clientNameList?.length > 0 && clientNameList !== null ? (
               clientNameList.map((client: any, index: any) => {
                 return (
@@ -59,8 +56,6 @@ const SearchChittiListing = ({ clientNameList, chittiListingData, selectedDropdo
                 )
               })
             ) : ""}
-
-
           </select>
 
           {/* <SelectedInputDropdown
@@ -69,7 +64,6 @@ const SearchChittiListing = ({ clientNameList, chittiListingData, selectedDropdo
             selectedDropdownValue={selectedDropdownValue}
             setSelectedDropdownValue={setSelectedDropdownValue}
           /> */}
-
         </div>
         <div className="col-md-2 ">
           <button

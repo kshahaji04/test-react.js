@@ -17,6 +17,11 @@ import EmeraldChitti from '../components/Master/MasterListing/EmeraldChitti';
 import EmeraldListing from '../components/Master/MasterListing/Emerald';
 import ClientNameListing from '../components/Master/MasterListing/ClientName/ClientNameListing';
 import EditChallanChitti from '../components/Chitti/ChittiListing/EditChallanChitti';
+import MasterPageListingDetails from '../components/Master/MasterListing/ClientName/MasterPageClientNameDetails';
+import MasterPageClientNameDetail from '../components/Master/MasterListing/ClientName/MasterPageClientNameDetails';
+import MasterListing from '../components/Master/MasterListing';
+import MasterPageSubCategoryDetail from '../components/Master/MasterListing/SubCategory/MasterPageSubCagegoryDetail';
+import EditEmeraldChitti from '../components/EmeraldChitti/EmeraldListing/EditEmeraldChitti';
 
 const AppRoutes = () => {
   return (
@@ -116,10 +121,29 @@ const AppRoutes = () => {
         />
 
         <Route
+          path="/master/clientname/:id"
+          element={
+            <ProtectedRoute>
+              <MasterListing />
+              <MasterPageClientNameDetail />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/master/subcategory/:id"
+          element={
+            <ProtectedRoute>
+              <MasterListing />
+              < MasterPageSubCategoryDetail />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path="/emerald/:id"
           element={
             <ProtectedRoute>
-
+              <EditEmeraldChitti />
             </ProtectedRoute>
           }
         />

@@ -10,6 +10,7 @@ const MasterListing = () => {
     'Huid product',
   ];
 
+
   return (
     <div className="container mt-3">
       <div className="d-flex justify-content-center ">

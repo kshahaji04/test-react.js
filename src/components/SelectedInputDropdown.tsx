@@ -121,7 +121,7 @@ const SelectedInputDropdown = ({
                   {noRecords === true && filterDropdownList?.length === 0 && (
                     <li className="dropdown-list p-1 mt-2">
                       <select
-                        className="form-select form-select-sm"
+                        className="form-select form-select-sm "
                         aria-label="Default select example"
                         onChange={HandleClientGroup}
                       >
@@ -130,7 +130,7 @@ const SelectedInputDropdown = ({
                           clientGroupList.map((group: any, index: any) => {
                             return (
                               <>
-                                <option></option>
+                                {/* <option></option> */}
                                 <option>{group}</option>
                               </>
                             );

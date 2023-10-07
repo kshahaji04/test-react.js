@@ -4,7 +4,7 @@ const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCateg
   // const [tableData, setTableData] = useState<any>([{ id: 1, name: '' }]);
   const [amountValue, setamountValue] = useState<any>({ sub_category: '', product: "", gross_weight: 0, net_weight: 0, amount: 0 })
 
-
+  console.log("subCategoryList", subCategoryList)
   const HandleAddRow: any = () => {
     const newRow = {
       id: tableData.length + 1,
@@ -132,6 +132,7 @@ const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCateg
                           name="category"
                           className="form-select p-0 custom-input-field "
                           aria-label=".form-select-sm example"
+
                           onChange={(e) => HandleSubCategory(e, row.id)}
 
                         >
@@ -155,6 +156,7 @@ const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCateg
                           name="category"
                           className="form-select p-0 custom-input-field "
                           aria-label=".form-select-sm example"
+                          defaultValue={row.product}
                           onChange={(e) => HandleProductItem(e, row.id)}
                         >
                           <option></option>
@@ -179,6 +181,7 @@ const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCateg
                           className="form-control custom-input-field-t"
                           aria-label="Sizing example input"
                           aria-describedby="inputGroup-sizing-sm"
+                          defaultValue={row.gross_weight}
                           onChange={(e) => HandleGrossWeightValue(e, row.id)}
                         />
                       </td>
@@ -188,6 +191,8 @@ const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCateg
                           className="form-control custom-input-field-t"
                           aria-label="Sizing example input"
                           aria-describedby="inputGroup-sizing-sm"
+                          defaultValue={row.net_weight}
+
                           onChange={(e) => HandleNetWeightValue(e, row.id)}
                         />
                       </td>
@@ -198,12 +203,15 @@ const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCateg
                           aria-label="Sizing example input"
                           aria-describedby="inputGroup-sizing-sm"
                           onKeyDown={(e) => handleKeyDown(e, row.id)}
+                          defaultValue={row.amount}
+
                           onChange={(e) => HandleAmountValue(e, row.id)}
                         />
                       </td>
                       <td className='table-data-input'>
                         <div
                           className="d-flex align-items-center delete-link"
+
                           onClick={() => HandleDeleteRow(row.id)}
                         >
                           <i className="fa-solid fa-xmark fs-5"></i>

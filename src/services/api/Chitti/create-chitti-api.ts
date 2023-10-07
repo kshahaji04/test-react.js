@@ -8,6 +8,7 @@ const CreateChittiApi = async (request: any) => {
   // const params = `/api/resource/Challan`;
 
   let body = {
+    date: request.date,
     client_name: request.clientName,
     client_group: request.clientGroup,
     gold_rate: request.goldRate,

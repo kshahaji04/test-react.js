@@ -18,7 +18,8 @@ const CreateChittiMaster = ({
   productList,
   clientGroupList,
   HandleClientGroup,
-  HandleDateChange
+  HandleDateChange,
+  date
 }: any) => {
   // const HandleCreateChittiSubmit: any = () => {};
 
@@ -43,6 +44,7 @@ const CreateChittiMaster = ({
         clientGroupList={clientGroupList}
         HandleClientGroup={HandleClientGroup}
         HandleDateChange={HandleDateChange}
+        date={date}
       />
       <ChallanItemsTable
         tableData={tableData}

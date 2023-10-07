@@ -4,6 +4,7 @@ import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
 import { getSpecificChittiChallan, get_specific_chitti_challan } from '../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
 import UseChittiHook from './chitti-page-hook';
+import { useParams } from 'react-router-dom';
 
 const UseEditChallanChitti: any = () => {
     const dispatch = useDispatch();
@@ -13,13 +14,17 @@ const UseEditChallanChitti: any = () => {
 
     const [challanDetail, setChallanDetail] = useState<any>("");
 
-    console.log(window.location.pathname)
+    console.log("ChallanDetailDataFromStore", ChallanDetailDataFromStore)
+    const { id } = useParams();
+    console.log("params", id)
+
     const { setNarrationTableData, subCategoryList, setTableData, productList, selectedDropdownValue, drowpdownlist }: any = UseChittiHook();
 
     useEffect(() => {
+
         const params: any = {
             token: AccessToken?.token,
-            name: window.location.pathname
+            name: id
         }
         dispatch(getSpecificChittiChallan(params))
     }, [])

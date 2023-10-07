@@ -24,7 +24,8 @@ const ChittiMaster = () => {
     productList,
     clientGroupList,
     HandleClientGroup,
-    HandleDateChange
+    HandleDateChange,
+    date
   }: any = UseChittiHook();
 
   console.log('chittiListingData in master', chittiListingData);
@@ -74,6 +75,7 @@ const ChittiMaster = () => {
                   clientGroupList={clientGroupList}
                   HandleClientGroup={HandleClientGroup}
                   HandleDateChange={HandleDateChange}
+                  date={date}
                 />
               </Tab>
             </Tabs>

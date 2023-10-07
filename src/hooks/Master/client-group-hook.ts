@@ -8,7 +8,7 @@ const UseClientGroupHook = () => {
   const dispatch = useDispatch();
   const AccessToken: any = useSelector(get_access_token);
 
-  const ClientGroupDataFromStore:any = useSelector(get_client_group);
+  const ClientGroupDataFromStore: any = useSelector(get_client_group);
   const [clientGroupList, setClientGroupList] = useState<any>([]);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const UseClientGroupHook = () => {
       setClientGroupList([]);
     }
   }, [ClientGroupDataFromStore]);
-  return{clientGroupList};
+  return { clientGroupList };
 };
 
 export default UseClientGroupHook;
