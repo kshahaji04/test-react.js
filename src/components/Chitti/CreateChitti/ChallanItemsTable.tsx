@@ -5,7 +5,7 @@ const ChallanItemsTable = ({
   setTableData,
   subCategoryList,
 }: any) => {
-  console.log("tableDataaa initial",tableData)
+  console.log("tableDataaa initial", tableData)
   // const [tableData, setTableData] = useState<any>([{ id: 1 }]);
   const [amountValue, setamountValue] = useState<any>({
     sub_category: '',
@@ -136,7 +136,7 @@ const ChallanItemsTable = ({
                       >
                         <option defaultValue={row.sub_category} ></option>
                         {subCategoryList?.length > 0 &&
-                        subCategoryList !== null ? (
+                          subCategoryList !== null ? (
                           <>
                             {subCategoryList.map(
                               (category: any, index: any) => {
@@ -155,7 +155,7 @@ const ChallanItemsTable = ({
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        defaultValue={row.gross_weight}
+                        // defaultValue={row.gross_weight}
                         onChange={(e) => HandleGrossWeightValue(e, row.id)}
                       />
                     </td>
@@ -165,7 +165,7 @@ const ChallanItemsTable = ({
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        defaultValue={row.net_weight}
+                        // defaultValue={row.net_weight}
                         onChange={(e) => HandleNetWeightValue(e, row.id)}
                       />
                     </td>
@@ -175,7 +175,7 @@ const ChallanItemsTable = ({
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        defaultValue={row.amount}
+                        // defaultValue={row.amount}
                         onKeyDown={(e) => handleKeyDown(e, row.id)}
                         onChange={(e) => HandleAmountValue(e, row.id)}
                       />

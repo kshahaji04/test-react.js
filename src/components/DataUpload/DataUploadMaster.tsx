@@ -10,7 +10,7 @@ import UseDataUploadHook from '../../hooks/dataUpload/data-upload-hook';
 const DataUploadMaster = () => {
 
 
-  const { supplierList, HandleSupplier } = UseDataUploadHook();
+  const { supplierList, HandleSupplier, emeraldTableData } = UseDataUploadHook();
   console.log("supplierList", supplierList)
 
   // const [showButtons, setShowButtons] = useState<any>(false)
@@ -36,8 +36,8 @@ const DataUploadMaster = () => {
                 <DataUpload supplierList={supplierList} HandleSupplier={HandleSupplier} />
               </Tab>
               <Tab eventKey="longer-tab" title="View uploaded list">
-                {/* <ViewUploadedList /> */}
-                <ListingTable tableListingData={TableListingData} />
+                <ViewUploadedList emeraldTableData={TableListingData} />
+                {/* <ListingTable tableListingData={TableListingData} /> */}
               </Tab>
             </Tabs>
           </div>

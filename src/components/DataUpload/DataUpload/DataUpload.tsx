@@ -5,7 +5,7 @@ const DataUpload = ({ supplierList, HandleSupplier }: any) => {
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
 
   const handleFileUploadInput: any = (e: any) => {
-    console.log('file upload', e.target.value);
+    console.log('file upload', e.target.files);
   };
   return (
     <div className="container">
@@ -80,7 +80,7 @@ const DataUpload = ({ supplierList, HandleSupplier }: any) => {
               name="fileupload"
               // value="fileupload"
               id="fileupload"
-              onChange={handleFileUploadInput}
+              onChange={(e) => handleFileUploadInput(e)}
             />
 
 

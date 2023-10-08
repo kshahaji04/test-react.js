@@ -11,6 +11,7 @@ import GetCategoryListReducer from './slices/Master/get-category-slice';
 import GetHuidProductListReducer from './slices/Master/get-huid-product-slice';
 import GetProductItemReducer from './slices/Emerald/get-product-item-slice';
 import GetSupplierListReducer from './slices/dataUpload/get-supplier-slice';
+import GetEmeraldTableDataReducer from './slices/dataUpload/get-emerald-table-data-slice';
 
 const appReducer = combineReducers({
   GetAccessTokenScreen: GetAccessTokenReducer,
@@ -25,6 +26,7 @@ const appReducer = combineReducers({
   GetHuidProductListScreen: GetHuidProductListReducer,
   GetProductItemScreen: GetProductItemReducer,
   GetSupplierListScreen: GetSupplierListReducer,
+  GetEmeraldTableDataScreen: GetEmeraldTableDataReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
