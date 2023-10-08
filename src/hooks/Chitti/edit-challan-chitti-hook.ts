@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import { getSpecificChittiChallan, get_specific_chitti_challan } from '../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
 import UseChittiHook from './chitti-page-hook';
 import { useParams } from 'react-router-dom';
+import UpdateChittiApi from '../../services/api/Chitti/update-challan-chitti-api';
+import { toast } from 'react-toastify';
 
 const UseEditChallanChitti: any = () => {
     const dispatch = useDispatch();
@@ -13,13 +15,17 @@ const UseEditChallanChitti: any = () => {
     const ChallanDetailDataFromStore: any = useSelector(get_specific_chitti_challan);
 
     const [challanDetail, setChallanDetail] = useState<any>("");
-
+    const [tableData, setTableData] = useState<any>([{ id: 1 }]);
     console.log("ChallanDetailDataFromStore", ChallanDetailDataFromStore)
     const { id } = useParams();
     console.log("params", id)
 
-    const { setNarrationTableData, subCategoryList, setTableData, productList, selectedDropdownValue, drowpdownlist }: any = UseChittiHook();
+    const { setNarrationTableData, subCategoryList, productList, selectedDropdownValue, drowpdownlist, clientNameList, setSelectedDropdownValue, goldRate,
+        remarks, date, challanTableData,
+        narrationUpdatedTableData, HandleGoldRate, HandleDateChange,
+        HandleRemarks, }: any = UseChittiHook();
 
+    console.log("selectedDropdownValue", selectedDropdownValue)
     useEffect(() => {
 
         const params: any = {
@@ -40,7 +46,49 @@ const UseEditChallanChitti: any = () => {
         }
     }, [ChallanDetailDataFromStore]);
 
-    return { challanDetail, setNarrationTableData, subCategoryList, setTableData, productList, selectedDropdownValue, drowpdownlist };
+
+    const HandleUpdateChallanSubmit = async () => {
+
+        console.log("edited data", tableData, challanTableData)
+
+        console.log(
+            'submit create chitti',
+            selectedDropdownValue,
+            goldRate,
+            remarks,
+            challanTableData,
+            narrationUpdatedTableData,
+            date
+        );
+
+        const BodyData: any = {
+            name: id,
+            date: date,
+            clientName: selectedDropdownValue,
+            // clientGroup: clientGroupName,
+            goldRate: goldRate,
+            remarks: remarks,
+            challanTableData: challanTableData,
+            narrationTableData: challanTableData,
+            token: AccessToken?.token,
+        };
+        let updateChittiApi: any = await UpdateChittiApi(BodyData);
+        console.log('updateChittiApi', updateChittiApi);
+
+        if (
+            updateChittiApi?.status === 200 &&
+            updateChittiApi?.hasOwnProperty('data')
+        ) {
+            toast.success('Chitti Updated');
+        } else {
+            toast.error('Failed to Update chitti');
+        }
+    }
+
+    return {
+        challanDetail, setNarrationTableData, subCategoryList, setTableData, productList, selectedDropdownValue, drowpdownlist, clientNameList, setSelectedDropdownValue, HandleUpdateChallanSubmit, HandleGoldRate,
+        HandleRemarks, HandleDateChange
+    };
 };
 
 export default UseEditChallanChitti;

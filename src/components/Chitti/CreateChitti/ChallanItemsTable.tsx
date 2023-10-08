@@ -4,6 +4,8 @@ const ChallanItemsTable = ({
   tableData,
   setTableData,
   subCategoryList,
+  isEditing,
+  setEditedData
 }: any) => {
   console.log("tableDataaa initial", tableData)
   // const [tableData, setTableData] = useState<any>([{ id: 1 }]);
@@ -64,14 +66,14 @@ const ChallanItemsTable = ({
   }, [tableData]);
 
   const HandleCategory = (e: any, id: any) => {
-    console.log('handlecategory', e.target.value);
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, sub_category: e.target.value } : row
     );
-    setTableData(updatedData);
+    setTableData([...updatedData]);
   };
 
   const HandleGrossWeightValue = (e: any, id: any) => {
+    console.log("gross", e.target.value)
     const updatedData = tableData.map((row: any) =>
       row.id === id
         ? { ...row, gross_weight: parseFloat(e.target.value) || 0 }
@@ -132,6 +134,7 @@ const ChallanItemsTable = ({
                         name="category"
                         className="form-select p-0 custom-input-field "
                         aria-label=".form-select-sm example"
+                        defaultValue={row.sub_category}
                         onChange={(e) => HandleCategory(e, row.id)}
                       >
                         <option defaultValue={row.sub_category} ></option>
@@ -155,7 +158,7 @@ const ChallanItemsTable = ({
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        // defaultValue={row.gross_weight}
+                        defaultValue={row.gross_weight}
                         onChange={(e) => HandleGrossWeightValue(e, row.id)}
                       />
                     </td>
@@ -165,7 +168,7 @@ const ChallanItemsTable = ({
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        // defaultValue={row.net_weight}
+                        defaultValue={row.net_weight}
                         onChange={(e) => HandleNetWeightValue(e, row.id)}
                       />
                     </td>
@@ -175,7 +178,7 @@ const ChallanItemsTable = ({
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        // defaultValue={row.amount}
+                        defaultValue={row.amount}
                         onKeyDown={(e) => handleKeyDown(e, row.id)}
                         onChange={(e) => HandleAmountValue(e, row.id)}
                       />

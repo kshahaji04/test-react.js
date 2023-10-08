@@ -151,6 +151,9 @@ const UseChittiHook = () => {
     setDate(e.target.value);
   };
 
+  console.log("setTableData", tableData)
+
+  // for removing id key from list
   useEffect(() => {
     if (tableData?.length > 0 && tableData !== null) {
       let modifiedList: any = tableData.map((obj: any) => {
@@ -223,7 +226,10 @@ const UseChittiHook = () => {
     clientGroupList,
     HandleClientGroup,
     HandleDateChange,
-    date
+    date,
+    goldRate,
+    remarks,
+    challanTableData
   };
 };
 
