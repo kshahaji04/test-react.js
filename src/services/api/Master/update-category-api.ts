@@ -1,20 +1,26 @@
 import axios from 'axios';
 import { BASE_URL } from '../../Config/api-config';
 
-const GetProductItemList = async (token: any) => {
-    console.log('tokennnn', token);
+const UpdateCategoryApi: any = async (token: any, name:any, category: any) => {
+
     let response: any;
-   
+    const params = `/api/resource/Sub Category/${name}`
 
     const config = {
         headers: {
+            Accept: 'application/json',
             Authorization: token,
         },
     };
 
+    let body = {
+       category:category
+    };
+
     await axios
-        .get(`${BASE_URL}/api/resource/Item`, config)
+        .put(`${BASE_URL}/${params}`, body, config)
         .then((res: any) => {
+
             response = res;
         })
         .catch((err: any) => {
@@ -23,4 +29,4 @@ const GetProductItemList = async (token: any) => {
     return response;
 };
 
-export default GetProductItemList;
+export default UpdateCategoryApi;

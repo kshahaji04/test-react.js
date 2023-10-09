@@ -10,36 +10,49 @@ const AddClientGroup = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState<any>('');
   const AccessToken: any = useSelector(get_access_token);
+  const [inputValue, setInputValue] = useState('');
+  const [error, setError] = useState('');
 
+  const HandleSubmit = async () => {
+    if (inputValue.trim() === '') {
+      setError('Input field cannot be empty');
+    } else {
+      let apiRes: any = await AddClientGroupApi(AccessToken?.token, title);
+      console.log('apires', title);
+      if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
+        toast.success('Client Group Created');
+        dispatch(getClientGroupList(AccessToken?.token));
+      }
+      setError('');
 
-  const HandleSubmit = async() => {
-    let apiRes:any = await AddClientGroupApi(AccessToken?.token,title)
-    console.log("apires",apiRes)
-    if(apiRes?.status === 200 && apiRes?.hasOwnProperty("data")){
-      toast.success('Client Group Created');
-      dispatch(getClientGroupList(AccessToken?.token));
+      setInputValue('');
     }
-  }
+  };
 
-  const HandleInputValue = (e:any) => {
-    console.log(e.target.value)
-    setTitle(e.target.value)
-  }
+  const HandleInputValue = (e: any) => {
+    setError('');
+    setTitle(e.target.value);
+    setInputValue(e.target.value);
+  };
   return (
     <div className="container mt-1">
       <label htmlFor="basic-url " className="fs-6 mb-1 text-center">
         Title
       </label>
-      <div className="input-group mb-3 w-50 master-input-field">
+      <span className="text-danger">*</span>
+      <div className="input-group mb-1 w-50 master-input-field">
         <input
           type="text"
-          name='title'
+          name="title"
           className="form-control ps-2"
           id="basic-url"
           aria-describedby="basic-addon3"
           onChange={HandleInputValue}
+          value={inputValue}
+          required
         />
       </div>
+        <div className=''> {error && <p className="text-danger">{error}</p>}</div>
       <div className="d-flex justify-content-start ">
         <button
           type="submit"
@@ -48,7 +61,7 @@ const AddClientGroup = () => {
         >
           Save
         </button>
-        </div>
+      </div>
     </div>
   );
 };

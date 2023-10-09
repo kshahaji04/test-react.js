@@ -32,10 +32,13 @@ export const GetProductItemScreen = createSlice({
             state.data = "";
         });
         builder.addCase(getProductItem.fulfilled, (state, action) => {
-            if (action?.payload?.message?.status === "success") {
-                if (action?.payload?.message?.hasOwnProperty("data")) {
-                    state.data = action?.payload?.message?.data;
-                    state.isLoading = "succeeded";
+            if (action?.payload?.status === 200) {
+                if (action?.payload?.hasOwnProperty("data")) {
+                    if(action?.payload?.data?.data?.length > 0){
+
+                        state.data = action?.payload?.data?.data;
+                        state.isLoading = "succeeded";
+                    }
                 }
             }
         });

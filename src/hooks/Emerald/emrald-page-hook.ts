@@ -18,9 +18,15 @@ import {
   getClientGroupList,
   get_client_group,
 } from '../../store/slices/Chitti/get-client-group-list-slice';
-import { getEmeraldChallan, get_Emerald_challan } from '../../store/slices/Emerald/get-emerald-list-slice';
+import {
+  getEmeraldChallan,
+  get_Emerald_challan,
+} from '../../store/slices/Emerald/get-emerald-list-slice';
 import { toast } from 'react-toastify';
-import { getProductItem, get_product_item } from '../../store/slices/Emerald/get-product-item-slice';
+import {
+  getProductItem,
+  get_product_item,
+} from '../../store/slices/Emerald/get-product-item-slice';
 import CreateEmeraldChittiApi from '../../services/api/Emerald/create-emerald-chitti-api';
 
 const UseEmeraldHook = () => {
@@ -33,7 +39,7 @@ const UseEmeraldHook = () => {
   const SubCategoryDataFromStore: any = useSelector(get_subcategory_list);
   const ProductItemDataFromStore: any = useSelector(get_product_item);
   const [clientNameList, setClientNameList] = useState<any>([]);
-  const [emeraldChittiData, setEmeraldChittiData] = useState<any>([])
+  const [emeraldChittiData, setEmeraldChittiData] = useState<any>([]);
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
   const [clientGroupName, setClientGroupName] = useState<any>('');
   const [clientGroupList, setClientGroupList] = useState<any>([]);
@@ -43,7 +49,7 @@ const UseEmeraldHook = () => {
 
   const [tableData, setTableData] = useState<any>([{ id: 1 }]);
   const [emeraldChittiTableData, setEmeraldChittiTableData] = useState<any>([]);
-
+console.log("ProductItemDataFromStore",ProductItemDataFromStore)
   useEffect(() => {
     dispatch(getEmeraldChallan(AccessToken?.token));
     dispatch(getClientName(AccessToken?.token));
@@ -51,7 +57,6 @@ const UseEmeraldHook = () => {
     dispatch(getProductItem(AccessToken?.token));
     dispatch(getClientGroupList(AccessToken?.token));
   }, []);
-
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -111,12 +116,10 @@ const UseEmeraldHook = () => {
     }
   }, [ProductItemDataFromStore]);
 
-
   const HandleClientGroup: any = (e: any) => {
     console.log('clientgro', e.target.value);
     setClientGroupName(e.target.value);
   };
-
 
   const handleDateChange: any = (e: any) => {
     console.log('clientgro', e.target.value);
@@ -131,9 +134,7 @@ const UseEmeraldHook = () => {
       });
       setEmeraldChittiTableData(modifiedList);
     }
-
   }, [tableData]);
-
 
   const HandleCreateEmeraldChittiSubmit: any = async () => {
     console.log(
@@ -141,12 +142,11 @@ const UseEmeraldHook = () => {
       selectedDropdownValue,
       transactionDate,
 
-
       emeraldChittiTableData
     );
     console.log(
       'submit create chitti challan table',
-      emeraldChittiTableData,
+      emeraldChittiTableData
       // narrationUpdatedTableData
     );
     const BodyData: any = {
@@ -163,13 +163,27 @@ const UseEmeraldHook = () => {
       createEmeraldChittiApiRes?.hasOwnProperty('data')
     ) {
       toast.success('Emerald Chitti Created');
+      dispatch(getEmeraldChallan(AccessToken?.token));
     } else {
       toast.error('Failed to created chitti');
     }
   };
+
+
   return {
-    emeraldChittiData, selectedDropdownValue, setSelectedDropdownValue, productItemList,
-    HandleClientGroup, HandleCreateEmeraldChittiSubmit, clientGroupList, clientNameList, currentDate, handleDateChange, tableData, setTableData
+    emeraldChittiData,
+    selectedDropdownValue,
+    setSelectedDropdownValue,
+    productItemList,
+    HandleClientGroup,
+    HandleCreateEmeraldChittiSubmit,
+    clientGroupList,
+    clientNameList,
+    currentDate,
+    handleDateChange,
+    tableData,
+    setTableData,
+    transactionDate
   };
 };
 

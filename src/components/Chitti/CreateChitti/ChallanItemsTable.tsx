@@ -4,10 +4,9 @@ const ChallanItemsTable = ({
   tableData,
   setTableData,
   subCategoryList,
-  isEditing,
-  setEditedData
+  defaultData,
 }: any) => {
-  console.log("tableDataaa initial", tableData)
+  console.log('tableDataaa initial', tableData);
   // const [tableData, setTableData] = useState<any>([{ id: 1 }]);
   const [amountValue, setamountValue] = useState<any>({
     sub_category: '',
@@ -15,6 +14,17 @@ const ChallanItemsTable = ({
     net_weight: 0,
     amount: 0,
   });
+console.log("defaultData",defaultData)
+  useEffect(() => {
+    if(defaultData?.length > 0 && defaultData !== undefined && defaultData !== null) {
+      setTableData(defaultData);
+    }
+  }, []);
+
+  // const updateParentTableData = (newData:any) => {
+  //   console.log("newdata",ne)
+  //   setTableData(newData);
+  // };
 
   const HandleAddRow: any = () => {
     const newRow = {
@@ -73,7 +83,7 @@ const ChallanItemsTable = ({
   };
 
   const HandleGrossWeightValue = (e: any, id: any) => {
-    console.log("gross", e.target.value)
+    console.log('gross', e.target.value);
     const updatedData = tableData.map((row: any) =>
       row.id === id
         ? { ...row, gross_weight: parseFloat(e.target.value) || 0 }
@@ -124,7 +134,7 @@ const ChallanItemsTable = ({
               </tr>
             </thead>
             <tbody>
-              {tableData.map((row: any) => (
+              {tableData.map((row: any, index: any) => (
                 <>
                   <tr key={row.id}>
                     <td className="p-0">{row.id}</td>
@@ -137,13 +147,20 @@ const ChallanItemsTable = ({
                         defaultValue={row.sub_category}
                         onChange={(e) => HandleCategory(e, row.id)}
                       >
-                        <option defaultValue={row.sub_category} ></option>
+                        <option defaultValue={row.sub_category}></option>
                         {subCategoryList?.length > 0 &&
-                          subCategoryList !== null ? (
+                        subCategoryList !== null ? (
                           <>
                             {subCategoryList.map(
                               (category: any, index: any) => {
-                                return <option defaultValue={row.sub_category} key={index}>{category}</option>;
+                                return (
+                                  <option
+                                    defaultValue={row.sub_category}
+                                    key={index}
+                                  >
+                                    {category}
+                                  </option>
+                                );
                               }
                             )}
                           </>

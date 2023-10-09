@@ -56,6 +56,7 @@ const CreateChittiForm = ({
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"
                 onChange={HandleDateChange}
+                required
               />
             </div>
           </div>
@@ -87,7 +88,7 @@ const CreateChittiForm = ({
               aria-describedby="inputGroup-sizing-sm"
               // defaultValue={defaultData}
               onChange={HandleGoldRate}
-            // onBlur={handleBlur}
+            
             />
           </div>
 

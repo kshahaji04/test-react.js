@@ -203,6 +203,7 @@ const UseChittiHook = () => {
       CreateChittiApiRes?.hasOwnProperty('data')
     ) {
       toast.success('Chitti Created');
+      dispatch(getChittiChallan(AccessToken?.token))
     } else {
       toast.error('Failed to created chitti');
     }
@@ -229,7 +230,8 @@ const UseChittiHook = () => {
     date,
     goldRate,
     remarks,
-    challanTableData
+    challanTableData,
+    clientGroupName
   };
 };
 

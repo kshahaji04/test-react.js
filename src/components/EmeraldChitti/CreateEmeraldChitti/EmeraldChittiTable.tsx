@@ -1,10 +1,34 @@
 import { useState, useEffect } from 'react';
 
-const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCategoryList }: any) => {
+const EmeraldChittiTable = ({
+  tableData,
+  setTableData,
+  productItemList,
+  subCategoryList,
+  defaultData,
+}: any) => {
   // const [tableData, setTableData] = useState<any>([{ id: 1, name: '' }]);
-  const [amountValue, setamountValue] = useState<any>({ sub_category: '', product: "", gross_weight: 0, net_weight: 0, amount: 0 })
+  const [amountValue, setamountValue] = useState<any>({
+    sub_category: '',
+    product: '',
+    gross_weight: 0,
+    net_weight: 0,
+    amount: 0,
+  });
 
-  console.log("subCategoryList", subCategoryList)
+  console.log('subCategoryList', subCategoryList);
+
+  console.log('defaultData', defaultData);
+  useEffect(() => {
+    if (
+      defaultData?.length > 0 &&
+      defaultData !== undefined &&
+      defaultData !== null
+    ) {
+      setTableData(defaultData);
+    }
+  }, []);
+
   const HandleAddRow: any = () => {
     const newRow = {
       id: tableData.length + 1,
@@ -56,14 +80,18 @@ const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCateg
 
   const HandleGrossWeightValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, gross_weight: parseFloat(e.target.value) || 0 } : row
+      row.id === id
+        ? { ...row, gross_weight: parseFloat(e.target.value) || 0 }
+        : row
     );
     setTableData(updatedData);
   };
 
   const HandleNetWeightValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, net_weight: parseFloat(e.target.value) || 0 } : row
+      row.id === id
+        ? { ...row, net_weight: parseFloat(e.target.value) || 0 }
+        : row
     );
     setTableData(updatedData);
   };
@@ -84,9 +112,6 @@ const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCateg
     setTableData(updatedData);
   };
 
-
-
-
   const HandleAmountValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, amount: parseFloat(e.target.value) || 0 } : row
@@ -100,7 +125,10 @@ const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCateg
         <div className="container mt-1 border rounded-3">
           <div className="d-flex justify-content-between table-heading-row">
             <caption>Emerald Chitti Table</caption>
-            <p className="cursor-pointer my-auto btn-link" onClick={HandleAddRow}>
+            <p
+              className="cursor-pointer my-auto btn-link"
+              onClick={HandleAddRow}
+            >
               Add Row
             </p>
           </div>
@@ -125,32 +153,27 @@ const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCateg
                 {tableData.map((row: any) => (
                   <>
                     <tr key={row.id}>
-                      <td className='p-0'>{row.id}</td>
-                      <td className='table-data-input' >
+                      <td className="p-0">{row.id}</td>
+                      <td className="table-data-input">
                         <select
-                          id="category"
-                          name="category"
+                          id="subcategory"
+                          name="subcategory"
                           className="form-select p-0 custom-input-field "
                           aria-label=".form-select-sm example"
-
+                          defaultValue={row.sub_category}
                           onChange={(e) => HandleSubCategory(e, row.id)}
-
                         >
-                          <option></option>
-                          {
-                            subCategoryList?.length > 0 && subCategoryList !== null && (
-                              subCategoryList.map((subCategory: any, index: any) => {
-                                return (
-                                  <option>
-                                    {subCategory}
-                                  </option>
-                                )
-                              })
-                            )
-                          }
+                          <option defaultValue={row.sub_category}></option>
+                          {subCategoryList?.length > 0 &&
+                            subCategoryList !== null &&
+                            subCategoryList.map(
+                              (subCategoryList: any, index: any) => {
+                                return <option  defaultValue={row.sub_category}>{subCategoryList}</option>;
+                              }
+                            )}
                         </select>
                       </td>
-                      <td className='table-data-input'>
+                      <td className="table-data-input">
                         <select
                           id="category"
                           name="category"
@@ -159,23 +182,23 @@ const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCateg
                           defaultValue={row.product}
                           onChange={(e) => HandleProductItem(e, row.id)}
                         >
-                          <option></option>
-                          {/* {productItemList?.length > 0 && productItemList !== null && (
+                          <option defaultValue={row.product}></option>
+                          {productItemList?.length > 0 && productItemList !== null && (
                             <>
                               {
                                 productItemList.map((product: any, index: any) => (
-                                  <option key={index}>{product}</option>
+                                  <option key={index}>
+                                    {Object?.values(product)}
+                                  </option>
 
                                 ))
                               }
                             </>
-                          )} */}
-                          <option>One</option>
-                          <option>Two</option>
-                          <option>Three</option>
+                          )}
+                        
                         </select>
                       </td>
-                      <td className='table-data-input'>
+                      <td className="table-data-input">
                         <input
                           type="number"
                           className="form-control custom-input-field-t"
@@ -185,18 +208,17 @@ const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCateg
                           onChange={(e) => HandleGrossWeightValue(e, row.id)}
                         />
                       </td>
-                      <td className='table-data-input'>
+                      <td className="table-data-input">
                         <input
                           type="number"
                           className="form-control custom-input-field-t"
                           aria-label="Sizing example input"
                           aria-describedby="inputGroup-sizing-sm"
                           defaultValue={row.net_weight}
-
                           onChange={(e) => HandleNetWeightValue(e, row.id)}
                         />
                       </td>
-                      <td className='table-data-input'>
+                      <td className="table-data-input">
                         <input
                           type="number"
                           className="form-control custom-input-field-t"
@@ -204,37 +226,34 @@ const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCateg
                           aria-describedby="inputGroup-sizing-sm"
                           onKeyDown={(e) => handleKeyDown(e, row.id)}
                           defaultValue={row.amount}
-
                           onChange={(e) => HandleAmountValue(e, row.id)}
                         />
                       </td>
-                      <td className='table-data-input'>
+                      <td className="table-data-input">
                         <div
                           className="d-flex align-items-center delete-link"
-
                           onClick={() => HandleDeleteRow(row.id)}
                         >
                           <i className="fa-solid fa-xmark fs-5"></i>
                         </div>
                       </td>
                     </tr>
-
                   </>
                 ))}
                 <tr>
                   <td></td>
 
-                  <td className='py-1 px-2' colSpan={2}>
+                  <td className="py-1 px-2" colSpan={2}>
                     <input
                       type="text"
                       className="form-control custom-input-field-t text-center p-0"
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-sm"
-                      placeholder='Total'
+                      placeholder="Total"
                       readOnly
                     />
                   </td>
-                  <td className='py-1 px-2'>
+                  <td className="py-1 px-2">
                     <input
                       type="number"
                       className="form-control custom-input-field-t text-center p-0"
@@ -244,18 +263,17 @@ const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCateg
                       readOnly
                     />
                   </td>
-                  <td className='py-1 px-2'>
+                  <td className="py-1 px-2">
                     <input
                       type="number"
                       className="form-control custom-input-field-t text-center p-0"
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-sm"
                       value={amountValue.net_weight}
-
                       readOnly
                     />
                   </td>
-                  <td className='py-1 px-2'>
+                  <td className="py-1 px-2">
                     <input
                       type="number"
                       className="form-control custom-input-field-t text-center p-0"
@@ -270,9 +288,6 @@ const EmeraldChittiTable = ({ tableData, setTableData, productItemList, subCateg
             </table>
           </div>
         </div>
-
-
-
 
         {/* <div className="container border rounded-3 py-1">
           <div className="d-flex justify-content-between mb-1 table-heading-row">

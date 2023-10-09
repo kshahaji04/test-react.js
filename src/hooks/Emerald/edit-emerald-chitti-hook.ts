@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { getSpecificChittiChallan, get_specific_chitti_challan } from "../../store/slices/Chitti/get-specific-chitti-listing-data-slice";
+
 import UseEmeraldHook from "./emrald-page-hook";
 import { get_access_token } from "../../store/slices/auth/token-login-slice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { toast } from 'react-toastify';
+
+import { getSpecificEmeraldChitti, get_specific_emerald_chitti } from "../../store/slices/Emerald/get-specific-emrald-slice";
+import UpdateEmeraldChittiApi from "../../services/api/Emerald/update-emerald-chitti-api";
 
 
-const UseEmeraldChittiHook: any = () => {
+const UseEditEmeraldChittiHook: any = () => {
     const dispatch = useDispatch();
 
     const AccessToken: any = useSelector(get_access_token);
-    const ChallanDetailDataFromStore: any = useSelector(get_specific_chitti_challan);
+    const EmeraldChittiDataFromStore: any = useSelector(get_specific_emerald_chitti);
 
     const [challanDetail, setChallanDetail] = useState<any>("");
 
-    console.log("ChallanDetailDataFromStore", ChallanDetailDataFromStore)
+    console.log("EmeraldChittiDataFromStore", EmeraldChittiDataFromStore)
     const { id } = useParams();
     console.log("params", id)
 
@@ -23,30 +27,52 @@ const UseEmeraldChittiHook: any = () => {
         clientNameList, currentDate, handleDateChange, transactionDate, tableData, setTableData }: any = UseEmeraldHook();
 
     useEffect(() => {
-
         const params: any = {
             token: AccessToken?.token,
             name: id
         }
-        dispatch(getSpecificChittiChallan(params))
+        dispatch(getSpecificEmeraldChitti(params))
     }, [])
 
     useEffect(() => {
         if (
-            ChallanDetailDataFromStore?.data?.length > 0 &&
-            ChallanDetailDataFromStore?.data !== null
+            EmeraldChittiDataFromStore?.data?.length > 0 &&
+            EmeraldChittiDataFromStore?.data !== null
         ) {
-            setChallanDetail([...ChallanDetailDataFromStore?.data]);
+            setChallanDetail([...EmeraldChittiDataFromStore?.data]);
         } else {
             setChallanDetail([]);
         }
-    }, [ChallanDetailDataFromStore]);
+    }, [EmeraldChittiDataFromStore]);
 
+    const HandleUpdateEmeraldChittiSubmit = async() => {
+        console.log("update emerald chitti",selectedDropdownValue,transactionDate,tableData)
+
+        const BodyData: any = {
+            name: id,
+            clientName: selectedDropdownValue,
+            date: transactionDate,
+            // clientGroup: clientGroupName,
+            challanTableData: tableData,
+            token: AccessToken?.token,
+          };
+          let updateChittiApi: any = await UpdateEmeraldChittiApi(BodyData);
+          console.log('UpdateEmeraldChittiApi', UpdateEmeraldChittiApi);
+      
+          if (
+            updateChittiApi?.status === 200 &&
+            updateChittiApi?.hasOwnProperty('data')
+          ) {
+            toast.success('Emerald Chitti Updated');
+          } else {
+            toast.error('Failed to Update Emerald chitti');
+          }
+    }
 
     return {
         emeraldChittiData, selectedDropdownValue, setSelectedDropdownValue, productItemList, HandleClientGroup, HandleCreateEmeraldChittiSubmit, clientGroupList,
-        clientNameList, currentDate, handleDateChange, transactionDate, tableData, setTableData, challanDetail
+        clientNameList, currentDate, handleDateChange, transactionDate, tableData, setTableData, challanDetail,HandleUpdateEmeraldChittiSubmit
     }
 }
 
-export default UseEmeraldChittiHook;
+export default UseEditEmeraldChittiHook;

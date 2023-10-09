@@ -4,6 +4,7 @@ const NarrationTable = ({
   narrationTableData,
   setNarrationTableData,
   productList,
+  defaultData,
 }: any) => {
   // const [tablData, etTableData] = useState([{ id: 1, name: '' }]);
   const [totalAmountValue, setTotalAmountValue] = useState<any>({
@@ -11,6 +12,16 @@ const NarrationTable = ({
     huid_pieces: 0,
     huid_weight: 0,
   });
+
+  useEffect(() => {
+    if (
+      defaultData?.length > 0 &&
+      defaultData !== undefined &&
+      defaultData !== null
+    ) {
+      setNarrationTableData(defaultData);
+    }
+  }, []);
 
   const HandleAddRow: any = () => {
     const newRow = {
@@ -110,13 +121,18 @@ const NarrationTable = ({
                   name="category"
                   className="form-select p-0 custom-input-field"
                   aria-label=".form-select-sm example"
+                  defaultValue={row.product}
                   onChange={(e) => HandleCategory(e, row.id)}
                 >
                   <option></option>
                   {productList?.length > 0 && productList !== null ? (
                     <>
                       {productList.map((product: any, index: any) => {
-                        return <option defaultValue={row.product} key={index}>{product}</option>;
+                        return (
+                          <option defaultValue={row.product} key={index}>
+                            {product}
+                          </option>
+                        );
                       })}
                     </>
                   ) : (
@@ -142,7 +158,6 @@ const NarrationTable = ({
                   aria-describedby="inputGroup-sizing-sm"
                   onKeyDown={(e) => handleKeyDown(e, row.id)}
                   defaultValue={row.huid_weight}
-
                   onChange={(e) => HandleWeightAmount(e, row.id)}
                 />
               </td>

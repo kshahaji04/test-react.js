@@ -1,7 +1,17 @@
 import react, { useState } from 'react';
-import SelectedInputDropdown from "../../SelectedInputDropdown";
+import SelectedInputDropdown from '../../SelectedInputDropdown';
 
-const EmeraldCreateChitti = ({ selectedDropdownValue, setSelectedDropdownValue, HandleClientGroup, clientGroupList, clientNameList, currentDate, handleDateChange, transactionDate }: any) => {
+const EmeraldCreateChitti = ({
+  selectedDropdownValue,
+  defaultData,
+  setSelectedDropdownValue,
+  HandleClientGroup,
+  clientGroupList,
+  clientNameList,
+  currentDate,
+  handleDateChange,
+  transactionDate,
+}: any) => {
   const [bgColor, setBgColor] = useState<any>(true);
   return (
     <form
@@ -22,7 +32,7 @@ const EmeraldCreateChitti = ({ selectedDropdownValue, setSelectedDropdownValue, 
               setSelectedDropdownValue={setSelectedDropdownValue}
               clientGroupList={clientGroupList}
               HandleClientGroup={HandleClientGroup}
-            // defaultData={defaultData}
+              defaultData={defaultData}
             />
           </div>
         </div>
@@ -37,12 +47,12 @@ const EmeraldCreateChitti = ({ selectedDropdownValue, setSelectedDropdownValue, 
               name="date"
               value={transactionDate}
               defaultValue={currentDate}
-              // min="2011- 
+              // min="2011-
               className="form-control custom-input-field emerald-input-field"
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"
               onChange={handleDateChange}
-            // onBlur={handleBlur}
+              // onBlur={handleBlur}
             />
           </div>
         </div>

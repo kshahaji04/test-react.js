@@ -3,24 +3,28 @@ import { NavLink } from 'react-router-dom';
 
 const SubCategoryListing = ({ subCategoryList }: any) => {
   return (
-    <div className="container  mt-2">
-      <div className="table-responsive-sm">
-        <table className="table">
-          <ul className='list-group list-group-flush'>
-
-            {subCategoryList?.length > 0 &&
-              subCategoryList !== null &&
-              subCategoryList.map((group: any, index: any) => {
-                return (
-                  <NavLink to={group} className="text-decoration-none">
-                    <li className="list-group-item master-ul-li" key={index}>{group}</li>
-                  </NavLink>
-                );
-              })}
-          </ul>
-        </table>
-      </div>
-    </div>
+    <div className="container border mt-2">
+    <table className="table table-striped mt-2">
+      <thead>
+        <tr className="text-start table-heading table-heading-row">
+          <th scope="col">Subcategory Listing</th>
+        </tr>
+      </thead>
+      <tbody>
+        {subCategoryList?.length > 0 &&
+          subCategoryList !== null &&
+          subCategoryList.map((group: any, index: any) => (
+            <tr className="text-start table-body-row" key={index}>
+              <td className="p-1">
+                <NavLink to={`${group}`} className="text-decoration-none text-dark">
+                  {group}
+                </NavLink>
+              </td>
+            </tr>
+          ))}
+      </tbody>
+    </table>
+  </div>
   )
 }
 

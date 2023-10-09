@@ -8,9 +8,25 @@ import UseEmeraldHook from '../../hooks/Emerald/emrald-page-hook';
 import UseSubCategoryHook from '../../hooks/Master/sub-category-hook';
 
 const EmeraldChittiMaster = () => {
-  const { emeraldChittiData, selectedDropdownValue, setSelectedDropdownValue, HandleClientGroup, HandleCreateEmeraldChittiSubmit, productItemList, clientGroupList, clientNameList, currentDate, handleDateChange, transactionDate, tableData, setTableData }: any = UseEmeraldHook();
+  const {
+    emeraldChittiData,
+    selectedDropdownValue,
+    setSelectedDropdownValue,
+    HandleClientGroup,
+    HandleCreateEmeraldChittiSubmit,
+    productItemList,
+    clientGroupList,
+    clientNameList,
+    currentDate,
+    handleDateChange,
+    transactionDate,
+    tableData,
+    setTableData,
+  
+  }: any = UseEmeraldHook();
   const { subCategoryList }: any = UseSubCategoryHook();
-  // const { }: any = 
+  // const { }: any =
+  console.log("productItemList",productItemList)
 
   return (
     <div className="container mt-3">
@@ -30,11 +46,21 @@ const EmeraldChittiMaster = () => {
               </div>
             </Tab>
             <Tab eventKey="longer-tab" title="Create Emerald Chitti">
-              <CreateEmeraldChittiMaster selectedDropdownValue={selectedDropdownValue} setSelectedDropdownValue={setSelectedDropdownValue}
-                HandleClientGroup={HandleClientGroup} HandleCreateEmeraldChittiSubmit={HandleCreateEmeraldChittiSubmit} clientGroupList={clientGroupList}
-                clientNameList={clientNameList} currentDate={currentDate}
-                handleDateChange={handleDateChange} transactionDate={transactionDate}
-                tableData={tableData} setTableData={setTableData} subCategoryList={subCategoryList}
+              <CreateEmeraldChittiMaster
+                selectedDropdownValue={selectedDropdownValue}
+                setSelectedDropdownValue={setSelectedDropdownValue}
+                HandleClientGroup={HandleClientGroup}
+                HandleCreateEmeraldChittiSubmit={
+                  HandleCreateEmeraldChittiSubmit
+                }
+                clientGroupList={clientGroupList}
+                clientNameList={clientNameList}
+                currentDate={currentDate}
+                handleDateChange={handleDateChange}
+                transactionDate={transactionDate}
+                tableData={tableData}
+                setTableData={setTableData}
+                subCategoryList={subCategoryList}
                 productItemList={productItemList}
               />
             </Tab>

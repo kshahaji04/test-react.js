@@ -43,8 +43,8 @@ const ListingTable = ({
         {headingData?.length > 0 &&
           headingData !== null &&
           headingData.map((heading: any, index: any) => {
-            console.log('headingData', heading.replace('_', ' '));
-            if (heading !== 'ate') { // Exclude 'date' key
+          
+            if (heading !== 'name') { // Exclude 'date' key
               console.log('headingData', heading.replace('_', ' '));
               return (
                 <th className="text-uppercase" key={index} scope="col">
@@ -72,7 +72,7 @@ const ListingTable = ({
                   {headingData?.length > 0 &&
                     headingData !== null &&
                     headingData.map((v: any, index: any) => {
-                      if (v !== 'dte') { // Exclude 'date' key
+                      if (v !== 'name') { // Exclude 'date' key
                         return (
                           <td className="border-0" key={v}>
                             {v !== 'docstatus' ? data[v] :
@@ -92,7 +92,7 @@ const ListingTable = ({
                     <>
                       <td className="button-section-td border-0">
                         <NavLink
-                          to={`${data.number}`}
+                          to={`${data.name}`}
                           className="button-section-text text-info"
                         >
                           Edit
