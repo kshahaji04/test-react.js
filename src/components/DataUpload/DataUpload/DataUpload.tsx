@@ -20,32 +20,29 @@ const DataUpload = ({ supplierList, HandleSupplier }: any) => {
       </div>
       <div className="card ">
         <div className="card-body">
-          <label htmlFor="basic-url " className="fs-6 mb-1 text-center form-label-bold">
+          <label
+            htmlFor="basic-url "
+            className="fs-6 mb-1 text-center form-label-bold"
+          >
             Supplier
           </label>
           <div className="input-group mb-3 w-50 ">
-            <div className='w-100'>
-
+            <div className="w-100">
               <select
                 id="category"
                 name="category"
                 className="form-select p-0 px-2 ustom-input-field "
                 aria-label=".form-select-sm example"
                 onChange={HandleSupplier}
-
               >
                 <option></option>
-                {
-                  supplierList?.length > 0 && supplierList !== null && (
-                    supplierList.map((supplier: any, index: any) => {
-                      return (
-                        <option key={index}>
-                          {Object.values(supplier)}
-                        </option>
-                      )
-                    })
-                  )
-                }
+                {supplierList?.length > 0 &&
+                  supplierList !== null &&
+                  supplierList.map((supplier: any, index: any) => {
+                    return (
+                      <option key={index}>{Object.values(supplier)}</option>
+                    );
+                  })}
               </select>
             </div>
           </div>
@@ -62,16 +59,18 @@ const DataUpload = ({ supplierList, HandleSupplier }: any) => {
               className="form-control custom-input-field py-0 px-2"
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"
-            // onChange={HandleDateChange}
+              // onChange={HandleDateChange}
             />
           </div>
           <div className="my-4">
-            <button type="button" className="btn btn-outline-primary text-uppercase btn-sm">
-              <span className='download-template-btn'>
-
-                download template
-              </span>
-            </button>
+            <a href="http://192.168.29.54:8000/app/emerald/new-emerald-1">
+              <button
+                type="button"
+                className="btn btn-outline-primary text-uppercase btn-sm"
+              >
+                <span className="download-template-btn">download template</span>
+              </button>
+            </a>
           </div>
           <div>
             {/* <form > */}
@@ -82,12 +81,9 @@ const DataUpload = ({ supplierList, HandleSupplier }: any) => {
               id="fileupload"
               onChange={(e) => handleFileUploadInput(e)}
             />
-
-
           </div>
         </div>
       </div>
-
     </div>
   );
 };

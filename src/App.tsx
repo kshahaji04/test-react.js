@@ -2,6 +2,7 @@ import { ToastContainer } from 'react-toastify';
 import './Style/index.css';
 import 'react-toastify/dist/ReactToastify.css';
 import AppRoutes from './routes/AppRoutes';
+import CustomDropDown from './components/customDropdown';
 
 const App = () => {
   return (

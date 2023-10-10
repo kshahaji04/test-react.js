@@ -9,29 +9,24 @@ const SelectedInputDropdown = ({
   clientGroupList,
   HandleClientGroup,
   defaultData,
+  readOnlyField,
 }: any) => {
+  console.log('defaultt', defaultData);
   const [showDropDown, setShowDropdown] = useState<any>(false);
   const [noRecords, setNoRecordsFound] = useState<any>(false);
   const [filterDropdownList, setFilterDropdownList] = useState<any>([]);
 
   const [isFocused, setIsFocused] = useState(false);
 
-  const handleBlur = () => {
-    setIsFocused(false);
-    console.log('no foucsss');
-
-    if (!isFocused) {
-      console.log('no foucs');
-      setShowDropdown(false);
+  useEffect(() => {
+    if (
+      defaultData !== undefined &&
+      defaultData !== null &&
+      Object.keys(defaultData?.client_name)?.length > 0
+    ) {
+      setSelectedDropdownValue(defaultData.client_name);
     }
-  };
-  // useEffect(() => {
-  //   if (showDropDown) {
-  //     setShowDropdown(false)
-  //   }
-  // }, [isFocused])
-
-  console.log('focus', isFocused, showDropDown);
+  }, []);
 
   const handleSelectedOption = (data: any) => {
     setSelectedDropdownValue(data);
@@ -42,10 +37,10 @@ const SelectedInputDropdown = ({
     setSelectedDropdownValue(e.target.value);
     const query = e.target.value;
 
-    const UpdatedFilterList: any = drowpdownlist.filter((item: any) => {
+    const UpdatedFilterList: any = drowpdownlist?.filter((item: any) => {
       return item.toLowerCase().indexOf(query.toLowerCase()) !== -1;
     });
-    console.log('selectedDropdownValue up', UpdatedFilterList);
+
     setFilterDropdownList(UpdatedFilterList);
     setNoRecordsFound(true);
   };
@@ -84,6 +79,7 @@ const SelectedInputDropdown = ({
           value={selectedDropdownValue}
           onKeyDown={handleKeyDown}
           autoComplete="off"
+          readOnly={readOnlyField}
         />
         {showDropDown && (
           <ul
@@ -119,7 +115,7 @@ const SelectedInputDropdown = ({
               <>
                 {noRecords === true && filterDropdownList?.length === 0 && (
                   <>
-                  <div className="text-uppercase px-2 mt-1">Client Group</div>
+                    <div className="text-uppercase px-2 mt-1">Client Group</div>
                     <li className="dropdown-list p-1">
                       <select
                         className="form-select form-select-sm "

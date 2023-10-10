@@ -299,3 +299,11 @@ table tr {
   padding: 0px 5px !important;
   height: 27px !important;
 }
+
+.docstatus-button {
+  background-color: rgb(242, 220, 220) !important;
+  padding: 0px 13px !important;
+  color: rgb(243, 97, 97) !important;
+  font-size: 0.8rem;
+  /* font-weight: 550; */
+}

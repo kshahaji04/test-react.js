@@ -49,7 +49,8 @@ const UseEmeraldHook = () => {
 
   const [tableData, setTableData] = useState<any>([{ id: 1 }]);
   const [emeraldChittiTableData, setEmeraldChittiTableData] = useState<any>([]);
-console.log("ProductItemDataFromStore",ProductItemDataFromStore)
+  const [stateForDocStatus, setStateForDocStatus] = useState<boolean>(false);
+  console.log('ProductItemDataFromStore', ProductItemDataFromStore);
   useEffect(() => {
     dispatch(getEmeraldChallan(AccessToken?.token));
     dispatch(getClientName(AccessToken?.token));
@@ -119,11 +120,13 @@ console.log("ProductItemDataFromStore",ProductItemDataFromStore)
   const HandleClientGroup: any = (e: any) => {
     console.log('clientgro', e.target.value);
     setClientGroupName(e.target.value);
+    setStateForDocStatus(true);
   };
 
   const handleDateChange: any = (e: any) => {
     console.log('clientgro', e.target.value);
     setTransactionDate(e.target.value);
+    setStateForDocStatus(true);
   };
 
   useEffect(() => {
@@ -141,34 +144,59 @@ console.log("ProductItemDataFromStore",ProductItemDataFromStore)
       'submit create emerald chitti',
       selectedDropdownValue,
       transactionDate,
-
       emeraldChittiTableData
     );
-    console.log(
-      'submit create chitti challan table',
-      emeraldChittiTableData
-      // narrationUpdatedTableData
+    const NoDataEmeraldTableData = emeraldChittiTableData.some(
+      (item: any) => Object?.keys(item)?.length === 0
     );
-    const BodyData: any = {
-      clientName: selectedDropdownValue,
-      date: transactionDate,
-      emeraldChittiTableData: emeraldChittiTableData,
-      token: AccessToken?.token,
-    };
-    let createEmeraldChittiApiRes: any = await CreateEmeraldChittiApi(BodyData);
-    console.log('Createchittiapires', createEmeraldChittiApiRes);
 
     if (
-      createEmeraldChittiApiRes?.status === 200 &&
-      createEmeraldChittiApiRes?.hasOwnProperty('data')
+      Object?.keys(selectedDropdownValue)?.length > 0 &&
+      NoDataEmeraldTableData === false
     ) {
-      toast.success('Emerald Chitti Created');
-      dispatch(getEmeraldChallan(AccessToken?.token));
-    } else {
-      toast.error('Failed to created chitti');
-    }
-  };
+      const BodyData: any = {
+        clientName: selectedDropdownValue,
+        date: transactionDate,
+        emeraldChittiTableData: emeraldChittiTableData,
+        token: AccessToken?.token,
+      };
+      let createEmeraldChittiApiRes: any =
+        await CreateEmeraldChittiApi(BodyData);
+      console.log('Createchittiapires', createEmeraldChittiApiRes);
 
+      if (
+        createEmeraldChittiApiRes?.status === 200 &&
+        createEmeraldChittiApiRes?.hasOwnProperty('data')
+      ) {
+        toast.success('Emerald Chitti Created');
+        dispatch(getEmeraldChallan(AccessToken?.token));
+      } else {
+        toast.error('Failed to Create Emerald Chitti');
+      }
+    } else {
+      console.log('select elss');
+      toast.error('Mandatory fields Client name, Emerald Table ');
+    }
+
+    // const BodyData: any = {
+    //   clientName: selectedDropdownValue,
+    //   date: transactionDate,
+    //   emeraldChittiTableData: emeraldChittiTableData,
+    //   token: AccessToken?.token,
+    // };
+    // let createEmeraldChittiApiRes: any = await CreateEmeraldChittiApi(BodyData);
+    // console.log('Createchittiapires', createEmeraldChittiApiRes);
+
+    // if (
+    //   createEmeraldChittiApiRes?.status === 200 &&
+    //   createEmeraldChittiApiRes?.hasOwnProperty('data')
+    // ) {
+    //   toast.success('Emerald Chitti Created');
+    //   dispatch(getEmeraldChallan(AccessToken?.token));
+    // } else {
+    //   toast.error('Failed to Create Emerald Chitti');
+    // }
+  };
 
   return {
     emeraldChittiData,
@@ -183,7 +211,9 @@ console.log("ProductItemDataFromStore",ProductItemDataFromStore)
     handleDateChange,
     tableData,
     setTableData,
-    transactionDate
+    transactionDate,
+    stateForDocStatus,
+    setStateForDocStatus,
   };
 };
 

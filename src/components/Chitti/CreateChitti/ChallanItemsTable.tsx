@@ -14,9 +14,13 @@ const ChallanItemsTable = ({
     net_weight: 0,
     amount: 0,
   });
-console.log("defaultData",defaultData)
+  console.log('defaultData', defaultData);
   useEffect(() => {
-    if(defaultData?.length > 0 && defaultData !== undefined && defaultData !== null) {
+    if (
+      defaultData?.length > 0 &&
+      defaultData !== undefined &&
+      defaultData !== null
+    ) {
       setTableData(defaultData);
     }
   }, []);

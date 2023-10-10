@@ -22,11 +22,10 @@ const EmeraldChittiMaster = () => {
     transactionDate,
     tableData,
     setTableData,
-  
   }: any = UseEmeraldHook();
   const { subCategoryList }: any = UseSubCategoryHook();
   // const { }: any =
-  console.log("productItemList",productItemList)
+  console.log('productItemList', productItemList);
 
   return (
     <div className="container mt-3">

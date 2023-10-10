@@ -45,14 +45,12 @@ const EmeraldCreateChitti = ({
               type="date"
               id="date"
               name="date"
-              value={transactionDate}
-              defaultValue={currentDate}
-              // min="2011-
+              value={currentDate?.toISOString()?.split('T')[0]}
+              // defaultValue={}
               className="form-control custom-input-field emerald-input-field"
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"
               onChange={handleDateChange}
-              // onBlur={handleBlur}
             />
           </div>
         </div>

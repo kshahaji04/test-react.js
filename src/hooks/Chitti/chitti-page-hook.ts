@@ -53,22 +53,23 @@ const UseChittiHook = () => {
   const [remarks, setRemarks] = useState<any>('');
   const [clientGroupName, setClientGroupName] = useState<any>('');
   const [date, setDate] = useState<any>('');
+  const [stateForDocStatus, setStateForDocStatus] = useState<boolean>(false);
 
   let modifiedList: any;
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const now = new Date();
-      const day = String(now.getDate()).padStart(2, '0');
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const year = now.getFullYear();
-      const formattedDate: any = `${day}-${month}-${year}`;
-      setCurrentDate(formattedDate);
-    }, 1000); // Update the date every second
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     const now = new Date();
+  //     const day = String(now.getDate()).padStart(2, '0');
+  //     const month = String(now.getMonth() + 1).padStart(2, '0');
+  //     const year = now.getFullYear();
+  //     const formattedDate: any = `${day}-${month}-${year}`;
+  //     setCurrentDate(formattedDate);
+  //   }, 1000); // Update the date every second
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // }, []);
 
   useEffect(() => {
     dispatch(getChittiChallan(AccessToken?.token));
@@ -135,23 +136,27 @@ const UseChittiHook = () => {
 
   const HandleGoldRate: any = (e: any) => {
     setGoldRate(e.target.value);
+    setStateForDocStatus(true);
   };
 
   const HandleRemarks: any = (e: any) => {
     setRemarks(e.target.value);
+    setStateForDocStatus(true);
   };
 
   const HandleClientGroup: any = (e: any) => {
     console.log('clientgro', e.target.value);
     setClientGroupName(e.target.value);
+    setStateForDocStatus(true);
   };
 
   const HandleDateChange: any = (e: any) => {
     console.log('HandleDateChange', e.target.value);
     setDate(e.target.value);
+    setStateForDocStatus(true);
   };
 
-  console.log("setTableData", tableData)
+  console.log('setTableData', tableData);
 
   // for removing id key from list
   useEffect(() => {
@@ -172,40 +177,66 @@ const UseChittiHook = () => {
   }, [tableData, narrationTableData]);
 
   const HandleCreateChittiSubmit: any = async () => {
+    const NoDataChallanTableData = challanTableData.some(
+      (item: any) => Object?.keys(item)?.length === 0
+    );
+    const NoDataNarrationTableData = narrationUpdatedTableData.some(
+      (item: any) => Object?.keys(item)?.length === 0
+    );
+
     console.log(
-      'submit create chitti',
+      'selectt',
       selectedDropdownValue,
-      goldRate,
-      remarks,
-      clientGroupName,
-      date
+      NoDataChallanTableData,
+      NoDataNarrationTableData
     );
-    console.log(
-      'submit create chitti challan table',
-      challanTableData,
-      narrationUpdatedTableData
-    );
-    const BodyData: any = {
-      date: date,
-      clientName: selectedDropdownValue,
-      clientGroup: clientGroupName,
-      goldRate: goldRate,
-      remarks: remarks,
-      challanTableData: challanTableData,
-      narrationTableData: narrationUpdatedTableData,
-      token: AccessToken?.token,
-    };
-    let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
-    console.log('Createchittiapires', CreateChittiApiRes);
 
     if (
-      CreateChittiApiRes?.status === 200 &&
-      CreateChittiApiRes?.hasOwnProperty('data')
+      Object?.keys(selectedDropdownValue)?.length > 0 &&
+      NoDataChallanTableData === false &&
+      NoDataNarrationTableData === false
     ) {
-      toast.success('Chitti Created');
-      dispatch(getChittiChallan(AccessToken?.token))
+      const BodyData: any = {
+        date: date,
+        clientName: selectedDropdownValue,
+        clientGroup: clientGroupName,
+        goldRate: goldRate,
+        remarks: remarks,
+        challanTableData: challanTableData,
+        narrationTableData: narrationUpdatedTableData,
+        token: AccessToken?.token,
+      };
+      let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
+      console.log('Createchittiapires', CreateChittiApiRes);
+
+      if (
+        CreateChittiApiRes?.status === 200 &&
+        CreateChittiApiRes?.hasOwnProperty('data')
+      ) {
+        toast.success('Chitti Created');
+        dispatch(getChittiChallan(AccessToken?.token));
+      } else {
+        toast.error('Failed to created chitti');
+      }
     } else {
-      toast.error('Failed to created chitti');
+      console.log('select elss');
+      toast.error('Mandatory fields Client name, challan Table , HUID Table');
+
+      // if (Object.keys(selectedDropdownValue)?.length === 0 && !NoDataChallanTableData ) {
+      //   toast.error('Please add Client name');
+      // }
+      // if (
+      //   NoDataChallanTableData &&
+      //   Object.keys(selectedDropdownValue)?.length === 0
+      // ) {
+      //   toast.error('Please add Client Name and Challan Table');
+      // }
+      // if (
+      //   NoDataNarrationTableData === true &&
+      //   Object.keys(selectedDropdownValue)?.length === 0
+      // ) {
+      //   toast.error('Please add Client name and Narration Table');
+      // }
     }
   };
   console.log('chittiListingData in hook end', chittiListingData);
@@ -231,7 +262,9 @@ const UseChittiHook = () => {
     goldRate,
     remarks,
     challanTableData,
-    clientGroupName
+    clientGroupName,
+    stateForDocStatus,
+    setStateForDocStatus,
   };
 };
 

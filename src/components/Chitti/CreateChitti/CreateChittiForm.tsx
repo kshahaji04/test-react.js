@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import SelectedInputDropdown from '../../SelectedInputDropdown';
+import { get_specific_chitti_challan } from '../../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
+import { useSelector } from 'react-redux';
+import CustomDropDown from '../../customDropdown';
 
 const CreateChittiForm = ({
   currentDate,
@@ -12,33 +15,26 @@ const CreateChittiForm = ({
   HandleClientGroup,
   defaultData,
   HandleDateChange,
-  date
+  date,
 }: any) => {
+  console.log('defaultData', currentDate);
 
-  console.log("defaultData", defaultData)
-  const ChittiNoList = ['client1', 'client2', 'client3', 'client4'];
-  const handleSubmit: any = () => { };
   const [bgColor, setBgColor] = useState<any>(true);
-  // const [currentDate, setCurrentDate] = useState<any>(new Date());
+  const [readOnlyField, setReadOnlyField] = useState<any>(false);
+
+  const docStatusFromStore: any = useSelector(get_specific_chitti_challan);
+  console.log('docStatus in cre', docStatusFromStore?.docStatus);
   // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     const now = new Date();
-  //     const day = String(now.getDate()).padStart(2, '0');
-  //     const month = String(now.getMonth() + 1).padStart(2, '0');
-  //     const year = now.getFullYear();
-
-  //     const formattedDate: any = `${day}-${month}-${year}`;
-  //     setCurrentDate(formattedDate);
-  //   }, 1000); // Update the date every second
-
-  //   return () => {
-  //     clearInterval(intervalId);
-  //   };
+  //   if (docStatusFromStore?.docStatus > 0) {
+  //     setReadOnlyField(true);
+  //   } else {
+  //     setReadOnlyField(false);
+  //   }
   // }, []);
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="d-flex flex-column">
+      <form className="d-flex flex-column">
         <div className="row ">
           <div className="col-lg-10"></div>
           <div className="col-lg-3 col-md-6">
@@ -51,18 +47,18 @@ const CreateChittiForm = ({
                 id="date"
                 name="date"
                 defaultValue={defaultData?.date}
-                value={date}
+                value={currentDate?.toISOString()?.split('T')[0]}
                 className="form-control custom-input-field py-0 px-2"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"
                 onChange={HandleDateChange}
-                required
+                // readOnly={readOnlyField}
               />
             </div>
           </div>
           <div className="col-lg-3 col-md-6">
             <label className="form-Form.Label fs-6 text-dark form-label-bold">
-              Client Name :
+              Client Name :<span className="text-danger">*</span>
             </label>
 
             <SelectedInputDropdown
@@ -74,7 +70,9 @@ const CreateChittiForm = ({
               clientGroupList={clientGroupList}
               HandleClientGroup={HandleClientGroup}
               defaultData={defaultData}
+              // readOnlyField={readOnlyField}
             />
+            <CustomDropDown />
           </div>
           <div className="col-lg-3 col-md-6">
             <label className="form-Form.Label fs-6 text-dark form-label-bold">
@@ -86,9 +84,8 @@ const CreateChittiForm = ({
               className="form-control custom-input-field px-1"
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"
-              // defaultValue={defaultData}
+              // readOnly={readOnlyField}
               onChange={HandleGoldRate}
-            
             />
           </div>
 
@@ -103,7 +100,8 @@ const CreateChittiForm = ({
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"
               onChange={HandleRemarks}
-            // onBlur={handleBlur}
+              // readOnly={readOnlyField}
+              // onBlur={handleBlur}
             />
           </div>
         </div>

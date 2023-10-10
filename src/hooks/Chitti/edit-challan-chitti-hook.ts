@@ -10,6 +10,7 @@ import UseChittiHook from './chitti-page-hook';
 import { useParams } from 'react-router-dom';
 import UpdateChittiApi from '../../services/api/Chitti/update-challan-chitti-api';
 import { toast } from 'react-toastify';
+import UpdateDocStatus from '../../services/api/general/update-doc-status-api';
 
 const UseEditChallanChitti: any = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const UseEditChallanChitti: any = () => {
 
   const [challanDetail, setChallanDetail] = useState<any>('');
   const [tableData, setTableData] = useState<any>([{ id: 1 }]);
+
   console.log('emeraldDetailDataFromStore', emeraldDetailDataFromStore);
   const { id } = useParams();
   console.log('params', id);
@@ -43,7 +45,9 @@ const UseEditChallanChitti: any = () => {
     HandleDateChange,
     HandleRemarks,
     clientGroupList,
-    clientGroupName
+    clientGroupName,
+    stateForDocStatus,
+    setStateForDocStatus,
   }: any = UseChittiHook();
 
   console.log('selectedDropdownValue', selectedDropdownValue);
@@ -57,8 +61,8 @@ const UseEditChallanChitti: any = () => {
 
   useEffect(() => {
     if (
-        emeraldDetailDataFromStore?.data?.length > 0 &&
-        emeraldDetailDataFromStore?.data !== null
+      emeraldDetailDataFromStore?.data?.length > 0 &&
+      emeraldDetailDataFromStore?.data !== null
     ) {
       setChallanDetail([...emeraldDetailDataFromStore?.data]);
     } else {
@@ -100,6 +104,12 @@ const UseEditChallanChitti: any = () => {
       updateChittiApi?.hasOwnProperty('data')
     ) {
       toast.success('Chitti Updated');
+      setStateForDocStatus(false);
+      let updateDocStatus: any = await UpdateDocStatus(
+        AccessToken?.token,
+        '0',
+        id
+      );
     } else {
       toast.error('Failed to Update chitti');
     }
@@ -121,7 +131,8 @@ const UseEditChallanChitti: any = () => {
     HandleRemarks,
     HandleDateChange,
     narrationTableData,
-    clientGroupList
+    clientGroupList,
+    stateForDocStatus,
   };
 };
 
