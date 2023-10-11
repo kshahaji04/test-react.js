@@ -46,11 +46,12 @@ const EmeraldCreateChitti = ({
               id="date"
               name="date"
               value={currentDate?.toISOString()?.split('T')[0]}
-              // defaultValue={}
+              defaultValue={defaultData?.date}
               className="form-control custom-input-field emerald-input-field"
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"
               onChange={handleDateChange}
+              readOnly
             />
           </div>
         </div>

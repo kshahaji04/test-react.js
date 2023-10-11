@@ -33,7 +33,7 @@ const UseChittiHook = () => {
   const ClientGroupDataFromStore: any = useSelector(get_client_group);
   const SubCategoryDataFromStore: any = useSelector(get_subcategory_list);
   const ProductListDataFromStore: any = useSelector(get_product_list);
-  console.log('ChittiChallanData', ChittiChallanData);
+  console.log('ChittiChallanData in hook', ChittiChallanData);
   const [chittiListingData, setChittiListingData] = useState<any>([]);
   const [subCategoryList, setSubCategoryList] = useState<any>([]);
   const [productList, setProductList] = useState<any>([]);
@@ -52,7 +52,7 @@ const UseChittiHook = () => {
   const [goldRate, setGoldRate] = useState<any>('');
   const [remarks, setRemarks] = useState<any>('');
   const [clientGroupName, setClientGroupName] = useState<any>('');
-  const [date, setDate] = useState<any>('');
+  const [date, setDate] = useState<any>(new Date());
   const [stateForDocStatus, setStateForDocStatus] = useState<boolean>(false);
 
   let modifiedList: any;

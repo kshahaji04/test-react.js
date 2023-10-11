@@ -11,13 +11,13 @@ const SelectedInputDropdown = ({
   defaultData,
   readOnlyField,
 }: any) => {
-  console.log('defaultt', defaultData);
+  console.log('defaultt', selectedDropdownValue, drowpdownlist);
   const [showDropDown, setShowDropdown] = useState<any>(false);
   const [noRecords, setNoRecordsFound] = useState<any>(false);
   const [filterDropdownList, setFilterDropdownList] = useState<any>([]);
 
   const [isFocused, setIsFocused] = useState(false);
-
+  const selectDropdownRef = useRef<any>(null);
   useEffect(() => {
     if (
       defaultData !== undefined &&
@@ -29,11 +29,13 @@ const SelectedInputDropdown = ({
   }, []);
 
   const handleSelectedOption = (data: any) => {
+    console.log('dataa', data);
     setSelectedDropdownValue(data);
     setShowDropdown(false);
   };
   const HandleInputField = (e: any) => {
     console.log('input value', e.target.value);
+    setShowDropdown(true);
     setSelectedDropdownValue(e.target.value);
     const query = e.target.value;
 
@@ -53,9 +55,24 @@ const SelectedInputDropdown = ({
     if (e.key === 'Tab') {
       setShowDropdown(true);
     }
-    // if (e.key === 'Tab' && showDropDown === true) {
-    //   setShowDropdown(false)
-    // }
+    if (e.key === 'Escape') {
+      setShowDropdown(!showDropDown);
+    }
+  };
+
+  const handleBlur = () => {
+    setTimeout(() => {
+      if (
+        !selectDropdownRef.current ||
+        !selectDropdownRef.current.contains(document.activeElement)
+      ) {
+        setShowDropdown(false);
+      }
+    }, 200);
+  };
+
+  const HandleClientBlur = () => {
+    setShowDropdown(false);
   };
 
   return (
@@ -63,14 +80,13 @@ const SelectedInputDropdown = ({
       <div className="dropdown-input-container">
         <input
           type="text"
-          // className="form-control input-fields  dropdown-input"
           className={`${
             bgColor === true
               ? 'form-control dropdown-input client-name-input-chitti'
               : 'form-control input-fields  dropdown-input'
           }`}
           id="exampleInputEmail1"
-          // onBlur={handleBlur}
+          onBlur={handleBlur}
           onFocus={() => setIsFocused(true)}
           placeholder={placeholderValue}
           onChange={HandleInputField}
@@ -91,8 +107,8 @@ const SelectedInputDropdown = ({
                 {drowpdownlist.map((list: any, index: any) => (
                   <li
                     key={index}
-                    className="dropdown-list"
                     onClick={() => handleSelectedOption(list)}
+                    className="dropdown-list"
                   >
                     {list}
                   </li>
@@ -103,8 +119,8 @@ const SelectedInputDropdown = ({
                 {filterDropdownList.map((list: any, index: any) => (
                   <li
                     key={index}
-                    className="dropdown-list"
                     onClick={() => handleSelectedOption(list)}
+                    className="dropdown-list"
                   >
                     {list}
                   </li>
@@ -121,6 +137,8 @@ const SelectedInputDropdown = ({
                         className="form-select form-select-sm "
                         aria-label="Default select example"
                         onChange={HandleClientGroup}
+                        ref={selectDropdownRef}
+                        onBlur={HandleClientBlur}
                       >
                         <option>Select client group</option>
                         {clientGroupList?.length > 0 &&
@@ -128,7 +146,7 @@ const SelectedInputDropdown = ({
                           clientGroupList.map((group: any, index: any) => {
                             return (
                               <>
-                                <option>{group}</option>
+                                <option key={index}>{group}</option>
                               </>
                             );
                           })}

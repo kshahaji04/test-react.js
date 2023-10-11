@@ -8,7 +8,6 @@ import SelectedInputDropdown from '../../../SelectedInputDropdown';
 import { getClientName } from '../../../../store/slices/Chitti/get-client-name-slice';
 
 const AddClient = ({ clientGroupList }: any) => {
-
   const dispatch = useDispatch();
   const [title, setTitle] = useState<any>('');
   const [clientGroup, setClientGroup] = useState<any>('');
@@ -17,16 +16,19 @@ const AddClient = ({ clientGroupList }: any) => {
   const [error, setError] = useState('');
   const AccessToken: any = useSelector(get_access_token);
 
-
   const HandleSubmit: any = async () => {
     if (inputValue.trim() === '') {
       setError('Input field cannot be empty');
     } else {
-      let apiRes: any = await AddClientNameApi(AccessToken?.token, title, selectedDropdownValue)
-      console.log("apires", apiRes)
-      setClientGroup("")
-      setTitle("")
-      if (apiRes?.status === 200 && apiRes?.hasOwnProperty("data")) {
+      let apiRes: any = await AddClientNameApi(
+        AccessToken?.token,
+        title,
+        selectedDropdownValue
+      );
+      console.log('apires', apiRes);
+      setClientGroup('');
+      setTitle('');
+      if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
         toast.success('Client Group Created');
         dispatch(getClientName(AccessToken?.token));
       }
@@ -34,22 +36,22 @@ const AddClient = ({ clientGroupList }: any) => {
 
       setInputValue('');
     }
-  }
+  };
 
   const HandleInputValue = (e: any) => {
-   setError('')
-    setTitle(e.target.value)
-  }
+    setError('');
+    setTitle(e.target.value);
+  };
   const HandleClientInput = (e: any) => {
-    console.log(e.target.value)
-    setClientGroup(e.target.value)
-    setInputValue(e.target.value)
-  }
+    console.log(e.target.value);
+    setClientGroup(e.target.value);
+    setInputValue(e.target.value);
+  };
   return (
     <div className="container mt-2">
       <label htmlFor="basic-url " className="fs-6 text-center">
         Title
-        <span className='text-danger'>*</span>
+        <span className="text-danger">*</span>
       </label>
       <div className="input-group  w-50 master-input-field">
         <input
@@ -62,23 +64,20 @@ const AddClient = ({ clientGroupList }: any) => {
           value={inputValue}
         />
       </div>
-      <div className=''> {error && <p className="text-danger">{error}</p>}</div>
+      <div className=""> {error && <p className="text-danger">{error}</p>}</div>
       <label htmlFor="basic-url " className="fs-6 mt-1 text-center">
         Client Group
-          <span className='text-danger'>*</span>
+        <span className="text-danger">*</span>
       </label>
       <div className="input-group w-50 master-input-field">
-        <div className='w-100'>
+        <div className="w-100 ">
           <SelectedInputDropdown
             drowpdownlist={clientGroupList}
             // bgColor={bgColor}
             placeholderValue="Category Name"
             selectedDropdownValue={selectedDropdownValue}
             setSelectedDropdownValue={setSelectedDropdownValue}
-          // clientGroupList={clientGroupList}
-          // HandleClientGroup={HandleClientGroup}
           />
-
         </div>
       </div>
       <div className="d-flex justify-content-start ">

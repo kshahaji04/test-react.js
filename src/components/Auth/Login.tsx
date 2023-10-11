@@ -22,13 +22,12 @@ const Login = () => {
   const HandleFormSubmit: any = async (e: any) => {
     e.preventDefault();
     const AccessTokenApiRes = await dispatch(getAccessToken(userData));
-    console.log('accessTokeninTsx', AccessTokenApiRes.payload.msg);
+
     if (AccessTokenApiRes?.payload?.msg === 'success') {
       showToast('login successfully', 'success');
       navigate('/master');
     } else {
       showToast('Invalid Credentials', 'error');
-
     }
   };
   return (

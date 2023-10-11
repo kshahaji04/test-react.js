@@ -32,9 +32,34 @@ const EmeraldChittiTable = ({
   const HandleAddRow: any = () => {
     const newRow = {
       id: tableData.length + 1,
-      // name: `Row ${tableData.length + 1}`,
+      sub_category: '',
+      product: '',
+      gross_weight: 0,
+      net_weight: 0,
+      amount: 0,
     };
+
+    // Add the new row to the tableData
     setTableData([...tableData, newRow]);
+
+    // Calculate the new total values, including the new row
+    const newColumnTotals = tableData.reduce(
+      (totals: any, row: any) => {
+        totals.gross_weight += row.gross_weight;
+        totals.net_weight += row.net_weight;
+        totals.amount += row.amount;
+        return totals;
+      },
+      { gross_weight: 0, net_weight: 0, amount: 0 }
+    );
+
+    // Add the values of the new row to the totals
+    newColumnTotals.gross_weight += newRow.gross_weight;
+    newColumnTotals.net_weight += newRow.net_weight;
+    newColumnTotals.amount += newRow.amount;
+
+    // Update the total values
+    setamountValue(newColumnTotals);
   };
 
   const HandleDeleteRow: any = (id: any) => {
@@ -168,7 +193,11 @@ const EmeraldChittiTable = ({
                             subCategoryList !== null &&
                             subCategoryList.map(
                               (subCategoryList: any, index: any) => {
-                                return <option  defaultValue={row.sub_category}>{subCategoryList}</option>;
+                                return (
+                                  <option defaultValue={row.sub_category}>
+                                    {subCategoryList}
+                                  </option>
+                                );
                               }
                             )}
                         </select>
@@ -183,19 +212,18 @@ const EmeraldChittiTable = ({
                           onChange={(e) => HandleProductItem(e, row.id)}
                         >
                           <option defaultValue={row.product}></option>
-                          {productItemList?.length > 0 && productItemList !== null && (
-                            <>
-                              {
-                                productItemList.map((product: any, index: any) => (
-                                  <option key={index}>
-                                    {Object?.values(product)}
-                                  </option>
-
-                                ))
-                              }
-                            </>
-                          )}
-                        
+                          {productItemList?.length > 0 &&
+                            productItemList !== null && (
+                              <>
+                                {productItemList.map(
+                                  (product: any, index: any) => (
+                                    <option key={index}>
+                                      {Object?.values(product)}
+                                    </option>
+                                  )
+                                )}
+                              </>
+                            )}
                         </select>
                       </td>
                       <td className="table-data-input">

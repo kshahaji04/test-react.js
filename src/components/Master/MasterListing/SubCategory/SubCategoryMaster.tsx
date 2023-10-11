@@ -24,7 +24,10 @@ const SubCategoryMaster = () => {
               </Tab>
 
               <Tab eventKey="longer-tab" title="Sub Category Listing">
-                <SubCategoryListing subCategoryList={subCategoryList} />
+                <SubCategoryListing
+                  subCategoryList={subCategoryList}
+                  CategoryList={CategoryList}
+                />
               </Tab>
             </Tabs>
           </div>

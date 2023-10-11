@@ -26,9 +26,30 @@ const NarrationTable = ({
   const HandleAddRow: any = () => {
     const newRow = {
       id: narrationTableData.length + 1,
-      // name: `Row ${narrationTableData.length + 1}`,
+      product: '',
+      huid_pieces: 0,
+      huid_weight: 0,
     };
+
     setNarrationTableData([...narrationTableData, newRow]);
+
+    const newColumnTotals = narrationTableData.reduce(
+      (totals: any, row: any) => {
+        totals.product += row.product;
+        totals.huid_pieces += row.huid_pieces;
+        totals.huid_weight += row.huid_weight;
+        return totals;
+      },
+      { product: 0, huid_pieces: 0, huid_weight: 0 }
+    );
+
+    // Add the values of the new row to the totals
+    newColumnTotals.gross_weight += newRow.product;
+    newColumnTotals.net_weight += newRow.huid_pieces;
+    newColumnTotals.amount += newRow.huid_weight;
+
+    // Update the total values
+    setTotalAmountValue(newColumnTotals);
   };
 
   const HandleDeleteRow: any = (id: any) => {

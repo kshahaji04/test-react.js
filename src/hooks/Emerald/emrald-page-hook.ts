@@ -59,19 +59,19 @@ const UseEmeraldHook = () => {
     dispatch(getClientGroupList(AccessToken?.token));
   }, []);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const now = new Date();
-      const day = String(now.getDate()).padStart(2, '0');
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const year = now.getFullYear();
-      const formattedDate: any = `${day}-${month}-${year}`;
-      setCurrentDate(formattedDate);
-    }, 1000); // Update the date every second
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     const now = new Date();
+  //     const day = String(now.getDate()).padStart(2, '0');
+  //     const month = String(now.getMonth() + 1).padStart(2, '0');
+  //     const year = now.getFullYear();
+  //     const formattedDate: any = `${day}-${month}-${year}`;
+  //     setCurrentDate(formattedDate);
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // }, []);
 
   useEffect(() => {
     if (

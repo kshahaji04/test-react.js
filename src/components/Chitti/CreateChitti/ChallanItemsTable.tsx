@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import SelectedInputDropdown from '../../SelectedInputDropdown';
+import CustomTableDropdown from './CustomTableDropdown';
 
 const ChallanItemsTable = ({
   tableData,
@@ -8,6 +10,9 @@ const ChallanItemsTable = ({
 }: any) => {
   console.log('tableDataaa initial', tableData);
   // const [tableData, setTableData] = useState<any>([{ id: 1 }]);
+  const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
+
+  console.log('selectedDropdownValue', selectedDropdownValue);
   const [amountValue, setamountValue] = useState<any>({
     sub_category: '',
     gross_weight: 0,
@@ -30,12 +35,44 @@ const ChallanItemsTable = ({
   //   setTableData(newData);
   // };
 
+  // const HandleAddRow: any = () => {
+  //   const newRow = {
+  //     id: tableData.length + 1,
+
+  //   };
+  //   setTableData([...tableData, newRow]);
+  // };
+
   const HandleAddRow: any = () => {
     const newRow = {
       id: tableData.length + 1,
-      // name: `Row ${tableData.length + 1}`,
+      sub_category: '',
+      gross_weight: 0,
+      net_weight: 0,
+      amount: 0,
     };
+
+    // Add the new row to the tableData
     setTableData([...tableData, newRow]);
+
+    // Calculate the new total values, including the new row
+    const newColumnTotals = tableData.reduce(
+      (totals: any, row: any) => {
+        totals.gross_weight += row.gross_weight;
+        totals.net_weight += row.net_weight;
+        totals.amount += row.amount;
+        return totals;
+      },
+      { gross_weight: 0, net_weight: 0, amount: 0 }
+    );
+
+    // Add the values of the new row to the totals
+    newColumnTotals.gross_weight += newRow.gross_weight;
+    newColumnTotals.net_weight += newRow.net_weight;
+    newColumnTotals.amount += newRow.amount;
+
+    // Update the total values
+    setamountValue(newColumnTotals);
   };
 
   const HandleDeleteRow: any = (id: any) => {
@@ -113,7 +150,7 @@ const ChallanItemsTable = ({
   };
 
   console.log('updated tabledata', tableData);
-
+  const data = ['Java', 'JavaScript', 'React js', 'Python', 'C', 'C++'];
   return (
     <>
       <div className="container mt-1 border rounded-3">
@@ -143,6 +180,11 @@ const ChallanItemsTable = ({
                   <tr key={row.id}>
                     <td className="p-0">{row.id}</td>
                     <td className="table-data-input">
+                      {/* <CustomTableDropdown
+                        dropdownlist={subCategoryList}
+                        setSelectedDropdownValue={setSelectedDropdownValue}
+                      /> */}
+
                       <select
                         id="category"
                         name="category"

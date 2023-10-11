@@ -1,7 +1,8 @@
+import React, { useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import CreateChittiMaster from './CreateChitti/CreateChittiMaster';
-import SearchChittiListing from './ChittiListing/SearchChittiListing';
+import SearchListingTable from './ChittiListing/SearchListingTable';
 
 import UseChittiHook from '../../hooks/Chitti/chitti-page-hook';
 import ListingTable from '../ListingTable';
@@ -25,10 +26,56 @@ const ChittiMaster = () => {
     clientGroupList,
     HandleClientGroup,
     HandleDateChange,
-    date
+    date,
   }: any = UseChittiHook();
 
-  console.log('chittiListingData in master', chittiListingData);
+  console.log('chittiListingData', chittiListingData);
+
+  const [searchClientName, setSearchclientName] = useState<any>('');
+  const [searchInputValues, setSearchInputValues] = useState({
+    date: '',
+    chitti_no: '',
+    name: '',
+    status: '',
+  });
+
+  const HandleSearchInput: any = (e: any) => {
+    const { name, value } = e.target;
+    setSearchInputValues({
+      ...searchInputValues,
+      [name]: value,
+    });
+  };
+
+  console.log('searchh', searchInputValues);
+
+  const filteredList =
+    chittiListingData?.length > 0 &&
+    chittiListingData !== null &&
+    chittiListingData.filter((item: any) => {
+      const dateMatch = item?.date?.includes(searchInputValues.date);
+      const numberMatch = item?.number?.includes(searchInputValues.chitti_no);
+      const clientNameMatch = item?.client_name
+        ?.toLowerCase()
+        ?.includes(searchClientName?.toLowerCase());
+
+      if (searchInputValues.status === 'Draft') {
+        return (
+          item?.docstatus === 0 && dateMatch && numberMatch && clientNameMatch
+        );
+      } else if (searchInputValues.status === 'Submitted') {
+        return (
+          item?.docstatus === 1 && dateMatch && numberMatch && clientNameMatch
+        );
+      } else if (searchInputValues.status === 'Cancel') {
+        return (
+          item?.docstatus === 2 && dateMatch && numberMatch && clientNameMatch
+        );
+      }
+
+      return dateMatch && numberMatch && clientNameMatch;
+    });
+  console.log('chittiListingData filter', filteredList);
 
   return (
     <>
@@ -44,9 +91,15 @@ const ChittiMaster = () => {
               <Tab eventKey="chitti-listing" title="Chitti Listing">
                 <div className="container">
                   <h4 className="text-center mt-2">Chitti Listing</h4>
-                  <SearchChittiListing clientNameList={clientNameList} chittiListingData={chittiListingData} selectedDropdownValue={selectedDropdownValue} setSelectedDropdownValue={setSelectedDropdownValue} />
+                  <SearchListingTable
+                    HandleSearchInput={HandleSearchInput}
+                    clientNameList={clientNameList}
+                    chittiListingData={chittiListingData}
+                    setSearchclientName={setSearchclientName}
+                    searchClientName={searchClientName}
+                  />
                   <ListingTable
-                    tableListingData={chittiListingData}
+                    tableListingData={filteredList}
                     setTableData={setTableData}
                     subCategoryList={subCategoryList}
                     narrationTableData={narrationTableData}

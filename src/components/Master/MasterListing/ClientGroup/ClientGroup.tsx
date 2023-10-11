@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import ClientGroupListing from './ClientGroupListing';
 import AddClientGroup from './AddClientGroup';
 import UseClientGroupHook from '../../../../hooks/Master/client-group-hook';
+import MasterSingleListingSearch from '../MasterSingleListingSearch';
 
 const ClientGroup = () => {
   const { clientGroupList } = UseClientGroupHook();
+
+  const [searchField, setSearchField] = useState<any>('');
+
+  const HandleSearchInput: any = (e: any) => {
+    setSearchField(e.target.value);
+  };
+
+  const filterList: any =
+    clientGroupList?.length > 0 &&
+    clientGroupList !== null &&
+    clientGroupList.filter((value: any) => {
+      return value.toLowerCase().includes(searchField?.toLowerCase());
+    });
 
   return (
     <div className="container">
@@ -23,7 +37,11 @@ const ClientGroup = () => {
                 <AddClientGroup />
               </Tab>
               <Tab eventKey="longer-tab" title="Client Group Listing">
-                <ClientGroupListing clientGroupList={clientGroupList} />
+                <MasterSingleListingSearch
+                  placeholder="Enter Client group"
+                  HandleSearchInput={HandleSearchInput}
+                />
+                <ClientGroupListing clientGroupList={filterList} />
               </Tab>
             </Tabs>
           </div>

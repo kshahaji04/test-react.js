@@ -6,7 +6,6 @@ import MasterPage from '../pages/master';
 import ChittiPage from '../pages/chitti';
 import Report from '../pages/report';
 import Emerald from '../pages/emrald';
-import Master from '../components/Master';
 import ChallanList from '../components/Master/MasterListing/ChallanList';
 import ClientGroup from '../components/Master/MasterListing/ClientGroup/ClientGroup';
 import ClientName from '../components/Master/MasterListing/ClientName/ClientName';
@@ -15,13 +14,12 @@ import SubCategory from '../components/Master/MasterListing/SubCategory/SubCateg
 import HuidProduct from '../components/Master/MasterListing/HuidProduct/HuidProductMaster';
 import EmeraldChitti from '../components/Master/MasterListing/EmeraldChitti';
 import EmeraldListing from '../components/Master/MasterListing/Emerald';
-import ClientNameListing from '../components/Master/MasterListing/ClientName/ClientNameListing';
 import EditChallanChitti from '../components/Chitti/ChittiListing/EditChallanChitti';
-import MasterPageListingDetails from '../components/Master/MasterListing/ClientName/MasterPageClientNameDetails';
 import MasterPageClientNameDetail from '../components/Master/MasterListing/ClientName/MasterPageClientNameDetails';
 import MasterListing from '../components/Master/MasterListing';
 import MasterPageSubCategoryDetail from '../components/Master/MasterListing/SubCategory/MasterPageSubCagegoryDetail';
 import EditEmeraldChitti from '../components/EmeraldChitti/EmeraldListing/EditEmeraldChitti';
+import EmeraldDetailPage from '../components/DataUpload/ViewUpload/EmeraldDetailPage';
 
 const AppRoutes = () => {
   return (
@@ -134,7 +132,7 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <MasterListing />
-              < MasterPageSubCategoryDetail />
+              <MasterPageSubCategoryDetail />
             </ProtectedRoute>
           }
         />
@@ -147,9 +145,15 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
-
-
-
+        <Route
+          path="/data-upload/:id"
+          element={
+            <ProtectedRoute>
+              <MasterPage />
+              <EmeraldDetailPage />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/chitti"
           element={

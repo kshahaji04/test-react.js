@@ -4,7 +4,7 @@ const HuidProductListing = ({ huidProductData }: any) => {
       <table className="table table-striped mt-2">
         <thead>
           <tr className="text-start table-heading table-heading-row">
-            <th scope="col ">Huid Listing</th>
+            <th scope="col ">Huid Product</th>
           </tr>
         </thead>
         <tbody>

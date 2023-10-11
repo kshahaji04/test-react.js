@@ -105,7 +105,7 @@ const ListingTable = ({
   const TableHeading: any = () => {
     return (
       <>
-        <th className="text-uppercase" scope="col">
+        <th className="text-uppercase text-start" scope="col">
           Sr No
         </th>
         {headingData?.length > 0 &&
@@ -209,7 +209,7 @@ const ListingTable = ({
             })}
           </>
         ) : (
-          'no data'
+          ''
         )}
       </>
     );
@@ -218,39 +218,16 @@ const ListingTable = ({
   return (
     <>
       <div className="container">
-        {tableListingData?.length > 0 && tableListingData !== null ? (
-          <table className="table table table-striped table-hover listing-table border-0">
-            <thead className="table-heading">
-              <tr className="table-heading-row">
-                {TableHeading()}
-                <th className="w-25" scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>{TableBodyData()}</tbody>
-          </table>
-        ) : (
-          <div className="text-center my-5">
-            <div className="spinner-border text-secondary" role="status">
-              <span className="sr-only">Loading...</span>
-            </div>
-          </div>
-        )}
+        <table className="table table table-striped table-hover listing-table border-0">
+          <thead className="table-heading">
+            <tr className="table-heading-row">
+              {TableHeading()}
+              <th className="w-25" scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>{TableBodyData()}</tbody>
+        </table>
       </div>
-
-      {/* {showEditModal ? (
-        <EditChittiChallan
-          show={showEditModal}
-          toHide={handleEditModal}
-          modalData={modalData}
-          setTableData={setTableData}
-          subCategoryList={subCategoryList}
-          narrationTableData={narrationTableData}
-          setNarrationTableData={setNarrationTableData}
-          productList={productList}
-          selectedDropdownValue={selectedDropdownValue}
-          drowpdownlist={drowpdownlist}
-        />
-      ) : null} */}
     </>
   );
 };

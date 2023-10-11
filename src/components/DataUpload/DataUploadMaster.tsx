@@ -1,26 +1,15 @@
 import { Tab } from 'react-bootstrap';
 import Tabs from 'react-bootstrap/Tabs';
 import DataUpload from './DataUpload/DataUpload';
-import ViewUploadedList from './ViewUpload/ViewUploadedList';
 import { useState } from 'react';
-import ListingTable from '../ListingTable';
 import '../../Style/data-upload.css';
 import UseDataUploadHook from '../../hooks/dataUpload/data-upload-hook';
+import EmeraldList from './ViewUpload/EmeraldList';
+import UseEmeraldDetailHook from '../../hooks/dataUpload/emerald-detail-hook';
 
 const DataUploadMaster = () => {
+  const { supplierList, HandleSupplier } = UseDataUploadHook();
 
-
-  const { supplierList, HandleSupplier, emeraldTableData } = UseDataUploadHook();
-  console.log("supplierList", supplierList)
-
-  // const [showButtons, setShowButtons] = useState<any>(false)
-  const TableListingData: any = [
-    { No: 1, TRANSFERID: "DTR-100040026	", RFID: "300163904", SKUNUMBER: "TSKU-0300163904	", PACKAGEID: "draft", Photonumber: "SPS1539-06A" },
-    { No: 2, TRANSFERID: "DTR-100040026	", RFID: "300163904", SKUNUMBER: "TSKU-0300163904	", PACKAGEID: "draft", Photonumber: "SPS1539-06A" },
-    { No: 3, TRANSFERID: "DTR-100040026	", RFID: "300163904", SKUNUMBER: "TSKU-0300163904	", PACKAGEID: "draft", Photonumber: "SPS1539-06A" },
-    { No: 4, TRANSFERID: "DTR-100040026	", RFID: "300163904", SKUNUMBER: "TSKU-0300163904	", PACKAGEID: "draft", Photonumber: "SPS1539-06A" },
-
-  ];
   return (
     <>
       <div className="container mt-3">
@@ -32,12 +21,14 @@ const DataUploadMaster = () => {
               className="mb-1"
               justify
             >
-              <Tab eventKey="chitti-listing" title="Upload">
-                <DataUpload supplierList={supplierList} HandleSupplier={HandleSupplier} />
+              <Tab eventKey="chitti-listing" title="New Upload">
+                <DataUpload
+                  supplierList={supplierList}
+                  HandleSupplier={HandleSupplier}
+                />
               </Tab>
               <Tab eventKey="longer-tab" title="View uploaded list">
-                <ViewUploadedList emeraldTableData={TableListingData} />
-                {/* <ListingTable tableListingData={TableListingData} /> */}
+                <EmeraldList supplierList={supplierList} />
               </Tab>
             </Tabs>
           </div>

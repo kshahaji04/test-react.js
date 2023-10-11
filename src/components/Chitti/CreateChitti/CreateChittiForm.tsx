@@ -17,7 +17,7 @@ const CreateChittiForm = ({
   HandleDateChange,
   date,
 }: any) => {
-  console.log('defaultData', currentDate);
+  console.log('defaultData chit', currentDate);
 
   const [bgColor, setBgColor] = useState<any>(true);
   const [readOnlyField, setReadOnlyField] = useState<any>(false);
@@ -52,6 +52,7 @@ const CreateChittiForm = ({
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"
                 onChange={HandleDateChange}
+                readOnly
                 // readOnly={readOnlyField}
               />
             </div>
@@ -72,7 +73,7 @@ const CreateChittiForm = ({
               defaultData={defaultData}
               // readOnlyField={readOnlyField}
             />
-            <CustomDropDown />
+            {/* <CustomDropDown /> */}
           </div>
           <div className="col-lg-3 col-md-6">
             <label className="form-Form.Label fs-6 text-dark form-label-bold">
