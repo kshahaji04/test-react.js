@@ -2,6 +2,8 @@ import React from 'react';
 
 const MasterMultipleListingSearch = ({
   HandleSearchInput,
+  handleInputChange1,
+  handleInputChange2,
   placeholder1,
   placeholder2,
 }: any) => {
@@ -16,7 +18,7 @@ const MasterMultipleListingSearch = ({
             className="form-control input-fields custom-input-field ps-2 p-2"
             aria-describedby="emailHelp"
             placeholder={placeholder1}
-            onChange={HandleSearchInput}
+            onChange={handleInputChange1}
           />
         </div>
         <div className="ms-5">
@@ -27,7 +29,7 @@ const MasterMultipleListingSearch = ({
             className="form-control input-fields custom-input-field ps-2 p-2"
             aria-describedby="emailHelp"
             placeholder={placeholder2}
-            onChange={HandleSearchInput}
+            onChange={handleInputChange2}
           />
         </div>
       </div>

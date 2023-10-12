@@ -2,41 +2,38 @@ import React, { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import ClientNameListing from './ClientNameListing';
 import AddClient from './AddClient';
-import UseClientNameHook from '../../../../hooks/Master/client-name-hook';
+
 import UseClientGroupHook from '../../../../hooks/Master/client-group-hook';
 import MasterMultipleListingSearch from '../MasterMultipleListingSearch';
 
 const ClientName = () => {
-  const { clientNameList }: any = UseClientNameHook();
-  const { clientGroupList }: any = UseClientGroupHook();
-  const [searchField, setSearchField] = useState<any>({
-    input1: '',
-    input2: '',
-  });
+  // const { clientNameList }: any = UseClientNameHook();
+  const { clientGroupList, clientNameClientGroupList }: any =
+    UseClientGroupHook();
 
-  const HandleSearchInput: any = (e: any) => {
-    const { name, value } = e.target;
-    setSearchField({
-      ...searchField,
-      [name]: value,
-    });
+  console.log('clientNameClientGroupList', clientNameClientGroupList);
+
+  const [inputName, setInputName] = useState('');
+  const [inputGroup, setInputGroup] = useState('');
+
+  const handleInputChange1 = (event: any) => {
+    setInputName(event.target.value);
   };
 
-  const ClientFilterList =
-    clientNameList?.length > 0 &&
-    clientNameList !== null &&
-    clientNameList.filter((item: any) => {
-      return item?.toLowerCase()?.includes(searchField?.input1?.toLowerCase());
-    });
+  const handleInputChange2 = (event: any) => {
+    setInputGroup(event.target.value);
+  };
 
-  const ClientGroupFilterList =
-    clientGroupList?.length > 0 &&
-    clientGroupList !== null &&
-    clientGroupList.filter((item: any) => {
-      return item?.toLowerCase()?.includes(searchField?.input2?.toLowerCase());
-    });
+  const filteredList: any =
+    clientNameClientGroupList?.length > 0 &&
+    clientNameClientGroupList !== null &&
+    clientNameClientGroupList.filter(
+      (client: any) =>
+        client.name.toLowerCase().includes(inputName.toLowerCase()) &&
+        client.client_group.toLowerCase().includes(inputGroup.toLowerCase())
+    );
 
-  console.log('ClientFilterList', ClientFilterList, searchField);
+  console.log('ClientFilterList updated', filteredList);
   return (
     <div className="container">
       <div className="container mt-3">
@@ -55,14 +52,10 @@ const ClientName = () => {
                 <MasterMultipleListingSearch
                   placeholder1="Enter Client name"
                   placeholder2="Enter Client group"
-                  HandleSearchInput={HandleSearchInput}
+                  handleInputChange1={handleInputChange1}
+                  handleInputChange2={handleInputChange2}
                 />
-                <ClientNameListing
-                  clientNameList={clientNameList}
-                  clientGroupList={clientGroupList}
-                  ClientFilterList={ClientFilterList}
-                  ClientGroupFilterList={ClientGroupFilterList}
-                />
+                <ClientNameListing clientNameClientGroupList={filteredList} />
               </Tab>
             </Tabs>
           </div>

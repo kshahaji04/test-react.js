@@ -1,3 +1,27 @@
 .download-template-btn {
     font-size: 0.7rem;
 }
+
+.emerald-table tr {
+    line-height: 1rem;
+}
+
+
+.emerald_table_container {
+    height: 455px;
+}
+
+.emerald-supplier-table tr td {
+    width: 17% !important;
+
+}
+
+/* 
+.emerald-supplier-table-heading {
+    width: 15% !important;
+} */
+
+.emerald-table td {
+    width: 20% !important;
+
+}

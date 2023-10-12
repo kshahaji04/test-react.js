@@ -149,7 +149,6 @@ const AppRoutes = () => {
           path="/data-upload/:id"
           element={
             <ProtectedRoute>
-              <MasterPage />
               <EmeraldDetailPage />
             </ProtectedRoute>
           }

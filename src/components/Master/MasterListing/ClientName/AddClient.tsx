@@ -41,6 +41,7 @@ const AddClient = ({ clientGroupList }: any) => {
   const HandleInputValue = (e: any) => {
     setError('');
     setTitle(e.target.value);
+    setInputValue(e.target.value);
   };
   const HandleClientInput = (e: any) => {
     console.log(e.target.value);
@@ -74,7 +75,7 @@ const AddClient = ({ clientGroupList }: any) => {
           <SelectedInputDropdown
             drowpdownlist={clientGroupList}
             // bgColor={bgColor}
-            placeholderValue="Category Name"
+            placeholderValue="Client Group"
             selectedDropdownValue={selectedDropdownValue}
             setSelectedDropdownValue={setSelectedDropdownValue}
           />

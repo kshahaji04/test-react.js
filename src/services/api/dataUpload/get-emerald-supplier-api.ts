@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { BASE_URL } from '../../Config/api-config';
 
-const GetEmeraldDetail: any = async (request: any) => {
+const GetEmeraldSupplier: any = async (request: any) => {
   console.log('tokennnn', request);
   let response: any;
   const version = 'v1';
-  const method = 'get_emeralds';
-  const entity = 'emerald_api';
+  const method = 'get_emerald_supplier';
+  const entity = 'all_emeralds_supplier';
 
-  const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}&name=${request.id}`;
+  const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}`;
 
   const config = {
     headers: {
@@ -27,4 +27,4 @@ const GetEmeraldDetail: any = async (request: any) => {
   return response;
 };
 
-export default GetEmeraldDetail;
+export default GetEmeraldSupplier;

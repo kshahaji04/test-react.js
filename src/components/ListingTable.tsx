@@ -105,9 +105,15 @@ const ListingTable = ({
   const TableHeading: any = () => {
     return (
       <>
-        <th className="text-uppercase text-start" scope="col">
-          Sr No
-        </th>
+        {headingData?.length > 0 && headingData !== null && (
+          <th
+            className="text-uppercase text-center table-heading-sr-no"
+            scope="col"
+          >
+            Sr No
+          </th>
+        )}
+
         {headingData?.length > 0 &&
           headingData !== null &&
           headingData.map((heading: any, index: any) => {
@@ -118,6 +124,7 @@ const ListingTable = ({
                 </th>
               );
             }
+
             return null;
           })}
       </>

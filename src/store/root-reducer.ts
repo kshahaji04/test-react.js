@@ -15,6 +15,10 @@ import GetEmeraldTableDataReducer from './slices/dataUpload/get-emerald-table-da
 import GetSpecificEmeraldReducer from './slices/Emerald/get-specific-emrald-slice';
 import GetSpecificClientGroupReducer from './slices/Master/get-specific-client-group-slice';
 import GetSpecificCategoryReducer from './slices/Master/get-specific-category-slice';
+import GetEmeraldSupplierReducer from './slices/dataUpload/get-emerald-supplier-slice';
+import GetClientNameClientGroupReducer from './slices/Master/get-clientname-clientgroup-slice';
+import GetSubCategoryCategoryReducer from './slices/Master/get-subcategory-category-slice';
+import GetReportTableDataReducer from './slices/report/get-report-tableData-slice';
 
 const appReducer = combineReducers({
   GetAccessTokenScreen: GetAccessTokenReducer,
@@ -33,6 +37,10 @@ const appReducer = combineReducers({
   GetSpecificEmeraldScreen: GetSpecificEmeraldReducer,
   GetSpecificClientGroupScreen: GetSpecificClientGroupReducer,
   GetSpecificCategoryScreen: GetSpecificCategoryReducer,
+  GetEmeraldSupplierScreen: GetEmeraldSupplierReducer,
+  GetClientNameClientGroupScreen: GetClientNameClientGroupReducer,
+  GetSubCategoryCategoryScreen: GetSubCategoryCategoryReducer,
+  GetReportTableDataScreen: GetReportTableDataReducer,
 });
 
 const rootReducer = (state: any, action: any) => {

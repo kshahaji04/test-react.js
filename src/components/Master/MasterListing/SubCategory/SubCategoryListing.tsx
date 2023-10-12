@@ -1,52 +1,41 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const SubCategoryListing = ({ subCategoryList, CategoryList }: any) => {
+const SubCategoryListing = ({ filteredList }: any) => {
+  console.log('filte cate', filteredList);
   return (
     <div className="container border mt-2 row">
-      <div className="col-lg-6">
+      <div className="">
         <table className="table table-striped mt-2">
           <thead>
-            <tr className="text-start table-heading table-heading-row">
-              <th scope="col">Subcategory </th>
+            <tr className="text-start table-heading table-heading-row row">
+              <div className="col-lg-6">
+                <th scope="col-lg-6">SubCategory </th>
+              </div>
+              <div className="col-lg-6">
+                <th scope="col-lg-6">Category</th>
+              </div>
             </tr>
           </thead>
           <tbody>
-            {subCategoryList?.length > 0 &&
-              subCategoryList !== null &&
-              subCategoryList.map((group: any, index: any) => (
-                <tr className="text-start table-body-row" key={index}>
-                  <td className="p-1">
+            {filteredList?.length > 0 &&
+              filteredList !== null &&
+              filteredList.map((group: any, index: any) => (
+                <tr className="text-start table-body-row row" key={index}>
+                  <td className="col-6 p-1">
                     <NavLink
-                      to={`${group}`}
+                      to={`${group.name}`}
                       className="text-decoration-none text-dark"
                     >
-                      {group}
+                      {group.name}
                     </NavLink>
                   </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="col-lg-6">
-        <table className="table table-striped mt-2">
-          <thead>
-            <tr className="text-start table-heading table-heading-row">
-              <th scope="col">Category </th>
-            </tr>
-          </thead>
-          <tbody>
-            {CategoryList?.length > 0 &&
-              CategoryList !== null &&
-              CategoryList.map((group: any, index: any) => (
-                <tr className="text-start table-body-row" key={index}>
-                  <td className="p-1">
+                  <td className="col-6 p-1">
                     <NavLink
-                      to={`${group}`}
+                      to={`${group.category}`}
                       className="text-decoration-none text-dark"
                     >
-                      {group}
+                      {group.category}
                     </NavLink>
                   </td>
                 </tr>

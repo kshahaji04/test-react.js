@@ -4,12 +4,13 @@ import DataUpload from './DataUpload/DataUpload';
 import { useState } from 'react';
 import '../../Style/data-upload.css';
 import UseDataUploadHook from '../../hooks/dataUpload/data-upload-hook';
-import EmeraldList from './ViewUpload/EmeraldList';
-import UseEmeraldDetailHook from '../../hooks/dataUpload/emerald-detail-hook';
+import EmeraldSupplierList from './ViewUpload/EmeraldSupplierList';
+import '../../Style/data-upload.css';
 
 const DataUploadMaster = () => {
-  const { supplierList, HandleSupplier } = UseDataUploadHook();
-
+  const { supplierList, HandleSupplier, emeraldSupplierData } =
+    UseDataUploadHook();
+  console.log('emeraldSupplierData in master', emeraldSupplierData);
   return (
     <>
       <div className="container mt-3">
@@ -28,7 +29,10 @@ const DataUploadMaster = () => {
                 />
               </Tab>
               <Tab eventKey="longer-tab" title="View uploaded list">
-                <EmeraldList supplierList={supplierList} />
+                <EmeraldSupplierList
+                  supplierList={supplierList}
+                  emeraldSupplierData={emeraldSupplierData}
+                />
               </Tab>
             </Tabs>
           </div>

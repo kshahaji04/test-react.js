@@ -13,7 +13,7 @@ const MasterPageClientNameDetail = () => {
   const AccessToken: any = useSelector(get_access_token);
   const { id } = useParams();
   const { clientGroupList } = UseClientGroupHook();
-  const {} = UseGetSpecificClientGroup();
+  const { _ } = UseGetSpecificClientGroup();
 
   const [clientGroup, setClientGroup] = useState<any>('');
   const HandleChangeClientGroup = async (e: any) => {
@@ -25,9 +25,9 @@ const MasterPageClientNameDetail = () => {
       id,
       clientGroup
     );
-    if(Object.keys(clientgrpApiRes)?.length > 0) {
+    if (Object.keys(clientgrpApiRes)?.length > 0) {
       toast.success('Client Group Updated');
-    }else{
+    } else {
       toast.error('Failed to create Group');
     }
     console.log('updateclient', clientgrpApiRes);

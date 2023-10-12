@@ -1,13 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import AddSubCategory from './AddSubCategory';
 import SubCategoryListing from './SubCategoryListing';
 import UseSubCategoryHook from '../../../../hooks/Master/sub-category-hook';
 import UseCategoryHook from '../../../../hooks/Master/category-hook';
+import MasterMultipleListingSearch from '../MasterMultipleListingSearch';
 
 const SubCategoryMaster = () => {
-  const { subCategoryList }: any = UseSubCategoryHook();
+  const { subCategoryCategoryData }: any = UseSubCategoryHook();
   const { CategoryList }: any = UseCategoryHook();
+
+  console.log('subCategoryCategoryData', subCategoryCategoryData);
+  const [inputName, setInputName] = useState('');
+  const [inputGroup, setInputGroup] = useState('');
+
+  const handleInputChange1 = (event: any) => {
+    setInputName(event.target.value);
+  };
+
+  const handleInputChange2 = (event: any) => {
+    setInputGroup(event.target.value);
+  };
+
+  const filteredList: any =
+    subCategoryCategoryData?.length > 0 &&
+    subCategoryCategoryData !== null &&
+    subCategoryCategoryData.filter(
+      (client: any) =>
+        client.name.toLowerCase().includes(inputName.toLowerCase()) &&
+        client.category.toLowerCase().includes(inputGroup.toLowerCase())
+    );
+
   return (
     <div className="container">
       <div className="container mt-3">
@@ -24,9 +47,15 @@ const SubCategoryMaster = () => {
               </Tab>
 
               <Tab eventKey="longer-tab" title="Sub Category Listing">
+                <MasterMultipleListingSearch
+                  placeholder1="Enter Client name"
+                  placeholder2="Enter Client group"
+                  handleInputChange1={handleInputChange1}
+                  handleInputChange2={handleInputChange2}
+                />
                 <SubCategoryListing
-                  subCategoryList={subCategoryList}
-                  CategoryList={CategoryList}
+                  filteredList={filteredList}
+                  // CategoryList={CategoryList}
                 />
               </Tab>
             </Tabs>

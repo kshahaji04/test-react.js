@@ -35,9 +35,9 @@ export const GetEmeraldTableDataScreen = createSlice({
     builder.addCase(getEmeraldTableData.fulfilled, (state, action) => {
       if (
         action?.payload?.status === 200 &&
-        Object.keys(action?.payload?.data)?.length > 0
+        action?.payload?.data?.message?.status === 'success'
       ) {
-        state.data = action?.payload?.data?.data;
+        state.data = action?.payload?.data?.message?.data?.data;
         state.isLoading = 'succeeded';
       }
     });

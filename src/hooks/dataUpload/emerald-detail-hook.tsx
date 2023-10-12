@@ -31,7 +31,7 @@ const UseEmeraldDetailHook: any = () => {
       Object.keys(EmeraldTableDataFromStore?.data)?.length > 0 &&
       EmeraldTableDataFromStore?.data !== null
     ) {
-      setEmeraldDetail(EmeraldTableDataFromStore?.data);
+      setEmeraldDetail([...EmeraldTableDataFromStore?.data]);
     } else {
       setEmeraldDetail([]);
     }

@@ -1,18 +1,17 @@
 import axios from 'axios';
 import { BASE_URL } from '../../Config/api-config';
 
-const GetEmeraldDetail: any = async (request: any) => {
-  console.log('tokennnn', request);
+const getSubCategoryCategoryApi: any = async (token: any) => {
   let response: any;
   const version = 'v1';
-  const method = 'get_emeralds';
-  const entity = 'emerald_api';
+  const method = 'get_subcategory_category';
+  const entity = 'subcategory_category';
 
-  const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}&name=${request.id}`;
+  const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}`;
 
   const config = {
     headers: {
-      Authorization: request.token,
+      Authorization: token,
     },
   };
 
@@ -27,4 +26,4 @@ const GetEmeraldDetail: any = async (request: any) => {
   return response;
 };
 
-export default GetEmeraldDetail;
+export default getSubCategoryCategoryApi;
