@@ -44,7 +44,9 @@ const UseEmeraldHook = () => {
   const [clientGroupName, setClientGroupName] = useState<any>('');
   const [clientGroupList, setClientGroupList] = useState<any>([]);
   const [currentDate, setCurrentDate] = useState<any>(new Date());
-  const [transactionDate, setTransactionDate] = useState<any>('');
+  const [transactionDate, setTransactionDate] = useState<any>(
+    new Date()?.toISOString()?.split('T')[0]
+  );
   const [productItemList, setProductItemList] = useState<any>([]);
 
   const [tableData, setTableData] = useState<any>([{ id: 1 }]);

@@ -1,18 +1,19 @@
 import UserProfile from './UserProfile';
 import '../../Style/Navbar.css';
 import logo from '../../assets/Logo.png';
+import { NavLink } from 'react-router-dom';
 
 const TopNavbar = () => {
   return (
     <>
       <nav className="container navbar navbar-light bg-light p-0">
         <div className="container-fluid">
-          <a className="navbar-brand">
+          <NavLink className="navbar-brand" to="/master">
             <img src={logo} alt="" height="55px" width="auto" />
-          </a>
+          </NavLink>
           <div className="dropdown">
             <button
-              className="btn  navbar-toggler dropdown-toggle"
+              className="btn navbar-toggler dropdown-toggle"
               type="button"
               id="dropdownMenuButton"
               data-toggle="dropdown"

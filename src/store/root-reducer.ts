@@ -19,6 +19,12 @@ import GetEmeraldSupplierReducer from './slices/dataUpload/get-emerald-supplier-
 import GetClientNameClientGroupReducer from './slices/Master/get-clientname-clientgroup-slice';
 import GetSubCategoryCategoryReducer from './slices/Master/get-subcategory-category-slice';
 import GetReportTableDataReducer from './slices/report/get-report-tableData-slice';
+import GetSubCategoryReportReducer from './slices/report/get-subcategory-report-slice';
+import GetCategorySummaryReportReducer from './slices/report/get-category-summary-report-slice';
+import GetCategoryPartywiseReportReducer from './slices/report/get-category-summary-report-slice';
+import GetEmeraldReportReducer from './slices/report/get-emerald-report-slice';
+import GetEmeraldShilpiListReducer from './slices/emerald-shilpi/get-emerald-shilpi-slice';
+import GetEmeraldShilpiDetailsReducer from './slices/emerald-shilpi/get-emerald-shilpi-details-slice';
 
 const appReducer = combineReducers({
   GetAccessTokenScreen: GetAccessTokenReducer,
@@ -41,6 +47,12 @@ const appReducer = combineReducers({
   GetClientNameClientGroupScreen: GetClientNameClientGroupReducer,
   GetSubCategoryCategoryScreen: GetSubCategoryCategoryReducer,
   GetReportTableDataScreen: GetReportTableDataReducer,
+  GetSubCategoryReportScreen: GetSubCategoryReportReducer,
+  GetCategorySummaryReportScreen: GetCategorySummaryReportReducer,
+  GetCategoryPartywiseReportScreen: GetCategoryPartywiseReportReducer,
+  GetEmeraldReportScreen: GetEmeraldReportReducer,
+  GetEmeraldShilpiListScreen: GetEmeraldShilpiListReducer,
+  GetEmeraldShilpiDetailsScreen: GetEmeraldShilpiDetailsReducer,
 });
 
 const rootReducer = (state: any, action: any) => {

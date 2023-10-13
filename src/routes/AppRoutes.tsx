@@ -20,6 +20,15 @@ import MasterListing from '../components/Master/MasterListing';
 import MasterPageSubCategoryDetail from '../components/Master/MasterListing/SubCategory/MasterPageSubCagegoryDetail';
 import EditEmeraldChitti from '../components/EmeraldChitti/EmeraldListing/EditEmeraldChitti';
 import EmeraldDetailPage from '../components/DataUpload/ViewUpload/EmeraldDetailPage';
+import ReportMaster from '../components/Report/ReportMaster';
+import SubCategoryReport from '../components/Report/ReportListing.tsx/SubCategoryReport';
+import CategoryPartyWiseReport from '../components/Report/ReportListing.tsx/CategoryPartywiseReport';
+import CategorySummaryReport from '../components/Report/ReportListing.tsx/CategorySummaryReport';
+import MasterPageClientGroupDetails from '../components/Master/MasterListing/ClientGroup/MasterPageClientGroupDetails';
+import MasterPageCategoryDetails from '../components/Master/MasterListing/Category/MasterPageCategoryDetails';
+import MasterPageHuidProductDetails from '../components/Master/MasterListing/HuidProduct/MasterPageHuidProductDetails';
+import EmeraldReport from '../components/Report/ReportListing.tsx/EmeraldReport';
+import EmeraldShilpiDetails from '../components/DataUpload/EmeraldShilpi/EmeraldShilpiDetails';
 
 const AppRoutes = () => {
   return (
@@ -128,11 +137,75 @@ const AppRoutes = () => {
           }
         />
         <Route
+          path="/master/clientgroup/:id"
+          element={
+            <ProtectedRoute>
+              <MasterListing />
+              <MasterPageClientGroupDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/master/category/:id"
+          element={
+            <ProtectedRoute>
+              <MasterListing />
+              <MasterPageCategoryDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/master/subcategory/:id"
           element={
             <ProtectedRoute>
               <MasterListing />
               <MasterPageSubCategoryDetail />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/master/huidproduct/:id"
+          element={
+            <ProtectedRoute>
+              <MasterListing />
+              <MasterPageHuidProductDetails />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/report/subcategory"
+          element={
+            <ProtectedRoute>
+              <ReportMaster />
+              <SubCategoryReport />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/report/categorypartywise"
+          element={
+            <ProtectedRoute>
+              <ReportMaster />
+              <CategoryPartyWiseReport />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/report/categorysummary"
+          element={
+            <ProtectedRoute>
+              <ReportMaster />
+              <CategorySummaryReport />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/report/emerald"
+          element={
+            <ProtectedRoute>
+              <ReportMaster />
+              <EmeraldReport />
             </ProtectedRoute>
           }
         />
@@ -182,6 +255,14 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <DataUploadMaster />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/data-upload/emerald-shilpi/:id"
+          element={
+            <ProtectedRoute>
+              <EmeraldShilpiDetails />
             </ProtectedRoute>
           }
         />

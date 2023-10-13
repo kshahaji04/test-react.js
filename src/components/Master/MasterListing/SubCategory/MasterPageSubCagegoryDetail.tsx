@@ -5,11 +5,12 @@ import UseCategoryHook from '../../../../hooks/Master/category-hook';
 import UseGetSpecificCategory from '../../../../hooks/Master/get-specific-category-hook';
 import UpdateCategoryApi from '../../../../services/api/Master/update-category-api';
 import { get_access_token } from '../../../../store/slices/auth/token-login-slice';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const MasterPageSubCategoryDetail = () => {
   const { CategoryList }: any = UseCategoryHook();
+  const navigate = useNavigate();
   const AccessToken: any = useSelector(get_access_token);
   const { id } = useParams();
   const {}: any = UseGetSpecificCategory();
@@ -26,8 +27,11 @@ const MasterPageSubCategoryDetail = () => {
       id,
       category
     );
-    console.log("clientgrpApiRes",clientgrpApiRes)
-    if (Object?.keys(clientgrpApiRes)?.length > 0 && clientgrpApiRes !== undefined) {
+    console.log('clientgrpApiRes', clientgrpApiRes);
+    if (
+      Object?.keys(clientgrpApiRes)?.length > 0 &&
+      clientgrpApiRes !== undefined
+    ) {
       toast.success('Category Updated');
     } else {
       toast.error('Failed to create Category');
@@ -37,7 +41,14 @@ const MasterPageSubCategoryDetail = () => {
     <div className="container">
       <div className="card mt-2">
         <div className="card-header">
-          <div className="d-flex justify-content-end ">
+          <div className="d-flex justify-content-between ">
+            <button
+              type="submit"
+              onClick={() => navigate(-1)}
+              className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
+            >
+              Back
+            </button>
             <button
               type="submit"
               onClick={HandleCategorySubmit}

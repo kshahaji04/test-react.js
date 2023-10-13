@@ -7,6 +7,7 @@ import {
   getEmeraldTableData,
   get_Emerald_detail,
 } from '../../store/slices/dataUpload/get-emerald-table-data-slice';
+import { getEmeraldShilpiDetails } from '../../store/slices/emerald-shilpi/get-emerald-shilpi-details-slice';
 
 const UseEmeraldDetailHook: any = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const UseEmeraldDetailHook: any = () => {
       token: AccessToken?.token,
       id: id,
     };
-    dispatch(getEmeraldTableData(params));
+    dispatch(getEmeraldShilpiDetails(params));
   }, []);
 
   useEffect(() => {

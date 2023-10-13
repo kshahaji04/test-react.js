@@ -5,13 +5,14 @@ import UseClientGroupHook from '../../../../hooks/Master/client-group-hook';
 import UseGetSpecificClientGroup from '../../../../hooks/Master/get-specific-client-group-hook';
 import UpdateClientGroup from '../../../../services/api/Master/update-client-group-api';
 import { get_access_token } from '../../../../store/slices/auth/token-login-slice';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const MasterPageClientNameDetail = () => {
   const clientGroupName: any = useSelector(get_specific_client_group);
   const AccessToken: any = useSelector(get_access_token);
   const { id } = useParams();
+  const navigate = useNavigate();
   const { clientGroupList } = UseClientGroupHook();
   const { _ } = UseGetSpecificClientGroup();
 
@@ -36,7 +37,14 @@ const MasterPageClientNameDetail = () => {
     <div className="container">
       <div className="card mt-2">
         <div className="card-header">
-          <div className="d-flex justify-content-end ">
+          <div className="d-flex justify-content-between ">
+            <button
+              type="submit"
+              onClick={() => navigate(-1)}
+              className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
+            >
+              Back
+            </button>
             <button
               type="submit"
               onClick={HandleClientGroup}

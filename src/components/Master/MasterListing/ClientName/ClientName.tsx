@@ -40,15 +40,12 @@ const ClientName = () => {
         <div className="row justify-content-center">
           <div className="col-lg-12 chitti-nav-tabs tab-container">
             <Tabs
-              defaultActiveKey="chitti-listing"
+              defaultActiveKey="default-tab"
               id="justify-tab-example"
               className="mb-1"
               justify
             >
-              <Tab eventKey="chitti-listing" title="Add Client">
-                <AddClient clientGroupList={clientGroupList} />
-              </Tab>
-              <Tab eventKey="longer-tab" title="Client Name Listing">
+              <Tab eventKey="default-tab" title="Client Name List">
                 <MasterMultipleListingSearch
                   placeholder1="Enter Client name"
                   placeholder2="Enter Client group"
@@ -56,6 +53,9 @@ const ClientName = () => {
                   handleInputChange2={handleInputChange2}
                 />
                 <ClientNameListing clientNameClientGroupList={filteredList} />
+              </Tab>
+              <Tab eventKey="longer-tab" title="Add Client">
+                <AddClient clientGroupList={clientGroupList} />
               </Tab>
             </Tabs>
           </div>

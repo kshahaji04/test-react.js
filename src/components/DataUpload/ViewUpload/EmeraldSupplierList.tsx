@@ -4,89 +4,116 @@ const EmeraldSupplierList = ({ supplierList, emeraldSupplierData }: any) => {
   console.log('emeraldTableData', supplierList);
   console.log('emeraldSupplierData', emeraldSupplierData);
   return (
-    <div className="container border mt-2">
-      <table className="table table-striped emerald-supplier-table mt-2">
-        <thead className="p-1">
-          <th className="emerald-supplier-table-heading">Id</th>
-          <th className="emerald-supplier-table-heading">Supplier</th>
-          <th className="emerald-supplier-table-heading">Date</th>
-          <th className="emerald-supplier-table-heading">Total No of Rows</th>
-          <th className="emerald-supplier-table-heading">Total of Grosswt</th>
-          <th className="emerald-supplier-table-heading">Total of Netwt</th>
-        </thead>
-      </table>
-      <table className="table table-striped emerald-supplier-table mt-2">
-        <thead></thead>
-        <tbody>
-          {emeraldSupplierData?.length > 0 &&
-            emeraldSupplierData !== null &&
-            emeraldSupplierData.map((value: any, index: any) => (
-              <NavLink
-                to={`${value.supplier}`}
-                className="text-decoration-none text-dark"
-              >
-                <tr
-                  className="text-start table-body-row border-secondary d-flex justify-content-around p-1 "
-                  key={index}
+    <>
+      <div className="container">
+        <div className="table-responsive">
+          <table className="table table-bordered table-hover">
+            <thead>
+              <tr>
+                {/* <th scope="col">Sr no</th> */}
+                <th scope="col">Id</th>
+                <th scope="col">Supplier</th>
+                <th scope="col">Date</th>
+                <th scope="col">Total No of Rows</th>
+                <th scope="col">Total of Grosswt</th>
+                <th scope="col">Total of Netwt</th>
+              </tr>
+            </thead>
+            <tbody>
+              {emeraldSupplierData?.length > 0 &&
+              emeraldSupplierData !== null ? (
+                <>
+                  {emeraldSupplierData.map((data: any, index: any) => (
+                    <tr key={index} className="report-table-row">
+                      <td>
+                        <NavLink
+                          to={`${data.name}`}
+                          // to="ESU-13-10-23-00016"
+                          className="text-decoration-none text-dark"
+                        >
+                          {data.naming_series}
+                        </NavLink>
+                      </td>
+                      <td>
+                        <NavLink
+                          to={`${data.name}`}
+                          className="text-decoration-none text-dark"
+                        >
+                          {data.supplier}{' '}
+                        </NavLink>
+                      </td>
+                      <td>
+                        <NavLink
+                          to={`${data.name}`}
+                          className="text-decoration-none text-dark"
+                        >
+                          {data.date}
+                        </NavLink>
+                      </td>
+                      <td>
+                        <NavLink
+                          to={`${data.name}`}
+                          className="text-decoration-none text-dark"
+                        >
+                          {data.total_no_of_rows}
+                        </NavLink>
+                      </td>
+                      <td>
+                        <NavLink
+                          to={`${data.name}`}
+                          className="text-decoration-none text-dark"
+                        >
+                          {data.total_of_grosswt}
+                        </NavLink>
+                      </td>
+                      <td>
+                        <NavLink
+                          to={`${data.name}`}
+                          className="text-decoration-none text-dark"
+                        >
+                          {data.total_of_netwt}
+                        </NavLink>
+                      </td>
+                    </tr>
+                  ))}
+                </>
+              ) : (
+                ''
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* <div className="container border mt-2">
+      
+        <table className="table table-striped table-hover  emerald-supplier-table mt-2">
+          <tbody>
+            {emeraldSupplierData?.length > 0 &&
+              emeraldSupplierData !== null &&
+              emeraldSupplierData.map((value: any, index: any) => (
+                <NavLink
+                  to={`${value?.supplier}`}
+                  className="text-decoration-none text-dark"
                 >
-                  <td className="">1</td>
-                  <td className="">{value.supplier}</td>
-                  <td className="">{value.date}</td>
-                  <td className="">{value.total_no_of_rows}</td>
-                  <td className="">{value.total_of_grosswt}</td>
-                  <td className="">{value.total_of_netwt}</td>
-                </tr>
-              </NavLink>
-            ))}
-        </tbody>
-      </table>
-    </div>
+                  <tr
+                    className="text-start table-body-row border-secondary d-flex justify-content-around p-1 "
+                    key={index}
+                  >
+                    <td className="">{value?.naming_series}</td>
+                    <td className="">{value?.supplier}</td>
+                    <td className="">{value?.date}</td>
+                    <td className="text-center">{value?.total_no_of_rows}</td>
+                    <td className="text-center">{value?.total_of_grosswt}</td>
+                    <td className="text-center">{value?.total_of_netwt}</td>
+                  </tr>
+                </NavLink>
+              ))}
+          </tbody>
+        </table>
+      </div> */}
+    </>
   );
-
-  // <div className="container">
-  //   <table className="table table table-striped table-hover mt-1">
-  //     <thead className="table-heading">
-  //       <tr className="table-heading-row">
-  //         <th className="sr-width" scope="col">
-  //           No.
-  //         </th>
-  //         <th className="" scope="col">
-  //           TRANSFERID
-  //         </th>
-  //         <th className="" scope="col">
-  //           RFID
-  //         </th>
-  //         <th className="" scope="col">
-  //           SKUNUMBER
-  //         </th>
-  //         <th className="" scope="col">
-  //           PACKAGEID
-  //         </th>
-  //         <th className="" scope="col">
-  //           Photonumber
-  //         </th>
-  //       </tr>
-  //     </thead>
-  //     <tbody>
-  //       {emeraldTableData?.length > 0 && emeraldTableData !== null && (
-  //         emeraldTableData.map((data: any, index: any) => {
-  //           return (
-  //             <tr className="table-body-row-em">
-  //               <td scope="row">{index}</td>
-  //               <td>{data.PACKAGEID} </td>
-  //               <td>{data.Photonumber}</td>
-  //               <td>{data.EFIF}</td>
-  //               <td>{data.SKUNUMBER}</td>
-  //               <td>{data.TRANSFERID}</td>
-
-  //             </tr>
-  //           )
-  //         })
-  //       )}
-
-  //     </tbody>
-  //   </table>
-  // </div>
 };
 
 export default EmeraldSupplierList;

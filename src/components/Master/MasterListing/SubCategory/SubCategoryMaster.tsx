@@ -37,26 +37,23 @@ const SubCategoryMaster = () => {
         <div className="row justify-content-center">
           <div className="col-lg-12 chitti-nav-tabs tab-container">
             <Tabs
-              defaultActiveKey="chitti-listing"
+              defaultActiveKey="default-tab"
               id="justify-tab-example"
               className="mb-1"
               justify
             >
-              <Tab eventKey="chitti-listing" title="Add Sub Category">
-                <AddSubCategory CategoryList={CategoryList} />
-              </Tab>
-
-              <Tab eventKey="longer-tab" title="Sub Category Listing">
+              <Tab eventKey="default-tab" title="Sub Category List">
                 <MasterMultipleListingSearch
                   placeholder1="Enter Client name"
                   placeholder2="Enter Client group"
                   handleInputChange1={handleInputChange1}
                   handleInputChange2={handleInputChange2}
                 />
-                <SubCategoryListing
-                  filteredList={filteredList}
-                  // CategoryList={CategoryList}
-                />
+                <SubCategoryListing filteredList={filteredList} />
+              </Tab>
+
+              <Tab eventKey="longer-tab" title="Add Sub Category">
+                <AddSubCategory CategoryList={CategoryList} />
               </Tab>
             </Tabs>
           </div>

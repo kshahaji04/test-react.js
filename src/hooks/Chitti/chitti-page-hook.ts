@@ -52,7 +52,9 @@ const UseChittiHook = () => {
   const [goldRate, setGoldRate] = useState<any>('');
   const [remarks, setRemarks] = useState<any>('');
   const [clientGroupName, setClientGroupName] = useState<any>('');
-  const [date, setDate] = useState<any>(new Date());
+  const [date, setDate] = useState<any>(
+    new Date()?.toISOString()?.split('T')[0]
+  );
   const [stateForDocStatus, setStateForDocStatus] = useState<boolean>(false);
 
   let modifiedList: any;

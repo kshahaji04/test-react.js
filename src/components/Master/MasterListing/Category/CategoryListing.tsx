@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const CategoryListing = ({ CategoryList }: any) => {
   return (
@@ -15,14 +16,21 @@ const CategoryListing = ({ CategoryList }: any) => {
             CategoryList.map((group: any, index: any) => {
               return (
                 <tr className="text-start table-body-row" key={index}>
-                  <td className="p-1">{group}</td>
+                  <td className="p-1">
+                    <NavLink
+                      to={group}
+                      className="text-decoration-none text-dark"
+                    >
+                      {group}
+                    </NavLink>
+                  </td>
                 </tr>
               );
             })}
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 
-export default CategoryListing
+export default CategoryListing;

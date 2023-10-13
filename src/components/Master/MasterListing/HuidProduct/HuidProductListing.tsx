@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom';
+
 const HuidProductListing = ({ huidProductData }: any) => {
   return (
     <div className="container border mt-2">
@@ -13,7 +15,14 @@ const HuidProductListing = ({ huidProductData }: any) => {
             huidProductData.map((group: any, index: any) => {
               return (
                 <tr className="text-start table-body-row" key={index}>
-                  <td className="p-1">{group}</td>
+                  <td className="p-1">
+                    <NavLink
+                      to={group}
+                      className="text-decoration-none text-dark"
+                    >
+                      {group}
+                    </NavLink>
+                  </td>
                 </tr>
               );
             })}

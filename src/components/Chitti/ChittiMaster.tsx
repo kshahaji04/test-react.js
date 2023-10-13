@@ -52,29 +52,47 @@ const ChittiMaster = () => {
   const filteredList =
     chittiListingData?.length > 0 &&
     chittiListingData !== null &&
-    chittiListingData.filter((item: any) => {
-      const dateMatch = item?.date?.includes(searchInputValues.date);
-      const numberMatch = item?.number?.includes(searchInputValues.chitti_no);
-      const clientNameMatch = item?.client_name
-        ?.toLowerCase()
-        ?.includes(searchClientName?.toLowerCase());
+    (searchInputValues.date ||
+      searchInputValues.chitti_no ||
+      searchClientName ||
+      searchInputValues.status)
+      ? chittiListingData.filter((item: any) => {
+          const dateMatch = searchInputValues.date
+            ? item?.date?.includes(searchInputValues.date)
+            : true;
+          const numberMatch = searchInputValues.chitti_no
+            ? item?.number?.includes(searchInputValues.chitti_no)
+            : true;
+          const clientNameMatch = searchClientName
+            ? item?.client_name?.includes(searchClientName)
+            : true;
 
-      if (searchInputValues.status === 'Draft') {
-        return (
-          item?.docstatus === 0 && dateMatch && numberMatch && clientNameMatch
-        );
-      } else if (searchInputValues.status === 'Submitted') {
-        return (
-          item?.docstatus === 1 && dateMatch && numberMatch && clientNameMatch
-        );
-      } else if (searchInputValues.status === 'Cancel') {
-        return (
-          item?.docstatus === 2 && dateMatch && numberMatch && clientNameMatch
-        );
-      }
+          if (searchInputValues.status === 'Draft') {
+            return (
+              item?.docstatus === 0 &&
+              dateMatch &&
+              numberMatch &&
+              clientNameMatch
+            );
+          } else if (searchInputValues.status === 'Submitted') {
+            return (
+              item?.docstatus === 1 &&
+              dateMatch &&
+              numberMatch &&
+              clientNameMatch
+            );
+          } else if (searchInputValues.status === 'Cancel') {
+            return (
+              item?.docstatus === 2 &&
+              dateMatch &&
+              numberMatch &&
+              clientNameMatch
+            );
+          }
 
-      return dateMatch && numberMatch && clientNameMatch;
-    });
+          return dateMatch && numberMatch && clientNameMatch;
+        })
+      : chittiListingData;
   console.log('chittiListingData filter', filteredList);
 
   return (
@@ -88,7 +106,7 @@ const ChittiMaster = () => {
               className="mb-1"
               justify
             >
-              <Tab eventKey="chitti-listing" title="Chitti Listing">
+              <Tab eventKey="chitti-listing" title="Chitti List">
                 <div className="container">
                   <h4 className="text-center mt-2">Chitti Listing</h4>
                   <SearchListingTable

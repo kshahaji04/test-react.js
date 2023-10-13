@@ -26,8 +26,12 @@ const ListingTable = ({
   const dispatch = useDispatch();
   const AccessToken: any = useSelector(get_access_token);
 
-  console.log('idd', window.location);
   const [headingData, setHeadingData] = useState<any>('');
+  const [tableViewData, setTableViewData] = useState<any>(20);
+
+  const HandleTableViewRows: any = (data: any) => {
+    setTableViewData(data);
+  };
 
   useEffect(() => {
     if (Object?.keys(tableListingData)?.length > 0) {
@@ -136,84 +140,86 @@ const ListingTable = ({
       <>
         {tableListingData?.length > 0 && tableListingData !== null ? (
           <>
-            {tableListingData.map((data: any, i: any) => {
-              return (
-                <tr className="table-body-row" key={i}>
-                  <td className="border-0">{i + 1}</td>
-                  {headingData?.length > 0 &&
-                    headingData !== null &&
-                    headingData.map((v: any, index: any) => {
-                      if (v !== 'name') {
-                        // Exclude 'date' key
-                        return (
-                          <td className="border-0" key={index}>
-                            {v !== 'docstatus'
-                              ? data[v]
-                              : data[v] === 0
-                              ? 'Draft'
-                              : data[v] === 1
-                              ? 'Submitted'
-                              : data[v] === 2
-                              ? 'Cancel'
-                              : data[v]}
-                          </td>
-                        );
-                      }
-                      return null;
-                    })}
-                  {data.docstatus === 0 && (
-                    <>
-                      <td className="button-section-td border-0">
-                        <NavLink
-                          to={`${data.name}`}
-                          className="button-section-text text-info"
-                        >
-                          Edit
-                        </NavLink>
+            {tableListingData
+              .slice(0, tableViewData)
+              ?.map((data: any, i: any) => {
+                return (
+                  <tr className="table-body-row" key={i}>
+                    <td className="border-0">{i + 1}</td>
+                    {headingData?.length > 0 &&
+                      headingData !== null &&
+                      headingData.map((v: any, index: any) => {
+                        if (v !== 'name') {
+                          // Exclude 'date' key
+                          return (
+                            <td className="border-0" key={index}>
+                              {v !== 'docstatus'
+                                ? data[v]
+                                : data[v] === 0
+                                ? 'Draft'
+                                : data[v] === 1
+                                ? 'Submitted'
+                                : data[v] === 2
+                                ? 'Cancel'
+                                : data[v]}
+                            </td>
+                          );
+                        }
+                        return null;
+                      })}
+                    {data.docstatus === 0 && (
+                      <>
+                        <td className="button-section-td border-0">
+                          <NavLink
+                            to={`${data.name}`}
+                            className="button-section-text text-info"
+                          >
+                            Edit
+                          </NavLink>
 
-                        <a
-                          onClick={() => HandleDeleteChitti(data.name)}
-                          className="button-section-text text-danger mx-3 "
-                        >
-                          Delete
-                        </a>
-                      </td>
-                    </>
-                  )}
-                  {data.docstatus === 1 && (
-                    <>
-                      <td className="button-section-td border-0">
-                        <a
-                          onClick={() => HandlePrint(data.name)}
-                          className="button-section-text text-primary"
-                        >
-                          print
-                        </a>
+                          <a
+                            onClick={() => HandleDeleteChitti(data.name)}
+                            className="button-section-text text-danger mx-3 "
+                          >
+                            Delete
+                          </a>
+                        </td>
+                      </>
+                    )}
+                    {data.docstatus === 1 && (
+                      <>
+                        <td className="button-section-td border-0">
+                          <a
+                            onClick={() => HandlePrint(data.name)}
+                            className="button-section-text text-primary"
+                          >
+                            print
+                          </a>
 
-                        <a
-                          onClick={() => HandleCancelChitti(data.name)}
-                          className="button-section-text text-danger mx-3"
-                        >
-                          Cancel
-                        </a>
-                      </td>
-                    </>
-                  )}
-                  {data.docstatus === 2 && (
-                    <>
-                      <td className="button-section-td border-0">
-                        <a
-                          onClick={() => HandleDeleteChitti(data.name)}
-                          className="button-section-text text-danger mx-3"
-                        >
-                          Delete
-                        </a>
-                      </td>
-                    </>
-                  )}
-                </tr>
-              );
-            })}
+                          <a
+                            onClick={() => HandleCancelChitti(data.name)}
+                            className="button-section-text text-danger mx-3"
+                          >
+                            Cancel
+                          </a>
+                        </td>
+                      </>
+                    )}
+                    {data.docstatus === 2 && (
+                      <>
+                        <td className="button-section-td border-0">
+                          <a
+                            onClick={() => HandleDeleteChitti(data.name)}
+                            className="button-section-text text-danger mx-3"
+                          >
+                            Delete
+                          </a>
+                        </td>
+                      </>
+                    )}
+                  </tr>
+                );
+              })}
           </>
         ) : (
           ''
@@ -234,6 +240,35 @@ const ListingTable = ({
           </thead>
           <tbody>{TableBodyData()}</tbody>
         </table>
+        {tableListingData?.length > 0 && tableListingData !== null && (
+          <div
+            className="btn-group mr-2 my-2 mb-4"
+            role="group"
+            aria-label="Second group"
+          >
+            <button
+              type="button"
+              className="btn btn-primary  py-0"
+              onClick={() => HandleTableViewRows(20)}
+            >
+              20
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary  py-0"
+              onClick={() => HandleTableViewRows(100)}
+            >
+              100
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary  py-0"
+              onClick={() => HandleTableViewRows(500)}
+            >
+              500
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

@@ -8,6 +8,11 @@
 
 }
 
-.master-heading:hover {
+/* .master-heading:hover {
     font-size: 1rem;
+} */
+
+.master-heading {
+    border-radius: 10px;
+    padding: 0px 4px;
 }

@@ -308,6 +308,9 @@ table tr {
   /* font-weight: 550; */
 }
 
-/* .table-heading-sr-no {
-  padding-left: 10px !important;
-} */
+.table-responsive {
+  /* max-height: 400px !important; */
+  /* Set a maximum height that triggers the scrollbar */
+  overflow: auto !important;
+  /* Enable vertical scrolling when content exceeds the height */
+}

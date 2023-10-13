@@ -1,12 +1,31 @@
 import React, { useState } from 'react';
 import SelectedInputDropdown from '../../SelectedInputDropdown';
+import GetBlankExcelApi from '../../../services/api/dataUpload/download-blank-excelsheet-api';
+import { get_access_token } from '../../../store/slices/auth/token-login-slice';
+import { useSelector } from 'react-redux';
+import { BASE_URL } from '../../../services/Config/api-config';
 
 const DataUpload = ({ supplierList, HandleSupplier }: any) => {
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
+  const AccessToken: any = useSelector(get_access_token);
 
   const handleFileUploadInput: any = (e: any) => {
     console.log('file upload', e.target.files);
   };
+
+  const HandleDownloadTemplate: any = async () => {
+    let downloadBlankExcelApi: any = await GetBlankExcelApi(AccessToken?.token);
+
+    if (
+      downloadBlankExcelApi?.status === 200 &&
+      downloadBlankExcelApi?.data?.message?.status === 'success'
+    ) {
+      window.open(
+        `${BASE_URL}/${downloadBlankExcelApi?.data?.message?.file_url}`
+      );
+    }
+  };
+
   return (
     <div className="container">
       <div className="d-flex justify-content-end my-2">
@@ -63,14 +82,13 @@ const DataUpload = ({ supplierList, HandleSupplier }: any) => {
             />
           </div>
           <div className="my-4">
-            <a href="http://192.168.29.54:8000/app/emerald/new-emerald-1">
-              <button
-                type="button"
-                className="btn btn-outline-primary text-uppercase btn-sm"
-              >
-                <span className="download-template-btn">download template</span>
-              </button>
-            </a>
+            <button
+              type="button"
+              className="btn btn-outline-primary text-uppercase btn-sm"
+              onClick={HandleDownloadTemplate}
+            >
+              <span className="download-template-btn">download template</span>
+            </button>
           </div>
           <div>
             {/* <form > */}

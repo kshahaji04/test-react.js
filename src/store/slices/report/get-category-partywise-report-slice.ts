@@ -1,0 +1,66 @@
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../../root-reducer';
+import getSubCategoryReportApi from '../../../services/api/report/get-sub-category-report-api';
+import getCategoryPartywiseReportApi from '../../../services/api/report/get-category-partywise-report-api';
+
+export const getCategoryPartywiseReportData: any = createAsyncThunk(
+  'getCategoryPartywiseReport/getCategoryPartywiseReports',
+  async (token: any) => {
+    const getCategoryPartywiseReportData: any =
+      await getCategoryPartywiseReportApi(token);
+    console.log(
+      'getCategoryPartywiseReportData res',
+      getCategoryPartywiseReportData
+    );
+    return getCategoryPartywiseReportData;
+  }
+);
+
+interface RepoGetSubcategoryList {
+  data: any;
+  error: string;
+  isLoading: 'idle' | 'pending' | 'succeeded' | 'failed';
+}
+
+const initialState: RepoGetSubcategoryList = {
+  data: '',
+  error: '',
+  isLoading: 'idle',
+};
+
+export const GetCategoryPartywiseReportScreen = createSlice({
+  name: 'getCategoryPartywiseReport',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getCategoryPartywiseReportData.pending, (state) => {
+      state.isLoading = 'pending';
+      state.data = '';
+    });
+    builder.addCase(
+      getCategoryPartywiseReportData.fulfilled,
+      (state, action) => {
+        if (
+          action?.payload?.status === 200 &&
+          action?.payload?.data?.message?.status === 'success'
+        ) {
+          state.data = action?.payload?.data?.message?.data;
+          state.isLoading = 'succeeded';
+        }
+      }
+    );
+    builder.addCase(
+      getCategoryPartywiseReportData.rejected,
+      (state, action) => {
+        state.isLoading = 'failed';
+        state.data = '';
+        state.error = 'failed to store data';
+      }
+    );
+  },
+});
+
+export const get_category_partywise_report_data = (state: RootState) =>
+  state.GetCategoryPartywiseReportScreen;
+
+export default GetCategoryPartywiseReportScreen.reducer;

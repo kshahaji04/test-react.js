@@ -27,20 +27,20 @@ const CategoryMaster = () => {
         <div className="row justify-content-center">
           <div className="col-lg-12 chitti-nav-tabs tab-container">
             <Tabs
-              defaultActiveKey="chitti-listing"
+              defaultActiveKey="default-tab"
               id="justify-tab-example"
               className="mb-1"
               justify
             >
-              <Tab eventKey="chitti-listing" title="Add Category">
-                <AddCategory />
-              </Tab>
-              <Tab eventKey="longer-tab" title="Category Listing">
+              <Tab eventKey="default-tab" title="Category List">
                 <MasterSingleListingSearch
                   placeholder="Enter Category"
                   HandleSearchInput={HandleSearchInput}
                 />
                 <CategoryListing CategoryList={filterList} />
+              </Tab>
+              <Tab eventKey="chitti-listing" title="Add Category">
+                <AddCategory />
               </Tab>
             </Tabs>
           </div>

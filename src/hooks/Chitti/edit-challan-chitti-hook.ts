@@ -87,7 +87,7 @@ const UseEditChallanChitti: any = () => {
 
     const BodyData: any = {
       name: id,
-      date: date,
+      // date: date,
       clientName: selectedDropdownValue,
       clientGroup: clientGroupName,
       goldRate: goldRate,

@@ -64,7 +64,7 @@ const SearchListingTable = ({
             aria-label="Default select example"
             onChange={HandleSearchInput}
           >
-            <option selected>status</option>
+            <option>status</option>
             <option>Draft</option>
             <option>Submitted</option>
             <option>Cancel</option>

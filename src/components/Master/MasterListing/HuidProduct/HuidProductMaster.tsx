@@ -29,20 +29,20 @@ const HuidProductMaster = () => {
         <div className="row justify-content-center">
           <div className="col-lg-12 chitti-nav-tabs tab-container">
             <Tabs
-              defaultActiveKey="chitti-listing"
+              defaultActiveKey="default-list"
               id="justify-tab-example"
               className="mb-1"
               justify
             >
-              <Tab eventKey="chitti-listing" title="Add HUID Product">
-                <AddHuidProduct />
-              </Tab>
-              <Tab eventKey="longer-tab" title="HUID Product Listing">
+              <Tab eventKey="default-list" title="HUID Product List">
                 <MasterSingleListingSearch
                   placeholder="Enter HUID Product"
                   HandleSearchInput={HandleSearchInput}
                 />
                 <HuidProductListing huidProductData={filterList} />
+              </Tab>
+              <Tab eventKey="longer-tab" title="Add HUID Product">
+                <AddHuidProduct />
               </Tab>
             </Tabs>
           </div>

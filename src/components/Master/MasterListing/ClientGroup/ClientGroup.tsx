@@ -33,15 +33,15 @@ const ClientGroup = () => {
               justify
             >
               {' '}
-              <Tab eventKey="chitti-listing" title="Add Client Group">
-                <AddClientGroup />
-              </Tab>
-              <Tab eventKey="longer-tab" title="Client Group Listing">
+              <Tab eventKey="chitti-listing" title="Client Group List">
                 <MasterSingleListingSearch
                   placeholder="Enter Client group"
                   HandleSearchInput={HandleSearchInput}
                 />
                 <ClientGroupListing clientGroupList={filterList} />
+              </Tab>
+              <Tab eventKey="longer-tab" title="Add Client Group">
+                <AddClientGroup />
               </Tab>
             </Tabs>
           </div>
