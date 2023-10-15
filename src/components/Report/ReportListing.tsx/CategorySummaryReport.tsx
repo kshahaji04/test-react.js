@@ -6,6 +6,9 @@ const CategorySummaryReport = () => {
   console.log('categorySummaryReportData in tsx', categorySummaryReportData);
   return (
     <div className="container">
+      <div className='mb-1'>
+        <h4>Category Summary Report</h4>
+      </div>
       <div className="table-responsive ">
         <table className="table table-bordered table-hover">
           <thead>
@@ -20,7 +23,7 @@ const CategorySummaryReport = () => {
           </thead>
           <tbody>
             {categorySummaryReportData?.length > 0 &&
-            categorySummaryReportData !== null ? (
+              categorySummaryReportData !== null ? (
               <>
                 {categorySummaryReportData.map((data: any, index: any) => {
                   return (

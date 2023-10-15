@@ -6,6 +6,7 @@ const EmeraldChittiTable = ({
   productItemList,
   subCategoryList,
   defaultData,
+  setStateForDocStatus
 }: any) => {
   // const [tableData, setTableData] = useState<any>([{ id: 1, name: '' }]);
   const [amountValue, setamountValue] = useState<any>({
@@ -41,6 +42,7 @@ const EmeraldChittiTable = ({
 
     // Add the new row to the tableData
     setTableData([...tableData, newRow]);
+    setStateForDocStatus(true)
 
     // Calculate the new total values, including the new row
     const newColumnTotals = tableData.reduce(
@@ -66,12 +68,14 @@ const EmeraldChittiTable = ({
     if (tableData?.length > 1) {
       const updatedData = tableData.filter((row: any) => row.id !== id);
       setTableData(updatedData);
+      setStateForDocStatus(true)
     }
   };
 
   const handleKeyDown = (event: any, id: any) => {
     if (event.key === 'Tab' && id === tableData[tableData.length - 1].id) {
       HandleAddRow();
+      setStateForDocStatus(true)
     }
   };
 
@@ -110,6 +114,7 @@ const EmeraldChittiTable = ({
         : row
     );
     setTableData(updatedData);
+    setStateForDocStatus(true)
   };
 
   const HandleNetWeightValue = (e: any, id: any) => {
@@ -119,6 +124,7 @@ const EmeraldChittiTable = ({
         : row
     );
     setTableData(updatedData);
+    setStateForDocStatus(true)
   };
 
   const HandleSubCategory = (e: any, id: any) => {
@@ -127,6 +133,7 @@ const EmeraldChittiTable = ({
       row.id === id ? { ...row, sub_category: e.target.value } : row
     );
     setTableData(updatedData);
+    setStateForDocStatus(true)
   };
 
   const HandleProductItem = (e: any, id: any) => {
@@ -135,6 +142,7 @@ const EmeraldChittiTable = ({
       row.id === id ? { ...row, product: e.target.value } : row
     );
     setTableData(updatedData);
+    setStateForDocStatus(true)
   };
 
   const HandleAmountValue = (e: any, id: any) => {
@@ -142,6 +150,7 @@ const EmeraldChittiTable = ({
       row.id === id ? { ...row, amount: parseFloat(e.target.value) || 0 } : row
     );
     setTableData(updatedData);
+    setStateForDocStatus(true)
   };
 
   return (

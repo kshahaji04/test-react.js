@@ -6,6 +6,9 @@ const SubCategoryReport = () => {
   console.log('SubcategoryReport data', subCategoryReportData);
   return (
     <div className="container">
+      <div className='mb-1'>
+        <h4>Sub Category Report</h4>
+      </div>
       <div className="table-responsive">
         <table className="table table-bordered table-hover">
           <thead>
@@ -21,7 +24,7 @@ const SubCategoryReport = () => {
           </thead>
           <tbody>
             {subCategoryReportData?.length > 0 &&
-            subCategoryReportData !== null ? (
+              subCategoryReportData !== null ? (
               <>
                 {subCategoryReportData.map((data: any, index: any) => {
                   return (

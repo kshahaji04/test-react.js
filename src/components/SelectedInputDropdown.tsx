@@ -10,6 +10,7 @@ const SelectedInputDropdown = ({
   HandleClientGroup,
   defaultData,
   readOnlyField,
+  setStateForDocStatus
 }: any) => {
   console.log('defaultt', selectedDropdownValue, drowpdownlist);
   const [showDropDown, setShowDropdown] = useState<any>(false);
@@ -32,6 +33,7 @@ const SelectedInputDropdown = ({
     console.log('dataa', data);
     setSelectedDropdownValue(data);
     setShowDropdown(false);
+    setStateForDocStatus(true)
   };
   const HandleInputField = (e: any) => {
     console.log('input value', e.target.value);
@@ -80,11 +82,10 @@ const SelectedInputDropdown = ({
       <div className="dropdown-input-container">
         <input
           type="text"
-          className={`${
-            bgColor === true
+          className={`${bgColor === true
               ? 'form-control dropdown-input client-name-input-chitti'
               : 'form-control input-fields  dropdown-input'
-          }`}
+            }`}
           id="exampleInputEmail1"
           onBlur={handleBlur}
           onFocus={() => setIsFocused(true)}

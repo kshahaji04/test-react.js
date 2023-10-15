@@ -38,7 +38,7 @@ const Login = () => {
         </a>
         <div className="container d-flex justify-content-center login-page-container">
           <div className="card w-50 p-5">
-            <p className="text-uppercase fs-3 text-center">login page</p>
+            <p className="text-uppercase fs-3 text-center">login </p>
             <div className="card-body">
               <form
                 onSubmit={HandleFormSubmit}

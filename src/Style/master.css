@@ -3,16 +3,44 @@
     font-size: 17px;
 }
 
-.master-listing-card-body {
-    padding: 0.4rem 0.7rem !important;
-
-}
-
-/* .master-heading:hover {
-    font-size: 1rem;
+/* .master-listing-card-body {
+    padding: 0.3rem 0.6rem !important;
 } */
 
+/* .navlink-class:hover {
+    color: rgb(113, 113, 241) !important;
+} */
+
+
+.card-title:hover {
+    border: none !important;
+}
+
 .master-heading {
+    border: 1px solid gray;
     border-radius: 10px;
-    padding: 0px 4px;
+    padding: 3px 10px;
+    margin: 0px 10px;
+}
+
+
+/* .master-heading-active:hover {
+
+    background-color: aquamarine;
+} */
+
+.activePage {
+    background-color: #6164ef;
+}
+
+.navlink-class {
+    color: black;
+}
+
+/* .navlink-class:hover {
+    color: rgb(225, 206, 206);
+} */
+
+.activeNavLink {
+    color: white;
 }

@@ -133,6 +133,7 @@ const UseEditChallanChitti: any = () => {
     narrationTableData,
     clientGroupList,
     stateForDocStatus,
+    setStateForDocStatus
   };
 };
 

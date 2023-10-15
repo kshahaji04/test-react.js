@@ -34,6 +34,7 @@ const EditEmeraldChitti = () => {
     challanDetail,
     HandleUpdateEmeraldChittiSubmit,
     stateForDocStatus,
+    setStateForDocStatus
   }: any = UseEditEmeraldChittiHook();
 
   const HandleBackButton = () => {
@@ -181,6 +182,7 @@ const EditEmeraldChitti = () => {
                     currentDate={currentDate}
                     handleDateChange={handleDateChange}
                     transactionDate={transactionDate}
+                    setStateForDocStatus={setStateForDocStatus}
                   />
 
                   <EmeraldChittiTable
@@ -189,6 +191,7 @@ const EditEmeraldChitti = () => {
                     setTableData={setTableData}
                     subCategoryList={subCategoryList}
                     productItemList={productItemList}
+                    setStateForDocStatus={setStateForDocStatus}
                   />
                 </>
               );

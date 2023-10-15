@@ -11,6 +11,8 @@ const EmeraldCreateChitti = ({
   currentDate,
   handleDateChange,
   transactionDate,
+  setStateForDocStatus
+
 }: any) => {
   const [bgColor, setBgColor] = useState<any>(true);
   return (
@@ -21,7 +23,10 @@ const EmeraldCreateChitti = ({
       <div className="d-flex justify-content-sm-evenly flex-md-row flex-column">
         <div className="w-25 ">
           <label className="form-Form.Label text-dark form-label-bold">
-            Client Name :
+            Client Name
+            <span className='text-danger'>
+              *
+            </span>
           </label>
           <div className="h-25">
             <SelectedInputDropdown
@@ -33,12 +38,13 @@ const EmeraldCreateChitti = ({
               clientGroupList={clientGroupList}
               HandleClientGroup={HandleClientGroup}
               defaultData={defaultData}
+              setStateForDocStatus={setStateForDocStatus}
             />
           </div>
         </div>
         <div className="w-25 ">
           <label className="form-Form.Label text-dark form-label-bold">
-            Transaction Date :
+            Transaction Date
           </label>
           <div className="d-flex justify-content-between h-100">
             <input

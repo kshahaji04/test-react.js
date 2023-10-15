@@ -1,201 +1,233 @@
+/* new css */
+.topbars {
+  background-color: #6B69DF;
+  padding: 15px 0px;
 
-  
-  /* new css */
-  .topbars {
-   background-color:#6B69DF;
-   padding: 15px 0px;
-  
-  }
-  .logo_color {
-    color: white !important;
-    font-size: 30px;
-  }
- 
-  .fa-user-circle {
-    color:#cdab6e;
-    font-size: 30px;
-  }
-  .sidebar_list {
-    list-style-type: none;
-    padding-left: 1rem;
-  }
-  .link_sidebar {
-    text-decoration: none;
-    color: #6B69DF;
-    font-size: 15px;
-    padding: 0.5rem 0rem !important;
-  }
-  .li_sidebar {
-    padding: 13px 6px;
-    margin-top: 10px;
-    width:225px
-  }
-  .sidebar_icon {
+}
+
+.logo_color {
+  color: white !important;
+  font-size: 30px;
+}
+
+.fa-user-circle {
+  color: #cdab6e;
+  font-size: 30px;
+}
+
+.sidebar_list {
+  list-style-type: none;
+  padding-left: 1rem;
+}
+
+.link_sidebar {
+  text-decoration: none;
+  color: #6B69DF;
+  font-size: 15px;
+  padding: 0.5rem 0rem !important;
+}
+
+.li_sidebar {
+  padding: 13px 6px;
+  margin-top: 10px;
+  width: 225px
+}
+
+.sidebar_icon {
   margin-right: 10px;
-  }
-  /* .li_sidebar:hover  {
-    background-color: #A1CBFF;
-    cursor: pointer;
-    border-radius: 36px;
-  } */
-  .li_sidebar:hover .link_sidebar {
-    color: black;
-  }
-  .topbar_text {
-    padding: 0px 40px;
-  }
-  .right-sidebar {
-    background-color: white;
-  }
-  .topbars {
-    position: relative;
-  }
+}
+
+.li_sidebar:hover .link_sidebar {
+  color: black;
+}
+
+.topbar_text {
+  padding: 0px 40px;
+}
+
+.right-sidebar {
+  background-color: white;
+}
+
+.topbars {
+  position: relative;
+}
+
+.profile_cards {
+  position: absolute;
+  text-align: right;
+  right: 0;
+  width: 17%;
+  margin-top: 80px;
+}
+
+.avatar_icon {
+  background-color: #EAEEFF;
+  height: 40px;
+  width: 40px;
+  border-radius: 80%;
+
+}
+
+.card-btn {
+  text-align: center !important;
+  margin-top: 10px;
+}
+
+.card_imf {
+  justify-content: center;
+}
+
+.addrow_btn {
+  width: 110px;
+  color: white;
+  background-color: #6b69df;
+  border: none;
+  padding: 3px;
+}
+
+.navbar_topbar {
+  background-color: white !important;
+  padding: 3px;
+  /* box-shadow: #2f308c24 0px 8px 24px; */
+}
+
+.sidebars {
+  position: fixed;
+  top: 61px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: block;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* Scrollable contents if viewport is shorter than content. */
+  background-color: #f5f5f5;
+  border-right: 1px solid #eee;
+}
+
+.link_sidebar.active {
+  background-color: #A1CBFF;
+  cursor: pointer;
+  border-radius: 36px;
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1360px) {
   .profile_cards {
-    position: absolute;
-    text-align: right;
-    right: 0;
-    width: 17%;
-    margin-top: 80px;
+
+    margin-top: 71px !important;
   }
-  .avatar_icon {
-    background-color: #EAEEFF;
-   height: 40px;
-   width: 40px;
-    border-radius: 80%;
-   
+
+  .invoice_container {
+    margin-top: 150px !important;
   }
-  .card-btn {
-    text-align: center !important;
-    margin-top: 10px;
+
+  .li_sidebar {
+    width: 190px
   }
-  .card_imf {
-    justify-content: center;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+  .nav-sidebar {
+
+    flex-direction: column !important;
+
   }
-  .addrow_btn {
-    width: 110px;
-    color: white;
-    background-color: #6b69df;
-    border: none;
-    padding: 3px;
-  }
-  .navbar_topbar {
-    background-color: white !important;
-    padding: 3px;
-    /* box-shadow: #2f308c24 0px 8px 24px; */
-  }
-  .sidebars {
-    position: fixed;
-    top: 61px;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    display: block;
-    padding: 20px;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #f5f5f5;
-    border-right: 1px solid #eee;
-    }
-    .link_sidebar.active {
-      background-color: #A1CBFF;
-      cursor: pointer;
-      border-radius: 36px;
-    }
-    @media only screen and (min-width: 1024px) and (max-width: 1360px) {
-      .profile_cards {
-     
-        margin-top: 71px !important;
-      }
-      .invoice_container {
-        margin-top: 150px !important;
-    }
-    .li_sidebar {
-      width:190px
-    }
-    }
-  
-    @media only screen and (min-width: 320px) and (max-width: 768px) {
-      .nav-sidebar {
-     
-        flex-direction: column !important;
-  
-      }
+
   .flexstart_mobile {
     justify-content: flex-start !important;
   }
+
   .logo_color {
-  margin-left: 10px !important;
+    margin-left: 10px !important;
   }
-    }
-  
-    .toggle_bar {
-      display: none;
-      /* background-color: #337DEE; */
-    }
-    @media only screen and (max-width: 768px) {
-      .toggle_bar {
-        display: block;
-      }
-      .toggle_div {
-        display: none;
-      }
-      /* .supplier-sidebar {
+}
+
+.toggle_bar {
+  display: none;
+  /* background-color: #337DEE; */
+}
+
+@media only screen and (max-width: 768px) {
+  .toggle_bar {
+    display: block;
+  }
+
+  .toggle_div {
+    display: none;
+  }
+
+  /* .supplier-sidebar {
         width: 50%;
       } */
-    }  
-  
-    .resetpassword_btn {
-      color: white;
-      background-color: #6b69df;
-      border: none;
-      padding: 3px;
-    }
-    .notification-badge {
-      margin-top: -2px;
-    }
-    .star-fontsize {
-      font-size: 17px !important;
-    }
-    .profile-card {
-    margin-left: -130px;
-    width: 220px;
-    }
-    .profile-fontSize  {
-      font-size: 13px;
-    }
-  
-    .navbar-toggler:focus {
-      border: 1px solid black !important;
-      box-shadow: none !important;
-    }
+}
 
-    .card-container {
-        margin-top: 100px;
-    }
-    .mainTab-navigation {
-        display: flex;
-        flex-direction: row;
-    }
-    .icons-color {
-        font-size: 26px;
-        height: 40px;
-        width: 40px;
-        background-color: white;
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        border-radius: 50%;
-        color: #cdab6e;
-    }
-    .card-body {
-        padding: 0.7rem 0.7rem !important;
-    }
-    .card {
-        box-shadow: #2f308c24 0px 8px 24px;
-        /* background-color: #b2abf2; */
-        border: none !important;
-    }
-    .cards-links {
-     text-decoration: none !important;
-     color: black;
-    }
+.resetpassword_btn {
+  color: white;
+  background-color: #6b69df;
+  border: none;
+  padding: 3px;
+}
+
+.notification-badge {
+  margin-top: -2px;
+}
+
+.star-fontsize {
+  font-size: 17px !important;
+}
+
+.profile-card {
+  margin-left: -130px;
+  width: 220px;
+}
+
+.profile-fontSize {
+  font-size: 13px;
+}
+
+.navbar-toggler:focus {
+  border: 1px solid black !important;
+  box-shadow: none !important;
+}
+
+.card-container {
+  margin-top: 100px;
+}
+
+.mainTab-navigation {
+  display: flex;
+  flex-direction: row;
+}
+
+.icons-color {
+  font-size: 26px;
+  height: 40px;
+  width: 40px;
+  /* background-color: white; */
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 50%;
+  /* color: #cdab6e; */
+}
+
+.master-icon-color {
+  color: #cdab6e;
+}
+
+.card-body {
+  padding: 0.7rem 0.7rem !important;
+}
+
+.card {
+  box-shadow: #2f308c24 0px 8px 24px;
+  /* background-color: #b2abf2; */
+  border: none !important;
+}
+
+.cards-links {
+  text-decoration: none !important;
+  color: black;
+}

@@ -27,6 +27,7 @@ const ChittiMaster = () => {
     HandleClientGroup,
     HandleDateChange,
     date,
+    setStateForDocStatus
   }: any = UseChittiHook();
 
   console.log('chittiListingData', chittiListingData);
@@ -51,47 +52,47 @@ const ChittiMaster = () => {
 
   const filteredList =
     chittiListingData?.length > 0 &&
-    chittiListingData !== null &&
-    (searchInputValues.date ||
-      searchInputValues.chitti_no ||
-      searchClientName ||
-      searchInputValues.status)
+      chittiListingData !== null &&
+      (searchInputValues.date ||
+        searchInputValues.chitti_no ||
+        searchClientName ||
+        searchInputValues.status)
       ? chittiListingData.filter((item: any) => {
-          const dateMatch = searchInputValues.date
-            ? item?.date?.includes(searchInputValues.date)
-            : true;
-          const numberMatch = searchInputValues.chitti_no
-            ? item?.number?.includes(searchInputValues.chitti_no)
-            : true;
-          const clientNameMatch = searchClientName
-            ? item?.client_name?.includes(searchClientName)
-            : true;
+        const dateMatch = searchInputValues.date
+          ? item?.date?.includes(searchInputValues.date)
+          : true;
+        const numberMatch = searchInputValues.chitti_no
+          ? item?.number?.includes(searchInputValues.chitti_no)
+          : true;
+        const clientNameMatch = searchClientName
+          ? item?.client_name?.includes(searchClientName)
+          : true;
 
-          if (searchInputValues.status === 'Draft') {
-            return (
-              item?.docstatus === 0 &&
-              dateMatch &&
-              numberMatch &&
-              clientNameMatch
-            );
-          } else if (searchInputValues.status === 'Submitted') {
-            return (
-              item?.docstatus === 1 &&
-              dateMatch &&
-              numberMatch &&
-              clientNameMatch
-            );
-          } else if (searchInputValues.status === 'Cancel') {
-            return (
-              item?.docstatus === 2 &&
-              dateMatch &&
-              numberMatch &&
-              clientNameMatch
-            );
-          }
+        if (searchInputValues.status === 'Draft') {
+          return (
+            item?.docstatus === 0 &&
+            dateMatch &&
+            numberMatch &&
+            clientNameMatch
+          );
+        } else if (searchInputValues.status === 'Submitted') {
+          return (
+            item?.docstatus === 1 &&
+            dateMatch &&
+            numberMatch &&
+            clientNameMatch
+          );
+        } else if (searchInputValues.status === 'Cancel') {
+          return (
+            item?.docstatus === 2 &&
+            dateMatch &&
+            numberMatch &&
+            clientNameMatch
+          );
+        }
 
-          return dateMatch && numberMatch && clientNameMatch;
-        })
+        return dateMatch && numberMatch && clientNameMatch;
+      })
       : chittiListingData;
   console.log('chittiListingData filter', filteredList);
 
@@ -147,6 +148,7 @@ const ChittiMaster = () => {
                   HandleClientGroup={HandleClientGroup}
                   HandleDateChange={HandleDateChange}
                   date={date}
+                  setStateForDocStatus={setStateForDocStatus}
                 />
               </Tab>
             </Tabs>

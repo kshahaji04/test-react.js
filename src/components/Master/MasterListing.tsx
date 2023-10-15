@@ -19,16 +19,19 @@ const MasterListing = () => {
           masterlist !== null &&
           masterlist.map((data: any, index: any) => {
             const processedStr = data.replace(/\s+/g, '').toLowerCase();
-
+            const linkTo: any = `/master/${processedStr}`;
+            const isActive: any = window?.location?.pathname === linkTo;
             return (
-              <div className="mx-3 master-heading border " key={index}>
+              <div className={`mx-3 master-heading p-1 px-2 ${isActive ? "activePage border-0" : ""}`} key={index}>
                 <NavLink
                   to={`/master/${processedStr}`}
-                  className="master-title-heading"
+                  className={`text-decoration-none navlink-class ${isActive ? "text-white " : ""}`}
+
+
                 >
                   <div className="rounded-4">
                     <div className=" d-flex justify-content-center master-listing-card-body">
-                      <h5 className="card-title me-1 m-0">{data}</h5>
+                      <h6 className="card-title me-1 m-0">{data}</h6>
                       <i className="fa-solid fa-arrow-turn-down d-flex align-items-center master-head-icon"></i>
                     </div>
                   </div>

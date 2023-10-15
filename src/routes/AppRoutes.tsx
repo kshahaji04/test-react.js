@@ -243,7 +243,7 @@ const AppRoutes = () => {
           }
         />
         <Route
-          path="/emerald"
+          path="/emeraldchitti"
           element={
             <ProtectedRoute>
               <Emerald />
@@ -251,7 +251,7 @@ const AppRoutes = () => {
           }
         />
         <Route
-          path="/data-upload"
+          path="/dataupload"
           element={
             <ProtectedRoute>
               <DataUploadMaster />

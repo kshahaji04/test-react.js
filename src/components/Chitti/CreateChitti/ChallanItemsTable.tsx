@@ -7,6 +7,7 @@ const ChallanItemsTable = ({
   setTableData,
   subCategoryList,
   defaultData,
+  setStateForDocStatus
 }: any) => {
   console.log('tableDataaa initial', tableData);
   // const [tableData, setTableData] = useState<any>([{ id: 1 }]);
@@ -79,6 +80,7 @@ const ChallanItemsTable = ({
     if (tableData?.length > 1) {
       const updatedData = tableData.filter((row: any) => row.id !== id);
       setTableData(updatedData);
+      setStateForDocStatus(true)
     }
   };
 
@@ -121,6 +123,7 @@ const ChallanItemsTable = ({
       row.id === id ? { ...row, sub_category: e.target.value } : row
     );
     setTableData([...updatedData]);
+    setStateForDocStatus(true)
   };
 
   const HandleGrossWeightValue = (e: any, id: any) => {
@@ -131,6 +134,7 @@ const ChallanItemsTable = ({
         : row
     );
     setTableData(updatedData);
+    setStateForDocStatus(true)
   };
 
   const HandleNetWeightValue = (e: any, id: any) => {
@@ -140,6 +144,7 @@ const ChallanItemsTable = ({
         : row
     );
     setTableData(updatedData);
+    setStateForDocStatus(true)
   };
 
   const HandleAmountValue = (e: any, id: any) => {
@@ -147,6 +152,7 @@ const ChallanItemsTable = ({
       row.id === id ? { ...row, amount: parseFloat(e.target.value) || 0 } : row
     );
     setTableData(updatedData);
+    setStateForDocStatus(true)
   };
 
   console.log('updated tabledata', tableData);
@@ -195,7 +201,7 @@ const ChallanItemsTable = ({
                       >
                         <option defaultValue={row.sub_category}></option>
                         {subCategoryList?.length > 0 &&
-                        subCategoryList !== null ? (
+                          subCategoryList !== null ? (
                           <>
                             {subCategoryList.map(
                               (category: any, index: any) => {

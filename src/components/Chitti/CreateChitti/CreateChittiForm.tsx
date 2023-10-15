@@ -16,6 +16,7 @@ const CreateChittiForm = ({
   defaultData,
   HandleDateChange,
   date,
+  setStateForDocStatus
 }: any) => {
   console.log('defaultData chit', currentDate);
 
@@ -39,7 +40,7 @@ const CreateChittiForm = ({
           <div className="col-lg-10"></div>
           <div className="col-lg-3 col-md-6">
             <label className="form-Form.Label fs-6 text-dark form-label-bold">
-              Date :
+              Date
             </label>
             <div className="d-flex justify-content-between h-100">
               <input
@@ -53,13 +54,13 @@ const CreateChittiForm = ({
                 aria-describedby="inputGroup-sizing-sm"
                 onChange={HandleDateChange}
                 readOnly
-                // readOnly={readOnlyField}
+              // readOnly={readOnlyField}
               />
             </div>
           </div>
           <div className="col-lg-3 col-md-6">
             <label className="form-Form.Label fs-6 text-dark form-label-bold">
-              Client Name :<span className="text-danger">*</span>
+              Client Name <span className="text-danger">*</span>
             </label>
 
             <SelectedInputDropdown
@@ -71,13 +72,14 @@ const CreateChittiForm = ({
               clientGroupList={clientGroupList}
               HandleClientGroup={HandleClientGroup}
               defaultData={defaultData}
-              // readOnlyField={readOnlyField}
+              setStateForDocStatus={setStateForDocStatus}
+            // readOnlyField={readOnlyField}
             />
             {/* <CustomDropDown /> */}
           </div>
           <div className="col-lg-3 col-md-6">
             <label className="form-Form.Label fs-6 text-dark form-label-bold">
-              Gold Rate :
+              Gold Rate
             </label>
             <input
               type="text"
@@ -92,7 +94,7 @@ const CreateChittiForm = ({
 
           <div className="col-lg-3 col-md-6">
             <label className="form-Form.Label fs-6 text-dark form-label-bold">
-              Remarks:
+              Remarks
             </label>
             <input
               type="text"
@@ -101,8 +103,8 @@ const CreateChittiForm = ({
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"
               onChange={HandleRemarks}
-              // readOnly={readOnlyField}
-              // onBlur={handleBlur}
+            // readOnly={readOnlyField}
+            // onBlur={handleBlur}
             />
           </div>
         </div>

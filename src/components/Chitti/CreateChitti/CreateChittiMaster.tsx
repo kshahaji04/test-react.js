@@ -19,7 +19,8 @@ const CreateChittiMaster = ({
   clientGroupList,
   HandleClientGroup,
   HandleDateChange,
-  date
+  date,
+  setStateForDocStatus
 }: any) => {
   // const HandleCreateChittiSubmit: any = () => {};
 
@@ -50,11 +51,13 @@ const CreateChittiMaster = ({
         tableData={tableData}
         setTableData={setTableData}
         subCategoryList={subCategoryList}
+        setStateForDocStatus={setStateForDocStatus}
       />
       <NarrationTable
         narrationTableData={narrationTableData}
         setNarrationTableData={setNarrationTableData}
         productList={productList}
+        setStateForDocStatus={setStateForDocStatus}
       />
     </div>
   );

@@ -9,6 +9,9 @@ const CategoryPartyWiseReport = () => {
   );
   return (
     <div className="container">
+      <div className='mb-1'>
+        <h4>Category Partywise Report</h4>
+      </div>
       <div className="table-responsive">
         <table className="table table-bordered table-hover">
           <thead>
@@ -23,7 +26,7 @@ const CategoryPartyWiseReport = () => {
           </thead>
           <tbody>
             {categoryPartywiseReportData?.length > 0 &&
-            categoryPartywiseReportData !== null ? (
+              categoryPartywiseReportData !== null ? (
               <>
                 {categoryPartywiseReportData.map((data: any, index: any) => {
                   return (
