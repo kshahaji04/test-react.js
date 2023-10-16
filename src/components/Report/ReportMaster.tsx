@@ -16,7 +16,7 @@ const ReportMaster = () => {
   ];
   return (
     <>
-      <div className="container my-3">
+      <div className="container mt-3">
         {/* <hr className="hr_line my-1" />
 
         <h4>Reports</h4>
@@ -29,24 +29,29 @@ const ReportMaster = () => {
               const linkTo: any = `/report/${processedStr}`;
               const isActive: any = window?.location?.pathname === linkTo;
               return (
-                <div className={`mx-3 master-heading p-1 px-2 ${isActive ? "activePage border-0" : ""}`} key={index}>
+                <div
+                  className={`mx-3 master-heading p-1 px-2 ${
+                    isActive ? 'activePage border-0' : ''
+                  }`}
+                  key={index}
+                >
                   <NavLink
                     to={`/report/${processedStr}`}
-                    className={`text-decoration-none navlink-class ${isActive ? "text-white" : ""}`}
-                  // onClick={() => setActiveLink(linkTo)}
+                    className={`text-decoration-none navlink-class ${
+                      isActive ? 'text-white' : ''
+                    }`}
+                    // onClick={() => setActiveLink(linkTo)}
                   >
-
                     <div className="d-flex justify-content-center mas">
                       <h6 className="card-title me-1 m-0">{data}</h6>
                       <i className="fa-solid fa-arrow-turn-down d-flex align-items-center master-head-icon"></i>
                     </div>
-
                   </NavLink>
                 </div>
               );
             })}
         </div>
-        <hr className='my-2 ' />
+        <hr className="my-0 mt-3 " />
       </div>
     </>
   );

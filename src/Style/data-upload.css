@@ -3,18 +3,31 @@
 }
 
 .emerald-table tr {
-    line-height: 1rem;
+    line-height: 0.6rem !important;
 }
 
 
-.emerald_table_container {
+/* .emerald_table_container {
     height: 455px;
+} */
+
+.emerald_table_container {
+    overflow-x: auto;
 }
 
 .emerald-supplier-table tr td {
     width: 17% !important;
-
 }
+
+.table-body-r td {
+    border: none !important;
+}
+
+.emerald-shilpi-table-heading-row {
+    line-height: 0.8rem;
+}
+
+
 
 /* 
 .emerald-supplier-table-heading {

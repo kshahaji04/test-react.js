@@ -3,15 +3,6 @@
     font-size: 17px;
 }
 
-/* .master-listing-card-body {
-    padding: 0.3rem 0.6rem !important;
-} */
-
-/* .navlink-class:hover {
-    color: rgb(113, 113, 241) !important;
-} */
-
-
 .card-title:hover {
     border: none !important;
 }
@@ -23,23 +14,14 @@
     margin: 0px 10px;
 }
 
-
-/* .master-heading-active:hover {
-
-    background-color: aquamarine;
-} */
-
 .activePage {
     background-color: #6164ef;
+    border: none;
 }
 
 .navlink-class {
     color: black;
 }
-
-/* .navlink-class:hover {
-    color: rgb(225, 206, 206);
-} */
 
 .activeNavLink {
     color: white;

@@ -32,7 +32,7 @@ const SubCategoryListing = ({ filteredList }: any) => {
                   </td>
                   <td className="col-6 p-1">
                     <NavLink
-                      to={`${group.category}`}
+                      to={`${group.name}`}
                       className="text-decoration-none text-dark"
                     >
                       {group.category}

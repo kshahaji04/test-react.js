@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../root-reducer';
-import GetEmeraldShilpiListApi from '../../../services/api/emrald-shilpi-api.ts/get-emerald-shilpi-list-api';
+import GetEmeraldShilpiListApi from '../../../services/api/emrald-shilpi/get-emerald-shilpi-list-api';
 
 export const getEmeraldShilpiList: any = createAsyncThunk(
   'getEmeraldshilpi/getEmeraldShilpiList',

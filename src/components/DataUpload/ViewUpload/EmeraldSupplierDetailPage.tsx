@@ -1,24 +1,17 @@
 import React, { useState } from 'react';
-import UseEmeraldDetailHook from '../../../hooks/dataUpload/emerald-detail-hook';
+import UseEmeraldSupplierDetailHook from '../../../hooks/dataUpload/emerald-supplier-detail-hook';
 import DownloadEmeraldSupplierTableData from '../../../services/api/dataUpload/get-emerald-supplier-table-data-api';
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BASE_URL } from '../../../services/Config/api-config';
 
-const EmeraldDetailPage = () => {
-  const { emeraldDetail } = UseEmeraldDetailHook();
+const EmeraldSupplierDetailPage = () => {
+  const { emeraldSupplierDetail } = UseEmeraldSupplierDetailHook();
   const navigate = useNavigate();
-  console.log('emeraldDetail', emeraldDetail);
+  console.log('emeraldSupplierDetail in tsx', emeraldSupplierDetail);
   const AccessToken: any = useSelector(get_access_token);
   const { id } = useParams();
-
-  // let itemsPerPage: any = 50;
-  // const [currentPage, setCurrentPage] = useState<any>(1);
-
-  // const start = (currentPage - 1) * itemsPerPage;
-  // const end = currentPage * itemsPerPage;
-  // const currentList = emeraldDetail?.emerald_table[(start, end)];
 
   const HandleDownloadSupplierData: any = async () => {
     let downloadSupplierDataApi: any = await DownloadEmeraldSupplierTableData(
@@ -55,7 +48,7 @@ const EmeraldDetailPage = () => {
             <input
               type="text"
               className="form-control w-50 p-1"
-              value={emeraldDetail[0]?.supplier}
+              value={emeraldSupplierDetail[0]?.supplier}
               readOnly
             />
           </div>
@@ -66,7 +59,7 @@ const EmeraldDetailPage = () => {
             <input
               type="text"
               className="form-control w-50 p-1"
-              value={emeraldDetail[0]?.date}
+              value={emeraldSupplierDetail[0]?.date}
               readOnly
             />
           </div>
@@ -79,7 +72,7 @@ const EmeraldDetailPage = () => {
             <input
               type="text"
               className="form-control w-50 p-1"
-              value={emeraldDetail[0]?.total_no_of_rows}
+              value={emeraldSupplierDetail[0]?.total_no_of_rows}
               readOnly
             />
           </div>
@@ -90,7 +83,7 @@ const EmeraldDetailPage = () => {
             <input
               type="text"
               className="form-control w-50 p-1"
-              value={emeraldDetail[0]?.total_of_grosswt}
+              value={emeraldSupplierDetail[0]?.total_of_grosswt}
               readOnly
             />
           </div>
@@ -103,19 +96,19 @@ const EmeraldDetailPage = () => {
             <input
               type="text"
               className="form-control w-50 p-1"
-              value={emeraldDetail[0]?.total_of_netwt}
+              value={emeraldSupplierDetail[0]?.total_of_netwt}
               readOnly
             />
           </div>
         </div>
       </div>
-      {emeraldDetail[0]?.emerald_supplier_table?.length > 0 &&
-      emeraldDetail[0]?.emerald_supplier_table !== null ? (
+      {emeraldSupplierDetail[0]?.emerald_supplier_table?.length > 0 &&
+      emeraldSupplierDetail[0]?.emerald_supplier_table !== null ? (
         <>
-          <div className="table-responsive my-2 emerald_table_container">
-            <table className="table table-bordered emerald-table">
-              <thead>
-                <tr>
+          <div className="table-responsive my-2 ">
+            <table className="table table table-striped table-hover listing-table border-0">
+              <thead className="table-heading">
+                <tr className="table-heading-row">
                   <th scope="col">No</th>
                   <th scope="col" className="px-3">
                     TRANSFERID
@@ -144,26 +137,27 @@ const EmeraldDetailPage = () => {
                   <th scope="col" className="px-5 ">
                     PROJECT
                   </th>
-                  {/* <th scope="col">Sub Category</th> */}
+
                   <th scope="col">MC</th>
                   <th scope="col">MakingUnit</th>
                   <th scope="col">EJ_HUID</th>
                   <th scope="col">Textbox2</th>
                 </tr>
               </thead>
-              {emeraldDetail?.length > 0 && emeraldDetail !== null ? (
-                <>
-                  {emeraldDetail.map((detail: any, index: any) => (
-                    <>
-                      {detail?.emerald_supplier_table?.length > 0 &&
-                      detail?.emerald_supplier_table !== null ? (
-                        <>
-                          {detail?.emerald_supplier_table?.map(
-                            (values: any, i: any) => {
-                              return (
-                                <>
-                                  <tbody>
-                                    <tr className="">
+              <tbody>
+                {emeraldSupplierDetail?.length > 0 &&
+                emeraldSupplierDetail !== null ? (
+                  <>
+                    {emeraldSupplierDetail.map((detail: any, index: any) => (
+                      <>
+                        {detail?.emerald_supplier_table?.length > 0 &&
+                        detail?.emerald_supplier_table !== null ? (
+                          <>
+                            {detail?.emerald_supplier_table?.map(
+                              (values: any, i: any) => {
+                                return (
+                                  <>
+                                    <tr className="table-body-r">
                                       <td>{i + 1}</td>
                                       <td>{values.transferid}</td>
                                       <td>{values.rfid}</td>
@@ -187,21 +181,21 @@ const EmeraldDetailPage = () => {
                                       <td>{values.ej_huid}</td>
                                       <td>{values.textbox2}</td>
                                     </tr>
-                                  </tbody>
-                                </>
-                              );
-                            }
-                          )}
-                        </>
-                      ) : (
-                        ''
-                      )}
-                    </>
-                  ))}
-                </>
-              ) : (
-                ''
-              )}
+                                  </>
+                                );
+                              }
+                            )}
+                          </>
+                        ) : (
+                          ''
+                        )}
+                      </>
+                    ))}
+                  </>
+                ) : (
+                  ''
+                )}
+              </tbody>
             </table>
           </div>
           <div className="d-flex justify-content-end mt-2">
@@ -231,4 +225,4 @@ const EmeraldDetailPage = () => {
   );
 };
 
-export default EmeraldDetailPage;
+export default EmeraldSupplierDetailPage;

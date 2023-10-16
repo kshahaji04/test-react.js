@@ -46,7 +46,7 @@ const MasterPageHuidProductDetails = () => {
             >
               Back
             </button>
-            {showSubmitButton && (
+            {/* {showSubmitButton && (
               <button
                 type="submit"
                 onClick={HandleSubmit}
@@ -54,12 +54,12 @@ const MasterPageHuidProductDetails = () => {
               >
                 Save
               </button>
-            )}
+            )} */}
           </div>
         </div>
         <div className="my-2 p-4">
           <label htmlFor="basic-url " className="fs-5">
-            New Huid Product
+            Huid Product
             <span className="text-danger">*</span>
           </label>
           <div className="input-group my-2 w-25">
@@ -71,6 +71,7 @@ const MasterPageHuidProductDetails = () => {
               required
               id="basic-url"
               onChange={HandleInputField}
+              readOnly
             />
           </div>
           <div className="">

@@ -34,7 +34,7 @@ const EditEmeraldChitti = () => {
     challanDetail,
     HandleUpdateEmeraldChittiSubmit,
     stateForDocStatus,
-    setStateForDocStatus
+    setStateForDocStatus,
   }: any = UseEditEmeraldChittiHook();
 
   const HandleBackButton = () => {

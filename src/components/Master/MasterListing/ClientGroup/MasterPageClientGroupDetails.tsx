@@ -37,7 +37,7 @@ const MasterPageClientGroupDetails = () => {
 
   const navigate = useNavigate();
   return (
-    <div className="container">
+    <div className="container mt-5">
       <div className="card mt-2">
         <div className="card-header">
           <div className="d-flex justify-content-between ">
@@ -48,7 +48,7 @@ const MasterPageClientGroupDetails = () => {
             >
               Back
             </button>
-            {showSubmitButton && (
+            {/* {showSubmitButton && (
               <button
                 type="submit"
                 onClick={HandleSubmit}
@@ -56,28 +56,25 @@ const MasterPageClientGroupDetails = () => {
               >
                 Save
               </button>
-            )}
+            )} */}
           </div>
         </div>
         <div className="my-2 p-4">
           <label htmlFor="basic-url " className="fs-5">
-            New Client group
+            Client group
             <span className="text-danger">*</span>
           </label>
           <div className="input-group my-2 w-25">
             <input
               type="text"
-              className="form-control py-1"
+              className="form-control py-1 ps-1"
               // value={inputValue}
               defaultValue={id}
               required
               id="basic-url"
               onChange={HandleInputField}
+              readOnly
             />
-          </div>
-          <div className="">
-            {' '}
-            {error && <p className="text-danger">{error}</p>}
           </div>
         </div>
       </div>

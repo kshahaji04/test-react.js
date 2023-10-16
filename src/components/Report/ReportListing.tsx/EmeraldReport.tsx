@@ -6,13 +6,13 @@ const EmeraldReport = () => {
   console.log('emeraldReportData in tsx', emeraldReportData);
   return (
     <div className="container">
-      <div className='mb-1'>
-        <h4>Emerald Report</h4>
+      <div className="mb-1">
+        <h5>Emerald Report</h5>
       </div>
-      <div className="table-responsive ">
-        <table className="table table-bordered table-hover">
-          <thead>
-            <tr className="text-uppercase">
+      <div className="table-responsive">
+        <table className="table table-striped table-hover">
+          <thead className="report-table-head-row">
+            <tr className="report-table-head-tr text-uppercase">
               <th scope="col">Supplier</th>
               <th scope="col">Transferid</th>
               <th scope="col">Rfid</th>

@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../root-reducer';
-import GetEmeraldDetail from '../../../services/api/dataUpload/get-emerald-detail-api';
+import GetEmeraldShilpiDetailsApi from '../../../services/api/emrald-shilpi/get-emerald-shilpi-details-api';
 
 export const getEmeraldTableData: any = createAsyncThunk(
   'emeraldTableData/getEmeraldTableData',
   async (params: any) => {
-    const EmeraldTableData: any = await GetEmeraldDetail(params);
+    const EmeraldTableData: any = await GetEmeraldShilpiDetailsApi(params);
     console.log('EmeraldChallanData res', EmeraldTableData);
     return EmeraldTableData;
   }

@@ -25,6 +25,7 @@ import GetCategoryPartywiseReportReducer from './slices/report/get-category-summ
 import GetEmeraldReportReducer from './slices/report/get-emerald-report-slice';
 import GetEmeraldShilpiListReducer from './slices/emerald-shilpi/get-emerald-shilpi-slice';
 import GetEmeraldShilpiDetailsReducer from './slices/emerald-shilpi/get-emerald-shilpi-details-slice';
+import GetEmeraldSupplierDetailsReducer from './slices/dataUpload/get-emerald-supplier-details-slice';
 
 const appReducer = combineReducers({
   GetAccessTokenScreen: GetAccessTokenReducer,
@@ -51,6 +52,7 @@ const appReducer = combineReducers({
   GetCategorySummaryReportScreen: GetCategorySummaryReportReducer,
   GetCategoryPartywiseReportScreen: GetCategoryPartywiseReportReducer,
   GetEmeraldReportScreen: GetEmeraldReportReducer,
+  GetEmeraldSupplierDetailsScreen: GetEmeraldSupplierDetailsReducer,
   GetEmeraldShilpiListScreen: GetEmeraldShilpiListReducer,
   GetEmeraldShilpiDetailsScreen: GetEmeraldShilpiDetailsReducer,
 });

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { BASE_URL } from '../../Config/api-config';
 
-const GetEmeraldDetail: any = async (request: any) => {
+const GetEmeraldSupplierDetail: any = async (request: any) => {
   console.log('tokennnn', request);
   let response: any;
   const version = 'v1';
@@ -27,4 +27,4 @@ const GetEmeraldDetail: any = async (request: any) => {
   return response;
 };
 
-export default GetEmeraldDetail;
+export default GetEmeraldSupplierDetail;

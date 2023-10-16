@@ -1,3 +1,12 @@
 .report-table-row {
-    line-height: 1rem;
+    line-height: 9px;
+}
+
+.report-table-head-row {
+    background-color: #2f308c;
+    color: white;
+}
+
+.report-table-head-tr {
+    line-height: 1px;
 }

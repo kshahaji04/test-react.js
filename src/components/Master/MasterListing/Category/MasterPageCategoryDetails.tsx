@@ -46,7 +46,7 @@ const MasterPageCategoryDetails = () => {
             >
               Back
             </button>
-            {showSubmitButton && (
+            {/* {showSubmitButton && (
               <button
                 type="submit"
                 onClick={HandleSubmit}
@@ -54,12 +54,12 @@ const MasterPageCategoryDetails = () => {
               >
                 Save
               </button>
-            )}
+            )} */}
           </div>
         </div>
         <div className="my-2 p-4">
           <label htmlFor="basic-url " className="fs-5">
-            New Category
+            Category
             <span className="text-danger">*</span>
           </label>
           <div className="input-group my-2 w-25">
@@ -71,12 +71,13 @@ const MasterPageCategoryDetails = () => {
               required
               id="basic-url"
               onChange={HandleInputField}
+              readOnly
             />
           </div>
-          <div className="">
+          {/* <div className="">
             {' '}
             {error && <p className="text-danger">{error}</p>}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

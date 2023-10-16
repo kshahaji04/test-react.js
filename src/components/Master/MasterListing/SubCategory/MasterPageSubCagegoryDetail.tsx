@@ -38,7 +38,7 @@ const MasterPageSubCategoryDetail = () => {
     }
   };
   return (
-    <div className="container">
+    <div className="container mt-5">
       <div className="card mt-2">
         <div className="card-header">
           <div className="d-flex justify-content-between ">
@@ -49,22 +49,41 @@ const MasterPageSubCategoryDetail = () => {
             >
               Back
             </button>
-            <button
-              type="submit"
-              onClick={HandleCategorySubmit}
-              className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
-            >
-              Save
-            </button>
           </div>
         </div>
         <div className="card-body">
-          <label htmlFor="basic-url " className="fs-6 mt-3 text-center">
-            Category
-            <span className="text-danger">*</span>
-          </label>
-          <div className="input-group w-50 master-input-field my-3 mt-2">
-            <select
+          <div className="row">
+            <div className="col-lg-6">
+              <label htmlFor="basic-url " className="fs-6 mt-3 text-center">
+                Sub Category
+                <span className="text-danger">*</span>
+              </label>
+              <div className="input-group w-50 master-input-field my-3 mt-2">
+                <input
+                  type="text"
+                  className="form-control py-1 ps-1"
+                  defaultValue={id}
+                  value={id}
+                  required
+                  readOnly
+                />
+              </div>
+            </div>
+            <div className="col-lg-6">
+              <label htmlFor="basic-url " className="fs-6 mt-3 text-center">
+                Category
+                <span className="text-danger">*</span>
+              </label>
+              <div className="input-group w-50 master-input-field my-3 mt-2">
+                <input
+                  type="text"
+                  className="form-control py-1 ps-1"
+                  defaultValue={categoryName?.data}
+                  value={categoryName?.data}
+                  required
+                  readOnly
+                />
+                {/* <select
               className="form-select form-select-sm"
               aria-label=".form-select-sm example"
               defaultValue={categoryName?.data}
@@ -78,7 +97,9 @@ const MasterPageSubCategoryDetail = () => {
                   })}
                 </>
               )}
-            </select>
+            </select> */}
+              </div>
+            </div>
           </div>
         </div>
       </div>

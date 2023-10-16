@@ -19,7 +19,7 @@ import MasterPageClientNameDetail from '../components/Master/MasterListing/Clien
 import MasterListing from '../components/Master/MasterListing';
 import MasterPageSubCategoryDetail from '../components/Master/MasterListing/SubCategory/MasterPageSubCagegoryDetail';
 import EditEmeraldChitti from '../components/EmeraldChitti/EmeraldListing/EditEmeraldChitti';
-import EmeraldDetailPage from '../components/DataUpload/ViewUpload/EmeraldDetailPage';
+import EmeraldSupplierDetailPage from '../components/DataUpload/ViewUpload/EmeraldSupplierDetailPage';
 import ReportMaster from '../components/Report/ReportMaster';
 import SubCategoryReport from '../components/Report/ReportListing.tsx/SubCategoryReport';
 import CategoryPartyWiseReport from '../components/Report/ReportListing.tsx/CategoryPartywiseReport';
@@ -219,10 +219,10 @@ const AppRoutes = () => {
           }
         />
         <Route
-          path="/data-upload/:id"
+          path="/dataupload/:id"
           element={
             <ProtectedRoute>
-              <EmeraldDetailPage />
+              <EmeraldSupplierDetailPage />
             </ProtectedRoute>
           }
         />
@@ -259,15 +259,13 @@ const AppRoutes = () => {
           }
         />
         <Route
-          path="/data-upload/emerald-shilpi/:id"
+          path="/dataupload/emerald-shilpi/:id"
           element={
             <ProtectedRoute>
               <EmeraldShilpiDetails />
             </ProtectedRoute>
           }
         />
-
-        {/* <Route path="/login" element={<Login />} /> */}
       </Routes>
     </Router>
   );

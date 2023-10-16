@@ -6,14 +6,13 @@ const SubCategoryReport = () => {
   console.log('SubcategoryReport data', subCategoryReportData);
   return (
     <div className="container">
-      <div className='mb-1'>
-        <h4>Sub Category Report</h4>
+      <div className="mb-1">
+        <h5>Sub Category Report</h5>
       </div>
       <div className="table-responsive">
-        <table className="table table-bordered table-hover">
-          <thead>
-            <tr>
-              {/* <th scope="col">Sr no</th> */}
+        <table className="table table-striped table-hover">
+          <thead className="report-table-head-row">
+            <tr className="report-table-head-tr text-uppercase">
               <th scope="col">Client Name</th>
               <th scope="col">Category</th>
               <th scope="col">Sub Category</th>
@@ -24,12 +23,11 @@ const SubCategoryReport = () => {
           </thead>
           <tbody>
             {subCategoryReportData?.length > 0 &&
-              subCategoryReportData !== null ? (
+            subCategoryReportData !== null ? (
               <>
                 {subCategoryReportData.map((data: any, index: any) => {
                   return (
                     <tr className="report-table-row" key={index}>
-                      {/* <th scope="row">{index + 1}</th> */}
                       <td>{data.client_name}</td>
                       <td>{data.category}</td>
                       <td>{data.sub_category}</td>

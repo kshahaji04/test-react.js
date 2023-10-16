@@ -7,7 +7,7 @@ const MasterSingleListingSearch = ({ placeholder, HandleSearchInput }: any) => {
         type="text"
         name="name"
         id="name"
-        className="form-control input-fields custom-input-field w-25 py-2 ps-2"
+        className="form-control input-fields custom-input-field w-25 py-1 ps-2"
         aria-describedby="emailHelp"
         placeholder={placeholder}
         onChange={HandleSearchInput}
