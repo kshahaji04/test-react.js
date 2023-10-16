@@ -53,7 +53,7 @@ const ListingTable = ({
       } else {
         toast.error('Failed to delete chitti');
       }
-    } else if (window?.location?.pathname === '/emerald') {
+    } else if (window?.location?.pathname === '/emeraldchitti') {
       let deleteEmeraldApiRes: any = await DeleteEmeraldChittiApi(
         AccessToken?.token,
         name
@@ -82,7 +82,7 @@ const ListingTable = ({
       ) {
         dispatch(getChittiChallan(AccessToken?.token));
       }
-    } else if (window?.location?.pathname === '/emerald') {
+    } else if (window?.location?.pathname === '/emeraldchitti') {
       let updateDocStatus: any = await UpdateDocStatus(
         AccessToken?.token,
         '2',

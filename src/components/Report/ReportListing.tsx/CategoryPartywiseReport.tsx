@@ -8,26 +8,75 @@ const CategoryPartyWiseReport = () => {
   const { categoryPartywiseReportData }: any = UseCategoryPartywiseReportHook();
   const { clientNameList }: any = UseClientNameHook();
   const { CategoryList }: any = UseCategoryHook();
-  console.log(
-    'categoryPartywiseReportData in tsx',
-    categoryPartywiseReportData
-  );
 
+  const [searchInputValues, setSearchInputValues] = useState({
+    fromDate: '',
+    toDate: '',
+  });
+  const [showClientNameInFilter, setShowClientNameInFilter] =
+    useState<any>(true);
+  const [showCategoryInFilter, setShowCategoryInFilter] = useState<any>(true);
+  const [showDateInFilter, setShowDateInFilter] = useState<any>(true);
   const [searchClientName, setSearchclientName] = useState<any>('');
   const [searchCategory, setSearchCategory] = useState<any>('');
+
+  const HandleSearchInput: any = (e: any) => {
+    const { name, value } = e.target;
+    setSearchInputValues({
+      ...searchInputValues,
+      [name]: value,
+    });
+  };
+
+  const filteredList =
+    categoryPartywiseReportData?.length > 0 &&
+    categoryPartywiseReportData !== null &&
+    (searchInputValues.fromDate ||
+      searchInputValues.toDate ||
+      searchClientName ||
+      searchCategory)
+      ? categoryPartywiseReportData.filter((item: any) => {
+          const categoryMatch = searchCategory
+            ? item?.category?.includes(searchCategory)
+            : true;
+          const clientNameMatch = searchClientName
+            ? item?.client_name?.includes(searchClientName)
+            : true;
+
+          const dateMatch =
+            searchInputValues.fromDate && searchInputValues.toDate
+              ? item?.date >= searchInputValues.fromDate &&
+                item?.date <= searchInputValues.toDate
+              : true;
+
+          return categoryMatch && clientNameMatch && dateMatch;
+        })
+      : categoryPartywiseReportData;
+
+  console.log(
+    'filter list',
+    searchCategory,
+    searchClientName,
+    searchInputValues
+  );
+  console.log('filter list final', filteredList);
   return (
     <div className="container">
       <div className="mb-1">
         <h5>Category Partywise Report</h5>
       </div>
-      {/* <FilterReportListing
+      <FilterReportListing
         clientNameList={clientNameList}
         searchClientName={searchClientName}
         setSearchclientName={setSearchclientName}
         CategoryList={CategoryList}
         searchCategory={searchCategory}
         setSearchCategory={setSearchCategory}
-      /> */}
+        HandleSearchInput={HandleSearchInput}
+        showCategoryInFilter={showCategoryInFilter}
+        showClientNameInFilter={showClientNameInFilter}
+        showDateInFilter={showDateInFilter}
+      />
       <div className="table-responsive">
         <table className="table table-striped table-hover">
           <thead className="report-table-head-row">
@@ -40,10 +89,9 @@ const CategoryPartyWiseReport = () => {
             </tr>
           </thead>
           <tbody>
-            {categoryPartywiseReportData?.length > 0 &&
-            categoryPartywiseReportData !== null ? (
+            {filteredList?.length > 0 && filteredList !== null ? (
               <>
-                {categoryPartywiseReportData.map((data: any, index: any) => {
+                {filteredList.map((data: any, index: any) => {
                   return (
                     <tr className="report-table-row" key={index}>
                       <td>{data.client_name}</td>

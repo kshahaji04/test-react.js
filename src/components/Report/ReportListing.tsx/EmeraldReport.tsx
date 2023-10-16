@@ -1,14 +1,76 @@
-import React from 'react';
+import React, { useState } from 'react';
 import UseEmeraldReportHook from '../../../hooks/report/emerald-report-hook';
+import UseSubCategoryHook from '../../../hooks/Master/sub-category-hook';
+import FilterReportListing from './FilterReportListing';
+import UseDataUploadHook from '../../../hooks/dataUpload/data-upload-hook';
 
 const EmeraldReport = () => {
   const { emeraldReportData } = UseEmeraldReportHook();
-  console.log('emeraldReportData in tsx', emeraldReportData);
+  const { subCategoryList }: any = UseSubCategoryHook();
+  const { supplierList }: any = UseDataUploadHook();
+  console.log('emeraldReportData in tsx', supplierList);
+
+  const [searchInputValues, setSearchInputValues] = useState({
+    supplier: '',
+    project: '',
+    fromDate: '',
+    toDate: '',
+  });
+
+  const [showSubCategoryInFilter, setShowSubCategoryInFilter] =
+    useState<any>(true);
+  const [showSupplierInFilter, setShowSupplierInFilter] = useState<any>(true);
+  const [showProjectFieldInFilter, setShowProjectFieldInFilter] =
+    useState<any>(true);
+  const [searchSubCategory, setSearchSubCategory] = useState<any>('');
+  const [searchSupplier, setSearchSupplier] = useState<any>('');
+
+  const HandleSearchInput: any = (e: any) => {
+    const { name, value } = e.target;
+    setSearchInputValues({
+      ...searchInputValues,
+      [name]: value,
+    });
+  };
+
+  const filteredList =
+    emeraldReportData?.length > 0 &&
+    emeraldReportData !== null &&
+    (searchInputValues.supplier ||
+      searchInputValues.project ||
+      searchSubCategory)
+      ? emeraldReportData.filter((item: any) => {
+          const supplierMatch = searchInputValues.supplier
+            ? item?.supplier?.includes(searchInputValues.supplier)
+            : true;
+          const projectMatch = searchInputValues.project
+            ? item?.category?.includes(searchInputValues.project)
+            : true;
+          const subCategoryMatch = searchSubCategory
+            ? item?.sub_category?.includes(searchSubCategory)
+            : true;
+
+          return supplierMatch && subCategoryMatch && projectMatch;
+        })
+      : emeraldReportData;
+
   return (
     <div className="container">
       <div className="mb-1">
         <h5>Emerald Report</h5>
       </div>
+      <FilterReportListing
+        searchSubCategory={searchSubCategory}
+        setSearchSubCategory={setSearchSubCategory}
+        HandleSearchInput={HandleSearchInput}
+        showSubCategoryInFilter={showSubCategoryInFilter}
+        subCategoryList={subCategoryList}
+        showSupplierInFilter={showSupplierInFilter}
+        showProjectFieldInFilter={showProjectFieldInFilter}
+        searchSupplier={searchSupplier}
+        setSearchSupplier={setSearchSupplier}
+        supplierList={supplierList}
+      />
       <div className="table-responsive">
         <table className="table table-striped table-hover">
           <thead className="report-table-head-row">
@@ -39,9 +101,9 @@ const EmeraldReport = () => {
             </tr>
           </thead>
           <tbody>
-            {emeraldReportData?.length > 0 && emeraldReportData !== null ? (
+            {filteredList?.length > 0 && filteredList !== null ? (
               <>
-                {emeraldReportData.map((data: any, index: any) => {
+                {filteredList.map((data: any, index: any) => {
                   return (
                     <tr className="report-table-row" key={index}>
                       <td>{data.supplier}</td>

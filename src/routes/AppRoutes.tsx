@@ -211,7 +211,7 @@ const AppRoutes = () => {
         />
 
         <Route
-          path="/emerald/:id"
+          path="/emeraldchitti/:id"
           element={
             <ProtectedRoute>
               <EditEmeraldChitti />

@@ -185,7 +185,9 @@ const EmeraldShilpiDetails = () => {
             </table>
           </>
         ) : (
-          'no data'
+          <div className="text-center mt-5">
+            <h5>No Records Found...</h5>
+          </div>
         )}
       </div>
     </div>

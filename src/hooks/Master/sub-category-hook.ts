@@ -8,10 +8,7 @@ import {
   getSubCategoryList,
   get_subcategory_list,
 } from '../../store/slices/Chitti/get-subcategory-slice';
-import {
-  getCategoryList,
-  get_category_list,
-} from '../../store/slices/Master/get-category-slice';
+import { get_category_list } from '../../store/slices/Master/get-category-slice';
 import {
   getSubCategoryCategory,
   get_subcategory_category,

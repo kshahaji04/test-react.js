@@ -29,13 +29,13 @@ const DataUpload = () => {
   // };
 
   return (
-    <div className="container">
+    <div className="container mt-5">
       <a href={`${BASE_URL}/app/emerald-supplier/new-emerald-supplier-1`}>
         <button
           type="button"
           className="btn btn-outline-primary text-uppercase btn-sm"
         >
-          <span className="download-template-btn">download template</span>
+          <span className="">Create Emerald Supplier</span>
         </button>
       </a>
 

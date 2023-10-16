@@ -22,7 +22,7 @@ const UserProfile = () => {
           <div className="col-10">
             <div className="card-text text-center profile-fontSize">
               {' '}
-              <h6>Welcome Guest !!</h6>
+              <h6>Welcome !!!</h6>
             </div>
           </div>
         </div>
