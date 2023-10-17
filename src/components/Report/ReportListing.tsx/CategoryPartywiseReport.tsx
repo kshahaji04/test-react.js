@@ -8,7 +8,7 @@ const CategoryPartyWiseReport = () => {
   const { categoryPartywiseReportData }: any = UseCategoryPartywiseReportHook();
   const { clientNameList }: any = UseClientNameHook();
   const { CategoryList }: any = UseCategoryHook();
-
+  // let lastSubCategoryColor: any = 'text-dark';
   const [searchInputValues, setSearchInputValues] = useState({
     fromDate: '',
     toDate: '',
@@ -53,13 +53,6 @@ const CategoryPartyWiseReport = () => {
         })
       : categoryPartywiseReportData;
 
-  console.log(
-    'filter list',
-    searchCategory,
-    searchClientName,
-    searchInputValues
-  );
-  console.log('filter list final', filteredList);
   return (
     <div className="container">
       <div className="mb-1">
@@ -96,9 +89,7 @@ const CategoryPartyWiseReport = () => {
                   return (
                     <tr className="report-table-row" key={index}>
                       <td>{index + 1}</td>
-                      <td className={`${index % 2 ? '' : 'text-danger'}`}>
-                        {data.category}
-                      </td>
+                      <td>{data.category}</td>
                       <td>{data.client_name}</td>
                       <td>{data.total_gross_weight}</td>
                       <td>{data.total_net_weight}</td>

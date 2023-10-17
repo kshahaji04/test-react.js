@@ -23,6 +23,7 @@ const FilterReportListing = ({
   supplierList,
 }: any) => {
   console.log('supply', supplierList);
+
   return (
     <div className="container">
       <div className="row justify-content-center mt-2">

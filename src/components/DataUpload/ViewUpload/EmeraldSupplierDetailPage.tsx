@@ -113,7 +113,7 @@ const EmeraldSupplierDetailPage = () => {
           <>
             <table className="table table table-striped table-hover listing-table border-0">
               <thead className="table-heading">
-                <tr className="table-heading-row">
+                <tr className="table-heading-row text-uppercase">
                   <th scope="col">No</th>
                   <th scope="col" className="px-3">
                     TRANSFERID

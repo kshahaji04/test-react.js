@@ -16,6 +16,7 @@ const SubCategoryReport = () => {
     fromDate: '',
     toDate: '',
   });
+  let lastSubCategoryColor: any = 'text-dark';
   const [showClientNameInFilter, setShowClientNameInFilter] =
     useState<any>(true);
   const [showCategoryInFilter, setShowCategoryInFilter] = useState<any>(true);
@@ -102,12 +103,19 @@ const SubCategoryReport = () => {
             {filteredList?.length > 0 && filteredList !== null ? (
               <>
                 {filteredList.map((data: any, index: any) => {
+                  const subCategory = data.sub_category;
+                  const textColor =
+                    subCategory === filteredList[index - 1]?.sub_category
+                      ? lastSubCategoryColor
+                      : lastSubCategoryColor === 'text-danger'
+                      ? 'text-dark'
+                      : 'text-danger';
+                  lastSubCategoryColor = textColor; // Update the color for the next iteration
                   return (
                     <tr className="report-table-row" key={index}>
                       <td>{index + 1}</td>
-                      <td className={`${index % 2 ? '' : 'text-danger'}`}>
-                        {data.sub_category}
-                      </td>
+
+                      <td className={`${textColor}`}>{data.sub_category}</td>
                       <td>{data.client_name}</td>
                       <td>{data.total_gross_weight}</td>
                       <td>{data.total_net_weight}</td>
