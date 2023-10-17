@@ -240,7 +240,7 @@ const ListingTable = ({
           </thead>
           <tbody>{TableBodyData()}</tbody>
         </table>
-        {tableListingData?.length > 0 && tableListingData !== null && (
+        {tableListingData?.length > 19 && tableListingData !== null && (
           <div
             className="btn-group mr-2 my-2 mb-4"
             role="group"

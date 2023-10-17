@@ -1,17 +1,18 @@
 import React from 'react';
 import UseEmeraldShilpiDetails from '../../../hooks/emerald-shilpi/emerald-shilpi-detail-hook';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const EmeraldShilpiDetails = () => {
   const navigate = useNavigate();
+  const { id }: any = useParams();
   const { emeraldShilpiDetails }: any = UseEmeraldShilpiDetails();
   console.log('emeraldShilpiDetails in tsx', emeraldShilpiDetails);
 
   return (
     <div className="container mb-5">
-      <hr className="hr_line my-3" />
-      <div className="d-flex justify-content-between my-1">
-        <div>
+      <hr className="hr_line my-2" />
+      <div className="row mb-1">
+        <div className="col-lg-1">
           <button
             type="button"
             className="btn btn-outline-primary py-0 btn-sm"
@@ -19,6 +20,9 @@ const EmeraldShilpiDetails = () => {
           >
             Back
           </button>
+        </div>
+        <div className="col-lg-6 fs-6 ">
+          <span className="text-secondary">Emerald Shilpi : </span> <b>{id}</b>
         </div>
       </div>
       <div className="row mb-4">
@@ -84,7 +88,7 @@ const EmeraldShilpiDetails = () => {
           </div>
         </div>
       </div>
-      <div className="table-responsive">
+      <div className="table-responsive emerald-shilpi-table-container">
         {emeraldShilpiDetails[0]?.emerald_supplier_table?.length > 0 &&
         emeraldShilpiDetails[0]?.emerald_supplier_table !== null ? (
           <>
@@ -186,7 +190,7 @@ const EmeraldShilpiDetails = () => {
           </>
         ) : (
           <div className="text-center mt-5">
-            <h5>No Records Found...</h5>
+            {/* <h5>No Records Found...</h5> */}
           </div>
         )}
       </div>

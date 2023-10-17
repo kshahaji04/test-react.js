@@ -7,8 +7,8 @@ import UseDataUploadHook from '../../../hooks/dataUpload/data-upload-hook';
 const EmeraldReport = () => {
   const { emeraldReportData } = UseEmeraldReportHook();
   const { subCategoryList }: any = UseSubCategoryHook();
-  const { supplierList }: any = UseDataUploadHook();
-  console.log('emeraldReportData in tsx', supplierList);
+  const { updatedSupplierList }: any = UseDataUploadHook();
+  console.log('emeraldReportData in tsx', updatedSupplierList);
 
   const [searchInputValues, setSearchInputValues] = useState({
     supplier: '',
@@ -36,12 +36,10 @@ const EmeraldReport = () => {
   const filteredList =
     emeraldReportData?.length > 0 &&
     emeraldReportData !== null &&
-    (searchInputValues.supplier ||
-      searchInputValues.project ||
-      searchSubCategory)
+    (searchSupplier || searchInputValues.project || searchSubCategory)
       ? emeraldReportData.filter((item: any) => {
-          const supplierMatch = searchInputValues.supplier
-            ? item?.supplier?.includes(searchInputValues.supplier)
+          const supplierMatch = searchSupplier
+            ? item?.supplier?.includes(searchSupplier)
             : true;
           const projectMatch = searchInputValues.project
             ? item?.category?.includes(searchInputValues.project)
@@ -55,10 +53,11 @@ const EmeraldReport = () => {
       : emeraldReportData;
 
   return (
-    <div className="container">
+    <div className="container mb-5">
       <div className="mb-1">
         <h5>Emerald Report</h5>
       </div>
+
       <FilterReportListing
         searchSubCategory={searchSubCategory}
         setSearchSubCategory={setSearchSubCategory}
@@ -69,12 +68,14 @@ const EmeraldReport = () => {
         showProjectFieldInFilter={showProjectFieldInFilter}
         searchSupplier={searchSupplier}
         setSearchSupplier={setSearchSupplier}
-        supplierList={supplierList}
+        supplierList={updatedSupplierList}
       />
-      <div className="table-responsive">
+
+      <div className="table-responsive report-table-container">
         <table className="table table-striped table-hover">
           <thead className="report-table-head-row">
             <tr className="report-table-head-tr text-uppercase">
+              <th scope="col">No</th>
               <th scope="col">Supplier</th>
               <th scope="col">Transferid</th>
               <th scope="col">Rfid</th>
@@ -106,6 +107,7 @@ const EmeraldReport = () => {
                 {filteredList.map((data: any, index: any) => {
                   return (
                     <tr className="report-table-row" key={index}>
+                      <td>{index + 1}</td>
                       <td>{data.supplier}</td>
                       <td>{data.transferid}</td>
                       <td>{data.rfid}</td>

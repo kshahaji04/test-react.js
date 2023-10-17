@@ -1,14 +1,19 @@
 import { NavLink } from 'react-router-dom';
+import { get_emerald_supplier } from '../../../store/slices/dataUpload/get-emerald-supplier-slice';
+import { useSelector } from 'react-redux';
 
 const EmeraldSupplierList = ({ supplierList, emeraldSupplierData }: any) => {
   console.log('emeraldTableData', supplierList);
   console.log('emeraldSupplierData', emeraldSupplierData);
+
+  const emeraldSupplierDataFromStore: any = useSelector(get_emerald_supplier);
+  console.log(
+    'EmeraldSupplierDataFromStore in tsx',
+    emeraldSupplierDataFromStore
+  );
   return (
     <>
       <div className="container mt-3">
-        {/* <div className="mb-1">
-          <h5>Emerald Shilpi List</h5>
-        </div> */}
         <div className="table-responsive">
           <table className="table table-striped table-hover">
             <thead className="report-table-head-row">
@@ -22,6 +27,14 @@ const EmeraldSupplierList = ({ supplierList, emeraldSupplierData }: any) => {
               </tr>
             </thead>
             <tbody>
+              {/* <div className="text-center ">
+                {emeraldSupplierDataFromStore?.isLoading === 'succeeded' &&
+                Object.keys(emeraldSupplierDataFromStore?.data)?.length > 0 ? (
+                  <div className="spinner-border text-dark text-center mt-5"></div>
+                ) : (
+                  ''
+                )}
+              </div> */}
               {emeraldSupplierData?.length > 0 &&
               emeraldSupplierData !== null ? (
                 <>

@@ -12,6 +12,16 @@
 } */
 
 .emerald_table_container {
+    height: 455px;
+}
+
+.emerald-shilpi-table-container {
+    max-height: 455px;
+    overflow-x: auto;
+}
+
+.emerald-supplier-table-container {
+    max-height: 455px;
     overflow-x: auto;
 }
 

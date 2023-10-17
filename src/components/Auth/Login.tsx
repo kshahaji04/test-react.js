@@ -83,7 +83,7 @@ const Login = () => {
             </label>
           </div> */}
                 <button type="submit" className="btn btn-primary mt-3">
-                  Submit
+                  Login
                 </button>
               </form>
             </div>

@@ -1,5 +1,5 @@
 .report-table-row {
-    line-height: 9px;
+    line-height: auto;
 }
 
 .report-table-head-row {
@@ -9,5 +9,13 @@
 
 .report-table-head-tr {
     line-height: 12px;
+}
 
+.report-table-row td {
+    font-size: 0.8rem;
+}
+
+.report-table-container {
+    height: 450px;
+    overflow-y: auto;
 }

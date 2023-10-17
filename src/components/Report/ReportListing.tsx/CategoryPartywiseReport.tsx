@@ -81,8 +81,9 @@ const CategoryPartyWiseReport = () => {
         <table className="table table-striped table-hover">
           <thead className="report-table-head-row">
             <tr className="report-table-head-tr text-uppercase">
-              <th scope="col">Client Name</th>
+              <th scope="col">No</th>
               <th scope="col">Category</th>
+              <th scope="col">Client Name</th>
               <th scope="col">Gross Weight</th>
               <th scope="col">Net Weight</th>
               <th scope="col">Amount</th>
@@ -94,8 +95,11 @@ const CategoryPartyWiseReport = () => {
                 {filteredList.map((data: any, index: any) => {
                   return (
                     <tr className="report-table-row" key={index}>
+                      <td>{index + 1}</td>
+                      <td className={`${index % 2 ? '' : 'text-danger'}`}>
+                        {data.category}
+                      </td>
                       <td>{data.client_name}</td>
-                      <td>{data.category}</td>
                       <td>{data.total_gross_weight}</td>
                       <td>{data.total_net_weight}</td>
                       <td>{data.total_amount}</td>

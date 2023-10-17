@@ -16,9 +16,9 @@ const CreateChittiForm = ({
   defaultData,
   HandleDateChange,
   date,
-  setStateForDocStatus
+  setStateForDocStatus,
 }: any) => {
-  console.log('defaultData chit', currentDate);
+  console.log('defaultData chit', defaultData);
 
   const [bgColor, setBgColor] = useState<any>(true);
   const [readOnlyField, setReadOnlyField] = useState<any>(false);
@@ -47,14 +47,18 @@ const CreateChittiForm = ({
                 type="date"
                 id="date"
                 name="date"
-                value={currentDate?.toISOString()?.split('T')[0]}
+                value={
+                  defaultData === undefined
+                    ? currentDate?.toISOString()?.split('T')[0]
+                    : defaultData?.date
+                }
                 defaultValue={defaultData?.date}
                 className="form-control custom-input-field py-0 px-2"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"
                 onChange={HandleDateChange}
                 readOnly
-              // readOnly={readOnlyField}
+                // readOnly={readOnlyField}
               />
             </div>
           </div>
@@ -73,7 +77,7 @@ const CreateChittiForm = ({
               HandleClientGroup={HandleClientGroup}
               defaultData={defaultData}
               setStateForDocStatus={setStateForDocStatus}
-            // readOnlyField={readOnlyField}
+              // readOnlyField={readOnlyField}
             />
             {/* <CustomDropDown /> */}
           </div>
@@ -87,7 +91,7 @@ const CreateChittiForm = ({
               className="form-control custom-input-field px-1"
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"
-              // readOnly={readOnlyField}
+              defaultValue={defaultData?.gold_rate}
               onChange={HandleGoldRate}
             />
           </div>
@@ -103,8 +107,7 @@ const CreateChittiForm = ({
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"
               onChange={HandleRemarks}
-            // readOnly={readOnlyField}
-            // onBlur={handleBlur}
+              defaultValue={defaultData?.remarks}
             />
           </div>
         </div>

@@ -27,9 +27,9 @@ const EmeraldSupplierDetailPage = () => {
   };
   return (
     <div className="container mb-5">
-      <hr className="hr_line my-3" />
-      <div className="d-flex justify-content-between my-1">
-        <div>
+      <hr className="hr_line my-2" />
+      <div className="row mb-2">
+        <div className="col-lg-1">
           <button
             type="button"
             className="btn btn-outline-primary py-0 btn-sm"
@@ -37,6 +37,10 @@ const EmeraldSupplierDetailPage = () => {
           >
             Back
           </button>
+        </div>
+        <div className="col-lg-6 fs-6 ">
+          <span className="text-secondary">Emerald Supplier : </span>{' '}
+          <b>{id}</b>
         </div>
       </div>
       <div className="row mb-4">
@@ -102,10 +106,11 @@ const EmeraldSupplierDetailPage = () => {
           </div>
         </div>
       </div>
-      {emeraldSupplierDetail[0]?.emerald_supplier_table?.length > 0 &&
-      emeraldSupplierDetail[0]?.emerald_supplier_table !== null ? (
-        <>
-          <div className="table-responsive my-2 ">
+
+      <div className="table-responsive my-2 emerald-supplier-table-container">
+        {emeraldSupplierDetail[0]?.emerald_supplier_table?.length > 0 &&
+        emeraldSupplierDetail[0]?.emerald_supplier_table !== null ? (
+          <>
             <table className="table table table-striped table-hover listing-table border-0">
               <thead className="table-heading">
                 <tr className="table-heading-row">
@@ -197,30 +202,30 @@ const EmeraldSupplierDetailPage = () => {
                 )}
               </tbody>
             </table>
-          </div>
-          <div className="d-flex justify-content-end mt-2">
+            {/* <div className="d-flex justify-content-end mt-2">
             <div className="d-flex">
               <button
                 type="button"
                 className="btn btn-outline-secondary btn-sm p-0 px-2"
                 onClick={HandleDownloadSupplierData}
-              >
+                >
                 Download
               </button>
               <button
                 type="button"
                 className="btn btn-outline-secondary btn-sm p-0 px-2 mx-4"
-              >
+                >
                 Upload
               </button>
             </div>
+          </div> */}
+          </>
+        ) : (
+          <div className="my-5 text-center">
+            {/* <h5>No Records Found...</h5> */}
           </div>
-        </>
-      ) : (
-        <div className="my-5 text-center">
-          <h5>No Records Found...</h5>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

@@ -42,26 +42,14 @@ const FilterReportListing = ({
 
         {showSupplierInFilter && (
           <>
-            <div className="col-md-2 ">
-              <input
-                type="text"
-                name="supplier"
-                id="supplier"
-                className="form-control input-fields custom-input-field "
-                placeholder="Supplier"
-                onChange={HandleSearchInput}
-              />
-            </div>
-            {/* <div className="col-md-2">
+            <div className="col-md-2">
               <SelectedInputDropdown
                 drowpdownlist={supplierList}
-      
                 placeholderValue="Supplier"
                 selectedDropdownValue={searchSupplier}
                 setSelectedDropdownValue={setSearchSupplier}
-               
               />
-            </div> */}
+            </div>
           </>
         )}
 

@@ -21,6 +21,7 @@ const UseDataUploadHook = () => {
   const [supplierList, setSupplierList] = useState<any>([]);
   const [emeraldSupplierData, setEmeraldSupplierData] = useState<any>([]);
   const [supplier, setSupplier] = useState<any>('');
+  const [updatedSupplierList, setUpdatedSupplierList] = useState<any>([]);
 
   console.log('EmeraldSupplierDataFromStore', EmeraldSupplierDataFromStore);
 
@@ -52,13 +53,30 @@ const UseDataUploadHook = () => {
     }
   }, [EmeraldSupplierDataFromStore]);
 
+  useEffect(() => {
+    if (
+      SupplierDataFromStore?.data?.length > 0 &&
+      SupplierDataFromStore?.data !== null
+    ) {
+      const updatedSupplierList: any = SupplierDataFromStore?.data.map(
+        (list: any) => {
+          return list.name;
+        }
+      );
+      setUpdatedSupplierList(updatedSupplierList);
+    }
+  }, [SupplierDataFromStore]);
+
   const HandleSupplier = (e: any) => {
     setSupplier(e.target.value);
   };
 
-  console.log('emeraldSupplierData in hook', emeraldSupplierData);
-
-  return { supplierList, HandleSupplier, emeraldSupplierData };
+  return {
+    supplierList,
+    HandleSupplier,
+    emeraldSupplierData,
+    updatedSupplierList,
+  };
 };
 
 export default UseDataUploadHook;

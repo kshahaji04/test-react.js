@@ -137,6 +137,13 @@
   padding: 0px;
 }
 
+
+.dropdown-ul-list {
+  max-height: 170px;
+
+  overflow-y: auto;
+}
+
 .dropdown-ul-list li {
   padding: 0px 4px;
   font-size: 0.8rem;

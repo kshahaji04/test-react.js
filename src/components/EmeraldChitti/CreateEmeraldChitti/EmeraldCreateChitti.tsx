@@ -11,10 +11,10 @@ const EmeraldCreateChitti = ({
   currentDate,
   handleDateChange,
   transactionDate,
-  setStateForDocStatus
-
+  setStateForDocStatus,
 }: any) => {
   const [bgColor, setBgColor] = useState<any>(true);
+  console.log('default date', defaultData);
   return (
     <form
       //  onSubmit={handleSubmit}
@@ -24,9 +24,7 @@ const EmeraldCreateChitti = ({
         <div className="w-25 ">
           <label className="form-Form.Label text-dark form-label-bold">
             Client Name
-            <span className='text-danger'>
-              *
-            </span>
+            <span className="text-danger">*</span>
           </label>
           <div className="h-25">
             <SelectedInputDropdown
@@ -51,7 +49,11 @@ const EmeraldCreateChitti = ({
               type="date"
               id="date"
               name="date"
-              value={currentDate?.toISOString()?.split('T')[0]}
+              value={
+                defaultData === undefined
+                  ? currentDate?.toISOString()?.split('T')[0]
+                  : defaultData?.date
+              }
               defaultValue={defaultData?.date}
               className="form-control custom-input-field emerald-input-field"
               aria-label="Sizing example input"
