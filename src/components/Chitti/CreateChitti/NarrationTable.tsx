@@ -132,6 +132,7 @@ const NarrationTable = ({
             <th scope="col">No.</th>
             <th scope="col" className="narration-table-product">
               Product
+              <span className="text-danger">*</span>
             </th>
             <th scope="col">HUID Pieces</th>
             <th scope="col">HUID Weight</th>

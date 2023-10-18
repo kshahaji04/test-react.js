@@ -151,6 +151,7 @@ const ChallanItemsTable = ({
                 <th scope="col">No.</th>
                 <th scope="col" className="w-50">
                   Sub Category
+                  <span className="text-danger">*</span>
                 </th>
                 <th scope="col">Gross Weight</th>
                 <th scope="col">Net Weight</th>

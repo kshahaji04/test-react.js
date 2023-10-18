@@ -72,8 +72,8 @@ const EmeraldReport = () => {
 
       <div className="table-responsive report-table-container">
         <table className="table table-striped table-hover">
-          <thead className="report-table-head-row ">
-            <tr className="report-table-head-tr text-uppercase">
+          <thead className="report-table-head-row sticky-top">
+            <tr className="report-table-head-tr text-uppercase ">
               <th scope="col">No</th>
               <th scope="col">Supplier</th>
               <th scope="col">Transferid</th>

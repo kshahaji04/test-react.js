@@ -169,6 +169,7 @@ const EmeraldChittiTable = ({
                   <th scope="col">No.</th>
                   <th scope="col" className="w-25">
                     Sub Category
+                    <span className="text-danger">*</span>
                   </th>
                   <th scope="col" className="w-25">
                     Product

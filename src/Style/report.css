@@ -9,6 +9,7 @@
 
 .report-table-head-tr {
     line-height: 12px;
+
 }
 
 .report-table-row td {
@@ -18,4 +19,9 @@
 .report-table-container {
     height: 450px;
     overflow-y: auto;
+}
+
+.report-table-head-row {
+    z-index: 888;
+    background-color: #2f308c !important;
 }

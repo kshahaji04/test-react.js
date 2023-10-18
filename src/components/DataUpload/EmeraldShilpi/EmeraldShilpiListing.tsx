@@ -19,11 +19,10 @@ const EmeraldShilpiListing = ({ emeraldShilpiListData }: any) => {
                 {emeraldShilpiListData.map((data: any, index: any) => {
                   return (
                     <tr className="text-start" key={index}>
-                      <td className="border-0">
-                        {' '}
+                      <td className="border-0 ">
                         <NavLink
                           to={`emerald-shilpi/${data.name}`}
-                          className="text-decoration-none text-dark"
+                          className="text-decoration-none text-dark ps-2"
                         >
                           {data.name}
                         </NavLink>
