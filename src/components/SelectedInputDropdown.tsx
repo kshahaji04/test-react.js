@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const SelectedInputDropdown = ({
   drowpdownlist,
@@ -18,7 +18,6 @@ const SelectedInputDropdown = ({
   const [noRecords, setNoRecordsFound] = useState<any>(false);
   const [filterDropdownList, setFilterDropdownList] = useState<any>([]);
 
-  const [isFocused, setIsFocused] = useState(false);
   const selectDropdownRef = useRef<any>(null);
   useEffect(() => {
     if (
@@ -84,13 +83,13 @@ const SelectedInputDropdown = ({
         <input
           type="text"
           className={`${
-            bgColor === true
+            bgColor?.current === true
               ? 'form-control dropdown-input client-name-input-chitti'
               : 'form-control input-fields  dropdown-input'
           }`}
           id="exampleInputEmail1"
           onBlur={handleBlur}
-          onFocus={() => setIsFocused(true)}
+          // onFocus={() => setIsFocused(true)}
           placeholder={placeholderValue}
           onChange={HandleInputField}
           onClick={handleShowDropdown}

@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../root-reducer';
-import getSubCategoryReportApi from '../../../services/api/report/get-sub-category-report-api';
 import getCategorySummaryReportApi from '../../../services/api/report/get-category-summary-report-api';
 
 export const getCategorySummaryReportData: any = createAsyncThunk(

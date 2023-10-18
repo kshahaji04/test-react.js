@@ -1,8 +1,6 @@
-import React from 'react';
 import '../../Style/Navbar.css';
 import { NavLink } from 'react-router-dom';
 const MainNavigationTab = () => {
-  // const navList: any = ["Master", "Chitti", "Emerald Chitti", "Report", "Data Upload"]
   const navList: any = [
     {
       icon: 'fa-regular fa-file icons-color',

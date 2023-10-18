@@ -3,9 +3,6 @@ import { get_emerald_supplier } from '../../../store/slices/dataUpload/get-emera
 import { useSelector } from 'react-redux';
 
 const EmeraldSupplierList = ({ supplierList, emeraldSupplierData }: any) => {
-  console.log('emeraldTableData', supplierList);
-  console.log('emeraldSupplierData', emeraldSupplierData);
-
   const emeraldSupplierDataFromStore: any = useSelector(get_emerald_supplier);
   console.log(
     'EmeraldSupplierDataFromStore in tsx',

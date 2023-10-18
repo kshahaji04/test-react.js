@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../root-reducer';
-import GetChallanList from '../../../services/api/Chitti/get-chitti-challan-listing';
-import GetSpecificChallanListData from '../../../services/api/Chitti/get-specific-chitti-listing-api';
 import GetSpecificEmeraldListData from '../../../services/api/Emerald/get-specific-emerald-chitti-api';
 
 export const getSpecificEmeraldChitti: any = createAsyncThunk(

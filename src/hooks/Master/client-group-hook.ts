@@ -7,7 +7,6 @@ import {
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
 import {
-  GetClientNameClientGroupScreen,
   getClientNameClientGroup,
   get_client_name_client_group,
 } from '../../store/slices/Master/get-clientname-clientgroup-slice';

@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
-import {
-  getSubCategoryReportData,
-  get_subcategory_report_data,
-} from '../../store/slices/report/get-subcategory-report-slice';
+
 import {
   getCategorySummaryReportData,
   get_category_summary_report_data,

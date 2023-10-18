@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import HuidProductListing from './HuidProductListing';
 import AddHuidProduct from './AddHuidProduct';

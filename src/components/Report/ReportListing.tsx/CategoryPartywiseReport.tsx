@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useRef, useState } from 'react';
 import UseCategoryPartywiseReportHook from '../../../hooks/report/category-partywise-hook';
 import FilterReportListing from './FilterReportListing';
 import UseClientNameHook from '../../../hooks/Master/client-name-hook';
@@ -13,10 +13,11 @@ const CategoryPartyWiseReport = () => {
     fromDate: '',
     toDate: '',
   });
-  const [showClientNameInFilter, setShowClientNameInFilter] =
-    useState<any>(true);
-  const [showCategoryInFilter, setShowCategoryInFilter] = useState<any>(true);
-  const [showDateInFilter, setShowDateInFilter] = useState<any>(true);
+
+  const showClientNameInFilter = useRef(true);
+  const showCategoryInFilter = useRef(true);
+  const showDateInFilter = useRef(true);
+
   const [searchClientName, setSearchclientName] = useState<any>('');
   const [searchCategory, setSearchCategory] = useState<any>('');
 
@@ -72,7 +73,7 @@ const CategoryPartyWiseReport = () => {
       />
       <div className="table-responsive">
         <table className="table table-striped table-hover">
-          <thead className="report-table-head-row">
+          <thead className="report-table-head-row ">
             <tr className="report-table-head-tr text-uppercase">
               <th scope="col">No</th>
               <th scope="col">Category</th>

@@ -1,4 +1,3 @@
-import React from 'react';
 import EmeraldCreateChitti from './EmeraldCreateChitti';
 import EmeraldChittiTable from './EmeraldChittiTable';
 

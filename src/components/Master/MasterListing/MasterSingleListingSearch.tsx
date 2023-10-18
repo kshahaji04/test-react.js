@@ -1,5 +1,3 @@
-import React from 'react';
-
 const MasterSingleListingSearch = ({ placeholder, HandleSearchInput }: any) => {
   return (
     <div className="container row  mt-2">

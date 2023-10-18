@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useRef } from 'react';
 import SelectedInputDropdown from '../../SelectedInputDropdown';
 import { get_specific_chitti_challan } from '../../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
 import { useSelector } from 'react-redux';
-import CustomDropDown from '../../customDropdown';
 
 const CreateChittiForm = ({
   currentDate,
@@ -15,23 +14,13 @@ const CreateChittiForm = ({
   HandleClientGroup,
   defaultData,
   HandleDateChange,
-  date,
+
   setStateForDocStatus,
 }: any) => {
-  console.log('defaultData chit', defaultData);
-
-  const [bgColor, setBgColor] = useState<any>(true);
-  const [readOnlyField, setReadOnlyField] = useState<any>(false);
+  const bgColor = useRef(true);
 
   const docStatusFromStore: any = useSelector(get_specific_chitti_challan);
   console.log('docStatus in cre', docStatusFromStore?.docStatus);
-  // useEffect(() => {
-  //   if (docStatusFromStore?.docStatus > 0) {
-  //     setReadOnlyField(true);
-  //   } else {
-  //     setReadOnlyField(false);
-  //   }
-  // }, []);
 
   return (
     <>

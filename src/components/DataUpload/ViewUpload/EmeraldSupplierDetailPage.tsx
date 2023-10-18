@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
 import UseEmeraldSupplierDetailHook from '../../../hooks/dataUpload/emerald-supplier-detail-hook';
-import DownloadEmeraldSupplierTableData from '../../../services/api/dataUpload/get-emerald-supplier-table-data-api';
-import { get_access_token } from '../../../store/slices/auth/token-login-slice';
+
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { BASE_URL } from '../../../services/Config/api-config';
+
 import { get_emerald_supplier_details } from '../../../store/slices/dataUpload/get-emerald-supplier-details-slice';
+import TopSectionOfDataUploadTableDetails from '../TopSectionOfDataUploadTableDetails';
 
 const EmeraldSupplierDetailPage = () => {
   const { emeraldSupplierDetail } = UseEmeraldSupplierDetailHook();
@@ -14,21 +13,9 @@ const EmeraldSupplierDetailPage = () => {
     get_emerald_supplier_details
   );
   console.log('emeraldSupplierDetail in tsx', EmeraldSupplierDetailsFromStore);
-  const AccessToken: any = useSelector(get_access_token);
+
   const { id } = useParams();
 
-  const HandleDownloadSupplierData: any = async () => {
-    let downloadSupplierDataApi: any = await DownloadEmeraldSupplierTableData(
-      AccessToken?.token,
-      id
-    );
-
-    if (downloadSupplierDataApi?.data?.message?.status === 'success') {
-      window.open(
-        `${BASE_URL}${downloadSupplierDataApi?.data?.message?.file_url}`
-      );
-    }
-  };
   return (
     <div className="container mb-5">
       <hr className="hr_line my-2" />
@@ -51,70 +38,7 @@ const EmeraldSupplierDetailPage = () => {
           <b>{id}</b>
         </div>
       </div>
-
-      <div className="row mb-4 ">
-        <div className="col-lg-4">
-          <div className="form-group">
-            <label htmlFor="usr" className="text-secondary">
-              Supplier
-            </label>
-            <input
-              type="text"
-              className="form-control w-50 p-1"
-              value={emeraldSupplierDetail[0]?.supplier}
-              readOnly
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="usr" className="text-secondary">
-              Date
-            </label>
-            <input
-              type="text"
-              className="form-control w-50 p-1"
-              value={emeraldSupplierDetail[0]?.date}
-              readOnly
-            />
-          </div>
-        </div>
-        <div className="col-lg-4">
-          <div className="form-group">
-            <label htmlFor="usr" className="text-secondary">
-              Total No of Rows
-            </label>
-            <input
-              type="text"
-              className="form-control w-50 p-1"
-              value={emeraldSupplierDetail[0]?.total_no_of_rows}
-              readOnly
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="usr" className="text-secondary">
-              Total of Grosswt
-            </label>
-            <input
-              type="text"
-              className="form-control w-50 p-1"
-              value={emeraldSupplierDetail[0]?.total_of_grosswt}
-              readOnly
-            />
-          </div>
-        </div>
-        <div className="col-lg-4">
-          <div className="form-group ">
-            <label htmlFor="usr " className="text-secondary">
-              Total of Netwt
-            </label>
-            <input
-              type="text"
-              className="form-control w-50 p-1"
-              value={emeraldSupplierDetail[0]?.total_of_netwt}
-              readOnly
-            />
-          </div>
-        </div>
-      </div>
+      <TopSectionOfDataUploadTableDetails details={emeraldSupplierDetail} />
 
       {EmeraldSupplierDetailsFromStore?.isLoading === 'pending' &&
         Object?.keys(EmeraldSupplierDetailsFromStore.data)?.length === 0 && (
@@ -129,8 +53,8 @@ const EmeraldSupplierDetailPage = () => {
         {emeraldSupplierDetail[0]?.emerald_supplier_table?.length > 0 &&
         emeraldSupplierDetail[0]?.emerald_supplier_table !== null ? (
           <>
-            <table className="table table table-striped table-hover listing-table border-0">
-              <thead className="table-heading">
+            <table className="table table table-striped table-hover listing-table border-0 ">
+              <thead className="table-heading sticky-top">
                 <tr className="table-heading-row text-uppercase">
                   <th scope="col">No</th>
                   <th scope="col" className="px-3">

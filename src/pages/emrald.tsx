@@ -1,4 +1,3 @@
-import React from 'react';
 import EmeraldChittiMaster from '../components/EmeraldChitti/EmeraldChittiMaster';
 
 const Emerald = () => {

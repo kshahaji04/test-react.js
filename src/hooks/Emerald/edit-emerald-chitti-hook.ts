@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import UseEmeraldHook from './emrald-page-hook';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';

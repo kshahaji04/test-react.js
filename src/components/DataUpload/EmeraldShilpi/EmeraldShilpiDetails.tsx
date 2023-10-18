@@ -1,8 +1,8 @@
-import React from 'react';
 import UseEmeraldShilpiDetails from '../../../hooks/emerald-shilpi/emerald-shilpi-detail-hook';
 import { useNavigate, useParams } from 'react-router-dom';
 import { get_Emerald_shilpi_details } from '../../../store/slices/emerald-shilpi/get-emerald-shilpi-details-slice';
 import { useSelector } from 'react-redux';
+import TopSectionOfDataUploadTableDetails from '../TopSectionOfDataUploadTableDetails';
 
 const EmeraldShilpiDetails = () => {
   const navigate = useNavigate();
@@ -34,69 +34,8 @@ const EmeraldShilpiDetails = () => {
           <b>{id}</b>
         </div>
       </div>
-      <div className="row mb-4">
-        <div className="col-lg-4">
-          <div className="form-group">
-            <label htmlFor="usr" className="text-secondary">
-              Supplier
-            </label>
-            <input
-              type="text"
-              className="form-control w-50 p-1"
-              value={emeraldShilpiDetails[0]?.supplier}
-              readOnly
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="usr" className="text-secondary">
-              Date
-            </label>
-            <input
-              type="text"
-              className="form-control w-50 p-1"
-              value={emeraldShilpiDetails[0]?.date}
-              readOnly
-            />
-          </div>
-        </div>
-        <div className="col-lg-4">
-          <div className="form-group">
-            <label htmlFor="usr" className="text-secondary">
-              Total No of Rows
-            </label>
-            <input
-              type="text"
-              className="form-control w-50 p-1"
-              value={emeraldShilpiDetails[0]?.total_no_of_rows}
-              readOnly
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="usr" className="text-secondary">
-              Total of Grosswt
-            </label>
-            <input
-              type="text"
-              className="form-control w-50 p-1"
-              value={emeraldShilpiDetails[0]?.total_of_grosswt}
-              readOnly
-            />
-          </div>
-        </div>
-        <div className="col-lg-4">
-          <div className="form-group ">
-            <label htmlFor="usr " className="text-secondary">
-              Total of Netwt
-            </label>
-            <input
-              type="text"
-              className="form-control w-50 p-1"
-              value={emeraldShilpiDetails[0]?.total_of_netwt}
-              readOnly
-            />
-          </div>
-        </div>
-      </div>
+
+      <TopSectionOfDataUploadTableDetails details={emeraldShilpiDetails} />
 
       {emeraldShilpiDetailsDataFromStore?.isLoading === 'pending' &&
         Object?.keys(emeraldShilpiDetailsDataFromStore.data)?.length === 0 && (
@@ -111,7 +50,7 @@ const EmeraldShilpiDetails = () => {
         emeraldShilpiDetails[0]?.emerald_supplier_table !== null ? (
           <>
             <table className="table table table-striped table-hover listing-table border-0">
-              <thead className="table-heading">
+              <thead className="table-heading sticky-top">
                 <tr className="emerald-shilpi-table-heading-row">
                   <th scope="col">No</th>
                   <th scope="col" className="px-3">

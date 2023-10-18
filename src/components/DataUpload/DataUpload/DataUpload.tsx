@@ -1,33 +1,6 @@
-import React, { useState, useEffect } from 'react';
-
-import GetBlankExcelApi from '../../../services/api/dataUpload/download-blank-excelsheet-api';
-import { get_access_token } from '../../../store/slices/auth/token-login-slice';
-import { useSelector } from 'react-redux';
 import { BASE_URL } from '../../../services/Config/api-config';
-import { useNavigate } from 'react-router-dom';
 
 const DataUpload = () => {
-  const navigate = useNavigate();
-  const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
-  const AccessToken: any = useSelector(get_access_token);
-
-  const handleFileUploadInput: any = (e: any) => {
-    console.log('file upload', e.target.files);
-  };
-
-  // const HandleDownloadTemplate: any = async () => {
-  //   let downloadBlankExcelApi: any = await GetBlankExcelApi(AccessToken?.token);
-
-  //   if (
-  //     downloadBlankExcelApi?.status === 200 &&
-  //     downloadBlankExcelApi?.data?.message?.status === 'success'
-  //   ) {
-  //     window.open(
-  //       `${BASE_URL}/${downloadBlankExcelApi?.data?.message?.file_url}`
-  //     );
-  //   }
-  // };
-
   return (
     <div className="container mt-5">
       <a href={`${BASE_URL}/app/emerald-supplier/new-emerald-supplier-1`}>

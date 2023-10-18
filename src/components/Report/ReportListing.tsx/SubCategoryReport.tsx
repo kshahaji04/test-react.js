@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useRef, useState } from 'react';
 import UseSubCategoryReportHook from '../../../hooks/report/subCategory-report-hook';
 import FilterReportListing from './FilterReportListing';
 import UseClientNameHook from '../../../hooks/Master/client-name-hook';
@@ -17,12 +17,12 @@ const SubCategoryReport = () => {
     toDate: '',
   });
   let lastSubCategoryColor: any = 'text-dark';
-  const [showClientNameInFilter, setShowClientNameInFilter] =
-    useState<any>(true);
-  const [showCategoryInFilter, setShowCategoryInFilter] = useState<any>(true);
-  const [showDateInFilter, setShowDateInFilter] = useState<any>(true);
-  const [showSubCategoryInFilter, setShowSubCategoryInFilter] =
-    useState<any>(true);
+
+  const showClientNameInFilter = useRef(true);
+  const showCategoryInFilter = useRef(true);
+  const showDateInFilter = useRef(true);
+  const showSubCategoryInFilter = useRef(true);
+
   const [searchClientName, setSearchclientName] = useState<any>('');
   const [searchCategory, setSearchCategory] = useState<any>('');
   const [searchSubCategory, setSearchSubCategory] = useState<any>('');
@@ -89,7 +89,7 @@ const SubCategoryReport = () => {
       />
       <div className="table-responsive">
         <table className="table table-striped table-hover">
-          <thead className="report-table-head-row">
+          <thead className="report-table-head-row ">
             <tr className="report-table-head-tr text-uppercase">
               <th scope="col">No</th>
               <th scope="col">Sub Category</th>

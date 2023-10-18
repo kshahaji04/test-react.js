@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const MasterListing = () => {
   console.log('idd1', window.location.pathname);

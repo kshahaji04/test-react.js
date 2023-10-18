@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import ClientNameListing from './ClientNameListing';
 import AddClient from './AddClient';
@@ -7,7 +7,6 @@ import UseClientGroupHook from '../../../../hooks/Master/client-group-hook';
 import MasterMultipleListingSearch from '../MasterMultipleListingSearch';
 
 const ClientName = () => {
-  // const { clientNameList }: any = UseClientNameHook();
   const { clientGroupList, clientNameClientGroupList }: any =
     UseClientGroupHook();
 

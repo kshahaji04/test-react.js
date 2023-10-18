@@ -1,9 +1,6 @@
 import { Tab } from 'react-bootstrap';
 import Tabs from 'react-bootstrap/Tabs';
-import EmeraldListing from './EmeraldListing/EmeraldListing';
 import CreateEmeraldChittiMaster from './CreateEmeraldChitti/CreateEmeraldChittiMaster';
-
-import useChittiHook from '../../hooks/Chitti/chitti-page-hook';
 import UseEmeraldHook from '../../hooks/Emerald/emrald-page-hook';
 import UseSubCategoryHook from '../../hooks/Master/sub-category-hook';
 import SearchListingTable from '../Chitti/ChittiListing/SearchListingTable';

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import EditChittiChallan from './Modal/EditChittiChallan';
-import { NavLink, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+import { NavLink } from 'react-router-dom';
 import DeleteChallanChittiApi from '../services/api/Chitti/delete-challan-chitti-api';
 import { get_access_token } from '../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
@@ -12,16 +12,7 @@ import { getEmeraldChallan } from '../store/slices/Emerald/get-emerald-list-slic
 import UpdateDocStatus from '../services/api/general/update-doc-status-challan--api';
 import PrintApi from '../services/api/general/print-api';
 
-const ListingTable = ({
-  tableListingData,
-  setTableData,
-  subCategoryList,
-  narrationTableData,
-  setNarrationTableData,
-  productList,
-  selectedDropdownValue,
-  drowpdownlist,
-}: any) => {
+const ListingTable = ({ tableListingData }: any) => {
   console.log('tableListingData', tableListingData);
   const dispatch = useDispatch();
   const AccessToken: any = useSelector(get_access_token);
@@ -121,6 +112,14 @@ const ListingTable = ({
         {headingData?.length > 0 &&
           headingData !== null &&
           headingData.map((heading: any, index: any) => {
+            console.log('heading name', heading);
+            if (heading === 'docstatus') {
+              return (
+                <th className="text-uppercase" key={index} scope="col">
+                  Status
+                </th>
+              );
+            }
             if (heading !== 'name') {
               return (
                 <th className="text-uppercase" key={index} scope="col">

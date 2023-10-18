@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useRef, useState } from 'react';
 import UseCategorySummaryReportHook from '../../../hooks/report/category-summary-report-hook';
 import FilterReportListing from './FilterReportListing';
 import UseCategoryHook from '../../../hooks/Master/category-hook';
@@ -12,10 +12,9 @@ const CategorySummaryReport = () => {
     fromDate: '',
     toDate: '',
   });
-  const [showClientNameInFilter, setShowClientNameInFilter] =
-    useState<any>(false);
-  const [showCategoryInFilter, setShowCategoryInFilter] = useState<any>(true);
-  const [showDateInFilter, setShowDateInFilter] = useState<any>(true);
+
+  const showCategoryInFilter = useRef(true);
+  const showDateInFilter = useRef(true);
 
   const [searchCategory, setSearchCategory] = useState<any>('');
 
@@ -61,7 +60,7 @@ const CategorySummaryReport = () => {
       />
       <div className="table-responsive">
         <table className="table table-striped table-hover">
-          <thead className="report-table-head-row">
+          <thead className="report-table-head-row ">
             <tr className="report-table-head-tr text-uppercase">
               <th scope="col">No</th>
               <th scope="col">Category</th>

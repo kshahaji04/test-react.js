@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -10,7 +10,7 @@ import { getClientName } from '../../../../store/slices/Chitti/get-client-name-s
 const AddClient = ({ clientGroupList }: any) => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState<any>('');
-  const [clientGroup, setClientGroup] = useState<any>('');
+
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
@@ -26,7 +26,7 @@ const AddClient = ({ clientGroupList }: any) => {
         selectedDropdownValue
       );
       console.log('apires', apiRes);
-      setClientGroup('');
+
       setTitle('');
       if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
         toast.success('Client Group Created');
@@ -43,11 +43,7 @@ const AddClient = ({ clientGroupList }: any) => {
     setTitle(e.target.value);
     setInputValue(e.target.value);
   };
-  const HandleClientInput = (e: any) => {
-    console.log(e.target.value);
-    setClientGroup(e.target.value);
-    setInputValue(e.target.value);
-  };
+
   return (
     <div className="container mt-2">
       <label htmlFor="basic-url " className="fs-6 text-center">

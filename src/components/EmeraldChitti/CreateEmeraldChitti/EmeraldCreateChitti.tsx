@@ -1,4 +1,4 @@
-import react, { useState } from 'react';
+import { useRef } from 'react';
 import SelectedInputDropdown from '../../SelectedInputDropdown';
 
 const EmeraldCreateChitti = ({
@@ -10,11 +10,10 @@ const EmeraldCreateChitti = ({
   clientNameList,
   currentDate,
   handleDateChange,
-  transactionDate,
+
   setStateForDocStatus,
 }: any) => {
-  const [bgColor, setBgColor] = useState<any>(true);
-  console.log('default date', defaultData);
+  const bgColor = useRef(true);
   return (
     <form
       //  onSubmit={handleSubmit}

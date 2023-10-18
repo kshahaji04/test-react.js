@@ -1,38 +1,9 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { get_access_token } from '../../../../store/slices/auth/token-login-slice';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const MasterPageCategoryDetails = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState<any>('');
-  const [showSubmitButton, setShowSubmitButton] = useState<any>(false);
-  const [error, setError] = useState('');
-  const AccessToken: any = useSelector(get_access_token);
 
   const { id } = useParams();
-
-  const HandleInputField: any = (e: any) => {
-    setInputValue(e.target.value);
-    setShowSubmitButton(true);
-  };
-
-  const HandleSubmit = async () => {
-    if (inputValue.trim() === '') {
-      setError('Input field cannot be empty');
-    } else {
-      // let apiRes: any = await (AccessToken?.token, inputValue);
-
-      // if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
-      //   toast.success('Client Group Created');
-      //   dispatch(getClientGroupList(AccessToken?.token));
-      // }
-      setError('');
-      setInputValue('');
-    }
-  };
 
   return (
     <div className="container">
@@ -70,7 +41,6 @@ const MasterPageCategoryDetails = () => {
               defaultValue={id}
               required
               id="basic-url"
-              onChange={HandleInputField}
               readOnly
             />
           </div>

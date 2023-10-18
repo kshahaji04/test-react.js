@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   getClientName,
@@ -6,14 +6,7 @@ import {
 } from '../../store/slices/Chitti/get-client-name-slice';
 import { useSelector } from 'react-redux';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
-import {
-  getSubCategoryList,
-  get_subcategory_list,
-} from '../../store/slices/Chitti/get-subcategory-slice';
-import {
-  getProductList,
-  get_product_list,
-} from '../../store/slices/Chitti/get-product-list-slice';
+import { getSubCategoryList } from '../../store/slices/Chitti/get-subcategory-slice';
 import {
   getClientGroupList,
   get_client_group,
@@ -36,12 +29,12 @@ const UseEmeraldHook = () => {
   const EmeraldChittiDataFromStore: any = useSelector(get_Emerald_challan);
   const ClientNameDataFromStore: any = useSelector(get_client_name);
   const ClientGroupDataFromStore: any = useSelector(get_client_group);
-  const SubCategoryDataFromStore: any = useSelector(get_subcategory_list);
+
   const ProductItemDataFromStore: any = useSelector(get_product_item);
   const [clientNameList, setClientNameList] = useState<any>([]);
   const [emeraldChittiData, setEmeraldChittiData] = useState<any>([]);
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
-  const [clientGroupName, setClientGroupName] = useState<any>('');
+
   const [clientGroupList, setClientGroupList] = useState<any>([]);
   const [currentDate, setCurrentDate] = useState<any>(new Date());
   const [transactionDate, setTransactionDate] = useState<any>(
@@ -59,21 +52,8 @@ const UseEmeraldHook = () => {
     dispatch(getSubCategoryList(AccessToken?.token));
     dispatch(getProductItem(AccessToken?.token));
     dispatch(getClientGroupList(AccessToken?.token));
+    setCurrentDate(new Date());
   }, []);
-
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     const now = new Date();
-  //     const day = String(now.getDate()).padStart(2, '0');
-  //     const month = String(now.getMonth() + 1).padStart(2, '0');
-  //     const year = now.getFullYear();
-  //     const formattedDate: any = `${day}-${month}-${year}`;
-  //     setCurrentDate(formattedDate);
-  //   }, 1000);
-  //   return () => {
-  //     clearInterval(intervalId);
-  //   };
-  // }, []);
 
   useEffect(() => {
     if (
@@ -121,7 +101,7 @@ const UseEmeraldHook = () => {
 
   const HandleClientGroup: any = (e: any) => {
     console.log('clientgro', e.target.value);
-    setClientGroupName(e.target.value);
+
     setStateForDocStatus(true);
   };
 

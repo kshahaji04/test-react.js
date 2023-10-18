@@ -1,13 +1,7 @@
-import React, { useState } from 'react';
-import UseReportHook from '../../hooks/report/report-hook';
 import { NavLink } from 'react-router-dom';
 import '../../Style/report.css';
 
 const ReportMaster = () => {
-  // const { reportTableData } = UseReportHook();
-  // console.log('reportTableData', reportTableData);
-  // const [activeLink, setActiveLink] = useState('');
-
   const reportlist: any = [
     'Category Partywise',
     'Category Summary',
@@ -17,10 +11,6 @@ const ReportMaster = () => {
   return (
     <>
       <div className="container mt-3">
-        {/* <hr className="hr_line my-1" />
-
-        <h4>Reports</h4>
-        <hr className="hr_line my-1" /> */}
         <div className="d-flex justify-content-center card-listing-container">
           {reportlist?.length > 0 &&
             reportlist !== null &&
@@ -40,7 +30,6 @@ const ReportMaster = () => {
                     className={`text-decoration-none navlink-class ${
                       isActive ? 'text-white' : ''
                     }`}
-                    // onClick={() => setActiveLink(linkTo)}
                   >
                     <div className="d-flex justify-content-center mas">
                       <h6 className="card-title me-1 m-0">{data}</h6>

@@ -1,15 +1,11 @@
-import { useState, useEffect } from 'react';
 import SelectedInputDropdown from '../../SelectedInputDropdown';
 
 const SearchListingTable = ({
   clientNameList,
-  chittiListingData,
   setSearchclientName,
   searchClientName,
   HandleSearchInput,
 }: any) => {
-  const [chittiNoData, setChittiNoData] = useState<any>([]);
-
   return (
     <>
       <div className="row justify-content-center mt-2">

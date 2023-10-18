@@ -1,4 +1,3 @@
-import React from 'react';
 import SelectedInputDropdown from '../../SelectedInputDropdown';
 
 const FilterReportListing = ({
@@ -27,7 +26,7 @@ const FilterReportListing = ({
   return (
     <div className="container">
       <div className="row justify-content-center mt-2">
-        {showCategoryInFilter && (
+        {showCategoryInFilter?.current && (
           <div className="col-md-2">
             <label className="text-secondary ">Category</label>
             <SelectedInputDropdown
@@ -39,7 +38,7 @@ const FilterReportListing = ({
           </div>
         )}
 
-        {showSupplierInFilter && (
+        {showSupplierInFilter?.current && (
           <>
             <div className="col-md-2">
               <label className="text-secondary ">Supplier</label>
@@ -53,7 +52,7 @@ const FilterReportListing = ({
           </>
         )}
 
-        {showProjectFieldInFilter && (
+        {showProjectFieldInFilter?.current && (
           <div className="col-md-2 ">
             <label className="text-secondary ">Project</label>
             <input
@@ -67,7 +66,7 @@ const FilterReportListing = ({
           </div>
         )}
 
-        {showSubCategoryInFilter && (
+        {showSubCategoryInFilter?.current && (
           <div className="col-md-2">
             <label className="text-secondary ">Sub Category</label>
             <SelectedInputDropdown
@@ -80,7 +79,7 @@ const FilterReportListing = ({
             />
           </div>
         )}
-        {showClientNameInFilter && (
+        {showClientNameInFilter?.current && (
           <div className="col-md-2">
             <label className="text-secondary ">Client Name</label>
             <SelectedInputDropdown
@@ -95,7 +94,7 @@ const FilterReportListing = ({
           </div>
         )}
 
-        {showDateInFilter && (
+        {showDateInFilter?.current && (
           <>
             <div className="col-md-2 ">
               <label className="text-secondary ">From Date</label>

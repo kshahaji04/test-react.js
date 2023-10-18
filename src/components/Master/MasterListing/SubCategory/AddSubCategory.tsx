@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import SelectedInputDropdown from '../../../SelectedInputDropdown'
+import { useState } from 'react';
+import SelectedInputDropdown from '../../../SelectedInputDropdown';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { get_access_token } from '../../../../store/slices/auth/token-login-slice';
-import { Toast } from 'react-bootstrap';
 import AddSubCategoryApi from '../../../../services/api/Master/add-sub-category-api';
 import { useDispatch } from 'react-redux';
 import { getSubCategoryList } from '../../../../store/slices/Chitti/get-subcategory-slice';
@@ -16,33 +15,33 @@ const AddSubCategory = ({ CategoryList }: any) => {
   const [error, setError] = useState('');
   const AccessToken: any = useSelector(get_access_token);
 
-
   const HandleSubmit: any = async () => {
-
     if (inputValue.trim() === '') {
       setError('Input field cannot be empty');
     } else {
-      let apiRes: any = await AddSubCategoryApi(AccessToken?.token, title, selectedDropdownValue)
-      console.log("apires", apiRes)
-  
-      setTitle("")
-      if (apiRes?.status === 200 && apiRes?.hasOwnProperty("data")) {
+      let apiRes: any = await AddSubCategoryApi(
+        AccessToken?.token,
+        title,
+        selectedDropdownValue
+      );
+      console.log('apires', apiRes);
+
+      setTitle('');
+      if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
         toast.success('Sub Category Created');
         dispatch(getSubCategoryList(AccessToken?.token));
-  
       }
       setError('');
 
       setInputValue('');
     }
- 
-  }
+  };
 
   const HandleInputValue = (e: any) => {
-    setError('')
-    setTitle(e.target.value)
-    setInputValue(e.target.value)
-  }
+    setError('');
+    setTitle(e.target.value);
+    setInputValue(e.target.value);
+  };
 
   return (
     <div className="container mt-1">
@@ -53,7 +52,7 @@ const AddSubCategory = ({ CategoryList }: any) => {
       <div className="input-group mb-3 w-50 master-input-field">
         <input
           type="text"
-          name='title'
+          name="title"
           className="form-control ps-2"
           id="basic-url"
           aria-describedby="basic-addon3"
@@ -67,16 +66,15 @@ const AddSubCategory = ({ CategoryList }: any) => {
         Category
         <span className="text-danger">*</span>
       </label>
-      <div className='w-50'>
+      <div className="w-50">
         <SelectedInputDropdown
           drowpdownlist={CategoryList}
           // bgColor={bgColor}
           placeholderValue="Category Name"
           selectedDropdownValue={selectedDropdownValue}
           setSelectedDropdownValue={setSelectedDropdownValue}
-        // clientGroupList={clientGroupList}
-        // HandleClientGroup={HandleClientGroup}
-
+          // clientGroupList={clientGroupList}
+          // HandleClientGroup={HandleClientGroup}
         />
       </div>
       <div className="d-flex justify-content-start ">
@@ -89,7 +87,7 @@ const AddSubCategory = ({ CategoryList }: any) => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AddSubCategory
+export default AddSubCategory;

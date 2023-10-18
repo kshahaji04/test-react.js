@@ -6,7 +6,6 @@ import MasterPage from '../pages/master';
 import ChittiPage from '../pages/chitti';
 import Report from '../pages/report';
 import Emerald from '../pages/emrald';
-import ChallanList from '../components/Master/MasterListing/ChallanList';
 import ClientGroup from '../components/Master/MasterListing/ClientGroup/ClientGroup';
 import ClientName from '../components/Master/MasterListing/ClientName/ClientName';
 import Category from '../components/Master/MasterListing/Category/CategoryMaster';
@@ -44,7 +43,7 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
-        <Route
+        {/* <Route
           path="/master/challanlist"
           element={
             <ProtectedRoute>
@@ -52,7 +51,7 @@ const AppRoutes = () => {
               <ChallanList />
             </ProtectedRoute>
           }
-        />
+        /> */}
         <Route
           path="/master/clientgroup"
           element={

@@ -1,4 +1,3 @@
-import React from 'react';
 import EmeraldShilpiListing from './EmeraldShilpiListing';
 import UseEmeraldShilpiHook from '../../../hooks/emerald-shilpi/emerald-shilpi-hook';
 

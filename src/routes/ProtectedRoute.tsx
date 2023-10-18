@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../components/Header/Navbar';
 import { useSelector } from 'react-redux';
 import { get_access_token } from '../store/slices/auth/token-login-slice';
-import Login from '../components/Auth/Login';
-
 const ProtectedRoute = ({ children }: any) => {
   const [isAuthenticated, setIsAuthenticated] = useState<any>(false);
   const UserExist: any = useSelector(get_access_token);

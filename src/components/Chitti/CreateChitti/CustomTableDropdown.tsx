@@ -1,21 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../../../Style/custom-dropdown.css';
 
-const CustomTableDropdown = ({
-  dropdownlist,
-  setSelectedDropdownValue,
-}: any) => {
+const CustomTableDropdown = ({ dropdownlist }: any) => {
   const [inputValue, setInputValue] = useState<any>('');
   const [showDropdownMenu, setShowDropdownMenu] = useState<any>(false);
   const [filterDropdownList, setFilterDropdownList] = useState<any>([]);
 
   const HandleInputClick: any = () => {
     setShowDropdownMenu(true);
-  };
-
-  const HandleSelectDropdownList: any = (list: any) => {
-    console.log('list', list);
-    // setSelectedDropdownValue(data);
   };
 
   const HandleInputValue = (e: any) => {

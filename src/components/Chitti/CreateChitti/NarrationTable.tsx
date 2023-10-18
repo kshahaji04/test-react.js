@@ -5,9 +5,8 @@ const NarrationTable = ({
   setNarrationTableData,
   productList,
   defaultData,
-  setStateForDocStatus
+  setStateForDocStatus,
 }: any) => {
-  // const [tablData, etTableData] = useState([{ id: 1, name: '' }]);
   const [totalAmountValue, setTotalAmountValue] = useState<any>({
     product: '',
     huid_pieces: 0,
@@ -51,7 +50,7 @@ const NarrationTable = ({
 
     // Update the total values
     setTotalAmountValue(newColumnTotals);
-    setStateForDocStatus(true)
+    setStateForDocStatus(true);
   };
 
   const HandleDeleteRow: any = (id: any) => {
@@ -60,7 +59,7 @@ const NarrationTable = ({
         (row: any) => row.id !== id
       );
       setNarrationTableData(updatedData);
-      setStateForDocStatus(true)
+      setStateForDocStatus(true);
     }
   };
 
@@ -87,7 +86,7 @@ const NarrationTable = ({
         : row
     );
     setNarrationTableData(updatedData);
-    setStateForDocStatus(true)
+    setStateForDocStatus(true);
   };
 
   const HandleWeightAmount = (e: any, id: any) => {
@@ -97,7 +96,7 @@ const NarrationTable = ({
         : row
     );
     setNarrationTableData(updatedData);
-    setStateForDocStatus(true)
+    setStateForDocStatus(true);
   };
 
   const handleKeyDown = (event: any, id: any) => {
@@ -106,7 +105,7 @@ const NarrationTable = ({
       id === narrationTableData[narrationTableData.length - 1].id
     ) {
       HandleAddRow();
-      setStateForDocStatus(true)
+      setStateForDocStatus(true);
     }
   };
 
@@ -116,7 +115,7 @@ const NarrationTable = ({
       row.id === id ? { ...row, product: e.target.value } : row
     );
     setNarrationTableData(updatedData);
-    setStateForDocStatus(true)
+    setStateForDocStatus(true);
   };
 
   return (

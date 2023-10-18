@@ -1,38 +1,9 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { get_access_token } from '../../../../store/slices/auth/token-login-slice';
 
 const MasterPageHuidProductDetails = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState<any>('');
-  const [showSubmitButton, setShowSubmitButton] = useState<any>(false);
-  const [error, setError] = useState('');
-  const AccessToken: any = useSelector(get_access_token);
 
   const { id } = useParams();
-
-  const HandleInputField: any = (e: any) => {
-    setInputValue(e.target.value);
-    setShowSubmitButton(true);
-  };
-
-  const HandleSubmit = async () => {
-    if (inputValue.trim() === '') {
-      setError('Input field cannot be empty');
-    } else {
-      // let apiRes: any = await (AccessToken?.token, inputValue);
-
-      // if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
-      //   toast.success('Client Group Created');
-      //   dispatch(getClientGroupList(AccessToken?.token));
-      // }
-      setError('');
-      setInputValue('');
-    }
-  };
 
   return (
     <div className="container">
@@ -46,15 +17,6 @@ const MasterPageHuidProductDetails = () => {
             >
               Back
             </button>
-            {/* {showSubmitButton && (
-              <button
-                type="submit"
-                onClick={HandleSubmit}
-                className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
-              >
-                Save
-              </button>
-            )} */}
           </div>
         </div>
         <div className="my-2 p-4">
@@ -70,13 +32,8 @@ const MasterPageHuidProductDetails = () => {
               defaultValue={id}
               required
               id="basic-url"
-              onChange={HandleInputField}
               readOnly
             />
-          </div>
-          <div className="">
-            {' '}
-            {error && <p className="text-danger">{error}</p>}
           </div>
         </div>
       </div>

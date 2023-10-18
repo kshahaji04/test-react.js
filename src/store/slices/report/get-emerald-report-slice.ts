@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../root-reducer';
-import getSubCategoryReportApi from '../../../services/api/report/get-sub-category-report-api';
 import getEmeraldReportApi from '../../../services/api/report/get-emerald-report-api';
 
 export const getEmeraldReportData: any = createAsyncThunk(

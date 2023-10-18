@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useRef, useState } from 'react';
 import UseEmeraldReportHook from '../../../hooks/report/emerald-report-hook';
 import UseSubCategoryHook from '../../../hooks/Master/sub-category-hook';
 import FilterReportListing from './FilterReportListing';
@@ -17,11 +17,10 @@ const EmeraldReport = () => {
     toDate: '',
   });
 
-  const [showSubCategoryInFilter, setShowSubCategoryInFilter] =
-    useState<any>(true);
-  const [showSupplierInFilter, setShowSupplierInFilter] = useState<any>(true);
-  const [showProjectFieldInFilter, setShowProjectFieldInFilter] =
-    useState<any>(true);
+  const showSubCategoryInFilter = useRef(true);
+  const showSupplierInFilter = useRef(true);
+  const showProjectFieldInFilter = useRef(true);
+
   const [searchSubCategory, setSearchSubCategory] = useState<any>('');
   const [searchSupplier, setSearchSupplier] = useState<any>('');
 
@@ -73,7 +72,7 @@ const EmeraldReport = () => {
 
       <div className="table-responsive report-table-container">
         <table className="table table-striped table-hover">
-          <thead className="report-table-head-row">
+          <thead className="report-table-head-row ">
             <tr className="report-table-head-tr text-uppercase">
               <th scope="col">No</th>
               <th scope="col">Supplier</th>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import AddSubCategory from './AddSubCategory';
 import SubCategoryListing from './SubCategoryListing';

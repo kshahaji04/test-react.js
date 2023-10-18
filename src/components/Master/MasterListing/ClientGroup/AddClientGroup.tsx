@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { get_access_token } from '../../../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
@@ -52,7 +52,7 @@ const AddClientGroup = () => {
           required
         />
       </div>
-        <div className=''> {error && <p className="text-danger">{error}</p>}</div>
+      <div className=""> {error && <p className="text-danger">{error}</p>}</div>
       <div className="d-flex justify-content-start ">
         <button
           type="submit"

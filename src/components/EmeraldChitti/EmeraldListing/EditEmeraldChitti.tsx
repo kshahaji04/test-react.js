@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import EmeraldCreateChitti from '../CreateEmeraldChitti/EmeraldCreateChitti';
 import EmeraldChittiTable from '../CreateEmeraldChitti/EmeraldChittiTable';
 import UseSubCategoryHook from '../../../hooks/Master/sub-category-hook';
@@ -10,7 +10,7 @@ import {
   get_specific_emerald_chitti,
 } from '../../../store/slices/Emerald/get-specific-emrald-slice';
 import { useDispatch } from 'react-redux';
-import UpdateDocStatus from '../../../services/api/general/update-doc-status-challan--api';
+
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import DeleteEmeraldChittiApi from '../../../services/api/Emerald/delete-emerald-chitti-api';
 import UpdateDocStatusEmeraldChittiApi from '../../../services/api/general/update-doc-status-emrald-chitti-api';
@@ -19,12 +19,10 @@ const EditEmeraldChitti = () => {
   const navigate = useNavigate();
   const { subCategoryList } = UseSubCategoryHook();
   const {
-    emeraldChittiData,
     selectedDropdownValue,
     setSelectedDropdownValue,
     productItemList,
     HandleClientGroup,
-    HandleCreateEmeraldChittiSubmit,
     clientGroupList,
     clientNameList,
     currentDate,

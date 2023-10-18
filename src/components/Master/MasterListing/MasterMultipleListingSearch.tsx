@@ -1,7 +1,4 @@
-import React from 'react';
-
 const MasterMultipleListingSearch = ({
-  HandleSearchInput,
   handleInputChange1,
   handleInputChange2,
   placeholder1,

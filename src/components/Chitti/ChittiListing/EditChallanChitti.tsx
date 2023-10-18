@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import UseEditChallanChitti from '../../../hooks/Chitti/edit-challan-chitti-hook';
 import CreateChittiForm from '../CreateChitti/CreateChittiForm';
 import ChallanItemsTable from '../CreateChitti/ChallanItemsTable';
@@ -21,7 +21,7 @@ const EditChallanChitti = () => {
     subCategoryList,
     productList,
     selectedDropdownValue,
-    drowpdownlist,
+
     setTableData,
     HandleDateChange,
     clientNameList,

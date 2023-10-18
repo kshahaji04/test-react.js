@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import '../../Style/Login.css';
 import { useDispatch } from 'react-redux';
 import { getAccessToken } from '../../store/slices/auth/token-login-slice';
@@ -72,16 +72,7 @@ const Login = () => {
                     />
                   </div>
                 </div>
-                {/* <div className="mb-3 form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="exampleCheck1"
-            />
-            <label className="form-check-label" htmlFor="exampleCheck1">
-              Check me out
-            </label>
-          </div> */}
+
                 <button
                   type="submit"
                   className="btn btn-primary mt-3 py-1 px-4"

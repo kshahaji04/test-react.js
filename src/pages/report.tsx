@@ -1,4 +1,3 @@
-import React from 'react';
 import ReportMaster from '../components/Report/ReportMaster';
 
 const Report = () => {

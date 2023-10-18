@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
@@ -20,7 +20,7 @@ const UseDataUploadHook = () => {
 
   const [supplierList, setSupplierList] = useState<any>([]);
   const [emeraldSupplierData, setEmeraldSupplierData] = useState<any>([]);
-  const [supplier, setSupplier] = useState<any>('');
+
   const [updatedSupplierList, setUpdatedSupplierList] = useState<any>([]);
 
   console.log('EmeraldSupplierDataFromStore', EmeraldSupplierDataFromStore);
@@ -67,13 +67,8 @@ const UseDataUploadHook = () => {
     }
   }, [SupplierDataFromStore]);
 
-  const HandleSupplier = (e: any) => {
-    setSupplier(e.target.value);
-  };
-
   return {
     supplierList,
-    HandleSupplier,
     emeraldSupplierData,
     updatedSupplierList,
   };

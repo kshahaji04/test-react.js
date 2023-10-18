@@ -20,10 +20,8 @@ const CreateChittiMaster = ({
   HandleClientGroup,
   HandleDateChange,
   date,
-  setStateForDocStatus
+  setStateForDocStatus,
 }: any) => {
-  // const HandleCreateChittiSubmit: any = () => {};
-
   return (
     <div>
       <div className="d-flex justify-content-end ">

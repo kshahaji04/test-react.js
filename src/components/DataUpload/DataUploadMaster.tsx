@@ -1,17 +1,14 @@
 import { Tab } from 'react-bootstrap';
 import Tabs from 'react-bootstrap/Tabs';
 import DataUpload from './DataUpload/DataUpload';
-import { useState } from 'react';
 import '../../Style/data-upload.css';
 import UseDataUploadHook from '../../hooks/dataUpload/data-upload-hook';
 import EmeraldSupplierList from './ViewUpload/EmeraldSupplierList';
 import '../../Style/data-upload.css';
 import MasterEmeraldShilpi from './EmeraldShilpi/MasterEmeraldShilpi';
-import { Link } from 'react-router-dom';
 
 const DataUploadMaster = () => {
-  const { supplierList, HandleSupplier, emeraldSupplierData } =
-    UseDataUploadHook();
+  const { supplierList, emeraldSupplierData } = UseDataUploadHook();
   console.log('emeraldSupplierData in master', emeraldSupplierData);
   return (
     <>
