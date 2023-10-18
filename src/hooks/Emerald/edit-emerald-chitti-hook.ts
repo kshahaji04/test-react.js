@@ -12,7 +12,7 @@ import {
   get_specific_emerald_chitti,
 } from '../../store/slices/Emerald/get-specific-emrald-slice';
 import UpdateEmeraldChittiApi from '../../services/api/Emerald/update-emerald-chitti-api';
-import UpdateDocStatus from '../../services/api/general/update-doc-status-api';
+import UpdateDocStatus from '../../services/api/general/update-doc-status-challan--api';
 
 const UseEditEmeraldChittiHook: any = () => {
   const dispatch = useDispatch();

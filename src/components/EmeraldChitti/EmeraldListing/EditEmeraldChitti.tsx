@@ -10,9 +10,10 @@ import {
   get_specific_emerald_chitti,
 } from '../../../store/slices/Emerald/get-specific-emrald-slice';
 import { useDispatch } from 'react-redux';
-import UpdateDocStatus from '../../../services/api/general/update-doc-status-api';
+import UpdateDocStatus from '../../../services/api/general/update-doc-status-challan--api';
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import DeleteEmeraldChittiApi from '../../../services/api/Emerald/delete-emerald-chitti-api';
+import UpdateDocStatusEmeraldChittiApi from '../../../services/api/general/update-doc-status-emrald-chitti-api';
 
 const EditEmeraldChitti = () => {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ const EditEmeraldChitti = () => {
   }, [docStatusFromStore]);
 
   const HandleSubmitData: any = async () => {
-    let updateDocStatus: any = await UpdateDocStatus(
+    let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
       AccessToken?.token,
       '1',
       id
@@ -69,7 +70,7 @@ const EditEmeraldChitti = () => {
   };
 
   const HandleCancelChitti = async () => {
-    let updateDocStatus: any = await UpdateDocStatus(
+    let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
       AccessToken?.token,
       '2',
       id

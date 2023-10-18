@@ -29,14 +29,12 @@ const FilterReportListing = ({
       <div className="row justify-content-center mt-2">
         {showCategoryInFilter && (
           <div className="col-md-2">
+            <label className="text-secondary ">Category</label>
             <SelectedInputDropdown
               drowpdownlist={CategoryList}
-              // bgColor={bgColor}
-              placeholderValue="Category"
+              // placeholderValue="Category"
               selectedDropdownValue={searchCategory}
               setSelectedDropdownValue={setSearchCategory}
-              // clientGroupList={clientGroupList}
-              // HandleClientGroup={HandleClientGroup}
             />
           </div>
         )}
@@ -44,9 +42,10 @@ const FilterReportListing = ({
         {showSupplierInFilter && (
           <>
             <div className="col-md-2">
+              <label className="text-secondary ">Supplier</label>
               <SelectedInputDropdown
                 drowpdownlist={supplierList}
-                placeholderValue="Supplier"
+                // placeholderValue="Supplier"
                 selectedDropdownValue={searchSupplier}
                 setSelectedDropdownValue={setSearchSupplier}
               />
@@ -56,12 +55,13 @@ const FilterReportListing = ({
 
         {showProjectFieldInFilter && (
           <div className="col-md-2 ">
+            <label className="text-secondary ">Project</label>
             <input
               type="text"
               name="project"
               id="project"
               className="form-control input-fields custom-input-field "
-              placeholder="Project"
+              // placeholder="Project"
               onChange={HandleSearchInput}
             />
           </div>
@@ -69,10 +69,10 @@ const FilterReportListing = ({
 
         {showSubCategoryInFilter && (
           <div className="col-md-2">
+            <label className="text-secondary ">Sub Category</label>
             <SelectedInputDropdown
               drowpdownlist={subCategoryList}
-              // bgColor={bgColor}
-              placeholderValue="Sub Category"
+              // placeholderValue="Sub Category"
               selectedDropdownValue={searchSubCategory}
               setSelectedDropdownValue={setSearchSubCategory}
               // clientGroupList={clientGroupList}
@@ -82,10 +82,11 @@ const FilterReportListing = ({
         )}
         {showClientNameInFilter && (
           <div className="col-md-2">
+            <label className="text-secondary ">Client Name</label>
             <SelectedInputDropdown
               drowpdownlist={clientNameList}
               // bgColor={bgColor}
-              placeholderValue="Client Name"
+              // placeholderValue="Client Name"
               selectedDropdownValue={searchClientName}
               setSelectedDropdownValue={setSearchclientName}
               // clientGroupList={clientGroupList}
@@ -97,22 +98,22 @@ const FilterReportListing = ({
         {showDateInFilter && (
           <>
             <div className="col-md-2 ">
+              <label className="text-secondary ">From Date</label>
               <input
                 type="date"
                 name="fromDate"
                 id="fromDate"
                 className="form-control input-fields custom-input-field "
-                placeholder="From Date"
                 onChange={HandleSearchInput}
               />
             </div>
             <div className="col-md-2 ">
+              <label className="text-secondary ">To Date</label>
               <input
                 type="date"
                 name="toDate"
                 id="toDate"
                 className="form-control input-fields custom-input-field"
-                placeholder="To Date"
                 onChange={HandleSearchInput}
               />
             </div>

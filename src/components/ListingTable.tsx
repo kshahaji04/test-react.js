@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import DeleteEmeraldChittiApi from '../services/api/Emerald/delete-emerald-chitti-api';
 import { getEmeraldChallan } from '../store/slices/Emerald/get-emerald-list-slice';
-import UpdateDocStatus from '../services/api/general/update-doc-status-api';
+import UpdateDocStatus from '../services/api/general/update-doc-status-challan--api';
 import PrintApi from '../services/api/general/print-api';
 
 const ListingTable = ({

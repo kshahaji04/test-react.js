@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { BASE_URL } from '../../Config/api-config';
 
-const UpdateDocStatus = async (token: any, docStatus: any, name: any) => {
+const UpdateDocStatusChallanApi = async (
+  token: any,
+  docStatus: any,
+  name: any
+) => {
   let response: any;
 
   const params = `/api/resource/Challan/${name}`;
@@ -29,4 +33,4 @@ const UpdateDocStatus = async (token: any, docStatus: any, name: any) => {
   return response;
 };
 
-export default UpdateDocStatus;
+export default UpdateDocStatusChallanApi;

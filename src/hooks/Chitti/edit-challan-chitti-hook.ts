@@ -10,7 +10,7 @@ import UseChittiHook from './chitti-page-hook';
 import { useParams } from 'react-router-dom';
 import UpdateChittiApi from '../../services/api/Chitti/update-challan-chitti-api';
 import { toast } from 'react-toastify';
-import UpdateDocStatus from '../../services/api/general/update-doc-status-api';
+import UpdateDocStatus from '../../services/api/general/update-doc-status-challan--api';
 
 const UseEditChallanChitti: any = () => {
   const dispatch = useDispatch();
@@ -133,7 +133,7 @@ const UseEditChallanChitti: any = () => {
     narrationTableData,
     clientGroupList,
     stateForDocStatus,
-    setStateForDocStatus
+    setStateForDocStatus,
   };
 };
 

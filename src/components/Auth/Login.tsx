@@ -82,7 +82,10 @@ const Login = () => {
               Check me out
             </label>
           </div> */}
-                <button type="submit" className="btn btn-primary mt-3">
+                <button
+                  type="submit"
+                  className="btn btn-primary mt-3 py-1 px-4"
+                >
                   Login
                 </button>
               </form>

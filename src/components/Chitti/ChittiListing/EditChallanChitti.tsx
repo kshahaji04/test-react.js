@@ -9,10 +9,10 @@ import {
   getSpecificChittiChallan,
   get_specific_chitti_challan,
 } from '../../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
-import UpdateDocStatus from '../../../services/api/general/update-doc-status-api';
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import { useDispatch } from 'react-redux';
 import DeleteChallanChittiApi from '../../../services/api/Chitti/delete-challan-chitti-api';
+import UpdateDocStatusChallanApi from '../../../services/api/general/update-doc-status-challan--api';
 
 const EditChallanChitti = () => {
   const {
@@ -55,7 +55,7 @@ const EditChallanChitti = () => {
   }, [docStatusFromStore]);
 
   const HandleSubmitData: any = async () => {
-    let updateDocStatus: any = await UpdateDocStatus(
+    let updateDocStatus: any = await UpdateDocStatusChallanApi(
       AccessToken?.token,
       '1',
       id
@@ -71,7 +71,7 @@ const EditChallanChitti = () => {
   };
 
   const HandleCancelChitti = async () => {
-    let updateDocStatus: any = await UpdateDocStatus(
+    let updateDocStatus: any = await UpdateDocStatusChallanApi(
       AccessToken?.token,
       '2',
       id
