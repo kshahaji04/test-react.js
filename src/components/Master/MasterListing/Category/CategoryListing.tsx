@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import LoadMoreTableDataInMaster from '../LoadMoreTableDataInMaster';
 
 const CategoryListing = ({ CategoryList }: any) => {
+  const [tableViewData, setTableViewData] = useState<any>(20);
+
+  const HandleTableViewRows: any = (data: any) => {
+    setTableViewData(data);
+  };
   return (
     <div className="container border mt-2">
       <table className="table table-striped mt-2">
@@ -13,20 +19,28 @@ const CategoryListing = ({ CategoryList }: any) => {
         <tbody>
           {CategoryList?.length > 0 &&
             CategoryList !== null &&
-            CategoryList.map((group: any, index: any) => {
-              return (
-                <tr className="text-start table-body-row" key={index}>
-                  <td className="p-1">
-                    <NavLink
-                      to={group}
-                      className="text-decoration-none text-dark"
-                    >
-                      {group}
-                    </NavLink>
-                  </td>
-                </tr>
-              );
-            })}
+            CategoryList.slice(0, tableViewData).map(
+              (group: any, index: any) => {
+                return (
+                  <tr className="text-start table-body-row" key={index}>
+                    <td className="p-1">
+                      <NavLink
+                        to={group}
+                        className="text-decoration-none text-dark"
+                      >
+                        {group}
+                      </NavLink>
+                    </td>
+                  </tr>
+                );
+              }
+            )}
+
+          {CategoryList?.length > 10 && CategoryList !== null && (
+            <LoadMoreTableDataInMaster
+              HandleTableViewRows={HandleTableViewRows}
+            />
+          )}
         </tbody>
       </table>
     </div>

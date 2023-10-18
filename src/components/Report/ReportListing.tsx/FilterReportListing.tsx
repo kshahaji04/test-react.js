@@ -32,7 +32,7 @@ const FilterReportListing = ({
             <label className="text-secondary ">Category</label>
             <SelectedInputDropdown
               drowpdownlist={CategoryList}
-              // placeholderValue="Category"
+              title="Select Category"
               selectedDropdownValue={searchCategory}
               setSelectedDropdownValue={setSearchCategory}
             />
@@ -45,7 +45,7 @@ const FilterReportListing = ({
               <label className="text-secondary ">Supplier</label>
               <SelectedInputDropdown
                 drowpdownlist={supplierList}
-                // placeholderValue="Supplier"
+                title="Select Supplier"
                 selectedDropdownValue={searchSupplier}
                 setSelectedDropdownValue={setSearchSupplier}
               />
@@ -61,7 +61,7 @@ const FilterReportListing = ({
               name="project"
               id="project"
               className="form-control input-fields custom-input-field "
-              // placeholder="Project"
+              title="Project"
               onChange={HandleSearchInput}
             />
           </div>
@@ -72,7 +72,7 @@ const FilterReportListing = ({
             <label className="text-secondary ">Sub Category</label>
             <SelectedInputDropdown
               drowpdownlist={subCategoryList}
-              // placeholderValue="Sub Category"
+              title="Select Sub Category"
               selectedDropdownValue={searchSubCategory}
               setSelectedDropdownValue={setSearchSubCategory}
               // clientGroupList={clientGroupList}
@@ -86,7 +86,7 @@ const FilterReportListing = ({
             <SelectedInputDropdown
               drowpdownlist={clientNameList}
               // bgColor={bgColor}
-              // placeholderValue="Client Name"
+              title="Select Client Name"
               selectedDropdownValue={searchClientName}
               setSelectedDropdownValue={setSearchclientName}
               // clientGroupList={clientGroupList}

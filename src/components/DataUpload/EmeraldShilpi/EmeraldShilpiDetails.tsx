@@ -1,12 +1,17 @@
 import React from 'react';
 import UseEmeraldShilpiDetails from '../../../hooks/emerald-shilpi/emerald-shilpi-detail-hook';
 import { useNavigate, useParams } from 'react-router-dom';
+import { get_Emerald_shilpi_details } from '../../../store/slices/emerald-shilpi/get-emerald-shilpi-details-slice';
+import { useSelector } from 'react-redux';
 
 const EmeraldShilpiDetails = () => {
   const navigate = useNavigate();
   const { id }: any = useParams();
   const { emeraldShilpiDetails }: any = UseEmeraldShilpiDetails();
-  console.log('emeraldShilpiDetails in tsx', emeraldShilpiDetails);
+
+  const emeraldShilpiDetailsDataFromStore: any = useSelector(
+    get_Emerald_shilpi_details
+  );
 
   return (
     <div className="container mb-5">
@@ -17,12 +22,16 @@ const EmeraldShilpiDetails = () => {
             type="button"
             className="btn btn-outline-primary py-0 btn-sm"
             onClick={() => navigate(-1)}
+            title="Back"
           >
             Back
           </button>
         </div>
         <div className="col-lg-6 fs-6 ">
-          <span className="text-secondary">Emerald Shilpi : </span> <b>{id}</b>
+          <span className="text-secondary" title="Emerald Shilpi">
+            Emerald Shilpi :{' '}
+          </span>{' '}
+          <b>{id}</b>
         </div>
       </div>
       <div className="row mb-4">
@@ -88,6 +97,15 @@ const EmeraldShilpiDetails = () => {
           </div>
         </div>
       </div>
+
+      {emeraldShilpiDetailsDataFromStore?.isLoading === 'pending' &&
+        Object?.keys(emeraldShilpiDetailsDataFromStore.data)?.length === 0 && (
+          <div className="d-flex justify-content-center mt-5">
+            <div className="spinner-border " role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
+        )}
       <div className="table-responsive emerald-shilpi-table-container">
         {emeraldShilpiDetails[0]?.emerald_supplier_table?.length > 0 &&
         emeraldShilpiDetails[0]?.emerald_supplier_table !== null ? (

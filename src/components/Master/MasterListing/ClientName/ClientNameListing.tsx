@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import LoadMoreTableDataInMaster from '../LoadMoreTableDataInMaster';
 
 const ClientNameListing = ({ clientNameClientGroupList }: any) => {
+  const [tableViewData, setTableViewData] = useState<any>(20);
+
+  const HandleTableViewRows: any = (data: any) => {
+    setTableViewData(data);
+  };
   return (
     <div className="container border mt-2 row">
       <div className="">
@@ -21,26 +27,35 @@ const ClientNameListing = ({ clientNameClientGroupList }: any) => {
           <tbody>
             {clientNameClientGroupList?.length > 0 &&
               clientNameClientGroupList !== null &&
-              clientNameClientGroupList.map((group: any, index: any) => (
-                <tr className="text-start table-body-row row" key={index}>
-                  <td className="col-6 p-1">
-                    <NavLink
-                      to={`${group.name}`}
-                      className="text-decoration-none text-dark"
-                    >
-                      {group.name}
-                    </NavLink>
-                  </td>
-                  <td className="col-6 p-1">
-                    <NavLink
-                      to={`${group.name}`}
-                      className="text-decoration-none text-dark"
-                    >
-                      {group.client_group}
-                    </NavLink>
-                  </td>
-                </tr>
-              ))}
+              clientNameClientGroupList
+                .slice(0, tableViewData)
+                .map((group: any, index: any) => (
+                  <tr className="text-start table-body-row row" key={index}>
+                    <td className="col-6 p-1">
+                      <NavLink
+                        to={`${group.name}`}
+                        className="text-decoration-none text-dark"
+                      >
+                        {group.name}
+                      </NavLink>
+                    </td>
+                    <td className="col-6 p-1">
+                      <NavLink
+                        to={`${group.name}`}
+                        className="text-decoration-none text-dark"
+                      >
+                        {group.client_group}
+                      </NavLink>
+                    </td>
+                  </tr>
+                ))}
+
+            {clientNameClientGroupList?.length > 10 &&
+              clientNameClientGroupList !== null && (
+                <LoadMoreTableDataInMaster
+                  HandleTableViewRows={HandleTableViewRows}
+                />
+              )}
           </tbody>
         </table>
       </div>

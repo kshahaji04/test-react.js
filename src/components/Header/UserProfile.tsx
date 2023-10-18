@@ -18,10 +18,8 @@ const UserProfile = () => {
         aria-labelledby="dropdownMenuButton"
       >
         <div className="row card_imf">
-          <div className="col-1"></div>
           <div className="col-10">
             <div className="card-text text-center profile-fontSize">
-              {' '}
               <h6>Welcome !!!</h6>
             </div>
           </div>

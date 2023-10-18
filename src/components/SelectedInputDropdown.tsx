@@ -11,6 +11,7 @@ const SelectedInputDropdown = ({
   defaultData,
   readOnlyField,
   setStateForDocStatus,
+  title,
 }: any) => {
   console.log('defaultt', selectedDropdownValue, drowpdownlist);
   const [showDropDown, setShowDropdown] = useState<any>(false);
@@ -98,6 +99,7 @@ const SelectedInputDropdown = ({
           onKeyDown={handleKeyDown}
           autoComplete="off"
           readOnly={readOnlyField}
+          title={title}
         />
         {showDropDown && (
           <ul

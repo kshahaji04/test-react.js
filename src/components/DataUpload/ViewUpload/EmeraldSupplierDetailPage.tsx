@@ -5,11 +5,15 @@ import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BASE_URL } from '../../../services/Config/api-config';
+import { get_emerald_supplier_details } from '../../../store/slices/dataUpload/get-emerald-supplier-details-slice';
 
 const EmeraldSupplierDetailPage = () => {
   const { emeraldSupplierDetail } = UseEmeraldSupplierDetailHook();
   const navigate = useNavigate();
-  console.log('emeraldSupplierDetail in tsx', emeraldSupplierDetail);
+  const EmeraldSupplierDetailsFromStore: any = useSelector(
+    get_emerald_supplier_details
+  );
+  console.log('emeraldSupplierDetail in tsx', EmeraldSupplierDetailsFromStore);
   const AccessToken: any = useSelector(get_access_token);
   const { id } = useParams();
 
@@ -28,22 +32,27 @@ const EmeraldSupplierDetailPage = () => {
   return (
     <div className="container mb-5">
       <hr className="hr_line my-2" />
+
       <div className="row mb-2">
         <div className="col-lg-1">
           <button
             type="button"
             className="btn btn-outline-primary py-0 btn-sm"
             onClick={() => navigate(-1)}
+            title="Back"
           >
             Back
           </button>
         </div>
         <div className="col-lg-6 fs-6 ">
-          <span className="text-secondary">Emerald Supplier : </span>{' '}
+          <span className="text-secondary" title="Emerald Supplier">
+            Emerald Supplier :{' '}
+          </span>{' '}
           <b>{id}</b>
         </div>
       </div>
-      <div className="row mb-4">
+
+      <div className="row mb-4 ">
         <div className="col-lg-4">
           <div className="form-group">
             <label htmlFor="usr" className="text-secondary">
@@ -106,6 +115,15 @@ const EmeraldSupplierDetailPage = () => {
           </div>
         </div>
       </div>
+
+      {EmeraldSupplierDetailsFromStore?.isLoading === 'pending' &&
+        Object?.keys(EmeraldSupplierDetailsFromStore.data)?.length === 0 && (
+          <div className="d-flex justify-content-center mt-5">
+            <div className="spinner-border " role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
+        )}
 
       <div className="table-responsive my-2 emerald-supplier-table-container">
         {emeraldSupplierDetail[0]?.emerald_supplier_table?.length > 0 &&
