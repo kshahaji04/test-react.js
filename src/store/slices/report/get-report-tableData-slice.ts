@@ -42,7 +42,7 @@ export const GetReportTableDataScreen = createSlice({
         }
       }
     });
-    builder.addCase(getReportTableData.rejected, (state, action) => {
+    builder.addCase(getReportTableData.rejected, (state) => {
       state.isLoading = 'failed';
       state.data = '';
       state.error = 'failed to store data';

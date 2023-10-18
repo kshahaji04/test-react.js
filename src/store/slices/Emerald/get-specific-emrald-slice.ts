@@ -50,7 +50,7 @@ export const GetSpecificEmeraldScreen = createSlice({
         state.docStatus = '';
       }
     });
-    builder.addCase(getSpecificEmeraldChitti.rejected, (state, action) => {
+    builder.addCase(getSpecificEmeraldChitti.rejected, (state) => {
       state.isLoading = 'failed';
       state.data = '';
       state.docStatus = '';

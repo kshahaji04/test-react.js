@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { get_emerald_supplier } from '../../../store/slices/dataUpload/get-emerald-supplier-slice';
 import { useSelector } from 'react-redux';
 
-const EmeraldSupplierList = ({ supplierList, emeraldSupplierData }: any) => {
+const EmeraldSupplierList = ({ emeraldSupplierData }: any) => {
   const emeraldSupplierDataFromStore: any = useSelector(get_emerald_supplier);
   console.log(
     'EmeraldSupplierDataFromStore in tsx',

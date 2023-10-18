@@ -166,7 +166,7 @@ const EditEmeraldChitti = () => {
         <div>
           {challanDetail?.length > 0 &&
             challanDetail !== null &&
-            challanDetail.map((data: any, index: any) => {
+            challanDetail.map((data: any) => {
               console.log('valuess emerald', data);
 
               return (

@@ -196,15 +196,13 @@ const EmeraldChittiTable = ({
                           <option defaultValue={row.sub_category}></option>
                           {subCategoryList?.length > 0 &&
                             subCategoryList !== null &&
-                            subCategoryList.map(
-                              (subCategoryList: any, index: any) => {
-                                return (
-                                  <option defaultValue={row.sub_category}>
-                                    {subCategoryList}
-                                  </option>
-                                );
-                              }
-                            )}
+                            subCategoryList.map((subCategoryList: any) => {
+                              return (
+                                <option defaultValue={row.sub_category}>
+                                  {subCategoryList}
+                                </option>
+                              );
+                            })}
                         </select>
                       </td>
                       <td className="table-data-input">

@@ -40,7 +40,7 @@ export const GetEmeraldShilpiListScreen = createSlice({
         }
       }
     });
-    builder.addCase(getEmeraldShilpiList.rejected, (state, action) => {
+    builder.addCase(getEmeraldShilpiList.rejected, (state) => {
       state.isLoading = 'failed';
       state.data = '';
       state.error = 'failed to store data';

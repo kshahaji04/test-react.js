@@ -43,7 +43,7 @@ export const GetSubCategoryCategoryScreen = createSlice({
         }
       }
     });
-    builder.addCase(getSubCategoryCategory.rejected, (state, action) => {
+    builder.addCase(getSubCategoryCategory.rejected, (state) => {
       state.isLoading = 'failed';
       state.data = '';
       state.error = 'failed to store data';

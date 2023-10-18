@@ -41,7 +41,7 @@ export const GetSupplierListScreen = createSlice({
         }
       }
     });
-    builder.addCase(getSupplierList.rejected, (state, action) => {
+    builder.addCase(getSupplierList.rejected, (state) => {
       state.isLoading = 'failed';
       state.data = '';
       state.error = 'failed to store data';

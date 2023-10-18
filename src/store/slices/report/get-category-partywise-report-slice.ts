@@ -48,14 +48,11 @@ export const GetCategoryPartywiseReportScreen = createSlice({
         }
       }
     );
-    builder.addCase(
-      getCategoryPartywiseReportData.rejected,
-      (state, action) => {
-        state.isLoading = 'failed';
-        state.data = '';
-        state.error = 'failed to store data';
-      }
-    );
+    builder.addCase(getCategoryPartywiseReportData.rejected, (state) => {
+      state.isLoading = 'failed';
+      state.data = '';
+      state.error = 'failed to store data';
+    });
   },
 });
 

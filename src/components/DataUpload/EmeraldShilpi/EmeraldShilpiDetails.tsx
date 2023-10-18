@@ -94,7 +94,7 @@ const EmeraldShilpiDetails = () => {
                 {emeraldShilpiDetails?.length > 0 &&
                 emeraldShilpiDetails !== null ? (
                   <>
-                    {emeraldShilpiDetails.map((detail: any, index: any) => (
+                    {emeraldShilpiDetails.map((detail: any) => (
                       <>
                         {detail?.emerald_supplier_table?.length > 0 &&
                         detail?.emerald_supplier_table !== null ? (

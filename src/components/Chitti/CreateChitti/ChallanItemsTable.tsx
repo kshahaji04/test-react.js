@@ -135,8 +135,6 @@ const ChallanItemsTable = ({
     setStateForDocStatus(true);
   };
 
-  console.log('updated tabledata', tableData);
-  const data = ['Java', 'JavaScript', 'React js', 'Python', 'C', 'C++'];
   return (
     <>
       <div className="container mt-1 border rounded-3">
@@ -161,7 +159,7 @@ const ChallanItemsTable = ({
               </tr>
             </thead>
             <tbody>
-              {tableData.map((row: any, index: any) => (
+              {tableData.map((row: any) => (
                 <>
                   <tr key={row.id}>
                     <td className="p-0">{row.id}</td>

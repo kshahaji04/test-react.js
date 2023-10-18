@@ -95,7 +95,7 @@ const EmeraldSupplierDetailPage = () => {
                 {emeraldSupplierDetail?.length > 0 &&
                 emeraldSupplierDetail !== null ? (
                   <>
-                    {emeraldSupplierDetail.map((detail: any, index: any) => (
+                    {emeraldSupplierDetail.map((detail: any) => (
                       <>
                         {detail?.emerald_supplier_table?.length > 0 &&
                         detail?.emerald_supplier_table !== null ? (

@@ -41,7 +41,7 @@ export const GetEmeraldSupplierDetailsScreen = createSlice({
         }
       }
     });
-    builder.addCase(getEmeraldSupplierDetails.rejected, (state, action) => {
+    builder.addCase(getEmeraldSupplierDetails.rejected, (state) => {
       state.isLoading = 'failed';
       state.data = '';
       state.error = 'failed to store data';

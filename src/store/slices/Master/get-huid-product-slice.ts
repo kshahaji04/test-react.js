@@ -44,7 +44,7 @@ export const GetHuidProductListScreen = createSlice({
         }
       }
     });
-    builder.addCase(getHuidProductList.rejected, (state, action) => {
+    builder.addCase(getHuidProductList.rejected, (state) => {
       state.isLoading = 'failed';
       state.data = '';
       state.error = 'failed to store data';

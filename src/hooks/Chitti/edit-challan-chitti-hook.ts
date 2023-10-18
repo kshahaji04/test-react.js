@@ -105,11 +105,7 @@ const UseEditChallanChitti: any = () => {
     ) {
       toast.success('Chitti Updated');
       setStateForDocStatus(false);
-      let updateDocStatus: any = await UpdateDocStatus(
-        AccessToken?.token,
-        '0',
-        id
-      );
+      await UpdateDocStatus(AccessToken?.token, '0', id);
     } else {
       toast.error('Failed to Update chitti');
     }

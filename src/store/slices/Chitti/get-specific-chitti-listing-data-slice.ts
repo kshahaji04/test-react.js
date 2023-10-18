@@ -53,7 +53,7 @@ export const GetSpecificChittiChallanScreen = createSlice({
         state.docStatus = '';
       }
     });
-    builder.addCase(getSpecificChittiChallan.rejected, (state, action) => {
+    builder.addCase(getSpecificChittiChallan.rejected, (state) => {
       state.isLoading = 'failed';
       state.data = '';
       state.docStatus = '';

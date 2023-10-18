@@ -41,7 +41,7 @@ export const GetSubCategoryReportScreen = createSlice({
         state.isLoading = 'succeeded';
       }
     });
-    builder.addCase(getSubCategoryReportData.rejected, (state, action) => {
+    builder.addCase(getSubCategoryReportData.rejected, (state) => {
       state.isLoading = 'failed';
       state.data = '';
       state.error = 'failed to store data';

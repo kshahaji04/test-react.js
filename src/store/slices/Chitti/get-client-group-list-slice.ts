@@ -40,7 +40,7 @@ export const GetClientGroupScreen = createSlice({
         }
       }
     });
-    builder.addCase(getClientGroupList.rejected, (state, action) => {
+    builder.addCase(getClientGroupList.rejected, (state) => {
       state.isLoading = 'failed';
       state.data = '';
       state.error = 'failed to store data';

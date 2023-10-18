@@ -90,11 +90,7 @@ const UseEditEmeraldChittiHook: any = () => {
     ) {
       toast.success('Emerald Chitti Updated');
       setStateForDocStatus(false);
-      let updateDocStatus: any = await UpdateDocStatus(
-        AccessToken?.token,
-        '1',
-        id
-      );
+      await UpdateDocStatus(AccessToken?.token, '1', id);
     } else {
       toast.error('Failed to Update Emerald chitti');
     }

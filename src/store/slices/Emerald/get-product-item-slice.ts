@@ -43,7 +43,7 @@ export const GetProductItemScreen = createSlice({
         }
       }
     });
-    builder.addCase(getProductItem.rejected, (state, action) => {
+    builder.addCase(getProductItem.rejected, (state) => {
       state.isLoading = 'failed';
       state.data = '';
       state.error = 'failed to store data';
