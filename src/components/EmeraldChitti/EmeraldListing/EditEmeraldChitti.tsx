@@ -101,7 +101,7 @@ const EditEmeraldChitti = () => {
               <button
                 type="submit"
                 onClick={HandleBackButton}
-                className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
+                className=" btn btn-outline-primary me-3 px-2 py-0 form-submit-button"
               >
                 Back
               </button>
@@ -127,7 +127,7 @@ const EditEmeraldChitti = () => {
             <button
               type="submit"
               onClick={HandleUpdateEmeraldChittiSubmit}
-              className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
+              className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
             >
               Save
             </button>
@@ -135,7 +135,7 @@ const EditEmeraldChitti = () => {
           {stateForDocStatus === false && showButton === 0 && (
             <button
               type="submit"
-              className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
+              className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
               onClick={HandleSubmitData}
             >
               Submit
@@ -144,7 +144,7 @@ const EditEmeraldChitti = () => {
           {showButton === 1 && (
             <button
               type="submit"
-              className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
+              className=" btn btn-outline-primary px-2 py-0 form-submit-button"
               onClick={HandleCancelChitti}
             >
               Cancel
@@ -153,7 +153,7 @@ const EditEmeraldChitti = () => {
           {showButton === 2 && (
             <button
               type="submit"
-              className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
+              className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
               onClick={HandleDeleteChitti}
             >
               Delete
