@@ -6,6 +6,7 @@ import { get_access_token } from '../../../../store/slices/auth/token-login-slic
 import AddClientNameApi from '../../../../services/api/Master/add-client-name-api';
 import SelectedInputDropdown from '../../../SelectedInputDropdown';
 import { getClientName } from '../../../../store/slices/Chitti/get-client-name-slice';
+import { getClientNameClientGroup } from '../../../../store/slices/Master/get-clientname-clientgroup-slice';
 
 const AddClient = ({ clientGroupList }: any) => {
   const dispatch = useDispatch();
@@ -29,8 +30,8 @@ const AddClient = ({ clientGroupList }: any) => {
 
       setTitle('');
       if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
-        toast.success('Client Group Created');
-        dispatch(getClientName(AccessToken?.token));
+        toast.success('New Client Created');
+        dispatch(getClientNameClientGroup(AccessToken?.token));
       }
       setError('');
 

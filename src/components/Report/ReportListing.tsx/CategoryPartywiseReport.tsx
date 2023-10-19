@@ -6,6 +6,7 @@ import UseCategoryHook from '../../../hooks/Master/category-hook';
 
 const CategoryPartyWiseReport = () => {
   const { categoryPartywiseReportData }: any = UseCategoryPartywiseReportHook();
+  console.log("categoryPartywiseReportData in tssx",categoryPartywiseReportData)
   const { clientNameList }: any = UseClientNameHook();
   const { CategoryList }: any = UseCategoryHook();
   // let lastSubCategoryColor: any = 'text-dark';
