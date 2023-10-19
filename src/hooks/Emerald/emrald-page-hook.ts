@@ -150,6 +150,7 @@ const UseEmeraldHook = () => {
         createEmeraldChittiApiRes?.status === 200 &&
         createEmeraldChittiApiRes?.hasOwnProperty('data')
       ) {
+        setTableData([{id:-1}])
         toast.success('Emerald Chitti Created');
         dispatch(getEmeraldChallan(AccessToken?.token));
       } else {

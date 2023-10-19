@@ -10,7 +10,7 @@ import UseChittiHook from './chitti-page-hook';
 import { useParams } from 'react-router-dom';
 import UpdateChittiApi from '../../services/api/Chitti/update-challan-chitti-api';
 import { toast } from 'react-toastify';
-import UpdateDocStatus from '../../services/api/general/update-doc-status-challan--api';
+import UpdateDocStatusChallanApi from '../../services/api/general/update-doc-status-challan--api';
 
 const UseEditChallanChitti: any = () => {
   const dispatch = useDispatch();
@@ -71,7 +71,8 @@ const UseEditChallanChitti: any = () => {
   }, [emeraldDetailDataFromStore]);
 
   const HandleUpdateChallanSubmit = async () => {
-    console.log('edited data', tableData);
+    console.log('edited data', challanTableData);
+    console.log('edited narrationUpdatedTableData,', narrationUpdatedTableData,);
 
     console.log(
       'submit create chitti',
@@ -80,8 +81,8 @@ const UseEditChallanChitti: any = () => {
       selectedDropdownValue,
       goldRate,
       remarks,
-      challanTableData,
-      narrationUpdatedTableData,
+      
+      
       date
     );
 
@@ -105,7 +106,7 @@ const UseEditChallanChitti: any = () => {
     ) {
       toast.success('Chitti Updated');
       setStateForDocStatus(false);
-      await UpdateDocStatus(AccessToken?.token, '0', id);
+      await UpdateDocStatusChallanApi(AccessToken?.token, '0', id);
     } else {
       toast.error('Failed to Update chitti');
     }

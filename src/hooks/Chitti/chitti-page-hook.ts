@@ -200,6 +200,10 @@ const UseChittiHook = () => {
         CreateChittiApiRes?.status === 200 &&
         CreateChittiApiRes?.hasOwnProperty('data')
       ) {
+      
+        setTableData([{ id: 1 }])
+        setNarrationTableData([{id:1}])
+      
         toast.success('Chitti Created');
         dispatch(getChittiChallan(AccessToken?.token));
       } else {

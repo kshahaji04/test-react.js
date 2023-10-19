@@ -13,15 +13,13 @@ const NarrationTable = ({
     huid_weight: 0,
   });
 
+
   useEffect(() => {
-    if (
-      defaultData?.length > 0 &&
-      defaultData !== undefined &&
-      defaultData !== null
-    ) {
-      setNarrationTableData(defaultData);
+    if (defaultData?.length > 0 && defaultData !== undefined && defaultData !== null) {
+   
+      setNarrationTableData(defaultData.map((data:any, index:any) => ({ ...data, id: index + 1 })));
     }
-  }, []);
+  }, [defaultData, setNarrationTableData]);
 
   const HandleAddRow: any = () => {
     const newRow = {
@@ -110,7 +108,7 @@ const NarrationTable = ({
   };
 
   const HandleCategory = (e: any, id: any) => {
-    console.log('handlecategory', e.target.value);
+    console.log('handlecategory', e.target.value,id);
     const updatedData = narrationTableData.map((row: any) =>
       row.id === id ? { ...row, product: e.target.value } : row
     );
@@ -149,7 +147,7 @@ const NarrationTable = ({
                   name="category"
                   className="form-select p-0 custom-input-field"
                   aria-label=".form-select-sm example"
-                  defaultValue={row.product}
+                  value={row.product}
                   onChange={(e) => HandleCategory(e, row.id)}
                 >
                   <option></option>
@@ -174,7 +172,8 @@ const NarrationTable = ({
                   className="form-control custom-input-field"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-sm"
-                  defaultValue={row.huid_pieces}
+                  defaultValue={row.huid_pieces >= 0 ? row.huid_pieces : ''}
+                  value={row.huid_pieces > 0 ? row.huid_pieces : ''}
                   onChange={(e) => HandlePiecesAmount(e, row.id)}
                 />
               </td>
@@ -185,7 +184,8 @@ const NarrationTable = ({
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-sm"
                   onKeyDown={(e) => handleKeyDown(e, row.id)}
-                  defaultValue={row.huid_weight}
+                  defaultValue={row.huid_weight >= 0 ? row.huid_weight : ''}
+                  value={row.huid_weight > 0 ? row.huid_weight : ''}
                   onChange={(e) => HandleWeightAmount(e, row.id)}
                 />
               </td>
