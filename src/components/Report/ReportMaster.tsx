@@ -40,7 +40,7 @@ const ReportMaster = () => {
               );
             })}
         </div>
-        <hr className="my-0 mt-3 " />
+        <hr className="my-0 mt-2 " />
       </div>
     </>
   );

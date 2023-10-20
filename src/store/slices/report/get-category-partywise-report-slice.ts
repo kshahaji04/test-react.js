@@ -39,6 +39,7 @@ export const GetCategoryPartywiseReportScreen = createSlice({
     builder.addCase(
       getCategoryPartywiseReportData.fulfilled,
       (state, action) => {
+        console.log('category partywie payload', action?.payload);
         if (
           action?.payload?.status === 200 &&
           action?.payload?.data?.message?.status === 'success'
