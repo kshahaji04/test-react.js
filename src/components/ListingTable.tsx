@@ -9,8 +9,10 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import DeleteEmeraldChittiApi from '../services/api/Emerald/delete-emerald-chitti-api';
 import { getEmeraldChallan } from '../store/slices/Emerald/get-emerald-list-slice';
-import UpdateDocStatus from '../services/api/general/update-doc-status-challan--api';
-import PrintApi from '../services/api/general/print-api';
+import UpdateDocStatusChallanApi from '../services/api/general/update-doc-status-challan--api';
+import PrintChallanChittiApi from '../services/api/Chitti/print-challan-chitti-api';
+import UpdateDocStatusEmeraldChittiApi from '../services/api/general/update-doc-status-emrald-chitti-api';
+import PrintEmeraldChittiApi from '../services/api/Emerald/print-emerald-chitti-api';
 
 const ListingTable = ({ tableListingData }: any) => {
   console.log('tableListingData', tableListingData);
@@ -61,7 +63,7 @@ const ListingTable = ({ tableListingData }: any) => {
 
   const HandleCancelChitti: any = async (name: any) => {
     if (window?.location?.pathname === '/chitti') {
-      let updateDocStatus: any = await UpdateDocStatus(
+      let updateDocStatus: any = await UpdateDocStatusChallanApi(
         AccessToken?.token,
         '2',
         name
@@ -74,7 +76,7 @@ const ListingTable = ({ tableListingData }: any) => {
         dispatch(getChittiChallan(AccessToken?.token));
       }
     } else if (window?.location?.pathname === '/emeraldchitti') {
-      let updateDocStatus: any = await UpdateDocStatus(
+      let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
         AccessToken?.token,
         '2',
         name
@@ -89,12 +91,23 @@ const ListingTable = ({ tableListingData }: any) => {
   };
 
   const HandlePrint = async (name: any) => {
-    let printApiRes: any = await PrintApi(AccessToken?.token, name);
-    if (printApiRes?.status === 'success') {
-      if (printApiRes?.data?.data?.length > 0) {
-        window.open(printApiRes?.data?.data[0]?.print_url);
+    if (window?.location?.pathname === '/chitti') {
+      let printApiRes: any = await PrintChallanChittiApi(AccessToken?.token, name);
+      if (printApiRes?.status === 'success') {
+        if (printApiRes?.data?.data?.length > 0) {
+          window.open(printApiRes?.data?.data[0]?.print_url);
+        }
+      }
+    } else if (window?.location?.pathname === '/emeraldchitti') {
+      let printApiRes: any = await PrintEmeraldChittiApi(AccessToken?.token, name);
+      if (printApiRes?.status === 'success') {
+        if (printApiRes?.data?.data?.length > 0) {
+          window.open(printApiRes?.data?.data[0]?.print_url);
+        }
       }
     }
+    
+  
   };
 
   const TableHeading: any = () => {

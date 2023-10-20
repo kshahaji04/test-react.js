@@ -22,9 +22,11 @@ const EmeraldChittiTable = ({
       defaultData !== undefined &&
       defaultData !== null
     ) {
-      setTableData(defaultData);
+      setTableData(
+        defaultData.map((data: any, index: any) => ({ ...data, id: index + 1 }))
+      );
     }
-  }, []);
+  }, [defaultData, setTableData]);
 
   const HandleAddRow: any = () => {
     const newRow = {
@@ -191,7 +193,7 @@ const EmeraldChittiTable = ({
                           name="subcategory"
                           className="form-select p-0 custom-input-field "
                           aria-label=".form-select-sm example"
-                          defaultValue={row.sub_category}
+                          value={row.sub_category}
                           onChange={(e) => HandleSubCategory(e, row.id)}
                         >
                           <option defaultValue={row.sub_category}></option>
@@ -212,7 +214,7 @@ const EmeraldChittiTable = ({
                           name="category"
                           className="form-select p-0 custom-input-field "
                           aria-label=".form-select-sm example"
-                          defaultValue={row.product}
+                          value={row.product}
                           onChange={(e) => HandleProductItem(e, row.id)}
                         >
                           <option defaultValue={row.product}></option>
@@ -232,32 +234,39 @@ const EmeraldChittiTable = ({
                       </td>
                       <td className="table-data-input">
                         <input
-                          type="number"
+                          type="text"
                           className="form-control custom-input-field-t"
                           aria-label="Sizing example input"
                           aria-describedby="inputGroup-sizing-sm"
-                          defaultValue={row.gross_weight}
+                          defaultValue={
+                            row.gross_weight >= 0 ? row.gross_weight : ''
+                          }
+                          value={row.gross_weight > 0 ? row.gross_weight : ''}
                           onChange={(e) => HandleGrossWeightValue(e, row.id)}
                         />
                       </td>
                       <td className="table-data-input">
                         <input
-                          type="number"
+                          type="text"
                           className="form-control custom-input-field-t"
                           aria-label="Sizing example input"
                           aria-describedby="inputGroup-sizing-sm"
-                          defaultValue={row.net_weight}
+                          defaultValue={
+                            row.net_weight >= 0 ? row.net_weight : ''
+                          }
+                          value={row.net_weight > 0 ? row.net_weight : ''}
                           onChange={(e) => HandleNetWeightValue(e, row.id)}
                         />
                       </td>
                       <td className="table-data-input">
                         <input
-                          type="number"
+                          type="text"
                           className="form-control custom-input-field-t"
                           aria-label="Sizing example input"
                           aria-describedby="inputGroup-sizing-sm"
                           onKeyDown={(e) => handleKeyDown(e, row.id)}
-                          defaultValue={row.amount}
+                          defaultValue={row.amount >= 0 ? row.amount : ''}
+                          value={row.amount > 0 ? row.amount : ''}
                           onChange={(e) => HandleAmountValue(e, row.id)}
                         />
                       </td>

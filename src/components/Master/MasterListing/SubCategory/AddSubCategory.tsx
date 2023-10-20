@@ -6,6 +6,7 @@ import { get_access_token } from '../../../../store/slices/auth/token-login-slic
 import AddSubCategoryApi from '../../../../services/api/Master/add-sub-category-api';
 import { useDispatch } from 'react-redux';
 import { getSubCategoryList } from '../../../../store/slices/Chitti/get-subcategory-slice';
+import { getSubCategoryCategory } from '../../../../store/slices/Master/get-subcategory-category-slice';
 
 const AddSubCategory = ({ CategoryList }: any) => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const AddSubCategory = ({ CategoryList }: any) => {
       setTitle('');
       if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
         toast.success('Sub Category Created');
-        dispatch(getSubCategoryList(AccessToken?.token));
+        dispatch(getSubCategoryCategory(AccessToken?.token));
       }
       setError('');
 

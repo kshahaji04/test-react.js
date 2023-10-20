@@ -12,7 +12,7 @@ import {
   get_specific_emerald_chitti,
 } from '../../store/slices/Emerald/get-specific-emrald-slice';
 import UpdateEmeraldChittiApi from '../../services/api/Emerald/update-emerald-chitti-api';
-import UpdateDocStatus from '../../services/api/general/update-doc-status-challan--api';
+import UpdateDocStatusEmeraldChittiApi from '../../services/api/general/update-doc-status-emrald-chitti-api';
 
 const UseEditEmeraldChittiHook: any = () => {
   const dispatch = useDispatch();
@@ -90,7 +90,7 @@ const UseEditEmeraldChittiHook: any = () => {
     ) {
       toast.success('Emerald Chitti Updated');
       setStateForDocStatus(false);
-      await UpdateDocStatus(AccessToken?.token, '1', id);
+      await UpdateDocStatusEmeraldChittiApi(AccessToken?.token, '0', id);
     } else {
       toast.error('Failed to Update Emerald chitti');
     }

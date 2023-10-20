@@ -21,7 +21,7 @@ import GetSubCategoryCategoryReducer from './slices/Master/get-subcategory-categ
 import GetReportTableDataReducer from './slices/report/get-report-tableData-slice';
 import GetSubCategoryReportReducer from './slices/report/get-subcategory-report-slice';
 import GetCategorySummaryReportReducer from './slices/report/get-category-summary-report-slice';
-import GetCategoryPartywiseReportReducer from './slices/report/get-category-summary-report-slice';
+import GetCategoryPartywiseReportReducer from './slices/report/get-category-partywise-report-slice';
 import GetEmeraldReportReducer from './slices/report/get-emerald-report-slice';
 import GetEmeraldShilpiListReducer from './slices/emerald-shilpi/get-emerald-shilpi-slice';
 import GetEmeraldShilpiDetailsReducer from './slices/emerald-shilpi/get-emerald-shilpi-details-slice';

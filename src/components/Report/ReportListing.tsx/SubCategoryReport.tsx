@@ -115,7 +115,7 @@ const SubCategoryReport = () => {
                     <tr className="report-table-row" key={index}>
                       <td>{index + 1}</td>
 
-                      <td className={`${textColor}`}>{data.sub_category}</td>
+                      <td className={`${textColor} subcategory-title`}>{data.sub_category}</td>
                       <td>{data.client_name}</td>
                       <td>{data.total_gross_weight}</td>
                       <td>{data.total_net_weight}</td>

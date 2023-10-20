@@ -18,7 +18,6 @@ const SelectedInputDropdown = ({
   const [noRecords, setNoRecordsFound] = useState<any>(false);
   const [filterDropdownList, setFilterDropdownList] = useState<any>([]);
 
-  const selectDropdownRef = useRef<any>(null);
   useEffect(() => {
     if (
       defaultData !== undefined &&
@@ -62,17 +61,39 @@ const SelectedInputDropdown = ({
     }
   };
 
-  const handleBlur = () => {
-    setTimeout(() => {
-      if (
-        !selectDropdownRef.current ||
-        !selectDropdownRef.current.contains(document.activeElement)
-      ) {
+  // const handleBlur = () => {
+  //   console.log("handleblur")
+  // }
+  // const handleBlur = () => {
+  //   console.log("handleblur")
+  //   console.log("handleblur select",selectDropdownRef)
+  //   console.log("handleblur active",document.activeElement)
+  //   setTimeout(() => {
+  //     if (
+  //       !selectDropdownRef.current ||
+  //       !selectDropdownRef.current.contains(document.activeElement)
+  //     ) {
+  //       setShowDropdown(false);
+  //     }
+  //   }, 200);
+  // };
+
+  useEffect(() => {
+    const handleDocumentClick = (e:any) => {
+      if (!e?.target?.closest('.dropdown-input-container')) {
+        // The click was outside the dropdown, so close it
         setShowDropdown(false);
       }
-    }, 200);
-  };
+    };
+    // Attach the event listener when the component mounts
+    document.addEventListener('click', handleDocumentClick);
+    // Remove the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, []);
 
+  
   const HandleClientBlur = () => {
     setShowDropdown(false);
   };
@@ -88,7 +109,7 @@ const SelectedInputDropdown = ({
               : 'form-control input-fields  dropdown-input'
           }`}
           id="exampleInputEmail1"
-          onBlur={handleBlur}
+          // onBlur={handleBlur}
           // onFocus={() => setIsFocused(true)}
           placeholder={placeholderValue}
           onChange={HandleInputField}
@@ -140,7 +161,7 @@ const SelectedInputDropdown = ({
                         className="form-select form-select-sm "
                         aria-label="Default select example"
                         onChange={HandleClientGroup}
-                        ref={selectDropdownRef}
+                    
                         onBlur={HandleClientBlur}
                       >
                         <option>Select client group</option>

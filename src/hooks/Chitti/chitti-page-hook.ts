@@ -56,6 +56,7 @@ const UseChittiHook = () => {
     new Date()?.toISOString()?.split('T')[0]
   );
   const [stateForDocStatus, setStateForDocStatus] = useState<boolean>(false);
+  const [showMandatoryErrMsg, setShowMandatoryErrMsg] = useState<any>([]);
 
   useEffect(() => {
     dispatch(getChittiChallan(AccessToken?.token));
@@ -178,53 +179,80 @@ const UseChittiHook = () => {
       NoDataNarrationTableData
     );
 
-    if (
-      Object?.keys(selectedDropdownValue)?.length > 0 &&
-      NoDataChallanTableData === false &&
-      NoDataNarrationTableData === false
-    ) {
-      const BodyData: any = {
-        date: date,
-        clientName: selectedDropdownValue,
-        clientGroup: clientGroupName,
-        goldRate: goldRate,
-        remarks: remarks,
-        challanTableData: challanTableData,
-        narrationTableData: narrationUpdatedTableData,
-        token: AccessToken?.token,
-      };
-      let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
-      console.log('Createchittiapires', CreateChittiApiRes);
-
-      if (
-        CreateChittiApiRes?.status === 200 &&
-        CreateChittiApiRes?.hasOwnProperty('data')
-      ) {
-        toast.success('Chitti Created');
-        dispatch(getChittiChallan(AccessToken?.token));
-      } else {
-        toast.error('Failed to created chitti');
-      }
-    } else {
-      console.log('select elss');
-      toast.error('Mandatory fields Client name, challan Table , HUID Table');
-
-      // if (Object.keys(selectedDropdownValue)?.length === 0 && !NoDataChallanTableData ) {
-      //   toast.error('Please add Client name');
-      // }
-      // if (
-      //   NoDataChallanTableData &&
-      //   Object.keys(selectedDropdownValue)?.length === 0
-      // ) {
-      //   toast.error('Please add Client Name and Challan Table');
-      // }
-      // if (
-      //   NoDataNarrationTableData === true &&
-      //   Object.keys(selectedDropdownValue)?.length === 0
-      // ) {
-      //   toast.error('Please add Client name and Narration Table');
-      // }
+    let errMsgList:any = []
+    if(Object?.keys(selectedDropdownValue)?.length === 0) {
+      errMsgList.push("Client Name")
+    } if(NoDataChallanTableData) {
+      errMsgList.push("Challan Table")
+    } if(NoDataNarrationTableData) {
+      errMsgList.push("HUID Table")
     }
+console.log("show err msg",errMsgList)
+if(errMsgList?.length > 0 && errMsgList !== null ){
+    toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
+}else{
+  const BodyData: any = {
+    date: date,
+    clientName: selectedDropdownValue,
+    clientGroup: clientGroupName,
+    goldRate: goldRate,
+    remarks: remarks,
+    challanTableData: challanTableData,
+    narrationTableData: narrationUpdatedTableData,
+    token: AccessToken?.token,
+  };
+  let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
+  console.log('Createchittiapires', CreateChittiApiRes);
+
+  if (
+    CreateChittiApiRes?.status === 200 &&
+    CreateChittiApiRes?.hasOwnProperty('data')
+  ) {
+    setTableData([{ id: 1 }])
+    setNarrationTableData([{id:1}])
+  
+    toast.success('Chitti Created');
+    dispatch(getChittiChallan(AccessToken?.token));
+  } else {
+    toast.error('Failed to created chitti');
+  }
+}
+
+    // if (
+    //   Object?.keys(selectedDropdownValue)?.length > 0 &&
+    //   NoDataChallanTableData === false &&
+    //   NoDataNarrationTableData === false
+    // ) {
+    //   const BodyData: any = {
+    //     date: date,
+    //     clientName: selectedDropdownValue,
+    //     clientGroup: clientGroupName,
+    //     goldRate: goldRate,
+    //     remarks: remarks,
+    //     challanTableData: challanTableData,
+    //     narrationTableData: narrationUpdatedTableData,
+    //     token: AccessToken?.token,
+    //   };
+    //   let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
+    //   console.log('Createchittiapires', CreateChittiApiRes);
+
+    //   if (
+    //     CreateChittiApiRes?.status === 200 &&
+    //     CreateChittiApiRes?.hasOwnProperty('data')
+    //   ) {
+      
+    //     setTableData([{ id: 1 }])
+    //     setNarrationTableData([{id:1}])
+      
+    //     toast.success('Chitti Created');
+    //     dispatch(getChittiChallan(AccessToken?.token));
+    //   } else {
+    //     toast.error('Failed to created chitti');
+    //   }
+    // } else {
+    //   console.log('select elss');
+    //   toast.error('Mandatory fields Client name, challan Table , HUID Table');
+    // }
   };
   console.log('chittiListingData in hook end', chittiListingData);
   return {

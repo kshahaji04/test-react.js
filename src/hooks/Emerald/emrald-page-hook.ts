@@ -132,52 +132,73 @@ const UseEmeraldHook = () => {
       (item: any) => Object?.keys(item)?.length === 0
     );
 
-    if (
-      Object?.keys(selectedDropdownValue)?.length > 0 &&
-      NoDataEmeraldTableData === false
-    ) {
-      const BodyData: any = {
-        clientName: selectedDropdownValue,
-        date: transactionDate,
-        emeraldChittiTableData: emeraldChittiTableData,
-        token: AccessToken?.token,
-      };
-      let createEmeraldChittiApiRes: any =
-        await CreateEmeraldChittiApi(BodyData);
-      console.log('Createchittiapires', createEmeraldChittiApiRes);
+    let errMsgList:any = []
+    if(Object?.keys(selectedDropdownValue)?.length === 0) {
+      errMsgList.push("Client Name")
+    } if(NoDataEmeraldTableData) {
+      errMsgList.push("Emerald Chitti Table")
+    } 
+console.log("show err msg",errMsgList)
 
-      if (
-        createEmeraldChittiApiRes?.status === 200 &&
-        createEmeraldChittiApiRes?.hasOwnProperty('data')
-      ) {
-        toast.success('Emerald Chitti Created');
-        dispatch(getEmeraldChallan(AccessToken?.token));
-      } else {
-        toast.error('Failed to Create Emerald Chitti');
-      }
-    } else {
-      console.log('select elss');
-      toast.error('Mandatory fields Client name, Emerald Table ');
-    }
+if(errMsgList?.length > 0 && errMsgList !== null ){
+ 
+    // const concatenatedErrMsg:any = errMsgList?.join(", "); 
+    toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
 
-    // const BodyData: any = {
-    //   clientName: selectedDropdownValue,
-    //   date: transactionDate,
-    //   emeraldChittiTableData: emeraldChittiTableData,
-    //   token: AccessToken?.token,
-    // };
-    // let createEmeraldChittiApiRes: any = await CreateEmeraldChittiApi(BodyData);
-    // console.log('Createchittiapires', createEmeraldChittiApiRes);
+}else{
+  const BodyData: any = {
+    clientName: selectedDropdownValue,
+    date: transactionDate,
+    emeraldChittiTableData: emeraldChittiTableData,
+    token: AccessToken?.token,
+  };
+  let createEmeraldChittiApiRes: any =
+    await CreateEmeraldChittiApi(BodyData);
+  console.log('Createchittiapires', createEmeraldChittiApiRes);
+
+  if (
+    createEmeraldChittiApiRes?.status === 200 &&
+    createEmeraldChittiApiRes?.hasOwnProperty('data')
+  ) {
+    setTableData([{id:-1}])
+    toast.success('Emerald Chitti Created');
+    dispatch(getEmeraldChallan(AccessToken?.token));
+  } else {
+    toast.error('Failed to Create Emerald Chitti');
+  }
+}
+
 
     // if (
-    //   createEmeraldChittiApiRes?.status === 200 &&
-    //   createEmeraldChittiApiRes?.hasOwnProperty('data')
+    //   Object?.keys(selectedDropdownValue)?.length > 0 &&
+    //   NoDataEmeraldTableData === false
     // ) {
-    //   toast.success('Emerald Chitti Created');
-    //   dispatch(getEmeraldChallan(AccessToken?.token));
+    //   const BodyData: any = {
+    //     clientName: selectedDropdownValue,
+    //     date: transactionDate,
+    //     emeraldChittiTableData: emeraldChittiTableData,
+    //     token: AccessToken?.token,
+    //   };
+    //   let createEmeraldChittiApiRes: any =
+    //     await CreateEmeraldChittiApi(BodyData);
+    //   console.log('Createchittiapires', createEmeraldChittiApiRes);
+
+    //   if (
+    //     createEmeraldChittiApiRes?.status === 200 &&
+    //     createEmeraldChittiApiRes?.hasOwnProperty('data')
+    //   ) {
+    //     setTableData([{id:-1}])
+    //     toast.success('Emerald Chitti Created');
+    //     dispatch(getEmeraldChallan(AccessToken?.token));
+    //   } else {
+    //     toast.error('Failed to Create Emerald Chitti');
+    //   }
     // } else {
-    //   toast.error('Failed to Create Emerald Chitti');
+    //   console.log('select elss');
+    //   toast.error('Mandatory fields Client name, Emerald Table ');
     // }
+
+    
   };
 
   return {

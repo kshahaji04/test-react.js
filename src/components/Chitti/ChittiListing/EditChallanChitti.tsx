@@ -168,10 +168,11 @@ const EditChallanChitti = () => {
 
       <div>
         {challanDetail?.length > 0 && challanDetail !== null
-          ? challanDetail.map((data: any, index: any) => {
+          ? challanDetail.map((data: any) => {
+            console.log("default data challan",data)
               return (
                 <>
-                  <div key={index}>
+                  
                     <CreateChittiForm
                       defaultData={data}
                       HandleDateChange={HandleDateChange}
@@ -197,7 +198,7 @@ const EditChallanChitti = () => {
                       productList={productList}
                       setStateForDocStatus={setStateForDocStatus}
                     />
-                  </div>
+                
                 </>
               );
             })

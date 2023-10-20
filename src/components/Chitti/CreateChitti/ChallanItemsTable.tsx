@@ -14,15 +14,14 @@ const ChallanItemsTable = ({
     amount: 0,
   });
 
+  console.log("initial table data",tableData)
+
   useEffect(() => {
-    if (
-      defaultData?.length > 0 &&
-      defaultData !== undefined &&
-      defaultData !== null
-    ) {
-      setTableData(defaultData);
+    if (defaultData?.length > 0 && defaultData !== undefined && defaultData !== null) {
+   
+      setTableData(defaultData.map((data:any, index:any) => ({ ...data, id: index + 1 })));
     }
-  }, []);
+  }, [defaultData, setTableData]);
 
   const HandleAddRow: any = () => {
     const newRow = {
@@ -98,19 +97,23 @@ const ChallanItemsTable = ({
     setamountValue(newColumnTotals);
   }, [tableData]);
 
-  const HandleCategory = (e: any, id: any) => {
+  const HandleSubCategory:any = (e: any, id: any) => {
+    console.log('handlesubcategory', e.target.value,id);
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, sub_category: e.target.value } : row
     );
-    setTableData([...updatedData]);
+    setTableData(updatedData);
     setStateForDocStatus(true);
   };
+  
+  console.log("handlecategory sub category",tableData)
 
   const HandleGrossWeightValue = (e: any, id: any) => {
-    console.log('gross', e.target.value);
+    console.log('gross', e.target.value,id);
+    const inputValue = parseFloat(e.target.value) 
     const updatedData = tableData.map((row: any) =>
       row.id === id
-        ? { ...row, gross_weight: parseFloat(e.target.value) || 0 }
+        ? { ...row, gross_weight: inputValue || 0 }
         : row
     );
     setTableData(updatedData);
@@ -165,18 +168,13 @@ const ChallanItemsTable = ({
                   <tr key={row.id}>
                     <td className="p-0">{row.id}</td>
                     <td className="table-data-input">
-                      {/* <CustomTableDropdown
-                        dropdownlist={subCategoryList}
-                        setSelectedDropdownValue={setSelectedDropdownValue}
-                      /> */}
-
                       <select
-                        id="category"
-                        name="category"
+                        id="subcategory"
+                        name="subcategory"
                         className="form-select p-0 custom-input-field "
                         aria-label=".form-select-sm example"
-                        defaultValue={row.sub_category}
-                        onChange={(e) => HandleCategory(e, row.id)}
+                        value={row.sub_category}
+                        onChange={(e) =>HandleSubCategory(e, row.id)}
                       >
                         <option defaultValue={row.sub_category}></option>
                         {subCategoryList?.length > 0 &&
@@ -202,31 +200,36 @@ const ChallanItemsTable = ({
                     </td>
                     <td className="table-data-input">
                       <input
-                        type="number"
+                        type="text"
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        defaultValue={row.gross_weight}
+                        defaultValue={
+                          row.gross_weight >= 0 ? row.gross_weight : ''
+                        }
+                        value={row.gross_weight > 0 ? row.gross_weight : ''}
                         onChange={(e) => HandleGrossWeightValue(e, row.id)}
                       />
                     </td>
                     <td className="table-data-input">
                       <input
-                        type="number"
+                        type="text"
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        defaultValue={row.net_weight}
+                        defaultValue={row.net_weight >= 0 ? row.net_weight : ''}
+                        value={row.net_weight > 0 ? row.net_weight : ''}
                         onChange={(e) => HandleNetWeightValue(e, row.id)}
                       />
                     </td>
                     <td className="table-data-input">
                       <input
-                        type="number"
+                        type="text"
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        defaultValue={row.amount}
+                        defaultValue={row.amount >= 0 ? row.amount : ''}
+                        value={row.amount > 0 ? row.amount : ''}
                         onKeyDown={(e) => handleKeyDown(e, row.id)}
                         onChange={(e) => HandleAmountValue(e, row.id)}
                       />
