@@ -13,7 +13,7 @@ const ClientGroupListing = ({ clientGroupList }: any) => {
       <table className="table table-striped mt-2">
         <thead>
           <tr className="text-start table-heading table-heading-row">
-            <th scope="col ">Client Group List</th>
+            <th scope="col ">Client Group</th>
           </tr>
         </thead>
         <tbody>
