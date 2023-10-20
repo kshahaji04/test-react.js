@@ -79,7 +79,7 @@ const CategoryPartyWiseReport = () => {
         showClientNameInFilter={showClientNameInFilter}
         showDateInFilter={showDateInFilter}
       />
-      <div className="table-responsive  report-table-container">
+      <div className="table-responsive  report-table-container mb-5">
         <table className="table table-striped table-hover">
           <thead className="report-table-head-row sticky-top">
             <tr className="report-table-head-tr text-uppercase">

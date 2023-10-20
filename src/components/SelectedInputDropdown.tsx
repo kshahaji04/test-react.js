@@ -11,9 +11,10 @@ const SelectedInputDropdown = ({
   defaultData,
   readOnlyField,
   setStateForDocStatus,
+  hideDropdown,
   title,
 }: any) => {
-  console.log('defaultt', selectedDropdownValue, drowpdownlist);
+  console.log('defaultt', selectedDropdownValue, hideDropdown);
   const [showDropDown, setShowDropdown] = useState<any>(false);
   const [noRecords, setNoRecordsFound] = useState<any>(false);
   const [filterDropdownList, setFilterDropdownList] = useState<any>([]);
@@ -41,7 +42,7 @@ const SelectedInputDropdown = ({
     const query = e.target.value;
 
     const UpdatedFilterList: any = drowpdownlist?.filter((item: any) => {
-      return item.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+      return item?.toLowerCase()?.indexOf(query?.toLowerCase()) !== -1;
     });
 
     setFilterDropdownList(UpdatedFilterList);
@@ -61,25 +62,8 @@ const SelectedInputDropdown = ({
     }
   };
 
-  // const handleBlur = () => {
-  //   console.log("handleblur")
-  // }
-  // const handleBlur = () => {
-  //   console.log("handleblur")
-  //   console.log("handleblur select",selectDropdownRef)
-  //   console.log("handleblur active",document.activeElement)
-  //   setTimeout(() => {
-  //     if (
-  //       !selectDropdownRef.current ||
-  //       !selectDropdownRef.current.contains(document.activeElement)
-  //     ) {
-  //       setShowDropdown(false);
-  //     }
-  //   }, 200);
-  // };
-
   useEffect(() => {
-    const handleDocumentClick = (e:any) => {
+    const handleDocumentClick = (e: any) => {
       if (!e?.target?.closest('.dropdown-input-container')) {
         // The click was outside the dropdown, so close it
         setShowDropdown(false);
@@ -93,7 +77,6 @@ const SelectedInputDropdown = ({
     };
   }, []);
 
-  
   const HandleClientBlur = () => {
     setShowDropdown(false);
   };
@@ -118,7 +101,6 @@ const SelectedInputDropdown = ({
           value={selectedDropdownValue}
           onKeyDown={handleKeyDown}
           autoComplete="off"
-          readOnly={readOnlyField}
           title={title}
         />
         {showDropDown && (
@@ -161,7 +143,6 @@ const SelectedInputDropdown = ({
                         className="form-select form-select-sm "
                         aria-label="Default select example"
                         onChange={HandleClientGroup}
-                    
                         onBlur={HandleClientBlur}
                       >
                         <option>Select client group</option>
