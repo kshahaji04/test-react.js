@@ -92,22 +92,26 @@ const ListingTable = ({ tableListingData }: any) => {
 
   const HandlePrint = async (name: any) => {
     if (window?.location?.pathname === '/chitti') {
-      let printApiRes: any = await PrintChallanChittiApi(AccessToken?.token, name);
+      let printApiRes: any = await PrintChallanChittiApi(
+        AccessToken?.token,
+        name
+      );
       if (printApiRes?.status === 'success') {
         if (printApiRes?.data?.data?.length > 0) {
           window.open(printApiRes?.data?.data[0]?.print_url);
         }
       }
     } else if (window?.location?.pathname === '/emeraldchitti') {
-      let printApiRes: any = await PrintEmeraldChittiApi(AccessToken?.token, name);
+      let printApiRes: any = await PrintEmeraldChittiApi(
+        AccessToken?.token,
+        name
+      );
       if (printApiRes?.status === 'success') {
         if (printApiRes?.data?.data?.length > 0) {
           window.open(printApiRes?.data?.data[0]?.print_url);
         }
       }
     }
-    
-  
   };
 
   const TableHeading: any = () => {
@@ -242,7 +246,7 @@ const ListingTable = ({ tableListingData }: any) => {
 
   return (
     <>
-      <div className="container">
+      <div className=" table-responsive">
         <table className="table table table-striped table-hover listing-table border-0">
           <thead className="table-heading">
             <tr className="table-heading-row">

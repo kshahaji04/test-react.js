@@ -13,7 +13,7 @@ const CategoryListing = ({ CategoryList }: any) => {
       <table className="table table-striped mt-2">
         <thead>
           <tr className="text-start table-heading table-heading-row">
-            <th scope="col ">Category Listing</th>
+            <th scope="col ">Category</th>
           </tr>
         </thead>
         <tbody>

@@ -1,7 +1,5 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import SelectedInputDropdown from '../../SelectedInputDropdown';
-import { get_specific_chitti_challan } from '../../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
-import { useSelector } from 'react-redux';
 
 const CreateChittiForm = ({
   currentDate,
@@ -14,14 +12,20 @@ const CreateChittiForm = ({
   HandleClientGroup,
   defaultData,
   HandleDateChange,
-
   setStateForDocStatus,
+  setRemarks,
+  setGoldRate,
 }: any) => {
   const bgColor = useRef(true);
 
-  const docStatusFromStore: any = useSelector(get_specific_chitti_challan);
-  console.log('docStatus in cre', docStatusFromStore?.docStatus);
+  useEffect(() => {
+    if (defaultData !== undefined && defaultData !== null) {
+      setGoldRate(defaultData?.gold_rate);
+      setRemarks(defaultData?.remarks);
+    }
+  }, []);
 
+  console.log('defaultData', defaultData);
   return (
     <>
       <form className="d-flex flex-column">

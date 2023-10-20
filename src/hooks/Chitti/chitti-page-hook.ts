@@ -123,11 +123,13 @@ const UseChittiHook = () => {
   }, [ClientGroupDataFromStore]);
 
   const HandleGoldRate: any = (e: any) => {
+    console.log('handle goldrate', e.target.value);
     setGoldRate(e.target.value);
     setStateForDocStatus(true);
   };
 
   const HandleRemarks: any = (e: any) => {
+    console.log('handle remark', e.target.value);
     setRemarks(e.target.value);
     setStateForDocStatus(true);
   };
@@ -179,44 +181,43 @@ const UseChittiHook = () => {
       NoDataNarrationTableData
     );
 
-    let errMsgList:any = []
-    if(Object?.keys(selectedDropdownValue)?.length === 0) {
-      errMsgList.push("Client Name")
-    } if(NoDataChallanTableData) {
-      errMsgList.push("Challan Table")
-    } if(NoDataNarrationTableData) {
-      errMsgList.push("HUID Table")
+    let errMsgList: any = [];
+    if (Object?.keys(selectedDropdownValue)?.length === 0) {
+      errMsgList.push('Client Name');
     }
-console.log("show err msg",errMsgList)
-if(errMsgList?.length > 0 && errMsgList !== null ){
-    toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
-}else{
-  const BodyData: any = {
-    date: date,
-    clientName: selectedDropdownValue,
-    clientGroup: clientGroupName,
-    goldRate: goldRate,
-    remarks: remarks,
-    challanTableData: challanTableData,
-    narrationTableData: narrationUpdatedTableData,
-    token: AccessToken?.token,
-  };
-  let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
-  console.log('Createchittiapires', CreateChittiApiRes);
+    if (NoDataChallanTableData) {
+      errMsgList.push('Challan Table');
+    }
+    if (NoDataNarrationTableData) {
+      errMsgList.push('HUID Table');
+    }
+    console.log('show err msg', errMsgList);
+    if (errMsgList?.length > 0 && errMsgList !== null) {
+      toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
+    } else {
+      const BodyData: any = {
+        date: date,
+        clientName: selectedDropdownValue,
+        clientGroup: clientGroupName,
+        goldRate: goldRate,
+        remarks: remarks,
+        challanTableData: challanTableData,
+        narrationTableData: narrationUpdatedTableData,
+        token: AccessToken?.token,
+      };
+      let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
+      console.log('Createchittiapires', CreateChittiApiRes);
 
-  if (
-    CreateChittiApiRes?.status === 200 &&
-    CreateChittiApiRes?.hasOwnProperty('data')
-  ) {
-    setTableData([{ id: 1 }])
-    setNarrationTableData([{id:1}])
-  
-    toast.success('Chitti Created');
-    dispatch(getChittiChallan(AccessToken?.token));
-  } else {
-    toast.error('Failed to created chitti');
-  }
-}
+      if (
+        CreateChittiApiRes?.status === 200 &&
+        CreateChittiApiRes?.hasOwnProperty('data')
+      ) {
+        toast.success('Chitti Created');
+        dispatch(getChittiChallan(AccessToken?.token));
+      } else {
+        toast.error('Failed to created chitti');
+      }
+    }
 
     // if (
     //   Object?.keys(selectedDropdownValue)?.length > 0 &&
@@ -240,10 +241,10 @@ if(errMsgList?.length > 0 && errMsgList !== null ){
     //     CreateChittiApiRes?.status === 200 &&
     //     CreateChittiApiRes?.hasOwnProperty('data')
     //   ) {
-      
+
     //     setTableData([{ id: 1 }])
     //     setNarrationTableData([{id:1}])
-      
+
     //     toast.success('Chitti Created');
     //     dispatch(getChittiChallan(AccessToken?.token));
     //   } else {
@@ -280,6 +281,8 @@ if(errMsgList?.length > 0 && errMsgList !== null ){
     clientGroupName,
     stateForDocStatus,
     setStateForDocStatus,
+    setRemarks,
+    setGoldRate,
   };
 };
 

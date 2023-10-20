@@ -37,49 +37,50 @@ const Login = () => {
           <img src={logo} alt="" height="55px" width="auto" />
         </a>
         <div className="container d-flex justify-content-center login-page-container">
-          <div className="card w-50 p-5">
-            <p className="text-uppercase fs-3 text-center">login </p>
-            <div className="card-body">
-              <form
-                onSubmit={HandleFormSubmit}
-                className="login-form p-2 mx-auto text-center"
-              >
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    onChange={HandleInputChange}
-                    className="form-control login-input-field px-2"
-                    placeholder="Username"
-                    aria-describedby="emailHelp"
-                    required
-                  />
-                  {/* <div id="emailHelp" className="form-text">
-                  We'll never share your email with anyone else.
-                </div> */}
-                </div>
-                <div className="my-4">
-                  <div className="d-flex justify-content-center">
-                    <input
-                      type="password"
-                      id="password"
-                      name="password"
-                      onChange={HandleInputChange}
-                      className="form-control login-input-field px-2 "
-                      placeholder="Password"
-                      required
-                    />
-                  </div>
-                </div>
+          <div className="row">
+            <div className="col-lg-12 card login-card">
+              <div className="  p-lg-5 p-0">
+                <p className="text-uppercase fs-3 text-center">login </p>
+                <div className="card-body p-0">
+                  <form
+                    onSubmit={HandleFormSubmit}
+                    className="login-form p-2 mx-auto text-center"
+                  >
+                    <div className="mb-3">
+                      <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        onChange={HandleInputChange}
+                        className="form-control login-input-field px-2"
+                        placeholder="Username"
+                        aria-describedby="emailHelp"
+                        required
+                      />
+                    </div>
+                    <div className="my-4">
+                      <div className="d-flex justify-content-center">
+                        <input
+                          type="password"
+                          id="password"
+                          name="password"
+                          onChange={HandleInputChange}
+                          className="form-control login-input-field px-2 "
+                          placeholder="Password"
+                          required
+                        />
+                      </div>
+                    </div>
 
-                <button
-                  type="submit"
-                  className="btn btn-primary mt-3 py-1 px-4"
-                >
-                  Login
-                </button>
-              </form>
+                    <button
+                      type="submit"
+                      className="btn btn-primary mt-3 py-1 px-4"
+                    >
+                      Login
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>

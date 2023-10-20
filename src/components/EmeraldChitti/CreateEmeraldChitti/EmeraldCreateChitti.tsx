@@ -19,8 +19,8 @@ const EmeraldCreateChitti = ({
       //  onSubmit={handleSubmit}
       className=""
     >
-      <div className="d-flex justify-content-sm-evenly flex-md-row flex-column">
-        <div className="w-25 ">
+      <div className="row justify-content-around">
+        <div className="col-lg-3 col-6">
           <label className="form-Form.Label text-dark form-label-bold">
             Client Name
             <span className="text-danger">*</span>
@@ -39,7 +39,7 @@ const EmeraldCreateChitti = ({
             />
           </div>
         </div>
-        <div className="w-25 ">
+        <div className="col-lg-3 col-6">
           <label className="form-Form.Label text-dark form-label-bold">
             Transaction Date
           </label>

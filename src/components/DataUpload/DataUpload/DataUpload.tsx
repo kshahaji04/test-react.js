@@ -5,12 +5,13 @@ import { BASE_URL } from '../../../services/Config/api-config';
 
 const DataUpload = () => {
   const AccessToken: any = useSelector(get_access_token);
-
+  const requestID = new Date().getTime();
+  console.log('request id', requestID);
   const HandleCreateNewSupplier: any = async () => {
     let internalLoginApi: any = await InternalLoginApi(AccessToken?.token);
     console.log('internal login api res', internalLoginApi);
     if (Object?.keys(internalLoginApi?.data)?.length > 0) {
-      window.open(`${BASE_URL}/app`);
+      window.open(`${BASE_URL}/app/emerald-supplier/new-emerald-supplier-1`);
     }
   };
   return (

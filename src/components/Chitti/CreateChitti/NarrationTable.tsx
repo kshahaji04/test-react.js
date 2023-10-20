@@ -13,11 +13,15 @@ const NarrationTable = ({
     huid_weight: 0,
   });
 
-
   useEffect(() => {
-    if (defaultData?.length > 0 && defaultData !== undefined && defaultData !== null) {
-   
-      setNarrationTableData(defaultData.map((data:any, index:any) => ({ ...data, id: index + 1 })));
+    if (
+      defaultData?.length > 0 &&
+      defaultData !== undefined &&
+      defaultData !== null
+    ) {
+      setNarrationTableData(
+        defaultData.map((data: any, index: any) => ({ ...data, id: index + 1 }))
+      );
     }
   }, [defaultData, setNarrationTableData]);
 
@@ -53,9 +57,9 @@ const NarrationTable = ({
 
   const HandleDeleteRow: any = (id: any) => {
     if (narrationTableData?.length > 1) {
-      const updatedData = narrationTableData.filter(
-        (row: any) => row.id !== id
-      );
+      const updatedData = narrationTableData
+        .filter((row: any) => row.id !== id)
+        .map((row: any, index: number) => ({ ...row, id: index + 1 }));
       setNarrationTableData(updatedData);
       setStateForDocStatus(true);
     }
@@ -108,7 +112,7 @@ const NarrationTable = ({
   };
 
   const HandleCategory = (e: any, id: any) => {
-    console.log('handlecategory', e.target.value,id);
+    console.log('handlecategory', e.target.value, id);
     const updatedData = narrationTableData.map((row: any) =>
       row.id === id ? { ...row, product: e.target.value } : row
     );

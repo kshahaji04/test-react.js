@@ -45,13 +45,19 @@ const SubCategoryReport = () => {
       searchCategory)
       ? subCategoryReportData.filter((item: any) => {
           const clientNameMatch = searchClientName
-            ? item?.client_name?.includes(searchClientName)
+            ? item?.client_name
+                ?.toLowerCase()
+                ?.includes(searchClientName?.toLowerCase())
             : true;
           const categoryMatch = searchCategory
-            ? item?.category?.includes(searchCategory)
+            ? item?.category
+                ?.toLowerCase()
+                ?.includes(searchCategory?.toLowerCase())
             : true;
           const subCategoryMatch = searchSubCategory
-            ? item?.sub_category?.includes(searchSubCategory)
+            ? item?.sub_category
+                ?.toLowerCase()
+                ?.includes(searchSubCategory?.toLowerCase())
             : true;
 
           const dateMatch =
@@ -67,7 +73,7 @@ const SubCategoryReport = () => {
       : subCategoryReportData;
 
   return (
-    <div className="container">
+    <div className="container mb-5">
       <div className="mb-1">
         <h5>Sub Category Report</h5>
       </div>
@@ -87,9 +93,9 @@ const SubCategoryReport = () => {
         showDateInFilter={showDateInFilter}
         subCategoryList={subCategoryList}
       />
-      <div className="table-responsive">
+      <div className="table-responsive report-table-container">
         <table className="table table-striped table-hover">
-          <thead className="report-table-head-row ">
+          <thead className="report-table-head-row sticky-top">
             <tr className="report-table-head-tr text-uppercase">
               <th scope="col">No</th>
               <th scope="col">Sub Category</th>
@@ -115,7 +121,9 @@ const SubCategoryReport = () => {
                     <tr className="report-table-row" key={index}>
                       <td>{index + 1}</td>
 
-                      <td className={`${textColor} subcategory-title`}>{data.sub_category}</td>
+                      <td className={`${textColor} subcategory-title`}>
+                        {data.sub_category}
+                      </td>
                       <td>{data.client_name}</td>
                       <td>{data.total_gross_weight}</td>
                       <td>{data.total_net_weight}</td>

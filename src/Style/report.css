@@ -9,7 +9,6 @@
 
 .report-table-head-tr {
     line-height: 12px;
-
 }
 
 .report-table-row td {
@@ -29,3 +28,9 @@
 /* .subcategory-title {
     font-weight: bold;
 } */
+
+@media only screen and (max-width:768px) {
+    .report-table-head-tr {
+        line-height: 15px !important;
+    }
+}

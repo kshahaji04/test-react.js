@@ -14,11 +14,11 @@ const ClientNameListing = ({ clientNameClientGroupList }: any) => {
         <table className="table table-striped mt-2">
           <thead>
             <tr className="text-start table-heading table-heading-row row">
-              <div className="col-lg-6">
+              <div className="col-lg-6 col-6">
                 {' '}
                 <th scope="col-lg-6">Client Name</th>
               </div>
-              <div className="col-lg-6">
+              <div className="col-lg-6 col-6">
                 {' '}
                 <th scope="col-lg-6">Client Group</th>
               </div>
@@ -31,7 +31,7 @@ const ClientNameListing = ({ clientNameClientGroupList }: any) => {
                 .slice(0, tableViewData)
                 .map((group: any, index: any) => (
                   <tr className="text-start table-body-row row" key={index}>
-                    <td className="col-6 p-1">
+                    <td className="col-lg-6 col-6 p-1">
                       <NavLink
                         to={`${group.name}`}
                         className="text-decoration-none text-dark"
@@ -39,7 +39,7 @@ const ClientNameListing = ({ clientNameClientGroupList }: any) => {
                         {group.name}
                       </NavLink>
                     </td>
-                    <td className="col-6 p-1">
+                    <td className="col-lg-6 col-6 p-1">
                       <NavLink
                         to={`${group.name}`}
                         className="text-decoration-none text-dark"

@@ -64,7 +64,9 @@ const EmeraldChittiTable = ({
 
   const HandleDeleteRow: any = (id: any) => {
     if (tableData?.length > 1) {
-      const updatedData = tableData.filter((row: any) => row.id !== id);
+      const updatedData = tableData
+        .filter((row: any) => row.id !== id)
+        .map((row: any, index: number) => ({ ...row, id: index + 1 }));
       setTableData(updatedData);
       setStateForDocStatus(true);
     }

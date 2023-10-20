@@ -32,7 +32,9 @@ const CategorySummaryReport = () => {
     (searchInputValues.fromDate || searchInputValues.toDate || searchCategory)
       ? categorySummaryReportData.filter((item: any) => {
           const categoryMatch = searchCategory
-            ? item?.category?.includes(searchCategory)
+            ? item?.category
+                ?.toLowerCase()
+                ?.includes(searchCategory?.toLowerCase())
             : true;
 
           const dateMatch =
@@ -58,9 +60,9 @@ const CategorySummaryReport = () => {
         showCategoryInFilter={showCategoryInFilter}
         showDateInFilter={showDateInFilter}
       />
-      <div className="table-responsive">
+      <div className="table-responsive report-table-container">
         <table className="table table-striped table-hover">
-          <thead className="report-table-head-row ">
+          <thead className="report-table-head-row sticky-top">
             <tr className="report-table-head-tr text-uppercase">
               <th scope="col">No</th>
               <th scope="col">Category</th>

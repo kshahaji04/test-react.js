@@ -18,7 +18,7 @@ const MasterMultipleListingSearch = ({
             onChange={handleInputChange1}
           />
         </div>
-        <div className="ms-5">
+        <div className="ms-lg-5 ms-3">
           <input
             type="text"
             name="input2"

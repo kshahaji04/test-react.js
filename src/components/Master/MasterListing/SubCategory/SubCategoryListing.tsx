@@ -17,10 +17,10 @@ const SubCategoryListing = ({ filteredList }: any) => {
         <table className="table table-striped mt-2">
           <thead>
             <tr className="text-start table-heading table-heading-row row">
-              <div className="col-lg-6">
+              <div className="col-lg-6 col-6">
                 <th scope="col-lg-6">SubCategory </th>
               </div>
-              <div className="col-lg-6">
+              <div className="col-lg-6 col-6">
                 <th scope="col-lg-6">Category</th>
               </div>
             </tr>

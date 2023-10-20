@@ -38,13 +38,19 @@ const EmeraldReport = () => {
     (searchSupplier || searchInputValues.project || searchSubCategory)
       ? emeraldReportData.filter((item: any) => {
           const supplierMatch = searchSupplier
-            ? item?.supplier?.includes(searchSupplier)
+            ? item?.supplier
+                ?.toLowerCase()
+                ?.includes(searchSupplier?.toLowerCase())
             : true;
           const projectMatch = searchInputValues.project
-            ? item?.category?.includes(searchInputValues.project)
+            ? item?.category
+                ?.toLowerCase()
+                ?.includes(searchInputValues?.project?.toLowerCase())
             : true;
           const subCategoryMatch = searchSubCategory
-            ? item?.sub_category?.includes(searchSubCategory)
+            ? item?.sub_category
+                ?.toLowerCase()
+                ?.includes(searchSubCategory?.toLowerCase())
             : true;
 
           return supplierMatch && subCategoryMatch && projectMatch;
@@ -52,7 +58,7 @@ const EmeraldReport = () => {
       : emeraldReportData;
 
   return (
-    <div className="container mb-5">
+    <div className="container mb-5 ">
       <div className="mb-1">
         <h5>Emerald Report</h5>
       </div>
@@ -70,7 +76,7 @@ const EmeraldReport = () => {
         supplierList={updatedSupplierList}
       />
 
-      <div className="table-responsive report-table-container">
+      <div className="table-responsive report-table-container ">
         <table className="table table-striped table-hover">
           <thead className="report-table-head-row sticky-top">
             <tr className="report-table-head-tr text-uppercase ">

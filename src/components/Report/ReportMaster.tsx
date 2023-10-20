@@ -11,7 +11,7 @@ const ReportMaster = () => {
   return (
     <>
       <div className="container mt-3">
-        <div className="d-flex justify-content-center card-listing-container">
+        <div className="d-flex justify-content-center flex-wrap  card-listing-container">
           {reportlist?.length > 0 &&
             reportlist !== null &&
             reportlist.map((data: any, index: any) => {
@@ -20,7 +20,7 @@ const ReportMaster = () => {
               const isActive: any = window?.location?.pathname === linkTo;
               return (
                 <div
-                  className={`mx-3 master-heading p-1 px-2 ${
+                  className={`mx-3 my-lg-0 my-1 master-heading p-1 px-2 ${
                     isActive ? 'activePage border-0' : ''
                   }`}
                   key={index}

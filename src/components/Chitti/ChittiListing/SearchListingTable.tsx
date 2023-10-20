@@ -5,6 +5,7 @@ const SearchListingTable = ({
   setSearchclientName,
   searchClientName,
   HandleSearchInput,
+  searchInputValues,
 }: any) => {
   return (
     <>
@@ -28,6 +29,11 @@ const SearchListingTable = ({
             className="form-control input-fields custom-input-field "
             aria-describedby="emailHelp"
             placeholder="Chitti no"
+            value={
+              searchInputValues?.chitti_no >= 0
+                ? searchInputValues?.chitti_no
+                : ''
+            }
             onChange={HandleSearchInput}
           />
         </div>
@@ -43,16 +49,7 @@ const SearchListingTable = ({
             // HandleClientGroup={HandleClientGroup}
           />
         </div>
-        <div className="col-md-2 ">
-          {/* <input
-            type="text"
-            name="status"
-            id="status"
-            className="form-control input-fields custom-input-field "
-            placeholder="status"
-            onChange={HandleSearchInput}
-          /> */}
-
+        <div className="col-md-2 my-lg-0 my-3">
           <select
             name="status"
             id="status"

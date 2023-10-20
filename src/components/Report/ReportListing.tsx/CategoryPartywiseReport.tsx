@@ -6,10 +6,13 @@ import UseCategoryHook from '../../../hooks/Master/category-hook';
 
 const CategoryPartyWiseReport = () => {
   const { categoryPartywiseReportData }: any = UseCategoryPartywiseReportHook();
-  console.log("categoryPartywiseReportData in tssx",categoryPartywiseReportData)
+  console.log(
+    'categoryPartywiseReportData in tssx',
+    categoryPartywiseReportData
+  );
   const { clientNameList }: any = UseClientNameHook();
   const { CategoryList }: any = UseCategoryHook();
-  // let lastSubCategoryColor: any = 'text-dark';
+
   const [searchInputValues, setSearchInputValues] = useState({
     fromDate: '',
     toDate: '',
@@ -39,10 +42,14 @@ const CategoryPartyWiseReport = () => {
       searchCategory)
       ? categoryPartywiseReportData.filter((item: any) => {
           const categoryMatch = searchCategory
-            ? item?.category?.includes(searchCategory)
+            ? item?.category
+                ?.toLowerCase()
+                .includes(searchCategory?.toLowerCase())
             : true;
           const clientNameMatch = searchClientName
-            ? item?.client_name?.includes(searchClientName)
+            ? item?.client_name
+                ?.toLowerCase()
+                ?.includes(searchClientName?.toLowerCase())
             : true;
 
           const dateMatch =
@@ -72,9 +79,9 @@ const CategoryPartyWiseReport = () => {
         showClientNameInFilter={showClientNameInFilter}
         showDateInFilter={showDateInFilter}
       />
-      <div className="table-responsive">
+      <div className="table-responsive  report-table-container">
         <table className="table table-striped table-hover">
-          <thead className="report-table-head-row ">
+          <thead className="report-table-head-row sticky-top">
             <tr className="report-table-head-tr text-uppercase">
               <th scope="col">No</th>
               <th scope="col">Category</th>

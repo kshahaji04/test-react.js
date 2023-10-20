@@ -38,7 +38,7 @@ const MainNavigationTab = () => {
 
             return (
               <div
-                className={`header-card-container px-1  ${
+                className={`header-card-container px-1 my-1 ${
                   isActive ? 'activePage' : ''
                 }`}
                 key={index}

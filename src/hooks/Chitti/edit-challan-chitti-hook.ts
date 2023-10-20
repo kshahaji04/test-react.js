@@ -48,6 +48,8 @@ const UseEditChallanChitti: any = () => {
     clientGroupName,
     stateForDocStatus,
     setStateForDocStatus,
+    setRemarks,
+    setGoldRate,
   }: any = UseChittiHook();
 
   console.log('selectedDropdownValue', selectedDropdownValue);
@@ -72,7 +74,7 @@ const UseEditChallanChitti: any = () => {
 
   const HandleUpdateChallanSubmit = async () => {
     console.log('edited data', challanTableData);
-    console.log('edited narrationUpdatedTableData,', narrationUpdatedTableData,);
+    console.log('edited narrationUpdatedTableData,', narrationUpdatedTableData);
 
     console.log(
       'submit create chitti',
@@ -81,8 +83,7 @@ const UseEditChallanChitti: any = () => {
       selectedDropdownValue,
       goldRate,
       remarks,
-      
-      
+
       date
     );
 
@@ -131,6 +132,8 @@ const UseEditChallanChitti: any = () => {
     clientGroupList,
     stateForDocStatus,
     setStateForDocStatus,
+    setRemarks,
+    setGoldRate,
   };
 };
 

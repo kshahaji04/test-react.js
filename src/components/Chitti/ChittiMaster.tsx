@@ -41,13 +41,14 @@ const ChittiMaster = () => {
 
   const HandleSearchInput: any = (e: any) => {
     const { name, value } = e.target;
+
     setSearchInputValues({
       ...searchInputValues,
       [name]: value,
     });
   };
 
-  console.log('searchh', searchInputValues);
+  console.log('searchh', searchInputValues, searchClientName);
 
   const filteredList =
     chittiListingData?.length > 0 &&
@@ -64,7 +65,9 @@ const ChittiMaster = () => {
             ? item?.number?.includes(searchInputValues.chitti_no)
             : true;
           const clientNameMatch = searchClientName
-            ? item?.client_name?.includes(searchClientName)
+            ? item?.client_name
+                ?.toLowerCase()
+                .includes(searchClientName.toLowerCase())
             : true;
 
           if (searchInputValues.status === 'Draft') {
@@ -115,6 +118,7 @@ const ChittiMaster = () => {
                     chittiListingData={chittiListingData}
                     setSearchclientName={setSearchclientName}
                     searchClientName={searchClientName}
+                    searchInputValues={searchInputValues}
                   />
                   <ListingTable
                     tableListingData={filteredList}

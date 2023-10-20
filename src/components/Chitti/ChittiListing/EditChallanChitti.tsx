@@ -21,7 +21,6 @@ const EditChallanChitti = () => {
     subCategoryList,
     productList,
     selectedDropdownValue,
-
     setTableData,
     HandleDateChange,
     clientNameList,
@@ -34,6 +33,8 @@ const EditChallanChitti = () => {
     clientGroupList,
     stateForDocStatus,
     setStateForDocStatus,
+    setRemarks,
+    setGoldRate,
   }: any = UseEditChallanChitti();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -169,36 +170,36 @@ const EditChallanChitti = () => {
       <div>
         {challanDetail?.length > 0 && challanDetail !== null
           ? challanDetail.map((data: any) => {
-            console.log("default data challan",data)
+              console.log('default data challan', data);
               return (
                 <>
-                  
-                    <CreateChittiForm
-                      defaultData={data}
-                      HandleDateChange={HandleDateChange}
-                      selectedDropdownValue={selectedDropdownValue}
-                      clientNameList={clientNameList}
-                      setSelectedDropdownValue={setSelectedDropdownValue}
-                      HandleGoldRate={HandleGoldRate}
-                      HandleRemarks={HandleRemarks}
-                      clientGroupList={clientGroupList}
-                      setStateForDocStatus={setStateForDocStatus}
-                    />
-                    <ChallanItemsTable
-                      defaultData={data?.challan_table}
-                      tableData={tableData}
-                      setTableData={setTableData}
-                      subCategoryList={subCategoryList}
-                      setStateForDocStatus={setStateForDocStatus}
-                    />
-                    <NarrationTable
-                      defaultData={data?.narrations}
-                      narrationTableData={narrationTableData}
-                      setNarrationTableData={setNarrationTableData}
-                      productList={productList}
-                      setStateForDocStatus={setStateForDocStatus}
-                    />
-                
+                  <CreateChittiForm
+                    defaultData={data}
+                    HandleDateChange={HandleDateChange}
+                    selectedDropdownValue={selectedDropdownValue}
+                    clientNameList={clientNameList}
+                    setSelectedDropdownValue={setSelectedDropdownValue}
+                    HandleGoldRate={HandleGoldRate}
+                    HandleRemarks={HandleRemarks}
+                    clientGroupList={clientGroupList}
+                    setStateForDocStatus={setStateForDocStatus}
+                    setRemarks={setRemarks}
+                    setGoldRate={setGoldRate}
+                  />
+                  <ChallanItemsTable
+                    defaultData={data?.challan_table}
+                    tableData={tableData}
+                    setTableData={setTableData}
+                    subCategoryList={subCategoryList}
+                    setStateForDocStatus={setStateForDocStatus}
+                  />
+                  <NarrationTable
+                    defaultData={data?.narrations}
+                    narrationTableData={narrationTableData}
+                    setNarrationTableData={setNarrationTableData}
+                    productList={productList}
+                    setStateForDocStatus={setStateForDocStatus}
+                  />
                 </>
               );
             })

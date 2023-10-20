@@ -14,12 +14,17 @@ const ChallanItemsTable = ({
     amount: 0,
   });
 
-  console.log("initial table data",tableData)
+  console.log('initial table data', tableData);
 
   useEffect(() => {
-    if (defaultData?.length > 0 && defaultData !== undefined && defaultData !== null) {
-   
-      setTableData(defaultData.map((data:any, index:any) => ({ ...data, id: index + 1 })));
+    if (
+      defaultData?.length > 0 &&
+      defaultData !== undefined &&
+      defaultData !== null
+    ) {
+      setTableData(
+        defaultData.map((data: any, index: any) => ({ ...data, id: index + 1 }))
+      );
     }
   }, [defaultData, setTableData]);
 
@@ -57,7 +62,9 @@ const ChallanItemsTable = ({
 
   const HandleDeleteRow: any = (id: any) => {
     if (tableData?.length > 1) {
-      const updatedData = tableData.filter((row: any) => row.id !== id);
+      const updatedData = tableData
+        .filter((row: any) => row.id !== id)
+        .map((row: any, index: number) => ({ ...row, id: index + 1 }));
       setTableData(updatedData);
       setStateForDocStatus(true);
     }
@@ -97,24 +104,22 @@ const ChallanItemsTable = ({
     setamountValue(newColumnTotals);
   }, [tableData]);
 
-  const HandleSubCategory:any = (e: any, id: any) => {
-    console.log('handlesubcategory', e.target.value,id);
+  const HandleSubCategory: any = (e: any, id: any) => {
+    console.log('handlesubcategory', e.target.value, id);
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, sub_category: e.target.value } : row
     );
     setTableData(updatedData);
     setStateForDocStatus(true);
   };
-  
-  console.log("handlecategory sub category",tableData)
+
+  console.log('handlecategory sub category', tableData);
 
   const HandleGrossWeightValue = (e: any, id: any) => {
-    console.log('gross', e.target.value,id);
-    const inputValue = parseFloat(e.target.value) 
+    console.log('gross', e.target.value, id);
+    const inputValue = parseFloat(e.target.value);
     const updatedData = tableData.map((row: any) =>
-      row.id === id
-        ? { ...row, gross_weight: inputValue || 0 }
-        : row
+      row.id === id ? { ...row, gross_weight: inputValue || 0 } : row
     );
     setTableData(updatedData);
     setStateForDocStatus(true);
@@ -174,7 +179,7 @@ const ChallanItemsTable = ({
                         className="form-select p-0 custom-input-field "
                         aria-label=".form-select-sm example"
                         value={row.sub_category}
-                        onChange={(e) =>HandleSubCategory(e, row.id)}
+                        onChange={(e) => HandleSubCategory(e, row.id)}
                       >
                         <option defaultValue={row.sub_category}></option>
                         {subCategoryList?.length > 0 &&
