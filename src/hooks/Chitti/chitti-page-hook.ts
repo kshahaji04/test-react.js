@@ -56,7 +56,7 @@ const UseChittiHook = () => {
     new Date()?.toISOString()?.split('T')[0]
   );
   const [stateForDocStatus, setStateForDocStatus] = useState<boolean>(false);
-  const [showMandatoryErrMsg, setShowMandatoryErrMsg] = useState<any>([]);
+
 
   useEffect(() => {
     dispatch(getChittiChallan(AccessToken?.token));

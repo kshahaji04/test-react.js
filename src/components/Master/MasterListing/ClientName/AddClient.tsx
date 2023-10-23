@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import { get_access_token } from '../../../../store/slices/auth/token-login-slice';
 import AddClientNameApi from '../../../../services/api/Master/add-client-name-api';
 import SelectedInputDropdown from '../../../SelectedInputDropdown';
-import { getClientName } from '../../../../store/slices/Chitti/get-client-name-slice';
 import { getClientNameClientGroup } from '../../../../store/slices/Master/get-clientname-clientgroup-slice';
 
 const AddClient = ({ clientGroupList }: any) => {

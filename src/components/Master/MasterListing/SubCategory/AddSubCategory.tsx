@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import { get_access_token } from '../../../../store/slices/auth/token-login-slice';
 import AddSubCategoryApi from '../../../../services/api/Master/add-sub-category-api';
 import { useDispatch } from 'react-redux';
-import { getSubCategoryList } from '../../../../store/slices/Chitti/get-subcategory-slice';
 import { getSubCategoryCategory } from '../../../../store/slices/Master/get-subcategory-category-slice';
 
 const AddSubCategory = ({ CategoryList }: any) => {
@@ -74,8 +73,8 @@ const AddSubCategory = ({ CategoryList }: any) => {
           placeholderValue="Category Name"
           selectedDropdownValue={selectedDropdownValue}
           setSelectedDropdownValue={setSelectedDropdownValue}
-          // clientGroupList={clientGroupList}
-          // HandleClientGroup={HandleClientGroup}
+        // clientGroupList={clientGroupList}
+        // HandleClientGroup={HandleClientGroup}
         />
       </div>
       <div className="d-flex justify-content-start ">

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 const SelectedInputDropdown = ({
   drowpdownlist,
@@ -9,7 +9,6 @@ const SelectedInputDropdown = ({
   clientGroupList,
   HandleClientGroup,
   defaultData,
-  readOnlyField,
   setStateForDocStatus,
   hideDropdown,
   title,
@@ -86,11 +85,10 @@ const SelectedInputDropdown = ({
       <div className="dropdown-input-container">
         <input
           type="text"
-          className={`${
-            bgColor?.current === true
-              ? 'form-control dropdown-input client-name-input-chitti'
-              : 'form-control input-fields  dropdown-input'
-          }`}
+          className={`${bgColor?.current === true
+            ? 'form-control dropdown-input client-name-input-chitti'
+            : 'form-control input-fields  dropdown-input'
+            }`}
           id="exampleInputEmail1"
           // onBlur={handleBlur}
           // onFocus={() => setIsFocused(true)}
