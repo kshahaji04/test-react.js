@@ -106,6 +106,7 @@ const EmeraldChittiMaster = () => {
                   clientNameList={clientNameList}
                   setSearchclientName={setSearchclientName}
                   searchClientName={searchClientName}
+                  searchInputValues={searchInputValues}
                 />{' '}
                 <ListingTable tableListingData={filteredList} />
               </div>
