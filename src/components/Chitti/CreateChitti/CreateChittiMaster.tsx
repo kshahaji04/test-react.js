@@ -21,17 +21,35 @@ const CreateChittiMaster = ({
   HandleDateChange,
   date,
   setStateForDocStatus,
+  HandleEmptyChallanChittiTable,
+  goldRate,
+  remarks
 }: any) => {
   return (
     <div>
-      <div className="d-flex justify-content-end ">
-        <button
-          type="submit"
-          onClick={HandleCreateChittiSubmit}
-          className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
-        >
-          Save
-        </button>
+      <div className='row'>
+        <div className='col-lg-10'>
+        </div>
+        <div className="col-lg-2">
+          <div className='d-flex justify-content-end'>
+            <button
+              type="submit"
+              onClick={HandleEmptyChallanChittiTable}
+              className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
+            >
+              New
+            </button>
+            <div className="">
+              <button
+                type="submit"
+                onClick={HandleCreateChittiSubmit}
+                className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
       <CreateChittiForm
         currentDate={currentDate}
@@ -44,6 +62,8 @@ const CreateChittiMaster = ({
         HandleClientGroup={HandleClientGroup}
         HandleDateChange={HandleDateChange}
         date={date}
+        goldRate={goldRate}
+        remarks={remarks}
       />
       <ChallanItemsTable
         tableData={tableData}

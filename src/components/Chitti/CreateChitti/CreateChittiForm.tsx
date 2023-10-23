@@ -15,6 +15,8 @@ const CreateChittiForm = ({
   setStateForDocStatus,
   setRemarks,
   setGoldRate,
+  goldRate,
+  remarks
 }: any) => {
   const bgColor = useRef(true);
 
@@ -51,7 +53,7 @@ const CreateChittiForm = ({
                 aria-describedby="inputGroup-sizing-sm"
                 onChange={HandleDateChange}
                 readOnly
-                // readOnly={readOnlyField}
+              // readOnly={readOnlyField}
               />
             </div>
           </div>
@@ -70,7 +72,7 @@ const CreateChittiForm = ({
               HandleClientGroup={HandleClientGroup}
               defaultData={defaultData}
               setStateForDocStatus={setStateForDocStatus}
-              // readOnlyField={readOnlyField}
+            // readOnlyField={readOnlyField}
             />
             {/* <CustomDropDown /> */}
           </div>
@@ -85,6 +87,7 @@ const CreateChittiForm = ({
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"
               defaultValue={defaultData?.gold_rate}
+              value={goldRate}
               onChange={HandleGoldRate}
             />
           </div>
@@ -99,8 +102,9 @@ const CreateChittiForm = ({
               className="form-control custom-input-field px-1"
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"
-              onChange={HandleRemarks}
+              value={remarks}
               defaultValue={defaultData?.remarks}
+              onChange={HandleRemarks}
             />
           </div>
         </div>

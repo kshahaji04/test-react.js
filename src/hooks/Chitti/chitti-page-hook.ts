@@ -148,6 +148,21 @@ const UseChittiHook = () => {
 
   console.log('setTableData', tableData);
 
+  const HandleEmptyChallanChittiTable: any = () => {
+    setTableData([{ id: 1 }])
+    setNarrationTableData([{ id: 1 }])
+    setSelectedDropdownValue("")
+    setGoldRate("")
+    setRemarks("")
+
+    // Set the value of the select tag to an empty string
+    const selectElements: any = document?.querySelectorAll('.custom-input-field');
+    selectElements.forEach((selectElement: any) => {
+      selectElement.value = '';
+    });
+  }
+
+
   // for removing id key from list
   useEffect(() => {
     if (tableData?.length > 0 && tableData !== null) {
@@ -283,6 +298,7 @@ const UseChittiHook = () => {
     setStateForDocStatus,
     setRemarks,
     setGoldRate,
+    HandleEmptyChallanChittiTable
   };
 };
 

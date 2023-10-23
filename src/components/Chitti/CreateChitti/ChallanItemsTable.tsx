@@ -183,7 +183,7 @@ const ChallanItemsTable = ({
                       >
                         <option defaultValue={row.sub_category}></option>
                         {subCategoryList?.length > 0 &&
-                        subCategoryList !== null ? (
+                          subCategoryList !== null ? (
                           <>
                             {subCategoryList.map(
                               (category: any, index: any) => {

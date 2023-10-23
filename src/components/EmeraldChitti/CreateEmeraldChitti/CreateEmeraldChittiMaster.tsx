@@ -15,10 +15,18 @@ const CreateEmeraldChittiMaster = ({
   setTableData,
   subCategoryList,
   productItemList,
+  HandleEmptyEmeraldChitti
 }: any) => {
   return (
     <>
       <div className="d-flex justify-content-end ">
+        <button
+          type="submit"
+          className=" btn btn-outline-primary px-2 py-0 form-submit-button"
+          onClick={HandleEmptyEmeraldChitti}
+        >
+          New
+        </button>
         <button
           type="submit"
           className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"

@@ -111,6 +111,18 @@ const UseEmeraldHook = () => {
     setStateForDocStatus(true);
   };
 
+  const HandleEmptyEmeraldChitti: any = () => {
+    console.log("new emerald chitti")
+    setTableData([{ id: 1 }])
+    setSelectedDropdownValue("")
+
+    // Set the value of the select tag to an empty string
+    const selectElements: any = document?.querySelectorAll('.custom-input-field');
+    selectElements.forEach((selectElement: any) => {
+      selectElement.value = '';
+    });
+  }
+
   useEffect(() => {
     if (tableData?.length > 0 && tableData !== null) {
       let modifiedList: any = tableData.map((obj: any) => {
@@ -212,6 +224,7 @@ const UseEmeraldHook = () => {
     transactionDate,
     stateForDocStatus,
     setStateForDocStatus,
+    HandleEmptyEmeraldChitti
   };
 };
 
