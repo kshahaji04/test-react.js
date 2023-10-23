@@ -34,6 +34,7 @@ const FilterReportListing = ({
               title="Select Category"
               selectedDropdownValue={searchCategory}
               setSelectedDropdownValue={setSearchCategory}
+              hideDropdown={false}
             />
           </div>
         )}
@@ -47,6 +48,7 @@ const FilterReportListing = ({
                 title="Select Supplier"
                 selectedDropdownValue={searchSupplier}
                 setSelectedDropdownValue={setSearchSupplier}
+                hideDropdown={true}
               />
             </div>
           </>
