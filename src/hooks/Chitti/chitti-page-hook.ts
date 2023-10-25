@@ -24,6 +24,7 @@ import {
   getClientGroupList,
   get_client_group,
 } from '../../store/slices/Chitti/get-client-group-list-slice';
+import AddClientNameApi from '../../services/api/Master/add-client-name-api';
 
 const UseChittiHook = () => {
   const dispatch = useDispatch();
@@ -222,6 +223,14 @@ const UseChittiHook = () => {
       };
       let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
       console.log('Createchittiapires', CreateChittiApiRes);
+
+      if (Object?.keys(clientGroupName)?.length > 0 && Object?.keys(clientNameList)?.length > 0) {
+        await AddClientNameApi(
+          AccessToken?.token,
+          selectedDropdownValue,
+          clientGroupName
+        );
+      }
 
       if (
         CreateChittiApiRes?.status === 200 &&
