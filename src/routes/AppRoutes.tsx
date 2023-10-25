@@ -28,6 +28,8 @@ import MasterPageCategoryDetails from '../components/Master/MasterListing/Catego
 import MasterPageHuidProductDetails from '../components/Master/MasterListing/HuidProduct/MasterPageHuidProductDetails';
 import EmeraldReport from '../components/Report/ReportListing.tsx/EmeraldReport';
 import EmeraldShilpiDetails from '../components/DataUpload/EmeraldShilpi/EmeraldShilpiDetails';
+import ProjectSubCategoryMappingMaster from '../components/Master/MasterListing/ProjectSubCategoryMapping/ProjectSubCategoryMappingMaster';
+import MasterPageProjectSubCategoryMapping from '../components/Master/MasterListing/ProjectSubCategoryMapping/MasterPageProjectSubCategoryMapping';
 
 const AppRoutes = () => {
   return (
@@ -94,6 +96,15 @@ const AppRoutes = () => {
             <ProtectedRoute>
               <MasterPage />
               <HuidProduct />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/master/projectsubcategorymapping"
+          element={
+            <ProtectedRoute>
+              <MasterPage />
+              <ProjectSubCategoryMappingMaster />
             </ProtectedRoute>
           }
         />
@@ -168,6 +179,15 @@ const AppRoutes = () => {
             <ProtectedRoute>
               <MasterListing />
               <MasterPageHuidProductDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/master/projectsubcategorymapping/:id"
+          element={
+            <ProtectedRoute>
+              <MasterListing />
+              <MasterPageProjectSubCategoryMapping />
             </ProtectedRoute>
           }
         />

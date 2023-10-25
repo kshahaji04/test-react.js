@@ -1,6 +1,11 @@
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import ChallanItemsTable from './ChallanItemsTable';
 import CreateChittiForm from './CreateChittiForm';
 import NarrationTable from './NarrationTable';
+import { get_specific_chitti_challan } from '../../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
+import { toast } from 'react-toastify';
+import HandleButtonsDisplayInChitti from '../../HandleButtonsDisplayInChitti';
 
 const CreateChittiMaster = ({
   HandleCreateChittiSubmit,
@@ -20,34 +25,56 @@ const CreateChittiMaster = ({
   HandleClientGroup,
   HandleDateChange,
   date,
+
   setStateForDocStatus,
   HandleEmptyChallanChittiTable,
   goldRate,
-  remarks
+  remarks,
+  showSubmitButtonAfterCreateChitti,
+  HandleSubmitChallanChitti,
+  HandleCancelChallanChitti,
+  HandleDeleteChallanChitti,
 }: any) => {
+  const docStatusFromStore: any = useSelector(get_specific_chitti_challan);
+
+  const [showButton, setShowButton] = useState<any>();
+  const [totalGrossWeightOfChallanTable, setTotalGrossWeightOfChallanTable] =
+    useState<any>('');
+  const [totalHuidWeightOfHuidTable, setTotalHuidWeightOfHuidTable] =
+    useState<any>('');
+
+  const CheckValidGrossAndHuidWeight: any = () => {
+    if (totalGrossWeightOfChallanTable < totalHuidWeightOfHuidTable) {
+      toast.error('Huid weight cannot be greater than Gross weight');
+    }
+  };
+
+  useEffect(() => {
+    CheckValidGrossAndHuidWeight();
+  }, [totalGrossWeightOfChallanTable, totalHuidWeightOfHuidTable]);
+
+  useEffect(() => {
+    setShowButton(docStatusFromStore?.docStatus);
+  }, [docStatusFromStore]);
+
   return (
     <div>
-      <div className='row'>
-        <div className='col-lg-10'>
-        </div>
+      <div className="row">
+        <div className="col-lg-10"></div>
         <div className="col-lg-2">
-          <div className='d-flex justify-content-end'>
-            <button
-              type="submit"
-              onClick={HandleEmptyChallanChittiTable}
-              className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-            >
-              New
-            </button>
-            <div className="">
-              <button
-                type="submit"
-                onClick={HandleCreateChittiSubmit}
-                className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
-              >
-                Save
-              </button>
-            </div>
+          <div className="d-flex justify-content-end">
+            {/* {HandleButtonsDisplay()} */}
+            <HandleButtonsDisplayInChitti
+              HandleCreateChittiSubmit={HandleCreateChittiSubmit}
+              showButton={showButton}
+              showSubmitButtonAfterCreateChitti={
+                showSubmitButtonAfterCreateChitti
+              }
+              HandleSubmitChittiData={HandleSubmitChallanChitti}
+              HandleCancelChitti={HandleCancelChallanChitti}
+              HandleDeleteChitti={HandleDeleteChallanChitti}
+              HandleEmptyChitti={HandleEmptyChallanChittiTable}
+            />
           </div>
         </div>
       </div>
@@ -70,12 +97,14 @@ const CreateChittiMaster = ({
         setTableData={setTableData}
         subCategoryList={subCategoryList}
         setStateForDocStatus={setStateForDocStatus}
+        setTotalGrossWeightOfChallanTable={setTotalGrossWeightOfChallanTable}
       />
       <NarrationTable
         narrationTableData={narrationTableData}
         setNarrationTableData={setNarrationTableData}
         productList={productList}
         setStateForDocStatus={setStateForDocStatus}
+        setTotalHuidWeightOfHuidTable={setTotalHuidWeightOfHuidTable}
       />
     </div>
   );

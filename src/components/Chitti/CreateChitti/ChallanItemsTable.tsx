@@ -6,6 +6,7 @@ const ChallanItemsTable = ({
   subCategoryList,
   defaultData,
   setStateForDocStatus,
+  setTotalGrossWeightOfChallanTable,
 }: any) => {
   const [amountValue, setamountValue] = useState<any>({
     sub_category: '',
@@ -14,6 +15,7 @@ const ChallanItemsTable = ({
     amount: 0,
   });
 
+  setTotalGrossWeightOfChallanTable(amountValue?.gross_weight);
   console.log('initial table data', tableData);
 
   useEffect(() => {
@@ -57,6 +59,7 @@ const ChallanItemsTable = ({
     newColumnTotals.amount += newRow.amount;
 
     // Update the total values
+
     setamountValue(newColumnTotals);
   };
 
@@ -87,6 +90,7 @@ const ChallanItemsTable = ({
       },
       { gross_weight: 0, net_weight: 0, amount: 0 }
     );
+
     setamountValue(newColumnTotals);
   }, [tableData]);
 
@@ -101,6 +105,7 @@ const ChallanItemsTable = ({
       },
       { gross_weight: 0, net_weight: 0, amount: 0 }
     );
+
     setamountValue(newColumnTotals);
   }, [tableData]);
 
@@ -183,7 +188,7 @@ const ChallanItemsTable = ({
                       >
                         <option defaultValue={row.sub_category}></option>
                         {subCategoryList?.length > 0 &&
-                          subCategoryList !== null ? (
+                        subCategoryList !== null ? (
                           <>
                             {subCategoryList.map(
                               (category: any, index: any) => {

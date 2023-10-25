@@ -5,14 +5,10 @@ import ChallanItemsTable from '../CreateChitti/ChallanItemsTable';
 import NarrationTable from '../CreateChitti/NarrationTable';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {
-  getSpecificChittiChallan,
-  get_specific_chitti_challan,
-} from '../../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
+import { get_specific_chitti_challan } from '../../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import { useDispatch } from 'react-redux';
 import DeleteChallanChittiApi from '../../../services/api/Chitti/delete-challan-chitti-api';
-import UpdateDocStatusChallanApi from '../../../services/api/general/update-doc-status-challan--api';
 
 const EditChallanChitti = () => {
   const {
@@ -35,18 +31,17 @@ const EditChallanChitti = () => {
     setStateForDocStatus,
     setRemarks,
     setGoldRate,
+    HandleSubmitChallanChitti,
+    HandleCancelChallanChitti,
+    HandleDeleteChallanChitti,
   }: any = UseEditChallanChitti();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [showButton, setShowButton] = useState<any>();
 
-  const AccessToken: any = useSelector(get_access_token);
+  const [showButton, setShowButton] = useState<any>();
 
   const HandleBackButton = () => {
     navigate(-1);
   };
-
-  const { id } = useParams();
 
   const docStatusFromStore: any = useSelector(get_specific_chitti_challan);
   console.log('docStatus', docStatusFromStore?.docStatus);
@@ -55,47 +50,48 @@ const EditChallanChitti = () => {
     setShowButton(docStatusFromStore?.docStatus);
   }, [docStatusFromStore]);
 
-  const HandleSubmitData: any = async () => {
-    let updateDocStatus: any = await UpdateDocStatusChallanApi(
-      AccessToken?.token,
-      '1',
-      id
-    );
-    console.log('update doc', updateDocStatus);
-    if (Object.keys(updateDocStatus?.data)?.length > 0) {
-      const params: any = {
-        token: AccessToken?.token,
-        name: id,
-      };
-      dispatch(getSpecificChittiChallan(params));
-    }
-  };
+  // const HandleSubmitChallanChitti: any = async () => {
+  //   let updateDocStatus: any = await UpdateDocStatusChallanApi(
+  //     AccessToken?.token,
+  //     '1',
+  //     id
+  //   );
+  //   console.log('update doc', updateDocStatus);
+  //   if (Object.keys(updateDocStatus?.data)?.length > 0) {
+  //     const params: any = {
+  //       token: AccessToken?.token,
+  //       name: id,
+  //     };
+  //     dispatch(getSpecificChittiChallan(params));
+  //   }
+  // };
 
-  const HandleCancelChitti = async () => {
-    let updateDocStatus: any = await UpdateDocStatusChallanApi(
-      AccessToken?.token,
-      '2',
-      id
-    );
-    console.log('update doc', updateDocStatus);
-    if (Object.keys(updateDocStatus?.data)?.length > 0) {
-      const params: any = {
-        token: AccessToken?.token,
-        name: id,
-      };
-      dispatch(getSpecificChittiChallan(params));
-    }
-  };
-  const HandleDeleteChitti = async () => {
-    let deleteChallanApiRes: any = await DeleteChallanChittiApi(
-      AccessToken?.token,
-      id
-    );
-    console.log('deletec', deleteChallanApiRes);
-    if (deleteChallanApiRes?.message?.status === 'success') {
-      navigate(-1);
-    }
-  };
+  // const HandleCancelChallanChitti = async () => {
+  //   let updateDocStatus: any = await UpdateDocStatusChallanApi(
+  //     AccessToken?.token,
+  //     '2',
+  //     id
+  //   );
+  //   console.log('update doc', updateDocStatus);
+  //   if (Object.keys(updateDocStatus?.data)?.length > 0) {
+  //     const params: any = {
+  //       token: AccessToken?.token,
+  //       name: id,
+  //     };
+  //     dispatch(getSpecificChittiChallan(params));
+  //   }
+  // };
+
+  // const HandleDeleteChallanChitti = async () => {
+  //   let deleteChallanApiRes: any = await DeleteChallanChittiApi(
+  //     AccessToken?.token,
+  //     id
+  //   );
+  //   console.log('deletec', deleteChallanApiRes);
+  //   if (deleteChallanApiRes?.message?.status === 'success') {
+  //     navigate(-1);
+  //   }
+  // };
   return (
     <div className="container">
       <div className="">
@@ -141,7 +137,7 @@ const EditChallanChitti = () => {
             <button
               type="submit"
               className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-              onClick={HandleSubmitData}
+              onClick={HandleSubmitChallanChitti}
             >
               Submit
             </button>
@@ -150,7 +146,7 @@ const EditChallanChitti = () => {
             <button
               type="submit"
               className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-              onClick={HandleCancelChitti}
+              onClick={HandleCancelChallanChitti}
             >
               Cancel
             </button>
@@ -159,7 +155,7 @@ const EditChallanChitti = () => {
             <button
               type="submit"
               className=" btn btn-outline-primary px-2 py-0 form-submit-button"
-              onClick={HandleDeleteChitti}
+              onClick={HandleDeleteChallanChitti}
             >
               Delete
             </button>

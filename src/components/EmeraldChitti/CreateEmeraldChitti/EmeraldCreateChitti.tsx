@@ -10,7 +10,6 @@ const EmeraldCreateChitti = ({
   clientNameList,
   currentDate,
   handleDateChange,
-
   setStateForDocStatus,
 }: any) => {
   const bgColor = useRef(true);

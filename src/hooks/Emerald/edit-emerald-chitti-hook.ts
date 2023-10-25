@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import UseEmeraldHook from './emrald-page-hook';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
@@ -44,6 +43,9 @@ const UseEditEmeraldChittiHook: any = () => {
     setTableData,
     stateForDocStatus,
     setStateForDocStatus,
+    HandleSubmitEmeraldChittiData,
+    HandleCancelEmeraldChitti,
+    HandleDeleteEmeraldChitti,
   }: any = UseEmeraldHook();
 
   useEffect(() => {
@@ -114,6 +116,9 @@ const UseEditEmeraldChittiHook: any = () => {
     HandleUpdateEmeraldChittiSubmit,
     stateForDocStatus,
     setStateForDocStatus,
+    HandleSubmitEmeraldChittiData,
+    HandleCancelEmeraldChitti,
+    HandleDeleteEmeraldChitti,
   };
 };
 

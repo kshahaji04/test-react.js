@@ -9,6 +9,7 @@ const MasterListing = () => {
     'Category',
     'Sub Category',
     'Huid product',
+    'Project Sub Category Mapping',
   ];
 
   return (

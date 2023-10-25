@@ -25,9 +25,15 @@ import {
   get_client_group,
 } from '../../store/slices/Chitti/get-client-group-list-slice';
 import AddClientNameApi from '../../services/api/Master/add-client-name-api';
+import UpdateDocStatusChallanApi from '../../services/api/general/update-doc-status-challan--api';
+import { getSpecificChittiChallan } from '../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
+import { useNavigate, useParams } from 'react-router-dom';
+import DeleteChallanChittiApi from '../../services/api/Chitti/delete-challan-chitti-api';
 
 const UseChittiHook = () => {
   const dispatch = useDispatch();
+  const { id } = useParams();
+  const navigate = useNavigate();
   const AccessToken: any = useSelector(get_access_token);
   const ChittiChallanData: any = useSelector(get_chitti_challan);
   const ClientNameDataFromStore: any = useSelector(get_client_name);
@@ -57,7 +63,10 @@ const UseChittiHook = () => {
     new Date()?.toISOString()?.split('T')[0]
   );
   const [stateForDocStatus, setStateForDocStatus] = useState<boolean>(false);
-
+  const [
+    showSubmitButtonAfterCreateChitti,
+    setShowSubmitButtonAfterCreateChitti,
+  ] = useState<any>('');
 
   useEffect(() => {
     dispatch(getChittiChallan(AccessToken?.token));
@@ -150,19 +159,76 @@ const UseChittiHook = () => {
   console.log('setTableData', tableData);
 
   const HandleEmptyChallanChittiTable: any = () => {
-    setTableData([{ id: 1 }])
-    setNarrationTableData([{ id: 1 }])
-    setSelectedDropdownValue("")
-    setGoldRate("")
-    setRemarks("")
-
+    setTableData([{ id: 1 }]);
+    setNarrationTableData([{ id: 1 }]);
+    setSelectedDropdownValue('');
+    setGoldRate('');
+    setRemarks('');
+    setShowSubmitButtonAfterCreateChitti('');
     // Set the value of the select tag to an empty string
-    const selectElements: any = document?.querySelectorAll('.custom-input-field');
+    const selectElements: any = document?.querySelectorAll(
+      '.custom-input-field'
+    );
     selectElements.forEach((selectElement: any) => {
       selectElement.value = '';
     });
-  }
+  };
 
+  const HandleSubmitChallanChitti: any = async () => {
+    let updateDocStatus: any = await UpdateDocStatusChallanApi(
+      AccessToken?.token,
+      '1',
+      showSubmitButtonAfterCreateChitti?.length > 0
+        ? showSubmitButtonAfterCreateChitti
+        : id
+    );
+    console.log('update doc', updateDocStatus);
+    if (Object?.keys(updateDocStatus?.data)?.length > 0) {
+      const params: any = {
+        token: AccessToken?.token,
+        name:
+          showSubmitButtonAfterCreateChitti?.length > 0
+            ? showSubmitButtonAfterCreateChitti
+            : id,
+      };
+      dispatch(getSpecificChittiChallan(params));
+    }
+  };
+
+  const HandleCancelChallanChitti = async () => {
+    let updateDocStatus: any = await UpdateDocStatusChallanApi(
+      AccessToken?.token,
+      '2',
+      showSubmitButtonAfterCreateChitti?.length > 0
+        ? showSubmitButtonAfterCreateChitti
+        : id
+    );
+    console.log('update doc', updateDocStatus);
+    if (Object.keys(updateDocStatus?.data)?.length > 0) {
+      const params: any = {
+        token: AccessToken?.token,
+        name:
+          showSubmitButtonAfterCreateChitti?.length > 0
+            ? showSubmitButtonAfterCreateChitti
+            : id,
+      };
+      dispatch(getSpecificChittiChallan(params));
+    }
+  };
+
+  const HandleDeleteChallanChitti = async () => {
+    let deleteChallanApiRes: any = await DeleteChallanChittiApi(
+      AccessToken?.token,
+      showSubmitButtonAfterCreateChitti?.length > 0
+        ? showSubmitButtonAfterCreateChitti
+        : id
+    );
+    console.log('deletec', deleteChallanApiRes);
+    if (deleteChallanApiRes?.message?.status === 'success') {
+      navigate(-1);
+      // window?.location?.reload();
+    }
+  };
 
   // for removing id key from list
   useEffect(() => {
@@ -186,16 +252,9 @@ const UseChittiHook = () => {
     const NoDataChallanTableData = challanTableData.some(
       (item: any) => Object?.keys(item)?.length === 0
     );
-    const NoDataNarrationTableData = narrationUpdatedTableData.some(
-      (item: any) => Object?.keys(item)?.length === 0
-    );
-
-    console.log(
-      'selectt',
-      selectedDropdownValue,
-      NoDataChallanTableData,
-      NoDataNarrationTableData
-    );
+    // const NoDataNarrationTableData = narrationUpdatedTableData.some(
+    //   (item: any) => Object?.keys(item)?.length === 0
+    // );
 
     let errMsgList: any = [];
     if (Object?.keys(selectedDropdownValue)?.length === 0) {
@@ -204,9 +263,7 @@ const UseChittiHook = () => {
     if (NoDataChallanTableData) {
       errMsgList.push('Challan Table');
     }
-    if (NoDataNarrationTableData) {
-      errMsgList.push('HUID Table');
-    }
+
     console.log('show err msg', errMsgList);
     if (errMsgList?.length > 0 && errMsgList !== null) {
       toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
@@ -224,7 +281,10 @@ const UseChittiHook = () => {
       let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
       console.log('Createchittiapires', CreateChittiApiRes);
 
-      if (Object?.keys(clientGroupName)?.length > 0 && Object?.keys(clientNameList)?.length > 0) {
+      if (
+        Object?.keys(clientGroupName)?.length > 0 &&
+        Object?.keys(clientNameList)?.length > 0
+      ) {
         await AddClientNameApi(
           AccessToken?.token,
           selectedDropdownValue,
@@ -237,47 +297,22 @@ const UseChittiHook = () => {
         CreateChittiApiRes?.hasOwnProperty('data')
       ) {
         toast.success('Chitti Created');
+        navigate(`${CreateChittiApiRes?.data?.data?.name}`);
+        console.log('dataa after save', CreateChittiApiRes?.data);
+        await UpdateDocStatusChallanApi(
+          AccessToken?.token,
+          '0',
+          CreateChittiApiRes?.data?.data?.name
+        );
+
+        setShowSubmitButtonAfterCreateChitti(
+          CreateChittiApiRes?.data?.data?.name
+        );
         dispatch(getChittiChallan(AccessToken?.token));
       } else {
         toast.error('Failed to created chitti');
       }
     }
-
-    // if (
-    //   Object?.keys(selectedDropdownValue)?.length > 0 &&
-    //   NoDataChallanTableData === false &&
-    //   NoDataNarrationTableData === false
-    // ) {
-    //   const BodyData: any = {
-    //     date: date,
-    //     clientName: selectedDropdownValue,
-    //     clientGroup: clientGroupName,
-    //     goldRate: goldRate,
-    //     remarks: remarks,
-    //     challanTableData: challanTableData,
-    //     narrationTableData: narrationUpdatedTableData,
-    //     token: AccessToken?.token,
-    //   };
-    //   let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
-    //   console.log('Createchittiapires', CreateChittiApiRes);
-
-    //   if (
-    //     CreateChittiApiRes?.status === 200 &&
-    //     CreateChittiApiRes?.hasOwnProperty('data')
-    //   ) {
-
-    //     setTableData([{ id: 1 }])
-    //     setNarrationTableData([{id:1}])
-
-    //     toast.success('Chitti Created');
-    //     dispatch(getChittiChallan(AccessToken?.token));
-    //   } else {
-    //     toast.error('Failed to created chitti');
-    //   }
-    // } else {
-    //   console.log('select elss');
-    //   toast.error('Mandatory fields Client name, challan Table , HUID Table');
-    // }
   };
   console.log('chittiListingData in hook end', chittiListingData);
   return {
@@ -307,7 +342,11 @@ const UseChittiHook = () => {
     setStateForDocStatus,
     setRemarks,
     setGoldRate,
-    HandleEmptyChallanChittiTable
+    HandleEmptyChallanChittiTable,
+    showSubmitButtonAfterCreateChitti,
+    HandleSubmitChallanChitti,
+    HandleCancelChallanChitti,
+    HandleDeleteChallanChitti,
   };
 };
 

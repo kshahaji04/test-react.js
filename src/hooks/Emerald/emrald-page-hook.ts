@@ -21,10 +21,16 @@ import {
   get_product_item,
 } from '../../store/slices/Emerald/get-product-item-slice';
 import CreateEmeraldChittiApi from '../../services/api/Emerald/create-emerald-chitti-api';
+import UpdateDocStatusEmeraldChittiApi from '../../services/api/general/update-doc-status-emrald-chitti-api';
+import { getSpecificEmeraldChitti } from '../../store/slices/Emerald/get-specific-emrald-slice';
+import { useNavigate, useParams } from 'react-router-dom';
+import DeleteEmeraldChittiApi from '../../services/api/Emerald/delete-emerald-chitti-api';
+import AddClientNameApi from '../../services/api/Master/add-client-name-api';
 
 const UseEmeraldHook = () => {
   const dispatch = useDispatch();
-
+  const { id } = useParams();
+  const navigate = useNavigate();
   const AccessToken: any = useSelector(get_access_token);
   const EmeraldChittiDataFromStore: any = useSelector(get_Emerald_challan);
   const ClientNameDataFromStore: any = useSelector(get_client_name);
@@ -41,10 +47,14 @@ const UseEmeraldHook = () => {
     new Date()?.toISOString()?.split('T')[0]
   );
   const [productItemList, setProductItemList] = useState<any>([]);
-
+  const [clientGroupName, setClientGroupName] = useState<any>('');
   const [tableData, setTableData] = useState<any>([{ id: 1 }]);
   const [emeraldChittiTableData, setEmeraldChittiTableData] = useState<any>([]);
   const [stateForDocStatus, setStateForDocStatus] = useState<boolean>(false);
+  const [
+    showSubmitButtonAfterCreateChitti,
+    setShowSubmitButtonAfterCreateChitti,
+  ] = useState<any>('');
   console.log('ProductItemDataFromStore', ProductItemDataFromStore);
   useEffect(() => {
     dispatch(getEmeraldChallan(AccessToken?.token));
@@ -100,8 +110,7 @@ const UseEmeraldHook = () => {
   }, [ProductItemDataFromStore]);
 
   const HandleClientGroup: any = (e: any) => {
-    console.log('clientgro', e.target.value);
-
+    setClientGroupName(e?.target?.value);
     setStateForDocStatus(true);
   };
 
@@ -112,16 +121,73 @@ const UseEmeraldHook = () => {
   };
 
   const HandleEmptyEmeraldChitti: any = () => {
-    console.log("new emerald chitti")
-    setTableData([{ id: 1 }])
-    setSelectedDropdownValue("")
-
+    console.log('new emerald chitti');
+    setTableData([{ id: 1 }]);
+    setSelectedDropdownValue('');
+    setShowSubmitButtonAfterCreateChitti('');
     // Set the value of the select tag to an empty string
-    const selectElements: any = document?.querySelectorAll('.custom-input-field');
+    const selectElements: any = document?.querySelectorAll(
+      '.custom-input-field'
+    );
     selectElements.forEach((selectElement: any) => {
       selectElement.value = '';
     });
-  }
+  };
+
+  const HandleSubmitEmeraldChittiData: any = async () => {
+    let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
+      AccessToken?.token,
+      '1',
+      showSubmitButtonAfterCreateChitti?.length > 0
+        ? showSubmitButtonAfterCreateChitti
+        : id
+    );
+    console.log('update doc', updateDocStatus);
+    if (Object.keys(updateDocStatus?.data)?.length > 0) {
+      const params: any = {
+        token: AccessToken?.token,
+        name:
+          showSubmitButtonAfterCreateChitti?.length > 0
+            ? showSubmitButtonAfterCreateChitti
+            : id,
+      };
+      dispatch(getSpecificEmeraldChitti(params));
+    }
+  };
+
+  const HandleCancelEmeraldChitti = async () => {
+    let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
+      AccessToken?.token,
+      '2',
+      showSubmitButtonAfterCreateChitti?.length > 0
+        ? showSubmitButtonAfterCreateChitti
+        : id
+    );
+    console.log('update doc', updateDocStatus);
+    if (Object.keys(updateDocStatus?.data)?.length > 0) {
+      const params: any = {
+        token: AccessToken?.token,
+        name:
+          showSubmitButtonAfterCreateChitti?.length > 0
+            ? showSubmitButtonAfterCreateChitti
+            : id,
+      };
+      dispatch(getSpecificEmeraldChitti(params));
+    }
+  };
+
+  const HandleDeleteEmeraldChitti = async () => {
+    let deleteChallanApiRes: any = await DeleteEmeraldChittiApi(
+      AccessToken?.token,
+      showSubmitButtonAfterCreateChitti?.length > 0
+        ? showSubmitButtonAfterCreateChitti
+        : id
+    );
+    console.log('deletec', deleteChallanApiRes);
+    if (deleteChallanApiRes?.message?.status === 'success') {
+      navigate(-1);
+    }
+  };
 
   useEffect(() => {
     if (tableData?.length > 0 && tableData !== null) {
@@ -159,6 +225,7 @@ const UseEmeraldHook = () => {
     } else {
       const BodyData: any = {
         clientName: selectedDropdownValue,
+        clientGroup: clientGroupName,
         date: transactionDate,
         emeraldChittiTableData: emeraldChittiTableData,
         token: AccessToken?.token,
@@ -166,46 +233,37 @@ const UseEmeraldHook = () => {
       let createEmeraldChittiApiRes: any =
         await CreateEmeraldChittiApi(BodyData);
       console.log('Createchittiapires', createEmeraldChittiApiRes);
+      if (
+        Object?.keys(clientGroupName)?.length > 0 &&
+        Object?.keys(clientNameList)?.length > 0
+      ) {
+        await AddClientNameApi(
+          AccessToken?.token,
+          selectedDropdownValue,
+          clientGroupName
+        );
+      }
 
       if (
         createEmeraldChittiApiRes?.status === 200 &&
         createEmeraldChittiApiRes?.hasOwnProperty('data')
       ) {
         toast.success('Emerald Chitti Created');
+        navigate(`${createEmeraldChittiApiRes?.data?.data?.name}`);
+        await UpdateDocStatusEmeraldChittiApi(
+          AccessToken?.token,
+          '0',
+          createEmeraldChittiApiRes?.data?.data?.name
+        );
+
+        setShowSubmitButtonAfterCreateChitti(
+          createEmeraldChittiApiRes?.data?.data?.name
+        );
         dispatch(getEmeraldChallan(AccessToken?.token));
       } else {
         toast.error('Failed to Create Emerald Chitti');
       }
     }
-
-    // if (
-    //   Object?.keys(selectedDropdownValue)?.length > 0 &&
-    //   NoDataEmeraldTableData === false
-    // ) {
-    //   const BodyData: any = {
-    //     clientName: selectedDropdownValue,
-    //     date: transactionDate,
-    //     emeraldChittiTableData: emeraldChittiTableData,
-    //     token: AccessToken?.token,
-    //   };
-    //   let createEmeraldChittiApiRes: any =
-    //     await CreateEmeraldChittiApi(BodyData);
-    //   console.log('Createchittiapires', createEmeraldChittiApiRes);
-
-    //   if (
-    //     createEmeraldChittiApiRes?.status === 200 &&
-    //     createEmeraldChittiApiRes?.hasOwnProperty('data')
-    //   ) {
-    //     setTableData([{id:-1}])
-    //     toast.success('Emerald Chitti Created');
-    //     dispatch(getEmeraldChallan(AccessToken?.token));
-    //   } else {
-    //     toast.error('Failed to Create Emerald Chitti');
-    //   }
-    // } else {
-    //   console.log('select elss');
-    //   toast.error('Mandatory fields Client name, Emerald Table ');
-    // }
   };
 
   return {
@@ -224,7 +282,11 @@ const UseEmeraldHook = () => {
     transactionDate,
     stateForDocStatus,
     setStateForDocStatus,
-    HandleEmptyEmeraldChitti
+    HandleEmptyEmeraldChitti,
+    HandleSubmitEmeraldChittiData,
+    HandleCancelEmeraldChitti,
+    HandleDeleteEmeraldChitti,
+    showSubmitButtonAfterCreateChitti,
   };
 };
 

@@ -22,7 +22,13 @@ const EmeraldChittiMaster = () => {
     transactionDate,
     tableData,
     setTableData,
-    HandleEmptyEmeraldChitti
+    HandleEmptyEmeraldChitti,
+    HandleSubmitEmeraldChittiData,
+    HandleCancelEmeraldChitti,
+    HandleDeleteEmeraldChitti,
+    showSubmitButtonAfterCreateChitti,
+    clientGroupName,
+    setClientGroupName,
   }: any = UseEmeraldHook();
   const { subCategoryList }: any = UseSubCategoryHook();
   console.log('emeraldChittiData', emeraldChittiData);
@@ -45,47 +51,47 @@ const EmeraldChittiMaster = () => {
   console.log('searchh', searchInputValues, searchClientName);
   const filteredList =
     emeraldChittiData?.length > 0 &&
-      emeraldChittiData !== null &&
-      (searchInputValues.date ||
-        searchInputValues.chitti_no ||
-        searchClientName ||
-        searchInputValues.status)
+    emeraldChittiData !== null &&
+    (searchInputValues.date ||
+      searchInputValues.chitti_no ||
+      searchClientName ||
+      searchInputValues.status)
       ? emeraldChittiData.filter((item: any) => {
-        const dateMatch = searchInputValues.date
-          ? item?.date?.includes(searchInputValues.date)
-          : true;
-        const numberMatch = searchInputValues.chitti_no
-          ? item?.number?.includes(searchInputValues.chitti_no)
-          : true;
-        const clientNameMatch = searchClientName
-          ? item?.client_name?.includes(searchClientName)
-          : true;
+          const dateMatch = searchInputValues.date
+            ? item?.date?.includes(searchInputValues.date)
+            : true;
+          const numberMatch = searchInputValues.chitti_no
+            ? item?.number?.includes(searchInputValues.chitti_no)
+            : true;
+          const clientNameMatch = searchClientName
+            ? item?.client_name?.includes(searchClientName)
+            : true;
 
-        if (searchInputValues.status === 'Draft') {
-          return (
-            item?.docstatus === 0 &&
-            dateMatch &&
-            numberMatch &&
-            clientNameMatch
-          );
-        } else if (searchInputValues.status === 'Submitted') {
-          return (
-            item?.docstatus === 1 &&
-            dateMatch &&
-            numberMatch &&
-            clientNameMatch
-          );
-        } else if (searchInputValues.status === 'Cancel') {
-          return (
-            item?.docstatus === 2 &&
-            dateMatch &&
-            numberMatch &&
-            clientNameMatch
-          );
-        }
+          if (searchInputValues.status === 'Draft') {
+            return (
+              item?.docstatus === 0 &&
+              dateMatch &&
+              numberMatch &&
+              clientNameMatch
+            );
+          } else if (searchInputValues.status === 'Submitted') {
+            return (
+              item?.docstatus === 1 &&
+              dateMatch &&
+              numberMatch &&
+              clientNameMatch
+            );
+          } else if (searchInputValues.status === 'Cancel') {
+            return (
+              item?.docstatus === 2 &&
+              dateMatch &&
+              numberMatch &&
+              clientNameMatch
+            );
+          }
 
-        return dateMatch && numberMatch && clientNameMatch;
-      })
+          return dateMatch && numberMatch && clientNameMatch;
+        })
       : emeraldChittiData;
 
   return (
@@ -120,6 +126,7 @@ const EmeraldChittiMaster = () => {
                   HandleCreateEmeraldChittiSubmit
                 }
                 clientGroupList={clientGroupList}
+                clientGroupName={clientGroupName}
                 clientNameList={clientNameList}
                 currentDate={currentDate}
                 handleDateChange={handleDateChange}
@@ -129,6 +136,13 @@ const EmeraldChittiMaster = () => {
                 subCategoryList={subCategoryList}
                 productItemList={productItemList}
                 HandleEmptyEmeraldChitti={HandleEmptyEmeraldChitti}
+                HandleSubmitEmeraldChittiData={HandleSubmitEmeraldChittiData}
+                HandleCancelEmeraldChitti={HandleCancelEmeraldChitti}
+                HandleDeleteEmeraldChitti={HandleDeleteEmeraldChitti}
+                showSubmitButtonAfterCreateChitti={
+                  showSubmitButtonAfterCreateChitti
+                }
+                setClientGroupName={setClientGroupName}
               />
             </Tab>
           </Tabs>

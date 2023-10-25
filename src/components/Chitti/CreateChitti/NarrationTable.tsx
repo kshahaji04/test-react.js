@@ -6,6 +6,7 @@ const NarrationTable = ({
   productList,
   defaultData,
   setStateForDocStatus,
+  setTotalHuidWeightOfHuidTable,
 }: any) => {
   const [totalAmountValue, setTotalAmountValue] = useState<any>({
     product: '',
@@ -13,6 +14,7 @@ const NarrationTable = ({
     huid_weight: 0,
   });
 
+  setTotalHuidWeightOfHuidTable(totalAmountValue?.huid_weight);
   useEffect(() => {
     if (
       defaultData?.length > 0 &&
@@ -51,6 +53,7 @@ const NarrationTable = ({
     newColumnTotals.amount += newRow.huid_weight;
 
     // Update the total values
+
     setTotalAmountValue(newColumnTotals);
     setStateForDocStatus(true);
   };
@@ -78,6 +81,7 @@ const NarrationTable = ({
       },
       { huid_pieces: 0, huid_weight: 0 }
     );
+
     setTotalAmountValue(newColumnTotals);
   }, [narrationTableData]);
 
@@ -134,7 +138,6 @@ const NarrationTable = ({
             <th scope="col">No.</th>
             <th scope="col" className="narration-table-product">
               Product
-              <span className="text-danger">*</span>
             </th>
             <th scope="col">HUID Pieces</th>
             <th scope="col">HUID Weight</th>

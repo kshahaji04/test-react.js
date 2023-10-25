@@ -117,14 +117,14 @@ const ListingTable = ({ tableListingData }: any) => {
   const TableHeading: any = () => {
     return (
       <>
-        {headingData?.length > 0 && headingData !== null && (
+        {/* {headingData?.length > 0 && headingData !== null && (
           <th
             className="text-uppercase text-center table-heading-sr-no"
             scope="col"
           >
             Sr No
           </th>
-        )}
+        )} */}
 
         {headingData?.length > 0 &&
           headingData !== null &&
@@ -161,7 +161,7 @@ const ListingTable = ({ tableListingData }: any) => {
               ?.map((data: any, i: any) => {
                 return (
                   <tr className="table-body-row" key={i}>
-                    <td className="border-0">{i + 1}</td>
+                    {/* <td className="border-0">{i + 1}</td> */}
                     {headingData?.length > 0 &&
                       headingData !== null &&
                       headingData.map((v: any, index: any) => {

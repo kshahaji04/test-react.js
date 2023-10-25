@@ -3,17 +3,9 @@ import EmeraldCreateChitti from '../CreateEmeraldChitti/EmeraldCreateChitti';
 import EmeraldChittiTable from '../CreateEmeraldChitti/EmeraldChittiTable';
 import UseSubCategoryHook from '../../../hooks/Master/sub-category-hook';
 import UseEditEmeraldChittiHook from '../../../hooks/Emerald/edit-emerald-chitti-hook';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {
-  getSpecificEmeraldChitti,
-  get_specific_emerald_chitti,
-} from '../../../store/slices/Emerald/get-specific-emrald-slice';
-import { useDispatch } from 'react-redux';
-
-import { get_access_token } from '../../../store/slices/auth/token-login-slice';
-import DeleteEmeraldChittiApi from '../../../services/api/Emerald/delete-emerald-chitti-api';
-import UpdateDocStatusEmeraldChittiApi from '../../../services/api/general/update-doc-status-emrald-chitti-api';
+import { get_specific_emerald_chitti } from '../../../store/slices/Emerald/get-specific-emrald-slice';
 
 const EditEmeraldChitti = () => {
   const navigate = useNavigate();
@@ -34,16 +26,16 @@ const EditEmeraldChitti = () => {
     HandleUpdateEmeraldChittiSubmit,
     stateForDocStatus,
     setStateForDocStatus,
+    HandleSubmitEmeraldChittiData,
+    HandleCancelEmeraldChitti,
+    HandleDeleteEmeraldChitti,
   }: any = UseEditEmeraldChittiHook();
 
   const HandleBackButton = () => {
     navigate(-1);
   };
 
-  const { id } = useParams();
-  const dispatch = useDispatch();
   const [showButton, setShowButton] = useState<any>();
-  const AccessToken: any = useSelector(get_access_token);
 
   const docStatusFromStore: any = useSelector(get_specific_emerald_chitti);
   console.log('docStatus', docStatusFromStore?.docStatus);
@@ -51,47 +43,48 @@ const EditEmeraldChitti = () => {
     setShowButton(docStatusFromStore?.docStatus);
   }, [docStatusFromStore]);
 
-  const HandleSubmitData: any = async () => {
-    let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
-      AccessToken?.token,
-      '1',
-      id
-    );
-    console.log('update doc', updateDocStatus);
-    if (Object.keys(updateDocStatus?.data)?.length > 0) {
-      const params: any = {
-        token: AccessToken?.token,
-        name: id,
-      };
-      dispatch(getSpecificEmeraldChitti(params));
-    }
-  };
+  // const HandleSubmitData: any = async () => {
+  //   let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
+  //     AccessToken?.token,
+  //     '1',
+  //     id
+  //   );
+  //   console.log('update doc', updateDocStatus);
+  //   if (Object.keys(updateDocStatus?.data)?.length > 0) {
+  //     const params: any = {
+  //       token: AccessToken?.token,
+  //       name: id,
+  //     };
+  //     dispatch(getSpecificEmeraldChitti(params));
+  //   }
+  // };
 
-  const HandleCancelChitti = async () => {
-    let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
-      AccessToken?.token,
-      '2',
-      id
-    );
-    console.log('update doc', updateDocStatus);
-    if (Object.keys(updateDocStatus?.data)?.length > 0) {
-      const params: any = {
-        token: AccessToken?.token,
-        name: id,
-      };
-      dispatch(getSpecificEmeraldChitti(params));
-    }
-  };
-  const HandleDeleteChitti = async () => {
-    let deleteChallanApiRes: any = await DeleteEmeraldChittiApi(
-      AccessToken?.token,
-      id
-    );
-    console.log('deletec', deleteChallanApiRes);
-    if (deleteChallanApiRes?.message?.status === 'success') {
-      navigate(-1);
-    }
-  };
+  // const HandleCancelChitti = async () => {
+  //   let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
+  //     AccessToken?.token,
+  //     '2',
+  //     id
+  //   );
+  //   console.log('update doc', updateDocStatus);
+  //   if (Object.keys(updateDocStatus?.data)?.length > 0) {
+  //     const params: any = {
+  //       token: AccessToken?.token,
+  //       name: id,
+  //     };
+  //     dispatch(getSpecificEmeraldChitti(params));
+  //   }
+  // };
+  // const HandleDeleteChitti = async () => {
+  //   let deleteChallanApiRes: any = await DeleteEmeraldChittiApi(
+  //     AccessToken?.token,
+  //     id
+  //   );
+  //   console.log('deletec', deleteChallanApiRes);
+  //   if (deleteChallanApiRes?.message?.status === 'success') {
+  //     navigate(-1);
+  //   }
+  // };
+
   return (
     <div className="container">
       <div className="">
@@ -136,7 +129,7 @@ const EditEmeraldChitti = () => {
             <button
               type="submit"
               className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-              onClick={HandleSubmitData}
+              onClick={HandleSubmitEmeraldChittiData}
             >
               Submit
             </button>
@@ -145,7 +138,7 @@ const EditEmeraldChitti = () => {
             <button
               type="submit"
               className=" btn btn-outline-primary px-2 py-0 form-submit-button"
-              onClick={HandleCancelChitti}
+              onClick={HandleCancelEmeraldChitti}
             >
               Cancel
             </button>
@@ -154,7 +147,7 @@ const EditEmeraldChitti = () => {
             <button
               type="submit"
               className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-              onClick={HandleDeleteChitti}
+              onClick={HandleDeleteEmeraldChitti}
             >
               Delete
             </button>

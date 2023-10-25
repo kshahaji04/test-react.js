@@ -50,6 +50,9 @@ const UseEditChallanChitti: any = () => {
     setStateForDocStatus,
     setRemarks,
     setGoldRate,
+    HandleSubmitChallanChitti,
+    HandleCancelChallanChitti,
+    HandleDeleteChallanChitti,
   }: any = UseChittiHook();
 
   console.log('selectedDropdownValue', selectedDropdownValue);
@@ -134,6 +137,9 @@ const UseEditChallanChitti: any = () => {
     setStateForDocStatus,
     setRemarks,
     setGoldRate,
+    HandleSubmitChallanChitti,
+    HandleCancelChallanChitti,
+    HandleDeleteChallanChitti,
   };
 };
 

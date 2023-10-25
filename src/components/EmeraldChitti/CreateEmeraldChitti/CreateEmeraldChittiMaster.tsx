@@ -1,5 +1,10 @@
+import { useState, useEffect } from 'react';
 import EmeraldCreateChitti from './EmeraldCreateChitti';
 import EmeraldChittiTable from './EmeraldChittiTable';
+import { useSelector } from 'react-redux';
+import { get_specific_emerald_chitti } from '../../../store/slices/Emerald/get-specific-emrald-slice';
+
+import HandleButtonsDisplayInChitti from '../../HandleButtonsDisplayInChitti';
 
 const CreateEmeraldChittiMaster = ({
   selectedDropdownValue,
@@ -8,6 +13,7 @@ const CreateEmeraldChittiMaster = ({
   HandleCreateEmeraldChittiSubmit,
   clientGroupList,
   clientNameList,
+  clientGroupName,
   currentDate,
   handleDateChange,
   transactionDate,
@@ -15,25 +21,33 @@ const CreateEmeraldChittiMaster = ({
   setTableData,
   subCategoryList,
   productItemList,
-  HandleEmptyEmeraldChitti
+  showSubmitButtonAfterCreateChitti,
+  HandleSubmitEmeraldChittiData,
+  HandleCancelEmeraldChitti,
+  HandleDeleteEmeraldChitti,
+  HandleEmptyEmeraldChitti,
 }: any) => {
+  const [showButton, setShowButton] = useState<any>();
+
+  const docStatusFromStore: any = useSelector(get_specific_emerald_chitti);
+  console.log('docStatus', docStatusFromStore?.docStatus);
+
+  useEffect(() => {
+    setShowButton(docStatusFromStore?.docStatus);
+  }, [docStatusFromStore]);
+
   return (
     <>
       <div className="d-flex justify-content-end ">
-        <button
-          type="submit"
-          className=" btn btn-outline-primary px-2 py-0 form-submit-button"
-          onClick={HandleEmptyEmeraldChitti}
-        >
-          New
-        </button>
-        <button
-          type="submit"
-          className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
-          onClick={HandleCreateEmeraldChittiSubmit}
-        >
-          Save
-        </button>
+        <HandleButtonsDisplayInChitti
+          HandleCreateChittiSubmit={HandleCreateEmeraldChittiSubmit}
+          showButton={showButton}
+          showSubmitButtonAfterCreateChitti={showSubmitButtonAfterCreateChitti}
+          HandleSubmitChittiData={HandleSubmitEmeraldChittiData}
+          HandleCancelChitti={HandleCancelEmeraldChitti}
+          HandleDeleteChitti={HandleDeleteEmeraldChitti}
+          HandleEmptyChitti={HandleEmptyEmeraldChitti}
+        />
       </div>
       <EmeraldCreateChitti
         selectedDropdownValue={selectedDropdownValue}
@@ -44,6 +58,7 @@ const CreateEmeraldChittiMaster = ({
         currentDate={currentDate}
         handleDateChange={handleDateChange}
         transactionDate={transactionDate}
+        clientGroupName={clientGroupName}
       />
 
       <EmeraldChittiTable
