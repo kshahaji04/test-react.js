@@ -1,8 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
 const MasterListing = () => {
-  console.log('idd1', window.location.pathname);
-
   const masterlist: any = [
     'Client Group',
     'Client Name',

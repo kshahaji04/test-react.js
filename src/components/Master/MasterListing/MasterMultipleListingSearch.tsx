@@ -1,8 +1,11 @@
 const MasterMultipleListingSearch = ({
   handleInputChange1,
   handleInputChange2,
+  handleInputChange3,
   placeholder1,
   placeholder2,
+  placeholder3,
+  showThirdInputField,
 }: any) => {
   return (
     <>
@@ -29,6 +32,19 @@ const MasterMultipleListingSearch = ({
             onChange={handleInputChange2}
           />
         </div>
+        {showThirdInputField?.current && (
+          <div className="ms-lg-5 ms-3">
+            <input
+              type="text"
+              name="input2"
+              id="input2"
+              className="form-control input-fields custom-input-field ps-2 p-1"
+              aria-describedby="emailHelp"
+              placeholder={placeholder3}
+              onChange={handleInputChange3}
+            />
+          </div>
+        )}
       </div>
     </>
   );

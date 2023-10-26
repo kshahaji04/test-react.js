@@ -224,6 +224,7 @@ const ListingTable = ({ tableListingData }: any) => {
                     {data.docstatus === 2 && (
                       <>
                         <td className="button-section-td border-0">
+                          <a className="button-section-text text-primary "></a>
                           <a
                             onClick={() => HandleDeleteChitti(data.name)}
                             className="button-section-text text-danger mx-3"

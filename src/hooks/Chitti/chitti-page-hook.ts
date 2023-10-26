@@ -29,6 +29,7 @@ import UpdateDocStatusChallanApi from '../../services/api/general/update-doc-sta
 import { getSpecificChittiChallan } from '../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
 import { useNavigate, useParams } from 'react-router-dom';
 import DeleteChallanChittiApi from '../../services/api/Chitti/delete-challan-chitti-api';
+import UseCustomChittiHook from './custom-chitti-page-hook';
 
 const UseChittiHook = () => {
   const dispatch = useDispatch();
@@ -67,6 +68,9 @@ const UseChittiHook = () => {
     showSubmitButtonAfterCreateChitti,
     setShowSubmitButtonAfterCreateChitti,
   ] = useState<any>('');
+
+  const { setTotalGrossWeightOfChallanTable, setTotalHuidWeightOfHuidTable } =
+    UseCustomChittiHook();
 
   useEffect(() => {
     dispatch(getChittiChallan(AccessToken?.token));
@@ -347,6 +351,8 @@ const UseChittiHook = () => {
     HandleSubmitChallanChitti,
     HandleCancelChallanChitti,
     HandleDeleteChallanChitti,
+    setTotalGrossWeightOfChallanTable,
+    setTotalHuidWeightOfHuidTable,
   };
 };
 

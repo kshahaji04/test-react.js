@@ -36,54 +36,18 @@ const EditEmeraldChitti = () => {
   };
 
   const [showButton, setShowButton] = useState<any>();
+  const [readOnly, setReadOnly] = useState<boolean>(false);
 
   const docStatusFromStore: any = useSelector(get_specific_emerald_chitti);
   console.log('docStatus', docStatusFromStore?.docStatus);
   useEffect(() => {
     setShowButton(docStatusFromStore?.docStatus);
+    if (docStatusFromStore?.docStatus > 0) {
+      setReadOnly(true);
+    } else {
+      setReadOnly(false);
+    }
   }, [docStatusFromStore]);
-
-  // const HandleSubmitData: any = async () => {
-  //   let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
-  //     AccessToken?.token,
-  //     '1',
-  //     id
-  //   );
-  //   console.log('update doc', updateDocStatus);
-  //   if (Object.keys(updateDocStatus?.data)?.length > 0) {
-  //     const params: any = {
-  //       token: AccessToken?.token,
-  //       name: id,
-  //     };
-  //     dispatch(getSpecificEmeraldChitti(params));
-  //   }
-  // };
-
-  // const HandleCancelChitti = async () => {
-  //   let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
-  //     AccessToken?.token,
-  //     '2',
-  //     id
-  //   );
-  //   console.log('update doc', updateDocStatus);
-  //   if (Object.keys(updateDocStatus?.data)?.length > 0) {
-  //     const params: any = {
-  //       token: AccessToken?.token,
-  //       name: id,
-  //     };
-  //     dispatch(getSpecificEmeraldChitti(params));
-  //   }
-  // };
-  // const HandleDeleteChitti = async () => {
-  //   let deleteChallanApiRes: any = await DeleteEmeraldChittiApi(
-  //     AccessToken?.token,
-  //     id
-  //   );
-  //   console.log('deletec', deleteChallanApiRes);
-  //   if (deleteChallanApiRes?.message?.status === 'success') {
-  //     navigate(-1);
-  //   }
-  // };
 
   return (
     <div className="container">
@@ -160,8 +124,6 @@ const EditEmeraldChitti = () => {
           {challanDetail?.length > 0 &&
             challanDetail !== null &&
             challanDetail.map((data: any) => {
-              console.log('valuess emerald', data);
-
               return (
                 <>
                   <EmeraldCreateChitti
@@ -175,6 +137,7 @@ const EditEmeraldChitti = () => {
                     handleDateChange={handleDateChange}
                     transactionDate={transactionDate}
                     setStateForDocStatus={setStateForDocStatus}
+                    readOnly={readOnly}
                   />
 
                   <EmeraldChittiTable
@@ -184,6 +147,7 @@ const EditEmeraldChitti = () => {
                     subCategoryList={subCategoryList}
                     productItemList={productItemList}
                     setStateForDocStatus={setStateForDocStatus}
+                    readOnly={readOnly}
                   />
                 </>
               );

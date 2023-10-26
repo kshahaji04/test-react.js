@@ -11,6 +11,7 @@ const EmeraldCreateChitti = ({
   currentDate,
   handleDateChange,
   setStateForDocStatus,
+  readOnly,
 }: any) => {
   const bgColor = useRef(true);
   return (
@@ -35,6 +36,7 @@ const EmeraldCreateChitti = ({
               HandleClientGroup={HandleClientGroup}
               defaultData={defaultData}
               setStateForDocStatus={setStateForDocStatus}
+              readOnly={readOnly === true ? true : false}
             />
           </div>
         </div>

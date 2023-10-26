@@ -1,0 +1,55 @@
+.custom-select-container {
+    position: absolute;
+    width: 36%;
+}
+
+/* .custom-select-total {
+    width: 95%;
+} */
+
+.input-field-chitti {
+    /* width: 200px; */
+    padding: 10px 5px !important;
+}
+
+@media only screen and (min-width: 1280px) {
+    .custom-select-container {
+        width: 36%;
+    }
+
+}
+
+@media only screen and (max-width: 980px) {
+    .custom-select-container {
+        width: 25%;
+    }
+
+}
+
+
+@media only screen and (max-width: 890px)and (min-width: 770px) {
+    .custom-select-container {
+        width: 35%;
+    }
+
+}
+
+@media only screen and (max-width: 768px)and (min-width: 452px) {
+    .custom-select-container {
+        width: 23%;
+    }
+
+    /* .custom-select-total {
+        width: 90%;
+    } */
+}
+
+@media only screen and (max-width: 450px) {
+    .custom-select-container {
+        width: 13% !important;
+    }
+
+    /* .custom-select-total {
+        width: 90%;
+    } */
+}

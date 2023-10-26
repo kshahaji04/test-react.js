@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import SelectedInputDropdown from '../../SelectedInputDropdown';
 
 const ChallanItemsTable = ({
   tableData,
@@ -7,7 +8,9 @@ const ChallanItemsTable = ({
   defaultData,
   setStateForDocStatus,
   setTotalGrossWeightOfChallanTable,
+  readOnly,
 }: any) => {
+  const [selectedCategory, setSelectedCategory] = useState<any>();
   const [amountValue, setamountValue] = useState<any>({
     sub_category: '',
     gross_weight: 0,
@@ -15,7 +18,6 @@ const ChallanItemsTable = ({
     amount: 0,
   });
 
-  setTotalGrossWeightOfChallanTable(amountValue?.gross_weight);
   console.log('initial table data', tableData);
 
   useEffect(() => {
@@ -29,6 +31,10 @@ const ChallanItemsTable = ({
       );
     }
   }, [defaultData, setTableData]);
+
+  useEffect(() => {
+    setTotalGrossWeightOfChallanTable(amountValue?.gross_weight);
+  }, [amountValue]);
 
   const HandleAddRow: any = () => {
     const newRow = {
@@ -178,6 +184,18 @@ const ChallanItemsTable = ({
                   <tr key={row.id}>
                     <td className="p-0">{row.id}</td>
                     <td className="table-data-input">
+                      {/* <div className="h-25 custom-select-container">
+                        <SelectedInputDropdown
+                          drowpdownlist={subCategoryList}
+                          // bgColor={bgColor}
+                          placeholderValue="Sub Category"
+                          selectedDropdownValue={selectedCategory}
+                          setSelectedDropdownValue={setSelectedCategory}
+                          defaultData={defaultData}
+                          setStateForDocStatus={setStateForDocStatus}
+                          readOnly={readOnly === true ? true : false}
+                        />
+                      </div> */}
                       <select
                         id="subcategory"
                         name="subcategory"
@@ -185,6 +203,7 @@ const ChallanItemsTable = ({
                         aria-label=".form-select-sm example"
                         value={row.sub_category}
                         onChange={(e) => HandleSubCategory(e, row.id)}
+                        disabled={readOnly === true ? true : false}
                       >
                         <option defaultValue={row.sub_category}></option>
                         {subCategoryList?.length > 0 &&
@@ -210,7 +229,7 @@ const ChallanItemsTable = ({
                     </td>
                     <td className="table-data-input">
                       <input
-                        type="text"
+                        type="number"
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
@@ -219,22 +238,24 @@ const ChallanItemsTable = ({
                         }
                         value={row.gross_weight > 0 ? row.gross_weight : ''}
                         onChange={(e) => HandleGrossWeightValue(e, row.id)}
+                        readOnly={readOnly === true ? true : false}
                       />
                     </td>
                     <td className="table-data-input">
                       <input
-                        type="text"
+                        type="number"
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
                         defaultValue={row.net_weight >= 0 ? row.net_weight : ''}
                         value={row.net_weight > 0 ? row.net_weight : ''}
                         onChange={(e) => HandleNetWeightValue(e, row.id)}
+                        readOnly={readOnly === true ? true : false}
                       />
                     </td>
                     <td className="table-data-input">
                       <input
-                        type="text"
+                        type="number"
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
@@ -242,6 +263,7 @@ const ChallanItemsTable = ({
                         value={row.amount > 0 ? row.amount : ''}
                         onKeyDown={(e) => handleKeyDown(e, row.id)}
                         onChange={(e) => HandleAmountValue(e, row.id)}
+                        readOnly={readOnly === true ? true : false}
                       />
                     </td>
                     <td className="table-data-input">
@@ -260,7 +282,7 @@ const ChallanItemsTable = ({
                 <td className="py-1 px-2">
                   <input
                     type="text"
-                    className="form-control custom-input-field-t text-center p-0"
+                    className="form-control custom-input-field-t custom-select-total text-center p-0"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
                     placeholder="Total"
@@ -273,7 +295,7 @@ const ChallanItemsTable = ({
                     className="form-control custom-input-field-t text-center p-0"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
-                    value={amountValue.gross_weight}
+                    value={amountValue.gross_weight?.toFixed(3)}
                     readOnly
                   />
                 </td>
@@ -283,7 +305,7 @@ const ChallanItemsTable = ({
                     className="form-control custom-input-field-t text-center p-0"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
-                    value={amountValue.net_weight}
+                    value={amountValue.net_weight?.toFixed(3)}
                     readOnly
                   />
                 </td>
@@ -293,7 +315,7 @@ const ChallanItemsTable = ({
                     className="form-control custom-input-field-t text-center p-0"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
-                    value={amountValue.amount}
+                    value={amountValue.amount?.toFixed(3)}
                     readOnly
                   />
                 </td>

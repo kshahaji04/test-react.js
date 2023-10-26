@@ -5,6 +5,7 @@ import CreateChittiMaster from './CreateChitti/CreateChittiMaster';
 import SearchListingTable from './ChittiListing/SearchListingTable';
 import UseChittiHook from '../../hooks/Chitti/chitti-page-hook';
 import ListingTable from '../ListingTable';
+import '../../Style/chitti.css';
 
 const ChittiMaster = () => {
   const {
@@ -35,13 +36,16 @@ const ChittiMaster = () => {
     HandleSubmitChallanChitti,
     HandleCancelChallanChitti,
     HandleDeleteChallanChitti,
+    setTotalGrossWeightOfChallanTable,
+    setTotalHuidWeightOfHuidTable,
   }: any = UseChittiHook();
 
   console.log('chittiListingData', chittiListingData);
 
+  const todayDate: any = currentDate?.toISOString()?.split('T')[0];
   const [searchClientName, setSearchclientName] = useState<any>('');
   const [searchInputValues, setSearchInputValues] = useState({
-    date: '',
+    date: todayDate,
     chitti_no: '',
     name: '',
     status: '',
@@ -55,8 +59,6 @@ const ChittiMaster = () => {
       [name]: value,
     });
   };
-
-  console.log('searchh', searchInputValues, searchClientName);
 
   const filteredList =
     chittiListingData?.length > 0 &&
@@ -170,6 +172,10 @@ const ChittiMaster = () => {
                   HandleSubmitChallanChitti={HandleSubmitChallanChitti}
                   HandleCancelChallanChitti={HandleCancelChallanChitti}
                   HandleDeleteChallanChitti={HandleDeleteChallanChitti}
+                  setTotalGrossWeightOfChallanTable={
+                    setTotalGrossWeightOfChallanTable
+                  }
+                  setTotalHuidWeightOfHuidTable={setTotalHuidWeightOfHuidTable}
                 />
               </Tab>
             </Tabs>

@@ -3,12 +3,9 @@ import UseEditChallanChitti from '../../../hooks/Chitti/edit-challan-chitti-hook
 import CreateChittiForm from '../CreateChitti/CreateChittiForm';
 import ChallanItemsTable from '../CreateChitti/ChallanItemsTable';
 import NarrationTable from '../CreateChitti/NarrationTable';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { get_specific_chitti_challan } from '../../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
-import { get_access_token } from '../../../store/slices/auth/token-login-slice';
-import { useDispatch } from 'react-redux';
-import DeleteChallanChittiApi from '../../../services/api/Chitti/delete-challan-chitti-api';
 
 const EditChallanChitti = () => {
   const {
@@ -34,10 +31,13 @@ const EditChallanChitti = () => {
     HandleSubmitChallanChitti,
     HandleCancelChallanChitti,
     HandleDeleteChallanChitti,
+    setTotalGrossWeightOfChallanTable,
+    setTotalHuidWeightOfHuidTable,
   }: any = UseEditChallanChitti();
   const navigate = useNavigate();
 
   const [showButton, setShowButton] = useState<any>();
+  const [readOnly, setReadOnly] = useState<boolean>(false);
 
   const HandleBackButton = () => {
     navigate(-1);
@@ -48,54 +48,18 @@ const EditChallanChitti = () => {
 
   useEffect(() => {
     setShowButton(docStatusFromStore?.docStatus);
+    if (docStatusFromStore?.docStatus > 0) {
+      setReadOnly(true);
+    } else {
+      setReadOnly(false);
+    }
   }, [docStatusFromStore]);
 
-  // const HandleSubmitChallanChitti: any = async () => {
-  //   let updateDocStatus: any = await UpdateDocStatusChallanApi(
-  //     AccessToken?.token,
-  //     '1',
-  //     id
-  //   );
-  //   console.log('update doc', updateDocStatus);
-  //   if (Object.keys(updateDocStatus?.data)?.length > 0) {
-  //     const params: any = {
-  //       token: AccessToken?.token,
-  //       name: id,
-  //     };
-  //     dispatch(getSpecificChittiChallan(params));
-  //   }
-  // };
-
-  // const HandleCancelChallanChitti = async () => {
-  //   let updateDocStatus: any = await UpdateDocStatusChallanApi(
-  //     AccessToken?.token,
-  //     '2',
-  //     id
-  //   );
-  //   console.log('update doc', updateDocStatus);
-  //   if (Object.keys(updateDocStatus?.data)?.length > 0) {
-  //     const params: any = {
-  //       token: AccessToken?.token,
-  //       name: id,
-  //     };
-  //     dispatch(getSpecificChittiChallan(params));
-  //   }
-  // };
-
-  // const HandleDeleteChallanChitti = async () => {
-  //   let deleteChallanApiRes: any = await DeleteChallanChittiApi(
-  //     AccessToken?.token,
-  //     id
-  //   );
-  //   console.log('deletec', deleteChallanApiRes);
-  //   if (deleteChallanApiRes?.message?.status === 'success') {
-  //     navigate(-1);
-  //   }
-  // };
+  console.log('readdd', readOnly);
   return (
     <div className="container">
       <div className="">
-        <div className="d-flex justify-content-between my-3">
+        <div className="d-flex justify-content-between  my-3">
           <div className="d-flex align-items-center">
             <div>
               <button
@@ -154,7 +118,7 @@ const EditChallanChitti = () => {
           {showButton === 2 && (
             <button
               type="submit"
-              className=" btn btn-outline-primary px-2 py-0 form-submit-button"
+              className=" btn btn-outline-primary px-2 py-0  form-submit-button"
               onClick={HandleDeleteChallanChitti}
             >
               Delete
@@ -181,6 +145,7 @@ const EditChallanChitti = () => {
                     setStateForDocStatus={setStateForDocStatus}
                     setRemarks={setRemarks}
                     setGoldRate={setGoldRate}
+                    readOnly={readOnly}
                   />
                   <ChallanItemsTable
                     defaultData={data?.challan_table}
@@ -188,6 +153,10 @@ const EditChallanChitti = () => {
                     setTableData={setTableData}
                     subCategoryList={subCategoryList}
                     setStateForDocStatus={setStateForDocStatus}
+                    setTotalGrossWeightOfChallanTable={
+                      setTotalGrossWeightOfChallanTable
+                    }
+                    readOnly={readOnly}
                   />
                   <NarrationTable
                     defaultData={data?.narrations}
@@ -195,6 +164,10 @@ const EditChallanChitti = () => {
                     setNarrationTableData={setNarrationTableData}
                     productList={productList}
                     setStateForDocStatus={setStateForDocStatus}
+                    setTotalHuidWeightOfHuidTable={
+                      setTotalHuidWeightOfHuidTable
+                    }
+                    readOnly={readOnly}
                   />
                 </>
               );

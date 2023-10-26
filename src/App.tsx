@@ -9,7 +9,7 @@ const App = () => {
       <div>
         <ToastContainer
           position="top-right"
-          autoClose={8000}
+          autoClose={7000}
           hideProgressBar={false}
           newestOnTop={false}
           draggable={false}

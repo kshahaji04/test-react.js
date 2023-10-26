@@ -72,7 +72,7 @@ const ProjectSubCategoryMappingListing = ({
                 )
               )}
 
-            {ProjectSubCategoryMappingList?.length > 10 &&
+            {ProjectSubCategoryMappingList?.length > 20 &&
               ProjectSubCategoryMappingList !== null && (
                 <LoadMoreTableDataInMaster
                   HandleTableViewRows={HandleTableViewRows}

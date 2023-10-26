@@ -4,7 +4,6 @@ import ChallanItemsTable from './ChallanItemsTable';
 import CreateChittiForm from './CreateChittiForm';
 import NarrationTable from './NarrationTable';
 import { get_specific_chitti_challan } from '../../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
-import { toast } from 'react-toastify';
 import HandleButtonsDisplayInChitti from '../../HandleButtonsDisplayInChitti';
 
 const CreateChittiMaster = ({
@@ -25,7 +24,6 @@ const CreateChittiMaster = ({
   HandleClientGroup,
   HandleDateChange,
   date,
-
   setStateForDocStatus,
   HandleEmptyChallanChittiTable,
   goldRate,
@@ -34,24 +32,12 @@ const CreateChittiMaster = ({
   HandleSubmitChallanChitti,
   HandleCancelChallanChitti,
   HandleDeleteChallanChitti,
+  setTotalGrossWeightOfChallanTable,
+  setTotalHuidWeightOfHuidTable,
 }: any) => {
   const docStatusFromStore: any = useSelector(get_specific_chitti_challan);
 
   const [showButton, setShowButton] = useState<any>();
-  const [totalGrossWeightOfChallanTable, setTotalGrossWeightOfChallanTable] =
-    useState<any>('');
-  const [totalHuidWeightOfHuidTable, setTotalHuidWeightOfHuidTable] =
-    useState<any>('');
-
-  const CheckValidGrossAndHuidWeight: any = () => {
-    if (totalGrossWeightOfChallanTable < totalHuidWeightOfHuidTable) {
-      toast.error('Huid weight cannot be greater than Gross weight');
-    }
-  };
-
-  useEffect(() => {
-    CheckValidGrossAndHuidWeight();
-  }, [totalGrossWeightOfChallanTable, totalHuidWeightOfHuidTable]);
 
   useEffect(() => {
     setShowButton(docStatusFromStore?.docStatus);

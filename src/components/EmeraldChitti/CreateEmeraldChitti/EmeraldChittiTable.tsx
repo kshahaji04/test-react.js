@@ -7,6 +7,7 @@ const EmeraldChittiTable = ({
   subCategoryList,
   defaultData,
   setStateForDocStatus,
+  readOnly,
 }: any) => {
   const [amountValue, setamountValue] = useState<any>({
     sub_category: '',
@@ -197,6 +198,7 @@ const EmeraldChittiTable = ({
                           aria-label=".form-select-sm example"
                           value={row.sub_category}
                           onChange={(e) => HandleSubCategory(e, row.id)}
+                          disabled={readOnly === true ? true : false}
                         >
                           <option defaultValue={row.sub_category}></option>
                           {subCategoryList?.length > 0 &&
@@ -218,6 +220,7 @@ const EmeraldChittiTable = ({
                           aria-label=".form-select-sm example"
                           value={row.product}
                           onChange={(e) => HandleProductItem(e, row.id)}
+                          disabled={readOnly === true ? true : false}
                         >
                           <option defaultValue={row.product}></option>
                           {productItemList?.length > 0 &&
@@ -236,7 +239,7 @@ const EmeraldChittiTable = ({
                       </td>
                       <td className="table-data-input">
                         <input
-                          type="text"
+                          type="number"
                           className="form-control custom-input-field-t"
                           aria-label="Sizing example input"
                           aria-describedby="inputGroup-sizing-sm"
@@ -245,11 +248,12 @@ const EmeraldChittiTable = ({
                           }
                           value={row.gross_weight > 0 ? row.gross_weight : ''}
                           onChange={(e) => HandleGrossWeightValue(e, row.id)}
+                          readOnly={readOnly === true ? true : false}
                         />
                       </td>
                       <td className="table-data-input">
                         <input
-                          type="text"
+                          type="number"
                           className="form-control custom-input-field-t"
                           aria-label="Sizing example input"
                           aria-describedby="inputGroup-sizing-sm"
@@ -258,11 +262,12 @@ const EmeraldChittiTable = ({
                           }
                           value={row.net_weight > 0 ? row.net_weight : ''}
                           onChange={(e) => HandleNetWeightValue(e, row.id)}
+                          readOnly={readOnly === true ? true : false}
                         />
                       </td>
                       <td className="table-data-input">
                         <input
-                          type="text"
+                          type="number"
                           className="form-control custom-input-field-t"
                           aria-label="Sizing example input"
                           aria-describedby="inputGroup-sizing-sm"
@@ -270,6 +275,7 @@ const EmeraldChittiTable = ({
                           defaultValue={row.amount >= 0 ? row.amount : ''}
                           value={row.amount > 0 ? row.amount : ''}
                           onChange={(e) => HandleAmountValue(e, row.id)}
+                          readOnly={readOnly === true ? true : false}
                         />
                       </td>
                       <td className="table-data-input">
@@ -302,7 +308,7 @@ const EmeraldChittiTable = ({
                       className="form-control custom-input-field-t text-center p-0"
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-sm"
-                      value={amountValue.gross_weight}
+                      value={amountValue.gross_weight?.toFixed(3)}
                       readOnly
                     />
                   </td>
@@ -312,7 +318,7 @@ const EmeraldChittiTable = ({
                       className="form-control custom-input-field-t text-center p-0"
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-sm"
-                      value={amountValue.net_weight}
+                      value={amountValue.net_weight?.toFixed(3)}
                       readOnly
                     />
                   </td>
@@ -322,7 +328,7 @@ const EmeraldChittiTable = ({
                       className="form-control custom-input-field-t text-center p-0"
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-sm"
-                      value={amountValue.amount}
+                      value={amountValue.amount?.toFixed(3)}
                       readOnly
                     />
                   </td>

@@ -53,6 +53,8 @@ const UseEditChallanChitti: any = () => {
     HandleSubmitChallanChitti,
     HandleCancelChallanChitti,
     HandleDeleteChallanChitti,
+    setTotalGrossWeightOfChallanTable,
+    setTotalHuidWeightOfHuidTable,
   }: any = UseChittiHook();
 
   console.log('selectedDropdownValue', selectedDropdownValue);
@@ -140,6 +142,8 @@ const UseEditChallanChitti: any = () => {
     HandleSubmitChallanChitti,
     HandleCancelChallanChitti,
     HandleDeleteChallanChitti,
+    setTotalGrossWeightOfChallanTable,
+    setTotalHuidWeightOfHuidTable,
   };
 };
 

@@ -58,23 +58,6 @@ const MasterPageClientNameDetail = () => {
                   required
                   readOnly
                 />
-                {/* <select
-                  className="form-select form-select-sm"
-                  aria-label=".form-select-sm example"
-                  defaultValue={clientGroupName?.data}
-                  onChange={HandleChangeClientGroup}
-                >
-                  <option value="1" selected>
-                    {clientGroupName?.data}
-                  </option>
-                  {clientGroupList?.length > clientGroupList !== null && (
-                    <>
-                      {clientGroupList.map((clientGroup: any, index: any) => {
-                        return <option key={index}>{clientGroup}</option>;
-                      })}
-                    </>
-                  )}
-                </select> */}
               </div>
             </div>
           </div>

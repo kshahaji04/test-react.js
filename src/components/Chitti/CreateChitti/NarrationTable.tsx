@@ -7,6 +7,7 @@ const NarrationTable = ({
   defaultData,
   setStateForDocStatus,
   setTotalHuidWeightOfHuidTable,
+  readOnly,
 }: any) => {
   const [totalAmountValue, setTotalAmountValue] = useState<any>({
     product: '',
@@ -14,7 +15,6 @@ const NarrationTable = ({
     huid_weight: 0,
   });
 
-  setTotalHuidWeightOfHuidTable(totalAmountValue?.huid_weight);
   useEffect(() => {
     if (
       defaultData?.length > 0 &&
@@ -26,6 +26,10 @@ const NarrationTable = ({
       );
     }
   }, [defaultData, setNarrationTableData]);
+
+  useEffect(() => {
+    setTotalHuidWeightOfHuidTable(totalAmountValue?.huid_weight);
+  }, [totalAmountValue]);
 
   const HandleAddRow: any = () => {
     const newRow = {
@@ -156,6 +160,7 @@ const NarrationTable = ({
                   aria-label=".form-select-sm example"
                   value={row.product}
                   onChange={(e) => HandleCategory(e, row.id)}
+                  disabled={readOnly === true ? true : false}
                 >
                   <option></option>
                   {productList?.length > 0 && productList !== null ? (
@@ -175,18 +180,19 @@ const NarrationTable = ({
               </td>
               <td className="table-data-input">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control custom-input-field"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-sm"
                   defaultValue={row.huid_pieces >= 0 ? row.huid_pieces : ''}
                   value={row.huid_pieces > 0 ? row.huid_pieces : ''}
                   onChange={(e) => HandlePiecesAmount(e, row.id)}
+                  readOnly={readOnly === true ? true : false}
                 />
               </td>
               <td className="table-data-input">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control custom-input-field"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-sm"
@@ -194,6 +200,7 @@ const NarrationTable = ({
                   defaultValue={row.huid_weight >= 0 ? row.huid_weight : ''}
                   value={row.huid_weight > 0 ? row.huid_weight : ''}
                   onChange={(e) => HandleWeightAmount(e, row.id)}
+                  readOnly={readOnly === true ? true : false}
                 />
               </td>
               <td className="table-data-input">
@@ -224,7 +231,7 @@ const NarrationTable = ({
                 className="form-control custom-input-field-t text-center p-0"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"
-                value={totalAmountValue.huid_pieces}
+                value={totalAmountValue.huid_pieces?.toFixed(3)}
                 readOnly
               />
             </td>
@@ -234,7 +241,7 @@ const NarrationTable = ({
                 className="form-control custom-input-field-t text-center p-0"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"
-                value={totalAmountValue.huid_weight}
+                value={totalAmountValue.huid_weight?.toFixed(3)}
                 readOnly
               />
             </td>

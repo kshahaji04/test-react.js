@@ -18,6 +18,7 @@ const SearchListingTable = ({
             className="form-control input-fields custom-input-field "
             aria-describedby="emailHelp"
             placeholder="Date"
+            value={searchInputValues?.date}
             onChange={HandleSearchInput}
           />
         </div>

@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 
-const SelectedInputDropdown = ({
+const CustomDropdownForTable = ({
   drowpdownlist,
   placeholderValue,
   bgColor,
   selectedDropdownValue,
   setSelectedDropdownValue,
-  clientGroupList,
-  HandleClientGroup,
+  HandleSubCategory,
   defaultData,
   setStateForDocStatus,
   hideDropdown,
@@ -79,10 +78,6 @@ const SelectedInputDropdown = ({
     };
   }, []);
 
-  const HandleClientBlur = () => {
-    setShowDropdown(false);
-  };
-
   return (
     <>
       <div className="dropdown-input-container">
@@ -94,10 +89,8 @@ const SelectedInputDropdown = ({
               : 'form-control input-fields input-field-chitti dropdown-input'
           }`}
           id="exampleInputEmail1"
-          // onBlur={handleBlur}
-          // onFocus={() => setIsFocused(true)}
           placeholder={placeholderValue}
-          onChange={HandleInputField}
+          onChange={HandleSubCategory}
           onClick={handleShowDropdown}
           defaultValue={defaultData?.client_name}
           value={selectedDropdownValue}
@@ -136,34 +129,6 @@ const SelectedInputDropdown = ({
                 ))}
               </>
             )}
-            {clientGroupList?.length > 0 && (
-              <>
-                {noRecords === true && filterDropdownList?.length === 0 && (
-                  <>
-                    <div className="text-uppercase px-2 mt-1">Client Group</div>
-                    <li className="dropdown-list p-1">
-                      <select
-                        className="form-select form-select-sm "
-                        aria-label="Default select example"
-                        onChange={HandleClientGroup}
-                        onBlur={HandleClientBlur}
-                      >
-                        <option>Select client group</option>
-                        {clientGroupList?.length > 0 &&
-                          clientGroupList !== null &&
-                          clientGroupList.map((group: any, index: any) => {
-                            return (
-                              <>
-                                <option key={index}>{group}</option>
-                              </>
-                            );
-                          })}
-                      </select>
-                    </li>
-                  </>
-                )}
-              </>
-            )}
           </ul>
         )}
       </div>
@@ -171,4 +136,4 @@ const SelectedInputDropdown = ({
   );
 };
 
-export default SelectedInputDropdown;
+export default CustomDropdownForTable;
