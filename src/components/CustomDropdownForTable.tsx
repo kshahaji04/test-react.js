@@ -4,16 +4,15 @@ const CustomDropdownForTable = ({
   drowpdownlist,
   placeholderValue,
   bgColor,
-  selectedDropdownValue,
   setSelectedDropdownValue,
-  HandleSubCategory,
+  HandleData,
   defaultData,
   setStateForDocStatus,
-  hideDropdown,
   title,
   readOnly,
+  rowId,
+  data,
 }: any) => {
-  console.log('defaultt', selectedDropdownValue, hideDropdown);
   const [showDropDown, setShowDropdown] = useState<any>(false);
   const [noRecords, setNoRecordsFound] = useState<any>(false);
   const [filterDropdownList, setFilterDropdownList] = useState<any>([]);
@@ -22,24 +21,27 @@ const CustomDropdownForTable = ({
     if (
       defaultData !== undefined &&
       defaultData !== null &&
-      Object.keys(defaultData?.client_name)?.length > 0
+      Object?.keys(defaultData)?.length > 0
     ) {
-      setSelectedDropdownValue(defaultData.client_name);
+      setSelectedDropdownValue(defaultData);
     }
   }, []);
 
   const handleSelectedOption = (data: any) => {
-    console.log('dataa', data);
     setSelectedDropdownValue(data);
     setShowDropdown(false);
-    setStateForDocStatus(true);
+    if (setStateForDocStatus !== undefined) {
+      setStateForDocStatus(true);
+    }
+
+    HandleData(data, rowId);
   };
+
   const HandleInputField = (e: any) => {
-    console.log('input value', e.target.value);
     setShowDropdown(true);
     setSelectedDropdownValue(e.target.value);
-    const query = e.target.value;
 
+    const query = e.target.value;
     const UpdatedFilterList: any = drowpdownlist?.filter((item: any) => {
       return item?.toLowerCase()?.indexOf(query?.toLowerCase()) !== -1;
     });
@@ -49,14 +51,14 @@ const CustomDropdownForTable = ({
   };
 
   const handleShowDropdown = () => {
-    if (readOnly === false) {
+    if (readOnly === false || readOnly === undefined) {
       setShowDropdown(!showDropDown);
     }
   };
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'Tab') {
-      setShowDropdown(true);
+      setShowDropdown(!showDropDown);
     }
     if (e.key === 'Escape') {
       setShowDropdown(!showDropDown);
@@ -86,14 +88,14 @@ const CustomDropdownForTable = ({
           className={`${
             bgColor?.current === true
               ? 'form-control dropdown-input client-name-input-chitti'
-              : 'form-control input-fields input-field-chitti dropdown-input'
+              : 'form-control input-field-chitti-table dropdown-input'
           }`}
           id="exampleInputEmail1"
           placeholder={placeholderValue}
-          onChange={HandleSubCategory}
+          onChange={HandleInputField}
           onClick={handleShowDropdown}
-          defaultValue={defaultData?.client_name}
-          value={selectedDropdownValue}
+          defaultValue={defaultData}
+          value={data}
           onKeyDown={handleKeyDown}
           autoComplete="off"
           title={title}

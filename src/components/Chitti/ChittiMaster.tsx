@@ -106,7 +106,6 @@ const ChittiMaster = () => {
           return dateMatch && numberMatch && clientNameMatch;
         })
       : chittiListingData;
-  console.log('chittiListingData filter', filteredList);
 
   return (
     <>

@@ -53,6 +53,8 @@ const UseEditChallanChitti: any = () => {
     HandleSubmitChallanChitti,
     HandleCancelChallanChitti,
     HandleDeleteChallanChitti,
+    totalGrossWeightOfChallanTable,
+    totalHuidWeightOfHuidTable,
     setTotalGrossWeightOfChallanTable,
     setTotalHuidWeightOfHuidTable,
   }: any = UseChittiHook();
@@ -78,43 +80,33 @@ const UseEditChallanChitti: any = () => {
   }, [emeraldDetailDataFromStore]);
 
   const HandleUpdateChallanSubmit = async () => {
-    console.log('edited data', challanTableData);
-    console.log('edited narrationUpdatedTableData,', narrationUpdatedTableData);
-
-    console.log(
-      'submit create chitti',
-      tableData,
-      narrationTableData,
-      selectedDropdownValue,
-      goldRate,
-      remarks,
-
-      date
-    );
-
-    const BodyData: any = {
-      name: id,
-      // date: date,
-      clientName: selectedDropdownValue,
-      clientGroup: clientGroupName,
-      goldRate: goldRate,
-      remarks: remarks,
-      challanTableData: tableData,
-      narrationTableData: narrationTableData,
-      token: AccessToken?.token,
-    };
-    let updateChittiApi: any = await UpdateChittiApi(BodyData);
-    console.log('updateChittiApi', updateChittiApi);
-
-    if (
-      updateChittiApi?.status === 200 &&
-      updateChittiApi?.hasOwnProperty('data')
-    ) {
-      toast.success('Chitti Updated');
-      setStateForDocStatus(false);
-      await UpdateDocStatusChallanApi(AccessToken?.token, '0', id);
+    if (totalGrossWeightOfChallanTable < totalHuidWeightOfHuidTable) {
+      toast.error('Huid weight cannot be greater than Gross weight');
     } else {
-      toast.error('Failed to Update chitti');
+      const BodyData: any = {
+        name: id,
+        // date: date,
+        clientName: selectedDropdownValue,
+        clientGroup: clientGroupName,
+        goldRate: goldRate,
+        remarks: remarks,
+        challanTableData: tableData,
+        narrationTableData: narrationTableData,
+        token: AccessToken?.token,
+      };
+      let updateChittiApi: any = await UpdateChittiApi(BodyData);
+      console.log('updateChittiApi', updateChittiApi);
+
+      if (
+        updateChittiApi?.status === 200 &&
+        updateChittiApi?.hasOwnProperty('data')
+      ) {
+        toast.success('Chitti Updated');
+        setStateForDocStatus(false);
+        await UpdateDocStatusChallanApi(AccessToken?.token, '0', id);
+      } else {
+        toast.error('Failed to Update chitti');
+      }
     }
   };
 

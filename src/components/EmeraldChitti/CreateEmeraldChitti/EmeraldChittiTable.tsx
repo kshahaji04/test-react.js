@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import CustomDropdownForTable from '../../CustomDropdownForTable';
 
 const EmeraldChittiTable = ({
   tableData,
@@ -16,6 +17,8 @@ const EmeraldChittiTable = ({
     net_weight: 0,
     amount: 0,
   });
+
+  console.log('productItemList', productItemList);
 
   useEffect(() => {
     if (
@@ -128,22 +131,26 @@ const EmeraldChittiTable = ({
     setStateForDocStatus(true);
   };
 
-  const HandleSubCategory = (e: any, id: any) => {
-    console.log('handlecategory', e.target.value);
+  const HandleSubCategory = (value: any, id: any) => {
+    console.log('handlecategory', value);
     const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, sub_category: e.target.value } : row
+      row.id === id ? { ...row, sub_category: value } : row
     );
     setTableData(updatedData);
-    setStateForDocStatus(true);
+    if (setStateForDocStatus !== undefined) {
+      setStateForDocStatus(true);
+    }
   };
 
-  const HandleProductItem = (e: any, id: any) => {
-    console.log('handlecategory', e.target.value);
+  const HandleProductItem = (value: any, id: any) => {
+    console.log('handlecategory', value);
     const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, product: e.target.value } : row
+      row.id === id ? { ...row, product: value } : row
     );
     setTableData(updatedData);
-    setStateForDocStatus(true);
+    if (setStateForDocStatus !== undefined) {
+      setStateForDocStatus(true);
+    }
   };
 
   const HandleAmountValue = (e: any, id: any) => {
@@ -154,6 +161,18 @@ const EmeraldChittiTable = ({
     setStateForDocStatus(true);
   };
 
+  const GetProductItemList: any = () => {
+    const getDummy = () => {
+      return (
+        productItemList?.length > 0 &&
+        productItemList !== null &&
+        productItemList.map((item: any) => item.name)
+      );
+    };
+    const dummyData = getDummy();
+    return dummyData;
+  };
+  console.log('GetProductItemList', GetProductItemList);
   return (
     <>
       <div className="table-responsive">
@@ -191,7 +210,24 @@ const EmeraldChittiTable = ({
                     <tr key={row.id}>
                       <td className="p-0">{row.id}</td>
                       <td className="table-data-input">
-                        <select
+                        <div className="h-25 custom-select-emerald-category">
+                          <CustomDropdownForTable
+                            drowpdownlist={subCategoryList}
+                            data={row.sub_category}
+                            key={row.id}
+                            rowId={row.id}
+                            HandleData={HandleSubCategory}
+                            placeholderValue="Sub Category"
+                            selectedDropdownValue={row.sub_category}
+                            setSelectedDropdownValue={(value: any) =>
+                              HandleSubCategory(value, row.id)
+                            }
+                            defaultData={row.sub_category}
+                            setStateForDocStatus={setStateForDocStatus}
+                            readOnly={readOnly === true ? true : false}
+                          />
+                        </div>
+                        {/* <select
                           id="subcategory"
                           name="subcategory"
                           className="form-select p-0 custom-input-field "
@@ -210,10 +246,32 @@ const EmeraldChittiTable = ({
                                 </option>
                               );
                             })}
-                        </select>
+                        </select> */}
                       </td>
                       <td className="table-data-input">
-                        <select
+                        <div className="h-25 custom-select-emerald-category">
+                          <CustomDropdownForTable
+                            drowpdownlist={
+                              productItemList?.length > 0 &&
+                              productItemList !== null &&
+                              productItemList.map((item: any) => item.name)
+                            }
+                            data={row.product}
+                            key={row.id}
+                            rowId={row.id}
+                            HandleData={HandleProductItem}
+                            placeholderValue="Product"
+                            selectedDropdownValue={row.product}
+                            setSelectedDropdownValue={(value: any) =>
+                              HandleProductItem(value, row.id)
+                            }
+                            defaultData={row.product}
+                            setStateForDocStatus={setStateForDocStatus}
+                            readOnly={readOnly === true ? true : false}
+                          />
+                        </div>
+
+                        {/* <select
                           id="category"
                           name="category"
                           className="form-select p-0 custom-input-field "
@@ -235,7 +293,7 @@ const EmeraldChittiTable = ({
                                 )}
                               </>
                             )}
-                        </select>
+                        </select> */}
                       </td>
                       <td className="table-data-input">
                         <input

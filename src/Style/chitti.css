@@ -1,13 +1,25 @@
 .custom-select-container {
     position: absolute;
-    width: 36%;
+    /* width: 36%; */
 }
+
+.custom-select-huid-container {
+    position: absolute;
+    /* width: 42%; */
+}
+
+
+.custom-select-emerald-category {
+    position: absolute;
+
+}
+
 
 /* .custom-select-total {
     width: 95%;
 } */
 
-.input-field-chitti {
+.input-field-chitti-table {
     /* width: 200px; */
     padding: 10px 5px !important;
 }
@@ -17,6 +29,14 @@
         width: 36%;
     }
 
+    .custom-select-huid-container {
+        width: 45%;
+    }
+
+    .custom-select-emerald-category {
+        width: 17%;
+    }
+
 }
 
 @media only screen and (max-width: 980px) {
@@ -24,32 +44,66 @@
         width: 25%;
     }
 
+    .custom-select-huid-container {
+        width: 27%;
+    }
+
+    .custom-select-emerald-category {
+        width: 15%;
+    }
 }
 
 
-@media only screen and (max-width: 890px)and (min-width: 770px) {
+@media only screen and (max-width: 890px) {
     .custom-select-container {
         width: 35%;
     }
 
-}
-
-@media only screen and (max-width: 768px)and (min-width: 452px) {
-    .custom-select-container {
-        width: 23%;
+    .custom-select-huid-container {
+        width: 45%;
     }
 
-    /* .custom-select-total {
-        width: 90%;
-    } */
+    .custom-select-emerald-category {
+        width: 13%;
+    }
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 767px) {
     .custom-select-container {
-        width: 13% !important;
+        width: 28%;
     }
 
-    /* .custom-select-total {
-        width: 90%;
-    } */
+    .custom-select-huid-container {
+        width: 35%;
+    }
+}
+
+@media only screen and (max-width: 570px) {
+    .custom-select-container {
+        width: 38% !important;
+    }
+
+    .custom-select-huid-container {
+        width: 45%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .custom-select-container {
+        width: 27% !important;
+    }
+
+    .custom-select-huid-container {
+        width: 30%;
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .custom-select-container {
+        width: 20% !important;
+    }
+
+    .custom-select-huid-container {
+        width: 28%;
+    }
 }

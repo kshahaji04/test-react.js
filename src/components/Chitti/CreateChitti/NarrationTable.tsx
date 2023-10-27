@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import CustomDropdownForTable from '../../CustomDropdownForTable';
 
 const NarrationTable = ({
   narrationTableData,
@@ -119,10 +120,10 @@ const NarrationTable = ({
     }
   };
 
-  const HandleCategory = (e: any, id: any) => {
-    console.log('handlecategory', e.target.value, id);
+  const HandleCategory = (value: any, rowId: any) => {
+    console.log('handlecategory', value, rowId);
     const updatedData = narrationTableData.map((row: any) =>
-      row.id === id ? { ...row, product: e.target.value } : row
+      row.id === rowId ? { ...row, product: value } : row
     );
     setNarrationTableData(updatedData);
     setStateForDocStatus(true);
@@ -153,7 +154,24 @@ const NarrationTable = ({
             <tr key={row.id}>
               <td className="p-0">{row.id}</td>
               <td className="table-data-input">
-                <select
+                <div className="h-25 custom-select-huid-container">
+                  <CustomDropdownForTable
+                    drowpdownlist={productList}
+                    data={row.product}
+                    key={row.id}
+                    rowId={row.id}
+                    HandleData={HandleCategory}
+                    placeholderValue="Sub Category"
+                    selectedDropdownValue={row.sub_category}
+                    setSelectedDropdownValue={(value: any) =>
+                      HandleCategory(value, row.id)
+                    }
+                    defaultData={row.sub_category}
+                    setStateForDocStatus={setStateForDocStatus}
+                    readOnly={readOnly === true ? true : false}
+                  />
+                </div>
+                {/* <select
                   id="category"
                   name="category"
                   className="form-select p-0 custom-input-field"
@@ -176,7 +194,7 @@ const NarrationTable = ({
                   ) : (
                     ''
                   )}
-                </select>
+                </select> */}
               </td>
               <td className="table-data-input">
                 <input
@@ -216,14 +234,16 @@ const NarrationTable = ({
           <tr>
             <td></td>
             <td className="py-1 px-2">
-              <input
-                type="text"
-                className="form-control custom-input-field-t text-center p-0"
-                aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-sm"
-                placeholder="Total"
-                readOnly
-              />
+              <div className="custom-select-huid-container">
+                <input
+                  type="text"
+                  className="form-control custom-input-field-t text-center p-0 "
+                  aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-sm"
+                  placeholder="Total"
+                  readOnly
+                />
+              </div>
             </td>
             <td className="py-1 px-2">
               <input

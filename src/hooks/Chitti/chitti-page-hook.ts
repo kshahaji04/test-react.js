@@ -69,8 +69,12 @@ const UseChittiHook = () => {
     setShowSubmitButtonAfterCreateChitti,
   ] = useState<any>('');
 
-  const { setTotalGrossWeightOfChallanTable, setTotalHuidWeightOfHuidTable } =
-    UseCustomChittiHook();
+  const {
+    totalGrossWeightOfChallanTable,
+    totalHuidWeightOfHuidTable,
+    setTotalGrossWeightOfChallanTable,
+    setTotalHuidWeightOfHuidTable,
+  } = UseCustomChittiHook();
 
   useEffect(() => {
     dispatch(getChittiChallan(AccessToken?.token));
@@ -268,53 +272,56 @@ const UseChittiHook = () => {
       errMsgList.push('Challan Table');
     }
 
-    console.log('show err msg', errMsgList);
     if (errMsgList?.length > 0 && errMsgList !== null) {
       toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
     } else {
-      const BodyData: any = {
-        date: date,
-        clientName: selectedDropdownValue,
-        clientGroup: clientGroupName,
-        goldRate: goldRate,
-        remarks: remarks,
-        challanTableData: challanTableData,
-        narrationTableData: narrationUpdatedTableData,
-        token: AccessToken?.token,
-      };
-      let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
-      console.log('Createchittiapires', CreateChittiApiRes);
-
-      if (
-        Object?.keys(clientGroupName)?.length > 0 &&
-        Object?.keys(clientNameList)?.length > 0
-      ) {
-        await AddClientNameApi(
-          AccessToken?.token,
-          selectedDropdownValue,
-          clientGroupName
-        );
-      }
-
-      if (
-        CreateChittiApiRes?.status === 200 &&
-        CreateChittiApiRes?.hasOwnProperty('data')
-      ) {
-        toast.success('Chitti Created');
-        navigate(`${CreateChittiApiRes?.data?.data?.name}`);
-        console.log('dataa after save', CreateChittiApiRes?.data);
-        await UpdateDocStatusChallanApi(
-          AccessToken?.token,
-          '0',
-          CreateChittiApiRes?.data?.data?.name
-        );
-
-        setShowSubmitButtonAfterCreateChitti(
-          CreateChittiApiRes?.data?.data?.name
-        );
-        dispatch(getChittiChallan(AccessToken?.token));
+      if (totalGrossWeightOfChallanTable < totalHuidWeightOfHuidTable) {
+        toast.error('Huid weight cannot be greater than Gross weight');
       } else {
-        toast.error('Failed to created chitti');
+        const BodyData: any = {
+          date: date,
+          clientName: selectedDropdownValue,
+          clientGroup: clientGroupName,
+          goldRate: goldRate,
+          remarks: remarks,
+          challanTableData: challanTableData,
+          narrationTableData: narrationUpdatedTableData,
+          token: AccessToken?.token,
+        };
+        let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
+        console.log('Createchittiapires', CreateChittiApiRes);
+
+        if (
+          Object?.keys(clientGroupName)?.length > 0 &&
+          Object?.keys(clientNameList)?.length > 0
+        ) {
+          await AddClientNameApi(
+            AccessToken?.token,
+            selectedDropdownValue,
+            clientGroupName
+          );
+        }
+
+        if (
+          CreateChittiApiRes?.status === 200 &&
+          CreateChittiApiRes?.hasOwnProperty('data')
+        ) {
+          toast.success('Chitti Created');
+          navigate(`${CreateChittiApiRes?.data?.data?.name}`);
+          console.log('dataa after save', CreateChittiApiRes?.data);
+          await UpdateDocStatusChallanApi(
+            AccessToken?.token,
+            '0',
+            CreateChittiApiRes?.data?.data?.name
+          );
+
+          setShowSubmitButtonAfterCreateChitti(
+            CreateChittiApiRes?.data?.data?.name
+          );
+          dispatch(getChittiChallan(AccessToken?.token));
+        } else {
+          toast.error('Failed to created chitti');
+        }
       }
     }
   };
@@ -351,6 +358,8 @@ const UseChittiHook = () => {
     HandleSubmitChallanChitti,
     HandleCancelChallanChitti,
     HandleDeleteChallanChitti,
+    totalGrossWeightOfChallanTable,
+    totalHuidWeightOfHuidTable,
     setTotalGrossWeightOfChallanTable,
     setTotalHuidWeightOfHuidTable,
   };

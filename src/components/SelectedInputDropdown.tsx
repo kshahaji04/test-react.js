@@ -10,11 +10,10 @@ const SelectedInputDropdown = ({
   HandleClientGroup,
   defaultData,
   setStateForDocStatus,
-  hideDropdown,
   title,
   readOnly,
 }: any) => {
-  console.log('defaultt', selectedDropdownValue, hideDropdown);
+  console.log('defaultt', readOnly);
   const [showDropDown, setShowDropdown] = useState<any>(false);
   const [noRecords, setNoRecordsFound] = useState<any>(false);
   const [filterDropdownList, setFilterDropdownList] = useState<any>([]);
@@ -23,7 +22,7 @@ const SelectedInputDropdown = ({
     if (
       defaultData !== undefined &&
       defaultData !== null &&
-      Object.keys(defaultData?.client_name)?.length > 0
+      Object?.keys(defaultData?.client_name)?.length > 0
     ) {
       setSelectedDropdownValue(defaultData.client_name);
     }
@@ -50,7 +49,7 @@ const SelectedInputDropdown = ({
   };
 
   const handleShowDropdown = () => {
-    if (readOnly === false) {
+    if (readOnly === false || readOnly === undefined) {
       setShowDropdown(!showDropDown);
     }
   };
@@ -94,8 +93,6 @@ const SelectedInputDropdown = ({
               : 'form-control input-fields input-field-chitti dropdown-input'
           }`}
           id="exampleInputEmail1"
-          // onBlur={handleBlur}
-          // onFocus={() => setIsFocused(true)}
           placeholder={placeholderValue}
           onChange={HandleInputField}
           onClick={handleShowDropdown}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import SelectedInputDropdown from '../../SelectedInputDropdown';
+import CustomDropdownForTable from '../../CustomDropdownForTable';
 
 const ChallanItemsTable = ({
   tableData,
@@ -10,7 +11,7 @@ const ChallanItemsTable = ({
   setTotalGrossWeightOfChallanTable,
   readOnly,
 }: any) => {
-  const [selectedCategory, setSelectedCategory] = useState<any>();
+  const [selectedCategory, setSelectedCategory] = useState<any>('');
   const [amountValue, setamountValue] = useState<any>({
     sub_category: '',
     gross_weight: 0,
@@ -115,16 +116,14 @@ const ChallanItemsTable = ({
     setamountValue(newColumnTotals);
   }, [tableData]);
 
-  const HandleSubCategory: any = (e: any, id: any) => {
-    console.log('handlesubcategory', e.target.value, id);
+  const HandleSubCategory: any = (value: any, id: any) => {
+    console.log('handlesubcategory', value, id, tableData);
     const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, sub_category: e.target.value } : row
+      row.id === id ? { ...row, sub_category: value } : row
     );
     setTableData(updatedData);
     setStateForDocStatus(true);
   };
-
-  console.log('handlecategory sub category', tableData);
 
   const HandleGrossWeightValue = (e: any, id: any) => {
     console.log('gross', e.target.value, id);
@@ -184,19 +183,24 @@ const ChallanItemsTable = ({
                   <tr key={row.id}>
                     <td className="p-0">{row.id}</td>
                     <td className="table-data-input">
-                      {/* <div className="h-25 custom-select-container">
-                        <SelectedInputDropdown
+                      <div className="h-25 custom-select-container">
+                        <CustomDropdownForTable
                           drowpdownlist={subCategoryList}
-                          // bgColor={bgColor}
+                          data={row.sub_category}
+                          key={row.id}
+                          rowId={row.id}
+                          HandleData={HandleSubCategory}
                           placeholderValue="Sub Category"
-                          selectedDropdownValue={selectedCategory}
-                          setSelectedDropdownValue={setSelectedCategory}
-                          defaultData={defaultData}
+                          selectedDropdownValue={row.sub_category}
+                          setSelectedDropdownValue={(value: any) =>
+                            HandleSubCategory(value, row.id)
+                          }
+                          defaultData={row.sub_category}
                           setStateForDocStatus={setStateForDocStatus}
                           readOnly={readOnly === true ? true : false}
                         />
-                      </div> */}
-                      <select
+                      </div>
+                      {/* <select
                         id="subcategory"
                         name="subcategory"
                         className="form-select p-0 custom-input-field "
@@ -206,6 +210,7 @@ const ChallanItemsTable = ({
                         disabled={readOnly === true ? true : false}
                       >
                         <option defaultValue={row.sub_category}></option>
+
                         {subCategoryList?.length > 0 &&
                         subCategoryList !== null ? (
                           <>
@@ -225,7 +230,7 @@ const ChallanItemsTable = ({
                         ) : (
                           ''
                         )}
-                      </select>
+                      </select> */}
                     </td>
                     <td className="table-data-input">
                       <input
@@ -280,14 +285,16 @@ const ChallanItemsTable = ({
               <tr>
                 <td></td>
                 <td className="py-1 px-2">
-                  <input
-                    type="text"
-                    className="form-control custom-input-field-t custom-select-total text-center p-0"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-sm"
-                    placeholder="Total"
-                    readOnly
-                  />
+                  <div className="custom-select-container">
+                    <input
+                      type="text"
+                      className="form-control custom-input-field-t text-center p-0 "
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-sm"
+                      placeholder="Total"
+                      readOnly
+                    />
+                  </div>
                 </td>
                 <td className="py-1 px-2">
                   <input

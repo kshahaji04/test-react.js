@@ -16,8 +16,13 @@ const UseCustomChittiHook: any = () => {
   useEffect(() => {
     CheckValidGrossAndHuidWeight();
   }, [totalGrossWeightOfChallanTable, totalHuidWeightOfHuidTable]);
-
-  return { setTotalGrossWeightOfChallanTable, setTotalHuidWeightOfHuidTable };
+  console.log('checkk', CheckValidGrossAndHuidWeight);
+  return {
+    totalGrossWeightOfChallanTable,
+    totalHuidWeightOfHuidTable,
+    setTotalGrossWeightOfChallanTable,
+    setTotalHuidWeightOfHuidTable,
+  };
 };
 
 export default UseCustomChittiHook;
