@@ -37,10 +37,7 @@ const UseEditChallanChitti: any = () => {
     setSelectedDropdownValue,
     goldRate,
     remarks,
-    date,
-    challanTableData,
     narrationTableData,
-    narrationUpdatedTableData,
     HandleGoldRate,
     HandleDateChange,
     HandleRemarks,
@@ -109,6 +106,8 @@ const UseEditChallanChitti: any = () => {
       }
     }
   };
+
+  console.log("setStateForDocStatus in hook", stateForDocStatus)
 
   return {
     challanDetail,

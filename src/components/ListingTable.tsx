@@ -172,12 +172,12 @@ const ListingTable = ({ tableListingData }: any) => {
                               {v !== 'docstatus'
                                 ? data[v]
                                 : data[v] === 0
-                                ? 'Draft'
-                                : data[v] === 1
-                                ? 'Submitted'
-                                : data[v] === 2
-                                ? 'Cancel'
-                                : data[v]}
+                                  ? 'Draft'
+                                  : data[v] === 1
+                                    ? 'Submitted'
+                                    : data[v] === 2
+                                      ? 'Cancel'
+                                      : data[v]}
                             </td>
                           );
                         }

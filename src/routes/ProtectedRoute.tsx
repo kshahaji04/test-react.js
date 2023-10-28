@@ -21,15 +21,7 @@ const ProtectedRoute = ({ children }: any) => {
     <>
       <Navbar />
       {children}
-      {/* {isAuthenticated === true ? (
-        <>
-        
-        </>
-      ) : (
-        <div className="mt-5">
-          <Login />
-        </div>
-      )} */}
+
     </>
   );
 };
