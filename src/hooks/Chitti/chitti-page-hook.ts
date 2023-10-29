@@ -192,6 +192,7 @@ const UseChittiHook = () => {
     );
     console.log('update doc', updateDocStatus);
     if (Object?.keys(updateDocStatus?.data)?.length > 0) {
+
       const params: any = {
         token: AccessToken?.token,
         name:
@@ -308,7 +309,7 @@ const UseChittiHook = () => {
         ) {
           toast.success('Chitti Created');
           navigate(`${CreateChittiApiRes?.data?.data?.name}`);
-          console.log('dataa after save', CreateChittiApiRes?.data);
+
           await UpdateDocStatusChallanApi(
             AccessToken?.token,
             '0',

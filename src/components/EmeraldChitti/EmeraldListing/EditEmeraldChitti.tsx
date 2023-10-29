@@ -63,7 +63,7 @@ const EditEmeraldChitti = () => {
                 Back
               </button>
             </div>
-            {stateForDocStatus === true && (
+            {stateForDocStatus === true && showButton === 0 && (
               <button type="button" className="btn docstatus-button">
                 Not Saved
               </button>
@@ -80,7 +80,7 @@ const EditEmeraldChitti = () => {
             )}
           </div>
 
-          {stateForDocStatus === true && (
+          {stateForDocStatus === true && showButton === 0 && (
             <button
               type="submit"
               onClick={HandleUpdateEmeraldChittiSubmit}

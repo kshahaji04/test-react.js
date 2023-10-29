@@ -70,7 +70,7 @@ const EditChallanChitti = () => {
                 Back
               </button>
             </div>
-            {stateForDocStatus === true && (
+            {stateForDocStatus === true && showButton === 0 && (
               <button type="button" className="btn docstatus-button">
                 Not Saved
               </button>
@@ -87,43 +87,46 @@ const EditChallanChitti = () => {
               </button>
             )}
           </div>
+          <div>
 
-          {stateForDocStatus === true && (
-            <button
-              type="submit"
-              onClick={HandleUpdateChallanSubmit}
-              className=" btn btn-outline-primary px-2 py-0 form-submit-button"
-            >
-              Save
-            </button>
-          )}
-          {stateForDocStatus === false && showButton === 0 && (
-            <button
-              type="submit"
-              className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-              onClick={HandleSubmitChallanChitti}
-            >
-              Submit
-            </button>
-          )}
-          {showButton === 1 && (
-            <button
-              type="submit"
-              className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-              onClick={HandleCancelChallanChitti}
-            >
-              Cancel
-            </button>
-          )}
-          {showButton === 2 && (
-            <button
-              type="submit"
-              className=" btn btn-outline-primary px-2 py-0  form-submit-button"
-              onClick={HandleDeleteChallanChitti}
-            >
-              Delete
-            </button>
-          )}
+
+            {stateForDocStatus === true && showButton === 0 && (
+              <button
+                type="submit"
+                onClick={HandleUpdateChallanSubmit}
+                className=" btn btn-outline-primary px-2 py-0 form-submit-button"
+              >
+                Save
+              </button>
+            )}
+            {stateForDocStatus === false && showButton === 0 && (
+              <button
+                type="submit"
+                className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
+                onClick={HandleSubmitChallanChitti}
+              >
+                Submit
+              </button>
+            )}
+            {showButton === 1 && (
+              <button
+                type="submit"
+                className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
+                onClick={HandleCancelChallanChitti}
+              >
+                Cancel
+              </button>
+            )}
+            {showButton === 2 && (
+              <button
+                type="submit"
+                className=" btn btn-outline-primary px-2 py-0  form-submit-button"
+                onClick={HandleDeleteChallanChitti}
+              >
+                Delete
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
