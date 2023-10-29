@@ -46,6 +46,7 @@ const UseEditEmeraldChittiHook: any = () => {
     HandleSubmitEmeraldChittiData,
     HandleCancelEmeraldChitti,
     HandleDeleteEmeraldChitti,
+    subCategoryList
   }: any = UseEmeraldHook();
 
   useEffect(() => {
@@ -119,6 +120,7 @@ const UseEditEmeraldChittiHook: any = () => {
     HandleSubmitEmeraldChittiData,
     HandleCancelEmeraldChitti,
     HandleDeleteEmeraldChitti,
+    subCategoryList
   };
 };
 

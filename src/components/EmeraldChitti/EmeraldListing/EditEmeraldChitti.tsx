@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import EmeraldCreateChitti from '../CreateEmeraldChitti/EmeraldCreateChitti';
 import EmeraldChittiTable from '../CreateEmeraldChitti/EmeraldChittiTable';
-import UseSubCategoryHook from '../../../hooks/Master/sub-category-hook';
 import UseEditEmeraldChittiHook from '../../../hooks/Emerald/edit-emerald-chitti-hook';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -9,7 +8,7 @@ import { get_specific_emerald_chitti } from '../../../store/slices/Emerald/get-s
 
 const EditEmeraldChitti = () => {
   const navigate = useNavigate();
-  const { subCategoryList } = UseSubCategoryHook();
+  // const { subCategoryList } = UseSubCategoryHook();
   const {
     selectedDropdownValue,
     setSelectedDropdownValue,
@@ -29,6 +28,7 @@ const EditEmeraldChitti = () => {
     HandleSubmitEmeraldChittiData,
     HandleCancelEmeraldChitti,
     HandleDeleteEmeraldChitti,
+    subCategoryList
   }: any = UseEditEmeraldChittiHook();
 
   const HandleBackButton = () => {

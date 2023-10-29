@@ -6,7 +6,7 @@ import {
 } from '../../store/slices/Chitti/get-client-name-slice';
 import { useSelector } from 'react-redux';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
-import { getSubCategoryList } from '../../store/slices/Chitti/get-subcategory-slice';
+import { getSubCategoryList, get_subcategory_list } from '../../store/slices/Chitti/get-subcategory-slice';
 import {
   getClientGroupList,
   get_client_group,
@@ -35,12 +35,12 @@ const UseEmeraldHook = () => {
   const EmeraldChittiDataFromStore: any = useSelector(get_Emerald_challan);
   const ClientNameDataFromStore: any = useSelector(get_client_name);
   const ClientGroupDataFromStore: any = useSelector(get_client_group);
-
+  const subCategoryDataFromStore: any = useSelector(get_subcategory_list);
   const ProductItemDataFromStore: any = useSelector(get_product_item);
   const [clientNameList, setClientNameList] = useState<any>([]);
   const [emeraldChittiData, setEmeraldChittiData] = useState<any>([]);
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
-
+  const [subCategoryList, setSubCategoryList] = useState<any>([]);
   const [clientGroupList, setClientGroupList] = useState<any>([]);
   const [currentDate, setCurrentDate] = useState<any>(new Date());
   const [transactionDate, setTransactionDate] = useState<any>(
@@ -108,6 +108,17 @@ const UseEmeraldHook = () => {
       setProductItemList([]);
     }
   }, [ProductItemDataFromStore]);
+
+  useEffect(() => {
+    if (
+      subCategoryDataFromStore?.data?.length > 0 &&
+      subCategoryDataFromStore?.data !== null
+    ) {
+      setSubCategoryList([...subCategoryDataFromStore?.data]);
+    } else {
+      setSubCategoryList([]);
+    }
+  }, [subCategoryDataFromStore]);
 
   const HandleClientGroup: any = (e: any) => {
     setClientGroupName(e?.target?.value);
@@ -287,6 +298,7 @@ const UseEmeraldHook = () => {
     HandleCancelEmeraldChitti,
     HandleDeleteEmeraldChitti,
     showSubmitButtonAfterCreateChitti,
+    subCategoryList
   };
 };
 
