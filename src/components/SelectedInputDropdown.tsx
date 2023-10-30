@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const SelectedInputDropdown = ({
   drowpdownlist,
@@ -17,7 +17,7 @@ const SelectedInputDropdown = ({
   const [showDropDown, setShowDropdown] = useState<any>(false);
   const [noRecords, setNoRecordsFound] = useState<any>(false);
   const [filterDropdownList, setFilterDropdownList] = useState<any>([]);
-
+  const inputRef = useRef<any>(null);
   useEffect(() => {
     if (
       defaultData !== undefined &&
@@ -62,17 +62,20 @@ const SelectedInputDropdown = ({
       setShowDropdown(!showDropDown);
     }
   };
-
   useEffect(() => {
+    // for close dropdown when click outside
     const handleDocumentClick = (e: any) => {
-      if (!e?.target?.closest('.dropdown-input-container')) {
-        // The click was outside the dropdown, so close it
+      // Check if the input element itself was clicked
+      if (
+        e?.target !== inputRef?.current &&
+        !inputRef?.current?.contains(e.target)
+      ) {
         setShowDropdown(false);
       }
     };
-    // Attach the event listener when the component mounts
+
     document.addEventListener('click', handleDocumentClick);
-    // Remove the event listener when the component unmounts
+
     return () => {
       document.removeEventListener('click', handleDocumentClick);
     };
@@ -102,6 +105,7 @@ const SelectedInputDropdown = ({
           autoComplete="off"
           title={title}
           readOnly={readOnly}
+          ref={inputRef}
         />
         {showDropDown && (
           <ul

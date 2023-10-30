@@ -225,28 +225,9 @@ const EmeraldChittiTable = ({
                             defaultData={row.sub_category}
                             setStateForDocStatus={setStateForDocStatus}
                             readOnly={readOnly === true ? true : false}
+                            dropdownIndex={row.id}
                           />
                         </div>
-                        {/* <select
-                          id="subcategory"
-                          name="subcategory"
-                          className="form-select p-0 custom-input-field "
-                          aria-label=".form-select-sm example"
-                          value={row.sub_category}
-                          onChange={(e) => HandleSubCategory(e, row.id)}
-                          disabled={readOnly === true ? true : false}
-                        >
-                          <option defaultValue={row.sub_category}></option>
-                          {subCategoryList?.length > 0 &&
-                            subCategoryList !== null &&
-                            subCategoryList.map((subCategoryList: any) => {
-                              return (
-                                <option defaultValue={row.sub_category}>
-                                  {subCategoryList}
-                                </option>
-                              );
-                            })}
-                        </select> */}
                       </td>
                       <td className="table-data-input">
                         <div className="h-25 custom-select-emerald-category">
@@ -268,6 +249,7 @@ const EmeraldChittiTable = ({
                             defaultData={row.product}
                             setStateForDocStatus={setStateForDocStatus}
                             readOnly={readOnly === true ? true : false}
+                            dropdownIndex={row.id}
                           />
                         </div>
 

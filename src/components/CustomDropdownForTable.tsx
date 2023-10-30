@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const CustomDropdownForTable = ({
   drowpdownlist,
@@ -11,12 +11,12 @@ const CustomDropdownForTable = ({
   title,
   readOnly,
   rowId,
-  data,
+  data, // Pass a unique index for each instance
 }: any) => {
-  const [showDropDown, setShowDropdown] = useState<any>(false);
-  const [noRecords, setNoRecordsFound] = useState<any>(false);
-  const [filterDropdownList, setFilterDropdownList] = useState<any>([]);
-
+  const [showDropDown, setShowDropdown] = useState(false);
+  const [noRecords, setNoRecordsFound] = useState(false);
+  const [filterDropdownList, setFilterDropdownList] = useState([]);
+  const inputRef = useRef<any>(null);
   useEffect(() => {
     if (
       defaultData !== undefined &&
@@ -38,7 +38,7 @@ const CustomDropdownForTable = ({
   };
 
   const HandleInputField = (e: any) => {
-    setShowDropdown(true);
+    setShowDropdown(true); // Open the dropdown when typing
     setSelectedDropdownValue(e.target.value);
 
     const query = e.target.value;
@@ -50,35 +50,53 @@ const CustomDropdownForTable = ({
     setNoRecordsFound(true);
   };
 
-  const handleShowDropdown = () => {
-    if (readOnly === false || readOnly === undefined) {
-      setShowDropdown(!showDropDown);
-    }
-  };
-
   const handleKeyDown = (e: any) => {
     if (e.key === 'Tab') {
-      setShowDropdown(!showDropDown);
+      setShowDropdown(false); // Close the dropdown on Tab press
     }
     if (e.key === 'Escape') {
-      setShowDropdown(!showDropDown);
+      setShowDropdown(false); // Close the dropdown on Escape press
     }
   };
 
+  // useEffect(() => {
+  //   const handleDocumentClick = (e: any) => {
+  //     if (!e.target.closest(`.dropdown-input-container-${dropdownIndex}`)) {
+  //       setShowDropdown(false);
+  //     }
+  //   };
+
+  //   document.addEventListener('click', handleDocumentClick);
+
+  //   return () => {
+  //     document.removeEventListener('click', handleDocumentClick);
+  //   };
+  // }, [dropdownIndex, showDropDown]);
+
   useEffect(() => {
+    // for close dropdown when click outside
     const handleDocumentClick = (e: any) => {
-      if (!e?.target?.closest('.dropdown-input-container')) {
-        // The click was outside the dropdown, so close it
+      // Check if the input element itself was clicked
+      if (
+        e?.target !== inputRef?.current &&
+        !inputRef?.current?.contains(e.target)
+      ) {
         setShowDropdown(false);
       }
     };
-    // Attach the event listener when the component mounts
+
     document.addEventListener('click', handleDocumentClick);
-    // Remove the event listener when the component unmounts
+
     return () => {
       document.removeEventListener('click', handleDocumentClick);
     };
   }, []);
+
+  const handleShowDropdown = () => {
+    if (readOnly === false || readOnly === undefined) {
+      setShowDropdown(!showDropDown); // Toggle the dropdown
+    }
+  };
 
   return (
     <>
@@ -100,10 +118,11 @@ const CustomDropdownForTable = ({
           autoComplete="off"
           title={title}
           readOnly={readOnly}
+          ref={inputRef}
         />
         {showDropDown && (
           <ul
-            className=" dropdown-ul-list border"
+            className="dropdown-ul-list border"
             aria-label="Default select example"
           >
             {noRecords === false && filterDropdownList?.length === 0 ? (
