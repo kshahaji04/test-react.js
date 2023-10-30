@@ -11,7 +11,7 @@ import {
   get_specific_emerald_chitti,
 } from '../../store/slices/Emerald/get-specific-emrald-slice';
 import UpdateEmeraldChittiApi from '../../services/api/Emerald/update-emerald-chitti-api';
-import UpdateDocStatusEmeraldChittiApi from '../../services/api/general/update-doc-status-emrald-chitti-api';
+import { UpdateDocStatusEmeraldChittiApi } from '../../services/api/general/update-doc-status-emrald-chitti-api';
 
 const UseEditEmeraldChittiHook: any = () => {
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const UseEditEmeraldChittiHook: any = () => {
     HandleSubmitEmeraldChittiData,
     HandleCancelEmeraldChitti,
     HandleDeleteEmeraldChitti,
-    subCategoryList
+    subCategoryList,
   }: any = UseEmeraldHook();
 
   useEffect(() => {
@@ -120,7 +120,7 @@ const UseEditEmeraldChittiHook: any = () => {
     HandleSubmitEmeraldChittiData,
     HandleCancelEmeraldChitti,
     HandleDeleteEmeraldChitti,
-    subCategoryList
+    subCategoryList,
   };
 };
 

@@ -9,20 +9,31 @@ const SearchListingTable = ({
 }: any) => {
   return (
     <>
-      <div className="row justify-content-center mt-2">
+      <div className="row justify-content-center mt-1">
         <div className="col-md-2">
+          <label className="text-secondary">Submitted Date</label>
           <input
             type="date"
-            name="date"
-            id="date"
+            name="submitted_date"
+            id="submitted_date"
             className="form-control input-fields custom-input-field "
-            aria-describedby="emailHelp"
-            placeholder="Date"
-            value={searchInputValues?.date}
+            value={searchInputValues?.submitted_date}
             onChange={HandleSearchInput}
           />
         </div>
         <div className="col-md-2">
+          <label className="text-secondary">Current Date</label>
+          <input
+            type="date"
+            name="current_date"
+            id="current_date"
+            className="form-control input-fields custom-input-field "
+            value={searchInputValues?.current_date}
+            onChange={HandleSearchInput}
+          />
+        </div>
+        <div className="col-md-2">
+          <label className="text-secondary">Chitti no</label>
           <input
             type="number"
             name="chitti_no"
@@ -40,6 +51,7 @@ const SearchListingTable = ({
         </div>
 
         <div className="col-md-2 ">
+          <label className="text-secondary ">Client name</label>
           <SelectedInputDropdown
             drowpdownlist={clientNameList}
             // bgColor={bgColor}
@@ -51,6 +63,7 @@ const SearchListingTable = ({
           />
         </div>
         <div className="col-md-2 my-lg-0 my-3">
+          <label className="text-secondary ">Status</label>
           <select
             name="status"
             id="status"

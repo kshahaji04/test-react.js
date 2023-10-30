@@ -9,10 +9,12 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import DeleteEmeraldChittiApi from '../services/api/Emerald/delete-emerald-chitti-api';
 import { getEmeraldChallan } from '../store/slices/Emerald/get-emerald-list-slice';
-import UpdateDocStatusChallanApi from '../services/api/general/update-doc-status-challan--api';
+
 import PrintChallanChittiApi from '../services/api/Chitti/print-challan-chitti-api';
-import UpdateDocStatusEmeraldChittiApi from '../services/api/general/update-doc-status-emrald-chitti-api';
+
 import PrintEmeraldChittiApi from '../services/api/Emerald/print-emerald-chitti-api';
+import { UpdateDocStatusChallanApi } from '../services/api/general/update-doc-status-challan--api';
+import { UpdateDocStatusEmeraldChittiApi } from '../services/api/general/update-doc-status-emrald-chitti-api';
 
 const ListingTable = ({ tableListingData }: any) => {
   console.log('tableListingData', tableListingData);
@@ -172,12 +174,12 @@ const ListingTable = ({ tableListingData }: any) => {
                               {v !== 'docstatus'
                                 ? data[v]
                                 : data[v] === 0
-                                  ? 'Draft'
-                                  : data[v] === 1
-                                    ? 'Submitted'
-                                    : data[v] === 2
-                                      ? 'Cancel'
-                                      : data[v]}
+                                ? 'Draft'
+                                : data[v] === 1
+                                ? 'Submitted'
+                                : data[v] === 2
+                                ? 'Cancel'
+                                : data[v]}
                             </td>
                           );
                         }
@@ -247,7 +249,7 @@ const ListingTable = ({ tableListingData }: any) => {
 
   return (
     <>
-      <div className=" table-responsive">
+      <div className="table-responsive ">
         <table className="table table table-striped table-hover listing-table border-0">
           <thead className="table-heading">
             <tr className="table-heading-row">

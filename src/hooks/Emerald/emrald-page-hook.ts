@@ -6,7 +6,10 @@ import {
 } from '../../store/slices/Chitti/get-client-name-slice';
 import { useSelector } from 'react-redux';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
-import { getSubCategoryList, get_subcategory_list } from '../../store/slices/Chitti/get-subcategory-slice';
+import {
+  getSubCategoryList,
+  get_subcategory_list,
+} from '../../store/slices/Chitti/get-subcategory-slice';
 import {
   getClientGroupList,
   get_client_group,
@@ -21,11 +24,14 @@ import {
   get_product_item,
 } from '../../store/slices/Emerald/get-product-item-slice';
 import CreateEmeraldChittiApi from '../../services/api/Emerald/create-emerald-chitti-api';
-import UpdateDocStatusEmeraldChittiApi from '../../services/api/general/update-doc-status-emrald-chitti-api';
 import { getSpecificEmeraldChitti } from '../../store/slices/Emerald/get-specific-emrald-slice';
 import { useNavigate, useParams } from 'react-router-dom';
 import DeleteEmeraldChittiApi from '../../services/api/Emerald/delete-emerald-chitti-api';
 import AddClientNameApi from '../../services/api/Master/add-client-name-api';
+import {
+  UpdateDocStatusEmeraldChittiApi,
+  UpdateDocStatusWithSubmittedEmeraldChittiApi,
+} from '../../services/api/general/update-doc-status-emrald-chitti-api';
 
 const UseEmeraldHook = () => {
   const dispatch = useDispatch();
@@ -146,13 +152,15 @@ const UseEmeraldHook = () => {
   };
 
   const HandleSubmitEmeraldChittiData: any = async () => {
-    let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
-      AccessToken?.token,
-      '1',
-      showSubmitButtonAfterCreateChitti?.length > 0
-        ? showSubmitButtonAfterCreateChitti
-        : id
-    );
+    let updateDocStatus: any =
+      await UpdateDocStatusWithSubmittedEmeraldChittiApi(
+        AccessToken?.token,
+        '1',
+        transactionDate,
+        showSubmitButtonAfterCreateChitti?.length > 0
+          ? showSubmitButtonAfterCreateChitti
+          : id
+      );
     console.log('update doc', updateDocStatus);
     if (Object.keys(updateDocStatus?.data)?.length > 0) {
       const params: any = {
@@ -298,7 +306,7 @@ const UseEmeraldHook = () => {
     HandleCancelEmeraldChitti,
     HandleDeleteEmeraldChitti,
     showSubmitButtonAfterCreateChitti,
-    subCategoryList
+    subCategoryList,
   };
 };
 

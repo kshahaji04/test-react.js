@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import SelectedInputDropdown from '../../SelectedInputDropdown';
+
 import CustomDropdownForTable from '../../CustomDropdownForTable';
 
 const ChallanItemsTable = ({
@@ -11,7 +11,6 @@ const ChallanItemsTable = ({
   setTotalGrossWeightOfChallanTable,
   readOnly,
 }: any) => {
-  const [selectedCategory, setSelectedCategory] = useState<any>('');
   const [amountValue, setamountValue] = useState<any>({
     sub_category: '',
     gross_weight: 0,

@@ -10,7 +10,7 @@ import UseChittiHook from './chitti-page-hook';
 import { useParams } from 'react-router-dom';
 import UpdateChittiApi from '../../services/api/Chitti/update-challan-chitti-api';
 import { toast } from 'react-toastify';
-import UpdateDocStatusChallanApi from '../../services/api/general/update-doc-status-challan--api';
+import { UpdateDocStatusChallanApi } from '../../services/api/general/update-doc-status-challan--api';
 
 const UseEditChallanChitti: any = () => {
   const dispatch = useDispatch();
@@ -107,7 +107,7 @@ const UseEditChallanChitti: any = () => {
     }
   };
 
-  console.log("setStateForDocStatus in hook", stateForDocStatus)
+  console.log('setStateForDocStatus in hook', stateForDocStatus);
 
   return {
     challanDetail,

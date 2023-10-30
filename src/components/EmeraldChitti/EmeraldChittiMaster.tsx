@@ -34,7 +34,8 @@ const EmeraldChittiMaster = () => {
   const todayDate: any = currentDate?.toISOString()?.split('T')[0];
   const [searchClientName, setSearchclientName] = useState<any>('');
   const [searchInputValues, setSearchInputValues] = useState({
-    date: todayDate,
+    submitted_date: '',
+    current_date: todayDate,
     chitti_no: '',
     name: '',
     status: '',
@@ -52,13 +53,17 @@ const EmeraldChittiMaster = () => {
   const filteredList =
     emeraldChittiData?.length > 0 &&
     emeraldChittiData !== null &&
-    (searchInputValues.date ||
+    (searchInputValues.submitted_date ||
+      searchInputValues.current_date ||
       searchInputValues.chitti_no ||
       searchClientName ||
       searchInputValues.status)
       ? emeraldChittiData.filter((item: any) => {
-          const dateMatch = searchInputValues.date
-            ? item?.date?.includes(searchInputValues.date)
+          const submittedDateMatch = searchInputValues.submitted_date
+            ? item?.submitted_date?.includes(searchInputValues.submitted_date)
+            : true;
+          const currentDateMatch = searchInputValues.current_date
+            ? item?.date?.includes(searchInputValues.current_date)
             : true;
           const numberMatch = searchInputValues.chitti_no
             ? item?.number?.includes(searchInputValues.chitti_no)
@@ -70,27 +75,35 @@ const EmeraldChittiMaster = () => {
           if (searchInputValues.status === 'Draft') {
             return (
               item?.docstatus === 0 &&
-              dateMatch &&
+              submittedDateMatch &&
+              currentDateMatch &&
               numberMatch &&
               clientNameMatch
             );
           } else if (searchInputValues.status === 'Submitted') {
             return (
               item?.docstatus === 1 &&
-              dateMatch &&
+              submittedDateMatch &&
+              currentDateMatch &&
               numberMatch &&
               clientNameMatch
             );
           } else if (searchInputValues.status === 'Cancel') {
             return (
               item?.docstatus === 2 &&
-              dateMatch &&
+              submittedDateMatch &&
+              currentDateMatch &&
               numberMatch &&
               clientNameMatch
             );
           }
 
-          return dateMatch && numberMatch && clientNameMatch;
+          return (
+            submittedDateMatch &&
+            currentDateMatch &&
+            numberMatch &&
+            clientNameMatch
+          );
         })
       : emeraldChittiData;
 

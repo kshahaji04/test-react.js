@@ -43,9 +43,11 @@ const ChittiMaster = () => {
   console.log('chittiListingData', chittiListingData);
 
   const todayDate: any = currentDate?.toISOString()?.split('T')[0];
+  console.log('today date', todayDate);
   const [searchClientName, setSearchclientName] = useState<any>('');
   const [searchInputValues, setSearchInputValues] = useState({
-    date: todayDate,
+    submitted_date: '',
+    current_date: todayDate,
     chitti_no: '',
     name: '',
     status: '',
@@ -63,13 +65,17 @@ const ChittiMaster = () => {
   const filteredList =
     chittiListingData?.length > 0 &&
     chittiListingData !== null &&
-    (searchInputValues.date ||
+    (searchInputValues.submitted_date ||
+      searchInputValues.current_date ||
       searchInputValues.chitti_no ||
       searchClientName ||
       searchInputValues.status)
       ? chittiListingData.filter((item: any) => {
-          const dateMatch = searchInputValues.date
-            ? item?.date?.includes(searchInputValues.date)
+          const submittedDateMatch = searchInputValues.submitted_date
+            ? item?.submitted_date?.includes(searchInputValues.submitted_date)
+            : true;
+          const currentDateMatch = searchInputValues.current_date
+            ? item?.date?.includes(searchInputValues.current_date)
             : true;
           const numberMatch = searchInputValues.chitti_no
             ? item?.number?.includes(searchInputValues.chitti_no)
@@ -83,27 +89,35 @@ const ChittiMaster = () => {
           if (searchInputValues.status === 'Draft') {
             return (
               item?.docstatus === 0 &&
-              dateMatch &&
+              submittedDateMatch &&
+              currentDateMatch &&
               numberMatch &&
               clientNameMatch
             );
           } else if (searchInputValues.status === 'Submitted') {
             return (
               item?.docstatus === 1 &&
-              dateMatch &&
+              submittedDateMatch &&
+              currentDateMatch &&
               numberMatch &&
               clientNameMatch
             );
           } else if (searchInputValues.status === 'Cancel') {
             return (
               item?.docstatus === 2 &&
-              dateMatch &&
+              submittedDateMatch &&
+              currentDateMatch &&
               numberMatch &&
               clientNameMatch
             );
           }
 
-          return dateMatch && numberMatch && clientNameMatch;
+          return (
+            submittedDateMatch &&
+            currentDateMatch &&
+            numberMatch &&
+            clientNameMatch
+          );
         })
       : chittiListingData;
 
@@ -120,7 +134,7 @@ const ChittiMaster = () => {
             >
               <Tab eventKey="chitti-listing" title="Chitti List">
                 <div className="container">
-                  <h4 className="text-center mt-2">Chitti Listing</h4>
+                  <h4 className="text-center mt-2 ">Chitti Listing</h4>
                   <SearchListingTable
                     HandleSearchInput={HandleSearchInput}
                     clientNameList={clientNameList}

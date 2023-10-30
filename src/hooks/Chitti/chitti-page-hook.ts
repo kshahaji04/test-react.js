@@ -25,7 +25,10 @@ import {
   get_client_group,
 } from '../../store/slices/Chitti/get-client-group-list-slice';
 import AddClientNameApi from '../../services/api/Master/add-client-name-api';
-import UpdateDocStatusChallanApi from '../../services/api/general/update-doc-status-challan--api';
+import {
+  UpdateDocStatusChallanApi,
+  UpdateDocStatusWithSubmittedChallanApi,
+} from '../../services/api/general/update-doc-status-challan--api';
 import { getSpecificChittiChallan } from '../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
 import { useNavigate, useParams } from 'react-router-dom';
 import DeleteChallanChittiApi from '../../services/api/Chitti/delete-challan-chitti-api';
@@ -183,16 +186,16 @@ const UseChittiHook = () => {
   };
 
   const HandleSubmitChallanChitti: any = async () => {
-    let updateDocStatus: any = await UpdateDocStatusChallanApi(
+    let updateDocStatus: any = await UpdateDocStatusWithSubmittedChallanApi(
       AccessToken?.token,
       '1',
+      date,
       showSubmitButtonAfterCreateChitti?.length > 0
         ? showSubmitButtonAfterCreateChitti
         : id
     );
     console.log('update doc', updateDocStatus);
     if (Object?.keys(updateDocStatus?.data)?.length > 0) {
-
       const params: any = {
         token: AccessToken?.token,
         name:

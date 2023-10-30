@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { BASE_URL } from '../../Config/api-config';
 
-const UpdateDocStatusEmeraldChittiApi = async (
+export const UpdateDocStatusEmeraldChittiApi = async (
   token: any,
   docStatus: any,
   name: any
@@ -33,4 +33,36 @@ const UpdateDocStatusEmeraldChittiApi = async (
   return response;
 };
 
-export default UpdateDocStatusEmeraldChittiApi;
+export const UpdateDocStatusWithSubmittedEmeraldChittiApi = async (
+  token: any,
+  docStatus: any,
+  submitted_date: any,
+  name: any
+) => {
+  let response: any;
+
+  const params = `/api/resource/Emerald Chitti/${name}`;
+
+  let body = {
+    docstatus: docStatus,
+    submitted_date: submitted_date,
+  };
+
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+  console.log('body', body);
+
+  await axios
+    .put(`${BASE_URL}${params}`, body, config)
+    .then((res: any) => {
+      console.log('create chitti res', res);
+      response = res;
+    })
+    .catch((err: any) => {
+      console.log(err);
+    });
+  return response;
+};
