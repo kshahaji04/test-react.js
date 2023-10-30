@@ -3,6 +3,9 @@ import UseCategoryPartywiseReportHook from '../../../hooks/report/category-party
 import FilterReportListing from './FilterReportListing';
 import UseClientNameHook from '../../../hooks/Master/client-name-hook';
 import UseCategoryHook from '../../../hooks/Master/category-hook';
+import { useSelector } from 'react-redux';
+import { get_chitti_challan } from '../../../store/slices/Chitti/get-chitti-challan-list-slice';
+import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
 
 const CategoryPartyWiseReport = () => {
   const { categoryPartywiseReportData }: any = UseCategoryPartywiseReportHook();
@@ -10,6 +13,9 @@ const CategoryPartyWiseReport = () => {
     'categoryPartywiseReportData in tssx',
     categoryPartywiseReportData
   );
+
+  const challan_data_from_store: any = useSelector(get_chitti_challan);
+  console.log('challandata', challan_data_from_store);
   const { clientNameList }: any = UseClientNameHook();
   const { CategoryList }: any = UseCategoryHook();
 
@@ -32,6 +38,26 @@ const CategoryPartyWiseReport = () => {
       [name]: value,
     });
   };
+
+  // const filteredListByDate =
+  //   challan_data_from_store?.data?.length > 0 &&
+  //   challan_data_from_store?.data !== null &&
+  //   (searchInputValues.fromDate ||
+  //     searchInputValues.toDate
+  //    )
+  //     ? challan_data_from_store?.data?.filter((item: any) => {
+
+  //         const dateMatch =
+  //           searchInputValues.fromDate && searchInputValues.toDate
+  //             ? item?.date >= searchInputValues.fromDate &&
+  //               item?.date <= searchInputValues.toDate
+  //             : true;
+
+  //         return dateMatch;
+  //       })
+  //     : challan_data_from_store;
+
+  //     console.log("filter challan data",filteredListByDate)
 
   const filteredList =
     categoryPartywiseReportData?.length > 0 &&
@@ -80,7 +106,7 @@ const CategoryPartyWiseReport = () => {
         showDateInFilter={showDateInFilter}
       />
       <div className="table-responsive  report-table-container mb-5">
-        <table className="table table-striped table-hover">
+        <table className="table table-striped table-hover ">
           <thead className="report-table-head-row sticky-top">
             <tr className="report-table-head-tr text-uppercase">
               <th scope="col">No</th>
@@ -96,16 +122,19 @@ const CategoryPartyWiseReport = () => {
               <>
                 {filteredList.map((data: any, index: any) => {
                   return (
-                    <tr className="report-table-row" key={index}>
-                      <td>{index + 1}</td>
-                      <td>{data.category}</td>
-                      <td>{data.client_name}</td>
-                      <td>{data.total_gross_weight}</td>
-                      <td>{data.total_net_weight}</td>
-                      <td>{data.total_amount}</td>
-                    </tr>
+                    <>
+                      <tr className="report-table-row" key={index}>
+                        <td>{index + 1}</td>
+                        <td>{data.category}</td>
+                        <td>{data.client_name}</td>
+                        <td>{data.total_gross_weight}</td>
+                        <td>{data.total_net_weight}</td>
+                        <td>{data.total_amount}</td>
+                      </tr>
+                    </>
                   );
                 })}
+                <ShowTotalAmountOfReportData data={filteredList} colSpan="3" />
               </>
             ) : (
               ''

@@ -25,12 +25,15 @@
     background-color: #2f308c !important;
 }
 
-/* .subcategory-title {
-    font-weight: bold;
-} */
-
 @media only screen and (max-width:768px) {
     .report-table-head-tr {
         line-height: 15px !important;
     }
+}
+
+.report-total-row-at-bottom {
+    position: sticky;
+    bottom: 0px;
+    background-color: #2f308c;
+    line-height: 4px;
 }

@@ -4,6 +4,7 @@ import FilterReportListing from './FilterReportListing';
 import UseClientNameHook from '../../../hooks/Master/client-name-hook';
 import UseCategoryHook from '../../../hooks/Master/category-hook';
 import UseSubCategoryHook from '../../../hooks/Master/sub-category-hook';
+import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
 
 const SubCategoryReport = () => {
   const { subCategoryReportData }: any = UseSubCategoryReportHook();
@@ -131,6 +132,7 @@ const SubCategoryReport = () => {
                     </tr>
                   );
                 })}
+                <ShowTotalAmountOfReportData data={filteredList} colSpan="3" />
               </>
             ) : (
               ''

@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import UseCategorySummaryReportHook from '../../../hooks/report/category-summary-report-hook';
 import FilterReportListing from './FilterReportListing';
 import UseCategoryHook from '../../../hooks/Master/category-hook';
+import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
 
 const CategorySummaryReport = () => {
   const { categorySummaryReportData }: any = UseCategorySummaryReportHook();
@@ -85,6 +86,7 @@ const CategorySummaryReport = () => {
                     </tr>
                   );
                 })}
+                <ShowTotalAmountOfReportData data={filteredList} colSpan="2" />
               </>
             ) : (
               ''

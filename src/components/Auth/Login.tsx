@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { getAccessToken } from '../../store/slices/auth/token-login-slice';
 import { useNavigate } from 'react-router-dom';
 import { showToast } from '../ToastNotification';
-import logo from '../../assets/Logo.png';
 
 const Login = () => {
   const dispatch = useDispatch();
