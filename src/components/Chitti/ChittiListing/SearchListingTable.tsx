@@ -10,8 +10,10 @@ const SearchListingTable = ({
   return (
     <>
       <div className="row justify-content-center mt-1">
-        <div className="col-md-2">
-          <label className="text-secondary">Submitted Date</label>
+        <div className="col-lg-2 col-md-3 ">
+          <label className="text-secondary submitted-date-label-chitti">
+            Submitted Date
+          </label>
           <input
             type="date"
             name="submitted_date"
@@ -21,7 +23,7 @@ const SearchListingTable = ({
             onChange={HandleSearchInput}
           />
         </div>
-        <div className="col-md-2">
+        <div className="col-lg-2 col-md-3 ">
           <label className="text-secondary">Current Date</label>
           <input
             type="date"
@@ -62,8 +64,8 @@ const SearchListingTable = ({
             // HandleClientGroup={HandleClientGroup}
           />
         </div>
-        <div className="col-md-2 my-lg-0 my-3">
-          <label className="text-secondary ">Status</label>
+        <div className="col-md-2 my-lg-0 mb-lg-0 mb-3">
+          <label className="text-secondary">Status</label>
           <select
             name="status"
             id="status"

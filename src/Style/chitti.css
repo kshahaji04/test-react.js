@@ -1,26 +1,23 @@
 .custom-select-container {
     position: absolute;
-    /* width: 36%; */
 }
 
 .custom-select-huid-container {
     position: absolute;
-    /* width: 42%; */
 }
 
 
 .custom-select-emerald-category {
     position: absolute;
+}
 
+.submitted-date-label-chitti {
+    font-size: 14px;
 }
 
 
-/* .custom-select-total {
-    width: 95%;
-} */
-
 .input-field-chitti-table {
-    /* width: 200px; */
+
     padding: 10px 5px !important;
 }
 
@@ -49,7 +46,11 @@
     }
 
     .custom-select-emerald-category {
-        width: 15%;
+        width: 17%;
+    }
+
+    .chitti-table-container {
+        padding: 0px;
     }
 }
 
@@ -64,11 +65,11 @@
     }
 
     .custom-select-emerald-category {
-        width: 13%;
+        width: 18%;
     }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 777px) {
     .custom-select-container {
         width: 28%;
     }
@@ -77,6 +78,17 @@
         width: 35%;
     }
 }
+
+@media only screen and (max-width: 720px) {
+    .custom-select-container {
+        width: 28%;
+    }
+
+    .custom-select-huid-container {
+        width: 35%;
+    }
+}
+
 
 @media only screen and (max-width: 570px) {
     .custom-select-container {
@@ -90,7 +102,27 @@
 
 @media only screen and (max-width: 500px) {
     .custom-select-container {
-        width: 27% !important;
+        width: 39% !important;
+    }
+
+    .custom-select-huid-container {
+        width: 47%;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .custom-select-container {
+        width: 33% !important;
+    }
+
+    .custom-select-huid-container {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 370px) {
+    .custom-select-container {
+        width: 23% !important;
     }
 
     .custom-select-huid-container {
@@ -98,12 +130,10 @@
     }
 }
 
-@media only screen and (max-width: 430px) {
+@media only screen and (max-width: 300px) {
     .custom-select-container {
-        width: 20% !important;
+        width: 19% !important;
     }
 
-    .custom-select-huid-container {
-        width: 28%;
-    }
+
 }

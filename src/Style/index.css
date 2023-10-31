@@ -49,6 +49,19 @@
   font-size: 20px !important;
 }
 
+@media screen and (max-width: 400px) {
+
+  .icons-color {
+    height: 33px !important;
+    width: 20px !important;
+    font-size: 15px !important;
+  }
+
+  .headers-heading {
+    font-size: 13px;
+  }
+}
+
 .card-container-margin {
   margin-top: 80px;
 }
@@ -218,22 +231,8 @@
   background-color: #f0f0f0;
 }
 
-.custom-select-input .css-1c8v8fs-control .css-art2ul-ValueContainer2 {
-  padding: 0px !important;
-}
 
-.custom-select-input .css-165vwa-control {
-  border-color: #86b7fe !important;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25) !important;
-
-}
-
-.custom-select-input .css-dgpnjf-control {
-  border-color: #86b7fe !important;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25) !important;
-}
-
-.select-dropdown-list {
+/* .select-dropdown-list {
   position: absolute;
   background-color: white;
   border: 1px solid blue;
@@ -244,7 +243,7 @@
   padding: 5px;
   max-height: 10rem;
   overflow-y: auto
-}
+} */
 
 .narration-table-product {
   width: 60%;
@@ -272,7 +271,6 @@
 }
 
 .table-header-row {
-  /* background-color: #E0E1F5; */
   background-color: #2f308c;
   color: white;
   line-height: 5px;
@@ -301,6 +299,14 @@
   }
 }
 
+@media only screen and (max-width:1000px) {
+  .table-header-row th {
+    font-size: 0.7rem;
+  }
+
+
+}
+
 
 table tr {
   text-align: center;
@@ -322,23 +328,10 @@ table tr {
   padding: 0px 13px !important;
   color: rgb(243, 97, 97) !important;
   font-size: 0.8rem;
-  /* font-weight: 550; */
+
 }
 
 .table-responsive {
-  /* max-height: 400px !important; */
-  /* Set a maximum height that triggers the scrollbar */
   overflow: auto !important;
-  /* Enable vertical scrolling when content exceeds the height */
+
 }
-
-/* .custom-select-field {
-
-  position: fixed !important;
-  width: 39% !important;
-  height: 34px !important;
-} */
-
-/* .ul-dropdown-select-table {
-  position: relative !important;
-} */

@@ -34,6 +34,7 @@ const SelectedInputDropdown = ({
     setShowDropdown(false);
     setStateForDocStatus(true);
   };
+
   const HandleInputField = (e: any) => {
     console.log('input value', e.target.value);
     setShowDropdown(true);
@@ -62,13 +63,15 @@ const SelectedInputDropdown = ({
       setShowDropdown(!showDropDown);
     }
   };
+
+  // for close dropdown when click outside
   useEffect(() => {
-    // for close dropdown when click outside
     const handleDocumentClick = (e: any) => {
       // Check if the input element itself was clicked
       if (
         e?.target !== inputRef?.current &&
-        !inputRef?.current?.contains(e.target)
+        !inputRef?.current?.contains(e?.target) &&
+        !document?.querySelector('.form-select-sm')?.contains(e?.target) //condn for client group dropdown
       ) {
         setShowDropdown(false);
       }

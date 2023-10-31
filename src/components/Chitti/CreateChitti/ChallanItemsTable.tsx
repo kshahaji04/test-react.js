@@ -154,7 +154,7 @@ const ChallanItemsTable = ({
 
   return (
     <>
-      <div className="container mt-1 border rounded-3">
+      <div className="container mt-1 border rounded-3 chitti-table-container">
         <div className="d-flex justify-content-between table-heading-row">
           <caption>Challan Items</caption>
           <p className="cursor-pointer my-auto btn-link" onClick={HandleAddRow}>

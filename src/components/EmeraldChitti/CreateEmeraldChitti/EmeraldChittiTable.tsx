@@ -176,7 +176,7 @@ const EmeraldChittiTable = ({
   return (
     <>
       <div className="table-responsive">
-        <div className="container mt-1 border rounded-3">
+        <div className="container chitti-table-container mt-1 border rounded-3">
           <div className="d-flex justify-content-between table-heading-row">
             <caption>Emerald Chitti Table</caption>
             <p

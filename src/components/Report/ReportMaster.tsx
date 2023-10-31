@@ -20,7 +20,7 @@ const ReportMaster = () => {
               const isActive: any = window?.location?.pathname === linkTo;
               return (
                 <div
-                  className={`mx-3 my-lg-0 my-1 master-heading p-1 px-2 ${
+                  className={`mx-lg-3 my-lg-0 my-1 master-heading p-lg-1 p-0  px-lg-2  ${
                     isActive ? 'activePage border-0' : ''
                   }`}
                   key={index}
@@ -31,8 +31,8 @@ const ReportMaster = () => {
                       isActive ? 'text-white' : ''
                     }`}
                   >
-                    <div className="d-flex justify-content-center mas">
-                      <h6 className="card-title me-1 m-0">{data}</h6>
+                    <div className="d-flex justify-content-center px-1">
+                      <div className="reports-heading me-1 m-0">{data}</div>
                       <i className="fa-solid fa-arrow-turn-down d-flex align-items-center master-head-icon"></i>
                     </div>
                   </NavLink>

@@ -60,7 +60,7 @@ const MainNavigationTab = () => {
                       <i className={pageName.icon}></i>
                     </span>
                     <p
-                      className={`text-body-secondary my-auto px-1 ${
+                      className={`text-body-secondary my-auto px-1 headers-heading ${
                         isActive ? ' border-0 text-white' : ''
                       } `}
                     >

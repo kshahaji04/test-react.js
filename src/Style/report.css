@@ -29,6 +29,10 @@
     .report-table-head-tr {
         line-height: 15px !important;
     }
+
+    .report-table-head-tr th {
+        font-size: 0.7rem;
+    }
 }
 
 .report-total-row-at-bottom {
