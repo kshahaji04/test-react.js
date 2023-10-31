@@ -5,9 +5,16 @@ const CreateEmeraldChittiApi = async (request: any) => {
   console.log('create chitti req', request);
 
   let response: any;
-  // const params = `/api/resource/Challan`;
+  const version = 'v1';
+  const method = 'create_emeralds_chitti';
+  const entity = 'emerald_chitti';
+
+  const params = `/api/method/challan.sdk.api`;
 
   let body = {
+    version: version,
+    method: method,
+    entity: entity,
     client_name: request.clientName,
     client_group: request.clientGroup,
     abb: request.date,
@@ -24,7 +31,7 @@ const CreateEmeraldChittiApi = async (request: any) => {
   console.log('body', body);
 
   await axios
-    .post(`${BASE_URL}/api/resource/Emerald Chitti`, body, config)
+    .post(`${BASE_URL}${params}`, body, config)
     .then((res: any) => {
       console.log('create chitti res', res);
       response = res;

@@ -20,6 +20,7 @@ const FilterReportListing = ({
   searchSupplier,
   setSearchSupplier,
   supplierList,
+  handleFilterList,
 }: any) => {
   console.log('supply', supplierList);
 
@@ -120,6 +121,14 @@ const FilterReportListing = ({
             </div>
           </>
         )}
+        <div className="col-md-2 d-flex align-items-center">
+          <button
+            className="btn btn-primary search-btn-challan-list"
+            onClick={handleFilterList}
+          >
+            Search
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -3,26 +3,31 @@ import UseEmeraldReportHook from '../../../hooks/report/emerald-report-hook';
 import UseSubCategoryHook from '../../../hooks/Master/sub-category-hook';
 import FilterReportListing from './FilterReportListing';
 import UseDataUploadHook from '../../../hooks/dataUpload/data-upload-hook';
+import { useDispatch } from 'react-redux';
+import { get_access_token } from '../../../store/slices/auth/token-login-slice';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { getEmeraldReportData } from '../../../store/slices/report/get-emerald-report-slice';
 
 const EmeraldReport = () => {
+  const dispatch = useDispatch();
   const { emeraldReportData } = UseEmeraldReportHook();
   const { subCategoryList }: any = UseSubCategoryHook();
   const { updatedSupplierList }: any = UseDataUploadHook();
   console.log('emeraldReportData in tsx', updatedSupplierList);
 
+  const AccessToken: any = useSelector(get_access_token);
+
   const [searchInputValues, setSearchInputValues] = useState({
-    supplier: '',
     project: '',
-    fromDate: '',
-    toDate: '',
   });
 
   const showSubCategoryInFilter = useRef(true);
   const showSupplierInFilter = useRef(true);
   const showProjectFieldInFilter = useRef(true);
 
-  const [searchSubCategory, setSearchSubCategory] = useState<any>('');
   const [searchSupplier, setSearchSupplier] = useState<any>('');
+  const [searchSubCategory, setSearchSubCategory] = useState<any>('');
 
   const HandleSearchInput: any = (e: any) => {
     const { name, value } = e.target;
@@ -32,30 +37,48 @@ const EmeraldReport = () => {
     });
   };
 
-  const filteredList =
-    emeraldReportData?.length > 0 &&
-    emeraldReportData !== null &&
-    (searchSupplier || searchInputValues.project || searchSubCategory)
-      ? emeraldReportData.filter((item: any) => {
-          const supplierMatch = searchSupplier
-            ? item?.supplier
-                ?.toLowerCase()
-                ?.includes(searchSupplier?.toLowerCase())
-            : true;
-          const projectMatch = searchInputValues.project
-            ? item?.category
-                ?.toLowerCase()
-                ?.includes(searchInputValues?.project?.toLowerCase())
-            : true;
-          const subCategoryMatch = searchSubCategory
-            ? item?.sub_category
-                ?.toLowerCase()
-                ?.includes(searchSubCategory?.toLowerCase())
-            : true;
+  const handleFilterList: any = () => {
+    const reqParams: any = {
+      token: AccessToken?.token,
+      supplier: searchSupplier,
+      project: searchInputValues?.project,
+      sub_category: searchSubCategory,
+    };
+    if (
+      Object?.keys(
+        reqParams?.supplier || reqParams?.project || reqParams?.sub_category
+      )?.length > 0
+    ) {
+      dispatch(getEmeraldReportData(reqParams));
+    } else {
+      toast.error('Search field is empty');
+    }
+  };
 
-          return supplierMatch && subCategoryMatch && projectMatch;
-        })
-      : emeraldReportData;
+  // const filteredList =
+  //   emeraldReportData?.length > 0 &&
+  //   emeraldReportData !== null &&
+  //   (searchSupplier || searchInputValues.project || searchSubCategory)
+  //     ? emeraldReportData.filter((item: any) => {
+  //         const supplierMatch = searchSupplier
+  //           ? item?.supplier
+  //               ?.toLowerCase()
+  //               ?.includes(searchSupplier?.toLowerCase())
+  //           : true;
+  //         const projectMatch = searchInputValues.project
+  //           ? item?.category
+  //               ?.toLowerCase()
+  //               ?.includes(searchInputValues?.project?.toLowerCase())
+  //           : true;
+  //         const subCategoryMatch = searchSubCategory
+  //           ? item?.sub_category
+  //               ?.toLowerCase()
+  //               ?.includes(searchSubCategory?.toLowerCase())
+  //           : true;
+
+  //         return supplierMatch && subCategoryMatch && projectMatch;
+  //       })
+  //     : emeraldReportData;
 
   return (
     <div className="container mb-5 ">
@@ -74,6 +97,7 @@ const EmeraldReport = () => {
         searchSupplier={searchSupplier}
         setSearchSupplier={setSearchSupplier}
         supplierList={updatedSupplierList}
+        handleFilterList={handleFilterList}
       />
 
       <div className="table-responsive report-table-container ">
@@ -107,9 +131,9 @@ const EmeraldReport = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredList?.length > 0 && filteredList !== null ? (
+            {emeraldReportData?.length > 0 && emeraldReportData !== null ? (
               <>
-                {filteredList.map((data: any, index: any) => {
+                {emeraldReportData.map((data: any, index: any) => {
                   return (
                     <tr className="report-table-row" key={index}>
                       <td>{index + 1}</td>

@@ -5,12 +5,20 @@ import UseClientNameHook from '../../../hooks/Master/client-name-hook';
 import UseCategoryHook from '../../../hooks/Master/category-hook';
 import UseSubCategoryHook from '../../../hooks/Master/sub-category-hook';
 import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { get_access_token } from '../../../store/slices/auth/token-login-slice';
+import { useSelector } from 'react-redux';
+import { getSubCategoryReportData } from '../../../store/slices/report/get-subcategory-report-slice';
 
 const SubCategoryReport = () => {
+  const dispatch = useDispatch();
   const { subCategoryReportData }: any = UseSubCategoryReportHook();
   const { clientNameList }: any = UseClientNameHook();
   const { CategoryList }: any = UseCategoryHook();
   const { subCategoryList }: any = UseSubCategoryHook();
+  const AccessToken: any = useSelector(get_access_token);
+
   console.log('SubcategoryReport data', subCategoryReportData);
 
   const [searchInputValues, setSearchInputValues] = useState({
@@ -36,42 +44,66 @@ const SubCategoryReport = () => {
     });
   };
 
-  const filteredList =
-    subCategoryReportData?.length > 0 &&
-    subCategoryReportData !== null &&
-    (searchInputValues.fromDate ||
-      searchInputValues.toDate ||
-      searchSubCategory ||
-      searchClientName ||
-      searchCategory)
-      ? subCategoryReportData.filter((item: any) => {
-          const clientNameMatch = searchClientName
-            ? item?.client_name
-                ?.toLowerCase()
-                ?.includes(searchClientName?.toLowerCase())
-            : true;
-          const categoryMatch = searchCategory
-            ? item?.category
-                ?.toLowerCase()
-                ?.includes(searchCategory?.toLowerCase())
-            : true;
-          const subCategoryMatch = searchSubCategory
-            ? item?.sub_category
-                ?.toLowerCase()
-                ?.includes(searchSubCategory?.toLowerCase())
-            : true;
+  const handleFilterList: any = () => {
+    const reqParams: any = {
+      token: AccessToken?.token,
+      category: searchCategory,
+      sub_category: searchSubCategory,
+      client_name: searchClientName,
+      from_date: searchInputValues?.fromDate,
+      to_date: searchInputValues?.toDate,
+    };
+    if (
+      Object?.keys(
+        reqParams?.category ||
+          reqParams?.sub_category ||
+          reqParams?.client_name ||
+          reqParams?.from_date ||
+          reqParams?.to_date
+      )?.length > 0
+    ) {
+      dispatch(getSubCategoryReportData(reqParams));
+    } else {
+      toast.error('Search field is empty');
+    }
+  };
 
-          const dateMatch =
-            searchInputValues.fromDate && searchInputValues.toDate
-              ? item?.date >= searchInputValues.fromDate &&
-                item?.date <= searchInputValues.toDate
-              : true;
+  // const filteredList =
+  //   subCategoryReportData?.length > 0 &&
+  //   subCategoryReportData !== null &&
+  //   (searchInputValues.fromDate ||
+  //     searchInputValues.toDate ||
+  //     searchSubCategory ||
+  //     searchClientName ||
+  //     searchCategory)
+  //     ? subCategoryReportData.filter((item: any) => {
+  //         const clientNameMatch = searchClientName
+  //           ? item?.client_name
+  //               ?.toLowerCase()
+  //               ?.includes(searchClientName?.toLowerCase())
+  //           : true;
+  //         const categoryMatch = searchCategory
+  //           ? item?.category
+  //               ?.toLowerCase()
+  //               ?.includes(searchCategory?.toLowerCase())
+  //           : true;
+  //         const subCategoryMatch = searchSubCategory
+  //           ? item?.sub_category
+  //               ?.toLowerCase()
+  //               ?.includes(searchSubCategory?.toLowerCase())
+  //           : true;
 
-          return (
-            categoryMatch && subCategoryMatch && clientNameMatch && dateMatch
-          );
-        })
-      : subCategoryReportData;
+  //         const dateMatch =
+  //           searchInputValues.fromDate && searchInputValues.toDate
+  //             ? item?.date >= searchInputValues.fromDate &&
+  //               item?.date <= searchInputValues.toDate
+  //             : true;
+
+  //         return (
+  //           categoryMatch && subCategoryMatch && clientNameMatch && dateMatch
+  //         );
+  //       })
+  //     : subCategoryReportData;
 
   return (
     <div className="container mb-5">
@@ -93,6 +125,7 @@ const SubCategoryReport = () => {
         showClientNameInFilter={showClientNameInFilter}
         showDateInFilter={showDateInFilter}
         subCategoryList={subCategoryList}
+        handleFilterList={handleFilterList}
       />
       <div className="table-responsive report-table-container">
         <table className="table table-striped table-hover">
@@ -107,12 +140,14 @@ const SubCategoryReport = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredList?.length > 0 && filteredList !== null ? (
+            {subCategoryReportData?.length > 0 &&
+            subCategoryReportData !== null ? (
               <>
-                {filteredList.map((data: any, index: any) => {
+                {subCategoryReportData.map((data: any, index: any) => {
                   const subCategory = data.sub_category;
                   const textColor =
-                    subCategory === filteredList[index - 1]?.sub_category
+                    subCategory ===
+                    subCategoryReportData[index - 1]?.sub_category
                       ? lastSubCategoryColor
                       : lastSubCategoryColor === 'text-danger'
                       ? 'text-dark'
@@ -132,7 +167,10 @@ const SubCategoryReport = () => {
                     </tr>
                   );
                 })}
-                <ShowTotalAmountOfReportData data={filteredList} colSpan="3" />
+                <ShowTotalAmountOfReportData
+                  data={subCategoryReportData}
+                  colSpan="3"
+                />
               </>
             ) : (
               ''

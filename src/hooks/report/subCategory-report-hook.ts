@@ -20,7 +20,10 @@ const UseSubCategoryReportHook = () => {
   const AccessToken: any = useSelector(get_access_token);
 
   useEffect(() => {
-    dispatch(getSubCategoryReportData(AccessToken?.token));
+    const reqParams: any = {
+      token: AccessToken?.token,
+    };
+    dispatch(getSubCategoryReportData(reqParams));
   }, []);
 
   useEffect(() => {

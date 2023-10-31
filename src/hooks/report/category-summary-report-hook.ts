@@ -25,7 +25,10 @@ const UseCategorySummaryReportHook = () => {
   const AccessToken: any = useSelector(get_access_token);
 
   useEffect(() => {
-    dispatch(getCategorySummaryReportData(AccessToken?.token));
+    const reqParams: any = {
+      token: AccessToken?.token,
+    };
+    dispatch(getCategorySummaryReportData(reqParams));
   }, []);
 
   useEffect(() => {

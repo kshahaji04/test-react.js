@@ -4,9 +4,9 @@ import getCategorySummaryReportApi from '../../../services/api/report/get-catego
 
 export const getCategorySummaryReportData: any = createAsyncThunk(
   'getCategorySummaryReport/getCategorySummaryReports',
-  async (token: any) => {
+  async (params: any) => {
     const getSubCategoryReportData: any =
-      await getCategorySummaryReportApi(token);
+      await getCategorySummaryReportApi(params);
     console.log('getSubCategoryReportData res', getSubCategoryReportData);
     return getSubCategoryReportData;
   }

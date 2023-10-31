@@ -4,8 +4,8 @@ import getEmeraldReportApi from '../../../services/api/report/get-emerald-report
 
 export const getEmeraldReportData: any = createAsyncThunk(
   'getEmeraldReport/getEmeraldReports',
-  async (token: any) => {
-    const getEmeraldReportData: any = await getEmeraldReportApi(token);
+  async (params: any) => {
+    const getEmeraldReportData: any = await getEmeraldReportApi(params);
     console.log('getSubCategoryReportData res', getEmeraldReportData);
     return getEmeraldReportData;
   }

@@ -23,7 +23,10 @@ const UseCategoryPartywiseReportHook = () => {
   const AccessToken: any = useSelector(get_access_token);
 
   useEffect(() => {
-    dispatch(getCategoryPartywiseReportData(AccessToken?.token));
+    const reqParams: any = {
+      token: AccessToken?.token,
+    };
+    dispatch(getCategoryPartywiseReportData(reqParams));
   }, []);
 
   useEffect(() => {

@@ -3,11 +3,19 @@ import UseCategorySummaryReportHook from '../../../hooks/report/category-summary
 import FilterReportListing from './FilterReportListing';
 import UseCategoryHook from '../../../hooks/Master/category-hook';
 import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
+import { get_access_token } from '../../../store/slices/auth/token-login-slice';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { getCategorySummaryReportData } from '../../../store/slices/report/get-category-summary-report-slice';
 
 const CategorySummaryReport = () => {
+  const dispatch = useDispatch();
   const { categorySummaryReportData }: any = UseCategorySummaryReportHook();
   const { CategoryList }: any = UseCategoryHook();
   console.log('categorySummaryReportData in tsx', categorySummaryReportData);
+
+  const AccessToken: any = useSelector(get_access_token);
 
   const [searchInputValues, setSearchInputValues] = useState({
     fromDate: '',
@@ -27,26 +35,43 @@ const CategorySummaryReport = () => {
     });
   };
 
-  const filteredList =
-    categorySummaryReportData?.length > 0 &&
-    categorySummaryReportData !== null &&
-    (searchInputValues.fromDate || searchInputValues.toDate || searchCategory)
-      ? categorySummaryReportData.filter((item: any) => {
-          const categoryMatch = searchCategory
-            ? item?.category
-                ?.toLowerCase()
-                ?.includes(searchCategory?.toLowerCase())
-            : true;
+  const handleFilterList: any = () => {
+    const reqParams: any = {
+      token: AccessToken?.token,
+      category: searchCategory,
+      from_date: searchInputValues?.fromDate,
+      to_date: searchInputValues?.toDate,
+    };
+    if (
+      Object?.keys(
+        reqParams?.category || reqParams?.from_date || reqParams?.to_date
+      )?.length > 0
+    ) {
+      dispatch(getCategorySummaryReportData(reqParams));
+    } else {
+      toast.error('Search field is empty');
+    }
+  };
+  // const filteredList =
+  //   categorySummaryReportData?.length > 0 &&
+  //   categorySummaryReportData !== null &&
+  //   (searchInputValues.fromDate || searchInputValues.toDate || searchCategory)
+  //     ? categorySummaryReportData.filter((item: any) => {
+  //         const categoryMatch = searchCategory
+  //           ? item?.category
+  //               ?.toLowerCase()
+  //               ?.includes(searchCategory?.toLowerCase())
+  //           : true;
 
-          const dateMatch =
-            searchInputValues.fromDate && searchInputValues.toDate
-              ? item?.date >= searchInputValues.fromDate &&
-                item?.date <= searchInputValues.toDate
-              : true;
+  //         const dateMatch =
+  //           searchInputValues.fromDate && searchInputValues.toDate
+  //             ? item?.date >= searchInputValues.fromDate &&
+  //               item?.date <= searchInputValues.toDate
+  //             : true;
 
-          return categoryMatch && dateMatch;
-        })
-      : categorySummaryReportData;
+  //         return categoryMatch && dateMatch;
+  //       })
+  //     : categorySummaryReportData;
 
   return (
     <div className="container">
@@ -60,6 +85,7 @@ const CategorySummaryReport = () => {
         HandleSearchInput={HandleSearchInput}
         showCategoryInFilter={showCategoryInFilter}
         showDateInFilter={showDateInFilter}
+        handleFilterList={handleFilterList}
       />
       <div className="table-responsive report-table-container">
         <table className="table table-striped table-hover">
@@ -73,9 +99,10 @@ const CategorySummaryReport = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredList?.length > 0 && filteredList !== null ? (
+            {categorySummaryReportData?.length > 0 &&
+            categorySummaryReportData !== null ? (
               <>
-                {filteredList.map((data: any, index: any) => {
+                {categorySummaryReportData.map((data: any, index: any) => {
                   return (
                     <tr className="report-table-row" key={index}>
                       <td>{index + 1}</td>
@@ -86,7 +113,10 @@ const CategorySummaryReport = () => {
                     </tr>
                   );
                 })}
-                <ShowTotalAmountOfReportData data={filteredList} colSpan="2" />
+                <ShowTotalAmountOfReportData
+                  data={categorySummaryReportData}
+                  colSpan="2"
+                />
               </>
             ) : (
               ''

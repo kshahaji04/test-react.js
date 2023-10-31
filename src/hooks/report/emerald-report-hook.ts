@@ -22,7 +22,10 @@ const UseEmeraldReportHook = () => {
   const AccessToken: any = useSelector(get_access_token);
 
   useEffect(() => {
-    dispatch(getEmeraldReportData(AccessToken?.token));
+    const reqParams: any = {
+      token: AccessToken?.token,
+    };
+    dispatch(getEmeraldReportData(reqParams));
   }, []);
 
   useEffect(() => {

@@ -4,9 +4,9 @@ import getCategoryPartywiseReportApi from '../../../services/api/report/get-cate
 
 export const getCategoryPartywiseReportData: any = createAsyncThunk(
   'getCategoryPartywiseReport/getCategoryPartywiseReports',
-  async (token: any) => {
+  async (params: any) => {
     const getCategoryPartywiseReportData: any =
-      await getCategoryPartywiseReportApi(token);
+      await getCategoryPartywiseReportApi(params);
     console.log(
       'getCategoryPartywiseReportData res',
       getCategoryPartywiseReportData

@@ -17,8 +17,13 @@
 
 
 .input-field-chitti-table {
-
     padding: 10px 5px !important;
+}
+
+.search-btn-challan-list {
+    padding: 1px 40px !important;
+    background-color: #6164ef !important;
+    border: none;
 }
 
 @media only screen and (min-width: 1280px) {

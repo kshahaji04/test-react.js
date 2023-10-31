@@ -4,8 +4,8 @@ import getSubCategoryReportApi from '../../../services/api/report/get-sub-catego
 
 export const getSubCategoryReportData: any = createAsyncThunk(
   'getSubCategoryReport/getSubCategoryReportData',
-  async (token: any) => {
-    const getSubCategoryReportData: any = await getSubCategoryReportApi(token);
+  async (params: any) => {
+    const getSubCategoryReportData: any = await getSubCategoryReportApi(params);
     console.log('getSubCategoryReportData res', getSubCategoryReportData);
     return getSubCategoryReportData;
   }
