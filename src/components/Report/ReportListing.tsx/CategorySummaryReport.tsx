@@ -1,11 +1,11 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import UseCategorySummaryReportHook from '../../../hooks/report/category-summary-report-hook';
 import FilterReportListing from './FilterReportListing';
 import UseCategoryHook from '../../../hooks/Master/category-hook';
 import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+
 import { useDispatch } from 'react-redux';
 import { getCategorySummaryReportData } from '../../../store/slices/report/get-category-summary-report-slice';
 
@@ -35,23 +35,48 @@ const CategorySummaryReport = () => {
     });
   };
 
-  const handleFilterList: any = () => {
-    const reqParams: any = {
-      token: AccessToken?.token,
-      category: searchCategory,
-      from_date: searchInputValues?.fromDate,
-      to_date: searchInputValues?.toDate,
+  useEffect(() => {
+    const handleFilterList: any = () => {
+      const reqParams: any = {
+        token: AccessToken?.token,
+        category: searchCategory,
+        from_date: searchInputValues?.fromDate,
+        to_date: searchInputValues?.toDate,
+      };
+
+      if (
+        CategoryList?.length > 0 &&
+        CategoryList !== null &&
+        CategoryList.find((data: any) => data === searchCategory)
+      ) {
+        dispatch(getCategorySummaryReportData(reqParams));
+      }
+
+      const checkNoFilterApply = () => {
+        if (!reqParams.category && !reqParams.from_date && !reqParams.to_date) {
+          return true;
+        }
+        return false;
+      };
+      if (checkNoFilterApply()) {
+        dispatch(getCategorySummaryReportData(reqParams));
+      }
     };
-    if (
-      Object?.keys(
-        reqParams?.category || reqParams?.from_date || reqParams?.to_date
-      )?.length > 0
-    ) {
-      dispatch(getCategorySummaryReportData(reqParams));
-    } else {
-      toast.error('Search field is empty');
-    }
+
+    handleFilterList();
+  }, [searchInputValues, searchCategory]);
+
+  const handleDownloadReport: any = async () => {
+    // const reqParams: any = {
+    //   token: AccessToken?.token,
+    //   method: 'get_subcategory_report_print',
+    //   entity: 'report_print',
+    // };
+    // let downloadReportApi: any = await DownloadReportApi(reqParams);
+    // console.log('download Report api', downloadReportApi);
+    // window.open();
   };
+
   // const filteredList =
   //   categorySummaryReportData?.length > 0 &&
   //   categorySummaryReportData !== null &&
@@ -75,8 +100,15 @@ const CategorySummaryReport = () => {
 
   return (
     <div className="container">
-      <div className="mb-1">
+      <div className="d-flex justify-content-between my-1">
         <h5>Category Summary Report</h5>
+        {/* <button
+          type="button"
+          className="btn btn-primary btn-sm py-0 download-report-btn"
+          onClick={handleDownloadReport}
+        >
+          <span className="fs-6">Download Report</span>
+        </button> */}
       </div>
       <FilterReportListing
         CategoryList={CategoryList}
@@ -85,7 +117,7 @@ const CategorySummaryReport = () => {
         HandleSearchInput={HandleSearchInput}
         showCategoryInFilter={showCategoryInFilter}
         showDateInFilter={showDateInFilter}
-        handleFilterList={handleFilterList}
+        // handleFilterList={handleFilterList}
       />
       <div className="table-responsive report-table-container">
         <table className="table table-striped table-hover">

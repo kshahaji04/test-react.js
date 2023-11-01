@@ -30,6 +30,7 @@ import EmeraldReport from '../components/Report/ReportListing.tsx/EmeraldReport'
 import EmeraldShilpiDetails from '../components/DataUpload/EmeraldShilpi/EmeraldShilpiDetails';
 import ProjectSubCategoryMappingMaster from '../components/Master/MasterListing/ProjectSubCategoryMapping/ProjectSubCategoryMappingMaster';
 import MasterPageProjectSubCategoryMapping from '../components/Master/MasterListing/ProjectSubCategoryMapping/MasterPageProjectSubCategoryMapping';
+import Supplier from '../components/Master/MasterListing/Supplier/Supplier';
 
 const AppRoutes = () => {
   return (
@@ -96,6 +97,15 @@ const AppRoutes = () => {
             <ProtectedRoute>
               <MasterPage />
               <HuidProduct />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/master/supplier"
+          element={
+            <ProtectedRoute>
+              <MasterPage />
+              <Supplier />
             </ProtectedRoute>
           }
         />

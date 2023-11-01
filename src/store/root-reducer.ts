@@ -27,6 +27,8 @@ import GetEmeraldShilpiListReducer from './slices/emerald-shilpi/get-emerald-shi
 import GetEmeraldShilpiDetailsReducer from './slices/emerald-shilpi/get-emerald-shilpi-details-slice';
 import GetEmeraldSupplierDetailsReducer from './slices/dataUpload/get-emerald-supplier-details-slice';
 import GetProjectSubCategoryMappingReducer from './slices/Master/get-project-subcategory-mapping-slice';
+import GetSupplierAndSupplierGroupReducer from './slices/Master/get-supplier-supplierGroup-slice';
+import GetSupplierGroupReducer from './slices/Master/get-supplier-group-slice';
 
 const appReducer = combineReducers({
   GetAccessTokenScreen: GetAccessTokenReducer,
@@ -57,6 +59,8 @@ const appReducer = combineReducers({
   GetEmeraldShilpiListScreen: GetEmeraldShilpiListReducer,
   GetEmeraldShilpiDetailsScreen: GetEmeraldShilpiDetailsReducer,
   GetProjectSubCategoryMappingScreen: GetProjectSubCategoryMappingReducer,
+  GetSupplierAndSupplierGroupScreen: GetSupplierAndSupplierGroupReducer,
+  GetSupplierGroupScreen: GetSupplierGroupReducer,
 });
 
 const rootReducer = (state: any, action: any) => {

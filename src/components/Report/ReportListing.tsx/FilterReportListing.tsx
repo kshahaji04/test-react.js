@@ -20,7 +20,6 @@ const FilterReportListing = ({
   searchSupplier,
   setSearchSupplier,
   supplierList,
-  handleFilterList,
 }: any) => {
   console.log('supply', supplierList);
 
@@ -61,6 +60,7 @@ const FilterReportListing = ({
             <input
               type="text"
               name="project"
+              // id="projectInputFieldInReport"
               id="project"
               className="form-control input-fields custom-input-field "
               title="Project"
@@ -121,14 +121,14 @@ const FilterReportListing = ({
             </div>
           </>
         )}
-        <div className="col-md-2 d-flex align-items-center">
+        {/* <div className="col-md-2 d-flex align-items-center">
           <button
             className="btn btn-primary search-btn-challan-list"
             onClick={handleFilterList}
           >
             Search
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

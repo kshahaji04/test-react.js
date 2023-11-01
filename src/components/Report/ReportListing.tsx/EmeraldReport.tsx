@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import UseEmeraldReportHook from '../../../hooks/report/emerald-report-hook';
 import UseSubCategoryHook from '../../../hooks/Master/sub-category-hook';
 import FilterReportListing from './FilterReportListing';
@@ -6,7 +6,7 @@ import UseDataUploadHook from '../../../hooks/dataUpload/data-upload-hook';
 import { useDispatch } from 'react-redux';
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+
 import { getEmeraldReportData } from '../../../store/slices/report/get-emerald-report-slice';
 
 const EmeraldReport = () => {
@@ -14,7 +14,8 @@ const EmeraldReport = () => {
   const { emeraldReportData } = UseEmeraldReportHook();
   const { subCategoryList }: any = UseSubCategoryHook();
   const { updatedSupplierList }: any = UseDataUploadHook();
-  console.log('emeraldReportData in tsx', updatedSupplierList);
+  console.log('subCategoryList in tsx', subCategoryList);
+  const inputFieldInOtherComponentRef = useRef(null);
 
   const AccessToken: any = useSelector(get_access_token);
 
@@ -28,6 +29,7 @@ const EmeraldReport = () => {
 
   const [searchSupplier, setSearchSupplier] = useState<any>('');
   const [searchSubCategory, setSearchSubCategory] = useState<any>('');
+  const [searchByProjectName, setSearchByProjectName] = useState<any>(false);
 
   const HandleSearchInput: any = (e: any) => {
     const { name, value } = e.target;
@@ -37,22 +39,83 @@ const EmeraldReport = () => {
     });
   };
 
-  const handleFilterList: any = () => {
-    const reqParams: any = {
-      token: AccessToken?.token,
-      supplier: searchSupplier,
-      project: searchInputValues?.project,
-      sub_category: searchSubCategory,
+  useEffect(() => {
+    const handleFilterList: any = () => {
+      const reqParams: any = {
+        token: AccessToken?.token,
+        supplier: searchSupplier,
+        project: searchInputValues?.project,
+        sub_category: searchSubCategory,
+      };
+      if (
+        updatedSupplierList?.length > 0 &&
+        updatedSupplierList !== null &&
+        updatedSupplierList.find((data: any) => data === searchSupplier)
+      ) {
+        dispatch(getEmeraldReportData(reqParams));
+      }
+      if (
+        subCategoryList?.length > 0 &&
+        subCategoryList !== null &&
+        subCategoryList.find((data: any) => data === searchSubCategory)
+      ) {
+        dispatch(getEmeraldReportData(reqParams));
+      }
+
+      if (Object.keys(reqParams.project)?.length > 0) {
+        dispatch(getEmeraldReportData(reqParams));
+      }
+
+      const checkNoFilterApply = () => {
+        if (
+          !reqParams.supplier &&
+          !reqParams.project &&
+          !reqParams.sub_category
+        ) {
+          return true;
+        }
+        return false;
+      };
+      if (checkNoFilterApply()) {
+        dispatch(getEmeraldReportData(reqParams));
+      }
     };
-    if (
-      Object?.keys(
-        reqParams?.supplier || reqParams?.project || reqParams?.sub_category
-      )?.length > 0
-    ) {
-      dispatch(getEmeraldReportData(reqParams));
-    } else {
-      toast.error('Search field is empty');
-    }
+
+    handleFilterList();
+  }, [searchInputValues, searchSupplier, searchSubCategory]);
+
+  // useEffect(() => {
+  //   const handleClickOutside = (event: any) => {
+  //     if (
+  //       event.target !== document.getElementById('projectInputFieldInReport')
+  //     ) {
+  //       // Clicked outside the input field, trigger the API call
+  //       console.log('searchh true');
+
+  //       setSearchByProjectName(true);
+  //     }
+  //   };
+
+  //   // Add the event listener
+  //   document.addEventListener('click', handleClickOutside);
+
+  //   // Clean up the event listener when the component unmounts
+  //   return () => {
+  //     document.removeEventListener('click', handleClickOutside);
+  //   };
+  // }, []);
+
+  const handleDownloadReport: any = async () => {
+    // const reqParams: any = {
+    //   token: AccessToken?.token,
+    //   method: 'get_subcategory_report_print',
+    //   entity: 'report_print',
+    // };
+    // let downloadReportApi: any = await DownloadReportApi(reqParams);
+    // console.log('download Report api', downloadReportApi);
+    // if (downloadReportApi?.status === 'success') {
+    //   window.open(downloadReportApi?.data?.print_url);
+    // }
   };
 
   // const filteredList =
@@ -82,8 +145,15 @@ const EmeraldReport = () => {
 
   return (
     <div className="container mb-5 ">
-      <div className="mb-1">
+      <div className="d-flex justify-content-between my-1">
         <h5>Emerald Report</h5>
+        {/* <button
+          type="button"
+          className="btn btn-primary btn-sm py-0 download-report-btn"
+          onClick={handleDownloadReport}
+        >
+          <span className="fs-6">Download Report</span>
+        </button> */}
       </div>
 
       <FilterReportListing
@@ -97,7 +167,7 @@ const EmeraldReport = () => {
         searchSupplier={searchSupplier}
         setSearchSupplier={setSearchSupplier}
         supplierList={updatedSupplierList}
-        handleFilterList={handleFilterList}
+        // handleFilterList={handleFilterList}
       />
 
       <div className="table-responsive report-table-container ">

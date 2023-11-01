@@ -7,6 +7,7 @@ const MasterListing = () => {
     'Category',
     'Sub Category',
     'Huid product',
+    'Supplier',
     'Project Sub Category Mapping',
   ];
 
@@ -21,7 +22,7 @@ const MasterListing = () => {
             const isActive: any = window?.location?.pathname === linkTo;
             return (
               <div
-                className={`mx-lg-3 mx-1 my-1 master-heading p-1 px-2 ${
+                className={`mx-lg-3 mx-1 my-1 master-heading p-1 ${
                   isActive ? 'activePage border-0' : ''
                 }`}
                 key={index}

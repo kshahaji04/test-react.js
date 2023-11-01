@@ -4,12 +4,12 @@ import { useDispatch } from 'react-redux';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
 
-import { get_subcategory_list } from '../../store/slices/Chitti/get-subcategory-slice';
-
 import {
-  getSubCategoryCategory,
-  get_subcategory_category,
-} from '../../store/slices/Master/get-subcategory-category-slice';
+  getSubCategoryList,
+  get_subcategory_list,
+} from '../../store/slices/Chitti/get-subcategory-slice';
+
+import { get_subcategory_category } from '../../store/slices/Master/get-subcategory-category-slice';
 
 const UseSubCategoryHook = () => {
   const dispatch = useDispatch();
@@ -24,9 +24,11 @@ const UseSubCategoryHook = () => {
   const [subCategoryCategoryData, setSubCategoryCategoryData] = useState<any>(
     []
   );
+
+  console.log('subCategoryDataFromStore', subCategoryDataFromStore);
   useEffect(() => {
-    // dispatch(getSubCategoryList(AccessToken?.token));
-    dispatch(getSubCategoryCategory(AccessToken?.token));
+    dispatch(getSubCategoryList(AccessToken?.token));
+    // dispatch(getSubCategoryCategory(AccessToken?.token));
   }, []);
 
   useEffect(() => {

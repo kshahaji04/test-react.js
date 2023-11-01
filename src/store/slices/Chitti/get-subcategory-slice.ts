@@ -5,9 +5,9 @@ import GetSubCategoryListApi from '../../../services/api/Chitti/get-subcategory-
 export const getSubCategoryList: any = createAsyncThunk(
   'getSubCategoryList/getSubCategoryList',
   async (token: any) => {
-    const ClientNameListData: any = await GetSubCategoryListApi(token);
-    console.log('ChittiChallanData res', ClientNameListData);
-    return ClientNameListData;
+    const subcategoryListData: any = await GetSubCategoryListApi(token);
+    console.log('subcategoryListData res', subcategoryListData);
+    return subcategoryListData;
   }
 );
 
@@ -48,7 +48,7 @@ export const GetSubCategoryListScreen = createSlice({
   },
 });
 
-export const get_subcategory_list = (state: RootState) =>
+export const get_subcategory_list: any = (state: RootState) =>
   state.GetSubCategoryListScreen;
 
 export default GetSubCategoryListScreen.reducer;

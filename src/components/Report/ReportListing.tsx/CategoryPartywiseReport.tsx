@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import UseCategoryPartywiseReportHook from '../../../hooks/report/category-partywise-hook';
 import FilterReportListing from './FilterReportListing';
 import UseClientNameHook from '../../../hooks/Master/client-name-hook';
@@ -46,27 +46,61 @@ const CategoryPartyWiseReport = () => {
     });
   };
 
-  const handleFilterList: any = () => {
-    const reqParams: any = {
-      token: AccessToken?.token,
-      category: searchCategory,
-      client_name: searchClientName,
-      from_date: searchInputValues?.fromDate,
-      to_date: searchInputValues?.toDate,
+  console.log('search category', searchCategory);
+
+  useEffect(() => {
+    const handleFilterList: any = () => {
+      const reqParams: any = {
+        token: AccessToken?.token,
+        category: searchCategory,
+        client_name: searchClientName,
+        from_date: searchInputValues?.fromDate,
+        to_date: searchInputValues?.toDate,
+      };
+      if (
+        clientNameList?.length > 0 &&
+        clientNameList !== null &&
+        clientNameList.find((data: any) => data === searchClientName)
+      ) {
+        dispatch(getCategoryPartywiseReportData(reqParams));
+      }
+      if (
+        CategoryList?.length > 0 &&
+        CategoryList !== null &&
+        CategoryList.find((data: any) => data === searchCategory)
+      ) {
+        dispatch(getCategoryPartywiseReportData(reqParams));
+      }
+
+      const checkNoFilterApply = () => {
+        if (
+          !reqParams.category &&
+          !reqParams.client_name &&
+          !reqParams.from_date &&
+          !reqParams.to_date
+        ) {
+          return true;
+        }
+        return false;
+      };
+      if (checkNoFilterApply()) {
+        dispatch(getCategoryPartywiseReportData(reqParams));
+      }
     };
-    console.log('reqq', reqParams);
-    if (
-      Object?.keys(
-        reqParams?.category ||
-          reqParams?.client_name ||
-          reqParams?.from_date ||
-          reqParams?.to_date
-      )?.length > 0
-    ) {
-      dispatch(getCategoryPartywiseReportData(reqParams));
-    } else {
-      toast.error('Search field is empty');
-    }
+
+    handleFilterList();
+  }, [searchInputValues, searchClientName, searchCategory]);
+
+  const handleDownloadReport: any = async () => {
+    // const reqParams: any = {
+    //   token: AccessToken?.token,
+    //   method: 'get_subcategory_report_print',
+    //   entity: 'report_print',
+    // };
+    // let downloadReportApi: any = await DownloadReportApi(reqParams);
+    // if (downloadReportApi?.status === 'success') {
+    //   window.open(downloadReportApi?.data?.print_url);
+    // }
   };
 
   // const filteredList =
@@ -100,8 +134,15 @@ const CategoryPartyWiseReport = () => {
 
   return (
     <div className="container">
-      <div className="mb-1">
+      <div className="my-1 d-flex justify-content-between">
         <h5>Category Partywise Report</h5>
+        {/* <button
+          type="button"
+          className="btn btn-primary btn-sm py-0 download-report-btn"
+          onClick={handleDownloadReport}
+        >
+          <span className="fs-6">Download Report</span>
+        </button> */}
       </div>
       <FilterReportListing
         clientNameList={clientNameList}
@@ -114,7 +155,7 @@ const CategoryPartyWiseReport = () => {
         showCategoryInFilter={showCategoryInFilter}
         showClientNameInFilter={showClientNameInFilter}
         showDateInFilter={showDateInFilter}
-        handleFilterList={handleFilterList}
+        // handleFilterList={handleFilterList}
       />
       <div className="table-responsive  report-table-container mb-5">
         <table className="table table-striped table-hover ">

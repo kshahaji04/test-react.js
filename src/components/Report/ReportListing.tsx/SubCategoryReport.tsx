@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import UseSubCategoryReportHook from '../../../hooks/report/subCategory-report-hook';
 import FilterReportListing from './FilterReportListing';
 import UseClientNameHook from '../../../hooks/Master/client-name-hook';
@@ -6,10 +6,10 @@ import UseCategoryHook from '../../../hooks/Master/category-hook';
 import UseSubCategoryHook from '../../../hooks/Master/sub-category-hook';
 import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
 import { useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
 import { getSubCategoryReportData } from '../../../store/slices/report/get-subcategory-report-slice';
+import DownloadReportApi from '../../../services/api/report/download-report-api';
 
 const SubCategoryReport = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const SubCategoryReport = () => {
   const { subCategoryList }: any = UseSubCategoryHook();
   const AccessToken: any = useSelector(get_access_token);
 
-  console.log('SubcategoryReport data', subCategoryReportData);
+  console.log('SubcategoryReport data', subCategoryList);
 
   const [searchInputValues, setSearchInputValues] = useState({
     fromDate: '',
@@ -44,27 +44,87 @@ const SubCategoryReport = () => {
     });
   };
 
-  const handleFilterList: any = () => {
+  useEffect(() => {
+    const handleFilterList: any = () => {
+      const reqParams: any = {
+        token: AccessToken?.token,
+        category: searchCategory,
+        sub_category: searchSubCategory,
+        client_name: searchClientName,
+        from_date: searchInputValues?.fromDate,
+        to_date: searchInputValues?.toDate,
+      };
+
+      if (
+        CategoryList?.length > 0 &&
+        CategoryList !== null &&
+        CategoryList.find((data: any) => data === searchCategory)
+      ) {
+        dispatch(getSubCategoryReportData(reqParams));
+      }
+      if (
+        subCategoryList?.length > 0 &&
+        subCategoryList !== null &&
+        subCategoryList.find((data: any) => data === searchSubCategory)
+      ) {
+        dispatch(getSubCategoryReportData(reqParams));
+      }
+      if (
+        clientNameList?.length > 0 &&
+        clientNameList !== null &&
+        clientNameList.find((data: any) => data === searchClientName)
+      ) {
+        dispatch(getSubCategoryReportData(reqParams));
+      }
+
+      const checkNoFilterApply = () => {
+        if (
+          !reqParams.category &&
+          !reqParams.sub_category &&
+          !reqParams.client_name &&
+          !reqParams.from_date &&
+          !reqParams.to_date
+        ) {
+          return true;
+        }
+        return false;
+      };
+      if (checkNoFilterApply()) {
+        dispatch(getSubCategoryReportData(reqParams));
+      }
+    };
+    handleFilterList();
+  }, [searchInputValues, searchCategory, searchSubCategory, searchClientName]);
+
+  // const handleFilterList: any = () => {
+  //   const reqParams: any = {
+  //     token: AccessToken?.token,
+  //     category: searchCategory,
+  //     sub_category: searchSubCategory,
+  //     client_name: searchClientName,
+  //     from_date: searchInputValues?.fromDate,
+  //     to_date: searchInputValues?.toDate,
+  //   };
+
+  //   dispatch(getSubCategoryReportData(reqParams));
+
+  // };
+
+  const handleDownloadReport: any = async () => {
     const reqParams: any = {
       token: AccessToken?.token,
+      method: 'get_subcategory_report_print',
+      entity: 'report_print',
       category: searchCategory,
       sub_category: searchSubCategory,
       client_name: searchClientName,
       from_date: searchInputValues?.fromDate,
       to_date: searchInputValues?.toDate,
     };
-    if (
-      Object?.keys(
-        reqParams?.category ||
-          reqParams?.sub_category ||
-          reqParams?.client_name ||
-          reqParams?.from_date ||
-          reqParams?.to_date
-      )?.length > 0
-    ) {
-      dispatch(getSubCategoryReportData(reqParams));
-    } else {
-      toast.error('Search field is empty');
+    let downloadReportApi: any = await DownloadReportApi(reqParams);
+
+    if (downloadReportApi?.status === 'success') {
+      window.open(downloadReportApi?.data?.print_url);
     }
   };
 
@@ -107,8 +167,15 @@ const SubCategoryReport = () => {
 
   return (
     <div className="container mb-5">
-      <div className="mb-1">
+      <div className="my-1 d-flex justify-content-between">
         <h5>Sub Category Report</h5>
+        <button
+          type="button"
+          className="btn btn-primary btn-sm py-0 download-report-btn"
+          onClick={handleDownloadReport}
+        >
+          <span className="fs-6">Download Report</span>
+        </button>
       </div>
       <FilterReportListing
         clientNameList={clientNameList}
@@ -125,7 +192,7 @@ const SubCategoryReport = () => {
         showClientNameInFilter={showClientNameInFilter}
         showDateInFilter={showDateInFilter}
         subCategoryList={subCategoryList}
-        handleFilterList={handleFilterList}
+        // handleFilterList={handleFilterList}
       />
       <div className="table-responsive report-table-container">
         <table className="table table-striped table-hover">

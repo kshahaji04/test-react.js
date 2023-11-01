@@ -161,7 +161,7 @@ const NarrationTable = ({
                     key={row.id}
                     rowId={row.id}
                     HandleData={HandleCategory}
-                    placeholderValue="Sub Category"
+                    placeholderValue="HUID Product"
                     selectedDropdownValue={row.sub_category}
                     setSelectedDropdownValue={(value: any) =>
                       HandleCategory(value, row.id)
