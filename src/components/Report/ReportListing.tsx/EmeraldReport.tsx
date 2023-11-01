@@ -15,7 +15,6 @@ const EmeraldReport = () => {
   const { subCategoryList }: any = UseSubCategoryHook();
   const { updatedSupplierList }: any = UseDataUploadHook();
   console.log('subCategoryList in tsx', subCategoryList);
-  const inputFieldInOtherComponentRef = useRef(null);
 
   const AccessToken: any = useSelector(get_access_token);
 
@@ -29,7 +28,6 @@ const EmeraldReport = () => {
 
   const [searchSupplier, setSearchSupplier] = useState<any>('');
   const [searchSubCategory, setSearchSubCategory] = useState<any>('');
-  const [searchByProjectName, setSearchByProjectName] = useState<any>(false);
 
   const HandleSearchInput: any = (e: any) => {
     const { name, value } = e.target;
@@ -105,18 +103,18 @@ const EmeraldReport = () => {
   //   };
   // }, []);
 
-  const handleDownloadReport: any = async () => {
-    // const reqParams: any = {
-    //   token: AccessToken?.token,
-    //   method: 'get_subcategory_report_print',
-    //   entity: 'report_print',
-    // };
-    // let downloadReportApi: any = await DownloadReportApi(reqParams);
-    // console.log('download Report api', downloadReportApi);
-    // if (downloadReportApi?.status === 'success') {
-    //   window.open(downloadReportApi?.data?.print_url);
-    // }
-  };
+  // const handleDownloadReport: any = async () => {
+  // const reqParams: any = {
+  //   token: AccessToken?.token,
+  //   method: 'get_subcategory_report_print',
+  //   entity: 'report_print',
+  // };
+  // let downloadReportApi: any = await DownloadReportApi(reqParams);
+  // console.log('download Report api', downloadReportApi);
+  // if (downloadReportApi?.status === 'success') {
+  //   window.open(downloadReportApi?.data?.print_url);
+  // }
+  // };
 
   // const filteredList =
   //   emeraldReportData?.length > 0 &&

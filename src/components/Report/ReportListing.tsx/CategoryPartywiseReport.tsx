@@ -4,7 +4,6 @@ import FilterReportListing from './FilterReportListing';
 import UseClientNameHook from '../../../hooks/Master/client-name-hook';
 import UseCategoryHook from '../../../hooks/Master/category-hook';
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 import { get_chitti_challan } from '../../../store/slices/Chitti/get-chitti-challan-list-slice';
 import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
 import { useDispatch } from 'react-redux';
@@ -91,17 +90,17 @@ const CategoryPartyWiseReport = () => {
     handleFilterList();
   }, [searchInputValues, searchClientName, searchCategory]);
 
-  const handleDownloadReport: any = async () => {
-    // const reqParams: any = {
-    //   token: AccessToken?.token,
-    //   method: 'get_subcategory_report_print',
-    //   entity: 'report_print',
-    // };
-    // let downloadReportApi: any = await DownloadReportApi(reqParams);
-    // if (downloadReportApi?.status === 'success') {
-    //   window.open(downloadReportApi?.data?.print_url);
-    // }
-  };
+  // const handleDownloadReport: any = async () => {
+  // const reqParams: any = {
+  //   token: AccessToken?.token,
+  //   method: 'get_subcategory_report_print',
+  //   entity: 'report_print',
+  // };
+  // let downloadReportApi: any = await DownloadReportApi(reqParams);
+  // if (downloadReportApi?.status === 'success') {
+  //   window.open(downloadReportApi?.data?.print_url);
+  // }
+  // };
 
   // const filteredList =
   //   categoryPartywiseReportData?.length > 0 &&

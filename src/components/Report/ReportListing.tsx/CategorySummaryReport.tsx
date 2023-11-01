@@ -5,7 +5,6 @@ import UseCategoryHook from '../../../hooks/Master/category-hook';
 import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
-
 import { useDispatch } from 'react-redux';
 import { getCategorySummaryReportData } from '../../../store/slices/report/get-category-summary-report-slice';
 
@@ -66,16 +65,16 @@ const CategorySummaryReport = () => {
     handleFilterList();
   }, [searchInputValues, searchCategory]);
 
-  const handleDownloadReport: any = async () => {
-    // const reqParams: any = {
-    //   token: AccessToken?.token,
-    //   method: 'get_subcategory_report_print',
-    //   entity: 'report_print',
-    // };
-    // let downloadReportApi: any = await DownloadReportApi(reqParams);
-    // console.log('download Report api', downloadReportApi);
-    // window.open();
-  };
+  // const handleDownloadReport: any = async () => {
+  // const reqParams: any = {
+  //   token: AccessToken?.token,
+  //   method: 'get_subcategory_report_print',
+  //   entity: 'report_print',
+  // };
+  // let downloadReportApi: any = await DownloadReportApi(reqParams);
+  // console.log('download Report api', downloadReportApi);
+  // window.open();
+  // };
 
   // const filteredList =
   //   categorySummaryReportData?.length > 0 &&
