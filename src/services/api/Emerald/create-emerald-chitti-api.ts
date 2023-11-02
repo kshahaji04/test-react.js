@@ -6,8 +6,8 @@ const CreateEmeraldChittiApi = async (request: any) => {
 
   let response: any;
   const version = 'v1';
-  const method = 'create_emeralds_chitti';
-  const entity = 'emerald_chitti';
+  const method = 'create_emerald_subcategory_new';
+  const entity = 'emerald_chitti_subcategory';
 
   const params = `/api/method/challan.sdk.api`;
 

@@ -306,21 +306,18 @@ const UseChittiHook = () => {
           );
         }
 
-        if (
-          CreateChittiApiRes?.status === 200 &&
-          CreateChittiApiRes?.hasOwnProperty('data')
-        ) {
+        if (CreateChittiApiRes?.data?.message?.msg === 'success') {
           toast.success('Chitti Created');
-          navigate(`${CreateChittiApiRes?.data?.data?.name}`);
+          navigate(`${CreateChittiApiRes?.data?.message?.data}`);
 
           await UpdateDocStatusChallanApi(
             AccessToken?.token,
             '0',
-            CreateChittiApiRes?.data?.data?.name
+            CreateChittiApiRes?.data?.message?.data
           );
 
           setShowSubmitButtonAfterCreateChitti(
-            CreateChittiApiRes?.data?.data?.name
+            CreateChittiApiRes?.data?.message?.data
           );
           dispatch(getChittiChallan(AccessToken?.token));
         } else {

@@ -264,13 +264,13 @@ const UseEmeraldHook = () => {
         );
       }
 
-      if (createEmeraldChittiApiRes?.data?.message?.status === 'success') {
+      if (createEmeraldChittiApiRes?.data?.message?.msg === 'success') {
         toast.success('Emerald Chitti Created');
-        navigate(`${createEmeraldChittiApiRes?.data?.message?.data?.name}`);
+        navigate(`${createEmeraldChittiApiRes?.data?.message?.data}`);
         await UpdateDocStatusEmeraldChittiApi(
           AccessToken?.token,
           '0',
-          createEmeraldChittiApiRes?.data?.message?.data?.name
+          createEmeraldChittiApiRes?.data?.message?.data
         );
 
         setShowSubmitButtonAfterCreateChitti(
