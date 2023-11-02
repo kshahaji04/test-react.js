@@ -52,6 +52,11 @@ const EmeraldReport = () => {
       ) {
         dispatch(getEmeraldReportData(reqParams));
       }
+
+      if ((reqParams?.from_date || reqParams?.to_date)?.length > 0) {
+        dispatch(getEmeraldReportData(reqParams));
+      }
+
       if (
         subCategoryList?.length > 0 &&
         subCategoryList !== null &&
