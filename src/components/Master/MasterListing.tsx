@@ -7,6 +7,7 @@ const MasterListing = () => {
     'Category',
     'Sub Category',
     'Huid product',
+    'Supplier Group',
     'Supplier',
     'Project Sub Category Mapping',
   ];
@@ -22,7 +23,7 @@ const MasterListing = () => {
             const isActive: any = window?.location?.pathname === linkTo;
             return (
               <div
-                className={`mx-lg-3 mx-1 my-1 master-heading p-1 ${
+                className={`mx-lg-2 mx-1 my-1 master-heading p-1 ${
                   isActive ? 'activePage border-0' : ''
                 }`}
                 key={index}
@@ -35,7 +36,7 @@ const MasterListing = () => {
                 >
                   <div className="rounded-4">
                     <div className="d-flex justify-content-center align-items-center master-listing-card-body">
-                      <h6 className="card-title me-1 m-0">{data}</h6>
+                      <div className="card-title me-1 m-0">{data}</div>
                       <i className="fa-solid fa-arrow-turn-down d-flex align-items-center master-head-icon"></i>
                     </div>
                   </div>

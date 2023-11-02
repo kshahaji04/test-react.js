@@ -1,26 +1,25 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import LoadMoreTableDataInMaster from '../LoadMoreTableDataInMaster';
+import LoadMoreTableDataInMaster from './LoadMoreTableDataInMaster';
 
-const HuidProductListing = ({ huidProductData }: any) => {
+const SingleItemListingInMaster = ({ listingData, heading }: any) => {
   const [tableViewData, setTableViewData] = useState<any>(20);
 
   const HandleTableViewRows: any = (data: any) => {
     setTableViewData(data);
   };
-
   return (
     <div className="container border mt-2">
       <table className="table table-striped mt-2">
         <thead>
           <tr className="text-start table-heading table-heading-row">
-            <th scope="col ">Huid Product</th>
+            <th scope="col ">{heading}</th>
           </tr>
         </thead>
         <tbody>
-          {huidProductData?.length > 0 &&
-            huidProductData !== null &&
-            huidProductData
+          {listingData?.length > 0 &&
+            listingData !== null &&
+            listingData
               .slice(0, tableViewData)
               .map((group: any, index: any) => {
                 return (
@@ -37,7 +36,7 @@ const HuidProductListing = ({ huidProductData }: any) => {
                 );
               })}
 
-          {huidProductData?.length > 10 && huidProductData !== null && (
+          {listingData?.length > 20 && listingData !== null && (
             <LoadMoreTableDataInMaster
               HandleTableViewRows={HandleTableViewRows}
             />
@@ -48,4 +47,4 @@ const HuidProductListing = ({ huidProductData }: any) => {
   );
 };
 
-export default HuidProductListing;
+export default SingleItemListingInMaster;

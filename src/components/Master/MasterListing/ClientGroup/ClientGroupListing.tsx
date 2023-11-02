@@ -36,7 +36,7 @@ const ClientGroupListing = ({ clientGroupList }: any) => {
                 );
               })}
 
-          {clientGroupList?.length > 10 && clientGroupList !== null && (
+          {clientGroupList?.length > 20 && clientGroupList !== null && (
             <LoadMoreTableDataInMaster
               HandleTableViewRows={HandleTableViewRows}
             />

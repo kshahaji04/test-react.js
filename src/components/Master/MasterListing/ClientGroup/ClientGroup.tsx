@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import ClientGroupListing from './ClientGroupListing';
+
 import AddClientGroup from './AddClientGroup';
 import UseClientGroupHook from '../../../../hooks/Master/client-group-hook';
 import MasterSingleListingSearch from '../MasterSingleListingSearch';
+import SingleItemListingInMaster from '../SingleItemListingInMaster';
 
 const ClientGroup = () => {
   const { clientGroupList } = UseClientGroupHook();
@@ -38,7 +39,11 @@ const ClientGroup = () => {
                   placeholder="Enter Client group"
                   HandleSearchInput={HandleSearchInput}
                 />
-                <ClientGroupListing clientGroupList={filterList} />
+                <SingleItemListingInMaster
+                  listingData={filterList}
+                  heading="Client Group"
+                />
+                {/* <ClientGroupListing clientGroupList={filterList} /> */}
               </Tab>
               <Tab eventKey="longer-tab" title="Add Client Group">
                 <AddClientGroup />

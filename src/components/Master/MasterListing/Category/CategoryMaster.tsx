@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import CategoryListing from './CategoryListing';
 import AddCategory from './AddCategory';
 import UseCategoryHook from '../../../../hooks/Master/category-hook';
 import MasterSingleListingSearch from '../MasterSingleListingSearch';
+import SingleItemListingInMaster from '../SingleItemListingInMaster';
 
 const CategoryMaster = () => {
   const { CategoryList }: any = UseCategoryHook();
@@ -23,7 +23,7 @@ const CategoryMaster = () => {
 
   return (
     <div className="container">
-      <div className="container mt-3">
+      <div className="container my-3">
         <div className="row justify-content-center">
           <div className="col-lg-12 chitti-nav-tabs tab-container">
             <Tabs
@@ -37,7 +37,10 @@ const CategoryMaster = () => {
                   placeholder="Enter Category"
                   HandleSearchInput={HandleSearchInput}
                 />
-                <CategoryListing CategoryList={filterList} />
+                <SingleItemListingInMaster
+                  listingData={filterList}
+                  heading="Category"
+                />
               </Tab>
               <Tab eventKey="chitti-listing" title="Add Category">
                 <AddCategory />

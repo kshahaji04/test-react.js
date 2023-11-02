@@ -64,7 +64,7 @@ const UseChittiHook = () => {
   const [remarks, setRemarks] = useState<any>('');
   const [clientGroupName, setClientGroupName] = useState<any>('');
   const [date, setDate] = useState<any>(
-    new Date()?.toISOString()?.split('T')[0]
+    new Date().toLocaleDateString('en-GB').split('/').join('-')
   );
   const [stateForDocStatus, setStateForDocStatus] = useState<boolean>(false);
   const [
@@ -189,7 +189,7 @@ const UseChittiHook = () => {
     let updateDocStatus: any = await UpdateDocStatusWithSubmittedChallanApi(
       AccessToken?.token,
       '1',
-      date,
+      new Date()?.toISOString()?.split('T')[0],
       showSubmitButtonAfterCreateChitti?.length > 0
         ? showSubmitButtonAfterCreateChitti
         : id

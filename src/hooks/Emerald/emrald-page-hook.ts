@@ -48,6 +48,7 @@ const UseEmeraldHook = () => {
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
   const [subCategoryList, setSubCategoryList] = useState<any>([]);
   const [clientGroupList, setClientGroupList] = useState<any>([]);
+
   const [currentDate, setCurrentDate] = useState<any>(new Date());
   const [transactionDate, setTransactionDate] = useState<any>(
     new Date()?.toISOString()?.split('T')[0]
@@ -156,7 +157,7 @@ const UseEmeraldHook = () => {
       await UpdateDocStatusWithSubmittedEmeraldChittiApi(
         AccessToken?.token,
         '1',
-        transactionDate,
+        new Date()?.toISOString()?.split('T')[0],
         showSubmitButtonAfterCreateChitti?.length > 0
           ? showSubmitButtonAfterCreateChitti
           : id
@@ -263,20 +264,17 @@ const UseEmeraldHook = () => {
         );
       }
 
-      if (
-        createEmeraldChittiApiRes?.status === 200 &&
-        createEmeraldChittiApiRes?.hasOwnProperty('data')
-      ) {
+      if (createEmeraldChittiApiRes?.data?.message?.status === 'success') {
         toast.success('Emerald Chitti Created');
-        navigate(`${createEmeraldChittiApiRes?.data?.data?.name}`);
+        navigate(`${createEmeraldChittiApiRes?.data?.message?.data?.name}`);
         await UpdateDocStatusEmeraldChittiApi(
           AccessToken?.token,
           '0',
-          createEmeraldChittiApiRes?.data?.data?.name
+          createEmeraldChittiApiRes?.data?.message?.data?.name
         );
 
         setShowSubmitButtonAfterCreateChitti(
-          createEmeraldChittiApiRes?.data?.data?.name
+          createEmeraldChittiApiRes?.data?.message?.data?.name
         );
         dispatch(getEmeraldChallan(AccessToken?.token));
       } else {

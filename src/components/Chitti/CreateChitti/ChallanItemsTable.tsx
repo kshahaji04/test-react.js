@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import CustomDropdownForTable from '../../CustomDropdownForTable';
 
@@ -13,6 +13,7 @@ const ChallanItemsTable = ({
 }: any) => {
   const [amountValue, setamountValue] = useState<any>({
     sub_category: '',
+    category: '',
     gross_weight: 0,
     net_weight: 0,
     amount: 0,
@@ -20,6 +21,7 @@ const ChallanItemsTable = ({
 
   console.log('initial table data', tableData);
 
+  const showCategoryDropdown: any = useRef<any>(true);
   useEffect(() => {
     if (
       defaultData?.length > 0 &&
@@ -124,6 +126,14 @@ const ChallanItemsTable = ({
     setStateForDocStatus(true);
   };
 
+  const HandleCategoryForNewSubcategory = (value: any, id: any) => {
+    console.log('handlecategory', value);
+    const updatedData = tableData.map((row: any) =>
+      row.id === id ? { ...row, category: value } : row
+    );
+    setTableData(updatedData);
+  };
+
   const HandleGrossWeightValue = (e: any, id: any) => {
     console.log('gross', e.target.value, id);
     const inputValue = parseFloat(e.target.value);
@@ -197,39 +207,13 @@ const ChallanItemsTable = ({
                           defaultData={row.sub_category}
                           setStateForDocStatus={setStateForDocStatus}
                           readOnly={readOnly === true ? true : false}
+                          HandleCategoryData={HandleCategoryForNewSubcategory}
+                          setSelectedCategoryForSubcategory={(value: any) =>
+                            HandleCategoryForNewSubcategory(value, row.id)
+                          }
+                          showCategoryDropdown={showCategoryDropdown}
                         />
                       </div>
-                      {/* <select
-                        id="subcategory"
-                        name="subcategory"
-                        className="form-select p-0 custom-input-field "
-                        aria-label=".form-select-sm example"
-                        value={row.sub_category}
-                        onChange={(e) => HandleSubCategory(e, row.id)}
-                        disabled={readOnly === true ? true : false}
-                      >
-                        <option defaultValue={row.sub_category}></option>
-
-                        {subCategoryList?.length > 0 &&
-                        subCategoryList !== null ? (
-                          <>
-                            {subCategoryList.map(
-                              (category: any, index: any) => {
-                                return (
-                                  <option
-                                    defaultValue={row.sub_category}
-                                    key={index}
-                                  >
-                                    {category}
-                                  </option>
-                                );
-                              }
-                            )}
-                          </>
-                        ) : (
-                          ''
-                        )}
-                      </select> */}
                     </td>
                     <td className="table-data-input">
                       <input

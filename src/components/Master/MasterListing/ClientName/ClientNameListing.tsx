@@ -50,7 +50,7 @@ const ClientNameListing = ({ clientNameClientGroupList }: any) => {
                   </tr>
                 ))}
 
-            {clientNameClientGroupList?.length > 10 &&
+            {clientNameClientGroupList?.length > 20 &&
               clientNameClientGroupList !== null && (
                 <LoadMoreTableDataInMaster
                   HandleTableViewRows={HandleTableViewRows}

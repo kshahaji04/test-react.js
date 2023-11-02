@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import { get_category_list } from '../store/slices/Master/get-category-slice';
+import { useSelector } from 'react-redux';
 
 const CustomDropdownForTable = ({
   drowpdownlist,
@@ -6,13 +8,19 @@ const CustomDropdownForTable = ({
   bgColor,
   setSelectedDropdownValue,
   HandleData,
+  setSelectedCategoryForSubcategory,
+  HandleCategoryData,
   defaultData,
   setStateForDocStatus,
+  showCategoryDropdown,
   title,
   readOnly,
   rowId,
   data, // Pass a unique index for each instance
 }: any) => {
+  const categoryDataFromStore: any = useSelector(get_category_list);
+  console.log('CategoryDataFromStore', categoryDataFromStore);
+
   const [showDropDown, setShowDropdown] = useState(false);
   const [noRecords, setNoRecordsFound] = useState(false);
   const [filterDropdownList, setFilterDropdownList] = useState([]);
@@ -37,6 +45,11 @@ const CustomDropdownForTable = ({
     HandleData(data, rowId);
   };
 
+  const HandleSelectedCategory: any = (e: any) => {
+    setSelectedCategoryForSubcategory(e.target.value);
+    HandleCategoryData(e.target.value, rowId);
+  };
+
   const HandleInputField = (e: any) => {
     setShowDropdown(true); // Open the dropdown when typing
     setSelectedDropdownValue(e.target.value);
@@ -59,27 +72,14 @@ const CustomDropdownForTable = ({
     }
   };
 
-  // useEffect(() => {
-  //   const handleDocumentClick = (e: any) => {
-  //     if (!e.target.closest(`.dropdown-input-container-${dropdownIndex}`)) {
-  //       setShowDropdown(false);
-  //     }
-  //   };
-
-  //   document.addEventListener('click', handleDocumentClick);
-
-  //   return () => {
-  //     document.removeEventListener('click', handleDocumentClick);
-  //   };
-  // }, [dropdownIndex, showDropDown]);
-
   useEffect(() => {
     // for close dropdown when click outside
     const handleDocumentClick = (e: any) => {
       // Check if the input element itself was clicked
       if (
         e?.target !== inputRef?.current &&
-        !inputRef?.current?.contains(e.target)
+        !inputRef?.current?.contains(e.target) &&
+        !document?.querySelector('.form-select-sm')?.contains(e?.target)
       ) {
         setShowDropdown(false);
       }
@@ -98,6 +98,9 @@ const CustomDropdownForTable = ({
     }
   };
 
+  const handleOnFocus: any = (e: any) => {
+    console.log('onfocus', e.target.value);
+  };
   return (
     <>
       <div className="dropdown-input-container">
@@ -119,6 +122,7 @@ const CustomDropdownForTable = ({
           title={title}
           readOnly={readOnly}
           ref={inputRef}
+          onFocus={handleOnFocus}
         />
         {showDropDown && (
           <ul
@@ -148,6 +152,36 @@ const CustomDropdownForTable = ({
                     {list}
                   </li>
                 ))}
+              </>
+            )}
+
+            {categoryDataFromStore?.data?.length > 0 && (
+              <>
+                {showCategoryDropdown && filterDropdownList?.length === 0 && (
+                  <>
+                    {/* <div className="text-uppercase px-2 mt-1">Category</div> */}
+                    <li className="dropdown-list p-1">
+                      <select
+                        className="form-select form-select-sm "
+                        aria-label="Default select example"
+                        onChange={HandleSelectedCategory}
+                      >
+                        <option>Select Category</option>
+                        {categoryDataFromStore?.data?.length > 0 &&
+                          categoryDataFromStore?.data !== null &&
+                          categoryDataFromStore?.data.map(
+                            (value: any, index: any) => {
+                              return (
+                                <>
+                                  <option key={index}>{value}</option>
+                                </>
+                              );
+                            }
+                          )}
+                      </select>
+                    </li>
+                  </>
+                )}
               </>
             )}
           </ul>

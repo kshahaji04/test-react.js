@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import AddClientGroupApi from '../../../../services/api/Master/add-client-group-api';
 import { toast } from 'react-toastify';
 import { getClientGroupList } from '../../../../store/slices/Chitti/get-client-group-list-slice';
+import CreateNewProductData from '../CreateNewProductData';
 
 const AddClientGroup = () => {
   const dispatch = useDispatch();
@@ -29,40 +30,28 @@ const AddClientGroup = () => {
     }
   };
 
+  // const HandleKeyDownFun: any = (e: any) => {
+  //   console.log('eee', e);
+  //   if (e.key === 'Enter') {
+  //     HandleSubmit();
+  //   }
+  // };
+
   const HandleInputValue = (e: any) => {
     setError('');
     setTitle(e.target.value);
     setInputValue(e.target.value);
   };
   return (
-    <div className="container mt-1">
-      <label htmlFor="basic-url " className="fs-6 mb-1 text-center">
-        Title
-      </label>
-      <span className="text-danger">*</span>
-      <div className="input-group mb-1 w-50 master-input-field">
-        <input
-          type="text"
-          name="title"
-          className="form-control ps-2"
-          id="basic-url"
-          aria-describedby="basic-addon3"
-          onChange={HandleInputValue}
-          value={inputValue}
-          required
-        />
-      </div>
-      <div className=""> {error && <p className="text-danger">{error}</p>}</div>
-      <div className="d-flex justify-content-start ">
-        <button
-          type="submit"
-          onClick={HandleSubmit}
-          className=" btn btn-outline-primary py-1 mt-2 form-submit-button"
-        >
-          Save
-        </button>
-      </div>
-    </div>
+    <>
+      <CreateNewProductData
+        inputValue={inputValue}
+        HandleInputValue={HandleInputValue}
+        error={error}
+        HandleSubmit={HandleSubmit}
+        // HandleKeyDownFun={HandleKeyDownFun}
+      />
+    </>
   );
 };
 

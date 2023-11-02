@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import CustomDropdownForTable from '../../CustomDropdownForTable';
 
 const EmeraldChittiTable = ({
@@ -12,11 +12,14 @@ const EmeraldChittiTable = ({
 }: any) => {
   const [amountValue, setamountValue] = useState<any>({
     sub_category: '',
+    category: '',
     product: '',
     gross_weight: 0,
     net_weight: 0,
     amount: 0,
   });
+
+  const showCategoryDropdown: any = useRef<any>(true);
 
   console.log('productItemList', productItemList);
 
@@ -141,6 +144,13 @@ const EmeraldChittiTable = ({
       setStateForDocStatus(true);
     }
   };
+  const HandleCategoryForNewSubcategory = (value: any, id: any) => {
+    console.log('handlecategory', value);
+    const updatedData = tableData.map((row: any) =>
+      row.id === id ? { ...row, category: value } : row
+    );
+    setTableData(updatedData);
+  };
 
   const HandleProductItem = (value: any, id: any) => {
     console.log('handlecategory', value);
@@ -216,8 +226,8 @@ const EmeraldChittiTable = ({
                             data={row.sub_category}
                             key={row.id}
                             rowId={row.id}
-                            HandleData={HandleSubCategory}
                             placeholderValue="Sub Category"
+                            HandleData={HandleSubCategory}
                             selectedDropdownValue={row.sub_category}
                             setSelectedDropdownValue={(value: any) =>
                               HandleSubCategory(value, row.id)
@@ -226,6 +236,11 @@ const EmeraldChittiTable = ({
                             setStateForDocStatus={setStateForDocStatus}
                             readOnly={readOnly === true ? true : false}
                             dropdownIndex={row.id}
+                            HandleCategoryData={HandleCategoryForNewSubcategory}
+                            setSelectedCategoryForSubcategory={(value: any) =>
+                              HandleCategoryForNewSubcategory(value, row.id)
+                            }
+                            showCategoryDropdown={showCategoryDropdown}
                           />
                         </div>
                       </td>
@@ -252,30 +267,6 @@ const EmeraldChittiTable = ({
                             dropdownIndex={row.id}
                           />
                         </div>
-
-                        {/* <select
-                          id="category"
-                          name="category"
-                          className="form-select p-0 custom-input-field "
-                          aria-label=".form-select-sm example"
-                          value={row.product}
-                          onChange={(e) => HandleProductItem(e, row.id)}
-                          disabled={readOnly === true ? true : false}
-                        >
-                          <option defaultValue={row.product}></option>
-                          {productItemList?.length > 0 &&
-                            productItemList !== null && (
-                              <>
-                                {productItemList.map(
-                                  (product: any, index: any) => (
-                                    <option key={index}>
-                                      {Object?.values(product)}
-                                    </option>
-                                  )
-                                )}
-                              </>
-                            )}
-                        </select> */}
                       </td>
                       <td className="table-data-input">
                         <input

@@ -55,6 +55,10 @@ const SubCategoryReport = () => {
         to_date: searchInputValues?.toDate,
       };
 
+      if ((reqParams?.from_date || reqParams?.to_date)?.length > 0) {
+        dispatch(getSubCategoryReportData(reqParams));
+      }
+
       if (
         CategoryList?.length > 0 &&
         CategoryList !== null &&
@@ -69,6 +73,7 @@ const SubCategoryReport = () => {
       ) {
         dispatch(getSubCategoryReportData(reqParams));
       }
+
       if (
         clientNameList?.length > 0 &&
         clientNameList !== null &&

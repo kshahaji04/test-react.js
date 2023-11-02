@@ -31,6 +31,7 @@ const EmeraldChittiMaster = () => {
     setClientGroupName,
   }: any = UseEmeraldHook();
   const { subCategoryList }: any = UseSubCategoryHook();
+
   const todayDate: any = currentDate?.toISOString()?.split('T')[0];
   const [searchClientName, setSearchclientName] = useState<any>('');
   const [searchInputValues, setSearchInputValues] = useState({

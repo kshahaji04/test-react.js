@@ -9,10 +9,10 @@ const App = () => {
       <div>
         <ToastContainer
           position="top-right"
-          autoClose={7000}
+          autoClose={6000}
           hideProgressBar={false}
           newestOnTop={false}
-          draggable={false}
+          draggable={true}
           // pauseOnVisibilityChange
           closeOnClick
           pauseOnHover

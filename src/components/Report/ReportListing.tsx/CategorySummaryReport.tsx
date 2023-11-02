@@ -51,6 +51,10 @@ const CategorySummaryReport = () => {
         dispatch(getCategorySummaryReportData(reqParams));
       }
 
+      if ((reqParams?.from_date || reqParams?.to_date)?.length > 0) {
+        dispatch(getCategoryPartywiseReportData(reqParams));
+      }
+
       const checkNoFilterApply = () => {
         if (!reqParams.category && !reqParams.from_date && !reqParams.to_date) {
           return true;

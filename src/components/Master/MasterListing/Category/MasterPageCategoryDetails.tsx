@@ -17,15 +17,6 @@ const MasterPageCategoryDetails = () => {
             >
               Back
             </button>
-            {/* {showSubmitButton && (
-              <button
-                type="submit"
-                onClick={HandleSubmit}
-                className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
-              >
-                Save
-              </button>
-            )} */}
           </div>
         </div>
         <div className="my-2 p-4">
@@ -44,10 +35,6 @@ const MasterPageCategoryDetails = () => {
               readOnly
             />
           </div>
-          {/* <div className="">
-            {' '}
-            {error && <p className="text-danger">{error}</p>}
-          </div> */}
         </div>
       </div>
     </div>

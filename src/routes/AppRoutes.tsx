@@ -31,6 +31,7 @@ import EmeraldShilpiDetails from '../components/DataUpload/EmeraldShilpi/Emerald
 import ProjectSubCategoryMappingMaster from '../components/Master/MasterListing/ProjectSubCategoryMapping/ProjectSubCategoryMappingMaster';
 import MasterPageProjectSubCategoryMapping from '../components/Master/MasterListing/ProjectSubCategoryMapping/MasterPageProjectSubCategoryMapping';
 import Supplier from '../components/Master/MasterListing/Supplier/Supplier';
+import SupplierGroup from '../components/Master/MasterListing/SupplierGroup/SupplierGroup';
 
 const AppRoutes = () => {
   return (
@@ -46,15 +47,7 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
-        {/* <Route
-          path="/master/challanlist"
-          element={
-            <ProtectedRoute>
-              <MasterPage />
-              <ChallanList />
-            </ProtectedRoute>
-          }
-        /> */}
+
         <Route
           path="/master/clientgroup"
           element={
@@ -106,6 +99,15 @@ const AppRoutes = () => {
             <ProtectedRoute>
               <MasterPage />
               <Supplier />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/master/suppliergroup"
+          element={
+            <ProtectedRoute>
+              <MasterPage />
+              <SupplierGroup />
             </ProtectedRoute>
           }
         />

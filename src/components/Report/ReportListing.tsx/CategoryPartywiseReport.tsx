@@ -71,6 +71,10 @@ const CategoryPartyWiseReport = () => {
         dispatch(getCategoryPartywiseReportData(reqParams));
       }
 
+      if ((reqParams?.from_date || reqParams?.to_date)?.length > 0) {
+        dispatch(getCategoryPartywiseReportData(reqParams));
+      }
+
       const checkNoFilterApply = () => {
         if (
           !reqParams.category &&

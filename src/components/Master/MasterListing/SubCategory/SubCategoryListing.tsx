@@ -3,8 +3,6 @@ import { NavLink } from 'react-router-dom';
 import LoadMoreTableDataInMaster from '../LoadMoreTableDataInMaster';
 
 const SubCategoryListing = ({ filteredList }: any) => {
-  console.log('filte cate', filteredList);
-
   const [tableViewData, setTableViewData] = useState<any>(20);
 
   const HandleTableViewRows: any = (data: any) => {
@@ -50,7 +48,7 @@ const SubCategoryListing = ({ filteredList }: any) => {
                     </td>
                   </tr>
                 ))}
-            {filteredList?.length > 10 && filteredList !== null && (
+            {filteredList?.length > 20 && filteredList !== null && (
               <LoadMoreTableDataInMaster
                 HandleTableViewRows={HandleTableViewRows}
               />
