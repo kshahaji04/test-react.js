@@ -276,8 +276,7 @@ const UseChittiHook = () => {
     const hasSubCategoryKey =
       challanTableData?.length > 0 &&
       challanTableData.every(
-        (obj: any, index: any) =>
-          'sub_category' in obj && obj.sub_category !== ''
+        (obj: any) => 'sub_category' in obj && obj.sub_category !== ''
       );
 
     if (!hasSubCategoryKey && errMsgList?.length === 0) {
