@@ -20,21 +20,26 @@ const AddSupplier = ({ GroupListdata }: any) => {
     if (inputValue.trim() === '') {
       setError('Input field cannot be empty');
     } else {
-      let apiRes: any = await CreateNewSupplierApi(
-        AccessToken?.token,
-        title,
-        selectedDropdownValue
-      );
+      if (Object?.keys(selectedDropdownValue)?.length > 0) {
+        let apiRes: any = await CreateNewSupplierApi(
+          AccessToken?.token,
+          title,
+          selectedDropdownValue
+        );
 
-      setTitle('');
-      if (apiRes?.data?.message?.status === 'success') {
-        toast.success('New Supplier Created');
-        dispatch(getsupplierAndSupplierGroup(AccessToken?.token));
-        setInputValue('');
-      } else if (apiRes?.data?.message?.status === 'error') {
-        toast.error('Duplicate entry');
+        if (apiRes?.data?.message?.status === 'success') {
+          toast.success('New Supplier Created');
+          dispatch(getsupplierAndSupplierGroup(AccessToken?.token));
+          setInputValue('');
+        } else if (apiRes?.data?.message?.status === 'error') {
+          toast.error('Supplier already exist');
+        }
+        setTitle('');
+        setError('');
+        setSelectedDropdownValue('');
+      } else {
+        toast.error('Supplier group in mandatory');
       }
-      setError('');
     }
   };
 

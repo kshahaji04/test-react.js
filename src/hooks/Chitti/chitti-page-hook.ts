@@ -261,12 +261,10 @@ const UseChittiHook = () => {
   }, [tableData, narrationTableData]);
 
   const HandleCreateChittiSubmit: any = async () => {
-    const NoDataChallanTableData = challanTableData.some(
+    console.log('submit values', challanTableData);
+    const NoDataChallanTableData = challanTableData?.some(
       (item: any) => Object?.keys(item)?.length === 0
     );
-    // const NoDataNarrationTableData = narrationUpdatedTableData.some(
-    //   (item: any) => Object?.keys(item)?.length === 0
-    // );
 
     let errMsgList: any = [];
     if (Object?.keys(selectedDropdownValue)?.length === 0) {
@@ -275,7 +273,16 @@ const UseChittiHook = () => {
     if (NoDataChallanTableData) {
       errMsgList.push('Challan Table');
     }
+    const hasSubCategoryKey =
+      challanTableData?.length > 0 &&
+      challanTableData.every(
+        (obj: any, index: any) =>
+          'sub_category' in obj && obj.sub_category !== ''
+      );
 
+    if (!hasSubCategoryKey && errMsgList?.length === 0) {
+      errMsgList.push('Sub Category in Challan table');
+    }
     if (errMsgList?.length > 0 && errMsgList !== null) {
       toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
     } else {

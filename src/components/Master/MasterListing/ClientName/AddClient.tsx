@@ -17,24 +17,31 @@ const AddClient = ({ clientGroupList }: any) => {
   const AccessToken: any = useSelector(get_access_token);
 
   const HandleSubmit: any = async () => {
+    console.log('submit va', title, selectedDropdownValue);
     if (inputValue.trim() === '') {
       setError('Input field cannot be empty');
     } else {
-      let apiRes: any = await AddClientNameApi(
-        AccessToken?.token,
-        title,
-        selectedDropdownValue
-      );
-      console.log('apires', apiRes);
+      if (Object?.keys(selectedDropdownValue)?.length > 0) {
+        let apiRes: any = await AddClientNameApi(
+          AccessToken?.token,
+          title,
+          selectedDropdownValue
+        );
+        console.log('apires', apiRes);
 
-      setTitle('');
-      if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
-        toast.success('New Client Created');
-        dispatch(getClientNameClientGroup(AccessToken?.token));
+        setTitle('');
+        if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
+          toast.success('New Client Created');
+          dispatch(getClientNameClientGroup(AccessToken?.token));
+        } else {
+          toast.error('Client already exist');
+        }
+        setError('');
+        setInputValue('');
+        setSelectedDropdownValue('');
+      } else {
+        toast.error('client group is mandatory');
       }
-      setError('');
-
-      setInputValue('');
     }
   };
 

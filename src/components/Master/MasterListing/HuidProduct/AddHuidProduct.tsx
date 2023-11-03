@@ -27,6 +27,8 @@ const AddHuidProduct = () => {
       if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
         toast.success('HUID Product Added');
         dispatch(getHuidProductList(AccessToken?.token));
+      } else {
+        toast.error('HUID product already exist');
       }
       setError('');
       setInputValue('');

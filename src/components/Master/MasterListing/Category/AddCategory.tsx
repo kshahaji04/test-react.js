@@ -22,9 +22,10 @@ const AddCategory = () => {
       if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
         toast.success('Category Created');
         dispatch(getCategoryList(AccessToken?.token));
+      } else {
+        toast.error('Category already exist');
       }
       setError('');
-
       setInputValue('');
     }
   };

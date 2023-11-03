@@ -19,21 +19,27 @@ const AddSubCategory = ({ CategoryList }: any) => {
     if (inputValue.trim() === '') {
       setError('Input field cannot be empty');
     } else {
-      let apiRes: any = await AddSubCategoryApi(
-        AccessToken?.token,
-        title,
-        selectedDropdownValue
-      );
-      console.log('apires', apiRes);
+      if (Object?.keys(selectedDropdownValue)?.length > 0) {
+        let apiRes: any = await AddSubCategoryApi(
+          AccessToken?.token,
+          title,
+          selectedDropdownValue
+        );
+        console.log('apires', apiRes);
 
-      setTitle('');
-      if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
-        toast.success('Sub Category Created');
-        dispatch(getSubCategoryCategory(AccessToken?.token));
+        setTitle('');
+        if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
+          toast.success('Sub Category Created');
+          dispatch(getSubCategoryCategory(AccessToken?.token));
+        } else {
+          toast.error('Sub category already exist');
+        }
+        setError('');
+        setInputValue('');
+        setSelectedDropdownValue('');
+      } else {
+        toast.error('Category is mandatory');
       }
-      setError('');
-
-      setInputValue('');
     }
   };
 
@@ -49,7 +55,7 @@ const AddSubCategory = ({ CategoryList }: any) => {
         Title
         <span className="text-danger">*</span>
       </label>
-      <div className="input-group mb-3 w-50 master-input-field">
+      <div className="input-group mb-1 w-50 master-input-field">
         <input
           type="text"
           name="title"
@@ -73,8 +79,8 @@ const AddSubCategory = ({ CategoryList }: any) => {
           placeholderValue="Category Name"
           selectedDropdownValue={selectedDropdownValue}
           setSelectedDropdownValue={setSelectedDropdownValue}
-        // clientGroupList={clientGroupList}
-        // HandleClientGroup={HandleClientGroup}
+          // clientGroupList={clientGroupList}
+          // HandleClientGroup={HandleClientGroup}
         />
       </div>
       <div className="d-flex justify-content-start ">

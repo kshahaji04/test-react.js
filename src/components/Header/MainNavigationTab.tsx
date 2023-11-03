@@ -27,7 +27,7 @@ const MainNavigationTab = () => {
     <>
       <div className="container-fluid card-container-mrgin">
         <hr className="hr_line" />
-        <div className="container d-flex align-items-center justify-content-evenly flex-wrap mt-1">
+        <div className="container d-flex align-items-center justify-content-evenly flex-wrap ">
           {navList.map((pageName: any, index: any) => {
             const processedStr: any = pageName?.name
               ?.replace(/\s+/g, '')

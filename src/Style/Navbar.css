@@ -202,15 +202,13 @@
 }
 
 .icons-color {
-  font-size: 26px;
-  height: 40px;
-  width: 40px;
-  /* background-color: white; */
+  font-size: 18px;
+  height: 30px;
+  width: 30px;
   align-items: center;
   justify-content: center;
   display: flex;
   border-radius: 50%;
-  /* color: #cdab6e; */
 }
 
 .master-icon-color {

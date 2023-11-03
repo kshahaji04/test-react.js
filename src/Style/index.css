@@ -43,12 +43,6 @@
   text-decoration: none;
 }
 
-.icons-color {
-  height: 33px !important;
-  width: 35px !important;
-  font-size: 20px !important;
-}
-
 @media screen and (max-width: 400px) {
 
   .icons-color {
@@ -231,19 +225,6 @@
   background-color: #f0f0f0;
 }
 
-
-/* .select-dropdown-list {
-  position: absolute;
-  background-color: white;
-  border: 1px solid blue;
-  border-radius: 0 0 5px 5px;
-  border-top: none;
-  font-family: sans-serif;
-  width: 350px;
-  padding: 5px;
-  max-height: 10rem;
-  overflow-y: auto
-} */
 
 .narration-table-product {
   width: 60%;

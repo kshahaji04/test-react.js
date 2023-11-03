@@ -22,11 +22,14 @@ const CreateNewSupplierGroup = () => {
         AccessToken?.token,
         title
       );
-      console.log('apires', title);
-      if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
+      console.log('apires', apiRes);
+      if (apiRes?.data?.message?.status === 'success') {
         toast.success('Supplier Group Create');
         dispatch(getSupplierGroupList(AccessToken?.token));
+      } else {
+        toast.error('Supplier group already exist');
       }
+
       setError('');
       setInputValue('');
     }
