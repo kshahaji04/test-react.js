@@ -54,6 +54,7 @@ const UseEditChallanChitti: any = () => {
     totalHuidWeightOfHuidTable,
     setTotalGrossWeightOfChallanTable,
     setTotalHuidWeightOfHuidTable,
+    HandleAmendButtonForDuplicateChitti,
   }: any = UseChittiHook();
 
   console.log('selectedDropdownValue', selectedDropdownValue);
@@ -101,6 +102,7 @@ const UseEditChallanChitti: any = () => {
         toast.success('Chitti Updated');
         setStateForDocStatus(false);
         await UpdateDocStatusChallanApi(AccessToken?.token, '0', id);
+        stateForDocStatus(false);
       } else {
         toast.error('Failed to Update chitti');
       }
@@ -135,6 +137,7 @@ const UseEditChallanChitti: any = () => {
     HandleDeleteChallanChitti,
     setTotalGrossWeightOfChallanTable,
     setTotalHuidWeightOfHuidTable,
+    HandleAmendButtonForDuplicateChitti,
   };
 };
 

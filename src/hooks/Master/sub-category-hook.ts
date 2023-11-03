@@ -9,7 +9,10 @@ import {
   get_subcategory_list,
 } from '../../store/slices/Chitti/get-subcategory-slice';
 
-import { get_subcategory_category } from '../../store/slices/Master/get-subcategory-category-slice';
+import {
+  getSubCategoryCategory,
+  get_subcategory_category,
+} from '../../store/slices/Master/get-subcategory-category-slice';
 
 const UseSubCategoryHook = () => {
   const dispatch = useDispatch();
@@ -25,10 +28,8 @@ const UseSubCategoryHook = () => {
     []
   );
 
-  console.log('subCategoryDataFromStore', subCategoryDataFromStore);
   useEffect(() => {
-    dispatch(getSubCategoryList(AccessToken?.token));
-    // dispatch(getSubCategoryCategory(AccessToken?.token));
+    dispatch(getSubCategoryCategory(AccessToken?.token));
   }, []);
 
   useEffect(() => {

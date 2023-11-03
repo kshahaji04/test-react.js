@@ -33,6 +33,7 @@ import { getSpecificChittiChallan } from '../../store/slices/Chitti/get-specific
 import { useNavigate, useParams } from 'react-router-dom';
 import DeleteChallanChittiApi from '../../services/api/Chitti/delete-challan-chitti-api';
 import UseCustomChittiHook from './custom-chitti-page-hook';
+import { challanAmendApi } from '../../services/api/general/amend-api';
 
 const UseChittiHook = () => {
   const dispatch = useDispatch();
@@ -228,20 +229,6 @@ const UseChittiHook = () => {
     }
   };
 
-  const HandleDeleteChallanChitti = async () => {
-    let deleteChallanApiRes: any = await DeleteChallanChittiApi(
-      AccessToken?.token,
-      showSubmitButtonAfterCreateChitti?.length > 0
-        ? showSubmitButtonAfterCreateChitti
-        : id
-    );
-    console.log('deletec', deleteChallanApiRes);
-    if (deleteChallanApiRes?.message?.status === 'success') {
-      navigate(-1);
-      // window?.location?.reload();
-    }
-  };
-
   // for removing id key from list
   useEffect(() => {
     if (tableData?.length > 0 && tableData !== null) {
@@ -259,6 +246,50 @@ const UseChittiHook = () => {
       setNarrationUpdatedTableData(narrationmodifiedList);
     }
   }, [tableData, narrationTableData]);
+
+  const HandleAmendButtonForDuplicateChitti: any = async () => {
+    console.log('amend ', tableData, challanTableData, narrationTableData);
+    const reqParams: any = {
+      token: AccessToken?.token,
+      client_name: selectedDropdownValue,
+      name: id,
+      challan_data: challanTableData,
+      narration_data: narrationTableData,
+    };
+    let amendApi: any = await challanAmendApi(reqParams);
+    console.log('challan amend api res', amendApi);
+    if (
+      amendApi?.data?.hasOwnProperty('data') &&
+      Object?.keys(amendApi?.data?.data)?.length > 0
+    ) {
+      navigate(`/chitti/${amendApi?.data?.data?.name}`);
+      await UpdateDocStatusChallanApi(
+        AccessToken?.token,
+        '0',
+        amendApi?.data?.data?.name
+      );
+      // const params: any = {
+      //   token: AccessToken?.token,
+      //   name: amendApi?.data?.data?.name,
+      // };
+      // dispatch(getSpecificChittiChallan(params));
+      setStateForDocStatus(false);
+    }
+  };
+
+  const HandleDeleteChallanChitti = async () => {
+    let deleteChallanApiRes: any = await DeleteChallanChittiApi(
+      AccessToken?.token,
+      showSubmitButtonAfterCreateChitti?.length > 0
+        ? showSubmitButtonAfterCreateChitti
+        : id
+    );
+    console.log('deletec', deleteChallanApiRes);
+    if (deleteChallanApiRes?.message?.status === 'success') {
+      navigate('/chitti');
+      // window?.location?.reload();
+    }
+  };
 
   const HandleCreateChittiSubmit: any = async () => {
     console.log('submit values', challanTableData);
@@ -327,7 +358,7 @@ const UseChittiHook = () => {
           );
           dispatch(getChittiChallan(AccessToken?.token));
         } else {
-          toast.error('Failed to created chitti');
+          toast.error('Failed to create chitti');
         }
       }
     }
@@ -369,6 +400,7 @@ const UseChittiHook = () => {
     totalHuidWeightOfHuidTable,
     setTotalGrossWeightOfChallanTable,
     setTotalHuidWeightOfHuidTable,
+    HandleAmendButtonForDuplicateChitti,
   };
 };
 
