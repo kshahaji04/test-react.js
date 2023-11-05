@@ -23,3 +23,23 @@
         width: 15rem !important;
     }
 }
+
+.input-pswd-field {
+    border: 1px solid #2f308c6e;
+    border-radius: 0.25rem;
+    /* box-shadow: none; */
+}
+
+.input-pswd-field:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25);
+}
+
+
+.pswd-eye-icon {
+    cursor: pointer;
+}
+
+.login-username-input:focus {
+    border-color: #2f308c6e;
+}

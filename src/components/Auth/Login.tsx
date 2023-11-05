@@ -14,6 +14,8 @@ const Login = () => {
     password: '',
   });
 
+  const [showPassword, setShowPassword] = useState<any>(false);
+
   const HandleInputChange: any = (e: any) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
@@ -29,6 +31,13 @@ const Login = () => {
       showToast('Invalid Credentials', 'error');
     }
   };
+
+  const HandleShowPassword: any = () => {
+    console.log("eye click")
+    setShowPassword(!showPassword)
+  };
+
+
   return (
     <>
       <div className="container mt-5">
@@ -51,23 +60,26 @@ const Login = () => {
                         id="username"
                         name="username"
                         onChange={HandleInputChange}
-                        className="form-control login-input-field px-2"
+                        className="form-control login-input-field px-2 shadow-none login-username-input"
                         placeholder="Username"
                         aria-describedby="emailHelp"
                         required
                       />
                     </div>
                     <div className="my-4">
-                      <div className="d-flex justify-content-center">
+                      <div className="d-flex justify-content-center input-pswd-field">
                         <input
-                          type="password"
+                          type={`${showPassword ? "text" : "password"}`}
                           id="password"
                           name="password"
                           onChange={HandleInputChange}
-                          className="form-control login-input-field px-2 "
+                          className="form-control login-input-field px-2 border-0 shadow-none"
                           placeholder="Password"
                           required
                         />
+                        <div onClick={HandleShowPassword}>
+                          <i className={`fa fa-eye p-1 fs-6 pswd-eye-icon ${showPassword ? "text-primary" : ""}`} ></i>
+                        </div>
                       </div>
                     </div>
 
