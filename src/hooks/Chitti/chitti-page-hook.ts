@@ -56,7 +56,7 @@ const UseChittiHook = () => {
   const [narrationTableData, setNarrationTableData] = useState<any>([
     { id: 1 },
   ]);
-  const [challanTableData, setChallanTableData] = useState<any>([{ id: 1 }]);
+  const [challanTableData, setChallanTableData] = useState<any>([]);
   const [narrationUpdatedTableData, setNarrationUpdatedTableData] =
     useState<any>([]);
   const [currentDate, setCurrentDate] = useState<any>(new Date());
@@ -246,6 +246,8 @@ const UseChittiHook = () => {
       setNarrationUpdatedTableData(narrationmodifiedList);
     }
   }, [tableData, narrationTableData]);
+
+  console.log('amend before', tableData, challanTableData, narrationTableData);
 
   const HandleAmendButtonForDuplicateChitti: any = async () => {
     console.log('amend ', tableData, challanTableData, narrationTableData);

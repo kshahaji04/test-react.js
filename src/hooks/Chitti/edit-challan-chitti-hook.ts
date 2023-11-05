@@ -21,7 +21,7 @@ const UseEditChallanChitti: any = () => {
   );
 
   const [challanDetail, setChallanDetail] = useState<any>('');
-  const [tableData, setTableData] = useState<any>([{ id: 1 }]);
+  // const [tableData, setTableData] = useState<any>([{ id: 1 }]);
 
   console.log('emeraldDetailDataFromStore', emeraldDetailDataFromStore);
   const { id } = useParams();
@@ -45,6 +45,8 @@ const UseEditChallanChitti: any = () => {
     clientGroupName,
     stateForDocStatus,
     setStateForDocStatus,
+    tableData,
+    setTableData,
     setRemarks,
     setGoldRate,
     HandleSubmitChallanChitti,
