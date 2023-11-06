@@ -28,36 +28,6 @@ const ListingTable = ({ tableListingData }: any) => {
     setTableViewData(data);
   };
 
-  const [objectWithHighestDigit, setObjectWithHighestDigit] = useState(null);
-
-  const [highestName, setHighestName] = useState('');
-  const [objectWithHighestName, setObjectWithHighestName] = useState(null);
-
-  useEffect(() => {
-    const findHighestName = () => {
-      let highestNumber = '';
-      let objectWithHighest = null;
-
-      for (const item of tableListingData) {
-        const name = item.name;
-        if (name) {
-          if (name > highestNumber) {
-            highestNumber = name;
-            objectWithHighest = item;
-          }
-        }
-      }
-
-      if (objectWithHighest) {
-        setObjectWithHighestName(objectWithHighest);
-      }
-    };
-
-    findHighestName();
-  }, [tableListingData]);
-
-  console.log('objectWithHighestDigit', objectWithHighestName);
-
   useEffect(() => {
     if (Object?.keys(tableListingData)?.length > 0) {
       let column: any = Object?.keys(tableListingData[0]);
@@ -185,14 +155,6 @@ const ListingTable = ({ tableListingData }: any) => {
     );
   };
 
-  const maxNumber =
-    tableListingData?.length > 0 &&
-    tableListingData !== null &&
-    tableListingData.reduce((max: any, item: any) => {
-      const number = parseInt(item.number);
-      return number > max ? number : max;
-    }, 0);
-
   const TableBodyData: any = () => {
     return (
       <>
@@ -318,6 +280,12 @@ const ListingTable = ({ tableListingData }: any) => {
   return (
     <>
       <div className="table-responsive ">
+        <div className="text-end text-gray">
+          Total count:{' '}
+          {tableListingData?.length < 10
+            ? '0' + tableListingData?.length
+            : tableListingData?.length}
+        </div>
         <table className="table table table-striped table-hover listing-table border-0">
           <thead className="table-heading">
             <tr className="table-heading-row">
