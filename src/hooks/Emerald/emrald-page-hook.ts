@@ -32,6 +32,7 @@ import {
   UpdateDocStatusEmeraldChittiApi,
   UpdateDocStatusWithSubmittedEmeraldChittiApi,
 } from '../../services/api/general/update-doc-status-emrald-chitti-api';
+import { EmeraldChittiAmendApi } from '../../services/api/Emerald/emerald-chitti-amend-api';
 
 const UseEmeraldHook = () => {
   const dispatch = useDispatch();
@@ -62,6 +63,8 @@ const UseEmeraldHook = () => {
     showSubmitButtonAfterCreateChitti,
     setShowSubmitButtonAfterCreateChitti,
   ] = useState<any>('');
+  const [showSaveButtonForAmendFlow, setShowSaveButtonForAmendFlow] =
+    useState<any>(false);
   console.log('ProductItemDataFromStore', ProductItemDataFromStore);
   useEffect(() => {
     dispatch(getEmeraldChallan(AccessToken?.token));
@@ -192,6 +195,7 @@ const UseEmeraldHook = () => {
             ? showSubmitButtonAfterCreateChitti
             : id,
       };
+      setShowSaveButtonForAmendFlow(false);
       dispatch(getSpecificEmeraldChitti(params));
     }
   };
@@ -205,7 +209,9 @@ const UseEmeraldHook = () => {
     );
     console.log('deletec', deleteChallanApiRes);
     if (deleteChallanApiRes?.message?.status === 'success') {
-      navigate(-1);
+      navigate('/emeraldchitti');
+    } else {
+      toast.error(deleteChallanApiRes?.message?.message);
     }
   };
 
@@ -219,6 +225,34 @@ const UseEmeraldHook = () => {
     }
   }, [tableData]);
 
+  // amend create duplicate chitti
+  const HandleAmendButtonForDuplicateChitti: any = async () => {
+    const reqParams: any = {
+      clientName: selectedDropdownValue,
+      clientGroup: clientGroupName,
+      date: transactionDate,
+      name: id,
+      emeraldChittiTableData: emeraldChittiTableData,
+      token: AccessToken?.token,
+    };
+    let amendApi: any = await EmeraldChittiAmendApi(reqParams);
+    console.log('challan amend api res', amendApi);
+    if (
+      amendApi?.data?.hasOwnProperty('data') &&
+      Object?.keys(amendApi?.data?.data)?.length > 0
+    ) {
+      navigate(`/emeraldchitti/${amendApi?.data?.data?.name}`);
+
+      const params: any = {
+        token: AccessToken?.token,
+        name: amendApi?.data?.data?.name,
+      };
+      dispatch(getSpecificEmeraldChitti(params));
+      setTimeout(() => {
+        setStateForDocStatus(false);
+      }, 250);
+    }
+  };
   const HandleCreateEmeraldChittiSubmit: any = async () => {
     console.log(
       'submit create emerald chitti',
@@ -305,6 +339,9 @@ const UseEmeraldHook = () => {
     HandleDeleteEmeraldChitti,
     showSubmitButtonAfterCreateChitti,
     subCategoryList,
+    HandleAmendButtonForDuplicateChitti,
+    showSaveButtonForAmendFlow,
+    setShowSaveButtonForAmendFlow,
   };
 };
 

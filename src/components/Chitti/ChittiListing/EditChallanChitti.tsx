@@ -34,17 +34,24 @@ const EditChallanChitti = () => {
     setTotalGrossWeightOfChallanTable,
     setTotalHuidWeightOfHuidTable,
     HandleAmendButtonForDuplicateChitti,
+    setShowSaveButtonForAmendFlow,
+    showSaveButtonForAmendFlow,
   }: any = UseEditChallanChitti();
   const navigate = useNavigate();
-
   const [showButton, setShowButton] = useState<any>();
   const [readOnly, setReadOnly] = useState<boolean>(false);
-  const [showSaveButtonForAmendFlow, setShowSaveButtonForAmendFlow] =
-    useState<any>(false);
+  // const [showSaveButtonForAmendFlow, setShowSaveButtonForAmendFlow] =
+  //   useState<any>(false);
 
   const HandleBackButton = () => {
     navigate(-1);
   };
+
+  console.log(
+    'challan detail current date',
+    new Date()?.toISOString()?.split('T')[0]
+  );
+  console.log('challan detail', challanDetail);
 
   const docStatusFromStore: any = useSelector(get_specific_chitti_challan);
   console.log(
@@ -63,18 +70,19 @@ const EditChallanChitti = () => {
   }, [docStatusFromStore]);
 
   const HandleAmendButtonChanges: any = async () => {
-    // let currentURL: any = window?.location?.href;
-    // const parts: any = currentURL.split('/');
-    // parts?.pop();
-    // const newURL = parts?.join('/');
-
-    // window?.history?.replaceState({}, '', newURL);
-    setReadOnly(false);
+    console.log('docStatus from store in amend func');
     setShowSaveButtonForAmendFlow(true);
     setStateForDocStatus(true);
+    setReadOnly(false);
   };
 
-  console.log('readdd', stateForDocStatus);
+  console.log(
+    'readdd',
+    'docstatus=>',
+    showButton,
+    'show amend=>',
+    showSaveButtonForAmendFlow
+  );
   return (
     <div className="container">
       <div className="">
@@ -95,7 +103,6 @@ const EditChallanChitti = () => {
               </button>
             )}
             {stateForDocStatus === false && showButton === 0 && (
-              // <div className="text-danger bold">Draft</div>
               <button type="button" className="btn docstatus-button">
                 Draft
               </button>
@@ -105,6 +112,18 @@ const EditChallanChitti = () => {
                 Submit
               </button>
             )}
+            {showButton === 2 && readOnly && (
+              <button type="button" className="btn docstatus-button">
+                Cancelled
+              </button>
+            )}
+            {showSaveButtonForAmendFlow &&
+              stateForDocStatus &&
+              readOnly === false && (
+                <button type="button" className="btn docstatus-button">
+                  Not saved
+                </button>
+              )}
           </div>
           <div>
             {stateForDocStatus === true && showButton === 0 && (
@@ -134,24 +153,36 @@ const EditChallanChitti = () => {
                 Cancel
               </button>
             )}
-            {showButton === 2 && showSaveButtonForAmendFlow === false && (
-              <button
-                type="submit"
-                className=" btn btn-outline-primary px-2 me-2 py-0  form-submit-button"
-                onClick={HandleAmendButtonChanges}
-              >
-                Amend
-              </button>
-            )}
-            {showSaveButtonForAmendFlow && (
-              <button
-                type="submit"
-                onClick={HandleAmendButtonForDuplicateChitti}
-                className=" btn btn-outline-primary px-2 py-0 me-2 form-submit-button"
-              >
-                Save
-              </button>
-            )}
+            {challanDetail?.length > 0 &&
+              challanDetail !== null &&
+              challanDetail[0]?.date ===
+                new Date()?.toISOString()?.split('T')[0] && (
+                <>
+                  {showButton === 2 && showSaveButtonForAmendFlow === false && (
+                    <>
+                      <button
+                        type="submit"
+                        className=" btn btn-outline-primary px-2 me-2 py-0  form-submit-button"
+                        onClick={HandleAmendButtonChanges}
+                      >
+                        Amend
+                      </button>
+                    </>
+                  )}
+                </>
+              )}
+
+            {showSaveButtonForAmendFlow &&
+              stateForDocStatus &&
+              readOnly === false && (
+                <button
+                  type="submit"
+                  onClick={HandleAmendButtonForDuplicateChitti}
+                  className=" btn btn-outline-primary px-2 py-0 me-2 form-submit-button"
+                >
+                  Save
+                </button>
+              )}
 
             {showButton === 2 && (
               <button

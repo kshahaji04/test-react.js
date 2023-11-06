@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { BASE_URL } from '../../Config/api-config';
 
-export const challanAmendApi: any = async (request: any) => {
+export const EmeraldChittiAmendApi: any = async (request: any) => {
   let response: any;
 
-  const params = `/api/resource/Challan`;
+  const params = `/api/resource/Emerald Chitti`;
 
   let body = {
     amended_from: request.name,
-    client_name: request.client_name,
-    gold_rate: request.gold_rate,
-    remarks: request.remarks,
-    challan_table: request.challan_data,
-    narration_huid: request.narration_data,
+    client_name: request.clientName,
+    client_group: request.clientGroup,
+    abb: request.date,
+    date: request.date,
+    emerald_chitti_table: request.emeraldChittiTableData,
   };
 
   const config = {

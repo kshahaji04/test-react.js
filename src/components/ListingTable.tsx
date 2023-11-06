@@ -28,6 +28,36 @@ const ListingTable = ({ tableListingData }: any) => {
     setTableViewData(data);
   };
 
+  const [objectWithHighestDigit, setObjectWithHighestDigit] = useState(null);
+
+  const [highestName, setHighestName] = useState('');
+  const [objectWithHighestName, setObjectWithHighestName] = useState(null);
+
+  useEffect(() => {
+    const findHighestName = () => {
+      let highestNumber = '';
+      let objectWithHighest = null;
+
+      for (const item of tableListingData) {
+        const name = item.name;
+        if (name) {
+          if (name > highestNumber) {
+            highestNumber = name;
+            objectWithHighest = item;
+          }
+        }
+      }
+
+      if (objectWithHighest) {
+        setObjectWithHighestName(objectWithHighest);
+      }
+    };
+
+    findHighestName();
+  }, [tableListingData]);
+
+  console.log('objectWithHighestDigit', objectWithHighestName);
+
   useEffect(() => {
     if (Object?.keys(tableListingData)?.length > 0) {
       let column: any = Object?.keys(tableListingData[0]);
@@ -42,11 +72,13 @@ const ListingTable = ({ tableListingData }: any) => {
         name
       );
 
+      console.log('deleteChallanApiRes', deleteChallanApiRes);
+
       if (deleteChallanApiRes?.message?.status === 'success') {
         toast.success('Chitti Deleted');
         dispatch(getChittiChallan(AccessToken?.token));
       } else {
-        toast.error('Failed to delete chitti');
+        toast.error(deleteChallanApiRes?.message?.message);
       }
     } else if (window?.location?.pathname === '/emeraldchitti') {
       let deleteEmeraldApiRes: any = await DeleteEmeraldChittiApi(
@@ -58,7 +90,7 @@ const ListingTable = ({ tableListingData }: any) => {
         toast.success('Chitti Deleted');
         dispatch(getEmeraldChallan(AccessToken?.token));
       } else {
-        toast.error('Failed to delete chitti');
+        toast.error(deleteEmeraldApiRes?.message?.message);
       }
     }
   };
@@ -153,6 +185,14 @@ const ListingTable = ({ tableListingData }: any) => {
     );
   };
 
+  const maxNumber =
+    tableListingData?.length > 0 &&
+    tableListingData !== null &&
+    tableListingData.reduce((max: any, item: any) => {
+      const number = parseInt(item.number);
+      return number > max ? number : max;
+    }, 0);
+
   const TableBodyData: any = () => {
     return (
       <>
@@ -187,52 +227,80 @@ const ListingTable = ({ tableListingData }: any) => {
                       })}
                     {data.docstatus === 0 && (
                       <>
-                        <td className="button-section-td border-0">
-                          <NavLink
-                            to={`${data.name}`}
-                            className="button-section-text text-info"
-                          >
-                            Edit
-                          </NavLink>
-
-                          <a
-                            onClick={() => HandleDeleteChitti(data.name)}
-                            className="button-section-text text-danger mx-3 "
-                          >
-                            Delete
-                          </a>
+                        <td className=" button-section-td border-0 ">
+                          <div className="row justify-content-center gx-0">
+                            <div className="col-lg-2">
+                              <NavLink
+                                to={`${data.name}`}
+                                className="button-section-text text-info "
+                              >
+                                Edit
+                              </NavLink>
+                            </div>
+                            <div className="col-lg-2">
+                              <a
+                                onClick={() => HandleDeleteChitti(data.name)}
+                                className="button-section-text text-danger "
+                              >
+                                Delete
+                              </a>
+                            </div>
+                          </div>
                         </td>
                       </>
                     )}
                     {data.docstatus === 1 && (
                       <>
                         <td className="button-section-td border-0">
-                          <a
-                            onClick={() => HandlePrint(data.name)}
-                            className="button-section-text text-primary"
-                          >
-                            print
-                          </a>
-
-                          <a
-                            onClick={() => HandleCancelChitti(data.name)}
-                            className="button-section-text text-danger mx-3"
-                          >
-                            Cancel
-                          </a>
+                          <div className="row justify-content-center gx-0">
+                            <div className="col-lg-2">
+                              <a
+                                onClick={() => HandlePrint(data.name)}
+                                className="button-section-text text-primary"
+                              >
+                                print
+                              </a>
+                            </div>
+                            <div className="col-lg-2">
+                              <a
+                                onClick={() => HandleCancelChitti(data.name)}
+                                className="button-section-text text-danger "
+                              >
+                                Cancel
+                              </a>
+                            </div>
+                          </div>
                         </td>
                       </>
                     )}
                     {data.docstatus === 2 && (
                       <>
                         <td className="button-section-td border-0">
-                          <a className="button-section-text text-primary "></a>
-                          <a
-                            onClick={() => HandleDeleteChitti(data.name)}
-                            className="button-section-text text-danger mx-3"
-                          >
-                            Delete
-                          </a>
+                          <div className="row justify-content-center gx-0">
+                            <div className="col-lg-2 ">
+                              <NavLink
+                                to={`${data.name}`}
+                                className="button-section-text text-info"
+                              >
+                                Amend
+                              </NavLink>
+
+                              {/* <NavLink
+                                to={`${data.name}`}
+                                className="button-section-text text-info"
+                              >
+                                Amend
+                              </NavLink> */}
+                            </div>
+                            <div className="col-lg-2">
+                              <a
+                                onClick={() => HandleDeleteChitti(data.name)}
+                                className="button-section-text text-danger "
+                              >
+                                Delete
+                              </a>
+                            </div>
+                          </div>
                         </td>
                       </>
                     )}

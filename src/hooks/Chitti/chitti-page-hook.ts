@@ -72,6 +72,8 @@ const UseChittiHook = () => {
     showSubmitButtonAfterCreateChitti,
     setShowSubmitButtonAfterCreateChitti,
   ] = useState<any>('');
+  const [showSaveButtonForAmendFlow, setShowSaveButtonForAmendFlow] =
+    useState<any>(false);
 
   const {
     totalGrossWeightOfChallanTable,
@@ -145,30 +147,24 @@ const UseChittiHook = () => {
   }, [ClientGroupDataFromStore]);
 
   const HandleGoldRate: any = (e: any) => {
-    console.log('handle goldrate', e.target.value);
     setGoldRate(e.target.value);
     setStateForDocStatus(true);
   };
 
   const HandleRemarks: any = (e: any) => {
-    console.log('handle remark', e.target.value);
     setRemarks(e.target.value);
     setStateForDocStatus(true);
   };
 
   const HandleClientGroup: any = (e: any) => {
-    console.log('clientgro', e.target.value);
     setClientGroupName(e.target.value);
     setStateForDocStatus(true);
   };
 
   const HandleDateChange: any = (e: any) => {
-    console.log('HandleDateChange', e.target.value);
     setDate(e.target.value);
     setStateForDocStatus(true);
   };
-
-  console.log('setTableData', tableData);
 
   const HandleEmptyChallanChittiTable: any = () => {
     setTableData([{ id: 1 }]);
@@ -225,6 +221,8 @@ const UseChittiHook = () => {
             ? showSubmitButtonAfterCreateChitti
             : id,
       };
+      setStateForDocStatus(false);
+      setShowSaveButtonForAmendFlow(false);
       dispatch(getSpecificChittiChallan(params));
     }
   };
@@ -254,6 +252,8 @@ const UseChittiHook = () => {
     const reqParams: any = {
       token: AccessToken?.token,
       client_name: selectedDropdownValue,
+      gold_rate: goldRate,
+      remarks: remarks,
       name: id,
       challan_data: challanTableData,
       narration_data: narrationTableData,
@@ -265,17 +265,20 @@ const UseChittiHook = () => {
       Object?.keys(amendApi?.data?.data)?.length > 0
     ) {
       navigate(`/chitti/${amendApi?.data?.data?.name}`);
-      await UpdateDocStatusChallanApi(
-        AccessToken?.token,
-        '0',
-        amendApi?.data?.data?.name
-      );
-      // const params: any = {
-      //   token: AccessToken?.token,
-      //   name: amendApi?.data?.data?.name,
-      // };
-      // dispatch(getSpecificChittiChallan(params));
-      setStateForDocStatus(false);
+      // await UpdateDocStatusChallanApi(
+      //   AccessToken?.token,
+      //   '0',
+      //   amendApi?.data?.data?.name
+      // );
+      const params: any = {
+        token: AccessToken?.token,
+        name: amendApi?.data?.data?.name,
+      };
+      dispatch(getSpecificChittiChallan(params));
+      setTimeout(() => {
+        setStateForDocStatus(false);
+      }, 300);
+      // dispatch(getChittiChallan(AccessToken?.token));
     }
   };
 
@@ -286,10 +289,12 @@ const UseChittiHook = () => {
         ? showSubmitButtonAfterCreateChitti
         : id
     );
-    console.log('deletec', deleteChallanApiRes);
+
     if (deleteChallanApiRes?.message?.status === 'success') {
       navigate('/chitti');
       // window?.location?.reload();
+    } else {
+      toast.error(deleteChallanApiRes?.message?.message);
     }
   };
 
@@ -403,6 +408,8 @@ const UseChittiHook = () => {
     setTotalGrossWeightOfChallanTable,
     setTotalHuidWeightOfHuidTable,
     HandleAmendButtonForDuplicateChitti,
+    setShowSaveButtonForAmendFlow,
+    showSaveButtonForAmendFlow,
   };
 };
 
