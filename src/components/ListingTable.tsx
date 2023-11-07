@@ -165,7 +165,6 @@ const ListingTable = ({ tableListingData }: any) => {
               ?.map((data: any, i: any) => {
                 return (
                   <tr className="table-body-row" key={i}>
-                    {/* <td className="border-0">{i + 1}</td> */}
                     {headingData?.length > 0 &&
                       headingData !== null &&
                       headingData.map((v: any, index: any) => {
@@ -244,7 +243,7 @@ const ListingTable = ({ tableListingData }: any) => {
                                 to={`${data.name}`}
                                 className="button-section-text text-info"
                               >
-                                Amend
+                                view
                               </NavLink>
 
                               {/* <NavLink
@@ -280,12 +279,15 @@ const ListingTable = ({ tableListingData }: any) => {
   return (
     <>
       <div className="table-responsive ">
-        <div className="text-end text-gray">
-          Total count:{' '}
-          {tableListingData?.length < 10
-            ? '0' + tableListingData?.length
-            : tableListingData?.length}
-        </div>
+        {tableListingData?.length > 0 && (
+          <div className="text-end text-gray">
+            {tableListingData?.slice(0, tableViewData)?.length} of{' '}
+            {tableListingData?.length < 10
+              ? '0' + tableListingData?.length
+              : tableListingData?.length}
+          </div>
+        )}
+
         <table className="table table table-striped table-hover listing-table border-0">
           <thead className="table-heading">
             <tr className="table-heading-row">
