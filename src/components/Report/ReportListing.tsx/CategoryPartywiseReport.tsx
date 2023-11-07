@@ -9,6 +9,7 @@ import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
 import { useDispatch } from 'react-redux';
 import { getCategoryPartywiseReportData } from '../../../store/slices/report/get-category-partywise-report-slice';
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
+import DownloadReportApi from '../../../services/api/report/download-report-api';
 
 const CategoryPartyWiseReport = () => {
   const dispatch = useDispatch();
@@ -94,17 +95,22 @@ const CategoryPartyWiseReport = () => {
     handleFilterList();
   }, [searchInputValues, searchClientName, searchCategory]);
 
-  // const handleDownloadReport: any = async () => {
-  // const reqParams: any = {
-  //   token: AccessToken?.token,
-  //   method: 'get_subcategory_report_print',
-  //   entity: 'report_print',
-  // };
-  // let downloadReportApi: any = await DownloadReportApi(reqParams);
-  // if (downloadReportApi?.status === 'success') {
-  //   window.open(downloadReportApi?.data?.print_url);
-  // }
-  // };
+  const handleDownloadReport: any = async () => {
+    const reqParams: any = {
+      token: AccessToken?.token,
+      method: 'get_category_partywise_report_print',
+      entity: 'report_print_category_wise',
+      category: searchCategory,
+      client_name: searchClientName,
+      from_date: searchInputValues?.fromDate,
+      to_date: searchInputValues?.toDate,
+    };
+    let downloadReportApi: any = await DownloadReportApi(reqParams);
+
+    if (downloadReportApi?.status === 'success') {
+      window.open(downloadReportApi?.data?.print_url);
+    }
+  };
 
   // const filteredList =
   //   categoryPartywiseReportData?.length > 0 &&
@@ -139,13 +145,13 @@ const CategoryPartyWiseReport = () => {
     <div className="container">
       <div className="my-1 d-flex justify-content-between">
         <h5>Category Partywise Report</h5>
-        {/* <button
+        <button
           type="button"
-          className="btn btn-primary btn-sm py-0 download-report-btn"
+          className="btn btn-primary btn-sm py-0 px-3 download-report-btn"
           onClick={handleDownloadReport}
         >
-          <span className="fs-6">Download Report</span>
-        </button> */}
+          <span className="fs-6">Print</span>
+        </button>
       </div>
       <FilterReportListing
         clientNameList={clientNameList}

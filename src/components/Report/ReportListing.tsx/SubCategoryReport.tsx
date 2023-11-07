@@ -176,10 +176,10 @@ const SubCategoryReport = () => {
         <h5>Sub Category Report</h5>
         <button
           type="button"
-          className="btn btn-primary btn-sm py-0 download-report-btn"
+          className="btn btn-primary btn-sm py-0 px-3 download-report-btn"
           onClick={handleDownloadReport}
         >
-          <span className="fs-6">Download Report</span>
+          <span className="fs-6">Print</span>
         </button>
       </div>
       <FilterReportListing
