@@ -4,10 +4,7 @@ import { useDispatch } from 'react-redux';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
 
-import {
-  getSubCategoryList,
-  get_subcategory_list,
-} from '../../store/slices/Chitti/get-subcategory-slice';
+import { get_subcategory_list } from '../../store/slices/Chitti/get-subcategory-slice';
 
 import {
   getSubCategoryCategory,
