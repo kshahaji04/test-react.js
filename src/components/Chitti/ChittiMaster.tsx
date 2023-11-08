@@ -38,6 +38,8 @@ const ChittiMaster = () => {
     HandleDeleteChallanChitti,
     setTotalGrossWeightOfChallanTable,
     setTotalHuidWeightOfHuidTable,
+    checkGrossAndNetWeight,
+    setCheckGrossAndNetWeight,
   }: any = UseChittiHook();
 
   console.log('chittiListingData', chittiListingData);
@@ -189,6 +191,8 @@ const ChittiMaster = () => {
                     setTotalGrossWeightOfChallanTable
                   }
                   setTotalHuidWeightOfHuidTable={setTotalHuidWeightOfHuidTable}
+                  checkGrossAndNetWeight={checkGrossAndNetWeight}
+                  setCheckGrossAndNetWeight={setCheckGrossAndNetWeight}
                 />
               </Tab>
             </Tabs>

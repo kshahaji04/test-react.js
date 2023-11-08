@@ -10,6 +10,8 @@ const ChallanItemsTable = ({
   setStateForDocStatus,
   setTotalGrossWeightOfChallanTable,
   readOnly,
+  checkGrossAndNetWeight,
+  setCheckGrossAndNetWeight,
 }: any) => {
   const [amountValue, setamountValue] = useState<any>({
     sub_category: '',
@@ -36,6 +38,10 @@ const ChallanItemsTable = ({
 
   useEffect(() => {
     setTotalGrossWeightOfChallanTable(amountValue?.gross_weight);
+    setCheckGrossAndNetWeight({
+      gross_weight: amountValue?.gross_weight,
+      net_weight: amountValue?.net_weight,
+    });
   }, [amountValue]);
 
   const HandleAddRow: any = () => {
@@ -221,10 +227,12 @@ const ChallanItemsTable = ({
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        defaultValue={
-                          row.gross_weight >= 0 ? row.gross_weight : ''
-                        }
-                        value={row.gross_weight > 0 ? row.gross_weight : ''}
+                        // defaultValue={
+                        //   row.gross_weight >= 0 ? row.gross_weight : ''
+                        // }
+                        defaultValue={row.gross_weight}
+                        value={row.gross_weight}
+                        // value={row.gross_weight > 0 ? row.gross_weight : ''}
                         onChange={(e) => HandleGrossWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
@@ -235,8 +243,10 @@ const ChallanItemsTable = ({
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        defaultValue={row.net_weight >= 0 ? row.net_weight : ''}
-                        value={row.net_weight > 0 ? row.net_weight : ''}
+                        // defaultValue={row.net_weight >= 0 ? row.net_weight : ''}
+                        // value={row.net_weight > 0 ? row.net_weight : ''}
+                        defaultValue={row.net_weight}
+                        value={row.net_weight}
                         onChange={(e) => HandleNetWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
@@ -247,8 +257,10 @@ const ChallanItemsTable = ({
                         className="form-control custom-input-field-t"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        defaultValue={row.amount >= 0 ? row.amount : ''}
-                        value={row.amount > 0 ? row.amount : ''}
+                        // defaultValue={row.amount >= 0 ? row.amount : ''}
+                        // value={row.amount > 0 ? row.amount : ''}
+                        defaultValue={row.amount}
+                        value={row.amount}
                         onKeyDown={(e) => handleKeyDown(e, row.id)}
                         onChange={(e) => HandleAmountValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}

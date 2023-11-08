@@ -59,6 +59,8 @@ const UseEditChallanChitti: any = () => {
     HandleAmendButtonForDuplicateChitti,
     setShowSaveButtonForAmendFlow,
     showSaveButtonForAmendFlow,
+    checkGrossAndNetWeight,
+    setCheckGrossAndNetWeight,
   }: any = UseChittiHook();
 
   console.log('selectedDropdownValue', selectedDropdownValue);
@@ -84,6 +86,10 @@ const UseEditChallanChitti: any = () => {
   const HandleUpdateChallanSubmit = async () => {
     if (totalGrossWeightOfChallanTable < totalHuidWeightOfHuidTable) {
       toast.error('Huid weight cannot be greater than Gross weight');
+    } else if (
+      checkGrossAndNetWeight.gross_weight < checkGrossAndNetWeight.net_weight
+    ) {
+      toast.error('Net weight cannot be greater than Gross weight');
     } else {
       const BodyData: any = {
         name: id,

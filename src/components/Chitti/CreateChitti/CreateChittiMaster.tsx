@@ -34,6 +34,8 @@ const CreateChittiMaster = ({
   HandleDeleteChallanChitti,
   setTotalGrossWeightOfChallanTable,
   setTotalHuidWeightOfHuidTable,
+  checkGrossAndNetWeight,
+  setCheckGrossAndNetWeight,
 }: any) => {
   const docStatusFromStore: any = useSelector(get_specific_chitti_challan);
 
@@ -84,6 +86,8 @@ const CreateChittiMaster = ({
         subCategoryList={subCategoryList}
         setStateForDocStatus={setStateForDocStatus}
         setTotalGrossWeightOfChallanTable={setTotalGrossWeightOfChallanTable}
+        checkGrossAndNetWeight={checkGrossAndNetWeight}
+        setCheckGrossAndNetWeight={setCheckGrossAndNetWeight}
       />
       <NarrationTable
         narrationTableData={narrationTableData}

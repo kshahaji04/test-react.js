@@ -202,8 +202,10 @@ const NarrationTable = ({
                   className="form-control custom-input-field"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-sm"
-                  defaultValue={row.huid_pieces >= 0 ? row.huid_pieces : ''}
-                  value={row.huid_pieces > 0 ? row.huid_pieces : ''}
+                  // defaultValue={row.huid_pieces >= 0 ? row.huid_pieces : ''}
+                  // value={row.huid_pieces > 0 ? row.huid_pieces : ''}
+                  defaultValue={row.huid_pieces}
+                  value={row.huid_pieces}
                   onChange={(e) => HandlePiecesAmount(e, row.id)}
                   readOnly={readOnly === true ? true : false}
                 />
@@ -215,8 +217,10 @@ const NarrationTable = ({
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-sm"
                   onKeyDown={(e) => handleKeyDown(e, row.id)}
-                  defaultValue={row.huid_weight >= 0 ? row.huid_weight : ''}
-                  value={row.huid_weight > 0 ? row.huid_weight : ''}
+                  // defaultValue={row.huid_weight >= 0 ? row.huid_weight : ''}
+                  // value={row.huid_weight > 0 ? row.huid_weight : ''}
+                  defaultValue={row.huid_weight}
+                  value={row.huid_weight}
                   onChange={(e) => HandleWeightAmount(e, row.id)}
                   readOnly={readOnly === true ? true : false}
                 />

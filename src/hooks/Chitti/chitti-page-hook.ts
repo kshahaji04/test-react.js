@@ -80,6 +80,8 @@ const UseChittiHook = () => {
     totalHuidWeightOfHuidTable,
     setTotalGrossWeightOfChallanTable,
     setTotalHuidWeightOfHuidTable,
+    checkGrossAndNetWeight,
+    setCheckGrossAndNetWeight,
   } = UseCustomChittiHook();
 
   useEffect(() => {
@@ -299,10 +301,33 @@ const UseChittiHook = () => {
   };
 
   const HandleCreateChittiSubmit: any = async () => {
-    console.log('submit values', challanTableData);
+    console.log('submit values', challanTableData, narrationTableData);
     const NoDataChallanTableData = challanTableData?.some(
       (item: any) => Object?.keys(item)?.length === 0
     );
+
+    const CheckObjectHasValues = () => {
+      return challanTableData.filter((item: any) => {
+        return (
+          (item.hasOwnProperty('gross_weight') && item.gross_weight > 0) ||
+          (item.hasOwnProperty('net_weight') && item.net_weight > 0) ||
+          (item.hasOwnProperty('amount') && item.amount > 0)
+        );
+      });
+    };
+    const filteredChallanTable: any = CheckObjectHasValues();
+
+    const CheckObjectHasValuesInHuid = () => {
+      return narrationTableData.filter((item: any) => {
+        return (
+          (item.hasOwnProperty('huid_pieces') && item.huid_pieces > 0) ||
+          (item.hasOwnProperty('huid_pieces') && item.huid_pieces > 0)
+        );
+      });
+    };
+    const filteredHuidTable: any = CheckObjectHasValuesInHuid();
+
+    console.log('checkobject values', filteredChallanTable, filteredHuidTable);
 
     let errMsgList: any = [];
     if (Object?.keys(selectedDropdownValue)?.length === 0) {
@@ -325,6 +350,10 @@ const UseChittiHook = () => {
     } else {
       if (totalGrossWeightOfChallanTable < totalHuidWeightOfHuidTable) {
         toast.error('Huid weight cannot be greater than Gross weight');
+      } else if (
+        checkGrossAndNetWeight.gross_weight < checkGrossAndNetWeight.net_weight
+      ) {
+        toast.error('Net weight cannot be greater than Gross weight');
       } else {
         const BodyData: any = {
           date: date,
@@ -332,8 +361,8 @@ const UseChittiHook = () => {
           clientGroup: clientGroupName,
           goldRate: goldRate,
           remarks: remarks,
-          challanTableData: challanTableData,
-          narrationTableData: narrationUpdatedTableData,
+          challanTableData: filteredChallanTable,
+          narrationTableData: filteredHuidTable,
           token: AccessToken?.token,
         };
         let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
@@ -410,6 +439,8 @@ const UseChittiHook = () => {
     HandleAmendButtonForDuplicateChitti,
     setShowSaveButtonForAmendFlow,
     showSaveButtonForAmendFlow,
+    checkGrossAndNetWeight,
+    setCheckGrossAndNetWeight,
   };
 };
 
