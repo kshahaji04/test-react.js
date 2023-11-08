@@ -10,7 +10,6 @@ const ChallanItemsTable = ({
   setStateForDocStatus,
   setTotalGrossWeightOfChallanTable,
   readOnly,
-  checkGrossAndNetWeight,
   setCheckGrossAndNetWeight,
 }: any) => {
   const [amountValue, setamountValue] = useState<any>({

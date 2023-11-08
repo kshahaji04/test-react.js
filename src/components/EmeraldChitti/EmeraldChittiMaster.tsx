@@ -120,7 +120,7 @@ const EmeraldChittiMaster = () => {
           >
             <Tab eventKey="chitti-listing" title="Emerald Chitti List">
               <div className="container">
-                <h4 className="text-center mt-2">Emerald Listing</h4>
+                {/* <h4 className="text-center mt-2">Emerald Listing</h4> */}
                 <SearchListingTable
                   HandleSearchInput={HandleSearchInput}
                   clientNameList={clientNameList}

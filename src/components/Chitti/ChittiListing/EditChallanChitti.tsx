@@ -36,6 +36,7 @@ const EditChallanChitti = () => {
     HandleAmendButtonForDuplicateChitti,
     setShowSaveButtonForAmendFlow,
     showSaveButtonForAmendFlow,
+    setCheckGrossAndNetWeight,
   }: any = UseEditChallanChitti();
   const navigate = useNavigate();
   const [showButton, setShowButton] = useState<any>();
@@ -226,6 +227,7 @@ const EditChallanChitti = () => {
                     setTotalGrossWeightOfChallanTable={
                       setTotalGrossWeightOfChallanTable
                     }
+                    setCheckGrossAndNetWeight={setCheckGrossAndNetWeight}
                     readOnly={readOnly}
                   />
                   <NarrationTable

@@ -136,7 +136,7 @@ const ChittiMaster = () => {
             >
               <Tab eventKey="chitti-listing" title="Chitti List">
                 <div className="container">
-                  <h4 className="text-center mt-2">Chitti Listing</h4>
+                  {/* <h4 className="text-center mt-2">Chitti Listing</h4> */}
                   <SearchListingTable
                     HandleSearchInput={HandleSearchInput}
                     clientNameList={clientNameList}

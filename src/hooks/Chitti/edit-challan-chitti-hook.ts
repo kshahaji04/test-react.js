@@ -150,6 +150,7 @@ const UseEditChallanChitti: any = () => {
     HandleAmendButtonForDuplicateChitti,
     setShowSaveButtonForAmendFlow,
     showSaveButtonForAmendFlow,
+    setCheckGrossAndNetWeight,
   };
 };
 
