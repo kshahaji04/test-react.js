@@ -14,7 +14,7 @@ const EmeraldReport = () => {
   const { emeraldReportData } = UseEmeraldReportHook();
   const { subCategoryList }: any = UseSubCategoryHook();
   const { updatedSupplierList }: any = UseDataUploadHook();
-  console.log('subCategoryList in tsx', subCategoryList);
+  console.log('emeraldReportData in tsx', emeraldReportData);
 
   const AccessToken: any = useSelector(get_access_token);
 
