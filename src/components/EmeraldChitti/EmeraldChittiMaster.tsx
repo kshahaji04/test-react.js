@@ -6,6 +6,7 @@ import UseSubCategoryHook from '../../hooks/Master/sub-category-hook';
 import SearchListingTable from '../Chitti/ChittiListing/SearchListingTable';
 import { useState } from 'react';
 import ListingTable from '../ListingTable';
+import UseCustomEmeraldChittiHook from '../../hooks/Emerald/custom-emerald-chitti-hook';
 
 const EmeraldChittiMaster = () => {
   const {
@@ -20,8 +21,10 @@ const EmeraldChittiMaster = () => {
     currentDate,
     handleDateChange,
     transactionDate,
+    HandleAddRow,
     tableData,
     setTableData,
+    HandleDeleteRow,
     HandleEmptyEmeraldChitti,
     HandleSubmitEmeraldChittiData,
     HandleCancelEmeraldChitti,
@@ -30,6 +33,8 @@ const EmeraldChittiMaster = () => {
     clientGroupName,
     setClientGroupName,
   }: any = UseEmeraldHook();
+
+  // const { HandleAddRow, tableData, setTableData, HandleDeleteRow }: any = UseCustomEmeraldChittiHook()
   const { subCategoryList }: any = UseSubCategoryHook();
 
   const todayDate: any = currentDate?.toISOString()?.split('T')[0];
@@ -53,59 +58,59 @@ const EmeraldChittiMaster = () => {
   console.log('searchh', searchInputValues, searchClientName);
   const filteredList =
     emeraldChittiData?.length > 0 &&
-    emeraldChittiData !== null &&
-    (searchInputValues.submitted_date ||
-      searchInputValues.current_date ||
-      searchInputValues.chitti_no ||
-      searchClientName ||
-      searchInputValues.status)
+      emeraldChittiData !== null &&
+      (searchInputValues.submitted_date ||
+        searchInputValues.current_date ||
+        searchInputValues.chitti_no ||
+        searchClientName ||
+        searchInputValues.status)
       ? emeraldChittiData.filter((item: any) => {
-          const submittedDateMatch = searchInputValues.submitted_date
-            ? item?.submitted_date?.includes(searchInputValues.submitted_date)
-            : true;
-          const currentDateMatch = searchInputValues.current_date
-            ? item?.date?.includes(searchInputValues.current_date)
-            : true;
-          const numberMatch = searchInputValues.chitti_no
-            ? item?.number?.includes(searchInputValues.chitti_no)
-            : true;
-          const clientNameMatch = searchClientName
-            ? item?.client_name?.includes(searchClientName)
-            : true;
+        const submittedDateMatch = searchInputValues.submitted_date
+          ? item?.submitted_date?.includes(searchInputValues.submitted_date)
+          : true;
+        const currentDateMatch = searchInputValues.current_date
+          ? item?.date?.includes(searchInputValues.current_date)
+          : true;
+        const numberMatch = searchInputValues.chitti_no
+          ? item?.number?.includes(searchInputValues.chitti_no)
+          : true;
+        const clientNameMatch = searchClientName
+          ? item?.client_name?.includes(searchClientName)
+          : true;
 
-          if (searchInputValues.status === 'Draft') {
-            return (
-              item?.docstatus === 0 &&
-              submittedDateMatch &&
-              currentDateMatch &&
-              numberMatch &&
-              clientNameMatch
-            );
-          } else if (searchInputValues.status === 'Submitted') {
-            return (
-              item?.docstatus === 1 &&
-              submittedDateMatch &&
-              currentDateMatch &&
-              numberMatch &&
-              clientNameMatch
-            );
-          } else if (searchInputValues.status === 'Cancel') {
-            return (
-              item?.docstatus === 2 &&
-              submittedDateMatch &&
-              currentDateMatch &&
-              numberMatch &&
-              clientNameMatch
-            );
-          }
-
+        if (searchInputValues.status === 'Draft') {
           return (
+            item?.docstatus === 0 &&
             submittedDateMatch &&
             currentDateMatch &&
             numberMatch &&
             clientNameMatch
           );
-        })
+        } else if (searchInputValues.status === 'Submitted') {
+          return (
+            item?.docstatus === 1 &&
+            submittedDateMatch &&
+            currentDateMatch &&
+            numberMatch &&
+            clientNameMatch
+          );
+        } else if (searchInputValues.status === 'Cancel') {
+          return (
+            item?.docstatus === 2 &&
+            submittedDateMatch &&
+            currentDateMatch &&
+            numberMatch &&
+            clientNameMatch
+          );
+        }
+
+        return (
+          submittedDateMatch &&
+          currentDateMatch &&
+          numberMatch &&
+          clientNameMatch
+        );
+      })
       : emeraldChittiData;
 
   return (
@@ -147,6 +152,8 @@ const EmeraldChittiMaster = () => {
                 transactionDate={transactionDate}
                 tableData={tableData}
                 setTableData={setTableData}
+                HandleAddRow={HandleAddRow}
+                HandleDeleteRow={HandleDeleteRow}
                 subCategoryList={subCategoryList}
                 productItemList={productItemList}
                 HandleEmptyEmeraldChitti={HandleEmptyEmeraldChitti}

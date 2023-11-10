@@ -39,6 +39,7 @@ export const GetSpecificEmeraldScreen = createSlice({
       if (action?.payload?.message?.status === 'success') {
         if (action?.payload?.message?.hasOwnProperty('data')) {
           if (action?.payload?.message?.data?.data?.length > 0) {
+
             state.data = action?.payload?.message?.data?.data;
             state.docStatus =
               action?.payload?.message?.data?.data[0]?.docstatus;

@@ -15,6 +15,12 @@
     font-size: 14px;
 }
 
+.table-header-row-emerald-chitti {
+    background-color: #2f308c;
+    color: white;
+    font-size: 0.8rem;
+    line-height: 12px;
+}
 
 .input-field-chitti-table {
     padding: 10px 5px !important;

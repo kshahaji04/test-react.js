@@ -50,6 +50,8 @@ const UseEditEmeraldChittiHook: any = () => {
     HandleAmendButtonForDuplicateChitti,
     setShowSaveButtonForAmendFlow,
     showSaveButtonForAmendFlow,
+    HandleDeleteRow,
+    HandleAddRow
   }: any = UseEmeraldHook();
 
   useEffect(() => {
@@ -127,6 +129,8 @@ const UseEditEmeraldChittiHook: any = () => {
     HandleAmendButtonForDuplicateChitti,
     setShowSaveButtonForAmendFlow,
     showSaveButtonForAmendFlow,
+    HandleDeleteRow,
+    HandleAddRow
   };
 };
 

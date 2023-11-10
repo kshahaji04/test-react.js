@@ -93,11 +93,10 @@ const SelectedInputDropdown = ({
       <div className="dropdown-input-container">
         <input
           type="text"
-          className={`${
-            bgColor?.current === true
+          className={`${bgColor?.current === true
               ? 'form-control dropdown-input client-name-input-chitti'
               : 'form-control input-fields input-field-chitti dropdown-input'
-          }`}
+            }`}
           id="exampleInputEmail1"
           placeholder={placeholderValue}
           onChange={HandleInputField}
@@ -117,7 +116,7 @@ const SelectedInputDropdown = ({
           >
             {noRecords === false && filterDropdownList?.length === 0 ? (
               <>
-                {drowpdownlist.map((list: any, index: any) => (
+                {drowpdownlist?.length > 0 && drowpdownlist !== null && drowpdownlist.map((list: any, index: any) => (
                   <li
                     key={index}
                     onClick={() => handleSelectedOption(list)}

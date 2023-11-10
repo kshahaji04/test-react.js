@@ -2,14 +2,14 @@ import axios from 'axios';
 import { BASE_URL } from '../../Config/api-config';
 
 const GetSpecificEmeraldListData = async (request: any) => {
- console.log("req",request)
+  console.log("req", request)
   let response: any;
   const version = 'v1';
   const method = 'get_specific_emerald_chitti';
   const entity = 'specific_emerald_chitti';
 
   const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}&name=${request.name}`;
- 
+
 
   const config = {
     headers: {

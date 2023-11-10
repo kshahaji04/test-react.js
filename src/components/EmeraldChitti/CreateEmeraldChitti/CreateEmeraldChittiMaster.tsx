@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { get_specific_emerald_chitti } from '../../../store/slices/Emerald/get-specific-emrald-slice';
 
 import HandleButtonsDisplayInChitti from '../../HandleButtonsDisplayInChitti';
+import EmeraldChittiTableNew from './EmeraldChittiTableNew';
 
 const CreateEmeraldChittiMaster = ({
   selectedDropdownValue,
@@ -19,6 +20,8 @@ const CreateEmeraldChittiMaster = ({
   transactionDate,
   tableData,
   setTableData,
+  HandleAddRow,
+  HandleDeleteRow,
   subCategoryList,
   productItemList,
   showSubmitButtonAfterCreateChitti,
@@ -61,12 +64,20 @@ const CreateEmeraldChittiMaster = ({
         clientGroupName={clientGroupName}
       />
 
-      <EmeraldChittiTable
+      <EmeraldChittiTableNew
         tableData={tableData}
         setTableData={setTableData}
         subCategoryList={subCategoryList}
         productItemList={productItemList}
+        HandleAddRow={HandleAddRow}
+        HandleDeleteRow={HandleDeleteRow}
       />
+      {/* <EmeraldChittiTable
+        tableData={tableData}
+        setTableData={setTableData}
+        subCategoryList={subCategoryList}
+        productItemList={productItemList}
+      /> */}
     </>
   );
 };

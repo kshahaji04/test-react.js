@@ -5,6 +5,7 @@ import UseEditEmeraldChittiHook from '../../../hooks/Emerald/edit-emerald-chitti
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { get_specific_emerald_chitti } from '../../../store/slices/Emerald/get-specific-emrald-slice';
+import EmeraldChittiTableNew from '../CreateEmeraldChitti/EmeraldChittiTableNew';
 
 const EditEmeraldChitti = () => {
   const navigate = useNavigate();
@@ -32,6 +33,8 @@ const EditEmeraldChitti = () => {
     HandleCancelEmeraldChitti,
     HandleDeleteEmeraldChitti,
     subCategoryList,
+
+    HandleAddRow
   }: any = UseEditEmeraldChittiHook();
 
   console.log('challan detail', challanDetail);
@@ -139,7 +142,7 @@ const EditEmeraldChitti = () => {
             {challanDetail?.length > 0 &&
               challanDetail !== null &&
               challanDetail[0]?.date ===
-                new Date()?.toISOString()?.split('T')[0] && (
+              new Date()?.toISOString()?.split('T')[0] && (
                 <>
                   {showButton === 2 && showSaveButtonForAmendFlow === false && (
                     <>
@@ -200,7 +203,7 @@ const EditEmeraldChitti = () => {
                     readOnly={readOnly}
                   />
 
-                  <EmeraldChittiTable
+                  {/* <EmeraldChittiTable
                     defaultData={data?.challan_table}
                     tableData={tableData}
                     setTableData={setTableData}
@@ -208,7 +211,19 @@ const EditEmeraldChitti = () => {
                     productItemList={productItemList}
                     setStateForDocStatus={setStateForDocStatus}
                     readOnly={readOnly}
+                  /> */}
+                  <EmeraldChittiTableNew
+                    defaultData={data?.challan_table}
+                    tableData={tableData}
+                    setTableData={setTableData}
+                    subCategoryList={subCategoryList}
+                    productItemList={productItemList}
+                    setStateForDocStatus={setStateForDocStatus}
+                    readOnly={readOnly}
+
+                    HandleAddRow={HandleAddRow}
                   />
+
                 </>
               );
             })}

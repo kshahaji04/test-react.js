@@ -33,6 +33,7 @@ import {
   UpdateDocStatusWithSubmittedEmeraldChittiApi,
 } from '../../services/api/general/update-doc-status-emrald-chitti-api';
 import { EmeraldChittiAmendApi } from '../../services/api/Emerald/emerald-chitti-amend-api';
+import UseCustomEmeraldChittiHook from './custom-emerald-chitti-hook';
 
 const UseEmeraldHook = () => {
   const dispatch = useDispatch();
@@ -56,7 +57,37 @@ const UseEmeraldHook = () => {
   );
   const [productItemList, setProductItemList] = useState<any>([]);
   const [clientGroupName, setClientGroupName] = useState<any>('');
-  const [tableData, setTableData] = useState<any>([{ id: 1 }]);
+  const initialTableData = [
+    {
+      id: 1,
+      a: "",
+      b: "",
+      c: "",
+      d: "",
+      e: "",
+      gross_weight: '',
+      stn_wt: '21',
+      h: "",
+      i: "",
+      j: "",
+      net_weight: '',
+      project: "",
+      product: "",
+      n: "",
+      o: "",
+      p: "",
+      q: "",
+      r: "",
+      sub_category: "",
+      category: "",
+      cz_amt: '',
+      cs_amt: '',
+      amount: ''
+    }
+
+  ];
+
+  const [tableData, setTableData] = useState<any>(initialTableData);
   const [emeraldChittiTableData, setEmeraldChittiTableData] = useState<any>([]);
   const [stateForDocStatus, setStateForDocStatus] = useState<boolean>(false);
   const [
@@ -74,6 +105,7 @@ const UseEmeraldHook = () => {
     dispatch(getClientGroupList(AccessToken?.token));
     setCurrentDate(new Date());
   }, []);
+
 
   useEffect(() => {
     if (
@@ -135,6 +167,72 @@ const UseEmeraldHook = () => {
     setStateForDocStatus(true);
   };
 
+  const HandleAddRow: any = () => {
+    const newRow = {
+      id: tableData?.length + 1,
+      a: "",
+      b: "",
+      c: "",
+      d: "",
+      e: "",
+      gross_weight: '',
+      stn_wt: '',
+      h: "",
+      i: "",
+      j: "",
+      net_weight: '',
+      project: "",
+      product: "",
+      n: "",
+      o: "",
+      p: "",
+      q: "",
+      r: "",
+      sub_category: "",
+      category: "",
+      cz_amt: '',
+      cs_amt: '',
+      amount: ''
+    }
+
+
+    // Add the new row to the tableData
+    setTableData([...tableData, newRow]);
+    // setStateForDocStatus(true);
+
+    // // Calculate the new total values, including the new row
+    // const newColumnTotals = tableData.reduce(
+    //     (totals: any, row: any) => {
+    //         totals.gross_weight += row.gross_weight;
+    //         totals.net_weight += row.net_weight;
+    //         totals.amount += row.amount;
+    //         return totals;
+    //     },
+    //     { gross_weight: 0, net_weight: 0, amount: 0 }
+    // );
+
+    // // Add the values of the new row to the totals
+    // newColumnTotals.gross_weight += newRow.gross_weight;
+    // newColumnTotals.net_weight += newRow.net_weight;
+    // newColumnTotals.amount += newRow.amount;
+
+    // // Update the total values
+    // setamountValue(newColumnTotals);
+  };
+
+
+  // console.log("table data set", tableData)
+
+  const HandleDeleteRow: any = (id: any) => {
+    console.log("id", id)
+    if (tableData?.length > 1) {
+      const updatedData = tableData
+        .filter((row: any) => row.id !== id)
+      // .map((row: any, index: number) => ({ ...row, id: index + 1 }));
+      setTableData(updatedData);
+      //   setStateForDocStatus(true);
+    }
+  };
   const handleDateChange: any = (e: any) => {
     console.log('clientgro', e.target.value);
     setTransactionDate(e.target.value);
@@ -353,6 +451,8 @@ const UseEmeraldHook = () => {
     HandleAmendButtonForDuplicateChitti,
     showSaveButtonForAmendFlow,
     setShowSaveButtonForAmendFlow,
+    HandleDeleteRow,
+    HandleAddRow
   };
 };
 
