@@ -184,26 +184,26 @@ const EditEmeraldChitti = () => {
 
       <div>
         <div>
-          {challanDetail?.length > 0 &&
+          {/* {challanDetail?.length > 0 &&
             challanDetail !== null &&
             challanDetail.map((data: any) => {
               return (
-                <>
-                  <EmeraldCreateChitti
-                    defaultData={data}
-                    selectedDropdownValue={selectedDropdownValue}
-                    setSelectedDropdownValue={setSelectedDropdownValue}
-                    HandleClientGroup={HandleClientGroup}
-                    clientGroupList={clientGroupList}
-                    clientNameList={clientNameList}
-                    currentDate={currentDate}
-                    handleDateChange={handleDateChange}
-                    transactionDate={transactionDate}
-                    setStateForDocStatus={setStateForDocStatus}
-                    readOnly={readOnly}
-                  />
+                <> */}
+          <EmeraldCreateChitti
+            // defaultData={data}
+            selectedDropdownValue={selectedDropdownValue}
+            setSelectedDropdownValue={setSelectedDropdownValue}
+            HandleClientGroup={HandleClientGroup}
+            clientGroupList={clientGroupList}
+            clientNameList={clientNameList}
+            currentDate={currentDate}
+            handleDateChange={handleDateChange}
+            transactionDate={transactionDate}
+            setStateForDocStatus={setStateForDocStatus}
+            readOnly={readOnly}
+          />
 
-                  {/* <EmeraldChittiTable
+          {/* <EmeraldChittiTable
                     defaultData={data?.challan_table}
                     tableData={tableData}
                     setTableData={setTableData}
@@ -212,21 +212,21 @@ const EditEmeraldChitti = () => {
                     setStateForDocStatus={setStateForDocStatus}
                     readOnly={readOnly}
                   /> */}
-                  <EmeraldChittiTableNew
-                    defaultData={data?.challan_table}
-                    tableData={tableData}
-                    setTableData={setTableData}
-                    subCategoryList={subCategoryList}
-                    productItemList={productItemList}
-                    setStateForDocStatus={setStateForDocStatus}
-                    readOnly={readOnly}
+          <EmeraldChittiTableNew
+            // defaultData={data?.challan_table}
+            tableData={tableData}
+            setTableData={setTableData}
+            subCategoryList={subCategoryList}
+            productItemList={productItemList}
+            setStateForDocStatus={setStateForDocStatus}
+            readOnly={readOnly}
 
-                    HandleAddRow={HandleAddRow}
-                  />
+            HandleAddRow={HandleAddRow}
+          />
 
-                </>
+          {/* </>
               );
-            })}
+            })} */}
         </div>
       </div>
     </div>

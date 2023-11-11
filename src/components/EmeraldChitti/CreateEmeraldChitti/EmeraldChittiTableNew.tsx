@@ -23,12 +23,28 @@ const EmeraldChittiTableNew = ({
     //     }
     // }, [defaultData, setTableData]);
 
-    console.log("default tabledata", tableData)
-
-
     const handleInputChange: any = (id: any, field: string, newValue: any) => {
         setTableData((prevData: any) =>
-            prevData.map((row: any) => (row.id === id ? { ...row, [field]: newValue } : row))
+            prevData.map((row: any) => {
+                if (row.id === id) {
+                    let updatedRow = { ...row, [field]: newValue };
+
+                    // Calculate cz_amt when stn_wt changes
+                    if (field === 'stn_wt') {
+                        const newCzAmt = parseFloat(newValue) * 10.0;
+                        updatedRow = { ...updatedRow, stn_wt: newValue, cz_amt: newCzAmt, amount: newCzAmt + (parseFloat(updatedRow.cs_amt) || 0) };
+                    }
+
+                    // Calculate amount when cz_amt or cs_amt changes
+                    if (field === 'cz_amt' || field === 'cs_amt') {
+                        updatedRow = { ...updatedRow, amount: (parseFloat(updatedRow.cz_amt) || 0) + (parseFloat(updatedRow.cs_amt) || 0) };
+                    }
+
+                    return updatedRow;
+                } else {
+                    return row;
+                }
+            })
         );
     };
 
@@ -93,110 +109,108 @@ const EmeraldChittiTableNew = ({
                                     <>
                                         <tr key={row.id}>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.a}
                                                     id={`a-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'a', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.b}
                                                     id={`b-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'b', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.c}
                                                     id={`c-${row.id}`}
 
                                                     onChange={(e: any) => handleInputChange(row.id, 'c', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.d}
                                                     id={`d-${row.id}`}
 
                                                     onChange={(e: any) => handleInputChange(row.id, 'd', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.b}
                                                     id={`b-${row.id}`}
 
                                                     onChange={(e: any) => handleInputChange(row.id, 'e', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.gross_weight}
                                                     id={`gross_weight-${row.id}`}
 
                                                     onChange={(e: any) => handleInputChange(row.id, 'gross_weight', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.stn_wt}
                                                     id={`stn_wt-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'stn_wt', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.h}
                                                     id={`h-${row.id}`}
-
                                                     onChange={(e: any) => handleInputChange(row.id, 'h', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.i}
                                                     id={`i-${row.id}`}
 
                                                     onChange={(e: any) => handleInputChange(row.id, 'i', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.j}
                                                     id={`j-${row.id}`}
 
                                                     onChange={(e: any) => handleInputChange(row.id, 'j', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.net_weight}
                                                     id={`net_weight-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'net_weight', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.project}
                                                     id={`project-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'project', e.target.value)}
                                                     type="text" />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.product}
                                                     id={`product-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'product', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.n}
                                                     id={`n-${row.id}`}
 
                                                     onChange={(e: any) => handleInputChange(row.id, 'n', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.o}
                                                     id={`o-${row.id}`}
-
                                                     onChange={(e: any) => handleInputChange(row.id, 'o', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.p}
                                                     id={`p-${row.id}`}
 
                                                     onChange={(e: any) => handleInputChange(row.id, 'p', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.q}
                                                     id={`q-${row.id}`}
 
                                                     onChange={(e: any) => handleInputChange(row.id, 'q', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.r}
                                                     id={`r-${row.id}`}
 
                                                     onChange={(e: any) => handleInputChange(row.id, 'r', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.sub_category}
                                                     id={`sub_category-${row.id}`}
 
                                                     onChange={(e: any) => handleInputChange(row.id, 'sub_category', e.target.value)} />
@@ -208,17 +222,17 @@ const EmeraldChittiTableNew = ({
                                                     onChange={(e: any) => handleInputChange(row.id, 'category', e.target.value)} />
                                             </td> */}
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.cz_amt}
                                                     id={`cz_amt-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'cz_amt', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.cs_amt}
                                                     id={`cs_amt-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'cs_amt', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.value}
+                                                <InputFieldComponent value={row.amount}
                                                     id={`amount-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'amount', e.target.value)} />
                                             </td>

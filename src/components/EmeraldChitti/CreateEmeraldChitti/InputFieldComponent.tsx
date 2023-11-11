@@ -6,7 +6,7 @@ const InputFieldComponent = ({ value, id, onChange, type }: any) => {
     return (
         <div>
             <input
-                type={type}
+                type="number"
                 className="form-control custom-input-field-t"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"

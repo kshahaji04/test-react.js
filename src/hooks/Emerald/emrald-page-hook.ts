@@ -66,7 +66,7 @@ const UseEmeraldHook = () => {
       d: "",
       e: "",
       gross_weight: '',
-      stn_wt: '21',
+      stn_wt: '',
       h: "",
       i: "",
       j: "",
@@ -425,6 +425,8 @@ const UseEmeraldHook = () => {
       }
     }
   };
+
+  console.log("table dataaa", tableData)
 
   return {
     emeraldChittiData,
