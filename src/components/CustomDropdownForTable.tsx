@@ -16,6 +16,8 @@ const CustomDropdownForTable = ({
   title,
   readOnly,
   rowId,
+  dropdownWidth,
+  manageSelectedValue = false,
   data, // Pass a unique index for each instance
 }: any) => {
   const categoryDataFromStore: any = useSelector(get_category_list);
@@ -24,7 +26,10 @@ const CustomDropdownForTable = ({
   const [showDropDown, setShowDropdown] = useState(false);
   const [noRecords, setNoRecordsFound] = useState(false);
   const [filterDropdownList, setFilterDropdownList] = useState([]);
+  const [selectedValue, setSelectedValue] = useState(data || '');
+
   const inputRef = useRef<any>(null);
+
   useEffect(() => {
     if (
       defaultData !== undefined &&
@@ -35,8 +40,17 @@ const CustomDropdownForTable = ({
     }
   }, []);
 
+  //for emerald chitti table
+  useEffect(() => {
+    if (manageSelectedValue) {
+      setSelectedDropdownValue(rowId, selectedValue);
+    }
+  }, [selectedValue, setSelectedDropdownValue, rowId, manageSelectedValue]);
+
+
   const handleSelectedOption = (data: any) => {
     setSelectedDropdownValue(data);
+    setSelectedValue(selectedValue);
     setShowDropdown(false);
     if (setStateForDocStatus !== undefined) {
       setStateForDocStatus(true);
@@ -103,90 +117,89 @@ const CustomDropdownForTable = ({
   };
   return (
     <>
-      <div className="dropdown-input-container">
-        <input
-          type="text"
-          className={`${
-            bgColor?.current === true
-              ? 'form-control dropdown-input client-name-input-chitti'
-              : 'form-control input-field-chitti-table dropdown-input'
+      <input
+        type="text"
+        className={`${bgColor?.current === true
+          ? 'form-control dropdown-input client-name-input-chitti'
+          : 'form-control input-field-chitti-table dropdown-input'
           }`}
-          id="exampleInputEmail1"
-          placeholder={placeholderValue}
-          onChange={HandleInputField}
-          onClick={handleShowDropdown}
-          defaultValue={defaultData}
-          value={data}
-          onKeyDown={handleKeyDown}
-          autoComplete="off"
-          title={title}
-          readOnly={readOnly}
-          ref={inputRef}
-          onFocus={handleOnFocus}
-        />
-        {showDropDown && (
-          <ul
-            className="dropdown-ul-list border"
-            aria-label="Default select example"
-          >
-            {noRecords === false && filterDropdownList?.length === 0 ? (
-              <>
-                {drowpdownlist.map((list: any, index: any) => (
-                  <li
-                    key={index}
-                    onClick={() => handleSelectedOption(list)}
-                    className="dropdown-list"
-                  >
-                    {list}
-                  </li>
-                ))}
-              </>
-            ) : (
-              <>
-                {filterDropdownList.map((list: any, index: any) => (
-                  <li
-                    key={index}
-                    onClick={() => handleSelectedOption(list)}
-                    className="dropdown-list"
-                  >
-                    {list}
-                  </li>
-                ))}
-              </>
-            )}
+        id="exampleInputEmail1"
+        placeholder={placeholderValue}
+        onChange={HandleInputField}
+        onClick={handleShowDropdown}
+        defaultValue={defaultData}
+        value={data}
+        onKeyDown={handleKeyDown}
+        autoComplete="off"
+        title={title}
+        readOnly={readOnly}
+        ref={inputRef}
+        onFocus={handleOnFocus}
+      />
+      {showDropDown && (
+        <ul
+          // className="dropdown-ul-list border"
+          className={`${dropdownWidth ? "w-auto" : ""} dropdown-ul-list border`}
+          aria-label="Default select example"
+        >
+          {noRecords === false && filterDropdownList?.length === 0 ? (
+            <>
+              {drowpdownlist.map((list: any, index: any) => (
+                <li
+                  key={index}
+                  onClick={() => handleSelectedOption(list)}
+                  className="dropdown-list"
+                >
+                  {list}
+                </li>
+              ))}
+            </>
+          ) : (
+            <>
+              {filterDropdownList.map((list: any, index: any) => (
+                <li
+                  key={index}
+                  onClick={() => handleSelectedOption(list)}
+                  className="dropdown-list"
+                >
+                  {list}
+                </li>
+              ))}
+            </>
+          )}
 
-            {categoryDataFromStore?.data?.length > 0 && (
-              <>
-                {showCategoryDropdown && filterDropdownList?.length === 0 && (
-                  <>
-                    {/* <div className="text-uppercase px-2 mt-1">Category</div> */}
-                    <li className="dropdown-list p-1">
-                      <select
-                        className="form-select form-select-sm "
-                        aria-label="Default select example"
-                        onChange={HandleSelectedCategory}
-                      >
-                        <option>Select Category</option>
-                        {categoryDataFromStore?.data?.length > 0 &&
-                          categoryDataFromStore?.data !== null &&
-                          categoryDataFromStore?.data.map(
-                            (value: any, index: any) => {
-                              return (
-                                <>
-                                  <option key={index}>{value}</option>
-                                </>
-                              );
-                            }
-                          )}
-                      </select>
-                    </li>
-                  </>
-                )}
-              </>
-            )}
-          </ul>
-        )}
-      </div>
+          {categoryDataFromStore?.data?.length > 0 && (
+            <>
+              {showCategoryDropdown && filterDropdownList?.length === 0 && (
+                <>
+                  {/* <div className="text-uppercase px-2 mt-1">Category</div> */}
+                  <li className="dropdown-list p-1">
+                    <select
+                      className="form-select form-select-sm "
+                      aria-label="Default select example"
+                      onChange={HandleSelectedCategory}
+                    >
+                      <option>Select Category</option>
+                      {categoryDataFromStore?.data?.length > 0 &&
+                        categoryDataFromStore?.data !== null &&
+                        categoryDataFromStore?.data.map(
+                          (value: any, index: any) => {
+                            return (
+                              <>
+                                <option key={index}>{value}</option>
+                              </>
+                            );
+                          }
+                        )}
+                    </select>
+                  </li>
+                </>
+              )}
+            </>
+          )}
+        </ul>
+      )}
+
     </>
   );
 };

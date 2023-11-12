@@ -1,13 +1,20 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import InputFieldComponent from './InputFieldComponent'
+import CustomDropdownForTable from '../../CustomDropdownForTable';
+import SelectedInputDropdown from '../../SelectedInputDropdown';
 
 const EmeraldChittiTableNew = ({
     tableData,
     setTableData,
+    // subCategoryList,
     defaultData,
     HandleAddRow,
 }: any) => {
 
+    const subCategoryList: any = ["Somit", 'BOM chain ', "Boom"]
+    const dropdownWidth: any = useRef<any>(true)
+
+    console.log("subcata")
     // useEffect(() => {
     //     console.log("default data", defaultData);
     //     if (
@@ -22,6 +29,7 @@ const EmeraldChittiTableNew = ({
 
     //     }
     // }, [defaultData, setTableData]);
+
 
     const handleInputChange: any = (id: any, field: string, newValue: any) => {
         setTableData((prevData: any) =>
@@ -45,6 +53,15 @@ const EmeraldChittiTableNew = ({
                     return row;
                 }
             })
+        );
+
+    };
+
+    const handleDropdownSelect = (rowId: any, selectedValue: any) => {
+        setTableData((prevData: any) =>
+            prevData.map((row: any) =>
+                row.id === rowId ? { ...row, sub_category: selectedValue } : row
+            )
         );
     };
 
@@ -139,7 +156,6 @@ const EmeraldChittiTableNew = ({
                                             <td className="p-0">
                                                 <InputFieldComponent value={row.gross_weight}
                                                     id={`gross_weight-${row.id}`}
-
                                                     onChange={(e: any) => handleInputChange(row.id, 'gross_weight', e.target.value)} />
                                             </td>
                                             <td className="p-0">
@@ -210,10 +226,19 @@ const EmeraldChittiTableNew = ({
                                                     onChange={(e: any) => handleInputChange(row.id, 'r', e.target.value)} />
                                             </td>
                                             <td className="p-0">
-                                                <InputFieldComponent value={row.sub_category}
+                                                <CustomDropdownForTable
+                                                    drowpdownlist={subCategoryList}
+                                                    rowId={row.id}
+                                                    setSelectedDropdownValue={(selectedValue: any) => handleDropdownSelect(row.id, selectedValue)}
+                                                    data={tableData.find((rowData: any) => rowData.id === row.id)?.sub_category}
+                                                    dropdownWidth={"true"}
+
+                                                />
+
+                                                {/* <InputFieldComponent value={row.sub_category}
                                                     id={`sub_category-${row.id}`}
 
-                                                    onChange={(e: any) => handleInputChange(row.id, 'sub_category', e.target.value)} />
+                                                    onChange={(e: any) => handleInputChange(row.id, 'sub_category', e.target.value)} /> */}
                                             </td>
                                             {/* <td className="p-0">
                                                 <InputFieldComponent value={row.value}

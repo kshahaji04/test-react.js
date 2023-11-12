@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import EmeraldCreateChitti from '../CreateEmeraldChitti/EmeraldCreateChitti';
-import EmeraldChittiTable from '../CreateEmeraldChitti/EmeraldChittiTable';
+
 import UseEditEmeraldChittiHook from '../../../hooks/Emerald/edit-emerald-chitti-hook';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -33,7 +33,6 @@ const EditEmeraldChitti = () => {
     HandleCancelEmeraldChitti,
     HandleDeleteEmeraldChitti,
     subCategoryList,
-
     HandleAddRow
   }: any = UseEditEmeraldChittiHook();
 

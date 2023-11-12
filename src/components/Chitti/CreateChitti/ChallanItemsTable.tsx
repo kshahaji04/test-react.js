@@ -198,26 +198,29 @@ const ChallanItemsTable = ({
                     <td className="p-0">{row.id}</td>
                     <td className="table-data-input">
                       <div className="h-25 custom-select-container">
-                        <CustomDropdownForTable
-                          drowpdownlist={subCategoryList}
-                          data={row.sub_category}
-                          key={row.id}
-                          rowId={row.id}
-                          HandleData={HandleSubCategory}
-                          placeholderValue="Sub Category"
-                          selectedDropdownValue={row.sub_category}
-                          setSelectedDropdownValue={(value: any) =>
-                            HandleSubCategory(value, row.id)
-                          }
-                          defaultData={row.sub_category}
-                          setStateForDocStatus={setStateForDocStatus}
-                          readOnly={readOnly === true ? true : false}
-                          HandleCategoryData={HandleCategoryForNewSubcategory}
-                          setSelectedCategoryForSubcategory={(value: any) =>
-                            HandleCategoryForNewSubcategory(value, row.id)
-                          }
-                          showCategoryDropdown={showCategoryDropdown}
-                        />
+                        <div className="dropdown-input-container">
+
+                          <CustomDropdownForTable
+                            drowpdownlist={subCategoryList}
+                            data={row.sub_category}
+                            key={row.id}
+                            rowId={row.id}
+                            HandleData={HandleSubCategory}
+                            placeholderValue="Sub Category"
+                            selectedDropdownValue={row.sub_category}
+                            setSelectedDropdownValue={(value: any) =>
+                              HandleSubCategory(value, row.id)
+                            }
+                            defaultData={row.sub_category}
+                            setStateForDocStatus={setStateForDocStatus}
+                            readOnly={readOnly === true ? true : false}
+                            HandleCategoryData={HandleCategoryForNewSubcategory}
+                            setSelectedCategoryForSubcategory={(value: any) =>
+                              HandleCategoryForNewSubcategory(value, row.id)
+                            }
+                            showCategoryDropdown={showCategoryDropdown}
+                          />
+                        </div>
                       </div>
                     </td>
                     <td className="table-data-input">

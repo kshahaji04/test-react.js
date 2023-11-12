@@ -155,21 +155,24 @@ const NarrationTable = ({
               <td className="p-0">{row.id}</td>
               <td className="table-data-input">
                 <div className="h-25 custom-select-huid-container">
-                  <CustomDropdownForTable
-                    drowpdownlist={productList}
-                    data={row.product}
-                    key={row.id}
-                    rowId={row.id}
-                    HandleData={HandleCategory}
-                    placeholderValue="HUID Product"
-                    selectedDropdownValue={row.sub_category}
-                    setSelectedDropdownValue={(value: any) =>
-                      HandleCategory(value, row.id)
-                    }
-                    defaultData={row.sub_category}
-                    setStateForDocStatus={setStateForDocStatus}
-                    readOnly={readOnly === true ? true : false}
-                  />
+                  <div className="dropdown-input-container">
+
+                    <CustomDropdownForTable
+                      drowpdownlist={productList}
+                      data={row.product}
+                      key={row.id}
+                      rowId={row.id}
+                      HandleData={HandleCategory}
+                      placeholderValue="HUID Product"
+                      selectedDropdownValue={row.sub_category}
+                      setSelectedDropdownValue={(value: any) =>
+                        HandleCategory(value, row.id)
+                      }
+                      defaultData={row.sub_category}
+                      setStateForDocStatus={setStateForDocStatus}
+                      readOnly={readOnly === true ? true : false}
+                    />
+                  </div>
                 </div>
                 {/* <select
                   id="category"
