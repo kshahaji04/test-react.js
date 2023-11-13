@@ -33,7 +33,6 @@ import {
   UpdateDocStatusWithSubmittedEmeraldChittiApi,
 } from '../../services/api/general/update-doc-status-emrald-chitti-api';
 import { EmeraldChittiAmendApi } from '../../services/api/Emerald/emerald-chitti-amend-api';
-import UseCustomEmeraldChittiHook from './custom-emerald-chitti-hook';
 
 const UseEmeraldHook = () => {
   const dispatch = useDispatch();

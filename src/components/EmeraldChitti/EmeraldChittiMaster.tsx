@@ -6,7 +6,7 @@ import UseSubCategoryHook from '../../hooks/Master/sub-category-hook';
 import SearchListingTable from '../Chitti/ChittiListing/SearchListingTable';
 import { useState } from 'react';
 import ListingTable from '../ListingTable';
-import UseCustomEmeraldChittiHook from '../../hooks/Emerald/custom-emerald-chitti-hook';
+
 
 const EmeraldChittiMaster = () => {
   const {

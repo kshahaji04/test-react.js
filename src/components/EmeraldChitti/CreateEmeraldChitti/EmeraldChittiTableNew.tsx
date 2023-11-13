@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import InputFieldComponent from './InputFieldComponent'
 import CustomDropdownForTable from '../../CustomDropdownForTable';
 import EmeraldChittiTableReadOnlyRow from './EmeraldChittiTableReadOnlyRow';

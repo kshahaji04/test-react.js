@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import EmeraldCreateChitti from './EmeraldCreateChitti';
-import EmeraldChittiTable from './EmeraldChittiTable';
 import { useSelector } from 'react-redux';
 import { get_specific_emerald_chitti } from '../../../store/slices/Emerald/get-specific-emrald-slice';
 

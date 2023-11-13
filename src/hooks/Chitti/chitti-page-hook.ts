@@ -74,7 +74,7 @@ const UseChittiHook = () => {
   ] = useState<any>('');
   const [showSaveButtonForAmendFlow, setShowSaveButtonForAmendFlow] =
     useState<any>(false);
-
+  console.log(narrationUpdatedTableData)
   const {
     totalGrossWeightOfChallanTable,
     totalHuidWeightOfHuidTable,
