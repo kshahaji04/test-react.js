@@ -66,7 +66,7 @@ const UseEmeraldHook = () => {
       d: "",
       e: "",
       gross_weight: '',
-      stn_wt: 10,
+      stn_wt: '',
       h: "",
       i: "",
       j: "",

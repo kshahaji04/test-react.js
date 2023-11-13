@@ -32,6 +32,10 @@
     border: none;
 }
 
+.emerald_chitti_table_td {
+    padding: 2px !important;
+}
+
 @media only screen and (min-width: 1280px) {
     .custom-select-container {
         width: 36%;
