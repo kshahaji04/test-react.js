@@ -28,6 +28,7 @@ const CreateEmeraldChittiMaster = ({
   HandleCancelEmeraldChitti,
   HandleDeleteEmeraldChitti,
   HandleEmptyEmeraldChitti,
+  setStateForDocStatus
 }: any) => {
   const [showButton, setShowButton] = useState<any>();
 
@@ -70,6 +71,7 @@ const CreateEmeraldChittiMaster = ({
         productItemList={productItemList}
         HandleAddRow={HandleAddRow}
         HandleDeleteRow={HandleDeleteRow}
+        setStateForDocStatus={setStateForDocStatus}
       />
       {/* <EmeraldChittiTable
         tableData={tableData}

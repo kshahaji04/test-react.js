@@ -32,6 +32,7 @@ const EmeraldChittiMaster = () => {
     showSubmitButtonAfterCreateChitti,
     clientGroupName,
     setClientGroupName,
+    setStateForDocStatus
   }: any = UseEmeraldHook();
 
   // const { HandleAddRow, tableData, setTableData, HandleDeleteRow }: any = UseCustomEmeraldChittiHook()
@@ -164,6 +165,7 @@ const EmeraldChittiMaster = () => {
                   showSubmitButtonAfterCreateChitti
                 }
                 setClientGroupName={setClientGroupName}
+                setStateForDocStatus={setStateForDocStatus}
               />
             </Tab>
           </Tabs>

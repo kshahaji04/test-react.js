@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import InputFieldComponent from './InputFieldComponent'
 import CustomDropdownForTable from '../../CustomDropdownForTable';
 import EmeraldChittiTableReadOnlyRow from './EmeraldChittiTableReadOnlyRow';
@@ -14,7 +14,7 @@ const EmeraldChittiTableNew = ({
     setStateForDocStatus
 }: any) => {
     console.log("readonly", readOnly)
-
+    const ShowCategoryDropdown: any = useRef<any>(true);
     const [calculationRow, setCalculationRow] = useState({
         gross_weight: 0,
         stn_wt: 0,
@@ -104,6 +104,7 @@ const EmeraldChittiTableNew = ({
         );
         setStateForDocStatus(true)
     };
+
 
     const HandleDeleteRow: any = (id: any) => {
         console.log("roww id", id)
@@ -310,6 +311,7 @@ const EmeraldChittiTableNew = ({
                                                     setSelectedDropdownValue={(selectedValue: any) => handleDropdownSelect(row.id, selectedValue)}
                                                     data={tableData.find((rowData: any) => rowData.id === row.id)?.sub_category}
                                                     dropdownWidth={"true"}
+                                                    showCategoryDropdown={ShowCategoryDropdown}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">

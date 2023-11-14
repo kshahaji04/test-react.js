@@ -44,6 +44,7 @@ const CustomDropdownForTable = ({
   useEffect(() => {
     if (manageSelectedValue) {
       setSelectedDropdownValue(rowId, selectedValue);
+
     }
   }, [selectedValue, setSelectedDropdownValue, rowId, manageSelectedValue]);
 
@@ -65,16 +66,18 @@ const CustomDropdownForTable = ({
   };
 
   const HandleInputField = (e: any) => {
+    console.log("updated search text", e.target.value)
     setShowDropdown(true); // Open the dropdown when typing
-    setSelectedDropdownValue(e.target.value);
 
     const query = e.target.value;
+
     const UpdatedFilterList: any = drowpdownlist?.filter((item: any) => {
       return item?.toLowerCase()?.indexOf(query?.toLowerCase()) !== -1;
     });
 
     setFilterDropdownList(UpdatedFilterList);
     setNoRecordsFound(true);
+    setSelectedDropdownValue(query);
   };
 
   const handleKeyDown = (e: any) => {
@@ -115,6 +118,8 @@ const CustomDropdownForTable = ({
   const handleOnFocus: any = (e: any) => {
     console.log('onfocus', e.target.value);
   };
+
+  console.log("filter list", filterDropdownList, categoryDataFromStore, showCategoryDropdown?.current)
   return (
     <>
       <input
@@ -170,7 +175,7 @@ const CustomDropdownForTable = ({
 
           {categoryDataFromStore?.data?.length > 0 && (
             <>
-              {showCategoryDropdown && filterDropdownList?.length === 0 && (
+              {noRecords === true && showCategoryDropdown?.current && filterDropdownList?.length === 0 && (
                 <>
                   {/* <div className="text-uppercase px-2 mt-1">Category</div> */}
                   <li className="dropdown-list p-1">

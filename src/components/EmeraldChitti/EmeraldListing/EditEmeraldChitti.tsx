@@ -219,7 +219,6 @@ const EditEmeraldChitti = () => {
                     productItemList={productItemList}
                     setStateForDocStatus={setStateForDocStatus}
                     readOnly={readOnly}
-
                     HandleAddRow={HandleAddRow}
                   />
 
