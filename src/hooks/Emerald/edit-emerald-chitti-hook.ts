@@ -133,7 +133,8 @@ const UseEditEmeraldChittiHook: any = () => {
     showSaveButtonForAmendFlow,
     HandleDeleteRow,
     HandleAddRow,
-    handleKeyDown
+    handleKeyDown,
+    handleOnFocus
   };
 };
 
