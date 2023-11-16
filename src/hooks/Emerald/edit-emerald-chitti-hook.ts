@@ -51,7 +51,9 @@ const UseEditEmeraldChittiHook: any = () => {
     setShowSaveButtonForAmendFlow,
     showSaveButtonForAmendFlow,
     HandleDeleteRow,
-    HandleAddRow
+    HandleAddRow,
+    handleKeyDown,
+    handleOnFocus
   }: any = UseEmeraldHook();
 
   useEffect(() => {
@@ -130,7 +132,8 @@ const UseEditEmeraldChittiHook: any = () => {
     setShowSaveButtonForAmendFlow,
     showSaveButtonForAmendFlow,
     HandleDeleteRow,
-    HandleAddRow
+    HandleAddRow,
+    handleKeyDown
   };
 };
 

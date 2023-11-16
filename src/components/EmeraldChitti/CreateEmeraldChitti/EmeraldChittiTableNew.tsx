@@ -11,7 +11,9 @@ const EmeraldChittiTableNew = ({
     defaultData,
     HandleAddRow,
     readOnly,
-    setStateForDocStatus
+    setStateForDocStatus,
+    handleKeyDown,
+    handleOnFocus
 }: any) => {
     console.log("readonly", readOnly)
     const ShowCategoryDropdown: any = useRef<any>(true);
@@ -100,7 +102,6 @@ const EmeraldChittiTableNew = ({
             prevData.map((row: any) =>
                 row.id === rowId ? { ...row, sub_category: selectedValue } : row
             )
-
         );
         setStateForDocStatus(true)
     };
@@ -116,6 +117,11 @@ const EmeraldChittiTableNew = ({
             setStateForDocStatus(true);
         }
     };
+
+    // const handleOnFocus: any = (e: any, id: any) => {
+    //     console.log("onfocus", e.target, id)
+
+    // }
 
     console.log("updated tabled dataa", tableData)
     return (
@@ -170,19 +176,32 @@ const EmeraldChittiTableNew = ({
                                                     readOnly={readOnly}
                                                     id={`a-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'a', e.target.value)}
-                                                    type="text" />
+                                                    type="text"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
+
+                                                />
                                             </td>
                                             <td className="emerald_chitti_table_td">
                                                 <InputFieldComponent value={row.b}
                                                     readOnly={readOnly}
                                                     id={`b-${row.id}`}
-                                                    onChange={(e: any) => handleInputChange(row.id, 'b', e.target.value)} type="text" />
+                                                    onChange={(e: any) => handleInputChange(row.id, 'b', e.target.value)}
+                                                    type="text"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
+
+                                                />
                                             </td>
                                             <td className="emerald_chitti_table_td">
                                                 <InputFieldComponent value={row.c}
                                                     readOnly={readOnly}
                                                     id={`c-${row.id}`}
-                                                    onChange={(e: any) => handleInputChange(row.id, 'c', e.target.value)} type="text" />
+                                                    onChange={(e: any) => handleInputChange(row.id, 'c', e.target.value)}
+                                                    type="text"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
+                                                />
                                             </td>
                                             <td className="emerald_chitti_table_td">
                                                 <InputFieldComponent value={row.d}
@@ -190,6 +209,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`d-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'd', e.target.value)}
                                                     type="text"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -198,6 +219,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`e-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'e', e.target.value)}
                                                     type="text"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -206,6 +229,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`gross_weight-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'gross_weight', e.target.value)}
                                                     type="number"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -214,6 +239,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`stn_wt-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'stn_wt', e.target.value)}
                                                     type="number"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -222,6 +249,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`h-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'h', e.target.value)}
                                                     type="text"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -230,6 +259,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`i-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'i', e.target.value)}
                                                     type="text"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -238,6 +269,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`j-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'j', e.target.value)}
                                                     type="text"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -246,6 +279,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`net_weight-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'net_weight', e.target.value)}
                                                     type="number"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -253,7 +288,10 @@ const EmeraldChittiTableNew = ({
                                                     readOnly={readOnly}
                                                     id={`project-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'project', e.target.value)}
-                                                    type="text" />
+                                                    type="text"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
+                                                />
                                             </td>
                                             <td className="emerald_chitti_table_td">
                                                 <InputFieldComponent value={row.product}
@@ -261,6 +299,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`product-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'product', e.target.value)}
                                                     type="text"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -269,6 +309,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`n-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'n', e.target.value)}
                                                     type="text"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -277,6 +319,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`o-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'o', e.target.value)}
                                                     type="text"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -285,6 +329,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`p-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'p', e.target.value)}
                                                     type="text"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -293,6 +339,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`q-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'q', e.target.value)}
                                                     type="text"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -301,6 +349,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`r-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'r', e.target.value)}
                                                     type="text"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -312,6 +362,7 @@ const EmeraldChittiTableNew = ({
                                                     data={tableData.find((rowData: any) => rowData.id === row.id)?.sub_category}
                                                     dropdownWidth={"true"}
                                                     showCategoryDropdown={ShowCategoryDropdown}
+
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -320,6 +371,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`cz_amt-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'cz_amt', e.target.value)}
                                                     type="number"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td" >
@@ -328,6 +381,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`cs_amt-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'cs_amt', e.target.value)}
                                                     type="number"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="emerald_chitti_table_td">
@@ -336,6 +391,8 @@ const EmeraldChittiTableNew = ({
                                                     id={`amount-${row.id}`}
                                                     onChange={(e: any) => handleInputChange(row.id, 'amount', e.target.value)}
                                                     type="number"
+                                                    handleKeyDown={handleKeyDown}
+                                                    handleOnFocus={handleOnFocus}
                                                 />
                                             </td>
                                             <td className="table-data-input">

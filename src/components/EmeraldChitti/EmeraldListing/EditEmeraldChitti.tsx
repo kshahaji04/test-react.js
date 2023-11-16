@@ -33,7 +33,9 @@ const EditEmeraldChitti = () => {
     HandleCancelEmeraldChitti,
     HandleDeleteEmeraldChitti,
     subCategoryList,
-    HandleAddRow
+    HandleAddRow,
+    handleKeyDown,
+    handleOnFocus
   }: any = UseEditEmeraldChittiHook();
 
   console.log('challan detail', challanDetail);
@@ -220,6 +222,8 @@ const EditEmeraldChitti = () => {
                     setStateForDocStatus={setStateForDocStatus}
                     readOnly={readOnly}
                     HandleAddRow={HandleAddRow}
+                    handleKeyDown={handleKeyDown}
+                    handleOnFocus={handleOnFocus}
                   />
 
                 </>

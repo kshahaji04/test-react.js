@@ -9,57 +9,67 @@ const ClientNameListing = ({ clientNameClientGroupList }: any) => {
     setTableViewData(data);
   };
   return (
-    <div className="container border mt-2 row">
-      <div className="">
-        <table className="table table-striped mt-2">
-          <thead>
-            <tr className="text-start table-heading table-heading-row row">
-              <div className="col-lg-6 col-6">
-                {' '}
-                <th scope="col-lg-6">Client Name</th>
-              </div>
-              <div className="col-lg-6 col-6">
-                {' '}
-                <th scope="col-lg-6">Client Group</th>
-              </div>
-            </tr>
-          </thead>
-          <tbody>
-            {clientNameClientGroupList?.length > 0 &&
-              clientNameClientGroupList !== null &&
-              clientNameClientGroupList
-                .slice(0, tableViewData)
-                .map((group: any, index: any) => (
-                  <tr className="text-start table-body-row row" key={index}>
-                    <td className="col-lg-6 col-6 p-1">
-                      <NavLink
-                        to={`${group.name}`}
-                        className="text-decoration-none text-dark"
-                      >
-                        {group.name}
-                      </NavLink>
-                    </td>
-                    <td className="col-lg-6 col-6 p-1">
-                      <NavLink
-                        to={`${group.name}`}
-                        className="text-decoration-none text-dark"
-                      >
-                        {group.client_group}
-                      </NavLink>
-                    </td>
-                  </tr>
-                ))}
+    <>
+      {clientNameClientGroupList?.length > 0 && (
+        <div className="text-end pe-3 text-gray">
+          {clientNameClientGroupList?.slice(0, tableViewData)?.length} of{' '}
+          {clientNameClientGroupList?.length < 10
+            ? '0' + clientNameClientGroupList?.length
+            : clientNameClientGroupList?.length}
+        </div>
+      )}
+      <div className="container border mt-2 row">
+        <div className="">
+          <table className="table table-striped mt-2">
+            <thead>
+              <tr className="text-start table-heading table-heading-row row">
+                <div className="col-lg-6 col-6">
+                  {' '}
+                  <th scope="col-lg-6">Client Name</th>
+                </div>
+                <div className="col-lg-6 col-6">
+                  {' '}
+                  <th scope="col-lg-6">Client Group</th>
+                </div>
+              </tr>
+            </thead>
+            <tbody>
+              {clientNameClientGroupList?.length > 0 &&
+                clientNameClientGroupList !== null &&
+                clientNameClientGroupList
+                  .slice(0, tableViewData)
+                  .map((group: any, index: any) => (
+                    <tr className="text-start table-body-row row" key={index}>
+                      <td className="col-lg-6 col-6 p-1">
+                        <NavLink
+                          to={`${group.name}`}
+                          className="text-decoration-none text-dark"
+                        >
+                          {group.name}
+                        </NavLink>
+                      </td>
+                      <td className="col-lg-6 col-6 p-1">
+                        <NavLink
+                          to={`${group.name}`}
+                          className="text-decoration-none text-dark"
+                        >
+                          {group.client_group}
+                        </NavLink>
+                      </td>
+                    </tr>
+                  ))}
 
-            {clientNameClientGroupList?.length > 20 &&
-              clientNameClientGroupList !== null && (
-                <LoadMoreTableDataInMaster
-                  HandleTableViewRows={HandleTableViewRows}
-                />
-              )}
-          </tbody>
-        </table>
+              {clientNameClientGroupList?.length > 20 &&
+                clientNameClientGroupList !== null && (
+                  <LoadMoreTableDataInMaster
+                    HandleTableViewRows={HandleTableViewRows}
+                  />
+                )}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

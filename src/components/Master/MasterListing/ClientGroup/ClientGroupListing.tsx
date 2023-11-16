@@ -10,6 +10,7 @@ const ClientGroupListing = ({ clientGroupList }: any) => {
   };
   return (
     <div className="container border mt-2">
+
       <table className="table table-striped mt-2">
         <thead>
           <tr className="text-start table-heading table-heading-row">

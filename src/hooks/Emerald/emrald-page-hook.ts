@@ -194,33 +194,35 @@ const UseEmeraldHook = () => {
       amount: ''
     }
 
-
     // Add the new row to the tableData
     setTableData([...tableData, newRow]);
-    // setStateForDocStatus(true);
+  };
 
-    // // Calculate the new total values, including the new row
-    // const newColumnTotals = tableData.reduce(
-    //     (totals: any, row: any) => {
-    //         totals.gross_weight += row.gross_weight;
-    //         totals.net_weight += row.net_weight;
-    //         totals.amount += row.amount;
-    //         return totals;
-    //     },
-    //     { gross_weight: 0, net_weight: 0, amount: 0 }
-    // );
+  const handleKeyDown: any = (e: any, id: any) => {
+    console.log("onfocus,e,id", e, id)
+    if (e.key === "Tab") {
+      if (id?.includes('amount')) {
+        HandleAddRow();
+      }
+    }
+  }
 
-    // // Add the values of the new row to the totals
-    // newColumnTotals.gross_weight += newRow.gross_weight;
-    // newColumnTotals.net_weight += newRow.net_weight;
-    // newColumnTotals.amount += newRow.amount;
+  const handleOnFocus: any = (e: any, id: any) => {
+    // Check if the event is a Tab key press
+    if (e.key === 'Tab') {
+      return;
+    }
 
-    // // Update the total values
-    // setamountValue(newColumnTotals);
+    console.log("onfocus", id.replace);
+    let modifiedString = id?.replace(/r-\d+/, "r");
+    console.log("onfocus mod", modifiedString);
+
+    if (modifiedString === 'r') {
+      HandleAddRow();
+    }
   };
 
 
-  // console.log("table data set", tableData)
 
   const HandleDeleteRow: any = (id: any) => {
     console.log("id", id)
@@ -453,7 +455,9 @@ const UseEmeraldHook = () => {
     showSaveButtonForAmendFlow,
     setShowSaveButtonForAmendFlow,
     HandleDeleteRow,
-    HandleAddRow
+    HandleAddRow,
+    handleKeyDown,
+    handleOnFocus
   };
 };
 

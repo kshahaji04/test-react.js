@@ -1,5 +1,5 @@
 
-const InputFieldComponent = ({ value, readOnly, id, onChange, type }: any) => {
+const InputFieldComponent = ({ value, readOnly, id, onChange, type, handleKeyDown, handleOnFocus }: any) => {
     console.log("type", readOnly)
 
     return (
@@ -13,6 +13,8 @@ const InputFieldComponent = ({ value, readOnly, id, onChange, type }: any) => {
                 name={id}
                 readOnly={readOnly}
                 value={value} onChange={onChange}
+                onKeyDown={(e) => handleKeyDown(e, id)}
+                onFocus={(e) => handleOnFocus(e, id)}
             />
         </div>
     )
