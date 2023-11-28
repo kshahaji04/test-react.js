@@ -18,7 +18,7 @@ const CreateEmeraldChittiApi = async (request: any) => {
     client_name: request.clientName,
     client_group: request.clientGroup,
     abb: request.date,
-    date: request.date,
+    // date: request.date,
     emerald_chitti_table: request.emeraldChittiTableData,
   };
 

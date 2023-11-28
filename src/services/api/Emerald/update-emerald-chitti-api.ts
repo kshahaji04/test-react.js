@@ -11,7 +11,7 @@ const UpdateEmeraldChittiApi = async (request: any) => {
   let body = {
     client_name: request.clientName,
     abb: request.date,
-    date: request.date,
+    // date: request.date,
     emerald_chitti_table: request.challanTableData,
     // challan_table: request.challanTableData,
   };

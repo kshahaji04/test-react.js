@@ -53,7 +53,7 @@ const UseEditEmeraldChittiHook: any = () => {
     HandleDeleteRow,
     HandleAddRow,
     handleKeyDown,
-    handleOnFocus
+    handleOnFocus,
   }: any = UseEmeraldHook();
 
   useEffect(() => {
@@ -83,10 +83,18 @@ const UseEditEmeraldChittiHook: any = () => {
       tableData
     );
 
+    const reversedDate = new Date()
+      ?.toISOString()
+      ?.split('T')[0]
+      .split('-')
+      .reverse()
+      .join('-');
+    console.log(reversedDate);
+
     const BodyData: any = {
       name: id,
       clientName: selectedDropdownValue,
-      date: transactionDate,
+      date: reversedDate,
       // clientGroup: clientGroupName,
       challanTableData: tableData,
       token: AccessToken?.token,
@@ -134,7 +142,7 @@ const UseEditEmeraldChittiHook: any = () => {
     HandleDeleteRow,
     HandleAddRow,
     handleKeyDown,
-    handleOnFocus
+    handleOnFocus,
   };
 };
 

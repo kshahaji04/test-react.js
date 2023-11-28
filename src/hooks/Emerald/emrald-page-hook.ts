@@ -367,6 +367,13 @@ const UseEmeraldHook = () => {
     //   });
     // };
     // const filteredemeraldChittiTable: any = CheckObjectHasValues();
+    const reversedDate = new Date()
+      ?.toISOString()
+      ?.split('T')[0]
+      .split('-')
+      .reverse()
+      .join('-');
+    console.log(reversedDate);
 
     let errMsgList: any = [];
     if (Object?.keys(selectedDropdownValue)?.length === 0) {
@@ -383,8 +390,8 @@ const UseEmeraldHook = () => {
     } else {
       const BodyData: any = {
         clientName: selectedDropdownValue,
+        date: reversedDate,
         clientGroup: clientGroupName,
-        date: transactionDate,
         emeraldChittiTableData: emeraldChittiTableData,
         token: AccessToken?.token,
       };
