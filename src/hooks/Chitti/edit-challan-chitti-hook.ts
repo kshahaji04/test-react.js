@@ -121,12 +121,12 @@ const UseEditChallanChitti: any = () => {
         toast.success('Chitti Updated');
         setStateForDocStatus(false);
         await UpdateDocStatusChallanApi(AccessToken?.token, '0', id);
-        const params: any = {
-          token: AccessToken?.token,
-          name: id,
-        };
-        dispatch(getSpecificChittiChallan(params));
-        // stateForDocStatus(false);
+        // const params: any = {
+        //   token: AccessToken?.token,
+        //   name: id,
+        // };
+        // dispatch(getSpecificChittiChallan(params));
+        // setStateForDocStatus(false);
       } else {
         toast.error('Failed to Update chitti');
       }
