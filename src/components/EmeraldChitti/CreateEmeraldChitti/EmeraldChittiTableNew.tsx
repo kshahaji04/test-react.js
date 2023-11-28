@@ -495,7 +495,7 @@ const EmeraldChittiTableNew = ({
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
                             value={row.amount}
-                            readOnly={readOnly}
+                            readOnly={true}
                             id={`amount-${row.id}`}
                             onChange={(e: any) =>
                               handleInputChange(
