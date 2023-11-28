@@ -59,31 +59,30 @@ const UseEmeraldHook = () => {
   const initialTableData = [
     {
       id: 1,
-      a: "",
-      b: "",
-      c: "",
-      d: "",
-      e: "",
+      a: '',
+      b: '',
+      c: '',
+      d: '',
+      e: '',
       gross_weight: '',
       stn_wt: '',
-      h: "",
-      i: "",
-      j: "",
+      h: '',
+      i: '',
+      j: '',
+      k: '',
       net_weight: '',
-      project: "",
-      product: "",
-      n: "",
-      o: "",
-      p: "",
-      q: "",
-      r: "",
-      sub_category: "",
-      category: "",
+      project: '',
+      product: '',
+      o: '',
+      p: '',
+      q: '',
+      r: '',
+      sub_category: '',
+      category: '',
       cz_amt: '',
       cs_amt: '',
-      amount: ''
-    }
-
+      amount: '',
+    },
   ];
 
   const [tableData, setTableData] = useState<any>(initialTableData);
@@ -104,7 +103,6 @@ const UseEmeraldHook = () => {
     dispatch(getClientGroupList(AccessToken?.token));
     setCurrentDate(new Date());
   }, []);
-
 
   useEffect(() => {
     if (
@@ -169,66 +167,61 @@ const UseEmeraldHook = () => {
   const HandleAddRow: any = () => {
     const newRow = {
       id: tableData?.length + 1,
-      a: "",
-      b: "",
-      c: "",
-      d: "",
-      e: "",
+      a: '',
+      b: '',
+      c: '',
+      d: '',
+      e: '',
       gross_weight: '',
       stn_wt: '',
-      h: "",
-      i: "",
-      j: "",
+      h: '',
+      i: '',
+      j: '',
+      k: '',
       net_weight: '',
-      project: "",
-      product: "",
-      n: "",
-      o: "",
-      p: "",
-      q: "",
-      r: "",
-      sub_category: "",
-      category: "",
+      project: '',
+      product: '',
+      o: '',
+      p: '',
+      q: '',
+      r: '',
+      sub_category: '',
+      category: '',
       cz_amt: '',
       cs_amt: '',
-      amount: ''
-    }
+      amount: '',
+    };
 
     // Add the new row to the tableData
     setTableData([...tableData, newRow]);
   };
 
   const handleKeyDown: any = (e: any, id: any) => {
-    console.log("onfocus,e,id", e, id)
-    if (e.key === "Tab") {
+    console.log('onfocus,e,id', e, id);
+    if (e.key === 'Tab') {
       if (id?.includes('amount')) {
         HandleAddRow();
       }
     }
-  }
-
-  const handleOnFocus: any = (e: any, id: any) => {
-    // Check if the event is a Tab key press
-    if (e.key === 'Tab') {
-      return;
-    }
-
-    console.log("onfocus", id.replace);
-    let modifiedString = id?.replace(/r-\d+/, "r");
-    console.log("onfocus mod", modifiedString);
-
-    if (modifiedString === 'r') {
-      HandleAddRow();
-    }
   };
 
-
+  const handleOnFocus: any = (e: any, id: any) => {
+    // // Check if the event is a Tab key press
+    // if (e.key === 'Tab') {
+    //   return;
+    // }
+    // console.log('onfocus', id.replace);
+    // let modifiedString = id?.replace(/r-\d+/, 'r');
+    // console.log('onfocus mod', modifiedString);
+    // if (modifiedString === 'r') {
+    //   HandleAddRow();
+    // }
+  };
 
   const HandleDeleteRow: any = (id: any) => {
-    console.log("id", id)
+    console.log('id', id);
     if (tableData?.length > 1) {
-      const updatedData = tableData
-        .filter((row: any) => row.id !== id)
+      const updatedData = tableData.filter((row: any) => row.id !== id);
       // .map((row: any, index: number) => ({ ...row, id: index + 1 }));
       setTableData(updatedData);
       //   setStateForDocStatus(true);
@@ -427,7 +420,7 @@ const UseEmeraldHook = () => {
     }
   };
 
-  console.log("table dataaa", tableData)
+  console.log('table dataaa', tableData);
 
   return {
     emeraldChittiData,
@@ -457,7 +450,7 @@ const UseEmeraldHook = () => {
     HandleDeleteRow,
     HandleAddRow,
     handleKeyDown,
-    handleOnFocus
+    handleOnFocus,
   };
 };
 
