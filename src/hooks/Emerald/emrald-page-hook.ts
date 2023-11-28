@@ -79,8 +79,8 @@ const UseEmeraldHook = () => {
       r: '',
       sub_category: '',
       category: '',
-      cz_amt: '',
-      cs_amt: '',
+      // cz_amt: '',
+      // cs_amt: '',
       amount: '',
     },
   ];
@@ -187,8 +187,8 @@ const UseEmeraldHook = () => {
       r: '',
       sub_category: '',
       category: '',
-      cz_amt: '',
-      cs_amt: '',
+      // cz_amt: '',
+      // cs_amt: '',
       amount: '',
     };
 
@@ -357,16 +357,16 @@ const UseEmeraldHook = () => {
       (item: any) => Object?.keys(item)?.length === 0
     );
 
-    const CheckObjectHasValues = () => {
-      return emeraldChittiTableData.filter((item: any) => {
-        return (
-          (item.hasOwnProperty('gross_weight') && item.gross_weight > 0) ||
-          (item.hasOwnProperty('net_weight') && item.net_weight > 0) ||
-          (item.hasOwnProperty('amount') && item.amount > 0)
-        );
-      });
-    };
-    const filteredemeraldChittiTable: any = CheckObjectHasValues();
+    // const CheckObjectHasValues = () => {
+    //   return emeraldChittiTableData.filter((item: any) => {
+    //     return (
+    //       (item.hasOwnProperty('gross_weight') && item.gross_weight > 0) ||
+    //       (item.hasOwnProperty('net_weight') && item.net_weight > 0) ||
+    //       (item.hasOwnProperty('amount') && item.amount > 0)
+    //     );
+    //   });
+    // };
+    // const filteredemeraldChittiTable: any = CheckObjectHasValues();
 
     let errMsgList: any = [];
     if (Object?.keys(selectedDropdownValue)?.length === 0) {
@@ -385,7 +385,7 @@ const UseEmeraldHook = () => {
         clientName: selectedDropdownValue,
         clientGroup: clientGroupName,
         date: transactionDate,
-        emeraldChittiTableData: filteredemeraldChittiTable,
+        emeraldChittiTableData: emeraldChittiTableData,
         token: AccessToken?.token,
       };
       let createEmeraldChittiApiRes: any =

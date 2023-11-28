@@ -83,23 +83,23 @@ const EmeraldChittiTableNew = ({
           let updatedRow = { ...row, [field]: newValue };
 
           // Calculate cz_amt when stn_wt changes
-          if (field === 'stn_wt') {
-            const newCzAmt = parseFloat(newValue) * 10.0;
-            updatedRow = {
-              ...updatedRow,
-              stn_wt: newValue,
-              cz_amt: newCzAmt,
-              amount: newCzAmt + (parseFloat(updatedRow.cs_amt) || 0),
-            };
-          }
+          //   if (field === 'stn_wt') {
+          //     const newCzAmt = parseFloat(newValue) * 10.0;
+          //     updatedRow = {
+          //       ...updatedRow,
+          //       stn_wt: newValue,
+          //       cz_amt: newCzAmt,
+          //       amount: newCzAmt + (parseFloat(updatedRow.cs_amt) || 0),
+          //     };
+          //   }
 
           // Calculate amount when cz_amt or cs_amt changes
-          if (field === 'cz_amt' || field === 'cs_amt') {
+          if (field === 'i' || field === 'k') {
             updatedRow = {
               ...updatedRow,
               amount:
-                (parseFloat(updatedRow.cz_amt) || 0) +
-                (parseFloat(updatedRow.cs_amt) || 0),
+                (parseFloat(updatedRow.i) || 0) +
+                (parseFloat(updatedRow.k) || 0),
             };
           }
           setStateForDocStatus(true);
@@ -161,10 +161,10 @@ const EmeraldChittiTableNew = ({
                   <th scope="col">E</th>
                   <th scope="col">Gross Weight</th>
                   <th scope="col">STN WT</th>
-                  <th scope="col">H</th>
-                  <th scope="col">I</th>
-                  <th scope="col">J</th>
-                  <th scope="col">K</th>
+                  <th scope="col"> Stone Pcs</th>
+                  <th scope="col">Stn Amt</th>
+                  <th scope="col">OT Wt</th>
+                  <th scope="col">Ot Amt</th>
                   <th scope="col">Net Weight</th>
                   <th scope="col">Project</th>
                   <th scope="col">Product</th>
@@ -174,8 +174,8 @@ const EmeraldChittiTableNew = ({
                   <th scope="col">R</th>
                   <th scope="col">Sub Category</th>
                   {/* <th scope="col">Category</th> */}
-                  <th scope="col">CZ Amt</th>
-                  <th scope="col">Cs Amt</th>
+                  {/* <th scope="col">CZ Amt</th>
+                  <th scope="col">Cs Amt</th> */}
                   <th scope="col">Amount</th>
                   <th scope="col"></th>
                 </tr>
@@ -458,7 +458,7 @@ const EmeraldChittiTableNew = ({
                             showCategoryDropdown={ShowCategoryDropdown}
                           />
                         </td>
-                        <td className="emerald_chitti_table_td">
+                        {/* <td className="emerald_chitti_table_td">
                           <InputFieldComponent
                             value={row.cz_amt}
                             readOnly={readOnly}
@@ -491,7 +491,7 @@ const EmeraldChittiTableNew = ({
                             handleKeyDown={handleKeyDown}
                             handleOnFocus={handleOnFocus}
                           />
-                        </td>
+                        </td> */}
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
                             value={row.amount}
