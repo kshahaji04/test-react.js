@@ -84,6 +84,15 @@ const UseEditChallanChitti: any = () => {
   }, [emeraldDetailDataFromStore]);
 
   const HandleUpdateChallanSubmit = async () => {
+    console.log('narration update', narrationTableData);
+    const isHUIDHasData = narrationTableData.map((obj: any) => {
+      if (Object.keys(obj).length === 1 && obj.hasOwnProperty('id')) {
+        return { ...obj, huid_pieces: 0, huid_weight: 0 };
+      } else {
+        return obj;
+      }
+    });
+
     if (totalGrossWeightOfChallanTable < totalHuidWeightOfHuidTable) {
       toast.error('Huid weight cannot be greater than Gross weight');
     } else if (
@@ -99,7 +108,7 @@ const UseEditChallanChitti: any = () => {
         goldRate: goldRate,
         remarks: remarks,
         challanTableData: tableData,
-        narrationTableData: narrationTableData,
+        narrationTableData: isHUIDHasData,
         token: AccessToken?.token,
       };
       let updateChittiApi: any = await UpdateChittiApi(BodyData);
@@ -112,6 +121,11 @@ const UseEditChallanChitti: any = () => {
         toast.success('Chitti Updated');
         setStateForDocStatus(false);
         await UpdateDocStatusChallanApi(AccessToken?.token, '0', id);
+        const params: any = {
+          token: AccessToken?.token,
+          name: id,
+        };
+        dispatch(getSpecificChittiChallan(params));
         // stateForDocStatus(false);
       } else {
         toast.error('Failed to Update chitti');

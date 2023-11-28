@@ -255,12 +255,12 @@ const ListingTable = ({ tableListingData }: any) => {
                         <td className="button-section-td border-0">
                           <div className="row justify-content-center gx-0">
                             <div className="col-lg-2">
-                              {/* <NavLink
+                              <NavLink
                                 to={`${data.name}`}
                                 className="button-section-text text-info "
                               >
-                                Edit
-                              </NavLink> */}
+                                Amend
+                              </NavLink>
                             </div>
 
                             <div className="col-lg-2">
@@ -271,7 +271,7 @@ const ListingTable = ({ tableListingData }: any) => {
                                 Delete
                               </a>
                             </div>
-                            <div className="col-lg-2 ">
+                            <div className="col-lg-2 text-start">
                               <NavLink
                                 to={`${data.name}`}
                                 className="button-section-text text-info"

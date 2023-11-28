@@ -74,7 +74,7 @@ const UseChittiHook = () => {
   ] = useState<any>('');
   const [showSaveButtonForAmendFlow, setShowSaveButtonForAmendFlow] =
     useState<any>(false);
-  console.log(narrationUpdatedTableData)
+  console.log(narrationUpdatedTableData);
   const {
     totalGrossWeightOfChallanTable,
     totalHuidWeightOfHuidTable,
@@ -309,12 +309,14 @@ const UseChittiHook = () => {
     const CheckObjectHasValues = () => {
       return challanTableData.filter((item: any) => {
         return (
+          item.hasOwnProperty('sub_category') ||
           (item.hasOwnProperty('gross_weight') && item.gross_weight > 0) ||
           (item.hasOwnProperty('net_weight') && item.net_weight > 0) ||
           (item.hasOwnProperty('amount') && item.amount > 0)
         );
       });
     };
+
     const filteredChallanTable: any = CheckObjectHasValues();
 
     const CheckObjectHasValuesInHuid = () => {
@@ -326,6 +328,7 @@ const UseChittiHook = () => {
       });
     };
     const filteredHuidTable: any = CheckObjectHasValuesInHuid();
+    console.log('CheckObjectHasValues', filteredHuidTable);
 
     console.log('checkobject values', filteredChallanTable, filteredHuidTable);
 
@@ -441,6 +444,7 @@ const UseChittiHook = () => {
     showSaveButtonForAmendFlow,
     checkGrossAndNetWeight,
     setCheckGrossAndNetWeight,
+    narrationUpdatedTableData,
   };
 };
 
