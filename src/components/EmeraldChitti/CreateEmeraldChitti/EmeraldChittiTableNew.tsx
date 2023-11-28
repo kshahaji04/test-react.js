@@ -25,6 +25,12 @@ const EmeraldChittiTableNew = ({
     amount: 0,
   });
 
+  const addIdToRows = (rows: any) => {
+    return rows.map((row: any, index: any) => ({
+      ...row,
+      id: index + 1,
+    }));
+  };
   useEffect(() => {
     console.log('default data', defaultData);
     if (
@@ -32,9 +38,10 @@ const EmeraldChittiTableNew = ({
       defaultData !== undefined &&
       defaultData !== null
     ) {
-      defaultData.map((data: any) => {
-        setTableData([data]);
-      });
+      // defaultData.map((data: any) => {
+      const dataWithIds = addIdToRows(defaultData);
+      setTableData(dataWithIds);
+      //   });
     }
   }, [defaultData, setTableData]);
 

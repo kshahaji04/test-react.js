@@ -206,6 +206,7 @@ const UseEmeraldHook = () => {
   };
 
   const handleOnFocus: any = (e: any, id: any) => {
+    console.log(e, id);
     // // Check if the event is a Tab key press
     // if (e.key === 'Tab') {
     //   return;
