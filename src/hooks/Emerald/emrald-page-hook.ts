@@ -391,6 +391,7 @@ const UseEmeraldHook = () => {
       const BodyData: any = {
         clientName: selectedDropdownValue,
         date: reversedDate,
+        transactionDate: transactionDate,
         clientGroup: clientGroupName,
         emeraldChittiTableData: emeraldChittiTableData,
         token: AccessToken?.token,

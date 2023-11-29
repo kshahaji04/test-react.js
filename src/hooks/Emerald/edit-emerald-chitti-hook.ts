@@ -95,6 +95,7 @@ const UseEditEmeraldChittiHook: any = () => {
       name: id,
       clientName: selectedDropdownValue,
       date: reversedDate,
+      transactionDate: transactionDate,
       // clientGroup: clientGroupName,
       challanTableData: tableData,
       token: AccessToken?.token,
