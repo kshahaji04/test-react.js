@@ -93,12 +93,39 @@ const UseEditChallanChitti: any = () => {
       }
     });
 
+    const CheckObjectHasValues = () => {
+      return tableData.filter((item: any) => {
+        const hasSubCategory = item.hasOwnProperty('sub_category');
+        const hasGrossWeight =
+          item.hasOwnProperty('gross_weight') && item.gross_weight > 0;
+        const hasNetWeight =
+          item.hasOwnProperty('net_weight') && item.net_weight > 0;
+        const hasAmount = item.hasOwnProperty('amount') && item.amount > 0;
+
+        // Include a check for sub_category and exclude rows where sub_category has data but others don't
+        return (
+          (hasSubCategory && (hasGrossWeight || hasNetWeight || hasAmount)) ||
+          hasGrossWeight ||
+          hasNetWeight ||
+          hasAmount
+        );
+      });
+    };
+    const filteredChallanTable: any = CheckObjectHasValues();
+    const hasSubCategoryKey =
+      tableData?.length > 0 &&
+      tableData.every(
+        (obj: any) => 'sub_category' in obj && obj.sub_category !== ''
+      );
+
     if (totalGrossWeightOfChallanTable < totalHuidWeightOfHuidTable) {
       toast.error('Huid weight cannot be greater than Gross weight');
     } else if (
       checkGrossAndNetWeight.gross_weight < checkGrossAndNetWeight.net_weight
     ) {
       toast.error('Net weight cannot be greater than Gross weight');
+    } else if (!hasSubCategoryKey) {
+      toast.error('Sub Category in Challan table');
     } else {
       const BodyData: any = {
         name: id,
@@ -107,7 +134,7 @@ const UseEditChallanChitti: any = () => {
         clientGroup: clientGroupName,
         goldRate: goldRate,
         remarks: remarks,
-        challanTableData: tableData,
+        challanTableData: filteredChallanTable,
         narrationTableData: isHUIDHasData,
         token: AccessToken?.token,
       };
@@ -119,14 +146,18 @@ const UseEditChallanChitti: any = () => {
         updateChittiApi?.hasOwnProperty('data')
       ) {
         toast.success('Chitti Updated');
-        setStateForDocStatus(false);
-        await UpdateDocStatusChallanApi(AccessToken?.token, '0', id);
-        // const params: any = {
-        //   token: AccessToken?.token,
-        //   name: id,
-        // };
-        // dispatch(getSpecificChittiChallan(params));
         // setStateForDocStatus(false);
+        await UpdateDocStatusChallanApi(AccessToken?.token, '0', id);
+        setTimeout(() => {
+          const params: any = {
+            token: AccessToken?.token,
+            name: id,
+          };
+          dispatch(getSpecificChittiChallan(params));
+        }, 300);
+        setTimeout(() => {
+          setStateForDocStatus(false);
+        }, 400);
       } else {
         toast.error('Failed to Update chitti');
       }

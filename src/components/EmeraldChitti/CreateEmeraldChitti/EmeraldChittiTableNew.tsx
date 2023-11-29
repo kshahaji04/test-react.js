@@ -85,7 +85,7 @@ const EmeraldChittiTableNew = ({
   const handleInputChange: any = (id: any, field: string, newValue: any) => {
     setTableData((prevData: any) =>
       prevData.map((row: any) => {
-        if (row.id === id) {
+        if (row.idx === id) {
           let updatedRow = { ...row, [field]: newValue };
 
           // Calculate cz_amt when stn_wt changes
@@ -120,7 +120,7 @@ const EmeraldChittiTableNew = ({
   const handleDropdownSelect = (rowId: any, selectedValue: any) => {
     setTableData((prevData: any) =>
       prevData.map((row: any) =>
-        row.id === rowId ? { ...row, sub_category: selectedValue } : row
+        row.idx === rowId ? { ...row, sub_category: selectedValue } : row
       )
     );
     setStateForDocStatus(true);
@@ -130,7 +130,7 @@ const EmeraldChittiTableNew = ({
     console.log('roww id', id);
     if (tableData?.length > 1) {
       const updatedData = tableData
-        .filter((row: any) => row.id !== id)
+        .filter((row: any) => row.idx !== id)
         .map((row: any, index: number) => ({ ...row, id: index + 1 }));
       setTableData(updatedData);
       setStateForDocStatus(true);
@@ -191,14 +191,14 @@ const EmeraldChittiTableNew = ({
                   tableData !== null &&
                   tableData.map((row: any) => (
                     <>
-                      <tr key={row.id}>
+                      <tr key={row.idx}>
                         <td className=" emerald_chitti_table_td">
                           <InputFieldComponent
                             value={row.a}
                             readOnly={readOnly}
-                            id={`a-${row.id}`}
+                            id={`a-${row.idx}`}
                             onChange={(e: any) =>
-                              handleInputChange(row.id, 'a', e.target.value)
+                              handleInputChange(row.idx, 'a', e.target.value)
                             }
                             type="text"
                             handleKeyDown={handleKeyDown}
@@ -209,9 +209,9 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.b}
                             readOnly={readOnly}
-                            id={`b-${row.id}`}
+                            id={`b-${row.idx}`}
                             onChange={(e: any) =>
-                              handleInputChange(row.id, 'b', e.target.value)
+                              handleInputChange(row.idx, 'b', e.target.value)
                             }
                             type="text"
                             handleKeyDown={handleKeyDown}
@@ -222,9 +222,9 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.c}
                             readOnly={readOnly}
-                            id={`c-${row.id}`}
+                            id={`c-${row.idx}`}
                             onChange={(e: any) =>
-                              handleInputChange(row.id, 'c', e.target.value)
+                              handleInputChange(row.idx, 'c', e.target.value)
                             }
                             type="text"
                             handleKeyDown={handleKeyDown}
@@ -235,9 +235,9 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.d}
                             readOnly={readOnly}
-                            id={`d-${row.id}`}
+                            id={`d-${row.idx}`}
                             onChange={(e: any) =>
-                              handleInputChange(row.id, 'd', e.target.value)
+                              handleInputChange(row.idx, 'd', e.target.value)
                             }
                             type="text"
                             handleKeyDown={handleKeyDown}
@@ -248,9 +248,9 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.e}
                             readOnly={readOnly}
-                            id={`e-${row.id}`}
+                            id={`e-${row.idx}`}
                             onChange={(e: any) =>
-                              handleInputChange(row.id, 'e', e.target.value)
+                              handleInputChange(row.idx, 'e', e.target.value)
                             }
                             type="text"
                             handleKeyDown={handleKeyDown}
@@ -261,10 +261,10 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.gross_weight}
                             readOnly={readOnly}
-                            id={`gross_weight-${row.id}`}
+                            id={`gross_weight-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(
-                                row.id,
+                                row.idx,
                                 'gross_weight',
                                 e.target.value
                               )
@@ -278,10 +278,10 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.stn_wt}
                             readOnly={readOnly}
-                            id={`stn_wt-${row.id}`}
+                            id={`stn_wt-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(
-                                row.id,
+                                row.idx,
                                 'stn_wt',
                                 e.target.value
                               )
@@ -295,9 +295,9 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.h}
                             readOnly={readOnly}
-                            id={`h-${row.id}`}
+                            id={`h-${row.idx}`}
                             onChange={(e: any) =>
-                              handleInputChange(row.id, 'h', e.target.value)
+                              handleInputChange(row.idx, 'h', e.target.value)
                             }
                             type="text"
                             handleKeyDown={handleKeyDown}
@@ -308,9 +308,9 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.i}
                             readOnly={readOnly}
-                            id={`i-${row.id}`}
+                            id={`i-${row.idx}`}
                             onChange={(e: any) =>
-                              handleInputChange(row.id, 'i', e.target.value)
+                              handleInputChange(row.idx, 'i', e.target.value)
                             }
                             type="text"
                             handleKeyDown={handleKeyDown}
@@ -321,9 +321,9 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.j}
                             readOnly={readOnly}
-                            id={`j-${row.id}`}
+                            id={`j-${row.idx}`}
                             onChange={(e: any) =>
-                              handleInputChange(row.id, 'j', e.target.value)
+                              handleInputChange(row.idx, 'j', e.target.value)
                             }
                             type="text"
                             handleKeyDown={handleKeyDown}
@@ -334,9 +334,9 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.k}
                             readOnly={readOnly}
-                            id={`k-${row.id}`}
+                            id={`k-${row.idx}`}
                             onChange={(e: any) =>
-                              handleInputChange(row.id, 'k', e.target.value)
+                              handleInputChange(row.idx, 'k', e.target.value)
                             }
                             type="text"
                             handleKeyDown={handleKeyDown}
@@ -347,10 +347,10 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.net_weight}
                             readOnly={readOnly}
-                            id={`net_weight-${row.id}`}
+                            id={`net_weight-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(
-                                row.id,
+                                row.idx,
                                 'net_weight',
                                 e.target.value
                               )
@@ -364,10 +364,10 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.project}
                             readOnly={readOnly}
-                            id={`project-${row.id}`}
+                            id={`project-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(
-                                row.id,
+                                row.idx,
                                 'project',
                                 e.target.value
                               )
@@ -381,10 +381,10 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.product}
                             readOnly={readOnly}
-                            id={`product-${row.id}`}
+                            id={`product-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(
-                                row.id,
+                                row.idx,
                                 'product',
                                 e.target.value
                               )
@@ -399,9 +399,9 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.o}
                             readOnly={readOnly}
-                            id={`o-${row.id}`}
+                            id={`o-${row.idx}`}
                             onChange={(e: any) =>
-                              handleInputChange(row.id, 'o', e.target.value)
+                              handleInputChange(row.idx, 'o', e.target.value)
                             }
                             type="text"
                             handleKeyDown={handleKeyDown}
@@ -412,9 +412,9 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.p}
                             readOnly={readOnly}
-                            id={`p-${row.id}`}
+                            id={`p-${row.idx}`}
                             onChange={(e: any) =>
-                              handleInputChange(row.id, 'p', e.target.value)
+                              handleInputChange(row.idx, 'p', e.target.value)
                             }
                             type="text"
                             handleKeyDown={handleKeyDown}
@@ -425,9 +425,9 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.q}
                             readOnly={readOnly}
-                            id={`q-${row.id}`}
+                            id={`q-${row.idx}`}
                             onChange={(e: any) =>
-                              handleInputChange(row.id, 'q', e.target.value)
+                              handleInputChange(row.idx, 'q', e.target.value)
                             }
                             type="text"
                             handleKeyDown={handleKeyDown}
@@ -438,9 +438,9 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.r}
                             readOnly={readOnly}
-                            id={`r-${row.id}`}
+                            id={`r-${row.idx}`}
                             onChange={(e: any) =>
-                              handleInputChange(row.id, 'r', e.target.value)
+                              handleInputChange(row.idx, 'r', e.target.value)
                             }
                             type="text"
                             handleKeyDown={handleKeyDown}
@@ -451,9 +451,9 @@ const EmeraldChittiTableNew = ({
                           <CustomDropdownForTable
                             drowpdownlist={subCategoryList}
                             readOnly={readOnly}
-                            rowId={row.id}
+                            rowId={row.idx}
                             setSelectedDropdownValue={(selectedValue: any) =>
-                              handleDropdownSelect(row.id, selectedValue)
+                              handleDropdownSelect(row.idx, selectedValue)
                             }
                             data={
                               tableData.find(
@@ -502,10 +502,10 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             value={row.amount}
                             readOnly={true}
-                            id={`amount-${row.id}`}
+                            id={`amount-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(
-                                row.id,
+                                row.idx,
                                 'amount',
                                 e.target.value
                               )
@@ -518,7 +518,7 @@ const EmeraldChittiTableNew = ({
                         <td className="table-data-input">
                           <div
                             className="d-flex align-items-center delete-link"
-                            onClick={() => HandleDeleteRow(row.id)}
+                            onClick={() => HandleDeleteRow(row.idx)}
                           >
                             <i className="fa-solid fa-xmark fs-5"></i>
                           </div>

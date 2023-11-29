@@ -21,7 +21,6 @@ const ProtectedRoute = ({ children }: any) => {
     <>
       <Navbar />
       {children}
-
     </>
   );
 };

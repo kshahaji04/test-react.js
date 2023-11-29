@@ -108,8 +108,18 @@ const UseEditEmeraldChittiHook: any = () => {
       updateChittiApi?.hasOwnProperty('data')
     ) {
       toast.success('Emerald Chitti Updated');
-      setStateForDocStatus(false);
+
       await UpdateDocStatusEmeraldChittiApi(AccessToken?.token, '0', id);
+      setTimeout(() => {
+        const params: any = {
+          token: AccessToken?.token,
+          name: id,
+        };
+        dispatch(getSpecificEmeraldChitti(params));
+      }, 300);
+      setTimeout(() => {
+        setStateForDocStatus(false);
+      }, 400);
     } else {
       toast.error('Failed to Update Emerald chitti');
     }

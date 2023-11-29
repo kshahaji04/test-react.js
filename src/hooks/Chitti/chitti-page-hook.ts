@@ -308,15 +308,22 @@ const UseChittiHook = () => {
 
     const CheckObjectHasValues = () => {
       return challanTableData.filter((item: any) => {
+        const hasSubCategory = item.hasOwnProperty('sub_category');
+        const hasGrossWeight =
+          item.hasOwnProperty('gross_weight') && item.gross_weight > 0;
+        const hasNetWeight =
+          item.hasOwnProperty('net_weight') && item.net_weight > 0;
+        const hasAmount = item.hasOwnProperty('amount') && item.amount > 0;
+
+        // Include a check for sub_category and exclude rows where sub_category has data but others don't
         return (
-          item.hasOwnProperty('sub_category') ||
-          (item.hasOwnProperty('gross_weight') && item.gross_weight > 0) ||
-          (item.hasOwnProperty('net_weight') && item.net_weight > 0) ||
-          (item.hasOwnProperty('amount') && item.amount > 0)
+          (hasSubCategory && (hasGrossWeight || hasNetWeight || hasAmount)) ||
+          hasGrossWeight ||
+          hasNetWeight ||
+          hasAmount
         );
       });
     };
-
     const filteredChallanTable: any = CheckObjectHasValues();
 
     const CheckObjectHasValuesInHuid = () => {

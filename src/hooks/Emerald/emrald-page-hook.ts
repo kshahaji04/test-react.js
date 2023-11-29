@@ -58,7 +58,7 @@ const UseEmeraldHook = () => {
   const [clientGroupName, setClientGroupName] = useState<any>('');
   const initialTableData = [
     {
-      id: 1,
+      idx: 1,
       a: '',
       b: '',
       c: '',
@@ -166,7 +166,7 @@ const UseEmeraldHook = () => {
 
   const HandleAddRow: any = () => {
     const newRow = {
-      id: tableData?.length + 1,
+      idx: tableData?.length + 1,
       a: '',
       b: '',
       c: '',
@@ -222,7 +222,7 @@ const UseEmeraldHook = () => {
   const HandleDeleteRow: any = (id: any) => {
     console.log('id', id);
     if (tableData?.length > 1) {
-      const updatedData = tableData.filter((row: any) => row.id !== id);
+      const updatedData = tableData.filter((row: any) => row.idx !== id);
       // .map((row: any, index: number) => ({ ...row, id: index + 1 }));
       setTableData(updatedData);
       //   setStateForDocStatus(true);
@@ -236,7 +236,7 @@ const UseEmeraldHook = () => {
 
   const HandleEmptyEmeraldChitti: any = () => {
     console.log('new emerald chitti');
-    setTableData([{ id: 1 }]);
+    setTableData([{ idx: 1 }]);
     setSelectedDropdownValue('');
     setShowSubmitButtonAfterCreateChitti('');
     // Set the value of the select tag to an empty string

@@ -6,9 +6,10 @@ const UpdateEmeraldChittiApi = async (request: any) => {
   console.log('create chitti req na', request.narrationTableData);
   let response: any;
 
-  const params = `/api/resource/Emerald Chitti/${request.name}`;
+  const params = `/api/method/challan.api.put_emerald_chitti.put_emerald`;
 
   let body = {
+    name: request.name,
     client_name: request.clientName,
     abb: request.date,
     date: request.transactionDate,

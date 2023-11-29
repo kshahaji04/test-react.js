@@ -90,6 +90,7 @@ const EmeraldChittiTablereadOnlyRow = ({ calculationRow }: any) => {
             readOnly={'true'}
           />
         </td>
+        <td></td>
       </tr>
     </>
   );
