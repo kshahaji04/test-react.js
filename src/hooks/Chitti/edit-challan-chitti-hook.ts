@@ -139,6 +139,8 @@ const UseEditChallanChitti: any = () => {
       toast.error('Net weight cannot be greater than Gross weight');
     } else if (!hasSubCategoryKey) {
       toast.error('Sub Category in Challan table');
+    } else if (filteredChallanTable?.length === 0) {
+      toast.error('No values inserted');
     } else {
       const BodyData: any = {
         name: id,

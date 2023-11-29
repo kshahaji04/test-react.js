@@ -315,13 +315,8 @@ const UseChittiHook = () => {
           item.hasOwnProperty('net_weight') && item.net_weight > 0;
         const hasAmount = item.hasOwnProperty('amount') && item.amount > 0;
 
-        // Include a check for sub_category and exclude rows where sub_category has data but others don't
-        return (
-          (hasSubCategory && (hasGrossWeight || hasNetWeight || hasAmount)) ||
-          hasGrossWeight ||
-          hasNetWeight ||
-          hasAmount
-        );
+        // Include a check for sub_category and at least one of gross_weight, net_weight, or amount
+        return hasSubCategory && (hasGrossWeight || hasNetWeight || hasAmount);
       });
     };
 
@@ -338,7 +333,7 @@ const UseChittiHook = () => {
       });
     };
     const filteredHuidTable: any = CheckObjectHasValuesInHuid();
-    console.log('CheckObjectHasValues', filteredHuidTable);
+    console.log('CheckObjectHasValues', filteredChallanTable, challanTableData);
 
     console.log('checkobject values', filteredChallanTable, filteredHuidTable);
 
@@ -367,6 +362,8 @@ const UseChittiHook = () => {
         checkGrossAndNetWeight.gross_weight < checkGrossAndNetWeight.net_weight
       ) {
         toast.error('Net weight cannot be greater than Gross weight');
+      } else if (filteredChallanTable?.length === 0) {
+        toast.error('No values inserted');
       } else {
         const BodyData: any = {
           date: date,
