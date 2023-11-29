@@ -32,17 +32,29 @@ const EmeraldChittiTablereadOnlyRow = ({ calculationRow }: any) => {
           />
         </td>
         <td className="emerald_chitti_table_td">
-          <InputFieldComponent value={''} readOnly={'true'} />
+          <InputFieldComponent
+            value={calculationRow?.h.toFixed(3)}
+            readOnly={'true'}
+          />
         </td>
         <td className="emerald_chitti_table_td">
-          <InputFieldComponent value={''} readOnly={'true'} />
+          <InputFieldComponent
+            value={calculationRow?.i.toFixed(3)}
+            readOnly={'true'}
+          />
         </td>
         <td className="emerald_chitti_table_td">
-          <InputFieldComponent value={''} readOnly={'true'} />
+          <InputFieldComponent
+            value={calculationRow?.j.toFixed(3)}
+            readOnly={'true'}
+          />
         </td>
 
         <td className="emerald_chitti_table_td">
-          <InputFieldComponent value={''} readOnly={'true'} />
+          <InputFieldComponent
+            value={calculationRow?.k.toFixed(3)}
+            readOnly={'true'}
+          />
         </td>
         <td className="emerald_chitti_table_td">
           <InputFieldComponent
@@ -71,16 +83,7 @@ const EmeraldChittiTablereadOnlyRow = ({ calculationRow }: any) => {
         <td className="emerald_chitti_table_td">
           <InputFieldComponent value={''} readOnly={'true'} />
         </td>
-        {/* <td className="emerald_chitti_table_td">
-                    <InputFieldComponent value={calculationRow?.cz_amt?.toFixed(3)}
-                        readOnly={"true"}
-                    />
-                </td>
-                <td className="emerald_chitti_table_td">
-                    <InputFieldComponent value={calculationRow?.cs_amt?.toFixed(3)}
-                        readOnly={"true"}
-                    />
-                </td> */}
+
         <td className="emerald_chitti_table_td">
           <InputFieldComponent
             value={calculationRow?.amount?.toFixed(3)}

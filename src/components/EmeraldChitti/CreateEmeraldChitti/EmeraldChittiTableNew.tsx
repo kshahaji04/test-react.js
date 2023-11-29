@@ -20,8 +20,10 @@ const EmeraldChittiTableNew = ({
     gross_weight: 0,
     stn_wt: 0,
     net_weight: 0,
-    cz_amt: 0,
-    cs_amt: 0,
+    h: 0,
+    i: 0,
+    j: 0,
+    k: 0,
     amount: 0,
   });
 
@@ -57,8 +59,10 @@ const EmeraldChittiTableNew = ({
         accumulator.gross_weight += parseFloat(row.gross_weight) || 0;
         accumulator.stn_wt += parseFloat(row.stn_wt) || 0;
         accumulator.net_weight += parseFloat(row.net_weight) || 0;
-        accumulator.cz_amt += parseFloat(row.cz_amt) || 0;
-        accumulator.cs_amt += parseFloat(row.cs_amt) || 0;
+        accumulator.h += parseFloat(row.h) || 0;
+        accumulator.i += parseFloat(row.i) || 0;
+        accumulator.j += parseFloat(row.j) || 0;
+        accumulator.k += parseFloat(row.k) || 0;
         accumulator.amount += parseFloat(row.amount) || 0;
         return accumulator;
       },
@@ -66,8 +70,10 @@ const EmeraldChittiTableNew = ({
         gross_weight: 0,
         stn_wt: 0,
         net_weight: 0,
-        cz_amt: 0,
-        cs_amt: 0,
+        h: 0,
+        i: 0,
+        j: 0,
+        k: 0,
         amount: 0,
       }
     );
