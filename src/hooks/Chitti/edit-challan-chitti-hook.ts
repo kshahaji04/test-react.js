@@ -93,14 +93,27 @@ const UseEditChallanChitti: any = () => {
       }
     });
 
+    const CheckObjectHasValuesInHuid = () => {
+      return isHUIDHasData.filter((item: any) => {
+        return (
+          item.hasOwnProperty('product') &&
+          item.product !== null &&
+          item.product !== undefined &&
+          item.product !== ''
+        );
+      });
+    };
+    const filteredHuidTable: any = CheckObjectHasValuesInHuid();
+
     const CheckObjectHasValues = () => {
       return tableData.filter((item: any) => {
         const hasSubCategory = item.hasOwnProperty('sub_category');
         const hasGrossWeight =
-          item.hasOwnProperty('gross_weight') && item.gross_weight > 0;
+          (item.hasOwnProperty('gross_weight') && item.gross_weight > 0) || 0;
         const hasNetWeight =
           item.hasOwnProperty('net_weight') && item.net_weight > 0;
-        const hasAmount = item.hasOwnProperty('amount') && item.amount > 0;
+        const hasAmount =
+          (item.hasOwnProperty('amount') && item.amount > 0) || 0;
 
         // Include a check for sub_category and exclude rows where sub_category has data but others don't
         return (
@@ -135,7 +148,7 @@ const UseEditChallanChitti: any = () => {
         goldRate: goldRate,
         remarks: remarks,
         challanTableData: filteredChallanTable,
-        narrationTableData: isHUIDHasData,
+        narrationTableData: filteredHuidTable,
         token: AccessToken?.token,
       };
       let updateChittiApi: any = await UpdateChittiApi(BodyData);

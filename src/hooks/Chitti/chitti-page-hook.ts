@@ -324,13 +324,16 @@ const UseChittiHook = () => {
         );
       });
     };
+
     const filteredChallanTable: any = CheckObjectHasValues();
 
     const CheckObjectHasValuesInHuid = () => {
       return narrationTableData.filter((item: any) => {
         return (
-          (item.hasOwnProperty('huid_pieces') && item.huid_pieces > 0) ||
-          (item.hasOwnProperty('huid_pieces') && item.huid_pieces > 0)
+          item.hasOwnProperty('product') &&
+          item.product !== null &&
+          item.product !== undefined &&
+          item.product !== ''
         );
       });
     };
