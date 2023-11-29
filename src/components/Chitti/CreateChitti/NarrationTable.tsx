@@ -156,7 +156,6 @@ const NarrationTable = ({
               <td className="table-data-input">
                 <div className="h-25 custom-select-huid-container">
                   <div className="dropdown-input-container">
-
                     <CustomDropdownForTable
                       drowpdownlist={productList}
                       data={row.product}
@@ -272,6 +271,7 @@ const NarrationTable = ({
                 readOnly
               />
             </td>
+            <td></td>
           </tr>
         </tbody>
       </table>

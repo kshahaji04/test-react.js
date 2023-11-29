@@ -74,6 +74,7 @@ const ChallanItemsTable = ({
     // Update the total values
 
     setamountValue(newColumnTotals);
+    setStateForDocStatus(true);
   };
 
   const HandleDeleteRow: any = (id: any) => {
@@ -123,7 +124,6 @@ const ChallanItemsTable = ({
   }, [tableData]);
 
   const HandleSubCategory: any = (value: any, id: any) => {
-    console.log('handlesubcategory', value, id, tableData);
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, sub_category: value } : row
     );
@@ -199,7 +199,6 @@ const ChallanItemsTable = ({
                     <td className="table-data-input">
                       <div className="h-25 custom-select-container">
                         <div className="dropdown-input-container">
-
                           <CustomDropdownForTable
                             drowpdownlist={subCategoryList}
                             data={row.sub_category}
@@ -323,6 +322,7 @@ const ChallanItemsTable = ({
                     readOnly
                   />
                 </td>
+                <td></td>
               </tr>
             </tbody>
           </table>
