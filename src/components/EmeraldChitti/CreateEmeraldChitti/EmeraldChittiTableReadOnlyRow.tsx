@@ -93,7 +93,7 @@ const EmeraldChittiTablereadOnlyRow = ({ calculationRow }: any) => {
         </td>
         <td className="emerald_chitti_table_td">
           <InputFieldComponent
-            value={calculationRow?.hm_pcs?.toFixed(3)}
+            value={calculationRow?.custom_hm_pcs?.toFixed(3)}
             readOnly={'true'}
           />
         </td>

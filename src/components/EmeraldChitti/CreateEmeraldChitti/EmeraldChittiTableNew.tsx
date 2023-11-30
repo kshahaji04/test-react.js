@@ -25,7 +25,7 @@ const EmeraldChittiTableNew = ({
     j: 0,
     k: 0,
     amount: 0,
-    hm_pcs: 0,
+    custom_hm_pcs: 0,
   });
 
   const addIdToRows = (rows: any) => {
@@ -65,7 +65,7 @@ const EmeraldChittiTableNew = ({
         accumulator.j += parseFloat(row.j) || 0;
         accumulator.k += parseFloat(row.k) || 0;
         accumulator.amount += parseFloat(row.amount) || 0;
-        accumulator.hm_pcs += parseFloat(row.hm_pcs) || 0;
+        accumulator.custom_hm_pcs += parseFloat(row.custom_hm_pcs) || 0;
         return accumulator;
       },
       {
@@ -77,7 +77,7 @@ const EmeraldChittiTableNew = ({
         j: 0,
         k: 0,
         amount: 0,
-        hm_pcs: 0,
+        custom_hm_pcs: 0,
       }
     );
 
