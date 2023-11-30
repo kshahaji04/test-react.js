@@ -35,7 +35,7 @@ export const GetEmeraldReportScreen = createSlice({
     builder.addCase(getEmeraldReportData.fulfilled, (state, action) => {
       if (
         action?.payload?.status === 200 &&
-        action?.payload?.data?.message?.status === 'success'
+        action?.payload?.data?.message?.status === 'Success'
       ) {
         state.data = action?.payload?.data?.message?.data;
         state.isLoading = 'succeeded';

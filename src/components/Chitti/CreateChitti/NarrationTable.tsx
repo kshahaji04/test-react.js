@@ -92,9 +92,7 @@ const NarrationTable = ({
 
   const HandlePiecesAmount = (e: any, id: any) => {
     const updatedData = narrationTableData.map((row: any) =>
-      row.id === id
-        ? { ...row, huid_pieces: parseFloat(e.target.value) || 0 }
-        : row
+      row.id === id ? { ...row, huid_pieces: parseFloat(e.target.value) } : row
     );
     setNarrationTableData(updatedData);
     setStateForDocStatus(true);
@@ -102,9 +100,7 @@ const NarrationTable = ({
 
   const HandleWeightAmount = (e: any, id: any) => {
     const updatedData = narrationTableData.map((row: any) =>
-      row.id === id
-        ? { ...row, huid_weight: parseFloat(e.target.value) || 0 }
-        : row
+      row.id === id ? { ...row, huid_weight: parseFloat(e.target.value) } : row
     );
     setNarrationTableData(updatedData);
     setStateForDocStatus(true);
@@ -173,30 +169,6 @@ const NarrationTable = ({
                     />
                   </div>
                 </div>
-                {/* <select
-                  id="category"
-                  name="category"
-                  className="form-select p-0 custom-input-field"
-                  aria-label=".form-select-sm example"
-                  value={row.product}
-                  onChange={(e) => HandleCategory(e, row.id)}
-                  disabled={readOnly === true ? true : false}
-                >
-                  <option></option>
-                  {productList?.length > 0 && productList !== null ? (
-                    <>
-                      {productList.map((product: any, index: any) => {
-                        return (
-                          <option defaultValue={row.product} key={index}>
-                            {product}
-                          </option>
-                        );
-                      })}
-                    </>
-                  ) : (
-                    ''
-                  )}
-                </select> */}
               </td>
               <td className="table-data-input">
                 <input

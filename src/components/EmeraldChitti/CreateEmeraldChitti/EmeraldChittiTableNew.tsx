@@ -131,7 +131,7 @@ const EmeraldChittiTableNew = ({
     if (tableData?.length > 1) {
       const updatedData = tableData
         .filter((row: any) => row.idx !== id)
-        .map((row: any, index: number) => ({ ...row, id: index + 1 }));
+        .map((row: any, index: number) => ({ ...row, idx: index + 1 }));
       setTableData(updatedData);
       setStateForDocStatus(true);
     }
@@ -160,6 +160,7 @@ const EmeraldChittiTableNew = ({
             <table className="table table-striped caption-top table-hover my-0 ">
               <thead>
                 <tr className="table-header-row-emerald-chitti ">
+                  <th scope="col">No.</th>
                   <th scope="col">A</th>
                   <th scope="col">B</th>
                   <th scope="col">C</th>
@@ -192,7 +193,8 @@ const EmeraldChittiTableNew = ({
                   tableData.map((row: any) => (
                     <>
                       <tr key={row.idx}>
-                        <td className=" emerald_chitti_table_td">
+                        <td className="emerald_chitti_table_td">{row.idx}</td>
+                        <td className="emerald_chitti_table_td">
                           <InputFieldComponent
                             value={row.a}
                             readOnly={readOnly}

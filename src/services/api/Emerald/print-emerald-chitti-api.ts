@@ -5,8 +5,8 @@ const PrintEmeraldChittiApi = async (token: any, name: any) => {
   console.log('tokennnn', token);
   let response: any;
   const version = 'v1';
-  const method = 'get_print_emerald_chitti';
-  const entity = 'print_emerald_chitti';
+  const method = 'get_emerald_chitti_print';
+  const entity = 'emerald_chitti_print_api';
 
   const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}&name=${name}`;
 

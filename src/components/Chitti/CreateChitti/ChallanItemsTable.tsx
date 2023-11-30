@@ -143,7 +143,7 @@ const ChallanItemsTable = ({
     console.log('gross', e.target.value, id);
     const inputValue = parseFloat(e.target.value);
     const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, gross_weight: inputValue || 0 } : row
+      row.id === id ? { ...row, gross_weight: inputValue } : row
     );
     setTableData(updatedData);
     setStateForDocStatus(true);
@@ -151,9 +151,7 @@ const ChallanItemsTable = ({
 
   const HandleNetWeightValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
-      row.id === id
-        ? { ...row, net_weight: parseFloat(e.target.value) || 0 }
-        : row
+      row.id === id ? { ...row, net_weight: parseFloat(e.target.value) } : row
     );
     setTableData(updatedData);
     setStateForDocStatus(true);
@@ -161,7 +159,7 @@ const ChallanItemsTable = ({
 
   const HandleAmountValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, amount: parseFloat(e.target.value) || 0 } : row
+      row.id === id ? { ...row, amount: parseFloat(e.target.value) } : row
     );
     setTableData(updatedData);
     setStateForDocStatus(true);
