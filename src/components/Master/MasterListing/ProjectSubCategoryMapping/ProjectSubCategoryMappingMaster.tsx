@@ -12,6 +12,7 @@ const ProjectSubCategoryMappingMaster = () => {
 
   const { subCategoryList } = UseSubCategoryHook();
   const showThirdInputField: any = useRef(true);
+  console.log('ProjectSubCategoryMappingList', subCategoryList);
 
   const [inputProject, setInputProject] = useState('');
   const [inputStone, setInputStone] = useState('');

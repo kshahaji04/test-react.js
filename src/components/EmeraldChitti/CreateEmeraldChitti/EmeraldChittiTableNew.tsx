@@ -25,6 +25,7 @@ const EmeraldChittiTableNew = ({
     j: 0,
     k: 0,
     amount: 0,
+    hm_pcs: 0,
   });
 
   const addIdToRows = (rows: any) => {
@@ -50,7 +51,7 @@ const EmeraldChittiTableNew = ({
   useEffect(() => {
     // Recalculate live calculations whenever tableData changes
     calculateLiveCalculations();
-  }, [tableData]);
+  }, [tableData, setTableData]);
 
   const calculateLiveCalculations = () => {
     // Calculate live values based on tableData
@@ -64,6 +65,7 @@ const EmeraldChittiTableNew = ({
         accumulator.j += parseFloat(row.j) || 0;
         accumulator.k += parseFloat(row.k) || 0;
         accumulator.amount += parseFloat(row.amount) || 0;
+        accumulator.hm_pcs += parseFloat(row.hm_pcs) || 0;
         return accumulator;
       },
       {
@@ -75,6 +77,7 @@ const EmeraldChittiTableNew = ({
         j: 0,
         k: 0,
         amount: 0,
+        hm_pcs: 0,
       }
     );
 
@@ -184,6 +187,7 @@ const EmeraldChittiTableNew = ({
                   {/* <th scope="col">CZ Amt</th>
                   <th scope="col">Cs Amt</th> */}
                   <th scope="col">Amount</th>
+                  <th scope="col">Hm Pcs</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -509,6 +513,23 @@ const EmeraldChittiTableNew = ({
                               handleInputChange(
                                 row.idx,
                                 'amount',
+                                e.target.value
+                              )
+                            }
+                            type="number"
+                            // handleKeyDown={handleKeyDown}
+                            handleOnFocus={handleOnFocus}
+                          />
+                        </td>
+                        <td className="emerald_chitti_table_td">
+                          <InputFieldComponent
+                            value={row.custom_hm_pcs}
+                            readOnly={readOnly}
+                            id={`hm_pcs-${row.idx}`}
+                            onChange={(e: any) =>
+                              handleInputChange(
+                                row.idx,
+                                'custom_hm_pcs',
                                 e.target.value
                               )
                             }

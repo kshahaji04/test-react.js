@@ -5,51 +5,99 @@ import { toast } from 'react-toastify';
 import { get_access_token } from '../../../../store/slices/auth/token-login-slice';
 import AddHuidProductApi from '../../../../services/api/Master/add-huid-product-api';
 import { getHuidProductList } from '../../../../store/slices/Master/get-huid-product-slice';
-import CreateNewProductData from '../CreateNewProductData';
 
 const AddHuidProduct = () => {
   const dispatch = useDispatch();
-  const [title, setTitle] = useState<any>('');
-  const [inputValue, setInputValue] = useState('');
+
+  const [inputValue, setInputValue] = useState({
+    title: '',
+    hm_pcs: '',
+  });
   const [error, setError] = useState('');
   const AccessToken: any = useSelector(get_access_token);
 
-  console.log('inputValue', inputValue);
-
   const HandleSubmit: any = async () => {
-    if (inputValue.trim() === '') {
+    if (inputValue.title.trim() === '') {
       setError('Input field cannot be empty');
     } else {
-      let apiRes: any = await AddHuidProductApi(AccessToken?.token, title);
-      console.log('apires', apiRes);
+      if (Object.keys(inputValue.hm_pcs)?.length > 0) {
+        let apiRes: any = await AddHuidProductApi(
+          AccessToken?.token,
+          inputValue
+        );
+        console.log('apires', apiRes);
 
-      setTitle('');
-      if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
-        toast.success('HUID Product Added');
-        dispatch(getHuidProductList(AccessToken?.token));
+        if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
+          toast.success('HUID Product Added');
+          dispatch(getHuidProductList(AccessToken?.token));
+        } else {
+          toast.error('HUID product already exist');
+        }
+        setError('');
+        setInputValue({
+          title: '',
+          hm_pcs: '',
+        });
       } else {
-        toast.error('HUID product already exist');
+        toast.error('Hm pcs is mandatory');
       }
-      setError('');
-      setInputValue('');
     }
   };
 
   const HandleInputValue = (e: any) => {
+    const { name, value } = e.target;
     setError('');
-    setTitle(e.target.value);
-    setInputValue(e.target.value);
-  };
 
+    setInputValue((prevInputValue) => ({
+      ...prevInputValue,
+      [name]: value,
+    }));
+  };
   return (
-    <>
-      <CreateNewProductData
-        inputValue={inputValue}
-        HandleInputValue={HandleInputValue}
-        error={error}
-        HandleSubmit={HandleSubmit}
-      />
-    </>
+    <div className="container mt-2">
+      <label htmlFor="basic-url " className="fs-6 text-center">
+        Title
+        <span className="text-danger">*</span>
+      </label>
+      <div className="input-group  w-50 master-input-field">
+        <input
+          type="text"
+          name="title"
+          className="form-control ps-2"
+          id="title"
+          aria-describedby="basic-addon3"
+          onChange={HandleInputValue}
+          value={inputValue.title}
+        />
+      </div>
+      <div className=""> {error && <p className="text-danger">{error}</p>}</div>
+      <label htmlFor="basic-url " className="fs-6 mt-1 text-center">
+        Hm pcs
+        <span className="text-danger">*</span>
+      </label>
+      <div className="input-group w-50 master-input-field">
+        <div className="w-100 ">
+          <input
+            type="number"
+            name="hm_pcs"
+            className="form-control h-100 ps-2"
+            id="hm_pcs"
+            aria-describedby="basic-addon3"
+            onChange={HandleInputValue}
+            value={inputValue.hm_pcs}
+          />
+        </div>
+      </div>
+      <div className="d-flex justify-content-start ">
+        <button
+          type="submit"
+          onClick={HandleSubmit}
+          className=" btn btn-outline-primary py-1 mt-2 form-submit-button"
+        >
+          Save
+        </button>
+      </div>
+    </div>
   );
 };
 

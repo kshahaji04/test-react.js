@@ -8,7 +8,7 @@ const UseCustomChittiHook: any = () => {
     useState<any>('');
 
   const [checkGrossAndNetWeight, setCheckGrossAndNetWeight] = useState({
-    gross_weight: '',
+    gross_weight: '0',
     net_weight: '',
   });
 

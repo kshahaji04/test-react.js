@@ -333,9 +333,6 @@ const UseChittiHook = () => {
       });
     };
     const filteredHuidTable: any = CheckObjectHasValuesInHuid();
-    console.log('CheckObjectHasValues', filteredChallanTable, challanTableData);
-
-    console.log('checkobject values', filteredChallanTable, filteredHuidTable);
 
     let errMsgList: any = [];
     if (Object?.keys(selectedDropdownValue)?.length === 0) {
@@ -365,46 +362,110 @@ const UseChittiHook = () => {
       } else if (filteredChallanTable?.length === 0) {
         toast.error('No values inserted');
       } else {
-        const BodyData: any = {
-          date: date,
-          clientName: selectedDropdownValue,
-          clientGroup: clientGroupName,
-          goldRate: goldRate,
-          remarks: remarks,
-          challanTableData: filteredChallanTable,
-          narrationTableData: filteredHuidTable,
-          token: AccessToken?.token,
+        const addGrossWeightKey = (item: any) => {
+          // Check if the item has the "gross_weight" key
+          if (!item.hasOwnProperty('gross_weight')) {
+            // If not, add "gross_weight" key with a value of 0
+            item.gross_weight = 0;
+          }
+          return item;
         };
-        let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
-        console.log('Createchittiapires', CreateChittiApiRes);
 
-        if (
-          Object?.keys(clientGroupName)?.length > 0 &&
-          Object?.keys(clientNameList)?.length > 0
-        ) {
-          await AddClientNameApi(
-            AccessToken?.token,
-            selectedDropdownValue,
-            clientGroupName
-          );
-        }
+        const challanTableWithGrossWeight =
+          filteredChallanTable.map(addGrossWeightKey);
 
-        if (CreateChittiApiRes?.data?.message?.msg === 'success') {
-          toast.success('Chitti Created');
-          navigate(`${CreateChittiApiRes?.data?.message?.data}`);
-
-          await UpdateDocStatusChallanApi(
-            AccessToken?.token,
-            '0',
-            CreateChittiApiRes?.data?.message?.data
+        // Additional check for gross_weight less than net_weight
+        const hasGrossWeightLessThanNetWeight =
+          challanTableWithGrossWeight.some(
+            (item: any) => item.gross_weight < item.net_weight
           );
 
-          setShowSubmitButtonAfterCreateChitti(
-            CreateChittiApiRes?.data?.message?.data
-          );
-          dispatch(getChittiChallan(AccessToken?.token));
+        if (hasGrossWeightLessThanNetWeight) {
+          toast.error('Gross weight cannot be less than Net weight');
         } else {
-          toast.error('Failed to create chitti');
+          const BodyData: any = {
+            date: date,
+            clientName: selectedDropdownValue,
+            clientGroup: clientGroupName,
+            goldRate: goldRate,
+            remarks: remarks,
+            challanTableData: challanTableWithGrossWeight,
+            narrationTableData: filteredHuidTable,
+            token: AccessToken?.token,
+          };
+          let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
+          console.log('Createchittiapires', CreateChittiApiRes);
+
+          if (
+            Object?.keys(clientGroupName)?.length > 0 &&
+            Object?.keys(clientNameList)?.length > 0
+          ) {
+            await AddClientNameApi(
+              AccessToken?.token,
+              selectedDropdownValue,
+              clientGroupName
+            );
+          }
+
+          if (CreateChittiApiRes?.data?.message?.msg === 'success') {
+            toast.success('Chitti Created');
+            navigate(`${CreateChittiApiRes?.data?.message?.data}`);
+
+            await UpdateDocStatusChallanApi(
+              AccessToken?.token,
+              '0',
+              CreateChittiApiRes?.data?.message?.data
+            );
+
+            setShowSubmitButtonAfterCreateChitti(
+              CreateChittiApiRes?.data?.message?.data
+            );
+            dispatch(getChittiChallan(AccessToken?.token));
+          } else {
+            toast.error('Failed to create chitti');
+          }
+
+          // const BodyData: any = {
+          //   date: date,
+          //   clientName: selectedDropdownValue,
+          //   clientGroup: clientGroupName,
+          //   goldRate: goldRate,
+          //   remarks: remarks,
+          //   challanTableData: filteredChallanTable,
+          //   narrationTableData: filteredHuidTable,
+          //   token: AccessToken?.token,
+          // };
+          // let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
+          // console.log('Createchittiapires', CreateChittiApiRes);
+
+          // if (
+          //   Object?.keys(clientGroupName)?.length > 0 &&
+          //   Object?.keys(clientNameList)?.length > 0
+          // ) {
+          //   await AddClientNameApi(
+          //     AccessToken?.token,
+          //     selectedDropdownValue,
+          //     clientGroupName
+          //   );
+          // }
+
+          // if (CreateChittiApiRes?.data?.message?.msg === 'success') {
+          //   toast.success('Chitti Created');
+          //   navigate(`${CreateChittiApiRes?.data?.message?.data}`);
+
+          //   await UpdateDocStatusChallanApi(
+          //     AccessToken?.token,
+          //     '0',
+          //     CreateChittiApiRes?.data?.message?.data
+          //   );
+
+          //   setShowSubmitButtonAfterCreateChitti(
+          //     CreateChittiApiRes?.data?.message?.data
+          //   );
+          //   dispatch(getChittiChallan(AccessToken?.token));
+          // } else {
+          //   toast.error('Failed to create chitti');
+          // }
         }
       }
     }

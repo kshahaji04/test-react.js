@@ -12,6 +12,7 @@ const UseHuidProductHook = () => {
   const AccessToken: any = useSelector(get_access_token);
 
   const huidDataFromStore: any = useSelector(get_huid_product_list);
+  console.log('huidDataFromStore', huidDataFromStore);
 
   const [huidProductData, setHuidProductData] = useState<any>([]);
 

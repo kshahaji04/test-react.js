@@ -82,6 +82,7 @@ const UseEmeraldHook = () => {
       // cz_amt: '',
       // cs_amt: '',
       amount: '',
+      custom_hm_pcs: '',
     },
   ];
 
@@ -190,6 +191,7 @@ const UseEmeraldHook = () => {
       // cz_amt: '',
       // cs_amt: '',
       amount: '',
+      custom_hm_pcs: '',
     };
 
     // Add the new row to the tableData
@@ -349,24 +351,13 @@ const UseEmeraldHook = () => {
   const HandleCreateEmeraldChittiSubmit: any = async () => {
     console.log(
       'submit create emerald chitti',
-      selectedDropdownValue,
-      transactionDate,
+
       emeraldChittiTableData
     );
     const NoDataEmeraldTableData = emeraldChittiTableData.some(
       (item: any) => Object?.keys(item)?.length === 0
     );
 
-    // const CheckObjectHasValues = () => {
-    //   return emeraldChittiTableData.filter((item: any) => {
-    //     return (
-    //       (item.hasOwnProperty('gross_weight') && item.gross_weight > 0) ||
-    //       (item.hasOwnProperty('net_weight') && item.net_weight > 0) ||
-    //       (item.hasOwnProperty('amount') && item.amount > 0)
-    //     );
-    //   });
-    // };
-    // const filteredemeraldChittiTable: any = CheckObjectHasValues();
     const reversedDate = new Date()
       ?.toISOString()
       ?.split('T')[0]

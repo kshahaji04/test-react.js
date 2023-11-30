@@ -2,26 +2,47 @@ import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import AddHuidProduct from './AddHuidProduct';
 import UseHuidProductHook from '../../../../hooks/Master/huid-product-hook';
-import MasterSingleListingSearch from '../MasterSingleListingSearch';
-import SingleItemListingInMaster from '../SingleItemListingInMaster';
+
+import HuidProductListing from './HuidProductListing';
+import MasterMultipleListingSearch from '../MasterMultipleListingSearch';
 
 const HuidProductMaster = () => {
   const { huidProductData }: any = UseHuidProductHook();
 
-  const [searchField, setSearchField] = useState<any>('');
+  const [inputName, setInputName] = useState('');
+  const [inputPcs, setInputPcs] = useState('');
 
-  const HandleSearchInput: any = (e: any) => {
-    console.log('inp', e.target.value);
-    setSearchField(e.target.value);
+  const handleInputChange1 = (event: any) => {
+    setInputName(event.target.value);
   };
 
-  const filterList: any =
-    huidProductData?.length > 0 &&
-    huidProductData !== null &&
-    huidProductData.filter((value: any) => {
-      return value.toLowerCase().includes(searchField?.toLowerCase());
+  const handleInputChange2 = (event: any) => {
+    setInputPcs(event.target.value);
+  };
+  console.log('huidDataFromStore in tex', huidProductData);
+  const filteredList: any = huidProductData || [];
+
+  // Now you can apply additional filters if needed
+  const filteredListWithAdditionalFilters: any =
+    filteredList.length > 0 &&
+    filteredList.filter((client: any) => {
+      const titleMatch = client?.title
+        ?.toLowerCase()
+        ?.includes(inputName?.toLowerCase());
+
+      // Check if custom_hm_pcs is a valid number
+      const clientPcs = Number(client?.custom_hm_pcs);
+      const inputPcsValue = Number(inputPcs);
+
+      // Check if both conversions were successful and values match, or inputPcsValue is 0
+      const pcsMatch =
+        (!isNaN(clientPcs) &&
+          !isNaN(inputPcsValue) &&
+          clientPcs === inputPcsValue) ||
+        inputPcsValue === 0;
+
+      return titleMatch && pcsMatch;
     });
-  console.log('handle', filterList);
 
   return (
     <div className="container">
@@ -35,14 +56,15 @@ const HuidProductMaster = () => {
               justify
             >
               <Tab eventKey="default-list" title="HUID Product List">
-                <MasterSingleListingSearch
-                  placeholder="Enter HUID Product"
-                  HandleSearchInput={HandleSearchInput}
+                <MasterMultipleListingSearch
+                  placeholder1="Enter Huid product"
+                  placeholder2="Enter Hm pcs"
+                  handleInputChange1={handleInputChange1}
+                  handleInputChange2={handleInputChange2}
                 />
 
-                <SingleItemListingInMaster
-                  listingData={filterList}
-                  heading="HUID Product"
+                <HuidProductListing
+                  listingData={filteredListWithAdditionalFilters}
                 />
               </Tab>
               <Tab eventKey="longer-tab" title="Add HUID Product">

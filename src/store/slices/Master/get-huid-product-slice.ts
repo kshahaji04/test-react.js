@@ -38,10 +38,8 @@ export const GetHuidProductListScreen = createSlice({
         action?.payload?.status === 200 &&
         action?.payload?.data?.message?.status === 'success'
       ) {
-        if (action?.payload?.data?.message?.hasOwnProperty('data')) {
-          state.data = action?.payload?.data?.message?.data?.data;
-          state.isLoading = 'succeeded';
-        }
+        state.data = action?.payload?.data?.message?.data;
+        state.isLoading = 'succeeded';
       }
     });
     builder.addCase(getHuidProductList.rejected, (state) => {
