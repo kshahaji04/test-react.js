@@ -11,6 +11,7 @@ import { useParams } from 'react-router-dom';
 import UpdateChittiApi from '../../services/api/Chitti/update-challan-chitti-api';
 import { toast } from 'react-toastify';
 import { UpdateDocStatusChallanApi } from '../../services/api/general/update-doc-status-challan--api';
+import PrintChallanChittiApi from '../../services/api/Chitti/print-challan-chitti-api';
 
 const UseEditChallanChitti: any = () => {
   const dispatch = useDispatch();
@@ -181,6 +182,14 @@ const UseEditChallanChitti: any = () => {
 
   console.log('setStateForDocStatus in hook', stateForDocStatus);
 
+  const HandlePrintButton: any = async () => {
+    let printApiRes: any = await PrintChallanChittiApi(AccessToken?.token, id);
+    if (printApiRes?.status === 'success') {
+      if (printApiRes?.data?.data?.length > 0) {
+        window.open(printApiRes?.data?.data[0]?.print_url);
+      }
+    }
+  };
   return {
     challanDetail,
     setNarrationTableData,
@@ -211,6 +220,7 @@ const UseEditChallanChitti: any = () => {
     setShowSaveButtonForAmendFlow,
     showSaveButtonForAmendFlow,
     setCheckGrossAndNetWeight,
+    HandlePrintButton,
   };
 };
 

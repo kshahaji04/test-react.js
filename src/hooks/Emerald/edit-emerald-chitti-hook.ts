@@ -12,6 +12,7 @@ import {
 } from '../../store/slices/Emerald/get-specific-emrald-slice';
 import UpdateEmeraldChittiApi from '../../services/api/Emerald/update-emerald-chitti-api';
 import { UpdateDocStatusEmeraldChittiApi } from '../../services/api/general/update-doc-status-emrald-chitti-api';
+import PrintEmeraldChittiApi from '../../services/api/Emerald/print-emerald-chitti-api';
 
 const UseEditEmeraldChittiHook: any = () => {
   const dispatch = useDispatch();
@@ -125,6 +126,15 @@ const UseEditEmeraldChittiHook: any = () => {
     }
   };
 
+  const HandlePrintButton: any = async () => {
+    let printApiRes: any = await PrintEmeraldChittiApi(AccessToken?.token, id);
+    if (printApiRes?.status === 'success') {
+      if (printApiRes?.data?.data?.length > 0) {
+        window.open(printApiRes?.data?.data[0]?.print_url);
+      }
+    }
+  };
+
   return {
     emeraldChittiData,
     selectedDropdownValue,
@@ -154,6 +164,7 @@ const UseEditEmeraldChittiHook: any = () => {
     HandleAddRow,
     handleKeyDown,
     handleOnFocus,
+    HandlePrintButton,
   };
 };
 

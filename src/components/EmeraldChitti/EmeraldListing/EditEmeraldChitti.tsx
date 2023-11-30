@@ -35,7 +35,8 @@ const EditEmeraldChitti = () => {
     subCategoryList,
     HandleAddRow,
     handleKeyDown,
-    handleOnFocus
+    handleOnFocus,
+    HandlePrintButton,
   }: any = UseEditEmeraldChittiHook();
 
   console.log('challan detail', challanDetail);
@@ -133,6 +134,15 @@ const EditEmeraldChitti = () => {
             {showButton === 1 && (
               <button
                 type="submit"
+                className=" btn btn-outline-primary me-2 px-2 py-0 form-submit-button"
+                onClick={HandlePrintButton}
+              >
+                Print
+              </button>
+            )}
+            {showButton === 1 && (
+              <button
+                type="submit"
                 className=" btn btn-outline-primary px-2 py-0 form-submit-button"
                 onClick={HandleCancelEmeraldChitti}
               >
@@ -143,7 +153,7 @@ const EditEmeraldChitti = () => {
             {challanDetail?.length > 0 &&
               challanDetail !== null &&
               challanDetail[0]?.date ===
-              new Date()?.toISOString()?.split('T')[0] && (
+                new Date()?.toISOString()?.split('T')[0] && (
                 <>
                   {showButton === 2 && showSaveButtonForAmendFlow === false && (
                     <>
@@ -225,7 +235,6 @@ const EditEmeraldChitti = () => {
                     handleKeyDown={handleKeyDown}
                     handleOnFocus={handleOnFocus}
                   />
-
                 </>
               );
             })}

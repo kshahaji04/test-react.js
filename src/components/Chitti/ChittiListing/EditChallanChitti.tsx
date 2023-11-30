@@ -37,6 +37,7 @@ const EditChallanChitti = () => {
     setShowSaveButtonForAmendFlow,
     showSaveButtonForAmendFlow,
     setCheckGrossAndNetWeight,
+    HandlePrintButton,
   }: any = UseEditChallanChitti();
   const navigate = useNavigate();
   const [showButton, setShowButton] = useState<any>();
@@ -77,13 +78,6 @@ const EditChallanChitti = () => {
     setReadOnly(false);
   };
 
-  console.log(
-    'readdd',
-    'docstatus=>',
-    showButton,
-    'show amend=>',
-    showSaveButtonForAmendFlow
-  );
   return (
     <div className="container">
       <div className="">
@@ -143,6 +137,15 @@ const EditChallanChitti = () => {
                 onClick={HandleSubmitChallanChitti}
               >
                 Submit
+              </button>
+            )}
+            {showButton === 1 && (
+              <button
+                type="submit"
+                className=" btn btn-outline-primary me-2 px-2 py-0 form-submit-button"
+                onClick={HandlePrintButton}
+              >
+                Print
               </button>
             )}
             {showButton === 1 && (
