@@ -198,28 +198,6 @@ const UseEmeraldHook = () => {
     setTableData([...tableData, newRow]);
   };
 
-  const handleKeyDown: any = (e: any, id: any) => {
-    console.log('onfocus,e,id', e, id);
-    if (e.key === 'Tab') {
-      if (id?.includes('amount')) {
-        HandleAddRow();
-      }
-    }
-  };
-
-  const handleOnFocus: any = (e: any, id: any) => {
-    console.log(e, id);
-    // // Check if the event is a Tab key press
-    // if (e.key === 'Tab') {
-    //   return;
-    // }
-    // console.log('onfocus', id.replace);
-    // let modifiedString = id?.replace(/r-\d+/, 'r');
-    // console.log('onfocus mod', modifiedString);
-    // if (modifiedString === 'r') {
-    //   HandleAddRow();
-    // }
-  };
 
   const HandleDeleteRow: any = (id: any) => {
     console.log('id', id);
@@ -501,8 +479,7 @@ const UseEmeraldHook = () => {
     setShowSaveButtonForAmendFlow,
     HandleDeleteRow,
     HandleAddRow,
-    handleKeyDown,
-    handleOnFocus,
+    // handleKeyDown
   };
 };
 

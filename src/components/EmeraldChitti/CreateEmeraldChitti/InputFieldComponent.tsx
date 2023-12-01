@@ -1,13 +1,16 @@
 const InputFieldComponent = ({
   value,
-
   readOnly,
   id,
   onChange,
   type,
-  handleKeyDown,
-  handleOnFocus,
+  HandleAddRow
 }: any) => {
+
+
+  const handleKeyDown: any = (e: any, id: any) => {
+    HandleAddRow();
+  }
   return (
     <div>
       <input
@@ -20,8 +23,8 @@ const InputFieldComponent = ({
         readOnly={readOnly}
         value={value}
         onChange={onChange}
-        onKeyDown={(e) => handleKeyDown(e, id)}
-        onFocus={(e) => handleOnFocus(e, id)}
+        onKeyDown={(e) => handleKeyDown(e, "custom_hm_pcs")}
+
       />
     </div>
   );

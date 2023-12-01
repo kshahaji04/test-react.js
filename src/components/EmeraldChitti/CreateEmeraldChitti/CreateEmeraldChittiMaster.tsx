@@ -29,8 +29,7 @@ const CreateEmeraldChittiMaster = ({
   HandleDeleteEmeraldChitti,
   HandleEmptyEmeraldChitti,
   setStateForDocStatus,
-  handleKeyDown,
-  handleOnFocus
+  handleKeyDown
 }: any) => {
   const [showButton, setShowButton] = useState<any>();
 
@@ -75,7 +74,7 @@ const CreateEmeraldChittiMaster = ({
         HandleDeleteRow={HandleDeleteRow}
         setStateForDocStatus={setStateForDocStatus}
         handleKeyDown={handleKeyDown}
-        handleOnFocus={handleOnFocus}
+
       />
       {/* <EmeraldChittiTable
         tableData={tableData}
