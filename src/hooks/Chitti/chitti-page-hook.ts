@@ -306,21 +306,21 @@ const UseChittiHook = () => {
       (item: any) => Object?.keys(item)?.length === 0
     );
 
-    // Function to add decimal values
-    const addDecimalValues = (item: any) => {
-      // Check if the item has the "gross_weight" key
-      if (!item.hasOwnProperty('gross_weight')) {
-        // If not, add "gross_weight" key with a value of 0
-        item.gross_weight = 0;
-      }
+    // // Function to add decimal values
+    // const addDecimalValues = (item: any) => {
+    //   // Check if the item has the "gross_weight" key
+    //   if (!item.hasOwnProperty('gross_weight')) {
+    //     // If not, add "gross_weight" key with a value of 0
+    //     item.gross_weight = 0;
+    //   }
 
-      // Format gross_weight, net_weight, and amount with desired decimal places
-      item.gross_weight = item.gross_weight.toFixed(3); // 3 decimal places
-      item.net_weight = item.net_weight.toFixed(3); // 3 decimal places
-      item.amount = item.amount.toFixed(2); // 2 decimal places
+    //   // Format gross_weight, net_weight, and amount with desired decimal places
+    //   item.gross_weight = item.gross_weight.toFixed(3); // 3 decimal places
+    //   item.net_weight = item.net_weight.toFixed(3); // 3 decimal places
+    //   item.amount = item.amount.toFixed(2); // 2 decimal places
 
-      return item;
-    };
+    //   return item;
+    // };
 
     const CheckObjectHasValues = () => {
       return challanTableData.filter((item: any) => {
