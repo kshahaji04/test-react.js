@@ -101,20 +101,6 @@ const SubCategoryReport = () => {
     handleFilterList();
   }, [searchInputValues, searchCategory, searchSubCategory, searchClientName]);
 
-  // const handleFilterList: any = () => {
-  //   const reqParams: any = {
-  //     token: AccessToken?.token,
-  //     category: searchCategory,
-  //     sub_category: searchSubCategory,
-  //     client_name: searchClientName,
-  //     from_date: searchInputValues?.fromDate,
-  //     to_date: searchInputValues?.toDate,
-  //   };
-
-  //   dispatch(getSubCategoryReportData(reqParams));
-
-  // };
-
   const handleDownloadReport: any = async () => {
     const reqParams: any = {
       token: AccessToken?.token,
@@ -132,43 +118,6 @@ const SubCategoryReport = () => {
       window.open(downloadReportApi?.data?.print_url);
     }
   };
-
-  // const filteredList =
-  //   subCategoryReportData?.length > 0 &&
-  //   subCategoryReportData !== null &&
-  //   (searchInputValues.fromDate ||
-  //     searchInputValues.toDate ||
-  //     searchSubCategory ||
-  //     searchClientName ||
-  //     searchCategory)
-  //     ? subCategoryReportData.filter((item: any) => {
-  //         const clientNameMatch = searchClientName
-  //           ? item?.client_name
-  //               ?.toLowerCase()
-  //               ?.includes(searchClientName?.toLowerCase())
-  //           : true;
-  //         const categoryMatch = searchCategory
-  //           ? item?.category
-  //               ?.toLowerCase()
-  //               ?.includes(searchCategory?.toLowerCase())
-  //           : true;
-  //         const subCategoryMatch = searchSubCategory
-  //           ? item?.sub_category
-  //               ?.toLowerCase()
-  //               ?.includes(searchSubCategory?.toLowerCase())
-  //           : true;
-
-  //         const dateMatch =
-  //           searchInputValues.fromDate && searchInputValues.toDate
-  //             ? item?.date >= searchInputValues.fromDate &&
-  //               item?.date <= searchInputValues.toDate
-  //             : true;
-
-  //         return (
-  //           categoryMatch && subCategoryMatch && clientNameMatch && dateMatch
-  //         );
-  //       })
-  //     : subCategoryReportData;
 
   return (
     <div className="container mb-5">
@@ -233,9 +182,9 @@ const SubCategoryReport = () => {
                         {data.sub_category}
                       </td>
                       <td>{data.client_name}</td>
-                      <td>{data.total_gross_weight}</td>
-                      <td>{data.total_net_weight}</td>
-                      <td>{data.total_amount}</td>
+                      <td>{data.total_gross_weight?.toFixed(3)}</td>
+                      <td>{data.total_net_weight?.toFixed(3)}</td>
+                      <td>{data.total_amount?.toFixed(2)}</td>
                     </tr>
                   );
                 })}

@@ -90,7 +90,12 @@ const UseEditEmeraldChittiHook: any = () => {
       .split('-')
       .reverse()
       .join('-');
-    console.log(reversedDate);
+
+    const updatedFilterEmeraldChitti = tableData
+      .filter((obj: any) =>
+        Object.keys(obj).some((key) => key !== 'idx' && obj[key] !== '')
+      )
+      .map((obj: any, index: any) => ({ ...obj, idx: index + 1 }));
 
     const BodyData: any = {
       name: id,
@@ -98,7 +103,7 @@ const UseEditEmeraldChittiHook: any = () => {
       date: reversedDate,
       transactionDate: transactionDate,
       // clientGroup: clientGroupName,
-      challanTableData: tableData,
+      challanTableData: updatedFilterEmeraldChitti,
       token: AccessToken?.token,
     };
     let updateChittiApi: any = await UpdateEmeraldChittiApi(BodyData);

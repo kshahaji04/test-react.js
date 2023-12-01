@@ -348,15 +348,37 @@ const UseEmeraldHook = () => {
       }, 250);
     }
   };
-  const HandleCreateEmeraldChittiSubmit: any = async () => {
-    console.log(
-      'submit create emerald chitti',
 
-      emeraldChittiTableData
-    );
-    const NoDataEmeraldTableData = emeraldChittiTableData.some(
-      (item: any) => Object?.keys(item)?.length === 0
-    );
+  const findDuplicateValues = (arr: any) => {
+    const counts: any = {};
+    const duplicates = [];
+
+    for (const value of arr) {
+      counts[value] = (counts[value] || 0) + 1;
+      if (counts[value] === 2) {
+        duplicates.push(value);
+      }
+    }
+
+    return duplicates;
+  };
+
+  const findDuplicateIndices = (arr: any) => {
+    const indices: any = {};
+    const duplicateIndices = [];
+
+    for (const { a, index } of arr) {
+      if (indices[a] !== undefined) {
+        duplicateIndices.push([indices[a], index]);
+      } else {
+        indices[a] = index;
+      }
+    }
+
+    return duplicateIndices;
+  };
+  const HandleCreateEmeraldChittiSubmit: any = async () => {
+    console.log('submit create emerald chitti', emeraldChittiTableData);
 
     const reversedDate = new Date()
       ?.toISOString()
@@ -364,13 +386,43 @@ const UseEmeraldHook = () => {
       .split('-')
       .reverse()
       .join('-');
-    console.log(reversedDate);
+    const duplicateAValues = findDuplicateValues(
+      emeraldChittiTableData.map((obj: any) => obj.a)
+    );
+
+    if (duplicateAValues.length > 0) {
+      // Show indices of the rows with duplicate values
+      const duplicateIndices = findDuplicateIndices(
+        emeraldChittiTableData.map((obj: any, index: any) => ({
+          a: obj.a,
+          index,
+        }))
+      );
+
+      if (duplicateIndices.length > 0) {
+        // Show indices of the rows with duplicate values
+        const rowIndicesMsg = duplicateIndices
+          .map((indices) => `row ${indices.join(', row ')}`)
+          .join(', ');
+
+        toast.error(`Duplicate values found in  "a" in ${rowIndicesMsg}`);
+        return;
+      }
+    }
+
+    const updatedFilterEmeraldChitti = emeraldChittiTableData
+      .filter((obj: any) =>
+        Object.keys(obj).some((key) => key !== 'idx' && obj[key] !== '')
+      )
+      .map((obj: any, index: any) => ({ ...obj, idx: index + 1 }));
+
+    console.log('filtered data', updatedFilterEmeraldChitti);
 
     let errMsgList: any = [];
     if (Object?.keys(selectedDropdownValue)?.length === 0) {
       errMsgList.push('Client Name');
     }
-    if (NoDataEmeraldTableData) {
+    if (updatedFilterEmeraldChitti?.length === 0) {
       errMsgList.push('Emerald Chitti Table');
     }
     console.log('show err msg', errMsgList);
@@ -384,7 +436,7 @@ const UseEmeraldHook = () => {
         date: reversedDate,
         transactionDate: transactionDate,
         clientGroup: clientGroupName,
-        emeraldChittiTableData: emeraldChittiTableData,
+        emeraldChittiTableData: updatedFilterEmeraldChitti,
         token: AccessToken?.token,
       };
       let createEmeraldChittiApiRes: any =

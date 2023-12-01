@@ -173,7 +173,7 @@ const NarrationTable = ({
               <td className="table-data-input">
                 <input
                   type="number"
-                  className="form-control custom-input-field"
+                  className="form-control custom-input-field text-end"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-sm"
                   // defaultValue={row.huid_pieces >= 0 ? row.huid_pieces : ''}
@@ -187,7 +187,7 @@ const NarrationTable = ({
               <td className="table-data-input">
                 <input
                   type="number"
-                  className="form-control custom-input-field"
+                  className="form-control custom-input-field text-end"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-sm"
                   onKeyDown={(e) => handleKeyDown(e, row.id)}
@@ -226,7 +226,7 @@ const NarrationTable = ({
             <td className="py-1 px-2">
               <input
                 type="number"
-                className="form-control custom-input-field-t text-center p-0"
+                className="form-control custom-input-field-t p-0 text-end"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"
                 value={totalAmountValue.huid_pieces?.toFixed(3)}
@@ -236,7 +236,7 @@ const NarrationTable = ({
             <td className="py-1 px-2">
               <input
                 type="number"
-                className="form-control custom-input-field-t text-center p-0"
+                className="form-control custom-input-field-t  p-0 text-end"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"
                 value={totalAmountValue.huid_weight?.toFixed(3)}

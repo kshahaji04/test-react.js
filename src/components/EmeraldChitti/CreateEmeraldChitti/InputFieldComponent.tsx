@@ -12,7 +12,7 @@ const InputFieldComponent = ({
     <div>
       <input
         type={type}
-        className="form-control custom-input-field-t"
+        className="form-control custom-input-field-t text-end"
         aria-label="Sizing example input"
         aria-describedby="inputGroup-sizing-sm"
         id={id}

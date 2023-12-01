@@ -87,65 +87,6 @@ const EmeraldReport = () => {
     handleFilterList();
   }, [searchInputValues, searchSupplier, searchSubCategory]);
 
-  // useEffect(() => {
-  //   const handleClickOutside = (event: any) => {
-  //     if (
-  //       event.target !== document.getElementById('projectInputFieldInReport')
-  //     ) {
-  //       // Clicked outside the input field, trigger the API call
-  //       console.log('searchh true');
-
-  //       setSearchByProjectName(true);
-  //     }
-  //   };
-
-  //   // Add the event listener
-  //   document.addEventListener('click', handleClickOutside);
-
-  //   // Clean up the event listener when the component unmounts
-  //   return () => {
-  //     document.removeEventListener('click', handleClickOutside);
-  //   };
-  // }, []);
-
-  // const handleDownloadReport: any = async () => {
-  // const reqParams: any = {
-  //   token: AccessToken?.token,
-  //   method: 'get_subcategory_report_print',
-  //   entity: 'report_print',
-  // };
-  // let downloadReportApi: any = await DownloadReportApi(reqParams);
-  // console.log('download Report api', downloadReportApi);
-  // if (downloadReportApi?.status === 'success') {
-  //   window.open(downloadReportApi?.data?.print_url);
-  // }
-  // };
-
-  // const filteredList =
-  //   emeraldReportData?.length > 0 &&
-  //   emeraldReportData !== null &&
-  //   (searchSupplier || searchInputValues.project || searchSubCategory)
-  //     ? emeraldReportData.filter((item: any) => {
-  //         const supplierMatch = searchSupplier
-  //           ? item?.supplier
-  //               ?.toLowerCase()
-  //               ?.includes(searchSupplier?.toLowerCase())
-  //           : true;
-  //         const projectMatch = searchInputValues.project
-  //           ? item?.category
-  //               ?.toLowerCase()
-  //               ?.includes(searchInputValues?.project?.toLowerCase())
-  //           : true;
-  //         const subCategoryMatch = searchSubCategory
-  //           ? item?.sub_category
-  //               ?.toLowerCase()
-  //               ?.includes(searchSubCategory?.toLowerCase())
-  //           : true;
-
-  //         return supplierMatch && subCategoryMatch && projectMatch;
-  //       })
-  //     : emeraldReportData;
-
   return (
     <div className="container mb-5 ">
       <div className="d-flex justify-content-between my-1">

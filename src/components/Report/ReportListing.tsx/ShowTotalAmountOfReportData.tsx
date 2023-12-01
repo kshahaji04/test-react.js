@@ -24,9 +24,9 @@ const ShowTotalAmountOfReportData = ({ data, colSpan }: any) => {
         <td colSpan={colSpan} className="">
           Total
         </td>
-        <td>{totalGrossWeight}</td>
-        <td>{totalNetWeight}</td>
-        <td>{totalAmount}</td>
+        <td>{totalGrossWeight.toFixed(3)}</td>
+        <td>{totalNetWeight.toFixed(3)}</td>
+        <td>{totalAmount.toFixed(2)}</td>
       </>
     );
   };

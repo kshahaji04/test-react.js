@@ -140,8 +140,10 @@ const ChallanItemsTable = ({
   };
 
   const HandleGrossWeightValue = (e: any, id: any) => {
-    console.log('gross', e.target.value, id);
+    console.log('gross', e.target.value);
+
     const inputValue = parseFloat(e.target.value);
+    // const formattedValue = inputValue.toFixed(3);
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, gross_weight: inputValue } : row
     );
@@ -223,15 +225,11 @@ const ChallanItemsTable = ({
                     <td className="table-data-input">
                       <input
                         type="number"
-                        className="form-control custom-input-field-t"
+                        className="form-control custom-input-field-t text-end"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        // defaultValue={
-                        //   row.gross_weight >= 0 ? row.gross_weight : ''
-                        // }
                         defaultValue={row.gross_weight}
                         value={row.gross_weight}
-                        // value={row.gross_weight > 0 ? row.gross_weight : ''}
                         onChange={(e) => HandleGrossWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
@@ -239,7 +237,7 @@ const ChallanItemsTable = ({
                     <td className="table-data-input">
                       <input
                         type="number"
-                        className="form-control custom-input-field-t"
+                        className="form-control custom-input-field-t text-end"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
                         // defaultValue={row.net_weight >= 0 ? row.net_weight : ''}
@@ -253,7 +251,7 @@ const ChallanItemsTable = ({
                     <td className="table-data-input">
                       <input
                         type="number"
-                        className="form-control custom-input-field-t"
+                        className="form-control custom-input-field-t text-end"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
                         // defaultValue={row.amount >= 0 ? row.amount : ''}
@@ -293,17 +291,17 @@ const ChallanItemsTable = ({
                 <td className="py-1 px-2">
                   <input
                     type="number"
-                    className="form-control custom-input-field-t text-center p-0"
+                    className="form-control custom-input-field-t p-0 text-end"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
-                    value={amountValue.gross_weight?.toFixed(3)}
+                    value={amountValue.gross_weight.toFixed(3)}
                     readOnly
                   />
                 </td>
                 <td className="py-1 px-2">
                   <input
                     type="number"
-                    className="form-control custom-input-field-t text-center p-0"
+                    className="form-control custom-input-field-t p-0 text-end"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
                     value={amountValue.net_weight?.toFixed(3)}
@@ -313,10 +311,10 @@ const ChallanItemsTable = ({
                 <td className="py-1 px-2">
                   <input
                     type="number"
-                    className="form-control custom-input-field-t text-center p-0"
+                    className="form-control custom-input-field-t  p-0 text-end"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
-                    value={amountValue.amount?.toFixed(3)}
+                    value={amountValue.amount?.toFixed(2)}
                     readOnly
                   />
                 </td>

@@ -189,9 +189,9 @@ const CategoryPartyWiseReport = () => {
                         <td>{index + 1}</td>
                         <td>{data.category}</td>
                         <td>{data.client_name}</td>
-                        <td>{data.total_gross_weight}</td>
-                        <td>{data.total_net_weight}</td>
-                        <td>{data.total_amount}</td>
+                        <td>{data.total_gross_weight?.toFixed(3)}</td>
+                        <td>{data.total_net_weight?.toFixed(3)}</td>
+                        <td>{data.total_amount?.toFixed(2)}</td>
                       </tr>
                     </>
                   );

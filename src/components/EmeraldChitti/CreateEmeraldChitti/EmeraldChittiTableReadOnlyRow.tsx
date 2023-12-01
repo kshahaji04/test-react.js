@@ -39,10 +39,7 @@ const EmeraldChittiTablereadOnlyRow = ({ calculationRow }: any) => {
           />
         </td>
         <td className="emerald_chitti_table_td">
-          <InputFieldComponent
-            value={calculationRow?.i.toFixed(3)}
-            readOnly={'true'}
-          />
+          <InputFieldComponent value={calculationRow?.i} readOnly={'true'} />
         </td>
         <td className="emerald_chitti_table_td">
           <InputFieldComponent
@@ -52,10 +49,7 @@ const EmeraldChittiTablereadOnlyRow = ({ calculationRow }: any) => {
         </td>
 
         <td className="emerald_chitti_table_td">
-          <InputFieldComponent
-            value={calculationRow?.k.toFixed(3)}
-            readOnly={'true'}
-          />
+          <InputFieldComponent value={calculationRow?.k} readOnly={'true'} />
         </td>
         <td className="emerald_chitti_table_td">
           <InputFieldComponent
@@ -87,13 +81,13 @@ const EmeraldChittiTablereadOnlyRow = ({ calculationRow }: any) => {
 
         <td className="emerald_chitti_table_td">
           <InputFieldComponent
-            value={calculationRow?.amount?.toFixed(3)}
+            value={calculationRow?.amount}
             readOnly={'true'}
           />
         </td>
         <td className="emerald_chitti_table_td">
           <InputFieldComponent
-            value={calculationRow?.custom_hm_pcs?.toFixed(3)}
+            value={calculationRow?.custom_hm_pcs}
             readOnly={'true'}
           />
         </td>
