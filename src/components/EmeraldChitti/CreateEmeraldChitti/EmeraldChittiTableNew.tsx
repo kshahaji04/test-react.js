@@ -11,7 +11,6 @@ const EmeraldChittiTableNew = ({
   HandleAddRow,
   readOnly,
   setStateForDocStatus,
-  handleKeyDown,
 
 }: any) => {
   console.log('readonly', readOnly);

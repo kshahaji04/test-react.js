@@ -9,7 +9,9 @@ const InputFieldComponent = ({
 
 
   const handleKeyDown: any = (e: any, id: any) => {
-    HandleAddRow();
+    if (e.key === "Tab" && id === "custom_hm_pcs") {
+      HandleAddRow();
+    }
   }
   return (
     <div>
