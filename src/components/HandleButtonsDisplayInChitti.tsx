@@ -11,13 +11,13 @@ const HandleButtonsDisplayInChitti = ({
     if (showButton === 0 && showSubmitButtonAfterCreateChitti?.length > 0) {
       return (
         <>
-          <button
+          {/* <button
             type="submit"
             onClick={HandleEmptyChitti}
             className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
           >
             New
-          </button>
+          </button> */}
 
           <button
             type="submit"
@@ -53,13 +53,13 @@ const HandleButtonsDisplayInChitti = ({
     } else {
       return (
         <>
-          <button
+          {/* <button
             type="submit"
             onClick={HandleEmptyChitti}
             className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
           >
             New
-          </button>
+          </button> */}
           <button
             type="submit"
             onClick={HandleCreateChittiSubmit}

@@ -91,14 +91,22 @@ const UseCustomEmeraldChittiHook = () => {
         const duplicates = [];
 
         for (const value of arr) {
-            counts[value] = (counts[value] || 0) + 1;
-            if (counts[value] === 2) {
-                duplicates.push(value);
+            const normalizedValue = value !== null && value !== undefined ? String(value) : '___empty___';
+
+            if (!counts[normalizedValue]) {
+                counts[normalizedValue] = 1;
+            } else if (counts[normalizedValue] === 1) {
+                duplicates.push(normalizedValue);
             }
         }
 
         return duplicates;
     };
+
+    // ... (rest of the code)
+
+
+    // ... (rest of the code)
 
     const findDuplicateIndicesInEmeraldChittiTable = (arr: any) => {
         const indices: any = {};
