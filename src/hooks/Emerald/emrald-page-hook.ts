@@ -33,6 +33,7 @@ import {
   UpdateDocStatusWithSubmittedEmeraldChittiApi,
 } from '../../services/api/general/update-doc-status-emrald-chitti-api';
 import { EmeraldChittiAmendApi } from '../../services/api/Emerald/emerald-chitti-amend-api';
+import UseCustomEmeraldChittiHook from './custom-emerald-chitti-hook';
 
 const UseEmeraldHook = () => {
   const dispatch = useDispatch();
@@ -96,6 +97,8 @@ const UseEmeraldHook = () => {
   const [showSaveButtonForAmendFlow, setShowSaveButtonForAmendFlow] =
     useState<any>(false);
   console.log('ProductItemDataFromStore', ProductItemDataFromStore);
+
+  const { findDuplicateValuesInEmeraldChittiTable, findDuplicateIndicesInEmeraldChittiTable } = UseCustomEmeraldChittiHook();
   useEffect(() => {
     dispatch(getEmeraldChallan(AccessToken?.token));
     dispatch(getClientName(AccessToken?.token));
@@ -327,34 +330,34 @@ const UseEmeraldHook = () => {
     }
   };
 
-  const findDuplicateValues = (arr: any) => {
-    const counts: any = {};
-    const duplicates = [];
+  // const findDuplicateValues = (arr: any) => {
+  //   const counts: any = {};
+  //   const duplicates = [];
 
-    for (const value of arr) {
-      counts[value] = (counts[value] || 0) + 1;
-      if (counts[value] === 2) {
-        duplicates.push(value);
-      }
-    }
+  //   for (const value of arr) {
+  //     counts[value] = (counts[value] || 0) + 1;
+  //     if (counts[value] === 2) {
+  //       duplicates.push(value);
+  //     }
+  //   }
 
-    return duplicates;
-  };
+  //   return duplicates;
+  // };
 
-  const findDuplicateIndices = (arr: any) => {
-    const indices: any = {};
-    const duplicateIndices = [];
+  // const findDuplicateIndices = (arr: any) => {
+  //   const indices: any = {};
+  //   const duplicateIndices = [];
 
-    for (const { a, index } of arr) {
-      if (indices[a] !== undefined) {
-        duplicateIndices.push([indices[a], index]);
-      } else {
-        indices[a] = index;
-      }
-    }
+  //   for (const { a, index } of arr) {
+  //     if (indices[a] !== undefined) {
+  //       duplicateIndices.push([indices[a], index]);
+  //     } else {
+  //       indices[a] = index;
+  //     }
+  //   }
 
-    return duplicateIndices;
-  };
+  //   return duplicateIndices;
+  // };
 
   const HandleCreateEmeraldChittiSubmit: any = async () => {
     console.log('submit create emerald chitti', emeraldChittiTableData);
@@ -365,13 +368,13 @@ const UseEmeraldHook = () => {
       .split('-')
       .reverse()
       .join('-');
-    const duplicateAValues = findDuplicateValues(
+    const duplicateAValues = findDuplicateValuesInEmeraldChittiTable(
       emeraldChittiTableData.map((obj: any) => obj.a)
     );
 
     if (duplicateAValues.length > 0) {
       // Show indices of the rows with duplicate values
-      const duplicateIndices = findDuplicateIndices(
+      const duplicateIndices = findDuplicateIndicesInEmeraldChittiTable(
         emeraldChittiTableData.map((obj: any, index: any) => ({
           a: obj.a,
           index,

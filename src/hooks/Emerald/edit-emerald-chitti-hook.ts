@@ -13,6 +13,7 @@ import {
 import UpdateEmeraldChittiApi from '../../services/api/Emerald/update-emerald-chitti-api';
 import { UpdateDocStatusEmeraldChittiApi } from '../../services/api/general/update-doc-status-emrald-chitti-api';
 import PrintEmeraldChittiApi from '../../services/api/Emerald/print-emerald-chitti-api';
+import UseCustomEmeraldChittiHook from './custom-emerald-chitti-hook';
 
 const UseEditEmeraldChittiHook: any = () => {
   const dispatch = useDispatch();
@@ -57,6 +58,9 @@ const UseEditEmeraldChittiHook: any = () => {
     handleOnFocus,
   }: any = UseEmeraldHook();
 
+
+  const { findDuplicateValuesInEmeraldChittiTable, findDuplicateIndicesInEmeraldChittiTable } = UseCustomEmeraldChittiHook();
+
   useEffect(() => {
     const params: any = {
       token: AccessToken?.token,
@@ -90,6 +94,38 @@ const UseEditEmeraldChittiHook: any = () => {
       .split('-')
       .reverse()
       .join('-');
+    const duplicateAValues = findDuplicateValuesInEmeraldChittiTable(
+      tableData.map((obj: any) => obj.a)
+    );
+
+    if (duplicateAValues.length > 0) {
+      // Show indices of the rows with duplicate values
+      const duplicateIndices = findDuplicateIndicesInEmeraldChittiTable(
+        tableData.map((obj: any, index: any) => ({
+          a: obj.a,
+          index,
+        }))
+      );
+
+      if (duplicateIndices.length > 0) {
+        // Collect unique row numbers with duplicate values
+        const uniqueRowsWithDuplicates: { [key: string]: boolean } = {};
+
+        duplicateIndices.forEach((indices) => {
+          indices.forEach((idx) => {
+            const rowNumber = idx + 1;
+            uniqueRowsWithDuplicates[rowNumber] = true;
+          });
+        });
+
+        const rowIndicesMsg = Object.keys(uniqueRowsWithDuplicates)
+          .map(row => `row ${row}`)
+          .join(', ');
+
+        toast.error(`Duplicate values found in "a" in ${rowIndicesMsg}`);
+        return;
+      }
+    }
 
     const updatedFilterEmeraldChitti = tableData
       .filter((obj: any) =>

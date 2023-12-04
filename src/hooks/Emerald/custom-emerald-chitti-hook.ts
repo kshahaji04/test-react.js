@@ -86,12 +86,37 @@ const UseCustomEmeraldChittiHook = () => {
         // setamountValue(newColumnTotals);
     };
 
+    const findDuplicateValuesInEmeraldChittiTable = (arr: any) => {
+        const counts: any = {};
+        const duplicates = [];
 
-    // console.log("table data set", tableData)
+        for (const value of arr) {
+            counts[value] = (counts[value] || 0) + 1;
+            if (counts[value] === 2) {
+                duplicates.push(value);
+            }
+        }
 
+        return duplicates;
+    };
+
+    const findDuplicateIndicesInEmeraldChittiTable = (arr: any) => {
+        const indices: any = {};
+        const duplicateIndices = [];
+
+        for (const { a, index } of arr) {
+            if (indices[a] !== undefined) {
+                duplicateIndices.push([indices[a], index]);
+            } else {
+                indices[a] = index;
+            }
+        }
+
+        return duplicateIndices;
+    };
 
     console.log("table data set", tableData)
-    return { HandleAddRow, tableData, setTableData }
+    return { HandleAddRow, tableData, setTableData, findDuplicateValuesInEmeraldChittiTable, findDuplicateIndicesInEmeraldChittiTable }
 }
 
 export default UseCustomEmeraldChittiHook;
