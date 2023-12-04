@@ -395,8 +395,9 @@ const UseEmeraldHook = () => {
         const rowIndicesMsg = Object.keys(uniqueRowsWithDuplicates)
           .map(row => `row ${row}`)
           .join(', ');
+        console.log("uniqueRowsWithDuplicates", uniqueRowsWithDuplicates)
 
-        toast.error(`Duplicate values found in "a" in ${rowIndicesMsg}`);
+        toast.error(`Duplicate values found in column "A" in ${rowIndicesMsg}`);
         return;
       }
     }

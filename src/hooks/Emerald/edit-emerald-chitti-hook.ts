@@ -122,7 +122,7 @@ const UseEditEmeraldChittiHook: any = () => {
           .map(row => `row ${row}`)
           .join(', ');
 
-        toast.error(`Duplicate values found in "a" in ${rowIndicesMsg}`);
+        toast.error(`Duplicate values found in column "A" in ${rowIndicesMsg}`);
         return;
       }
     }
