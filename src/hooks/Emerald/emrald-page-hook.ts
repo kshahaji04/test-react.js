@@ -369,7 +369,7 @@ const UseEmeraldHook = () => {
       .reverse()
       .join('-');
     const duplicateAValues = findDuplicateValuesInEmeraldChittiTable(
-      emeraldChittiTableData.map((obj: any) => obj.a)
+      emeraldChittiTableData.map((obj: any) => obj.a && obj.gross_weight)
     );
 
     if (duplicateAValues.length > 0) {
@@ -377,6 +377,7 @@ const UseEmeraldHook = () => {
       const duplicateIndices = findDuplicateIndicesInEmeraldChittiTable(
         emeraldChittiTableData.map((obj: any, index: any) => ({
           a: obj.a,
+          gross_weight: obj.gross_weight,
           index,
         }))
       );

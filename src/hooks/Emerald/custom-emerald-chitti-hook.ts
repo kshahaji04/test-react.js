@@ -93,10 +93,14 @@ const UseCustomEmeraldChittiHook = () => {
         for (const value of arr) {
             const normalizedValue = value !== null && value !== undefined ? String(value) : '___empty___';
 
-            if (!counts[normalizedValue]) {
-                counts[normalizedValue] = 1;
-            } else if (counts[normalizedValue] === 1) {
-                duplicates.push(normalizedValue);
+            if (normalizedValue.trim() !== '') {
+                const lowercaseValue = normalizedValue.toLowerCase();
+
+                counts[lowercaseValue] = (counts[lowercaseValue] || 0) + 1;
+
+                if (counts[lowercaseValue] === 2) {
+                    duplicates.push(lowercaseValue);
+                }
             }
         }
 
