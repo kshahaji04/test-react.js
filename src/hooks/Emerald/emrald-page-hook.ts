@@ -355,6 +355,7 @@ const UseEmeraldHook = () => {
 
     return duplicateIndices;
   };
+
   const HandleCreateEmeraldChittiSubmit: any = async () => {
     console.log('submit create emerald chitti', emeraldChittiTableData);
 
@@ -378,15 +379,25 @@ const UseEmeraldHook = () => {
       );
 
       if (duplicateIndices.length > 0) {
-        // Show indices of the rows with duplicate values
-        const rowIndicesMsg = duplicateIndices
-          .map((indices) => `row ${indices.join(', row ')}`)
+        // Collect unique row numbers with duplicate values
+        const uniqueRowsWithDuplicates: { [key: string]: boolean } = {};
+
+        duplicateIndices.forEach((indices) => {
+          indices.forEach((idx) => {
+            const rowNumber = idx + 1;
+            uniqueRowsWithDuplicates[rowNumber] = true;
+          });
+        });
+
+        const rowIndicesMsg = Object.keys(uniqueRowsWithDuplicates)
+          .map(row => `row ${row}`)
           .join(', ');
 
-        toast.error(`Duplicate values found in  "a" in ${rowIndicesMsg}`);
+        toast.error(`Duplicate values found in "a" in ${rowIndicesMsg}`);
         return;
       }
     }
+
 
     const updatedFilterEmeraldChitti = emeraldChittiTableData
       .filter((obj: any) =>
