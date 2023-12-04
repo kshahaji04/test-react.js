@@ -7,6 +7,8 @@ const HandleButtonsDisplayInChitti = ({
   HandleDeleteChitti,
   HandleEmptyChitti,
 }: any) => {
+
+  console.log(HandleEmptyChitti)
   const HandleButtonsDisplay: any = () => {
     if (showButton === 0 && showSubmitButtonAfterCreateChitti?.length > 0) {
       return (
