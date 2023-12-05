@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import AddClientGroupApi from '../../../../services/api/Master/add-client-group-api';
 import { toast } from 'react-toastify';
 import { getClientGroupList } from '../../../../store/slices/Chitti/get-client-group-list-slice';
-import CreateNewProductData from '../CreateNewProductData';
 import SingleItemAdd from '../SingleItemAdd';
 
 const AddClientGroup = () => {

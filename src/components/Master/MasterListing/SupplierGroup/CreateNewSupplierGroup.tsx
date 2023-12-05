@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { get_access_token } from '../../../../store/slices/auth/token-login-slice';
 import { getSupplierGroupList } from '../../../../store/slices/Master/get-supplier-group-slice';
-import CreateNewProductData from '../CreateNewProductData';
 import CreateNewSupplierGroupApi from '../../../../services/api/Master/create-new-supplier-group-api';
 import SingleItemAdd from '../SingleItemAdd';
 

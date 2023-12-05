@@ -5,7 +5,6 @@ import { get_access_token } from '../../../../store/slices/auth/token-login-slic
 import { toast } from 'react-toastify';
 import AddCategoryApi from '../../../../services/api/Master/add-category-api';
 import { getCategoryList } from '../../../../store/slices/Master/get-category-slice';
-import CreateNewProductData from '../CreateNewProductData';
 import SingleItemAdd from '../SingleItemAdd';
 
 const AddCategory = () => {
