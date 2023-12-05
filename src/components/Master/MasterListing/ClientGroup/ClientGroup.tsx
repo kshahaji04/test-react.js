@@ -36,7 +36,7 @@ const ClientGroup = () => {
               {' '}
               <Tab eventKey="chitti-listing" title="Client Group List">
                 <MasterSingleListingSearch
-                  placeholder="Enter Client group"
+                  placeholder="Client group"
                   HandleSearchInput={HandleSearchInput}
                 />
                 <SingleItemListingInMaster

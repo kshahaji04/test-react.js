@@ -44,8 +44,8 @@ const SubCategoryMaster = () => {
             >
               <Tab eventKey="default-tab" title="Sub Category List">
                 <MasterMultipleListingSearch
-                  placeholder1="Enter Sub Category"
-                  placeholder2="Enter Category"
+                  placeholder1="Sub Category"
+                  placeholder2="Category"
                   handleInputChange1={handleInputChange1}
                   handleInputChange2={handleInputChange2}
                 />

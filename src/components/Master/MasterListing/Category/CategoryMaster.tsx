@@ -34,7 +34,7 @@ const CategoryMaster = () => {
             >
               <Tab eventKey="default-tab" title="Category List">
                 <MasterSingleListingSearch
-                  placeholder="Enter Category"
+                  placeholder="Category"
                   HandleSearchInput={HandleSearchInput}
                 />
                 <SingleItemListingInMaster

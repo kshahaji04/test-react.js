@@ -20,6 +20,7 @@ const UseSubCategoryHook = () => {
     get_subcategory_category
   );
 
+  console.log("subCategoryDataFromStore", subCategoryDataFromStore)
   const [subCategoryList, setSubCategoryList] = useState<any>([]);
   const [subCategoryCategoryData, setSubCategoryCategoryData] = useState<any>(
     []
@@ -50,6 +51,8 @@ const UseSubCategoryHook = () => {
       setSubCategoryCategoryData([]);
     }
   }, [subCategoryCategoryDataFromStore]);
+
+  console.log("subCategoryCategoryData in hoook end", subCategoryCategoryData)
 
   return { subCategoryList, subCategoryCategoryData };
 };

@@ -76,7 +76,7 @@ const AddSupplier = ({ GroupListdata }: any) => {
           <SelectedInputDropdown
             drowpdownlist={GroupListdata}
             // bgColor={bgColor}
-            placeholderValue="Client Group"
+            placeholderValue="Supplier Group"
             selectedDropdownValue={selectedDropdownValue}
             setSelectedDropdownValue={setSelectedDropdownValue}
           />

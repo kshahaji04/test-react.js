@@ -95,7 +95,7 @@ const UseEditEmeraldChittiHook: any = () => {
       .reverse()
       .join('-');
     const duplicateAValues = findDuplicateValuesInEmeraldChittiTable(
-      tableData.map((obj: any) => obj.a)
+      tableData.map((obj: any) => obj.a && obj.gross_weight)
     );
 
     if (duplicateAValues.length > 0) {
@@ -103,6 +103,7 @@ const UseEditEmeraldChittiHook: any = () => {
       const duplicateIndices = findDuplicateIndicesInEmeraldChittiTable(
         tableData.map((obj: any, index: any) => ({
           a: obj.a,
+          gross_weight: obj.gross_weight,
           index,
         }))
       );
@@ -121,6 +122,7 @@ const UseEditEmeraldChittiHook: any = () => {
         const rowIndicesMsg = Object.keys(uniqueRowsWithDuplicates)
           .map(row => `row ${row}`)
           .join(', ');
+        console.log("uniqueRowsWithDuplicates", uniqueRowsWithDuplicates)
 
         toast.error(`Duplicate values found in column "A" in ${rowIndicesMsg}`);
         return;

@@ -46,8 +46,8 @@ const ClientName = () => {
             >
               <Tab eventKey="default-tab" title="Client Name List">
                 <MasterMultipleListingSearch
-                  placeholder1="Enter Client name"
-                  placeholder2="Enter Client group"
+                  placeholder1="Client name"
+                  placeholder2="Client group"
                   handleInputChange1={handleInputChange1}
                   handleInputChange2={handleInputChange2}
                 />

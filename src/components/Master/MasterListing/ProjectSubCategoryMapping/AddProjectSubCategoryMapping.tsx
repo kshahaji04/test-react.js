@@ -7,9 +7,12 @@ import { get_access_token } from '../../../../store/slices/auth/token-login-slic
 import AddProjectSubCategoryMappingApi from '../../../../services/api/Master/add-project-subCategory-mapping-api';
 import { getProjectSubCategoryMapping } from '../../../../store/slices/Master/get-project-subcategory-mapping-slice';
 
-const AddProjectSubCategoryMapping = ({ subCategoryList }: any) => {
+const AddProjectSubCategoryMapping = ({ subCategoryCategoryData }: any) => {
   const dispatch = useDispatch();
   const [project, setProject] = useState<any>('');
+
+
+  console.log("subCategoryCategoryData list", subCategoryCategoryData)
 
   const [selectedStoneValue, setSelectedStoneValue] = useState<any>('');
   const [selectedPlainValue, setSelectedPlainValue] = useState<any>('');
@@ -39,7 +42,6 @@ const AddProjectSubCategoryMapping = ({ subCategoryList }: any) => {
       } else {
         toast.error('Project sub category mapping already exist');
       }
-
       setError('');
     }
   };
@@ -73,7 +75,7 @@ const AddProjectSubCategoryMapping = ({ subCategoryList }: any) => {
       <div className="input-group w-50 master-input-field">
         <div className="w-100 ">
           <SelectedInputDropdown
-            drowpdownlist={subCategoryList}
+            drowpdownlist={subCategoryCategoryData?.length > 0 && subCategoryCategoryData !== null && subCategoryCategoryData.map((data: any) => data.name)}
             // placeholderValue="Group"
             selectedDropdownValue={selectedStoneValue}
             setSelectedDropdownValue={setSelectedStoneValue}
@@ -87,7 +89,7 @@ const AddProjectSubCategoryMapping = ({ subCategoryList }: any) => {
       <div className="input-group w-50 master-input-field">
         <div className="w-100 ">
           <SelectedInputDropdown
-            drowpdownlist={subCategoryList}
+            drowpdownlist={subCategoryCategoryData?.length > 0 && subCategoryCategoryData !== null && subCategoryCategoryData.map((data: any) => data.name)}
             // placeholderValue="Group"
             selectedDropdownValue={selectedPlainValue}
             setSelectedDropdownValue={setSelectedPlainValue}

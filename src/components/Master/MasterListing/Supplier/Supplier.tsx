@@ -51,8 +51,8 @@ const Supplier = () => {
             >
               <Tab eventKey="default-tab" title="Supplier List">
                 <MasterMultipleListingSearch
-                  placeholder1="Enter Supplier name"
-                  placeholder2="Enter supplier group"
+                  placeholder1="Supplier name"
+                  placeholder2="supplier group"
                   handleInputChange1={handleInputChange1}
                   handleInputChange2={handleInputChange2}
                 />

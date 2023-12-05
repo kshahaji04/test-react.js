@@ -10,9 +10,9 @@ const ProjectSubCategoryMappingMaster = () => {
   const { ProjectSubCategoryMappingList }: any =
     UseProjectSubCategoryMappingHook();
 
-  const { subCategoryList } = UseSubCategoryHook();
+  const { subCategoryCategoryData } = UseSubCategoryHook();
   const showThirdInputField: any = useRef(true);
-  console.log('ProjectSubCategoryMappingList', subCategoryList);
+  console.log('ProjectSubCategoryMappingList', subCategoryCategoryData);
 
   const [inputProject, setInputProject] = useState('');
   const [inputStone, setInputStone] = useState('');
@@ -31,16 +31,16 @@ const ProjectSubCategoryMappingMaster = () => {
 
   const filteredList: any =
     ProjectSubCategoryMappingList?.length > 0 &&
-    ProjectSubCategoryMappingList !== null &&
-    (inputProject || inputStone || inputPlain)
+      ProjectSubCategoryMappingList !== null &&
+      (inputProject || inputStone || inputPlain)
       ? ProjectSubCategoryMappingList.filter(
-          (data: any) =>
-            data?.project
-              ?.toLowerCase()
-              ?.includes(inputProject?.toLowerCase()) &&
-            data?.stone?.toLowerCase()?.includes(inputStone?.toLowerCase()) &&
-            data?.plain?.toLowerCase()?.includes(inputPlain?.toLowerCase())
-        )
+        (data: any) =>
+          data?.project
+            ?.toLowerCase()
+            ?.includes(inputProject?.toLowerCase()) &&
+          data?.stone?.toLowerCase()?.includes(inputStone?.toLowerCase()) &&
+          data?.plain?.toLowerCase()?.includes(inputPlain?.toLowerCase())
+      )
       : ProjectSubCategoryMappingList;
   console.log(
     'ProjectSubCategoryMappingList in tsx',
@@ -62,9 +62,9 @@ const ProjectSubCategoryMappingMaster = () => {
                 title="Project Sub Category Mapping List"
               >
                 <MasterMultipleListingSearch
-                  placeholder1="Enter Project"
-                  placeholder2="Enter Stone"
-                  placeholder3="Enter plain"
+                  placeholder1="Project"
+                  placeholder2="Stone"
+                  placeholder3="plain"
                   showThirdInputField={showThirdInputField}
                   handleInputChange1={handleInputChange1}
                   handleInputChange2={handleInputChange2}
@@ -79,7 +79,7 @@ const ProjectSubCategoryMappingMaster = () => {
                 title="Add Project Sub Category Mapping"
               >
                 <AddProjectSubCategoryMapping
-                  subCategoryList={subCategoryList}
+                  subCategoryCategoryData={subCategoryCategoryData}
                 />
               </Tab>
             </Tabs>

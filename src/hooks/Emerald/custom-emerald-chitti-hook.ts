@@ -85,47 +85,52 @@ const UseCustomEmeraldChittiHook = () => {
         // // Update the total values
         // setamountValue(newColumnTotals);
     };
-
     const findDuplicateValuesInEmeraldChittiTable = (arr: any) => {
         const counts: any = {};
         const duplicates = [];
 
-        for (const value of arr) {
-            const normalizedValue = value !== null && value !== undefined ? String(value) : '___empty___';
+        for (const obj of arr) {
+            const keyA = obj.a !== null && obj.a !== undefined ? String(obj.a) : '___empty___';
+            const grossWeight = obj.gross_weight !== null && obj.gross_weight !== undefined
+                ? String(obj.gross_weight)
+                : '___empty___';
 
-            if (normalizedValue.trim() !== '') {
-                const lowercaseValue = normalizedValue.toLowerCase();
+            // Combine "a" value and gross_weight value for comparison
+            const combinedValue = `${keyA}_${grossWeight}`;
 
-                counts[lowercaseValue] = (counts[lowercaseValue] || 0) + 1;
+            counts[combinedValue] = (counts[combinedValue] || 0) + 1;
 
-                if (counts[lowercaseValue] === 2) {
-                    duplicates.push(lowercaseValue);
-                }
+            if (counts[combinedValue] === 2) {
+                duplicates.push(combinedValue);
             }
         }
 
         return duplicates;
     };
 
-    // ... (rest of the code)
-
-
-    // ... (rest of the code)
-
     const findDuplicateIndicesInEmeraldChittiTable = (arr: any) => {
         const indices: any = {};
         const duplicateIndices = [];
 
-        for (const { a, index } of arr) {
-            if (indices[a] !== undefined) {
-                duplicateIndices.push([indices[a], index]);
+        for (const { a, gross_weight, index } of arr) {
+            const keyA = a !== null && a !== undefined ? String(a) : '___empty___';
+            const normalizedValue = gross_weight !== null && gross_weight !== undefined
+                ? String(gross_weight)
+                : '___empty___';
+
+            // Combine "a" value and gross_weight value for comparison
+            const combinedValue = `${keyA}_${normalizedValue}`;
+
+            if (indices[combinedValue] !== undefined) {
+                duplicateIndices.push([indices[combinedValue], index]);
             } else {
-                indices[a] = index;
+                indices[combinedValue] = index;
             }
         }
 
         return duplicateIndices;
-    };
+    }
+
 
     console.log("table data set", tableData)
     return { HandleAddRow, tableData, setTableData, findDuplicateValuesInEmeraldChittiTable, findDuplicateIndicesInEmeraldChittiTable }
