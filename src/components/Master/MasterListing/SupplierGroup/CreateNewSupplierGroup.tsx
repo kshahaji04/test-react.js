@@ -6,6 +6,7 @@ import { get_access_token } from '../../../../store/slices/auth/token-login-slic
 import { getSupplierGroupList } from '../../../../store/slices/Master/get-supplier-group-slice';
 import CreateNewProductData from '../CreateNewProductData';
 import CreateNewSupplierGroupApi from '../../../../services/api/Master/create-new-supplier-group-api';
+import SingleItemAdd from '../SingleItemAdd';
 
 const CreateNewSupplierGroup = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const CreateNewSupplierGroup = () => {
   };
   return (
     <div>
-      <CreateNewProductData
+      <SingleItemAdd
         inputValue={inputValue}
         HandleInputValue={HandleInputValue}
         error={error}

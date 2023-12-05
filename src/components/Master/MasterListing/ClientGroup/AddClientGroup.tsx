@@ -6,6 +6,7 @@ import AddClientGroupApi from '../../../../services/api/Master/add-client-group-
 import { toast } from 'react-toastify';
 import { getClientGroupList } from '../../../../store/slices/Chitti/get-client-group-list-slice';
 import CreateNewProductData from '../CreateNewProductData';
+import SingleItemAdd from '../SingleItemAdd';
 
 const AddClientGroup = () => {
   const dispatch = useDispatch();
@@ -45,12 +46,11 @@ const AddClientGroup = () => {
   };
   return (
     <>
-      <CreateNewProductData
+      <SingleItemAdd
         inputValue={inputValue}
         HandleInputValue={HandleInputValue}
         error={error}
         HandleSubmit={HandleSubmit}
-        // HandleKeyDownFun={HandleKeyDownFun}
       />
     </>
   );

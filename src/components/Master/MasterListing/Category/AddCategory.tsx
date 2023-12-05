@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import AddCategoryApi from '../../../../services/api/Master/add-category-api';
 import { getCategoryList } from '../../../../store/slices/Master/get-category-slice';
 import CreateNewProductData from '../CreateNewProductData';
+import SingleItemAdd from '../SingleItemAdd';
 
 const AddCategory = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const AddCategory = () => {
   };
   return (
     <>
-      <CreateNewProductData
+      <SingleItemAdd
         inputValue={inputValue}
         HandleInputValue={HandleInputValue}
         error={error}
