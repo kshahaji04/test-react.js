@@ -338,6 +338,8 @@ const UseChittiHook = () => {
 
     const filteredChallanTable: any = CheckObjectHasValues();
 
+    console.log("filter challan table", filteredChallanTable)
+
     const CheckObjectHasValuesInHuid = () => {
       return narrationTableData.filter((item: any) => {
         return (
@@ -358,8 +360,8 @@ const UseChittiHook = () => {
       errMsgList.push('Challan Table');
     }
     const hasSubCategoryKey =
-      challanTableData?.length > 0 &&
-      challanTableData.every(
+      filteredChallanTable?.length > 0 &&
+      filteredChallanTable.every(
         (obj: any) => 'sub_category' in obj && obj.sub_category !== ''
       );
 
