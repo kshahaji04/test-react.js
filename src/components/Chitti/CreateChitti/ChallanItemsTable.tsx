@@ -16,6 +16,7 @@ const ChallanItemsTable = ({
     sub_category: '',
     category: '',
     gross_weight: 0,
+    less_wt: 0,
     net_weight: 0,
     amount: 0,
   });
@@ -48,6 +49,7 @@ const ChallanItemsTable = ({
       id: tableData.length + 1,
       sub_category: '',
       gross_weight: 0,
+      less_wt: 0,
       net_weight: 0,
       amount: 0,
     };
@@ -59,6 +61,7 @@ const ChallanItemsTable = ({
     const newColumnTotals = tableData.reduce(
       (totals: any, row: any) => {
         totals.gross_weight += row.gross_weight;
+        totals.less_wt += row.less_wt;
         totals.net_weight += row.net_weight;
         totals.amount += row.amount;
         return totals;
@@ -68,6 +71,7 @@ const ChallanItemsTable = ({
 
     // Add the values of the new row to the totals
     newColumnTotals.gross_weight += newRow.gross_weight;
+    newColumnTotals.less_wt += newRow.less_wt;
     newColumnTotals.net_weight += newRow.net_weight;
     newColumnTotals.amount += newRow.amount;
 
@@ -98,11 +102,12 @@ const ChallanItemsTable = ({
     const newColumnTotals = tableData.reduce(
       (totals: any, row: any) => {
         totals.gross_weight += row.gross_weight;
+        totals.less_wt += row.less_wt;
         totals.net_weight += row.net_weight;
         totals.amount += row.amount;
         return totals;
       },
-      { gross_weight: 0, net_weight: 0, amount: 0 }
+      { gross_weight: 0, less_wt: 0, net_weight: 0, amount: 0 }
     );
 
     setamountValue(newColumnTotals);
@@ -113,11 +118,12 @@ const ChallanItemsTable = ({
     const newColumnTotals = tableData.reduce(
       (totals: any, row: any) => {
         totals.gross_weight += row.gross_weight;
+        totals.less_wt += row.less_wt;
         totals.net_weight += row.net_weight;
         totals.amount += row.amount;
         return totals;
       },
-      { gross_weight: 0, net_weight: 0, amount: 0 }
+      { gross_weight: 0, less_wt: 0, net_weight: 0, amount: 0 }
     );
 
     setamountValue(newColumnTotals);
@@ -140,24 +146,62 @@ const ChallanItemsTable = ({
   };
 
   const HandleGrossWeightValue = (e: any, id: any) => {
-    console.log('gross', e.target.value);
-
     const inputValue = parseFloat(e.target.value);
-    // const formattedValue = inputValue.toFixed(3);
-    const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, gross_weight: inputValue } : row
-    );
-    setTableData(updatedData);
-    setStateForDocStatus(true);
+    const row = tableData.find((row: any) => row.id === id);
+
+    if (row) {
+      const lessWeight = row.less_wt;
+      const netWeight = inputValue - lessWeight;
+
+
+      const updatedData = tableData.map((row: any) =>
+        row.id === id ? { ...row, gross_weight: inputValue, net_weight: netWeight } : row
+      );
+
+      setTableData(updatedData);
+      setStateForDocStatus(true);
+    }
+  };
+
+  // ...
+
+  const HandleLessWeightValue = (e: any, id: any) => {
+    const inputValue = parseFloat(e.target.value);
+    const row = tableData.find((row: any) => row.id === id);
+
+    if (row) {
+      const grossWeight = row.gross_weight;
+      const netWeight = grossWeight - inputValue;
+      // const grossWeightUpdated = inputValue + row.net_weight
+
+      const updatedData = tableData.map((row: any) =>
+        row.id === id ? { ...row, net_weight: netWeight, less_wt: inputValue } : row
+      );
+
+      setTableData(updatedData);
+      setStateForDocStatus(true);
+    }
   };
 
   const HandleNetWeightValue = (e: any, id: any) => {
-    const updatedData = tableData.map((row: any) =>
-      row.id === id ? { ...row, net_weight: parseFloat(e.target.value) } : row
-    );
-    setTableData(updatedData);
-    setStateForDocStatus(true);
+    const inputValue = parseFloat(e.target.value);
+    const row = tableData.find((row: any) => row.id === id);
+
+    if (row) {
+      const grossWeight = row.gross_weight;
+      const lessWeight = grossWeight - inputValue;
+      // const grossWeightUpdated = row.less_wt + inputValue
+
+      const updatedData = tableData.map((row: any) =>
+        row.id === id ? { ...row, less_wt: lessWeight, net_weight: inputValue } : row
+      );
+
+      setTableData(updatedData);
+      setStateForDocStatus(true);
+    }
   };
+  // ...
+
 
   const HandleAmountValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
@@ -186,6 +230,7 @@ const ChallanItemsTable = ({
                   <span className="text-danger">*</span>
                 </th>
                 <th scope="col">Gross Weight</th>
+                <th scope="col">Less Weight</th>
                 <th scope="col">Net Weight</th>
                 <th scope="col">Amount</th>
                 <th scope="col"></th>
@@ -231,6 +276,18 @@ const ChallanItemsTable = ({
                         defaultValue={row.gross_weight}
                         value={row.gross_weight}
                         onChange={(e) => HandleGrossWeightValue(e, row.id)}
+                        readOnly={readOnly === true ? true : false}
+                      />
+                    </td>
+                    <td className="table-data-input">
+                      <input
+                        type="number"
+                        className="form-control custom-input-field-t text-end"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-sm"
+                        defaultValue={row.less_wt}
+                        value={row.less_wt}
+                        onChange={(e) => HandleLessWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
                     </td>
@@ -295,6 +352,16 @@ const ChallanItemsTable = ({
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
                     value={amountValue.gross_weight.toFixed(3)}
+                    readOnly
+                  />
+                </td>
+                <td className="py-1 px-2">
+                  <input
+                    type="number"
+                    className="form-control custom-input-field-t p-0 text-end"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm"
+                    value={amountValue.less_wt.toFixed(3)}
                     readOnly
                   />
                 </td>
