@@ -171,11 +171,14 @@ const ChallanItemsTable = ({
 
     if (row) {
       const grossWeight = row.gross_weight;
-      const netWeight = grossWeight - inputValue;
+      // const netWeight = grossWeight - inputValue;
       // const grossWeightUpdated = inputValue + row.net_weight
 
+      // const updatedData = tableData.map((row: any) =>
+      //   row.id === id ? { ...row, net_weight: netWeight, less_wt: inputValue } : row
+      // );
       const updatedData = tableData.map((row: any) =>
-        row.id === id ? { ...row, net_weight: netWeight, less_wt: inputValue } : row
+        row.id === id ? { ...row, less_wt: inputValue } : row
       );
 
       setTableData(updatedData);
