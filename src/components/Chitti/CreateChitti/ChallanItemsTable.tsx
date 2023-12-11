@@ -170,7 +170,7 @@ const ChallanItemsTable = ({
     const row = tableData.find((row: any) => row.id === id);
 
     if (row) {
-      const grossWeight = row.gross_weight;
+      // const grossWeight = row.gross_weight;
       // const netWeight = grossWeight - inputValue;
       // const grossWeightUpdated = inputValue + row.net_weight
 
