@@ -1,9 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "../../Config/api-config";
 
-
 const GetTokenLoginApi: any = async (values: any) => {
-
   console.log("token req", values);
   const user: any = values.username;
   const password: any = encodeURIComponent(values.password);
@@ -12,21 +10,24 @@ const GetTokenLoginApi: any = async (values: any) => {
   const entity: any = "access_token";
   let response: any;
 
-  const params: any = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}&usr=${user}&pwd=${password}`
   const config = {
     headers: {
       Accept: "application/json",
     },
   };
 
+  const keyToUse = user?.includes("@") ? "usr" : "username";
 
-  await axios.post(`${BASE_URL}${params}`, undefined, config).then((res: any) => {
+  const params: any = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}&${keyToUse}=${user}&pwd=${password}`;
+
+  try {
+    const res = await axios.post(`${BASE_URL}${params}`, undefined, config);
     response = res?.data?.message;
-  }).catch((err: any) => {
-    console.log(err)
-  })
+  } catch (err) {
+    console.log(err);
+  }
 
-  return response
+  return response;
 };
 
 export default GetTokenLoginApi;
