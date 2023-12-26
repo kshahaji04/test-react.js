@@ -36,6 +36,7 @@
     padding: 2px !important;
 }
 
+
 @media only screen and (min-width: 1280px) {
     .custom-select-container {
         width: 36%;
@@ -82,7 +83,14 @@
     .custom-select-emerald-category {
         width: 18%;
     }
+
 }
+
+
+.emerald-chitti-table-row {
+    height: 174px;
+}
+
 
 @media only screen and (max-width: 777px) {
     .custom-select-container {

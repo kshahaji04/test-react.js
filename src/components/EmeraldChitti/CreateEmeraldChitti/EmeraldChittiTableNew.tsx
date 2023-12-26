@@ -13,7 +13,7 @@ const EmeraldChittiTableNew = ({
   setStateForDocStatus,
 
 }: any) => {
-  console.log('readonly', readOnly);
+  // const [] = useState<any>();
   const ShowCategoryDropdown: any = useRef<any>(true);
   const [calculationRow, setCalculationRow] = useState({
     gross_weight: 0,
@@ -197,7 +197,7 @@ const EmeraldChittiTableNew = ({
                   tableData !== null &&
                   tableData.map((row: any) => (
                     <>
-                      <tr key={row.idx}>
+                      <tr key={row.idx} >
                         <td className="emerald_chitti_table_td">{row.idx}</td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
@@ -443,7 +443,7 @@ const EmeraldChittiTableNew = ({
 
                           />
                         </td>
-                        <td className="emerald_chitti_table_td">
+                        <td className="emerald_chitti_table_td position-relative">
                           <CustomDropdownForTable
                             drowpdownlist={subCategoryList}
                             readOnly={readOnly}
@@ -453,7 +453,7 @@ const EmeraldChittiTableNew = ({
                             }
                             data={
                               tableData.find(
-                                (rowData: any) => rowData.id === row.id
+                                (rowData: any) => rowData.idx === row.idx
                               )?.sub_category
                             }
                             dropdownWidth={'true'}

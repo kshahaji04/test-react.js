@@ -3,7 +3,7 @@ import InputFieldComponent from './InputFieldComponent';
 const EmeraldChittiTablereadOnlyRow = ({ calculationRow }: any) => {
   return (
     <>
-      <tr>
+      <tr className='emerald-chitti-table-row'>
         <td className="emerald_chitti_table_td"></td>
         <td className="emerald_chitti_table_td">
           <InputFieldComponent value={''} readOnly={'true'} />
