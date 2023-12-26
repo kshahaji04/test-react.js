@@ -10,6 +10,8 @@ const NarrationTable = ({
   setTotalHuidWeightOfHuidTable,
   readOnly,
 }: any) => {
+
+  console.log("product list", productList)
   const [totalAmountValue, setTotalAmountValue] = useState<any>({
     product: '',
     huid_pieces: 0,
@@ -153,7 +155,7 @@ const NarrationTable = ({
                 <div className="h-25 custom-select-huid-container">
                   <div className="dropdown-input-container">
                     <CustomDropdownForTable
-                      drowpdownlist={productList}
+                      drowpdownlist={productList?.length > 0 && productList !== null && productList.map((huidProduct: any) => huidProduct.title)}
                       data={row.product}
                       key={row.id}
                       rowId={row.id}

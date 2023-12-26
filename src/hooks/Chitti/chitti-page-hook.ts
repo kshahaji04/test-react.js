@@ -127,6 +127,8 @@ const UseChittiHook = () => {
   }, [SubCategoryDataFromStore]);
 
   useEffect(() => {
+
+    console.log("product list from store", ProductListDataFromStore)
     if (
       ProductListDataFromStore?.data?.length > 0 &&
       ProductListDataFromStore?.data !== null
@@ -426,7 +428,7 @@ const UseChittiHook = () => {
           }
 
           if (CreateChittiApiRes?.data?.message?.msg === 'success') {
-            toast.success('Chitti Created');
+            toast.success('Chitti Created', CreateChittiApiRes);
             navigate(`${CreateChittiApiRes?.data?.message?.data}`);
 
             await UpdateDocStatusChallanApi(

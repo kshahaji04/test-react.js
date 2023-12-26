@@ -45,6 +45,8 @@ const EditChallanChitti = () => {
   // const [showSaveButtonForAmendFlow, setShowSaveButtonForAmendFlow] =
   //   useState<any>(false);
 
+  console.log("stateForDocStatus in button section", stateForDocStatus, showButton)
+
   const HandleBackButton = () => {
     navigate(-1);
   };
@@ -160,7 +162,7 @@ const EditChallanChitti = () => {
             {challanDetail?.length > 0 &&
               challanDetail !== null &&
               challanDetail[0]?.date ===
-                new Date()?.toISOString()?.split('T')[0] && (
+              new Date()?.toISOString()?.split('T')[0] && (
                 <>
                   {showButton === 2 && showSaveButtonForAmendFlow === false && (
                     <>
@@ -204,49 +206,49 @@ const EditChallanChitti = () => {
       <div>
         {challanDetail?.length > 0 && challanDetail !== null
           ? challanDetail.map((data: any) => {
-              console.log('default data challan', data);
-              return (
-                <>
-                  <CreateChittiForm
-                    defaultData={data}
-                    HandleDateChange={HandleDateChange}
-                    selectedDropdownValue={selectedDropdownValue}
-                    clientNameList={clientNameList}
-                    setSelectedDropdownValue={setSelectedDropdownValue}
-                    HandleGoldRate={HandleGoldRate}
-                    HandleRemarks={HandleRemarks}
-                    clientGroupList={clientGroupList}
-                    setStateForDocStatus={setStateForDocStatus}
-                    setRemarks={setRemarks}
-                    setGoldRate={setGoldRate}
-                    readOnly={readOnly}
-                  />
-                  <ChallanItemsTable
-                    defaultData={data?.challan_table}
-                    tableData={tableData}
-                    setTableData={setTableData}
-                    subCategoryList={subCategoryList}
-                    setStateForDocStatus={setStateForDocStatus}
-                    setTotalGrossWeightOfChallanTable={
-                      setTotalGrossWeightOfChallanTable
-                    }
-                    setCheckGrossAndNetWeight={setCheckGrossAndNetWeight}
-                    readOnly={readOnly}
-                  />
-                  <NarrationTable
-                    defaultData={data?.narrations}
-                    narrationTableData={narrationTableData}
-                    setNarrationTableData={setNarrationTableData}
-                    productList={productList}
-                    setStateForDocStatus={setStateForDocStatus}
-                    setTotalHuidWeightOfHuidTable={
-                      setTotalHuidWeightOfHuidTable
-                    }
-                    readOnly={readOnly}
-                  />
-                </>
-              );
-            })
+            console.log('default data challan', data);
+            return (
+              <>
+                <CreateChittiForm
+                  defaultData={data}
+                  HandleDateChange={HandleDateChange}
+                  selectedDropdownValue={selectedDropdownValue}
+                  clientNameList={clientNameList}
+                  setSelectedDropdownValue={setSelectedDropdownValue}
+                  HandleGoldRate={HandleGoldRate}
+                  HandleRemarks={HandleRemarks}
+                  clientGroupList={clientGroupList}
+                  setStateForDocStatus={setStateForDocStatus}
+                  setRemarks={setRemarks}
+                  setGoldRate={setGoldRate}
+                  readOnly={readOnly}
+                />
+                <ChallanItemsTable
+                  defaultData={data?.challan_table}
+                  tableData={tableData}
+                  setTableData={setTableData}
+                  subCategoryList={subCategoryList}
+                  setStateForDocStatus={setStateForDocStatus}
+                  setTotalGrossWeightOfChallanTable={
+                    setTotalGrossWeightOfChallanTable
+                  }
+                  setCheckGrossAndNetWeight={setCheckGrossAndNetWeight}
+                  readOnly={readOnly}
+                />
+                <NarrationTable
+                  defaultData={data?.narrations}
+                  narrationTableData={narrationTableData}
+                  setNarrationTableData={setNarrationTableData}
+                  productList={productList}
+                  setStateForDocStatus={setStateForDocStatus}
+                  setTotalHuidWeightOfHuidTable={
+                    setTotalHuidWeightOfHuidTable
+                  }
+                  readOnly={readOnly}
+                />
+              </>
+            );
+          })
           : ''}
       </div>
     </div>

@@ -87,12 +87,13 @@ const UseEditChallanChitti: any = () => {
   const HandleUpdateChallanSubmit = async () => {
     console.log('narration update', narrationTableData);
     const isHUIDHasData = narrationTableData.map((obj: any) => {
-      if (Object.keys(obj).length === 1 && obj.hasOwnProperty('id')) {
+      if (obj.hasOwnProperty('product')) {
         return { ...obj, huid_pieces: 0, huid_weight: 0 };
       } else {
         return obj;
       }
     });
+    console.log("filter huid table", isHUIDHasData)
 
     const CheckObjectHasValuesInHuid = () => {
       return isHUIDHasData.filter((item: any) => {
@@ -104,7 +105,9 @@ const UseEditChallanChitti: any = () => {
         );
       });
     };
+
     const filteredHuidTable: any = CheckObjectHasValuesInHuid();
+    console.log("filter huid table after check", filteredHuidTable)
 
     const CheckObjectHasValues = () => {
       return tableData.filter((item: any) => {
@@ -171,9 +174,10 @@ const UseEditChallanChitti: any = () => {
           };
           dispatch(getSpecificChittiChallan(params));
         }, 300);
+
         setTimeout(() => {
           setStateForDocStatus(false);
-        }, 400);
+        }, 600);
       } else {
         toast.error('Failed to Update chitti');
       }
