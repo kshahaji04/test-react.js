@@ -18,7 +18,8 @@ const SearchListingTable = ({
             type="date"
             name="submitted_date"
             id="submitted_date"
-            className="form-control input-fields custom-input-field "
+            className="form-control  custom-input-field px-1"
+            style={{ backgroundColor: '#E0E1F5' }}
             value={searchInputValues?.submitted_date}
             onChange={HandleSearchInput}
           />
@@ -30,7 +31,7 @@ const SearchListingTable = ({
             name="current_date"
             id="current_date"
             className="form-control custom-input-field px-2"
-            style={{ backgroundColor: "#E0E1F5" }}
+            style={{ backgroundColor: '#E0E1F5' }}
             value={searchInputValues?.current_date}
             onChange={HandleSearchInput}
           />
@@ -61,8 +62,8 @@ const SearchListingTable = ({
             placeholderValue="Client Name"
             selectedDropdownValue={searchClientName}
             setSelectedDropdownValue={setSearchclientName}
-          // clientGroupList={clientGroupList}
-          // HandleClientGroup={HandleClientGroup}
+            // clientGroupList={clientGroupList}
+            // HandleClientGroup={HandleClientGroup}
           />
         </div>
         <div className="col-md-2 my-lg-0 mb-lg-0 mb-3">
