@@ -36,8 +36,22 @@
     padding: 2px !important;
 }
 
+@media only screen and (min-width: 1281px) {
+    .custom-select-container {
+        width: 36%;
+    }
 
-@media only screen and (min-width: 1280px) {
+    .custom-select-huid-container {
+        width: 45%;
+    }
+
+    .custom-select-emerald-category {
+        width: 17%;
+    }
+
+}
+
+@media only screen and (max-width: 1280px) {
     .custom-select-container {
         width: 36%;
     }
@@ -125,7 +139,7 @@
 
 @media only screen and (max-width: 500px) {
     .custom-select-container {
-        width: 39% !important;
+        width: 29% !important;
     }
 
     .custom-select-huid-container {
@@ -135,7 +149,7 @@
 
 @media only screen and (max-width: 420px) {
     .custom-select-container {
-        width: 33% !important;
+        width: 23% !important;
     }
 
     .custom-select-huid-container {

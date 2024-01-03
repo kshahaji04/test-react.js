@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../../Config/api-config';
+import { BASE_URL } from '../../config/api-config';
 
 const UpdateChittiApi = async (request: any) => {
   console.log('create chitti req', request);

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../../Config/api-config';
+import { BASE_URL } from '../../config/api-config';
 
 export const challanAmendApi: any = async (request: any) => {
   let response: any;

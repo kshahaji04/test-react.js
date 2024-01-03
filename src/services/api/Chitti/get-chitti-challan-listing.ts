@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../../Config/api-config';
+import { BASE_URL } from '../../config/api-config';
 
 const GetChallanList = async (token: any) => {
   console.log('tokennnn', token);
