@@ -22,7 +22,7 @@ const ListingTable = ({ tableListingData }: any) => {
   const AccessToken: any = useSelector(get_access_token);
 
   const [headingData, setHeadingData] = useState<any>('');
-  const [tableViewData, setTableViewData] = useState<any>(20);
+  const [tableViewData, setTableViewData] = useState<any>(5);
 
   const HandleTableViewRows: any = (data: any) => {
     setTableViewData(data);
@@ -121,14 +121,6 @@ const ListingTable = ({ tableListingData }: any) => {
   const TableHeading: any = () => {
     return (
       <>
-        {/* {headingData?.length > 0 && headingData !== null && (
-          <th
-            className="text-uppercase text-center table-heading-sr-no"
-            scope="col"
-          >
-            Sr No
-          </th>
-        )} */}
 
         {headingData?.length > 0 &&
           headingData !== null &&
@@ -175,12 +167,12 @@ const ListingTable = ({ tableListingData }: any) => {
                               {v !== 'docstatus'
                                 ? data[v]
                                 : data[v] === 0
-                                ? 'Draft'
-                                : data[v] === 1
-                                ? 'Submitted'
-                                : data[v] === 2
-                                ? 'Cancel'
-                                : data[v]}
+                                  ? 'Draft'
+                                  : data[v] === 1
+                                    ? 'Submitted'
+                                    : data[v] === 2
+                                      ? 'Cancel'
+                                      : data[v]}
                             </td>
                           );
                         }
@@ -257,13 +249,13 @@ const ListingTable = ({ tableListingData }: any) => {
                             <div className="col-lg-2">
                               {data?.date ===
                                 new Date()?.toISOString()?.split('T')[0] && (
-                                <NavLink
-                                  to={`${data.name}`}
-                                  className="button-section-text text-info "
-                                >
-                                  Amend
-                                </NavLink>
-                              )}
+                                  <NavLink
+                                    to={`${data.name}`}
+                                    className="button-section-text text-info "
+                                  >
+                                    Amend
+                                  </NavLink>
+                                )}
                             </div>
 
                             <div className="col-lg-2">
@@ -318,12 +310,19 @@ const ListingTable = ({ tableListingData }: any) => {
           </thead>
           <tbody>{TableBodyData()}</tbody>
         </table>
-        {tableListingData?.length > 20 && tableListingData !== null && (
+        {tableListingData?.length > 5 && tableListingData !== null && (
           <div
             className="btn-group mr-2 my-2 mb-4"
             role="group"
             aria-label="Second group"
           >
+            <button
+              type="button"
+              className="btn btn-primary  py-0"
+              onClick={() => HandleTableViewRows(5)}
+            >
+              5
+            </button>
             <button
               type="button"
               className="btn btn-primary  py-0"

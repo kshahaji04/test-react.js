@@ -24,14 +24,26 @@ const SearchListingTable = ({
           />
         </div>
         <div className="col-lg-2 col-md-3 ">
-          <label className="text-secondary">Current Date</label>
+          <label className="text-secondary">From Date</label>
           <input
             type="date"
-            name="current_date"
-            id="current_date"
+            name="from_date"
+            id="from_date"
             className="form-control custom-input-field px-2"
             style={{ backgroundColor: "#E0E1F5" }}
-            value={searchInputValues?.current_date}
+            value={searchInputValues?.from_date}
+            onChange={HandleSearchInput}
+          />
+        </div>
+        <div className="col-lg-2 col-md-3 ">
+          <label className="text-secondary">To Date</label>
+          <input
+            type="date"
+            name="to_date"
+            id="to_date"
+            className="form-control custom-input-field px-2"
+            style={{ backgroundColor: "#E0E1F5" }}
+            value={searchInputValues?.to_date}
             onChange={HandleSearchInput}
           />
         </div>

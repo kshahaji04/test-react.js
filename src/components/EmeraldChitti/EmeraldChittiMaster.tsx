@@ -39,11 +39,12 @@ const EmeraldChittiMaster = () => {
   // const { HandleAddRow, tableData, setTableData, HandleDeleteRow }: any = UseCustomEmeraldChittiHook()
   const { subCategoryList }: any = UseSubCategoryHook();
 
-  const todayDate: any = currentDate?.toISOString()?.split('T')[0];
+  // const todayDate: any = currentDate?.toISOString()?.split('T')[0];
   const [searchClientName, setSearchclientName] = useState<any>('');
   const [searchInputValues, setSearchInputValues] = useState({
     submitted_date: '',
-    current_date: todayDate,
+    from_date: '',
+    to_date: '',
     chitti_no: '',
     name: '',
     status: '',
@@ -57,12 +58,13 @@ const EmeraldChittiMaster = () => {
     });
   };
 
-  console.log('searchh', searchInputValues, searchClientName);
+  console.log('searchh emerald chitti', searchInputValues, emeraldChittiData);
   const filteredList =
     emeraldChittiData?.length > 0 &&
       emeraldChittiData !== null &&
       (searchInputValues.submitted_date ||
-        searchInputValues.current_date ||
+        searchInputValues.from_date ||
+        searchInputValues.to_date ||
         searchInputValues.chitti_no ||
         searchClientName ||
         searchInputValues.status)
@@ -70,9 +72,12 @@ const EmeraldChittiMaster = () => {
         const submittedDateMatch = searchInputValues.submitted_date
           ? item?.submitted_date?.includes(searchInputValues.submitted_date)
           : true;
-        const currentDateMatch = searchInputValues.current_date
-          ? item?.date?.includes(searchInputValues.current_date)
-          : true;
+
+        const fromDateAndToDateMatch =
+          searchInputValues.from_date && searchInputValues.to_date
+            ? item.date >= searchInputValues.from_date && item.date <= searchInputValues.to_date
+            : true;
+
         const numberMatch = searchInputValues.chitti_no
           ? item?.number?.includes(searchInputValues.chitti_no)
           : true;
@@ -84,7 +89,7 @@ const EmeraldChittiMaster = () => {
           return (
             item?.docstatus === 0 &&
             submittedDateMatch &&
-            currentDateMatch &&
+            fromDateAndToDateMatch &&
             numberMatch &&
             clientNameMatch
           );
@@ -92,7 +97,7 @@ const EmeraldChittiMaster = () => {
           return (
             item?.docstatus === 1 &&
             submittedDateMatch &&
-            currentDateMatch &&
+            fromDateAndToDateMatch &&
             numberMatch &&
             clientNameMatch
           );
@@ -100,7 +105,7 @@ const EmeraldChittiMaster = () => {
           return (
             item?.docstatus === 2 &&
             submittedDateMatch &&
-            currentDateMatch &&
+            fromDateAndToDateMatch &&
             numberMatch &&
             clientNameMatch
           );
@@ -108,7 +113,7 @@ const EmeraldChittiMaster = () => {
 
         return (
           submittedDateMatch &&
-          currentDateMatch &&
+          fromDateAndToDateMatch &&
           numberMatch &&
           clientNameMatch
         );
@@ -127,7 +132,6 @@ const EmeraldChittiMaster = () => {
           >
             <Tab eventKey="chitti-listing" title="Emerald Chitti List">
               <div className="container">
-                {/* <h4 className="text-center mt-2">Emerald Listing</h4> */}
                 <SearchListingTable
                   HandleSearchInput={HandleSearchInput}
                   clientNameList={clientNameList}
