@@ -153,16 +153,16 @@ const ChallanItemsTable = ({
       const lessWeight = row.less_wt;
       const netWeight = inputValue - lessWeight;
 
-
       const updatedData = tableData.map((row: any) =>
-        row.id === id ? { ...row, gross_weight: inputValue, net_weight: netWeight } : row
+        row.id === id
+          ? { ...row, gross_weight: inputValue, net_weight: netWeight }
+          : row
       );
 
       setTableData(updatedData);
       setStateForDocStatus(true);
     }
   };
-
 
   const HandleLessWeightValue = (e: any, id: any) => {
     const inputValue = parseFloat(e.target.value);
@@ -174,7 +174,9 @@ const ChallanItemsTable = ({
       // const grossWeightUpdated = inputValue + row.net_weight
 
       const updatedData = tableData.map((row: any) =>
-        row.id === id ? { ...row, net_weight: netWeight, less_wt: inputValue } : row
+        row.id === id
+          ? { ...row, net_weight: netWeight, less_wt: inputValue }
+          : row
       );
       // const updatedData = tableData.map((row: any) =>
       //   row.id === id ? { ...row, less_wt: inputValue } : row
@@ -195,14 +197,15 @@ const ChallanItemsTable = ({
       // const grossWeightUpdated = row.less_wt + inputValue
 
       const updatedData = tableData.map((row: any) =>
-        row.id === id ? { ...row, less_wt: lessWeight, net_weight: inputValue } : row
+        row.id === id
+          ? { ...row, less_wt: lessWeight, net_weight: inputValue }
+          : row
       );
 
       setTableData(updatedData);
       setStateForDocStatus(true);
     }
   };
-
 
   const HandleAmountValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
@@ -225,7 +228,9 @@ const ChallanItemsTable = ({
           <table className="table table-striped caption-top table-hover my-0">
             <thead>
               <tr className="table-header-row">
-                <th scope="col">No.</th>
+                <th scope="col" className="px-1">
+                  No.
+                </th>
                 <th scope="col" className="w-50">
                   Sub Category
                   <span className="text-danger">*</span>

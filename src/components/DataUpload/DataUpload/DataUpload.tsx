@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import InternalLoginApi from '../../../services/api/auth/supplier-frappe-intenal-login-api';
-import { BASE_URL } from '../../../services/Config/api-config';
+import { BASE_URL } from '../../../services/config/api-config';
 
 const DataUpload = () => {
   const AccessToken: any = useSelector(get_access_token);

@@ -11,7 +11,6 @@ const EmeraldChittiTableNew = ({
   HandleAddRow,
   readOnly,
   setStateForDocStatus,
-
 }: any) => {
   // const [] = useState<any>();
   const ShowCategoryDropdown: any = useRef<any>(true);
@@ -46,8 +45,6 @@ const EmeraldChittiTableNew = ({
       //   });
     }
   }, [defaultData, setTableData]);
-
-
 
   useEffect(() => {
     // Recalculate live calculations whenever tableData changes
@@ -164,7 +161,9 @@ const EmeraldChittiTableNew = ({
             <table className="table table-striped caption-top table-hover my-0 ">
               <thead>
                 <tr className="table-header-row-emerald-chitti ">
-                  <th scope="col">No.</th>
+                  <th scope="col" className="px-1">
+                    No.
+                  </th>
                   <th scope="col">A</th>
                   <th scope="col">B</th>
                   <th scope="col">C</th>
@@ -197,8 +196,10 @@ const EmeraldChittiTableNew = ({
                   tableData !== null &&
                   tableData.map((row: any) => (
                     <>
-                      <tr key={row.idx} >
-                        <td className="emerald_chitti_table_td">{row.idx}</td>
+                      <tr key={row.idx}>
+                        <td className="emerald_chitti_table_td px-0">
+                          {row.idx}
+                        </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
                             value={row.a}
@@ -208,7 +209,6 @@ const EmeraldChittiTableNew = ({
                               handleInputChange(row.idx, 'a', e.target.value)
                             }
                             type="text"
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -220,8 +220,6 @@ const EmeraldChittiTableNew = ({
                               handleInputChange(row.idx, 'b', e.target.value)
                             }
                             type="text"
-
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -233,7 +231,6 @@ const EmeraldChittiTableNew = ({
                               handleInputChange(row.idx, 'c', e.target.value)
                             }
                             type="text"
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -245,7 +242,6 @@ const EmeraldChittiTableNew = ({
                               handleInputChange(row.idx, 'd', e.target.value)
                             }
                             type="text"
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -257,7 +253,6 @@ const EmeraldChittiTableNew = ({
                               handleInputChange(row.idx, 'e', e.target.value)
                             }
                             type="text"
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -273,7 +268,6 @@ const EmeraldChittiTableNew = ({
                               )
                             }
                             type="number"
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -289,7 +283,6 @@ const EmeraldChittiTableNew = ({
                               )
                             }
                             type="number"
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -301,7 +294,6 @@ const EmeraldChittiTableNew = ({
                               handleInputChange(row.idx, 'h', e.target.value)
                             }
                             type="text"
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -313,7 +305,6 @@ const EmeraldChittiTableNew = ({
                               handleInputChange(row.idx, 'i', e.target.value)
                             }
                             type="text"
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -325,7 +316,6 @@ const EmeraldChittiTableNew = ({
                               handleInputChange(row.idx, 'j', e.target.value)
                             }
                             type="text"
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -337,7 +327,6 @@ const EmeraldChittiTableNew = ({
                               handleInputChange(row.idx, 'k', e.target.value)
                             }
                             type="text"
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -353,8 +342,6 @@ const EmeraldChittiTableNew = ({
                               )
                             }
                             type="number"
-
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -370,8 +357,6 @@ const EmeraldChittiTableNew = ({
                               )
                             }
                             type="text"
-
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -387,8 +372,6 @@ const EmeraldChittiTableNew = ({
                               )
                             }
                             type="text"
-
-
                           />
                         </td>
 
@@ -401,8 +384,6 @@ const EmeraldChittiTableNew = ({
                               handleInputChange(row.idx, 'o', e.target.value)
                             }
                             type="text"
-
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -414,8 +395,6 @@ const EmeraldChittiTableNew = ({
                               handleInputChange(row.idx, 'p', e.target.value)
                             }
                             type="text"
-
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -427,7 +406,6 @@ const EmeraldChittiTableNew = ({
                               handleInputChange(row.idx, 'q', e.target.value)
                             }
                             type="text"
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -439,8 +417,6 @@ const EmeraldChittiTableNew = ({
                               handleInputChange(row.idx, 'r', e.target.value)
                             }
                             type="text"
-
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td position-relative">
@@ -458,8 +434,6 @@ const EmeraldChittiTableNew = ({
                             }
                             dropdownWidth={'true'}
                             showCategoryDropdown={ShowCategoryDropdown}
-
-
                           />
                         </td>
                         {/* <td className="emerald_chitti_table_td">
@@ -509,7 +483,6 @@ const EmeraldChittiTableNew = ({
                               )
                             }
                             type="number"
-
                           />
                         </td>
                         <td className="emerald_chitti_table_td">

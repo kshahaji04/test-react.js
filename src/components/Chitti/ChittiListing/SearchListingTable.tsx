@@ -18,7 +18,8 @@ const SearchListingTable = ({
             type="date"
             name="submitted_date"
             id="submitted_date"
-            className="form-control input-fields custom-input-field "
+            className="form-control  custom-input-field px-1"
+            style={{ backgroundColor: '#E0E1F5' }}
             value={searchInputValues?.submitted_date}
             onChange={HandleSearchInput}
           />

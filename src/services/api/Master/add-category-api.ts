@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { BASE_URL } from '../../Config/api-config';
+import { BASE_URL } from '../../config/api-config';
 
-const AddCategoryApi: any = async (token:any,title:any) => {
-
+const AddCategoryApi: any = async (token: any, title: any) => {
   let response: any;
 
   const config = {

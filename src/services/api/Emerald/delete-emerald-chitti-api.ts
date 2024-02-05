@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../../Config/api-config';
+import { BASE_URL } from '../../config/api-config';
 
 const DeleteEmeraldChittiApi = async (token: any, name: any) => {
   console.log('tokennnn', token);

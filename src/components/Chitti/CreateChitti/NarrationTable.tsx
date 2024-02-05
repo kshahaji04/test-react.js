@@ -10,8 +10,7 @@ const NarrationTable = ({
   setTotalHuidWeightOfHuidTable,
   readOnly,
 }: any) => {
-
-  console.log("product list", productList)
+  console.log('product list', productList);
   const [totalAmountValue, setTotalAmountValue] = useState<any>({
     product: '',
     huid_pieces: 0,
@@ -138,7 +137,9 @@ const NarrationTable = ({
       <table className="table table-striped caption-top table-hover my-0">
         <thead>
           <tr className="table-header-row">
-            <th scope="col">No.</th>
+            <th scope="col" className="px-1">
+              No.
+            </th>
             <th scope="col" className="narration-table-product">
               Product
             </th>
@@ -155,7 +156,11 @@ const NarrationTable = ({
                 <div className="h-25 custom-select-huid-container">
                   <div className="dropdown-input-container">
                     <CustomDropdownForTable
-                      drowpdownlist={productList?.length > 0 && productList !== null && productList.map((huidProduct: any) => huidProduct.title)}
+                      drowpdownlist={
+                        productList?.length > 0 &&
+                        productList !== null &&
+                        productList.map((huidProduct: any) => huidProduct.title)
+                      }
                       data={row.product}
                       key={row.id}
                       rowId={row.id}

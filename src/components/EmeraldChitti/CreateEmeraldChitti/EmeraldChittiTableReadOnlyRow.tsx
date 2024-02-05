@@ -3,7 +3,7 @@ import InputFieldComponent from './InputFieldComponent';
 const EmeraldChittiTablereadOnlyRow = ({ calculationRow }: any) => {
   return (
     <>
-      <tr className='emerald-chitti-table-row'>
+      <tr className="emerald-chitti-table-row">
         <td className="emerald_chitti_table_td"></td>
         <td className="emerald_chitti_table_td">
           <InputFieldComponent value={''} readOnly={'true'} />
@@ -22,38 +22,41 @@ const EmeraldChittiTablereadOnlyRow = ({ calculationRow }: any) => {
         </td>
         <td className="emerald_chitti_table_td">
           <InputFieldComponent
-            value={calculationRow?.gross_weight.toFixed(3)}
+            value={calculationRow?.gross_weight?.toFixed(3)}
             readOnly={'true'}
           />
         </td>
         <td className="emerald_chitti_table_td">
           <InputFieldComponent
-            value={calculationRow?.stn_wt.toFixed(3)}
+            value={calculationRow?.stn_wt?.toFixed(3)}
+            readOnly={'true'}
+          />
+        </td>
+        <td className="emerald_chitti_table_td">
+          <InputFieldComponent value={calculationRow?.h} readOnly={'true'} />
+        </td>
+        <td className="emerald_chitti_table_td">
+          <InputFieldComponent
+            value={calculationRow?.i?.toFixed(2)}
             readOnly={'true'}
           />
         </td>
         <td className="emerald_chitti_table_td">
           <InputFieldComponent
-            value={calculationRow?.h.toFixed(3)}
-            readOnly={'true'}
-          />
-        </td>
-        <td className="emerald_chitti_table_td">
-          <InputFieldComponent value={calculationRow?.i} readOnly={'true'} />
-        </td>
-        <td className="emerald_chitti_table_td">
-          <InputFieldComponent
-            value={calculationRow?.j.toFixed(3)}
+            value={calculationRow?.j?.toFixed(3)}
             readOnly={'true'}
           />
         </td>
 
         <td className="emerald_chitti_table_td">
-          <InputFieldComponent value={calculationRow?.k} readOnly={'true'} />
+          <InputFieldComponent
+            value={calculationRow?.k?.toFixed(2)}
+            readOnly={'true'}
+          />
         </td>
         <td className="emerald_chitti_table_td">
           <InputFieldComponent
-            value={calculationRow.net_weight.toFixed(3)}
+            value={calculationRow.net_weight?.toFixed(3)}
             readOnly={'true'}
           />
         </td>
@@ -81,7 +84,7 @@ const EmeraldChittiTablereadOnlyRow = ({ calculationRow }: any) => {
 
         <td className="emerald_chitti_table_td">
           <InputFieldComponent
-            value={calculationRow?.amount}
+            value={calculationRow?.amount?.toFixed(2)}
             readOnly={'true'}
           />
         </td>
