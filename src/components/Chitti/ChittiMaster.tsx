@@ -49,7 +49,8 @@ const ChittiMaster = () => {
   const [searchClientName, setSearchclientName] = useState<any>('');
   const [searchInputValues, setSearchInputValues] = useState({
     submitted_date: '',
-    current_date: todayDate,
+    from_date: '',
+    to_date: '',
     chitti_no: '',
     name: '',
     status: '',
@@ -66,62 +67,66 @@ const ChittiMaster = () => {
 
   const filteredList =
     chittiListingData?.length > 0 &&
-    chittiListingData !== null &&
-    (searchInputValues.submitted_date ||
-      searchInputValues.current_date ||
-      searchInputValues.chitti_no ||
-      searchClientName ||
-      searchInputValues.status)
+      chittiListingData !== null &&
+      (searchInputValues.submitted_date ||
+        searchInputValues.from_date ||
+        searchInputValues.to_date ||
+        searchInputValues.chitti_no ||
+        searchClientName ||
+        searchInputValues.status)
       ? chittiListingData.filter((item: any) => {
-          const submittedDateMatch = searchInputValues.submitted_date
-            ? item?.submitted_date?.includes(searchInputValues.submitted_date)
+        const submittedDateMatch = searchInputValues.submitted_date
+          ? item?.submitted_date?.includes(searchInputValues.submitted_date)
+          : true;
+        const fromDateAndToDateMatch =
+          searchInputValues.from_date && searchInputValues.to_date
+            ? item.date >= searchInputValues.from_date && item.date <= searchInputValues.to_date
             : true;
-          const currentDateMatch = searchInputValues.current_date
-            ? item?.date?.includes(searchInputValues.current_date)
-            : true;
-          const numberMatch = searchInputValues.chitti_no
-            ? item?.number?.includes(searchInputValues.chitti_no)
-            : true;
-          const clientNameMatch = searchClientName
-            ? item?.client_name
-                ?.toLowerCase()
-                .includes(searchClientName.toLowerCase())
-            : true;
+        const numberMatch = searchInputValues.chitti_no
+          ? item?.number?.includes(searchInputValues.chitti_no)
+          : true;
+        const clientNameMatch = searchClientName
+          ? item?.client_name
+            ?.toLowerCase()
+            .includes(searchClientName.toLowerCase())
+          : true;
 
-          if (searchInputValues.status === 'Draft') {
-            return (
-              item?.docstatus === 0 &&
-              submittedDateMatch &&
-              currentDateMatch &&
-              numberMatch &&
-              clientNameMatch
-            );
-          } else if (searchInputValues.status === 'Submitted') {
-            return (
-              item?.docstatus === 1 &&
-              submittedDateMatch &&
-              currentDateMatch &&
-              numberMatch &&
-              clientNameMatch
-            );
-          } else if (searchInputValues.status === 'Cancel') {
-            return (
-              item?.docstatus === 2 &&
-              submittedDateMatch &&
-              currentDateMatch &&
-              numberMatch &&
-              clientNameMatch
-            );
-          }
-
+        if (searchInputValues.status === 'Draft') {
           return (
+            item?.docstatus === 0 &&
             submittedDateMatch &&
-            currentDateMatch &&
+            fromDateAndToDateMatch &&
             numberMatch &&
             clientNameMatch
           );
-        })
+        } else if (searchInputValues.status === 'Submitted') {
+          return (
+            item?.docstatus === 1 &&
+            submittedDateMatch &&
+            fromDateAndToDateMatch &&
+            numberMatch &&
+            clientNameMatch
+          );
+        } else if (searchInputValues.status === 'Cancel') {
+          return (
+            item?.docstatus === 2 &&
+            submittedDateMatch &&
+            fromDateAndToDateMatch &&
+            numberMatch &&
+            clientNameMatch
+          );
+        }
+
+        return (
+          submittedDateMatch &&
+          fromDateAndToDateMatch &&
+          numberMatch &&
+          clientNameMatch
+        );
+      })
       : chittiListingData;
+
+  console.log("filter listing", filteredList)
 
   return (
     <>
