@@ -58,8 +58,10 @@ const UseEditEmeraldChittiHook: any = () => {
     handleOnFocus,
   }: any = UseEmeraldHook();
 
-
-  const { findDuplicateValuesInEmeraldChittiTable, findDuplicateIndicesInEmeraldChittiTable } = UseCustomEmeraldChittiHook();
+  const {
+    findDuplicateValuesInEmeraldChittiTable,
+    findDuplicateIndicesInEmeraldChittiTable,
+  } = UseCustomEmeraldChittiHook();
 
   useEffect(() => {
     const params: any = {
@@ -120,9 +122,9 @@ const UseEditEmeraldChittiHook: any = () => {
         });
 
         const rowIndicesMsg = Object.keys(uniqueRowsWithDuplicates)
-          .map(row => `row ${row}`)
+          .map((row) => `row ${row}`)
           .join(', ');
-        console.log("uniqueRowsWithDuplicates", uniqueRowsWithDuplicates)
+        console.log('uniqueRowsWithDuplicates', uniqueRowsWithDuplicates);
 
         toast.error(`Duplicate values found in column "A" in ${rowIndicesMsg}`);
         return;

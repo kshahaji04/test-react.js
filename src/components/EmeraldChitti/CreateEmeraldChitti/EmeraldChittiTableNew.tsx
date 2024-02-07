@@ -14,6 +14,7 @@ const EmeraldChittiTableNew = ({
 }: any) => {
   // const [] = useState<any>();
   const ShowCategoryDropdown: any = useRef<any>(true);
+  const inputRef: any = useRef<HTMLInputElement>(null);
   const [calculationRow, setCalculationRow] = useState({
     gross_weight: 0,
     stn_wt: 0,
@@ -25,6 +26,16 @@ const EmeraldChittiTableNew = ({
     amount: 0,
     custom_hm_pcs: 0,
   });
+  setTimeout(() => {
+    const allFieldsExceptExceptionsFilled = Object.keys(
+      tableData[tableData.length - 1]
+    )
+      .filter((key) => key !== 'idx')
+      .every((key) => tableData[tableData.length - 1][key] === '');
+    if (inputRef.current && allFieldsExceptExceptionsFilled) {
+      inputRef.current.focus();
+    }
+  }, 0);
 
   const addIdToRows = (rows: any) => {
     return rows.map((row: any, index: any) => ({
@@ -50,8 +61,13 @@ const EmeraldChittiTableNew = ({
     // Recalculate live calculations whenever tableData changes
     calculateLiveCalculations();
   }, [tableData, setTableData]);
-
-  const calculateLiveCalculations = () => {
+  // useEffect(() => {
+  //   if (inputRef.current) {
+  //     inputRef.current.focus();
+  //   }
+  // }, [HandleAddRow]);
+  console.log(tableData.length, 'tableData ');
+  const calculateLiveCalculations = async () => {
     // Calculate live values based on tableData
     const liveCalculations = tableData.reduce(
       (accumulator: any, row: any) => {
@@ -83,22 +99,45 @@ const EmeraldChittiTableNew = ({
     setCalculationRow(liveCalculations);
   };
 
+  // const handleInputChange: any = (id: any, field: string, newValue: any) => {
+  //   setTableData((prevData: any) =>
+  //     prevData.map((row: any) => {
+  //       if (row.idx === id) {
+  //         let updatedRow = { ...row, [field]: newValue };
+
+  //         // Calculate cz_amt when stn_wt changes
+  //         //   if (field === 'stn_wt') {
+  //         //     const newCzAmt = parseFloat(newValue) * 10.0;
+  //         //     updatedRow = {
+  //         //       ...updatedRow,
+  //         //       stn_wt: newValue,
+  //         //       cz_amt: newCzAmt,
+  //         //       amount: newCzAmt + (parseFloat(updatedRow.cs_amt) || 0),
+  //         //     };
+  //         //   }
+
+  //         // Calculate amount when cz_amt or cs_amt changes
+  //         if (field === 'i' || field === 'k') {
+  //           updatedRow = {
+  //             ...updatedRow,
+  //             amount:
+  //               (parseFloat(updatedRow.i) || 0) +
+  //               (parseFloat(updatedRow.k) || 0),
+  //           };
+  //         }
+  //         setStateForDocStatus(true);
+  //         return updatedRow;
+  //       } else {
+  //         return row;
+  //       }
+  //     })
+  //   );
+  // };
   const handleInputChange: any = (id: any, field: string, newValue: any) => {
     setTableData((prevData: any) =>
-      prevData.map((row: any) => {
+      prevData.map((row: any, index: number) => {
         if (row.idx === id) {
           let updatedRow = { ...row, [field]: newValue };
-
-          // Calculate cz_amt when stn_wt changes
-          //   if (field === 'stn_wt') {
-          //     const newCzAmt = parseFloat(newValue) * 10.0;
-          //     updatedRow = {
-          //       ...updatedRow,
-          //       stn_wt: newValue,
-          //       cz_amt: newCzAmt,
-          //       amount: newCzAmt + (parseFloat(updatedRow.cs_amt) || 0),
-          //     };
-          //   }
 
           // Calculate amount when cz_amt or cs_amt changes
           if (field === 'i' || field === 'k') {
@@ -109,6 +148,23 @@ const EmeraldChittiTableNew = ({
                 (parseFloat(updatedRow.k) || 0),
             };
           }
+
+          // Check if the current row is the last row and all fields are filled
+          const isLastRow = index === prevData.length - 1;
+          const allFieldsExceptExceptionsFilled = Object.keys(updatedRow)
+            .filter(
+              (key) =>
+                key !== 'custom_hm_pcs' &&
+                key !== 'sub_category' &&
+                key !== 'category' &&
+                key !== 'stn_wt'
+            )
+            .every((key) => updatedRow[key] !== '');
+
+          if (isLastRow && allFieldsExceptExceptionsFilled) {
+            HandleAddRow(); // Add a new row
+          }
+
           setStateForDocStatus(true);
           return updatedRow;
         } else {
@@ -209,6 +265,7 @@ const EmeraldChittiTableNew = ({
                               handleInputChange(row.idx, 'a', e.target.value)
                             }
                             type="text"
+                            inputRef={inputRef}
                           />
                         </td>
                         <td className="emerald_chitti_table_td">

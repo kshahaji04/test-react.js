@@ -4,15 +4,14 @@ const InputFieldComponent = ({
   id,
   onChange,
   type,
-  HandleAddRow
+  HandleAddRow,
+  inputRef,
 }: any) => {
-
-
   const handleKeyDown: any = (e: any, id: any) => {
-    if (e.key === "Tab" && id === "custom_hm_pcs") {
+    if (e.key === 'Tab' && id === 'custom_hm_pcs') {
       HandleAddRow();
     }
-  }
+  };
   return (
     <div>
       <input
@@ -25,8 +24,8 @@ const InputFieldComponent = ({
         readOnly={readOnly}
         value={value}
         onChange={onChange}
-        onKeyDown={(e) => handleKeyDown(e, "custom_hm_pcs")}
-
+        onKeyDown={(e) => handleKeyDown(e, 'custom_hm_pcs')}
+        ref={inputRef}
       />
     </div>
   );

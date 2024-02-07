@@ -98,7 +98,10 @@ const UseEmeraldHook = () => {
     useState<any>(false);
   console.log('ProductItemDataFromStore', ProductItemDataFromStore);
 
-  const { findDuplicateValuesInEmeraldChittiTable, findDuplicateIndicesInEmeraldChittiTable } = UseCustomEmeraldChittiHook();
+  const {
+    findDuplicateValuesInEmeraldChittiTable,
+    findDuplicateIndicesInEmeraldChittiTable,
+  } = UseCustomEmeraldChittiHook();
   useEffect(() => {
     dispatch(getEmeraldChallan(AccessToken?.token));
     dispatch(getClientName(AccessToken?.token));
@@ -200,7 +203,6 @@ const UseEmeraldHook = () => {
     // Add the new row to the tableData
     setTableData([...tableData, newRow]);
   };
-
 
   const HandleDeleteRow: any = (id: any) => {
     console.log('id', id);
@@ -394,15 +396,14 @@ const UseEmeraldHook = () => {
         });
 
         const rowIndicesMsg = Object.keys(uniqueRowsWithDuplicates)
-          .map(row => `row ${row}`)
+          .map((row) => `row ${row}`)
           .join(', ');
-        console.log("uniqueRowsWithDuplicates", uniqueRowsWithDuplicates)
+        console.log('uniqueRowsWithDuplicates', uniqueRowsWithDuplicates);
 
         toast.error(`Duplicate values found in column "A" in ${rowIndicesMsg}`);
         return;
       }
     }
-
 
     const updatedFilterEmeraldChitti = emeraldChittiTableData
       .filter((obj: any) =>
