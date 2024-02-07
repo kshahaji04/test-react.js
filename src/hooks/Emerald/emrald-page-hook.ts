@@ -202,6 +202,7 @@ const UseEmeraldHook = () => {
 
     // Add the new row to the tableData
     setTableData([...tableData, newRow]);
+    setStateForDocStatus(true)
   };
 
   const HandleDeleteRow: any = (id: any) => {
