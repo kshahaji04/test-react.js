@@ -42,7 +42,7 @@
     }
 
     .custom-select-huid-container {
-        width: 45%;
+        width: 35%;
     }
 
     .custom-select-emerald-category {
@@ -53,11 +53,11 @@
 
 @media only screen and (max-width: 1280px) {
     .custom-select-container {
-        width: 36%;
+        width: 26%;
     }
 
     .custom-select-huid-container {
-        width: 45%;
+        width: 25%;
     }
 
     .custom-select-emerald-category {
@@ -68,11 +68,11 @@
 
 @media only screen and (max-width: 980px) {
     .custom-select-container {
-        width: 25%;
+        width: 30%;
     }
 
     .custom-select-huid-container {
-        width: 27%;
+        width: 37%;
     }
 
     .custom-select-emerald-category {
@@ -87,11 +87,11 @@
 
 @media only screen and (max-width: 890px) {
     .custom-select-container {
-        width: 35%;
+        width: 25%;
     }
 
     .custom-select-huid-container {
-        width: 45%;
+        width: 35%;
     }
 
     .custom-select-emerald-category {
@@ -108,17 +108,17 @@
 
 @media only screen and (max-width: 777px) {
     .custom-select-container {
-        width: 28%;
+        width: 14%;
     }
 
     .custom-select-huid-container {
-        width: 35%;
+        width: 25%;
     }
 }
 
 @media only screen and (max-width: 720px) {
     .custom-select-container {
-        width: 28%;
+        width: 30%;
     }
 
     .custom-select-huid-container {
@@ -139,17 +139,17 @@
 
 @media only screen and (max-width: 500px) {
     .custom-select-container {
-        width: 29% !important;
+        width: 19% !important;
     }
 
     .custom-select-huid-container {
-        width: 47%;
+        width: 37%;
     }
 }
 
 @media only screen and (max-width: 420px) {
     .custom-select-container {
-        width: 23% !important;
+        width: 25% !important;
     }
 
     .custom-select-huid-container {
@@ -159,17 +159,17 @@
 
 @media only screen and (max-width: 370px) {
     .custom-select-container {
-        width: 23% !important;
+        width: 13% !important;
     }
 
     .custom-select-huid-container {
-        width: 30%;
+        width: 40%;
     }
 }
 
 @media only screen and (max-width: 300px) {
     .custom-select-container {
-        width: 19% !important;
+        width: 9% !important;
     }
 
 

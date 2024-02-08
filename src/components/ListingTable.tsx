@@ -222,7 +222,7 @@ const ListingTable = ({ tableListingData }: any) => {
                                 onClick={() => HandlePrint(data.name)}
                                 className="button-section-text text-primary"
                               >
-                                print
+                                Print
                               </a>
                             </div>
                             <div className="col-lg-4">

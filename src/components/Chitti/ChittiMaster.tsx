@@ -140,7 +140,7 @@ const ChittiMaster = () => {
               justify
             >
               <Tab eventKey="chitti-listing" title="Chitti List"  >
-                <div className='col-8 mx-auto  '>
+                <div className='col-9 mx-auto  '>
                   <SearchListingTable
                     HandleSearchInput={HandleSearchInput}
                     clientNameList={clientNameList}
@@ -162,7 +162,7 @@ const ChittiMaster = () => {
                 </div>
               </Tab>
               <Tab eventKey="longer-tab" title="Create Chitti">
-                <div className='col-9 mx-auto'>
+                <div className='col-lg-9 col-12 mx-auto'>
                   <CreateChittiMaster
                     HandleCreateChittiSubmit={HandleCreateChittiSubmit}
                     currentDate={currentDate}

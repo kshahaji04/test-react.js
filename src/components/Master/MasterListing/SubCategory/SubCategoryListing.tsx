@@ -19,20 +19,15 @@ const SubCategoryListing = ({ filteredList }: any) => {
             : filteredList?.length}
         </div>
       )}
-      <div className="container border my-2 ">
+      <div className="container border mt-2 ">
 
         <table className="table table-striped mt-2">
           <thead>
-            <tr className="text-start table-heading table-heading-row row">
-              <div className="col-lg-2 d-flex justify-content-center">
-                <th  >Sr No.</th>
-              </div>
-              <div className="col-lg-5 col-5 px-0">
-                <th >SubCategory </th>
-              </div>
-              <div className="col-lg-5 col-5 px-0">
-                <th >Category</th>
-              </div>
+            <tr className="text-start table-heading table-heading-row row mx-0">
+              <th scope='col' className='col-lg-2 d-flex justify-content-center'>Sr No.</th>
+              <th scope='col' className='col-lg-5'>SubCategory </th>
+              <th scope='col' className='col-lg-5'>Category</th>
+
             </tr>
           </thead>
           <tbody>
@@ -41,7 +36,7 @@ const SubCategoryListing = ({ filteredList }: any) => {
               filteredList
                 .slice(0, tableViewData)
                 .map((group: any, index: any) => (
-                  <tr className="text-start table-body-row row" key={index}>
+                  <tr className="text-start table-body-row row mx-0" key={index}>
                     <td className='col-2 text-center p-1'>
                       {index + 1}
                     </td>

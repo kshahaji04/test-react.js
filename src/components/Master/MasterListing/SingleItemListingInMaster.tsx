@@ -21,7 +21,7 @@ const SingleItemListingInMaster = ({ listingData, heading }: any) => {
       <div className="container border mt-2">
         <table className="table table-striped mt-2">
           <thead>
-            <tr className="text-start table-heading table-heading-row">
+            <tr className="text-start table-heading table-heading-row ">
               <th scope="col" style={{ width: "9%", textAlign: "center" }}>Sr No.</th>
               <th scope="col ">{heading}</th>
             </tr>

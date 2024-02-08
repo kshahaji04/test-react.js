@@ -77,8 +77,8 @@ const FilterReportListing = ({
               title="Select Sub Category"
               selectedDropdownValue={searchSubCategory}
               setSelectedDropdownValue={setSearchSubCategory}
-              // clientGroupList={clientGroupList}
-              // HandleClientGroup={HandleClientGroup}
+            // clientGroupList={clientGroupList}
+            // HandleClientGroup={HandleClientGroup}
             />
           </div>
         )}
@@ -91,8 +91,8 @@ const FilterReportListing = ({
               title="Select Client Name"
               selectedDropdownValue={searchClientName}
               setSelectedDropdownValue={setSearchclientName}
-              // clientGroupList={clientGroupList}
-              // HandleClientGroup={HandleClientGroup}
+            // clientGroupList={clientGroupList}
+            // HandleClientGroup={HandleClientGroup}
             />
           </div>
         )}

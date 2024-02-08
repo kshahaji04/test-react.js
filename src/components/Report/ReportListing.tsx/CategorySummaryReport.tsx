@@ -88,7 +88,7 @@ const CategorySummaryReport = () => {
   return (
     <div className="container">
       <div className='row justify-content-center'>
-        <div className='col-lg-9 col-12'>
+        <div className='col-lg-10 col-12'>
           <div className="d-flex justify-content-between my-1">
             <h5>Category Summary Report</h5>
             <button
@@ -108,42 +108,44 @@ const CategorySummaryReport = () => {
             showDateInFilter={showDateInFilter}
           // handleFilterList={handleFilterList}
           />
-          <div className="table-responsive report-table-container">
-            <table className="table table-striped table-hover">
-              <thead className="report-table-head-row sticky-top">
-                <tr className="report-table-head-tr text-uppercase">
-                  <th scope="col">No</th>
-                  <th scope="col">Category</th>
-                  <th scope="col">Gross Weight</th>
-                  <th scope="col">Net Weight</th>
-                  <th scope="col">Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                {categorySummaryReportData?.length > 0 &&
-                  categorySummaryReportData !== null ? (
-                  <>
-                    {categorySummaryReportData.map((data: any, index: any) => {
-                      return (
-                        <tr className="report-table-row" key={index}>
-                          <td>{index + 1}</td>
-                          <td>{data.category}</td>
-                          <td>{data.total_gross_weight?.toFixed(3)}</td>
-                          <td>{data.total_net_weight?.toFixed(3)}</td>
-                          <td>{data.total_amount?.toFixed(2)}</td>
-                        </tr>
-                      );
-                    })}
-                    <ShowTotalAmountOfReportData
-                      data={categorySummaryReportData}
-                      colSpan="2"
-                    />
-                  </>
-                ) : (
-                  ''
-                )}
-              </tbody>
-            </table>
+          <div className='row justify-content-center'>
+            <div className="col-lg-9 col-12 table-responsive report-table-container">
+              <table className="table table-striped table-hover">
+                <thead className="report-table-head-row sticky-top">
+                  <tr className="report-table-head-tr text-uppercase">
+                    <th scope="col">Sr No.</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Gross Weight</th>
+                    <th scope="col">Net Weight</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {categorySummaryReportData?.length > 0 &&
+                    categorySummaryReportData !== null ? (
+                    <>
+                      {categorySummaryReportData.map((data: any, index: any) => {
+                        return (
+                          <tr className="report-table-row" key={index}>
+                            <td>{index + 1}</td>
+                            <td>{data.category}</td>
+                            <td>{data.total_gross_weight?.toFixed(3)}</td>
+                            <td>{data.total_net_weight?.toFixed(3)}</td>
+                            <td>{data.total_amount?.toFixed(2)}</td>
+                          </tr>
+                        );
+                      })}
+                      <ShowTotalAmountOfReportData
+                        data={categorySummaryReportData}
+                        colSpan="2"
+                      />
+                    </>
+                  ) : (
+                    ''
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

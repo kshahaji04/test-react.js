@@ -20,26 +20,16 @@ const ProjectSubCategoryMappingListing = ({
             : ProjectSubCategoryMappingList?.length}
         </div>
       )}
-      <div className="container border mt-2 mb-3 ">
+      <div className="container border mt-2 ">
 
         <table className="table table-striped mt-2 table-hover">
           <thead>
-            <tr className="text-start table-heading table-heading-row row">
-              <div className="col-lg-1 col-1 d-flex justify-content-center">
-                <th >Sr No. </th>
-              </div>
-              <div className="col-lg-3 col-3">
-                <th >Name </th>
-              </div>
-              <div className="col-lg-3 col-3">
-                <th >Project </th>
-              </div>
-              <div className="col-lg-3 col-3">
-                <th> Stone</th>
-              </div>
-              <div className="col-lg-2 col-2">
-                <th> Plain</th>
-              </div>
+            <tr className="text-start table-heading table-heading-row row mx-0">
+              <th scope='col' className='col-lg-1 d-flex justify-content-center'>Sr No.</th>
+              <th scope='col' className='col-lg-3 col-3'> Name </th>
+              <th scope='col' className='col-lg-3 col-3'>Project</th>
+              <th scope='col' className='col-lg-3 col-3'>Stone</th>
+              <th scope='col' className='col-lg-2 col-3'>Plain</th>
             </tr>
           </thead>
           <tbody>
@@ -47,7 +37,7 @@ const ProjectSubCategoryMappingListing = ({
               ProjectSubCategoryMappingList !== null &&
               ProjectSubCategoryMappingList.slice(0, tableViewData).map(
                 (group: any, index: any) => (
-                  <tr className="text-start table-body-row row" key={index}>
+                  <tr className="text-start table-body-row row mx-0" key={index}>
                     <td className='col-1 p-1 text-center'>
                       {index + 1}
                     </td>

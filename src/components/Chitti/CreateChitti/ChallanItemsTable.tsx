@@ -235,7 +235,7 @@ const ChallanItemsTable = ({
                   Sub Category
                   <span className="text-danger">*</span>
                 </th>
-                <th scope="col">Gross Weight</th>
+                <th scope="col" style={{ width: "12%" }}>Gross Weight</th>
                 <th scope="col">Less Weight</th>
                 <th scope="col">Net Weight</th>
                 <th scope="col">Amount</th>
