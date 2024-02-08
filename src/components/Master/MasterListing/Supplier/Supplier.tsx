@@ -40,29 +40,28 @@ const Supplier = () => {
   console.log('ClientFilterList updated', filteredList);
   return (
     <div className="container">
-      <div className="container my-3">
-        <div className="row justify-content-center">
-          <div className="col-lg-12 chitti-nav-tabs tab-container">
-            <Tabs
-              defaultActiveKey="default-tab"
-              id="justify-tab-example"
-              className="mb-1"
-              justify
-            >
-              <Tab eventKey="default-tab" title="Supplier List">
-                <MasterMultipleListingSearch
-                  placeholder1="Supplier name"
-                  placeholder2="supplier group"
-                  handleInputChange1={handleInputChange1}
-                  handleInputChange2={handleInputChange2}
-                />
-                <SupplierListing listingData={filteredList} />
-              </Tab>
-              <Tab eventKey="longer-tab" title="Add Supplier">
-                <AddSupplier GroupListdata={supplierGroupList} />
-              </Tab>
-            </Tabs>
-          </div>
+
+      <div className="row justify-content-center mt-3">
+        <div className="col-lg-9 chitti-nav-tabs tab-container">
+          <Tabs
+            defaultActiveKey="default-tab"
+            id="justify-tab-example"
+            className="mb-1"
+            justify
+          >
+            <Tab eventKey="default-tab" title="Supplier List">
+              <MasterMultipleListingSearch
+                placeholder1="Supplier name"
+                placeholder2="supplier group"
+                handleInputChange1={handleInputChange1}
+                handleInputChange2={handleInputChange2}
+              />
+              <SupplierListing listingData={filteredList} />
+            </Tab>
+            <Tab eventKey="longer-tab" title="Add Supplier">
+              <AddSupplier GroupListdata={supplierGroupList} />
+            </Tab>
+          </Tabs>
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ const DataUploadMaster = () => {
     <>
       <div className="container mt-3">
         <div className="row justify-content-center">
-          <div className="col-lg-12 chitti-nav-tabs">
+          <div className="col-lg-10 col-12 chitti-nav-tabs">
             <Tabs
               defaultActiveKey="default-tab"
               id="justify-tab-example"

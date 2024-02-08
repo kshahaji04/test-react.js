@@ -6,7 +6,7 @@ const ReportMaster = () => {
     'Category Partywise',
     'Category Summary',
     'Sub Category ',
-    'Emerald',
+    // 'Emerald',
   ];
   return (
     <>
@@ -20,16 +20,14 @@ const ReportMaster = () => {
               const isActive: any = window?.location?.pathname === linkTo;
               return (
                 <div
-                  className={`mx-lg-3 my-lg-0 my-1 master-heading  px-lg-2  ${
-                    isActive ? 'activePage border-0' : ''
-                  }`}
+                  className={`mx-lg-3 my-lg-0 my-1 master-heading  px-lg-2  ${isActive ? 'activePage border-0' : ''
+                    }`}
                   key={index}
                 >
                   <NavLink
                     to={`/report/${processedStr}`}
-                    className={`text-decoration-none navlink-class ${
-                      isActive ? 'text-white' : ''
-                    }`}
+                    className={`text-decoration-none navlink-class ${isActive ? 'text-white' : ''
+                      }`}
                   >
                     <div className="d-flex justify-content-center align-items-center px-1">
                       <div className="reports-heading me-1 m-0">{data}</div>

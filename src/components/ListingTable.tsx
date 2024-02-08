@@ -9,12 +9,11 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import DeleteEmeraldChittiApi from '../services/api/Emerald/delete-emerald-chitti-api';
 import { getEmeraldChallan } from '../store/slices/Emerald/get-emerald-list-slice';
-
 import PrintChallanChittiApi from '../services/api/Chitti/print-challan-chitti-api';
-
 import PrintEmeraldChittiApi from '../services/api/Emerald/print-emerald-chitti-api';
 import { UpdateDocStatusChallanApi } from '../services/api/general/update-doc-status-challan--api';
 import { UpdateDocStatusEmeraldChittiApi } from '../services/api/general/update-doc-status-emrald-chitti-api';
+
 
 const ListingTable = ({ tableListingData }: any) => {
   console.log('tableListingData', tableListingData);
@@ -121,14 +120,14 @@ const ListingTable = ({ tableListingData }: any) => {
   const TableHeading: any = () => {
     return (
       <>
-
         {headingData?.length > 0 &&
           headingData !== null &&
           headingData.map((heading: any, index: any) => {
             console.log('heading name', heading);
+
             if (heading === 'docstatus') {
               return (
-                <th className="text-uppercase" key={index} scope="col">
+                <th className="text-uppercase " key={index} scope="col">
                   Status
                 </th>
               );
@@ -157,13 +156,16 @@ const ListingTable = ({ tableListingData }: any) => {
               ?.map((data: any, i: any) => {
                 return (
                   <tr className="table-body-row" key={i}>
+                    {headingData?.length > 0 && (
+                      <td className='border-0'>{i + 1}</td>
+                    )}
                     {headingData?.length > 0 &&
                       headingData !== null &&
                       headingData.map((v: any, index: any) => {
                         if (v !== 'name') {
                           // Exclude 'date' key
                           return (
-                            <td className="border-0" key={index}>
+                            <td className="border-0 px-0" key={index}>
                               {v !== 'docstatus'
                                 ? data[v]
                                 : data[v] === 0
@@ -176,6 +178,7 @@ const ListingTable = ({ tableListingData }: any) => {
                             </td>
                           );
                         }
+
                         return null;
                       })}
                     {data.docstatus === 0 && (
@@ -190,7 +193,7 @@ const ListingTable = ({ tableListingData }: any) => {
                                 Edit
                               </NavLink>
                             </div>
-                            <div className="col-lg-2">
+                            <div className="col-lg-4">
                               <a
                                 onClick={() => HandleDeleteChitti(data.name)}
                                 className="button-section-text text-danger "
@@ -222,7 +225,7 @@ const ListingTable = ({ tableListingData }: any) => {
                                 print
                               </a>
                             </div>
-                            <div className="col-lg-2">
+                            <div className="col-lg-4">
                               <a
                                 onClick={() => HandleCancelChitti(data.name)}
                                 className="button-section-text text-danger "
@@ -258,7 +261,7 @@ const ListingTable = ({ tableListingData }: any) => {
                                 )}
                             </div>
 
-                            <div className="col-lg-2">
+                            <div className="col-lg-4">
                               <a
                                 onClick={() => HandleDeleteChitti(data.name)}
                                 className="button-section-text text-danger "
@@ -303,14 +306,20 @@ const ListingTable = ({ tableListingData }: any) => {
 
         <table className="table table table-striped table-hover listing-table border-0">
           <thead className="table-heading">
-            <tr className="table-heading-row">
+            <tr className="table-heading-row px-0">
+              {headingData?.length > 0 && (
+                <th>Sr No.</th>
+              )}
               {TableHeading()}
               <th className="w-25" scope="col"></th>
             </tr>
           </thead>
-          <tbody>{TableBodyData()}</tbody>
+          <tbody>
+
+            {TableBodyData()}</tbody>
         </table>
         {tableListingData?.length > 5 && tableListingData !== null && (
+
           <div
             className="btn-group mr-2 my-2 mb-4"
             role="group"

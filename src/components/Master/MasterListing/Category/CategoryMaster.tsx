@@ -23,30 +23,28 @@ const CategoryMaster = () => {
 
   return (
     <div className="container">
-      <div className="container my-3">
-        <div className="row justify-content-center">
-          <div className="col-lg-12 chitti-nav-tabs tab-container">
-            <Tabs
-              defaultActiveKey="default-tab"
-              id="justify-tab-example"
-              className="mb-1"
-              justify
-            >
-              <Tab eventKey="default-tab" title="Category List">
-                <MasterSingleListingSearch
-                  placeholder="Category"
-                  HandleSearchInput={HandleSearchInput}
-                />
-                <SingleItemListingInMaster
-                  listingData={filterList}
-                  heading="Category"
-                />
-              </Tab>
-              <Tab eventKey="chitti-listing" title="Add Category">
-                <AddCategory />
-              </Tab>
-            </Tabs>
-          </div>
+      <div className="row justify-content-center my-3">
+        <div className="col-lg-9 chitti-nav-tabs tab-container">
+          <Tabs
+            defaultActiveKey="default-tab"
+            id="justify-tab-example"
+            className="mb-1"
+            justify
+          >
+            <Tab eventKey="default-tab" title="Category List">
+              <MasterSingleListingSearch
+                placeholder="Category"
+                HandleSearchInput={HandleSearchInput}
+              />
+              <SingleItemListingInMaster
+                listingData={filterList}
+                heading="Category"
+              />
+            </Tab>
+            <Tab eventKey="chitti-listing" title="Add Category">
+              <AddCategory />
+            </Tab>
+          </Tabs>
         </div>
       </div>
     </div>

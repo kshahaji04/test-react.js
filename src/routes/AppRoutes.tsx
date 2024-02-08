@@ -32,6 +32,8 @@ import ProjectSubCategoryMappingMaster from '../components/Master/MasterListing/
 import MasterPageProjectSubCategoryMapping from '../components/Master/MasterListing/ProjectSubCategoryMapping/MasterPageProjectSubCategoryMapping';
 import Supplier from '../components/Master/MasterListing/Supplier/Supplier';
 import SupplierGroup from '../components/Master/MasterListing/SupplierGroup/SupplierGroup';
+import MasterPageSupplierGroupDetail from '../components/Master/MasterListing/SupplierGroup/MasterPageSupplierGroupDetail';
+import MasterPageSupplierDetails from '../components/Master/MasterListing/Supplier/MasterPageSupplierDetails';
 
 const AppRoutes = () => {
   return (
@@ -111,6 +113,7 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/master/projectsubcategorymapping"
           element={
@@ -191,6 +194,24 @@ const AppRoutes = () => {
             <ProtectedRoute>
               <MasterListing />
               <MasterPageHuidProductDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/master/supplier/:id"
+          element={
+            <ProtectedRoute>
+              <MasterListing />
+              <MasterPageSupplierDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/master/suppliergroup/:id"
+          element={
+            <ProtectedRoute>
+              <MasterListing />
+              <MasterPageSupplierGroupDetail />
             </ProtectedRoute>
           }
         />

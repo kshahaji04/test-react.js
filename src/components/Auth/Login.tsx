@@ -25,7 +25,7 @@ const Login = () => {
     const AccessTokenApiRes = await dispatch(getAccessToken(userData));
 
     if (AccessTokenApiRes?.payload?.msg === 'success') {
-      showToast('login successfully', 'success');
+      showToast('Login Successfully', 'success');
       navigate('/master');
     } else {
       showToast('Invalid Credentials', 'error');
@@ -33,7 +33,6 @@ const Login = () => {
   };
 
   const HandleShowPassword: any = () => {
-    console.log("eye click")
     setShowPassword(!showPassword)
   };
 

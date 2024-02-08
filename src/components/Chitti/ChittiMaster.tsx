@@ -131,17 +131,16 @@ const ChittiMaster = () => {
   return (
     <>
       <div className="container mt-3">
-        <div className="row justify-content-center">
-          <div className="col-lg-12 chitti-nav-tabs tab-container">
+        <div className="">
+          <div className="row justify-content-center chitti-nav-tabs tab-container">
             <Tabs
               defaultActiveKey="chitti-listing"
               id="justify-tab-example"
-              className="mb-1"
+              className="mb-1 w-75 "
               justify
             >
-              <Tab eventKey="chitti-listing" title="Chitti List">
-                <div className="container">
-                  {/* <h4 className="text-center mt-2">Chitti Listing</h4> */}
+              <Tab eventKey="chitti-listing" title="Chitti List"  >
+                <div className='col-8 mx-auto  '>
                   <SearchListingTable
                     HandleSearchInput={HandleSearchInput}
                     clientNameList={clientNameList}
@@ -163,42 +162,44 @@ const ChittiMaster = () => {
                 </div>
               </Tab>
               <Tab eventKey="longer-tab" title="Create Chitti">
-                <CreateChittiMaster
-                  HandleCreateChittiSubmit={HandleCreateChittiSubmit}
-                  currentDate={currentDate}
-                  selectedDropdownValue={selectedDropdownValue}
-                  HandleGoldRate={HandleGoldRate}
-                  HandleRemarks={HandleRemarks}
-                  tableData={tableData}
-                  setTableData={setTableData}
-                  narrationTableData={narrationTableData}
-                  setNarrationTableData={setNarrationTableData}
-                  setSelectedDropdownValue={setSelectedDropdownValue}
-                  clientNameList={clientNameList}
-                  subCategoryList={subCategoryList}
-                  productList={productList}
-                  clientGroupList={clientGroupList}
-                  HandleClientGroup={HandleClientGroup}
-                  HandleDateChange={HandleDateChange}
-                  date={date}
-                  stateForDocStatus={stateForDocStatus}
-                  setStateForDocStatus={setStateForDocStatus}
-                  HandleEmptyChallanChittiTable={HandleEmptyChallanChittiTable}
-                  goldRate={goldRate}
-                  remarks={remarks}
-                  showSubmitButtonAfterCreateChitti={
-                    showSubmitButtonAfterCreateChitti
-                  }
-                  HandleSubmitChallanChitti={HandleSubmitChallanChitti}
-                  HandleCancelChallanChitti={HandleCancelChallanChitti}
-                  HandleDeleteChallanChitti={HandleDeleteChallanChitti}
-                  setTotalGrossWeightOfChallanTable={
-                    setTotalGrossWeightOfChallanTable
-                  }
-                  setTotalHuidWeightOfHuidTable={setTotalHuidWeightOfHuidTable}
-                  checkGrossAndNetWeight={checkGrossAndNetWeight}
-                  setCheckGrossAndNetWeight={setCheckGrossAndNetWeight}
-                />
+                <div className='col-9 mx-auto'>
+                  <CreateChittiMaster
+                    HandleCreateChittiSubmit={HandleCreateChittiSubmit}
+                    currentDate={currentDate}
+                    selectedDropdownValue={selectedDropdownValue}
+                    HandleGoldRate={HandleGoldRate}
+                    HandleRemarks={HandleRemarks}
+                    tableData={tableData}
+                    setTableData={setTableData}
+                    narrationTableData={narrationTableData}
+                    setNarrationTableData={setNarrationTableData}
+                    setSelectedDropdownValue={setSelectedDropdownValue}
+                    clientNameList={clientNameList}
+                    subCategoryList={subCategoryList}
+                    productList={productList}
+                    clientGroupList={clientGroupList}
+                    HandleClientGroup={HandleClientGroup}
+                    HandleDateChange={HandleDateChange}
+                    date={date}
+                    stateForDocStatus={stateForDocStatus}
+                    setStateForDocStatus={setStateForDocStatus}
+                    HandleEmptyChallanChittiTable={HandleEmptyChallanChittiTable}
+                    goldRate={goldRate}
+                    remarks={remarks}
+                    showSubmitButtonAfterCreateChitti={
+                      showSubmitButtonAfterCreateChitti
+                    }
+                    HandleSubmitChallanChitti={HandleSubmitChallanChitti}
+                    HandleCancelChallanChitti={HandleCancelChallanChitti}
+                    HandleDeleteChallanChitti={HandleDeleteChallanChitti}
+                    setTotalGrossWeightOfChallanTable={
+                      setTotalGrossWeightOfChallanTable
+                    }
+                    setTotalHuidWeightOfHuidTable={setTotalHuidWeightOfHuidTable}
+                    checkGrossAndNetWeight={checkGrossAndNetWeight}
+                    setCheckGrossAndNetWeight={setCheckGrossAndNetWeight}
+                  />
+                </div>
               </Tab>
             </Tabs>
           </div>

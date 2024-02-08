@@ -18,16 +18,19 @@ const HuidProductListing = ({ listingData }: any) => {
             : listingData?.length}
         </div>
       )}
-      <div className="container border mt-2 row">
+      <div className="container border mt-2">
         <div className="">
           <table className="table table-striped mt-2">
             <thead>
               <tr className="text-start table-heading table-heading-row row">
-                <div className="col-lg-6 col-6">
-                  <th scope="col-lg-6">Huid Name</th>
+                <div className="col-1 d-flex justify-content-center">
+                  <th >Sr No.</th>
                 </div>
-                <div className="col-lg-6 col-6">
-                  <th scope="col-lg-6">Hm pcs</th>
+                <div className="col-lg-6 col-6 px-0">
+                  <th >Huid Name</th>
+                </div>
+                <div className="col-lg-5 col-5 px-0">
+                  <th >Hm pcs</th>
                 </div>
               </tr>
             </thead>
@@ -38,6 +41,9 @@ const HuidProductListing = ({ listingData }: any) => {
                   .slice(0, tableViewData)
                   .map((group: any, index: any) => (
                     <tr className="text-start table-body-row row" key={index}>
+                      <td className='col-1 text-center p-1'>
+                        {index + 1}
+                      </td>
                       <td className="col-lg-6 col-6 p-1">
                         <NavLink
                           to={`${group.title}`}
@@ -46,7 +52,7 @@ const HuidProductListing = ({ listingData }: any) => {
                           {group.title}
                         </NavLink>
                       </td>
-                      <td className="col-lg-6 col-6 p-1">
+                      <td className="col-lg-5 col-5 p-1">
                         <NavLink
                           to={`${group.title}`}
                           className="text-decoration-none text-dark"
@@ -57,15 +63,15 @@ const HuidProductListing = ({ listingData }: any) => {
                     </tr>
                   ))}
 
-              {listingData?.length > 20 && listingData !== null && (
-                <LoadMoreTableDataInMaster
-                  HandleTableViewRows={HandleTableViewRows}
-                />
-              )}
             </tbody>
           </table>
         </div>
       </div>
+      {listingData?.length > 19 && listingData !== null && (
+        <LoadMoreTableDataInMaster
+          HandleTableViewRows={HandleTableViewRows}
+        />
+      )}
     </>
   );
 };

@@ -22,6 +22,7 @@ const SingleItemListingInMaster = ({ listingData, heading }: any) => {
         <table className="table table-striped mt-2">
           <thead>
             <tr className="text-start table-heading table-heading-row">
+              <th scope="col" style={{ width: "9%", textAlign: "center" }}>Sr No.</th>
               <th scope="col ">{heading}</th>
             </tr>
           </thead>
@@ -33,7 +34,10 @@ const SingleItemListingInMaster = ({ listingData, heading }: any) => {
                 .map((group: any, index: any) => {
                   return (
                     <tr className="text-start table-body-row" key={index}>
-                      <td className="p-1">
+                      <td className='p-1 text-center'>
+                        {index + 1}
+                      </td>
+                      <td className="p-1 ps-2">
                         <NavLink
                           to={group}
                           className="text-decoration-none text-dark"
@@ -45,14 +49,14 @@ const SingleItemListingInMaster = ({ listingData, heading }: any) => {
                   );
                 })}
 
-            {listingData?.length > 20 && listingData !== null && (
-              <LoadMoreTableDataInMaster
-                HandleTableViewRows={HandleTableViewRows}
-              />
-            )}
           </tbody>
         </table>
       </div>
+      {listingData?.length > 19 && listingData !== null && (
+        <LoadMoreTableDataInMaster
+          HandleTableViewRows={HandleTableViewRows}
+        />
+      )}
     </>
   );
 };

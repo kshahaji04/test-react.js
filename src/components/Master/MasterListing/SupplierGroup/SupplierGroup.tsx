@@ -18,36 +18,34 @@ const SupplierGroup = () => {
     supplierGroupList?.length > 0 &&
     supplierGroupList !== null &&
     supplierGroupList.filter((value: any) => {
-      return value.toLowerCase().includes(searchField?.toLowerCase());
+      return value?.toLowerCase()?.includes(searchField?.toLowerCase());
     });
 
   return (
     <div className="container">
-      <div className="container mt-2">
-        <div className="row justify-content-center">
-          <div className="col-lg-12 chitti-nav-tabs tab-container">
-            <Tabs
-              defaultActiveKey="chitti-listing"
-              id="justify-tab-example"
-              className="mb-1"
-              justify
-            >
-              {' '}
-              <Tab eventKey="chitti-listing" title="Supplier Group List">
-                <MasterSingleListingSearch
-                  placeholder="Client group"
-                  HandleSearchInput={HandleSearchInput}
-                />
-                <SingleItemListingInMaster
-                  listingData={filterList}
-                  heading="Supplier Group"
-                />
-              </Tab>
-              <Tab eventKey="longer-tab" title="Add Supplier Group">
-                <CreateNewSupplierGroup />
-              </Tab>
-            </Tabs>
-          </div>
+      <div className="row justify-content-center mt-3">
+        <div className="col-lg-9 chitti-nav-tabs tab-container">
+          <Tabs
+            defaultActiveKey="chitti-listing"
+            id="justify-tab-example"
+            className="mb-1"
+            justify
+          >
+            {' '}
+            <Tab eventKey="chitti-listing" title="Supplier Group List">
+              <MasterSingleListingSearch
+                placeholder="Client group"
+                HandleSearchInput={HandleSearchInput}
+              />
+              <SingleItemListingInMaster
+                listingData={filterList}
+                heading="Supplier Group"
+              />
+            </Tab>
+            <Tab eventKey="longer-tab" title="Add Supplier Group">
+              <CreateNewSupplierGroup />
+            </Tab>
+          </Tabs>
         </div>
       </div>
     </div>

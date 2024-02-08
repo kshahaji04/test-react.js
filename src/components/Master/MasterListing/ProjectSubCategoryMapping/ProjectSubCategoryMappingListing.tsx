@@ -20,77 +20,82 @@ const ProjectSubCategoryMappingListing = ({
             : ProjectSubCategoryMappingList?.length}
         </div>
       )}
-      <div className="container border mt-2 mb-3 row">
-        <div className="">
-          <table className="table table-striped mt-2 table-hover">
-            <thead>
-              <tr className="text-start table-heading table-heading-row row">
-                <div className="col-lg-3 col-3">
-                  <th scope="col-lg-6">name </th>
-                </div>
-                <div className="col-lg-3 col-3">
-                  <th scope="col-lg-6">Project </th>
-                </div>
-                <div className="col-lg-3 col-3">
-                  <th scope="col-lg-6"> Stone</th>
-                </div>
-                <div className="col-lg-3 col-3">
-                  <th scope="col-lg-6"> plain</th>
-                </div>
-              </tr>
-            </thead>
-            <tbody>
-              {ProjectSubCategoryMappingList?.length > 0 &&
-                ProjectSubCategoryMappingList !== null &&
-                ProjectSubCategoryMappingList.slice(0, tableViewData).map(
-                  (group: any, index: any) => (
-                    <tr className="text-start table-body-row row" key={index}>
-                      <td className="col-lg-3 col-3 p-1">
-                        <NavLink
-                          to={`${group.name}`}
-                          className="text-decoration-none text-dark"
-                        >
-                          {group.name}
-                        </NavLink>
-                      </td>
-                      <td className="col-lg-3 col-3 p-1">
-                        <NavLink
-                          to={`${group.name}`}
-                          className="text-decoration-none text-dark"
-                        >
-                          {group.project}
-                        </NavLink>
-                      </td>
-                      <td className="col-lg-3 col-3 p-1">
-                        <NavLink
-                          to={`${group.name}`}
-                          className="text-decoration-none text-dark"
-                        >
-                          {group.stone}
-                        </NavLink>
-                      </td>
-                      <td className="col-lg-3 col-3 p-1">
-                        <NavLink
-                          to={`${group.name}`}
-                          className="text-decoration-none text-dark"
-                        >
-                          {group.plain}
-                        </NavLink>
-                      </td>
-                    </tr>
-                  )
-                )}
+      <div className="container border mt-2 mb-3 ">
 
-              {ProjectSubCategoryMappingList?.length > 20 &&
-                ProjectSubCategoryMappingList !== null && (
-                  <LoadMoreTableDataInMaster
-                    HandleTableViewRows={HandleTableViewRows}
-                  />
-                )}
-            </tbody>
-          </table>
-        </div>
+        <table className="table table-striped mt-2 table-hover">
+          <thead>
+            <tr className="text-start table-heading table-heading-row row">
+              <div className="col-lg-1 col-1 d-flex justify-content-center">
+                <th >Sr No. </th>
+              </div>
+              <div className="col-lg-3 col-3">
+                <th >Name </th>
+              </div>
+              <div className="col-lg-3 col-3">
+                <th >Project </th>
+              </div>
+              <div className="col-lg-3 col-3">
+                <th> Stone</th>
+              </div>
+              <div className="col-lg-2 col-2">
+                <th> Plain</th>
+              </div>
+            </tr>
+          </thead>
+          <tbody>
+            {ProjectSubCategoryMappingList?.length > 0 &&
+              ProjectSubCategoryMappingList !== null &&
+              ProjectSubCategoryMappingList.slice(0, tableViewData).map(
+                (group: any, index: any) => (
+                  <tr className="text-start table-body-row row" key={index}>
+                    <td className='col-1 p-1 text-center'>
+                      {index + 1}
+                    </td>
+                    <td className="col-lg-3 col-3 p-1">
+                      <NavLink
+                        to={`${group.name}`}
+                        className="text-decoration-none text-dark"
+                      >
+                        {group.name}
+                      </NavLink>
+                    </td>
+                    <td className="col-lg-3 col-3 p-1">
+                      <NavLink
+                        to={`${group.name}`}
+                        className="text-decoration-none text-dark"
+                      >
+                        {group.project}
+                      </NavLink>
+                    </td>
+                    <td className="col-lg-3 col-3 p-1">
+                      <NavLink
+                        to={`${group.name}`}
+                        className="text-decoration-none text-dark"
+                      >
+                        {group.stone}
+                      </NavLink>
+                    </td>
+                    <td className="col-lg-2 col-2 p-1">
+                      <NavLink
+                        to={`${group.name}`}
+                        className="text-decoration-none text-dark"
+                      >
+                        {group.plain}
+                      </NavLink>
+                    </td>
+                  </tr>
+                )
+              )}
+
+          </tbody>
+        </table>
       </div>
+      {ProjectSubCategoryMappingList?.length > 19 &&
+        ProjectSubCategoryMappingList !== null && (
+          <LoadMoreTableDataInMaster
+            HandleTableViewRows={HandleTableViewRows}
+          />
+        )}
     </>
   );
 };

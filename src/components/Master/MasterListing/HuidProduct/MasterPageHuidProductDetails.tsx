@@ -18,9 +18,9 @@ const MasterPageHuidProductDetails = () => {
 
   return (
     <div className="container">
-      <div className="card mt-3">
-        <div className="card-header">
-          <div className="d-flex justify-content-between ">
+      <div className="mt-5 row justify-content-center">
+        <div className="card mt-3 col-9">
+          <div className="card-header">
             <button
               type="submit"
               onClick={() => navigate(-1)}
@@ -29,40 +29,40 @@ const MasterPageHuidProductDetails = () => {
               Back
             </button>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-6 my-2 p-4">
-            <label htmlFor="basic-url " className="fs-5">
-              Huid Product
-              <span className="text-danger">*</span>
-            </label>
-            <div className="input-group my-2 w-50">
-              <input
-                type="text"
-                className="form-control py-1 px-2"
-                // value={inputValue}
-                defaultValue={DetailPageList[0]?.title}
-                required
-                id="basic-url"
-                readOnly
-              />
+          <div className="row">
+            <div className="col-lg-6 my-2 p-4">
+              <label htmlFor="basic-url " className="fs-5">
+                Huid Product
+                <span className="text-danger">*</span>
+              </label>
+              <div className="input-group my-2 w-50">
+                <input
+                  type="text"
+                  className="form-control py-1 px-2"
+                  // value={inputValue}
+                  defaultValue={DetailPageList[0]?.title}
+                  required
+                  id="basic-url"
+                  readOnly
+                />
+              </div>
             </div>
-          </div>
-          <div className="col-lg-6  my-2 p-4">
-            <label htmlFor="basic-url " className="fs-5">
-              Hm pcs
-              <span className="text-danger">*</span>
-            </label>
-            <div className="input-group my-2 w-25">
-              <input
-                type="text"
-                className="form-control py-1 px-2"
-                // value={inputValue}
-                defaultValue={DetailPageList[0]?.custom_hm_pcs}
-                required
-                id="basic-url"
-                readOnly
-              />
+            <div className="col-lg-6  my-2 p-4">
+              <label htmlFor="basic-url " className="fs-5">
+                Hm pcs
+                <span className="text-danger">*</span>
+              </label>
+              <div className="input-group my-2 w-25">
+                <input
+                  type="text"
+                  className="form-control py-1 px-2"
+                  // value={inputValue}
+                  defaultValue={DetailPageList[0]?.custom_hm_pcs}
+                  required
+                  id="basic-url"
+                  readOnly
+                />
+              </div>
             </div>
           </div>
         </div>

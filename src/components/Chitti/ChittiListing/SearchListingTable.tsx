@@ -48,7 +48,7 @@ const SearchListingTable = ({
             onChange={HandleSearchInput}
           />
         </div>
-        <div className="col-md-2">
+        <div className="col-lg-2 col-md-2">
           <label className="text-secondary">Chitti no</label>
           <input
             type="number"
@@ -66,7 +66,7 @@ const SearchListingTable = ({
           />
         </div>
 
-        <div className="col-md-2 ">
+        <div className="col-lg-2 col-md-2 ">
           <label className="text-secondary ">Client name</label>
           <SelectedInputDropdown
             drowpdownlist={clientNameList}
@@ -78,7 +78,7 @@ const SearchListingTable = ({
           // HandleClientGroup={HandleClientGroup}
           />
         </div>
-        <div className="col-md-2 my-lg-0 mb-lg-0 mb-3">
+        <div className="col-lg-2 col-md-2 my-lg-0 mb-lg-0 mb-3">
           <label className="text-secondary">Status</label>
           <select
             name="status"

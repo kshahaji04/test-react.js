@@ -18,18 +18,20 @@ const ClientNameListing = ({ clientNameClientGroupList }: any) => {
             : clientNameClientGroupList?.length}
         </div>
       )}
-      <div className="container border mt-2 row">
+      <div className="container border mt-2 ">
         <div className="">
           <table className="table table-striped mt-2">
             <thead>
               <tr className="text-start table-heading table-heading-row row">
-                <div className="col-lg-6 col-6">
-                  {' '}
-                  <th scope="col-lg-6">Client Name</th>
+
+                <div className="col-lg-1 d-flex justify-content-center">
+                  <th  >Sr No.</th>
                 </div>
-                <div className="col-lg-6 col-6">
-                  {' '}
-                  <th scope="col-lg-6">Client Group</th>
+                <div className="col-lg-6 col-6 px-0">
+                  <th >Client Name</th>
+                </div>
+                <div className="col-lg-5 col-5 px-0">
+                  <th >Client Group</th>
                 </div>
               </tr>
             </thead>
@@ -40,7 +42,10 @@ const ClientNameListing = ({ clientNameClientGroupList }: any) => {
                   .slice(0, tableViewData)
                   .map((group: any, index: any) => (
                     <tr className="text-start table-body-row row" key={index}>
-                      <td className="col-lg-6 col-6 p-1">
+                      <td className='col-1 text-center p-1'>
+                        {index + 1}
+                      </td>
+                      <td className="col-lg-6 col-6 p-1 ">
                         <NavLink
                           to={`${group.name}`}
                           className="text-decoration-none text-dark"
@@ -48,7 +53,7 @@ const ClientNameListing = ({ clientNameClientGroupList }: any) => {
                           {group.name}
                         </NavLink>
                       </td>
-                      <td className="col-lg-6 col-6 p-1">
+                      <td className="col-lg-5 col-5 p-1 ">
                         <NavLink
                           to={`${group.name}`}
                           className="text-decoration-none text-dark"
@@ -59,16 +64,16 @@ const ClientNameListing = ({ clientNameClientGroupList }: any) => {
                     </tr>
                   ))}
 
-              {clientNameClientGroupList?.length > 20 &&
-                clientNameClientGroupList !== null && (
-                  <LoadMoreTableDataInMaster
-                    HandleTableViewRows={HandleTableViewRows}
-                  />
-                )}
             </tbody>
           </table>
         </div>
       </div>
+      {clientNameClientGroupList?.length > 19 &&
+        clientNameClientGroupList !== null && (
+          <LoadMoreTableDataInMaster
+            HandleTableViewRows={HandleTableViewRows}
+          />
+        )}
     </>
   );
 };

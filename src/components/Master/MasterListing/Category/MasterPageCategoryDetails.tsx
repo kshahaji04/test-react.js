@@ -7,9 +7,9 @@ const MasterPageCategoryDetails = () => {
 
   return (
     <div className="container">
-      <div className="card mt-3">
-        <div className="card-header">
-          <div className="d-flex justify-content-between ">
+      <div className="mt-5 row justify-content-center">
+        <div className="card mt-3 col-9">
+          <div className="card-header">
             <button
               type="submit"
               onClick={() => navigate(-1)}
@@ -18,22 +18,22 @@ const MasterPageCategoryDetails = () => {
               Back
             </button>
           </div>
-        </div>
-        <div className="my-2 p-4">
-          <label htmlFor="basic-url " className="fs-5">
-            Category
-            <span className="text-danger">*</span>
-          </label>
-          <div className="input-group my-2 w-25">
-            <input
-              type="text"
-              className="form-control py-1 px-2"
-              // value={inputValue}
-              defaultValue={id}
-              required
-              id="basic-url"
-              readOnly
-            />
+          <div className="my-2 p-4">
+            <label htmlFor="basic-url " className="fs-5">
+              Category
+              <span className="text-danger">*</span>
+            </label>
+            <div className="input-group my-2 w-25">
+              <input
+                type="text"
+                className="form-control py-1 px-2"
+                // value={inputValue}
+                defaultValue={id}
+                required
+                id="basic-url"
+                readOnly
+              />
+            </div>
           </div>
         </div>
       </div>

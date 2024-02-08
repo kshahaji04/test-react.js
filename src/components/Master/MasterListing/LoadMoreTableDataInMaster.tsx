@@ -5,23 +5,24 @@ const LoadMoreTableDataInMaster = ({ HandleTableViewRows }: any) => {
       role="group"
       aria-label="Second group"
     >
+
       <button
         type="button"
-        className="btn btn-primary  py-0 load-more-table-data-btn"
+        className="btn btn-primary py-0 load-more-table-data-btn text-white"
         onClick={() => HandleTableViewRows(20)}
       >
         20
       </button>
       <button
         type="button"
-        className="btn btn-primary  py-0 load-more-table-data-btn"
+        className="btn btn-primary  py-0 load-more-table-data-btn text-white"
         onClick={() => HandleTableViewRows(100)}
       >
         100
       </button>
       <button
         type="button"
-        className="btn btn-primary  py-0 load-more-table-data-btn"
+        className="btn btn-primary  py-0 load-more-table-data-btn text-white"
         onClick={() => HandleTableViewRows(500)}
       >
         500

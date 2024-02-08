@@ -35,32 +35,31 @@ const ClientName = () => {
   console.log('ClientFilterList updated', filteredList);
   return (
     <div className="container">
-      <div className="container mt-3">
-        <div className="row justify-content-center">
-          <div className="col-lg-12 chitti-nav-tabs tab-container">
-            <Tabs
-              defaultActiveKey="default-tab"
-              id="justify-tab-example"
-              className="mb-1"
-              justify
-            >
-              <Tab eventKey="default-tab" title="Client Name List">
-                <MasterMultipleListingSearch
-                  placeholder1="Client name"
-                  placeholder2="Client group"
-                  handleInputChange1={handleInputChange1}
-                  handleInputChange2={handleInputChange2}
-                />
-                <ClientNameListing clientNameClientGroupList={filteredList} />
-              </Tab>
-              <Tab eventKey="longer-tab" title="Add Client">
-                <AddClient clientGroupList={clientGroupList} />
-              </Tab>
-            </Tabs>
-          </div>
+      <div className="row justify-content-center mt-3">
+        <div className="col-lg-9 chitti-nav-tabs tab-container">
+          <Tabs
+            defaultActiveKey="default-tab"
+            id="justify-tab-example"
+            className="mb-1"
+            justify
+          >
+            <Tab eventKey="default-tab" title="Client Name List">
+              <MasterMultipleListingSearch
+                placeholder1="Client name"
+                placeholder2="Client group"
+                handleInputChange1={handleInputChange1}
+                handleInputChange2={handleInputChange2}
+              />
+              <ClientNameListing clientNameClientGroupList={filteredList} />
+            </Tab>
+            <Tab eventKey="longer-tab" title="Add Client">
+              <AddClient clientGroupList={clientGroupList} />
+            </Tab>
+          </Tabs>
         </div>
       </div>
     </div>
+
   );
 };
 

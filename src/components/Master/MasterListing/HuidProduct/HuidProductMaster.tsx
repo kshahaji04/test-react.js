@@ -46,32 +46,31 @@ const HuidProductMaster = () => {
 
   return (
     <div className="container">
-      <div className="container my-2">
-        <div className="row justify-content-center">
-          <div className="col-lg-12 chitti-nav-tabs tab-container">
-            <Tabs
-              defaultActiveKey="default-list"
-              id="justify-tab-example"
-              className="mb-1"
-              justify
-            >
-              <Tab eventKey="default-list" title="HUID Product List">
-                <MasterMultipleListingSearch
-                  placeholder1="Huid product"
-                  placeholder2="Hm pcs"
-                  handleInputChange1={handleInputChange1}
-                  handleInputChange2={handleInputChange2}
-                />
 
-                <HuidProductListing
-                  listingData={filteredListWithAdditionalFilters}
-                />
-              </Tab>
-              <Tab eventKey="longer-tab" title="Add HUID Product">
-                <AddHuidProduct />
-              </Tab>
-            </Tabs>
-          </div>
+      <div className="row justify-content-center mt-3">
+        <div className="col-lg-9 chitti-nav-tabs tab-container">
+          <Tabs
+            defaultActiveKey="default-list"
+            id="justify-tab-example"
+            className="mb-1"
+            justify
+          >
+            <Tab eventKey="default-list" title="HUID Product List">
+              <MasterMultipleListingSearch
+                placeholder1="Huid product"
+                placeholder2="Hm pcs"
+                handleInputChange1={handleInputChange1}
+                handleInputChange2={handleInputChange2}
+              />
+
+              <HuidProductListing
+                listingData={filteredListWithAdditionalFilters}
+              />
+            </Tab>
+            <Tab eventKey="longer-tab" title="Add HUID Product">
+              <AddHuidProduct />
+            </Tab>
+          </Tabs>
         </div>
       </div>
     </div>

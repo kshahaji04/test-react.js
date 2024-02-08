@@ -122,16 +122,16 @@ const EmeraldChittiMaster = () => {
 
   return (
     <div className="container mt-3">
-      <div className="row justify-content-center">
-        <div className="col-lg-12 chitti-nav-tabs">
+      <div className="">
+        <div className="row justify-content-center chitti-nav-tabs">
           <Tabs
             defaultActiveKey="chitti-listing"
             id="justify-tab-example"
-            className="mb-1"
+            className="mb-1 w-75"
             justify
           >
             <Tab eventKey="chitti-listing" title="Emerald Chitti List">
-              <div className="container">
+              <div className='col-9 mx-auto'>
                 <SearchListingTable
                   HandleSearchInput={HandleSearchInput}
                   clientNameList={clientNameList}
