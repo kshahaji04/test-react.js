@@ -83,13 +83,6 @@ const UseEditEmeraldChittiHook: any = () => {
   }, [EmeraldChittiDataFromStore]);
 
   const HandleUpdateEmeraldChittiSubmit = async () => {
-    console.log(
-      'update emerald chitti',
-      selectedDropdownValue,
-      transactionDate,
-      tableData
-    );
-
     const reversedDate = new Date()
       ?.toISOString()
       ?.split('T')[0]
@@ -137,38 +130,44 @@ const UseEditEmeraldChittiHook: any = () => {
       )
       .map((obj: any, index: any) => ({ ...obj, idx: index + 1 }));
 
-    const BodyData: any = {
-      name: id,
-      clientName: selectedDropdownValue,
-      date: reversedDate,
-      transactionDate: transactionDate,
-      // clientGroup: clientGroupName,
-      challanTableData: updatedFilterEmeraldChitti,
-      token: AccessToken?.token,
-    };
-    let updateChittiApi: any = await UpdateEmeraldChittiApi(BodyData);
-    console.log('UpdateEmeraldChittiApi', UpdateEmeraldChittiApi);
-
-    if (
-      updateChittiApi?.status === 200 &&
-      updateChittiApi?.hasOwnProperty('data')
-    ) {
-      toast.success('Emerald Chitti Updated');
-
-      await UpdateDocStatusEmeraldChittiApi(AccessToken?.token, '0', id);
-      setTimeout(() => {
-        const params: any = {
-          token: AccessToken?.token,
-          name: id,
-        };
-        dispatch(getSpecificEmeraldChitti(params));
-      }, 300);
-      setTimeout(() => {
-        setStateForDocStatus(false);
-      }, 400);
+    const hasEmptySubCategory = updatedFilterEmeraldChitti.some((obj: any) => !obj.sub_category);
+    if (hasEmptySubCategory) {
+      toast.error("Please Select Sub Category")
     } else {
-      toast.error('Failed to Update Emerald chitti');
+      const BodyData: any = {
+        name: id,
+        clientName: selectedDropdownValue,
+        date: reversedDate,
+        transactionDate: transactionDate,
+        // clientGroup: clientGroupName,
+        challanTableData: updatedFilterEmeraldChitti,
+        token: AccessToken?.token,
+      };
+      let updateChittiApi: any = await UpdateEmeraldChittiApi(BodyData);
+      console.log('UpdateEmeraldChittiApi', UpdateEmeraldChittiApi);
+
+      if (
+        updateChittiApi?.status === 200 &&
+        updateChittiApi?.hasOwnProperty('data')
+      ) {
+        toast.success('Emerald Chitti Updated');
+
+        await UpdateDocStatusEmeraldChittiApi(AccessToken?.token, '0', id);
+        setTimeout(() => {
+          const params: any = {
+            token: AccessToken?.token,
+            name: id,
+          };
+          dispatch(getSpecificEmeraldChitti(params));
+        }, 300);
+        setTimeout(() => {
+          setStateForDocStatus(false);
+        }, 400);
+      } else {
+        toast.error('Failed to Update Emerald chitti');
+      }
     }
+
   };
 
   const HandlePrintButton: any = async () => {

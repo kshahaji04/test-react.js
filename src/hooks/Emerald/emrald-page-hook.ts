@@ -412,8 +412,9 @@ const UseEmeraldHook = () => {
       )
       .map((obj: any, index: any) => ({ ...obj, idx: index + 1 }));
 
-    console.log('filtered data', updatedFilterEmeraldChitti);
-
+    console.log('`filtered data`', updatedFilterEmeraldChitti);
+    const hasEmptySubCategory = updatedFilterEmeraldChitti.some((obj: any) => !obj.sub_category);
+    console.log("checkSubCategoryHasValue", hasEmptySubCategory)
     let errMsgList: any = [];
     if (Object?.keys(selectedDropdownValue)?.length === 0) {
       errMsgList.push('Client Name');
@@ -426,6 +427,9 @@ const UseEmeraldHook = () => {
     if (errMsgList?.length > 0 && errMsgList !== null) {
       // const concatenatedErrMsg:any = errMsgList?.join(", ");
       toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
+    }
+    else if (hasEmptySubCategory) {
+      toast.error("Please Select Sub Category")
     } else {
       const BodyData: any = {
         clientName: selectedDropdownValue,
