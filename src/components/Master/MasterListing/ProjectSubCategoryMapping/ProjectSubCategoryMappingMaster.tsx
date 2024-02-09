@@ -17,6 +17,11 @@ const ProjectSubCategoryMappingMaster = () => {
   const [inputProject, setInputProject] = useState('');
   const [inputStone, setInputStone] = useState('');
   const [inputPlain, setInputPlain] = useState('');
+  const [tableViewData, setTableViewData] = useState<any>(20);
+
+  const HandleTableViewRows: any = (data: any) => {
+    setTableViewData(data);
+  };
 
   const handleInputChange1 = (event: any) => {
     setInputProject(event.target.value);
@@ -70,9 +75,12 @@ const ProjectSubCategoryMappingMaster = () => {
                 handleInputChange2={handleInputChange2}
                 handleInputChange3={handleInputChange3}
                 listingData={filteredList}
+                tableViewData={tableViewData}
               />
               <ProjectSubCategoryMappingListing
                 ProjectSubCategoryMappingList={filteredList}
+                tableViewData={tableViewData}
+                HandleTableViewRows={HandleTableViewRows}
               />
             </Tab>
             <Tab

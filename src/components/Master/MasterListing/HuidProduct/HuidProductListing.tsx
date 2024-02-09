@@ -1,13 +1,8 @@
-import { useState } from 'react';
+
 import { NavLink } from 'react-router-dom';
 import LoadMoreTableDataInMaster from '../LoadMoreTableDataInMaster';
 
-const HuidProductListing = ({ listingData }: any) => {
-  const [tableViewData, setTableViewData] = useState<any>(20);
-
-  const HandleTableViewRows: any = (data: any) => {
-    setTableViewData(data);
-  };
+const HuidProductListing = ({ listingData, tableViewData, HandleTableViewRows }: any) => {
   return (
     <>
       <div className="container border mt-2">

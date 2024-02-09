@@ -1,14 +1,7 @@
-import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import LoadMoreTableDataInMaster from '../LoadMoreTableDataInMaster';
 
-const SubCategoryListing = ({ filteredList }: any) => {
-  const [tableViewData, setTableViewData] = useState<any>(20);
-
-  const HandleTableViewRows: any = (data: any) => {
-    setTableViewData(data);
-  };
-
+const SubCategoryListing = ({ filteredList, tableViewData, HandleTableViewRows }: any) => {
   return (
     <>
       <div className="container border mt-2 ">

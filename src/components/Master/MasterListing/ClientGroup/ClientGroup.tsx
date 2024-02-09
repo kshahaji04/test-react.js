@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-
 import AddClientGroup from './AddClientGroup';
 import UseClientGroupHook from '../../../../hooks/Master/client-group-hook';
 import MasterSingleListingSearch from '../MasterSingleListingSearch';
@@ -10,6 +9,11 @@ const ClientGroup = () => {
   const { clientGroupList } = UseClientGroupHook();
 
   const [searchField, setSearchField] = useState<any>('');
+  const [tableViewData, setTableViewData] = useState<any>(20);
+
+  const HandleTableViewRows: any = (data: any) => {
+    setTableViewData(data);
+  };
 
   const HandleSearchInput: any = (e: any) => {
     setSearchField(e.target.value);
@@ -39,9 +43,12 @@ const ClientGroup = () => {
                 placeholder="Client group"
                 HandleSearchInput={HandleSearchInput}
                 listingData={filterList}
+                tableViewData={tableViewData}
               />
               <SingleItemListingInMaster
                 listingData={filterList}
+                HandleTableViewRows={HandleTableViewRows}
+                tableViewData={tableViewData}
                 heading="Client Group"
               />
 

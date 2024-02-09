@@ -1,23 +1,11 @@
-import { useState } from 'react';
+
 import { NavLink } from 'react-router-dom';
 import LoadMoreTableDataInMaster from '../LoadMoreTableDataInMaster';
 
-const ClientNameListing = ({ clientNameClientGroupList }: any) => {
-  const [tableViewData, setTableViewData] = useState<any>(20);
+const ClientNameListing = ({ clientNameClientGroupList, HandleTableViewRows, tableViewData }: any) => {
 
-  const HandleTableViewRows: any = (data: any) => {
-    setTableViewData(data);
-  };
   return (
     <>
-      {/* {clientNameClientGroupList?.length > 0 && (
-        <div className="text-end pe-3 text-gray">
-          {clientNameClientGroupList?.slice(0, tableViewData)?.length} of{' '}
-          {clientNameClientGroupList?.length < 10
-            ? '0' + clientNameClientGroupList?.length
-            : clientNameClientGroupList?.length}
-        </div>
-      )} */}
       <div className="container border mt-2 ">
         <table className="table table-striped mt-2 ">
           <thead>

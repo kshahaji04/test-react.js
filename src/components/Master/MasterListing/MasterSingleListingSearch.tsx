@@ -1,8 +1,5 @@
-import { useState } from "react";
 
-const MasterSingleListingSearch = ({ placeholder, HandleSearchInput, listingData }: any) => {
-  const [tableViewData, setTableViewData] = useState<any>(20);
-
+const MasterSingleListingSearch = ({ placeholder, HandleSearchInput, listingData, tableViewData }: any) => {
 
   return (
     <div className="container d-flex justify-content-between mt-2">

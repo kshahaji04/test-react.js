@@ -9,7 +9,11 @@ const SupplierGroup = () => {
   const { supplierGroupList } = UseSupplierHook();
 
   const [searchField, setSearchField] = useState<any>('');
+  const [tableViewData, setTableViewData] = useState<any>(20);
 
+  const HandleTableViewRows: any = (data: any) => {
+    setTableViewData(data);
+  };
   const HandleSearchInput: any = (e: any) => {
     setSearchField(e.target.value);
   };
@@ -37,9 +41,12 @@ const SupplierGroup = () => {
                 placeholder="Client group"
                 HandleSearchInput={HandleSearchInput}
                 listingData={filterList}
+                tableViewData={tableViewData}
               />
               <SingleItemListingInMaster
                 listingData={filterList}
+                HandleTableViewRows={HandleTableViewRows}
+                tableViewData={tableViewData}
                 heading="Supplier Group"
               />
             </Tab>

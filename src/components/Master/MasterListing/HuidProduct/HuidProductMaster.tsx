@@ -11,6 +11,11 @@ const HuidProductMaster = () => {
 
   const [inputName, setInputName] = useState('');
   const [inputPcs, setInputPcs] = useState('');
+  const [tableViewData, setTableViewData] = useState<any>(20);
+
+  const HandleTableViewRows: any = (data: any) => {
+    setTableViewData(data);
+  };
 
   const handleInputChange1 = (event: any) => {
     setInputName(event.target.value);
@@ -62,12 +67,13 @@ const HuidProductMaster = () => {
                 handleInputChange1={handleInputChange1}
                 handleInputChange2={handleInputChange2}
                 listingData={filteredListWithAdditionalFilters}
-
+                tableViewData={tableViewData}
               />
 
               <HuidProductListing
                 listingData={filteredListWithAdditionalFilters}
-
+                HandleTableViewRows={HandleTableViewRows}
+                tableViewData={tableViewData}
               />
             </Tab>
             <Tab eventKey="longer-tab" title="Add HUID Product">

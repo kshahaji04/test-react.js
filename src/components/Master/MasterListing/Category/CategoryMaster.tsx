@@ -9,6 +9,11 @@ const CategoryMaster = () => {
   const { CategoryList }: any = UseCategoryHook();
 
   const [searchField, setSearchField] = useState<any>('');
+  const [tableViewData, setTableViewData] = useState<any>(20);
+
+  const HandleTableViewRows: any = (data: any) => {
+    setTableViewData(data);
+  };
 
   const HandleSearchInput: any = (e: any) => {
     setSearchField(e.target.value);
@@ -36,12 +41,13 @@ const CategoryMaster = () => {
                 placeholder="Category"
                 HandleSearchInput={HandleSearchInput}
                 listingData={filterList}
-
+                tableViewData={tableViewData}
               />
               <SingleItemListingInMaster
                 listingData={filterList}
+                HandleTableViewRows={HandleTableViewRows}
+                tableViewData={tableViewData}
                 heading="Category"
-
               />
             </Tab>
             <Tab eventKey="chitti-listing" title="Add Category">

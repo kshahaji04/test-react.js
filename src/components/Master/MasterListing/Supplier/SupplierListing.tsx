@@ -1,13 +1,8 @@
-import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import LoadMoreTableDataInMaster from '../LoadMoreTableDataInMaster';
 
-const SupplierListing = ({ listingData }: any) => {
-  const [tableViewData, setTableViewData] = useState<any>(20);
+const SupplierListing = ({ listingData, tableViewData, HandleTableViewRows }: any) => {
 
-  const HandleTableViewRows: any = (data: any) => {
-    setTableViewData(data);
-  };
   return (
     <>
       <div className="container border mt-2 ">

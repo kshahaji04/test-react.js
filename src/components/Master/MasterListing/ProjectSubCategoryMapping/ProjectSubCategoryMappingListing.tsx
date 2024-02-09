@@ -1,19 +1,15 @@
-import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import LoadMoreTableDataInMaster from '../LoadMoreTableDataInMaster';
 
 const ProjectSubCategoryMappingListing = ({
   ProjectSubCategoryMappingList,
+  HandleTableViewRows,
+  tableViewData,
 }: any) => {
-  const [tableViewData, setTableViewData] = useState<any>(20);
 
-  const HandleTableViewRows: any = (data: any) => {
-    setTableViewData(data);
-  };
   return (
     <>
       <div className="container border mt-2 ">
-
         <table className="table table-striped mt-2 table-hover">
           <thead>
             <tr className="text-start table-heading table-heading-row row mx-0">

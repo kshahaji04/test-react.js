@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 
 const MasterMultipleListingSearch = ({
   handleInputChange1,
@@ -8,11 +8,9 @@ const MasterMultipleListingSearch = ({
   placeholder2,
   placeholder3,
   showThirdInputField,
-  listingData
+  listingData,
+  tableViewData
 }: any) => {
-
-  const [tableViewData, setTableViewData] = useState<any>(20);
-
   return (
     <>
       <div className="d-flex justify-content-between ">

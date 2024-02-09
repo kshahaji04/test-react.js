@@ -14,6 +14,11 @@ const ClientName = () => {
 
   const [inputName, setInputName] = useState('');
   const [inputGroup, setInputGroup] = useState('');
+  const [tableViewData, setTableViewData] = useState<any>(20);
+
+  const HandleTableViewRows: any = (data: any) => {
+    setTableViewData(data);
+  };
 
   const handleInputChange1 = (event: any) => {
     setInputName(event.target.value);
@@ -50,9 +55,10 @@ const ClientName = () => {
                 handleInputChange1={handleInputChange1}
                 handleInputChange2={handleInputChange2}
                 listingData={filteredList}
+                tableViewData={tableViewData}
 
               />
-              <ClientNameListing clientNameClientGroupList={filteredList} />
+              <ClientNameListing clientNameClientGroupList={filteredList} tableViewData={tableViewData} HandleTableViewRows={HandleTableViewRows} />
             </Tab>
             <Tab eventKey="longer-tab" title="Add Client">
               <AddClient clientGroupList={clientGroupList} />
