@@ -55,6 +55,8 @@ const Supplier = () => {
                 placeholder2="supplier group"
                 handleInputChange1={handleInputChange1}
                 handleInputChange2={handleInputChange2}
+                listingData={filteredList}
+
               />
               <SupplierListing listingData={filteredList} />
             </Tab>

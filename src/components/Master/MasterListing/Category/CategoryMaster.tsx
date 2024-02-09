@@ -35,10 +35,13 @@ const CategoryMaster = () => {
               <MasterSingleListingSearch
                 placeholder="Category"
                 HandleSearchInput={HandleSearchInput}
+                listingData={filterList}
+
               />
               <SingleItemListingInMaster
                 listingData={filterList}
                 heading="Category"
+
               />
             </Tab>
             <Tab eventKey="chitti-listing" title="Add Category">

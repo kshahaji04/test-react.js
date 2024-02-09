@@ -54,7 +54,7 @@ const CreateChittiForm = ({
                 aria-describedby="inputGroup-sizing-sm"
                 onChange={HandleDateChange}
                 readOnly
-                // readOnly={readOnlyField}
+              // readOnly={readOnlyField}
               />
             </div>
           </div>

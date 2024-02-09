@@ -117,15 +117,17 @@ const CategoryPartyWiseReport = () => {
     <div className="container">
       <div className='row justify-content-center'>
         <div className='col-lg-10 col-12 '>
-          <div className="mt-1 d-flex justify-content-between">
-            <h5>Category Partywise Report</h5>
-            <button
-              type="button"
-              className="btn btn-primary btn-sm py-0 px-3 download-report-btn"
-              onClick={handleDownloadReport}
-            >
-              <span className="fs-6">Print</span>
-            </button>
+          <div className='col-lg-9 col-12 mx-auto'>
+            <div className="mt-1 d-flex justify-content-between">
+              <h5>Category Partywise Report</h5>
+              <button
+                type="button"
+                className="btn btn-primary btn-sm py-0 px-3 download-report-btn"
+                onClick={handleDownloadReport}
+              >
+                <span className="fs-6">Print</span>
+              </button>
+            </div>
           </div>
           <FilterReportListing
             clientNameList={clientNameList}
@@ -138,53 +140,49 @@ const CategoryPartyWiseReport = () => {
             showCategoryInFilter={showCategoryInFilter}
             showClientNameInFilter={showClientNameInFilter}
             showDateInFilter={showDateInFilter}
-          // handleFilterList={handleFilterList}
           />
 
-          <div className='row justify-content-center'>
-            <div className="col-lg-9 col-12 table-responsive report-table-container mb-5">
-              <table className=" table table-striped table-hover ">
-                <thead className="report-table-head-row sticky-top">
-                  <tr className="report-table-head-tr text-uppercase">
-                    <th scope="col">Sr No.</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Client Name</th>
-                    <th scope="col">Gross Weight</th>
-                    <th scope="col">Net Weight</th>
-                    <th scope="col">Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {categoryPartywiseReportData?.length > 0 &&
-                    categoryPartywiseReportData !== null ? (
-                    <>
-                      {categoryPartywiseReportData.map((data: any, index: any) => {
-                        return (
-                          <>
-                            <tr className="report-table-row" key={index}>
-                              <td>{index + 1}</td>
-                              <td>{data.category}</td>
-                              <td>{data.client_name}</td>
-                              <td>{data.total_gross_weight?.toFixed(3)}</td>
-                              <td>{data.total_net_weight?.toFixed(3)}</td>
-                              <td>{data.total_amount?.toFixed(2)}</td>
-                            </tr>
-                          </>
-                        );
-                      })}
-                      <ShowTotalAmountOfReportData
-                        data={categoryPartywiseReportData}
-                        colSpan="3"
-                      />
-                    </>
-                  ) : (
-                    ''
-                  )}
-                </tbody>
-              </table>
-            </div>
+          <div className="col-lg-9 col-12 mx-auto table-responsive report-table-container mb-5">
+            <table className=" table table-striped table-hover ">
+              <thead className="report-table-head-row sticky-top">
+                <tr className="report-table-head-tr text-uppercase">
+                  <th scope="col">Sr No.</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Client Name</th>
+                  <th scope="col">Gross Weight</th>
+                  <th scope="col">Net Weight</th>
+                  <th scope="col">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {categoryPartywiseReportData?.length > 0 &&
+                  categoryPartywiseReportData !== null ? (
+                  <>
+                    {categoryPartywiseReportData.map((data: any, index: any) => {
+                      return (
+                        <>
+                          <tr className="report-table-row" key={index}>
+                            <td>{index + 1}</td>
+                            <td>{data.category}</td>
+                            <td>{data.client_name}</td>
+                            <td>{data.total_gross_weight?.toFixed(3)}</td>
+                            <td>{data.total_net_weight?.toFixed(3)}</td>
+                            <td>{data.total_amount?.toFixed(2)}</td>
+                          </tr>
+                        </>
+                      );
+                    })}
+                    <ShowTotalAmountOfReportData
+                      data={categoryPartywiseReportData}
+                      colSpan="3"
+                    />
+                  </>
+                ) : (
+                  ''
+                )}
+              </tbody>
+            </table>
           </div>
-
         </div>
       </div>
     </div>

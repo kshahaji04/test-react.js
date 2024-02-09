@@ -49,6 +49,8 @@ const ClientName = () => {
                 placeholder2="Client group"
                 handleInputChange1={handleInputChange1}
                 handleInputChange2={handleInputChange2}
+                listingData={filteredList}
+
               />
               <ClientNameListing clientNameClientGroupList={filteredList} />
             </Tab>

@@ -11,14 +11,6 @@ const SubCategoryListing = ({ filteredList }: any) => {
 
   return (
     <>
-      {filteredList?.length > 0 && (
-        <div className="text-end pe-3 text-gray">
-          {filteredList?.slice(0, tableViewData)?.length} of{' '}
-          {filteredList?.length < 10
-            ? '0' + filteredList?.length
-            : filteredList?.length}
-        </div>
-      )}
       <div className="container border mt-2 ">
 
         <table className="table table-striped mt-2">

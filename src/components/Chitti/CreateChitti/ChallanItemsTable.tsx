@@ -231,11 +231,11 @@ const ChallanItemsTable = ({
                 <th scope="col" className="px-1">
                   No.
                 </th>
-                <th scope="col" className="w-50">
+                <th scope="col" className="challan_sub_cat_col">
                   Sub Category
                   <span className="text-danger">*</span>
                 </th>
-                <th scope="col" style={{ width: "12%" }}>Gross Weight</th>
+                <th scope="col" className='challan_gr_wt_col'>Gross Weight</th>
                 <th scope="col">Less Weight</th>
                 <th scope="col">Net Weight</th>
                 <th scope="col">Amount</th>

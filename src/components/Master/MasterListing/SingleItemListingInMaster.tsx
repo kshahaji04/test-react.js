@@ -10,14 +10,14 @@ const SingleItemListingInMaster = ({ listingData, heading }: any) => {
   };
   return (
     <>
-      {listingData?.length > 0 && (
+      {/* {listingData?.length > 0 && (
         <div className="text-end text-gray">
           {listingData?.slice(0, tableViewData)?.length} of{' '}
           {listingData?.length < 10
             ? '0' + listingData?.length
             : listingData?.length}
         </div>
-      )}
+      )} */}
       <div className="container border mt-2">
         <table className="table table-striped mt-2">
           <thead>

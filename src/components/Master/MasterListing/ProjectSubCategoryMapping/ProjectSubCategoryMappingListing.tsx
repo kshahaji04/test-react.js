@@ -12,14 +12,6 @@ const ProjectSubCategoryMappingListing = ({
   };
   return (
     <>
-      {ProjectSubCategoryMappingList?.length > 0 && (
-        <div className="text-end pe-3 text-gray">
-          {ProjectSubCategoryMappingList?.slice(0, tableViewData)?.length} of{' '}
-          {ProjectSubCategoryMappingList?.length < 10
-            ? '0' + ProjectSubCategoryMappingList?.length
-            : ProjectSubCategoryMappingList?.length}
-        </div>
-      )}
       <div className="container border mt-2 ">
 
         <table className="table table-striped mt-2 table-hover">

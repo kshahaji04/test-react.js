@@ -123,15 +123,17 @@ const SubCategoryReport = () => {
     <div className="container mb-5">
       <div className='row justify-content-center'>
         <div className='col-lg-10 col-12'>
-          <div className="my-1 d-flex justify-content-between">
-            <h5>Sub Category Report</h5>
-            <button
-              type="button"
-              className="btn btn-primary btn-sm py-0 px-3 download-report-btn"
-              onClick={handleDownloadReport}
-            >
-              <span className="fs-6">Print</span>
-            </button>
+          <div className='col-lg-10 col-10 mx-auto'>
+            <div className="my-1 d-flex justify-content-between">
+              <h5>Sub Category Report</h5>
+              <button
+                type="button"
+                className="btn btn-primary btn-sm py-0 px-3 download-report-btn"
+                onClick={handleDownloadReport}
+              >
+                <span className="fs-6">Print</span>
+              </button>
+            </div>
           </div>
           <FilterReportListing
             clientNameList={clientNameList}
@@ -148,60 +150,58 @@ const SubCategoryReport = () => {
             showClientNameInFilter={showClientNameInFilter}
             showDateInFilter={showDateInFilter}
             subCategoryList={subCategoryList}
-          // handleFilterList={handleFilterList}
           />
-          <div className='row justify-content-center'>
-            <div className="col-lg-10 col-12 table-responsive report-table-container">
-              <table className="table table-striped table-hover">
-                <thead className="report-table-head-row sticky-top">
-                  <tr className="report-table-head-tr text-uppercase">
-                    <th scope="col">Sr No.</th>
-                    <th scope="col">Sub Category</th>
-                    <th scope="col">Client Name</th>
-                    <th scope="col">Gross Weight</th>
-                    <th scope="col">Net Weight</th>
-                    <th scope="col">Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {subCategoryReportData?.length > 0 &&
-                    subCategoryReportData !== null ? (
-                    <>
-                      {subCategoryReportData.map((data: any, index: any) => {
-                        const subCategory = data.sub_category;
-                        const textColor =
-                          subCategory ===
-                            subCategoryReportData[index - 1]?.sub_category
-                            ? lastSubCategoryColor
-                            : lastSubCategoryColor === 'text-danger'
-                              ? 'text-dark'
-                              : 'text-danger';
-                        lastSubCategoryColor = textColor; // Update the color for the next iteration
-                        return (
-                          <tr className="report-table-row" key={index}>
-                            <td>{index + 1}</td>
 
-                            <td className={`${textColor} subcategory-title`}>
-                              {data.sub_category}
-                            </td>
-                            <td>{data.client_name}</td>
-                            <td>{data.total_gross_weight?.toFixed(3)}</td>
-                            <td>{data.total_net_weight?.toFixed(3)}</td>
-                            <td>{data.total_amount?.toFixed(2)}</td>
-                          </tr>
-                        );
-                      })}
-                      <ShowTotalAmountOfReportData
-                        data={subCategoryReportData}
-                        colSpan="3"
-                      />
-                    </>
-                  ) : (
-                    ''
-                  )}
-                </tbody>
-              </table>
-            </div>
+          <div className="col-lg-10 col-12 mx-auto table-responsive report-table-container">
+            <table className="table table-striped table-hover">
+              <thead className="report-table-head-row sticky-top">
+                <tr className="report-table-head-tr text-uppercase">
+                  <th scope="col">Sr No.</th>
+                  <th scope="col">Sub Category</th>
+                  <th scope="col">Client Name</th>
+                  <th scope="col">Gross Weight</th>
+                  <th scope="col">Net Weight</th>
+                  <th scope="col">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {subCategoryReportData?.length > 0 &&
+                  subCategoryReportData !== null ? (
+                  <>
+                    {subCategoryReportData.map((data: any, index: any) => {
+                      const subCategory = data.sub_category;
+                      const textColor =
+                        subCategory ===
+                          subCategoryReportData[index - 1]?.sub_category
+                          ? lastSubCategoryColor
+                          : lastSubCategoryColor === 'text-danger'
+                            ? 'text-dark'
+                            : 'text-danger';
+                      lastSubCategoryColor = textColor; // Update the color for the next iteration
+                      return (
+                        <tr className="report-table-row" key={index}>
+                          <td>{index + 1}</td>
+
+                          <td className={`${textColor} subcategory-title`}>
+                            {data.sub_category}
+                          </td>
+                          <td>{data.client_name}</td>
+                          <td>{data.total_gross_weight?.toFixed(3)}</td>
+                          <td>{data.total_net_weight?.toFixed(3)}</td>
+                          <td>{data.total_amount?.toFixed(2)}</td>
+                        </tr>
+                      );
+                    })}
+                    <ShowTotalAmountOfReportData
+                      data={subCategoryReportData}
+                      colSpan="3"
+                    />
+                  </>
+                ) : (
+                  ''
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

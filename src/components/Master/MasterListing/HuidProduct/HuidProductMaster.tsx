@@ -61,10 +61,13 @@ const HuidProductMaster = () => {
                 placeholder2="Hm pcs"
                 handleInputChange1={handleInputChange1}
                 handleInputChange2={handleInputChange2}
+                listingData={filteredListWithAdditionalFilters}
+
               />
 
               <HuidProductListing
                 listingData={filteredListWithAdditionalFilters}
+
               />
             </Tab>
             <Tab eventKey="longer-tab" title="Add HUID Product">

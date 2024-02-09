@@ -69,6 +69,7 @@ const ProjectSubCategoryMappingMaster = () => {
                 handleInputChange1={handleInputChange1}
                 handleInputChange2={handleInputChange2}
                 handleInputChange3={handleInputChange3}
+                listingData={filteredList}
               />
               <ProjectSubCategoryMappingListing
                 ProjectSubCategoryMappingList={filteredList}

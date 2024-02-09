@@ -48,6 +48,8 @@ const SubCategoryMaster = () => {
                 placeholder2="Category"
                 handleInputChange1={handleInputChange1}
                 handleInputChange2={handleInputChange2}
+                listingData={filteredList}
+
               />
               <SubCategoryListing filteredList={filteredList} />
             </Tab>

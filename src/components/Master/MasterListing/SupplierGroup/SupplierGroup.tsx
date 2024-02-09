@@ -36,6 +36,7 @@ const SupplierGroup = () => {
               <MasterSingleListingSearch
                 placeholder="Client group"
                 HandleSearchInput={HandleSearchInput}
+                listingData={filterList}
               />
               <SingleItemListingInMaster
                 listingData={filterList}

@@ -1,7 +1,12 @@
-const MasterSingleListingSearch = ({ placeholder, HandleSearchInput }: any) => {
+import { useState } from "react";
+
+const MasterSingleListingSearch = ({ placeholder, HandleSearchInput, listingData }: any) => {
+  const [tableViewData, setTableViewData] = useState<any>(20);
+
+
   return (
-    <div className="container row  mt-2">
-      <div className="col-lg-3 col-8">
+    <div className="container d-flex justify-content-between mt-2">
+      <div className="">
         <input
           type="text"
           name="name"
@@ -11,6 +16,16 @@ const MasterSingleListingSearch = ({ placeholder, HandleSearchInput }: any) => {
           placeholder={placeholder}
           onChange={HandleSearchInput}
         />
+      </div>
+      <div className="d-flex align-items-end">
+        {listingData?.length > 0 && (
+          <div className="text-end text-gray">
+            {listingData?.slice(0, tableViewData)?.length} of{' '}
+            {listingData?.length < 10
+              ? '0' + listingData?.length
+              : listingData?.length}
+          </div>
+        )}
       </div>
     </div>
   );

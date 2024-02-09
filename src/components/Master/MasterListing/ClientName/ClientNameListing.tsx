@@ -10,14 +10,14 @@ const ClientNameListing = ({ clientNameClientGroupList }: any) => {
   };
   return (
     <>
-      {clientNameClientGroupList?.length > 0 && (
+      {/* {clientNameClientGroupList?.length > 0 && (
         <div className="text-end pe-3 text-gray">
           {clientNameClientGroupList?.slice(0, tableViewData)?.length} of{' '}
           {clientNameClientGroupList?.length < 10
             ? '0' + clientNameClientGroupList?.length
             : clientNameClientGroupList?.length}
         </div>
-      )}
+      )} */}
       <div className="container border mt-2 ">
         <table className="table table-striped mt-2 ">
           <thead>
