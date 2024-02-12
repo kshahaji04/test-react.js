@@ -27,7 +27,7 @@ const FilterReportListing = ({
     <div className="container">
       <div className="row justify-content-center mt-2">
         {showCategoryInFilter?.current && (
-          <div className="col-md-2">
+          <div className="col-lg-2 col-md-4 col-4">
             <label className="text-secondary ">Category</label>
             <SelectedInputDropdown
               drowpdownlist={CategoryList}
@@ -41,7 +41,7 @@ const FilterReportListing = ({
 
         {showSupplierInFilter?.current && (
           <>
-            <div className="col-md-2">
+            <div className="col-lg-2 col-md-4 col-4">
               <label className="text-secondary ">Supplier</label>
               <SelectedInputDropdown
                 drowpdownlist={supplierList}
@@ -55,7 +55,7 @@ const FilterReportListing = ({
         )}
 
         {showProjectFieldInFilter?.current && (
-          <div className="col-md-2 ">
+          <div className="col-lg-2 col-md-4 col-4">
             <label className="text-secondary ">Project</label>
             <input
               type="text"
@@ -70,7 +70,7 @@ const FilterReportListing = ({
         )}
 
         {showSubCategoryInFilter?.current && (
-          <div className="col-md-2">
+          <div className="col-lg-2 col-md-4 col-4">
             <label className="text-secondary ">Sub Category</label>
             <SelectedInputDropdown
               drowpdownlist={subCategoryList}
@@ -83,7 +83,7 @@ const FilterReportListing = ({
           </div>
         )}
         {showClientNameInFilter?.current && (
-          <div className="col-md-2">
+          <div className="col-lg-2 col-md-4 col-4">
             <label className="text-secondary ">Client Name</label>
             <SelectedInputDropdown
               drowpdownlist={clientNameList}
@@ -99,7 +99,7 @@ const FilterReportListing = ({
 
         {showDateInFilter?.current && (
           <>
-            <div className="col-md-2 ">
+            <div className="col-lg-2 col-md-4 col-4">
               <label className="text-secondary ">From Date</label>
               <input
                 type="date"
@@ -109,7 +109,7 @@ const FilterReportListing = ({
                 onChange={HandleSearchInput}
               />
             </div>
-            <div className="col-md-2 ">
+            <div className="col-lg-2 col-md-4 col-4">
               <label className="text-secondary ">To Date</label>
               <input
                 type="date"

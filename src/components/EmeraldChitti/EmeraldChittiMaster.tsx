@@ -131,7 +131,7 @@ const EmeraldChittiMaster = () => {
             justify
           >
             <Tab eventKey="chitti-listing" title="Emerald Chitti List">
-              <div className='col-9 mx-auto'>
+              <div className='col-xl-9 col-md-12 col-12  mx-auto'>
                 <SearchListingTable
                   HandleSearchInput={HandleSearchInput}
                   clientNameList={clientNameList}

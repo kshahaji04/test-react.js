@@ -13,9 +13,9 @@ const ProjectSubCategoryMappingListing = ({
         <table className="table table-striped mt-2 table-hover">
           <thead>
             <tr className="text-start table-heading table-heading-row row mx-0">
-              <th scope='col' className='col-lg-1 d-flex justify-content-center'>Sr No.</th>
-              <th scope='col' className='col-lg-3 col-3'> Name </th>
-              <th scope='col' className='col-lg-3 col-3'>Project</th>
+              <th scope='col' className='col-lg-1 col-2 d-flex justify-content-center'>Sr No.</th>
+              <th scope='col' className='col-lg-3 col-2'> Name </th>
+              <th scope='col' className='col-lg-3 col-2'>Project</th>
               <th scope='col' className='col-lg-3 col-3'>Stone</th>
               <th scope='col' className='col-lg-2 col-3'>Plain</th>
             </tr>
@@ -26,10 +26,10 @@ const ProjectSubCategoryMappingListing = ({
               ProjectSubCategoryMappingList.slice(0, tableViewData).map(
                 (group: any, index: any) => (
                   <tr className="text-start table-body-row row mx-0" key={index}>
-                    <td className='col-1 p-1 text-center'>
+                    <td className='col-1 col-2 p-1 text-center'>
                       {index + 1}
                     </td>
-                    <td className="col-lg-3 col-3 p-1">
+                    <td className="col-lg-3 col-2 p-1">
                       <NavLink
                         to={`${group.name}`}
                         className="text-decoration-none text-dark"
@@ -37,7 +37,7 @@ const ProjectSubCategoryMappingListing = ({
                         {group.name}
                       </NavLink>
                     </td>
-                    <td className="col-lg-3 col-3 p-1">
+                    <td className="col-lg-3 col-2 p-1">
                       <NavLink
                         to={`${group.name}`}
                         className="text-decoration-none text-dark"
@@ -53,7 +53,7 @@ const ProjectSubCategoryMappingListing = ({
                         {group.stone}
                       </NavLink>
                     </td>
-                    <td className="col-lg-2 col-2 p-1">
+                    <td className="col-lg-2 col-3 p-1">
                       <NavLink
                         to={`${group.name}`}
                         className="text-decoration-none text-dark"

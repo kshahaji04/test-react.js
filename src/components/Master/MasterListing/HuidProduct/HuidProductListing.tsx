@@ -9,9 +9,9 @@ const HuidProductListing = ({ listingData, tableViewData, HandleTableViewRows }:
         <table className="table table-striped mt-2">
           <thead>
             <tr className="text-start table-heading table-heading-row row mx-0">
-              <th scope='col' className='col-lg-1 d-flex justify-content-center'>Sr No.</th>
-              <th scope='col' className='col-lg-6'>Huid Name </th>
-              <th scope='col' className='col-lg-5'>Hm pcs</th>
+              <th scope='col' className='col-lg-1 col-2 d-flex justify-content-center'>Sr No.</th>
+              <th scope='col' className='col-lg-6 col-5'>Huid Name </th>
+              <th scope='col' className='col-lg-5 col-5'>Hm pcs</th>
             </tr>
           </thead>
           <tbody>
@@ -21,10 +21,10 @@ const HuidProductListing = ({ listingData, tableViewData, HandleTableViewRows }:
                 .slice(0, tableViewData)
                 .map((group: any, index: any) => (
                   <tr className="text-start table-body-row row mx-0" key={index}>
-                    <td className='col-1 text-center p-1 '>
+                    <td className='col-1 col-2 text-center p-1 '>
                       {index + 1}
                     </td>
-                    <td className="col-lg-6 col-6 p-1">
+                    <td className="col-lg-6 col-5 p-1">
                       <NavLink
                         to={`${group.title}`}
                         className="text-decoration-none text-dark"

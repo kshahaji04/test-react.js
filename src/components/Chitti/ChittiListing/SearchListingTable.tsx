@@ -10,7 +10,7 @@ const SearchListingTable = ({
   return (
     <>
       <div className="row justify-content-center mt-1">
-        <div className="col-lg-2 col-md-3 ">
+        <div className="col-lg-2  col-md-3 ">
           <label className="text-secondary submitted-date-label-chitti">
             Submitted Date
           </label>
