@@ -13,7 +13,7 @@ import PrintChallanChittiApi from '../services/api/Chitti/print-challan-chitti-a
 import PrintEmeraldChittiApi from '../services/api/Emerald/print-emerald-chitti-api';
 import { UpdateDocStatusChallanApi } from '../services/api/general/update-doc-status-challan--api';
 import { UpdateDocStatusEmeraldChittiApi } from '../services/api/general/update-doc-status-emrald-chitti-api';
-import { getSpecificEmeraldChitti, get_specific_emerald_chitti } from '../store/slices/Emerald/get-specific-emrald-slice';
+import { get_specific_emerald_chitti } from '../store/slices/Emerald/get-specific-emrald-slice';
 
 
 const ListingTable = ({ tableListingData }: any) => {
