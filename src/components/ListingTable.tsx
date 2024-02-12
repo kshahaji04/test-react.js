@@ -13,12 +13,20 @@ import PrintChallanChittiApi from '../services/api/Chitti/print-challan-chitti-a
 import PrintEmeraldChittiApi from '../services/api/Emerald/print-emerald-chitti-api';
 import { UpdateDocStatusChallanApi } from '../services/api/general/update-doc-status-challan--api';
 import { UpdateDocStatusEmeraldChittiApi } from '../services/api/general/update-doc-status-emrald-chitti-api';
+import { getSpecificEmeraldChitti, get_specific_emerald_chitti } from '../store/slices/Emerald/get-specific-emrald-slice';
 
 
 const ListingTable = ({ tableListingData }: any) => {
   console.log('tableListingData', tableListingData);
   const dispatch = useDispatch();
   const AccessToken: any = useSelector(get_access_token);
+  const EmeraldChittiDataFromStore: any = useSelector(
+    get_specific_emerald_chitti
+  );
+
+
+
+  console.log('EmeraldChittiDataFromStore in listing', EmeraldChittiDataFromStore);
 
   const [headingData, setHeadingData] = useState<any>('');
   const [tableViewData, setTableViewData] = useState<any>(5);
@@ -49,6 +57,22 @@ const ListingTable = ({ tableListingData }: any) => {
         dispatch(getChittiChallan(AccessToken?.token));
       }
     } else if (window?.location?.pathname === '/emeraldchitti') {
+      // const params: any = {
+      //   token: AccessToken?.token,
+      //   name: name,
+      // };
+      // dispatch(getSpecificEmeraldChitti(params));
+
+      // if (EmeraldChittiDataFromStore?.data?.length > 0) {
+
+      //   const hasEmptySubCategory = EmeraldChittiDataFromStore?.data?.some((obj: any) => !obj.sub_category);
+      //   if (hasEmptySubCategory) {
+      //     toast.error("Please Select Sub Category")
+      //   } else {
+
+      //   }
+      // }
+
       let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
         AccessToken?.token,
         '1',
