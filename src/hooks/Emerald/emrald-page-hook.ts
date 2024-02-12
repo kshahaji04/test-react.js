@@ -235,25 +235,32 @@ const UseEmeraldHook = () => {
   };
 
   const HandleSubmitEmeraldChittiData: any = async () => {
-    let updateDocStatus: any =
-      await UpdateDocStatusWithSubmittedEmeraldChittiApi(
-        AccessToken?.token,
-        '1',
-        new Date()?.toISOString()?.split('T')[0],
-        showSubmitButtonAfterCreateChitti?.length > 0
-          ? showSubmitButtonAfterCreateChitti
-          : id
-      );
-    console.log('update doc', updateDocStatus);
-    if (Object.keys(updateDocStatus?.data)?.length > 0) {
-      const params: any = {
-        token: AccessToken?.token,
-        name:
+    console.log("handle submit emerald chitti", emeraldChittiTableData)
+    const hasEmptySubCategory = emeraldChittiTableData.some((obj: any) => !obj.sub_category);
+
+    if (hasEmptySubCategory) {
+      toast.error("Please Select Sub Category")
+    } else {
+      let updateDocStatus: any =
+        await UpdateDocStatusWithSubmittedEmeraldChittiApi(
+          AccessToken?.token,
+          '1',
+          new Date()?.toISOString()?.split('T')[0],
           showSubmitButtonAfterCreateChitti?.length > 0
             ? showSubmitButtonAfterCreateChitti
-            : id,
-      };
-      dispatch(getSpecificEmeraldChitti(params));
+            : id
+        );
+      console.log('update doc', updateDocStatus);
+      if (Object.keys(updateDocStatus?.data)?.length > 0) {
+        const params: any = {
+          token: AccessToken?.token,
+          name:
+            showSubmitButtonAfterCreateChitti?.length > 0
+              ? showSubmitButtonAfterCreateChitti
+              : id,
+        };
+        dispatch(getSpecificEmeraldChitti(params));
+      }
     }
   };
 
@@ -333,35 +340,6 @@ const UseEmeraldHook = () => {
     }
   };
 
-  // const findDuplicateValues = (arr: any) => {
-  //   const counts: any = {};
-  //   const duplicates = [];
-
-  //   for (const value of arr) {
-  //     counts[value] = (counts[value] || 0) + 1;
-  //     if (counts[value] === 2) {
-  //       duplicates.push(value);
-  //     }
-  //   }
-
-  //   return duplicates;
-  // };
-
-  // const findDuplicateIndices = (arr: any) => {
-  //   const indices: any = {};
-  //   const duplicateIndices = [];
-
-  //   for (const { a, index } of arr) {
-  //     if (indices[a] !== undefined) {
-  //       duplicateIndices.push([indices[a], index]);
-  //     } else {
-  //       indices[a] = index;
-  //     }
-  //   }
-
-  //   return duplicateIndices;
-  // };
-
   const HandleCreateEmeraldChittiSubmit: any = async () => {
     console.log('submit create emerald chitti', emeraldChittiTableData);
 
@@ -413,8 +391,7 @@ const UseEmeraldHook = () => {
       .map((obj: any, index: any) => ({ ...obj, idx: index + 1 }));
 
     console.log('`filtered data`', updatedFilterEmeraldChitti);
-    const hasEmptySubCategory = updatedFilterEmeraldChitti.some((obj: any) => !obj.sub_category);
-    console.log("checkSubCategoryHasValue", hasEmptySubCategory)
+
     let errMsgList: any = [];
     if (Object?.keys(selectedDropdownValue)?.length === 0) {
       errMsgList.push('Client Name');
@@ -428,9 +405,7 @@ const UseEmeraldHook = () => {
       // const concatenatedErrMsg:any = errMsgList?.join(", ");
       toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
     }
-    else if (hasEmptySubCategory) {
-      toast.error("Please Select Sub Category")
-    } else {
+    else {
       const BodyData: any = {
         clientName: selectedDropdownValue,
         date: reversedDate,

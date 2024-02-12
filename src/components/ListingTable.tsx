@@ -34,6 +34,35 @@ const ListingTable = ({ tableListingData }: any) => {
     }
   }, [tableListingData]);
 
+  const HandleSubmitChittiData: any = async (name: any) => {
+    if (window?.location?.pathname === '/chitti') {
+      let updateDocStatus: any = await UpdateDocStatusChallanApi(
+        AccessToken?.token,
+        '1',
+        name
+      );
+
+      if (
+        updateDocStatus?.status === 200 &&
+        Object.keys(updateDocStatus?.data)?.length > 0
+      ) {
+        dispatch(getChittiChallan(AccessToken?.token));
+      }
+    } else if (window?.location?.pathname === '/emeraldchitti') {
+      let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
+        AccessToken?.token,
+        '1',
+        name
+      );
+      if (
+        updateDocStatus?.status === 200 &&
+        Object.keys(updateDocStatus?.data)?.length > 0
+      ) {
+        dispatch(getEmeraldChallan(AccessToken?.token));
+      }
+    }
+  }
+
   const HandleDeleteChitti: any = async (name: any) => {
     if (window?.location?.pathname === '/chitti') {
       let deleteChallanApiRes: any = await DeleteChallanChittiApi(
@@ -195,10 +224,10 @@ const ListingTable = ({ tableListingData }: any) => {
                             </div>
                             <div className="col-lg-4 col-md-4 col-12">
                               <a
-                                onClick={() => HandleDeleteChitti(data.name)}
+                                onClick={() => HandleSubmitChittiData(data.name)}
                                 className="button-section-text text-danger "
                               >
-                                Delete
+                                Submit
                               </a>
                             </div>
                             <div className="col-lg-2 col-md-4 col-12">

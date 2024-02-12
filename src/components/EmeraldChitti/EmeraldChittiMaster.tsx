@@ -139,7 +139,7 @@ const EmeraldChittiMaster = () => {
                   searchClientName={searchClientName}
                   searchInputValues={searchInputValues}
                 />{' '}
-                <ListingTable tableListingData={filteredList} />
+                <ListingTable tableListingData={filteredList} HandleSubmitChittiData={HandleSubmitEmeraldChittiData} />
               </div>
             </Tab>
             <Tab eventKey="longer-tab" title="Create Emerald Chitti">

@@ -158,6 +158,7 @@ const ChittiMaster = () => {
                     productList={productList}
                     selectedDropdownValue={selectedDropdownValue}
                     drowpdownlist={clientNameList}
+                    HandleSubmitChittiData={HandleSubmitChallanChitti}
                   />
                 </div>
               </Tab>
