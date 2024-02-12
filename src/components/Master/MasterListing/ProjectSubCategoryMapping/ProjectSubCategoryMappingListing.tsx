@@ -26,7 +26,7 @@ const ProjectSubCategoryMappingListing = ({
               ProjectSubCategoryMappingList.slice(0, tableViewData).map(
                 (group: any, index: any) => (
                   <tr className="text-start table-body-row row mx-0" key={index}>
-                    <td className='col-1 col-2 p-1 text-center'>
+                    <td className='col-lg-1 col-2 p-1 text-center'>
                       {index + 1}
                     </td>
                     <td className="col-lg-3 col-2 p-1">

@@ -23,7 +23,7 @@ const ClientNameListing = ({ clientNameClientGroupList, HandleTableViewRows, tab
                 .slice(0, tableViewData)
                 .map((group: any, index: any) => (
                   <tr className="text-start table-body-row row mx-0" key={index}>
-                    <td className='col-1 col-2 text-center p-1'>
+                    <td className='col-lg-1 col-2 text-center p-1'>
                       {index + 1}
                     </td>
                     <td className="col-lg-6 col-5 p-1 ">
