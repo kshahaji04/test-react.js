@@ -13,7 +13,7 @@ import PrintChallanChittiApi from '../services/api/Chitti/print-challan-chitti-a
 import PrintEmeraldChittiApi from '../services/api/Emerald/print-emerald-chitti-api';
 import { UpdateDocStatusChallanApi } from '../services/api/general/update-doc-status-challan--api';
 import { UpdateDocStatusEmeraldChittiApi } from '../services/api/general/update-doc-status-emrald-chitti-api';
-import { get_specific_emerald_chitti } from '../store/slices/Emerald/get-specific-emrald-slice';
+import { getSpecificEmeraldChitti, get_specific_emerald_chitti } from '../store/slices/Emerald/get-specific-emrald-slice';
 
 
 const ListingTable = ({ tableListingData }: any) => {
@@ -57,33 +57,33 @@ const ListingTable = ({ tableListingData }: any) => {
         dispatch(getChittiChallan(AccessToken?.token));
       }
     } else if (window?.location?.pathname === '/emeraldchitti') {
-      // const params: any = {
-      //   token: AccessToken?.token,
-      //   name: name,
-      // };
-      // dispatch(getSpecificEmeraldChitti(params));
+      const params: any = {
+        token: AccessToken?.token,
+        name: name,
+      };
+      dispatch(getSpecificEmeraldChitti(params));
 
-      // if (EmeraldChittiDataFromStore?.data?.length > 0) {
-
-      //   const hasEmptySubCategory = EmeraldChittiDataFromStore?.data?.some((obj: any) => !obj.sub_category);
-      //   if (hasEmptySubCategory) {
-      //     toast.error("Please Select Sub Category")
-      //   } else {
-
-      //   }
-      // }
-
-      let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
-        AccessToken?.token,
-        '1',
-        name
-      );
-      if (
-        updateDocStatus?.status === 200 &&
-        Object.keys(updateDocStatus?.data)?.length > 0
-      ) {
-        dispatch(getEmeraldChallan(AccessToken?.token));
+      if (EmeraldChittiDataFromStore?.data?.length > 0) {
+        const hasEmptySubCategory = EmeraldChittiDataFromStore?.data[0]?.challan_table?.some((obj: any) => !obj.sub_category);
+        console.log("has category", hasEmptySubCategory)
+        if (hasEmptySubCategory) {
+          toast.error("Please Select Sub Category")
+        } else {
+          let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
+            AccessToken?.token,
+            '1',
+            name
+          );
+          if (
+            updateDocStatus?.status === 200 &&
+            Object.keys(updateDocStatus?.data)?.length > 0
+          ) {
+            dispatch(getEmeraldChallan(AccessToken?.token));
+          }
+        }
       }
+
+
     }
   }
 

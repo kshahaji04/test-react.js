@@ -127,7 +127,7 @@ const EmeraldChittiMaster = () => {
           <Tabs
             defaultActiveKey="chitti-listing"
             id="justify-tab-example"
-            className="mb-1 w-75"
+            className="w-75"
             justify
           >
             <Tab eventKey="chitti-listing" title="Emerald Chitti List">

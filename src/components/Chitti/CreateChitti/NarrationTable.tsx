@@ -144,7 +144,7 @@ const NarrationTable = ({
               Product
             </th>
             <th scope="col">HUID Pieces</th>
-            <th scope="col">HUID Weight</th>
+            <th scope="col" className='huid_wt_header_col'>HUID Weight</th>
             <th scope="col"></th>
           </tr>
         </thead>
