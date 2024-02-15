@@ -46,9 +46,14 @@ export const GetSpecificChittiChallanScreen = createSlice({
             state.docStatus =
               action?.payload?.message?.data?.data[0]?.docstatus;
             state.isLoading = 'succeeded';
+          } else {
+            state.isLoading = 'succeeded';
+            state.data = '';
+            state.docStatus = '';
           }
         }
       } else {
+        state.isLoading = 'succeeded';
         state.data = '';
         state.docStatus = '';
       }

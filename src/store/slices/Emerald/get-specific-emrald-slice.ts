@@ -20,7 +20,7 @@ interface RepoSpecificChallanState {
 }
 
 const initialState: RepoSpecificChallanState = {
-  data: '',
+  data: [],
   docStatus: '',
   error: '',
   isLoading: 'idle',
@@ -33,7 +33,7 @@ export const GetSpecificEmeraldScreen = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getSpecificEmeraldChitti.pending, (state) => {
       state.isLoading = 'pending';
-      state.data = '';
+      state.data = [];
     });
     builder.addCase(getSpecificEmeraldChitti.fulfilled, (state, action) => {
       if (action?.payload?.message?.status === 'success') {
@@ -47,13 +47,14 @@ export const GetSpecificEmeraldScreen = createSlice({
           }
         }
       } else {
-        state.data = '';
+        state.isLoading = 'succeeded';
+        state.data = [];
         state.docStatus = '';
       }
     });
     builder.addCase(getSpecificEmeraldChitti.rejected, (state) => {
       state.isLoading = 'failed';
-      state.data = '';
+      state.data = [];
       state.docStatus = '';
       state.error = 'failed to store data';
     });

@@ -15,23 +15,27 @@ import { UpdateDocStatusEmeraldChittiApi } from '../../services/api/general/upda
 import { getSpecificEmeraldChitti, get_specific_emerald_chitti } from '../../store/slices/Emerald/get-specific-emrald-slice';
 import LoadMoreChittiListing from './LoadMoreChittiListing';
 
-
 const ListingTable = ({ tableListingData }: any) => {
   console.log('tableListingData', tableListingData);
   const dispatch = useDispatch();
   const AccessToken: any = useSelector(get_access_token);
-  const EmeraldChittiDataFromStore: any = useSelector(
-    get_specific_emerald_chitti
-  );
 
-  console.log('EmeraldChittiDataFromStore in listing', EmeraldChittiDataFromStore);
+  const EmeraldChittiDataFromStore: any = useSelector(get_specific_emerald_chitti);
+
+  const storedNumberOfRows = sessionStorage.getItem('numberOfRows');
+  let pathName: any = window?.location?.pathname
 
   const [headingData, setHeadingData] = useState<any>('');
-  const [tableViewData, setTableViewData] = useState<any>(5);
+  const [tableViewData, setTableViewData] = useState<number>(storedNumberOfRows ? parseInt(storedNumberOfRows) : 5);
 
-  const HandleTableViewRows: any = (data: any) => {
-    setTableViewData(data);
+  const HandleTableViewRows: any = (rows: any) => {
+    sessionStorage.setItem("numberOfRows", rows)
+    setTableViewData(rows);
   };
+
+  useEffect(() => {
+    sessionStorage.removeItem("numberOfRows");
+  }, [pathName])
 
   useEffect(() => {
     if (Object?.keys(tableListingData)?.length > 0) {

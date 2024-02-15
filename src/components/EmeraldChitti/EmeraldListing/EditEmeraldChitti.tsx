@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { get_specific_emerald_chitti } from '../../../store/slices/Emerald/get-specific-emrald-slice';
 import EmeraldChittiTableNew from '../CreateEmeraldChitti/EmeraldChittiTableNew';
+import { get_specific_chitti_challan } from '../../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
+import Loader from '../../Loader';
+import NoRecord from '../../NoRecord';
 
 const EditEmeraldChitti = () => {
   const navigate = useNavigate();
@@ -39,7 +42,9 @@ const EditEmeraldChitti = () => {
     HandlePrintButton,
   }: any = UseEditEmeraldChittiHook();
 
-  console.log('challan detail', challanDetail);
+  const emeraldDetailDataFromStore: any = useSelector(get_specific_chitti_challan);
+
+  console.log("emeraldDetailDataFromStore in detail page", emeraldDetailDataFromStore)
   const HandleBackButton = () => {
     navigate(-1);
   };
@@ -72,149 +77,154 @@ const EditEmeraldChitti = () => {
 
   return (
     <div className="container">
-      <div className="">
-        <div className="d-flex justify-content-between my-3">
-          <div className="d-flex align-items-center">
-            <div>
-              <button
-                type="submit"
-                onClick={HandleBackButton}
-                className=" btn btn-outline-primary me-3 px-2 py-0 form-submit-button"
-              >
-                Back
-              </button>
-            </div>
-            {stateForDocStatus === true && showButton === 0 && (
-              <button type="button" className="btn docstatus-button">
-                Not Saved
-              </button>
-            )}
-            {stateForDocStatus === false && showButton === 0 && (
-              <button type="button" className="btn docstatus-button">
-                Draft
-              </button>
-            )}
-            {showButton === 1 && (
-              <button type="button" className="btn docstatus-button">
-                Submit
-              </button>
-            )}
-            {showButton === 2 && readOnly && (
-              <button type="button" className="btn docstatus-button">
-                Cancelled
-              </button>
-            )}
-            {showSaveButtonForAmendFlow &&
-              stateForDocStatus &&
-              readOnly === false && (
-                <button type="button" className="btn docstatus-button">
-                  Not saved
-                </button>
-              )}
-          </div>
-          <div>
-            {stateForDocStatus === true && showButton === 0 && (
-              <button
-                type="submit"
-                onClick={HandleUpdateEmeraldChittiSubmit}
-                className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-              >
-                Save
-              </button>
-            )}
-            {stateForDocStatus === false && showButton === 0 && (
-              <button
-                type="submit"
-                className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-                onClick={HandleSubmitEmeraldChittiData}
-              >
-                Submit
-              </button>
-            )}
-            {showButton === 1 && (
-              <button
-                type="submit"
-                className=" btn btn-outline-primary me-2 px-2 py-0 form-submit-button"
-                onClick={HandlePrintButton}
-              >
-                Print
-              </button>
-            )}
-            {showButton === 1 && (
-              <button
-                type="submit"
-                className=" btn btn-outline-primary px-2 py-0 form-submit-button"
-                onClick={HandleCancelEmeraldChitti}
-              >
-                Cancel
-              </button>
-            )}
-
-            {challanDetail?.length > 0 &&
-              challanDetail !== null &&
-              challanDetail[0]?.date ===
-                new Date()?.toISOString()?.split('T')[0] && (
-                <>
-                  {showButton === 2 && showSaveButtonForAmendFlow === false && (
-                    <>
+      {
+        emeraldDetailDataFromStore?.isLoading === "pending" ? <Loader /> : (
+          <>
+            {Object?.keys(emeraldDetailDataFromStore?.data)?.length === 0 && emeraldDetailDataFromStore?.isLoading === "succeeded" ? (
+              <NoRecord />
+            ) : (
+              <>
+                <div className="d-flex justify-content-between my-3">
+                  <div className="d-flex align-items-center">
+                    <div>
                       <button
                         type="submit"
-                        className=" btn btn-outline-primary px-2 me-2 py-0  form-submit-button"
-                        onClick={HandleAmendButtonChanges}
+                        onClick={HandleBackButton}
+                        className=" btn btn-outline-primary me-3 px-2 py-0 form-submit-button"
                       >
-                        Amend
+                        Back
                       </button>
-                    </>
-                  )}
-                </>
-              )}
-            {showSaveButtonForAmendFlow &&
-              stateForDocStatus &&
-              readOnly === false && (
-                <button
-                  type="submit"
-                  onClick={HandleAmendButtonForDuplicateChitti}
-                  className=" btn btn-outline-primary px-2 py-0 me-2 form-submit-button"
-                >
-                  Save
-                </button>
-              )}
+                    </div>
+                    {stateForDocStatus === true && showButton === 0 && (
+                      <button type="button" className="btn docstatus-button">
+                        Not Saved
+                      </button>
+                    )}
+                    {stateForDocStatus === false && showButton === 0 && (
+                      <button type="button" className="btn docstatus-button">
+                        Draft
+                      </button>
+                    )}
+                    {showButton === 1 && (
+                      <button type="button" className="btn docstatus-button">
+                        Submit
+                      </button>
+                    )}
+                    {showButton === 2 && readOnly && (
+                      <button type="button" className="btn docstatus-button">
+                        Cancelled
+                      </button>
+                    )}
+                    {showSaveButtonForAmendFlow &&
+                      stateForDocStatus &&
+                      readOnly === false && (
+                        <button type="button" className="btn docstatus-button">
+                          Not saved
+                        </button>
+                      )}
+                  </div>
+                  <div>
+                    {stateForDocStatus === true && showButton === 0 && (
+                      <button
+                        type="submit"
+                        onClick={HandleUpdateEmeraldChittiSubmit}
+                        className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
+                      >
+                        Save
+                      </button>
+                    )}
+                    {stateForDocStatus === false && showButton === 0 && (
+                      <button
+                        type="submit"
+                        className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
+                        onClick={HandleSubmitEmeraldChittiData}
+                      >
+                        Submit
+                      </button>
+                    )}
+                    {showButton === 1 && (
+                      <button
+                        type="submit"
+                        className=" btn btn-outline-primary me-2 px-2 py-0 form-submit-button"
+                        onClick={HandlePrintButton}
+                      >
+                        Print
+                      </button>
+                    )}
+                    {showButton === 1 && (
+                      <button
+                        type="submit"
+                        className=" btn btn-outline-primary px-2 py-0 form-submit-button"
+                        onClick={HandleCancelEmeraldChitti}
+                      >
+                        Cancel
+                      </button>
+                    )}
 
-            {showButton === 2 && (
-              <button
-                type="submit"
-                className=" btn btn-outline-primary px-2 py-0  form-submit-button"
-                onClick={HandleDeleteEmeraldChitti}
-              >
-                Delete
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
+                    {challanDetail?.length > 0 &&
+                      challanDetail !== null &&
+                      challanDetail[0]?.date ===
+                      new Date()?.toISOString()?.split('T')[0] && (
+                        <>
+                          {showButton === 2 && showSaveButtonForAmendFlow === false && (
+                            <>
+                              <button
+                                type="submit"
+                                className=" btn btn-outline-primary px-2 me-2 py-0  form-submit-button"
+                                onClick={HandleAmendButtonChanges}
+                              >
+                                Amend
+                              </button>
+                            </>
+                          )}
+                        </>
+                      )}
+                    {showSaveButtonForAmendFlow &&
+                      stateForDocStatus &&
+                      readOnly === false && (
+                        <button
+                          type="submit"
+                          onClick={HandleAmendButtonForDuplicateChitti}
+                          className=" btn btn-outline-primary px-2 py-0 me-2 form-submit-button"
+                        >
+                          Save
+                        </button>
+                      )}
 
-      <div>
-        <div>
-          {challanDetail?.length > 0 &&
-            challanDetail !== null &&
-            challanDetail.map((data: any) => {
-              return (
-                <>
-                  <EmeraldCreateChitti
-                    defaultData={data}
-                    selectedDropdownValue={selectedDropdownValue}
-                    setSelectedDropdownValue={setSelectedDropdownValue}
-                    HandleClientGroup={HandleClientGroup}
-                    clientGroupList={clientGroupList}
-                    clientNameList={clientNameList}
-                    currentDate={currentDate}
-                    handleDateChange={handleDateChange}
-                    transactionDate={transactionDate}
-                    setStateForDocStatus={setStateForDocStatus}
-                    readOnly={readOnly}
-                  />
+                    {showButton === 2 && (
+                      <button
+                        type="submit"
+                        className=" btn btn-outline-primary px-2 py-0  form-submit-button"
+                        onClick={HandleDeleteEmeraldChitti}
+                      >
+                        Delete
+                      </button>
+                    )}
+                  </div>
+                </div>
 
-                  {/* <EmeraldChittiTable
+                <div>
+                  <div>
+                    {challanDetail?.length > 0 &&
+                      challanDetail !== null &&
+                      challanDetail.map((data: any) => {
+                        return (
+                          <>
+                            <EmeraldCreateChitti
+                              defaultData={data}
+                              selectedDropdownValue={selectedDropdownValue}
+                              setSelectedDropdownValue={setSelectedDropdownValue}
+                              HandleClientGroup={HandleClientGroup}
+                              clientGroupList={clientGroupList}
+                              clientNameList={clientNameList}
+                              currentDate={currentDate}
+                              handleDateChange={handleDateChange}
+                              transactionDate={transactionDate}
+                              setStateForDocStatus={setStateForDocStatus}
+                              readOnly={readOnly}
+                            />
+
+                            {/* <EmeraldChittiTable
                     defaultData={data?.challan_table}
                     tableData={tableData}
                     setTableData={setTableData}
@@ -223,23 +233,29 @@ const EditEmeraldChitti = () => {
                     setStateForDocStatus={setStateForDocStatus}
                     readOnly={readOnly}
                   /> */}
-                  <EmeraldChittiTableNew
-                    defaultData={data?.challan_table}
-                    tableData={tableData}
-                    setTableData={setTableData}
-                    subCategoryList={subCategoryList}
-                    productItemList={productItemList}
-                    setStateForDocStatus={setStateForDocStatus}
-                    readOnly={readOnly}
-                    HandleAddRow={HandleAddRow}
-                    handleKeyDown={handleKeyDown}
-                    handleOnFocus={handleOnFocus}
-                  />
-                </>
-              );
-            })}
-        </div>
-      </div>
+                            <EmeraldChittiTableNew
+                              defaultData={data?.challan_table}
+                              tableData={tableData}
+                              setTableData={setTableData}
+                              subCategoryList={subCategoryList}
+                              productItemList={productItemList}
+                              setStateForDocStatus={setStateForDocStatus}
+                              readOnly={readOnly}
+                              HandleAddRow={HandleAddRow}
+                              handleKeyDown={handleKeyDown}
+                              handleOnFocus={handleOnFocus}
+                            />
+                          </>
+                        );
+                      })}
+                  </div>
+                </div>
+              </>
+            )}
+
+          </>
+        )
+      }
     </div>
   );
 };
