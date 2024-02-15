@@ -130,7 +130,7 @@ const NarrationTable = ({
     <div className="container chitti-table-container mt-2 border rounded-3  mb-5">
       <div className="d-flex justify-content-between table-heading-row ">
         <caption>Narration- HUID</caption>
-        <p className="cursor-pointer my-auto btn-link" onClick={HandleAddRow}>
+        <p className="cursor-pointer my-auto btn-link" onClick={() => { if (!readOnly) { HandleAddRow() } }}>
           Add Row
         </p>
       </div>
@@ -183,8 +183,6 @@ const NarrationTable = ({
                   className="form-control custom-input-field text-end"
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-sm"
-                  // defaultValue={row.huid_pieces >= 0 ? row.huid_pieces : ''}
-                  // value={row.huid_pieces > 0 ? row.huid_pieces : ''}
                   defaultValue={row.huid_pieces}
                   value={row.huid_pieces}
                   onChange={(e) => HandlePiecesAmount(e, row.id)}
@@ -198,8 +196,6 @@ const NarrationTable = ({
                   aria-label="Sizing example input"
                   aria-describedby="inputGroup-sizing-sm"
                   onKeyDown={(e) => handleKeyDown(e, row.id)}
-                  // defaultValue={row.huid_weight >= 0 ? row.huid_weight : ''}
-                  // value={row.huid_weight > 0 ? row.huid_weight : ''}
                   defaultValue={row.huid_weight}
                   value={row.huid_weight}
                   onChange={(e) => HandleWeightAmount(e, row.id)}
@@ -208,7 +204,7 @@ const NarrationTable = ({
               </td>
               <td className="table-data-input">
                 <div
-                  className="d-flex align-items-center delete-link"
+                  className="d-flex align-items-center delete-link cursor-pointer"
                   onClick={() => HandleDeleteRow(row.id)}
                 >
                   <i className="fa-solid fa-xmark fs-5"></i>

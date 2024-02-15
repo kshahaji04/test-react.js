@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import EmeraldCreateChitti from '../CreateEmeraldChitti/EmeraldCreateChitti';
-
 import UseEditEmeraldChittiHook from '../../../hooks/Emerald/edit-emerald-chitti-hook';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -12,7 +11,7 @@ import NoRecord from '../../NoRecord';
 
 const EditEmeraldChitti = () => {
   const navigate = useNavigate();
-  // const { subCategoryList } = UseSubCategoryHook();
+
   const {
     selectedDropdownValue,
     setSelectedDropdownValue,
@@ -63,11 +62,6 @@ const EditEmeraldChitti = () => {
     }
   }, [docStatusFromStore]);
 
-  console.log(
-    'showSaveButtonForAmendFlow',
-    showSaveButtonForAmendFlow,
-    showButton
-  );
   const HandleAmendButtonChanges: any = async () => {
     console.log('docStatus from store in amend func');
     setShowSaveButtonForAmendFlow(true);
@@ -224,15 +218,6 @@ const EditEmeraldChitti = () => {
                               readOnly={readOnly}
                             />
 
-                            {/* <EmeraldChittiTable
-                    defaultData={data?.challan_table}
-                    tableData={tableData}
-                    setTableData={setTableData}
-                    subCategoryList={subCategoryList}
-                    productItemList={productItemList}
-                    setStateForDocStatus={setStateForDocStatus}
-                    readOnly={readOnly}
-                  /> */}
                             <EmeraldChittiTableNew
                               defaultData={data?.challan_table}
                               tableData={tableData}

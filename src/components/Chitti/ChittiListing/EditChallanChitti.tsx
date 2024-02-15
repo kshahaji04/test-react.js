@@ -75,189 +75,188 @@ const EditChallanChitti = () => {
 
   return (
     <div className="container">
-
-      {challanDetailDataFromStore?.isLoading === "pending" ? (
-        <Loader />
-      ) : (
-        <>
-          {
-            Object.keys(challanDetailDataFromStore?.data)?.length === 0 && challanDetailDataFromStore?.isLoading === "succeeded" ? (
-              <NoRecord />
-            ) : (
-              <>
-                <div className="d-flex justify-content-between  my-3">
-                  <div className="d-flex align-items-center">
-                    <div>
-                      <button
-                        type="submit"
-                        onClick={HandleBackButton}
-                        className=" btn btn-outline-primary me-3 px-2 py-0 form-submit-button"
-                      >
-                        Back
-                      </button>
-                    </div>
-                    {stateForDocStatus === true && showButton === 0 && (
-                      <button type="button" className="btn docstatus-button">
-                        Not Saved
-                      </button>
-                    )}
-                    {stateForDocStatus === false && showButton === 0 && (
-                      <button type="button" className="btn docstatus-button">
-                        Draft
-                      </button>
-                    )}
-                    {showButton === 1 && (
-                      <button type="button" className="btn docstatus-button">
-                        Submit
-                      </button>
-                    )}
-                    {showButton === 2 && readOnly && (
-                      <button type="button" className="btn docstatus-button">
-                        Cancelled
-                      </button>
-                    )}
-                    {showSaveButtonForAmendFlow &&
-                      stateForDocStatus &&
-                      readOnly === false && (
-                        <button type="button" className="btn docstatus-button">
-                          Not saved
-                        </button>
-                      )}
-                  </div>
-                  <div>
-                    {stateForDocStatus === true && showButton === 0 && (
-                      <button
-                        type="submit"
-                        onClick={HandleUpdateChallanSubmit}
-                        className=" btn btn-outline-primary px-2 py-0 form-submit-button"
-                      >
-                        Save
-                      </button>
-                    )}
-                    {stateForDocStatus === false && showButton === 0 && (
-                      <button
-                        type="submit"
-                        className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-                        onClick={HandleSubmitChallanChitti}
-                      >
-                        Submit
-                      </button>
-                    )}
-                    {showButton === 1 && (
-                      <button
-                        type="submit"
-                        className=" btn btn-outline-primary me-2 px-2 py-0 form-submit-button"
-                        onClick={HandlePrintButton}
-                      >
-                        Print
-                      </button>
-                    )}
-                    {showButton === 1 && (
-                      <button
-                        type="submit"
-                        className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-                        onClick={HandleCancelChallanChitti}
-                      >
-                        Cancel
-                      </button>
-                    )}
-                    {challanDetail?.length > 0 &&
-                      challanDetail !== null &&
-                      challanDetail[0]?.date ===
-                      new Date()?.toISOString()?.split('T')[0] && (
-                        <>
-                          {showButton === 2 && showSaveButtonForAmendFlow === false && (
-                            <>
-                              <button
-                                type="submit"
-                                className=" btn btn-outline-primary px-2 me-2 py-0  form-submit-button"
-                                onClick={HandleAmendButtonChanges}
-                              >
-                                Amend
-                              </button>
-                            </>
-                          )}
-                        </>
-                      )}
-
-                    {showSaveButtonForAmendFlow &&
-                      stateForDocStatus &&
-                      readOnly === false && (
+      <div className='col-lg-9 col-12 mx-auto mt-2'>
+        {challanDetailDataFromStore?.isLoading === "pending" ? (
+          <Loader />
+        ) : (
+          <>
+            {
+              Object.keys(challanDetailDataFromStore?.data)?.length === 0 && challanDetailDataFromStore?.isLoading === "succeeded" ? (
+                <NoRecord />
+              ) : (
+                <>
+                  <div className="d-flex justify-content-between  my-3">
+                    <div className="d-flex align-items-center">
+                      <div>
                         <button
                           type="submit"
-                          onClick={HandleAmendButtonForDuplicateChitti}
-                          className=" btn btn-outline-primary px-2 py-0 me-2 form-submit-button"
+                          onClick={HandleBackButton}
+                          className=" btn btn-outline-primary me-3 px-2 py-0 form-submit-button"
+                        >
+                          Back
+                        </button>
+                      </div>
+                      {stateForDocStatus === true && showButton === 0 && (
+                        <button type="button" className="btn docstatus-button">
+                          Not Saved
+                        </button>
+                      )}
+                      {stateForDocStatus === false && showButton === 0 && (
+                        <button type="button" className="btn docstatus-button">
+                          Draft
+                        </button>
+                      )}
+                      {showButton === 1 && (
+                        <button type="button" className="btn docstatus-button">
+                          Submit
+                        </button>
+                      )}
+                      {showButton === 2 && readOnly && (
+                        <button type="button" className="btn docstatus-button">
+                          Cancelled
+                        </button>
+                      )}
+                      {showSaveButtonForAmendFlow &&
+                        stateForDocStatus &&
+                        readOnly === false && (
+                          <button type="button" className="btn docstatus-button">
+                            Not saved
+                          </button>
+                        )}
+                    </div>
+                    <div>
+                      {stateForDocStatus === true && showButton === 0 && (
+                        <button
+                          type="submit"
+                          onClick={HandleUpdateChallanSubmit}
+                          className=" btn btn-outline-primary px-2 py-0 form-submit-button"
                         >
                           Save
                         </button>
                       )}
+                      {stateForDocStatus === false && showButton === 0 && (
+                        <button
+                          type="submit"
+                          className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
+                          onClick={HandleSubmitChallanChitti}
+                        >
+                          Submit
+                        </button>
+                      )}
+                      {showButton === 1 && (
+                        <button
+                          type="submit"
+                          className=" btn btn-outline-primary me-2 px-2 py-0 form-submit-button"
+                          onClick={HandlePrintButton}
+                        >
+                          Print
+                        </button>
+                      )}
+                      {showButton === 1 && (
+                        <button
+                          type="submit"
+                          className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
+                          onClick={HandleCancelChallanChitti}
+                        >
+                          Cancel
+                        </button>
+                      )}
+                      {challanDetail?.length > 0 &&
+                        challanDetail !== null &&
+                        challanDetail[0]?.date ===
+                        new Date()?.toISOString()?.split('T')[0] && (
+                          <>
+                            {showButton === 2 && showSaveButtonForAmendFlow === false && (
+                              <>
+                                <button
+                                  type="submit"
+                                  className=" btn btn-outline-primary px-2 me-2 py-0  form-submit-button"
+                                  onClick={HandleAmendButtonChanges}
+                                >
+                                  Amend
+                                </button>
+                              </>
+                            )}
+                          </>
+                        )}
 
-                    {showButton === 2 && (
-                      <button
-                        type="submit"
-                        className=" btn btn-outline-primary px-2 py-0  form-submit-button"
-                        onClick={HandleDeleteChallanChitti}
-                      >
-                        Delete
-                      </button>
-                    )}
+                      {showSaveButtonForAmendFlow &&
+                        stateForDocStatus &&
+                        readOnly === false && (
+                          <button
+                            type="submit"
+                            onClick={HandleAmendButtonForDuplicateChitti}
+                            className=" btn btn-outline-primary px-2 py-0 me-2 form-submit-button"
+                          >
+                            Save
+                          </button>
+                        )}
+
+                      {showButton === 2 && (
+                        <button
+                          type="submit"
+                          className=" btn btn-outline-primary px-2 py-0  form-submit-button"
+                          onClick={HandleDeleteChallanChitti}
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
                   </div>
-                </div>
-                <div>
-                  {challanDetail?.length > 0 && challanDetail !== null
-                    ? challanDetail.map((data: any) => {
-                      console.log('default data challan', data);
-                      return (
-                        <>
-                          <CreateChittiForm
-                            defaultData={data}
-                            HandleDateChange={HandleDateChange}
-                            selectedDropdownValue={selectedDropdownValue}
-                            clientNameList={clientNameList}
-                            setSelectedDropdownValue={setSelectedDropdownValue}
-                            HandleGoldRate={HandleGoldRate}
-                            HandleRemarks={HandleRemarks}
-                            clientGroupList={clientGroupList}
-                            setStateForDocStatus={setStateForDocStatus}
-                            setRemarks={setRemarks}
-                            setGoldRate={setGoldRate}
-                            readOnly={readOnly}
-                          />
-                          <ChallanItemsTable
-                            defaultData={data?.challan_table}
-                            tableData={tableData}
-                            setTableData={setTableData}
-                            subCategoryList={subCategoryList}
-                            setStateForDocStatus={setStateForDocStatus}
-                            setTotalGrossWeightOfChallanTable={
-                              setTotalGrossWeightOfChallanTable
-                            }
-                            setCheckGrossAndNetWeight={setCheckGrossAndNetWeight}
-                            readOnly={readOnly}
-                          />
-                          <NarrationTable
-                            defaultData={data?.narrations}
-                            narrationTableData={narrationTableData}
-                            setNarrationTableData={setNarrationTableData}
-                            productList={productList}
-                            setStateForDocStatus={setStateForDocStatus}
-                            setTotalHuidWeightOfHuidTable={
-                              setTotalHuidWeightOfHuidTable
-                            }
-                            readOnly={readOnly}
-                          />
-                        </>
-                      );
-                    })
-                    : ''}
-                </div>
-              </>
-            )
-          }
-
-        </>
-      )}
-
+                  <div className=''>
+                    {challanDetail?.length > 0 && challanDetail !== null
+                      ? challanDetail.map((data: any) => {
+                        console.log('default data challan', data);
+                        return (
+                          <>
+                            <CreateChittiForm
+                              defaultData={data}
+                              HandleDateChange={HandleDateChange}
+                              selectedDropdownValue={selectedDropdownValue}
+                              clientNameList={clientNameList}
+                              setSelectedDropdownValue={setSelectedDropdownValue}
+                              HandleGoldRate={HandleGoldRate}
+                              HandleRemarks={HandleRemarks}
+                              clientGroupList={clientGroupList}
+                              setStateForDocStatus={setStateForDocStatus}
+                              setRemarks={setRemarks}
+                              setGoldRate={setGoldRate}
+                              readOnly={readOnly}
+                            />
+                            <ChallanItemsTable
+                              defaultData={data?.challan_table}
+                              tableData={tableData}
+                              setTableData={setTableData}
+                              subCategoryList={subCategoryList}
+                              setStateForDocStatus={setStateForDocStatus}
+                              setTotalGrossWeightOfChallanTable={
+                                setTotalGrossWeightOfChallanTable
+                              }
+                              setCheckGrossAndNetWeight={setCheckGrossAndNetWeight}
+                              readOnly={readOnly}
+                            />
+                            <NarrationTable
+                              defaultData={data?.narrations}
+                              narrationTableData={narrationTableData}
+                              setNarrationTableData={setNarrationTableData}
+                              productList={productList}
+                              setStateForDocStatus={setStateForDocStatus}
+                              setTotalHuidWeightOfHuidTable={
+                                setTotalHuidWeightOfHuidTable
+                              }
+                              readOnly={readOnly}
+                            />
+                          </>
+                        );
+                      })
+                      : ''}
+                  </div>
+                </>
+              )
+            }
+          </>
+        )}
+      </div>
     </div>
 
   );

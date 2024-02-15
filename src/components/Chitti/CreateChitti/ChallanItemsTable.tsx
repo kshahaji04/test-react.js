@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-
 import CustomDropdownForTable from '../../CustomDropdownForTable';
 
 const ChallanItemsTable = ({
@@ -171,16 +170,12 @@ const ChallanItemsTable = ({
     if (row) {
       const grossWeight = row.gross_weight;
       const netWeight = grossWeight - inputValue;
-      // const grossWeightUpdated = inputValue + row.net_weight
 
       const updatedData = tableData.map((row: any) =>
         row.id === id
           ? { ...row, net_weight: netWeight, less_wt: inputValue }
           : row
       );
-      // const updatedData = tableData.map((row: any) =>
-      //   row.id === id ? { ...row, less_wt: inputValue } : row
-      // );
 
       setTableData(updatedData);
       setStateForDocStatus(true);
@@ -220,7 +215,7 @@ const ChallanItemsTable = ({
       <div className="container mt-1 border rounded-3 chitti-table-container">
         <div className="d-flex justify-content-between table-heading-row">
           <caption>Challan Items</caption>
-          <p className="cursor-pointer my-auto btn-link" onClick={HandleAddRow}>
+          <p className="cursor-pointer my-auto btn-link" onClick={() => { if (!readOnly) { HandleAddRow() } }}>
             Add Row
           </p>
         </div>
@@ -317,8 +312,6 @@ const ChallanItemsTable = ({
                         className="form-control custom-input-field-t text-end"
                         aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm"
-                        // defaultValue={row.amount >= 0 ? row.amount : ''}
-                        // value={row.amount > 0 ? row.amount : ''}
                         defaultValue={row.amount}
                         value={row.amount}
                         onKeyDown={(e) => handleKeyDown(e, row.id)}
@@ -328,7 +321,7 @@ const ChallanItemsTable = ({
                     </td>
                     <td className="table-data-input">
                       <div
-                        className="d-flex align-items-center delete-link"
+                        className="d-flex align-items-center delete-link cursor-pointer"
                         onClick={() => HandleDeleteRow(row.id)}
                       >
                         <i className="fa-solid fa-xmark fs-5"></i>

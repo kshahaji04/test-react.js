@@ -12,7 +12,7 @@ const EmeraldChittiTableNew = ({
   readOnly,
   setStateForDocStatus,
 }: any) => {
-  // const [] = useState<any>();
+
   const ShowCategoryDropdown: any = useRef<any>(true);
   const inputRef: any = useRef<HTMLInputElement>(null);
   const [calculationRow, setCalculationRow] = useState({
@@ -61,11 +61,7 @@ const EmeraldChittiTableNew = ({
     // Recalculate live calculations whenever tableData changes
     calculateLiveCalculations();
   }, [tableData, setTableData]);
-  // useEffect(() => {
-  //   if (inputRef.current) {
-  //     inputRef.current.focus();
-  //   }
-  // }, [HandleAddRow]);
+
   console.log(tableData.length, 'tableData ');
   const calculateLiveCalculations = async () => {
     // Calculate live values based on tableData
@@ -99,40 +95,6 @@ const EmeraldChittiTableNew = ({
     setCalculationRow(liveCalculations);
   };
 
-  // const handleInputChange: any = (id: any, field: string, newValue: any) => {
-  //   setTableData((prevData: any) =>
-  //     prevData.map((row: any) => {
-  //       if (row.idx === id) {
-  //         let updatedRow = { ...row, [field]: newValue };
-
-  //         // Calculate cz_amt when stn_wt changes
-  //         //   if (field === 'stn_wt') {
-  //         //     const newCzAmt = parseFloat(newValue) * 10.0;
-  //         //     updatedRow = {
-  //         //       ...updatedRow,
-  //         //       stn_wt: newValue,
-  //         //       cz_amt: newCzAmt,
-  //         //       amount: newCzAmt + (parseFloat(updatedRow.cs_amt) || 0),
-  //         //     };
-  //         //   }
-
-  //         // Calculate amount when cz_amt or cs_amt changes
-  //         if (field === 'i' || field === 'k') {
-  //           updatedRow = {
-  //             ...updatedRow,
-  //             amount:
-  //               (parseFloat(updatedRow.i) || 0) +
-  //               (parseFloat(updatedRow.k) || 0),
-  //           };
-  //         }
-  //         setStateForDocStatus(true);
-  //         return updatedRow;
-  //       } else {
-  //         return row;
-  //       }
-  //     })
-  //   );
-  // };
   const handleInputChange: any = (id: any, field: string, newValue: any) => {
     setTableData((prevData: any) =>
       prevData.map((row: any, index: number) => {
@@ -194,10 +156,7 @@ const EmeraldChittiTableNew = ({
     }
   };
 
-  // const handleOnFocus: any = (e: any, id: any) => {
-  //     console.log("onfocus", e.target, id)
 
-  // }
 
   console.log('updated tabled dataa', tableData);
   return (
@@ -208,7 +167,7 @@ const EmeraldChittiTableNew = ({
             <caption>Emerald Chitti Table</caption>
             <p
               className="cursor-pointer my-auto btn-link"
-              onClick={HandleAddRow}
+              onClick={() => { if (!readOnly) { HandleAddRow() } }}
             >
               Add Row
             </p>
@@ -560,7 +519,7 @@ const EmeraldChittiTableNew = ({
                         </td>
                         <td className="table-data-input">
                           <div
-                            className="d-flex align-items-center delete-link"
+                            className="d-flex align-items-center delete-link cursor-pointer"
                             onClick={() => HandleDeleteRow(row.idx)}
                           >
                             <i className="fa-solid fa-xmark fs-5"></i>
