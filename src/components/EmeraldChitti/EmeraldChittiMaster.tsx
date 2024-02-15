@@ -5,7 +5,7 @@ import UseEmeraldHook from '../../hooks/Emerald/emrald-page-hook';
 import UseSubCategoryHook from '../../hooks/Master/sub-category-hook';
 import SearchListingTable from '../Chitti/ChittiListing/SearchListingTable';
 import { useState } from 'react';
-import ListingTable from '../ListingTable';
+import ListingTable from '../ChittiListing/ListingTable';
 
 
 const EmeraldChittiMaster = () => {
@@ -127,7 +127,7 @@ const EmeraldChittiMaster = () => {
           <Tabs
             defaultActiveKey="chitti-listing"
             id="justify-tab-example"
-            className="w-75"
+            className="w-75 border-0"
             justify
           >
             <Tab eventKey="chitti-listing" title="Emerald Chitti List">

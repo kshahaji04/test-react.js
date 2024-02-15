@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
-
 import { NavLink } from 'react-router-dom';
-import DeleteChallanChittiApi from '../services/api/Chitti/delete-challan-chitti-api';
-import { get_access_token } from '../store/slices/auth/token-login-slice';
+import DeleteChallanChittiApi from '../../services/api/Chitti/delete-challan-chitti-api';
+import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
-import { getChittiChallan } from '../store/slices/Chitti/get-chitti-challan-list-slice';
+import { getChittiChallan } from '../../store/slices/Chitti/get-chitti-challan-list-slice';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import DeleteEmeraldChittiApi from '../services/api/Emerald/delete-emerald-chitti-api';
-import { getEmeraldChallan } from '../store/slices/Emerald/get-emerald-list-slice';
-import PrintChallanChittiApi from '../services/api/Chitti/print-challan-chitti-api';
-import PrintEmeraldChittiApi from '../services/api/Emerald/print-emerald-chitti-api';
-import { UpdateDocStatusChallanApi } from '../services/api/general/update-doc-status-challan--api';
-import { UpdateDocStatusEmeraldChittiApi } from '../services/api/general/update-doc-status-emrald-chitti-api';
-import { getSpecificEmeraldChitti, get_specific_emerald_chitti } from '../store/slices/Emerald/get-specific-emrald-slice';
+import DeleteEmeraldChittiApi from '../../services/api/Emerald/delete-emerald-chitti-api';
+import { getEmeraldChallan } from '../../store/slices/Emerald/get-emerald-list-slice';
+import PrintChallanChittiApi from '../../services/api/Chitti/print-challan-chitti-api';
+import PrintEmeraldChittiApi from '../../services/api/Emerald/print-emerald-chitti-api';
+import { UpdateDocStatusChallanApi } from '../../services/api/general/update-doc-status-challan--api';
+import { UpdateDocStatusEmeraldChittiApi } from '../../services/api/general/update-doc-status-emrald-chitti-api';
+import { getSpecificEmeraldChitti, get_specific_emerald_chitti } from '../../store/slices/Emerald/get-specific-emrald-slice';
+import LoadMoreChittiListing from './LoadMoreChittiListing';
 
 
 const ListingTable = ({ tableListingData }: any) => {
@@ -23,8 +23,6 @@ const ListingTable = ({ tableListingData }: any) => {
   const EmeraldChittiDataFromStore: any = useSelector(
     get_specific_emerald_chitti
   );
-
-
 
   console.log('EmeraldChittiDataFromStore in listing', EmeraldChittiDataFromStore);
 
@@ -371,43 +369,7 @@ const ListingTable = ({ tableListingData }: any) => {
 
             {TableBodyData()}</tbody>
         </table>
-        {tableListingData?.length > 5 && tableListingData !== null && (
-
-          <div
-            className="btn-group mr-2 my-2 mb-4"
-            role="group"
-            aria-label="Second group"
-          >
-            <button
-              type="button"
-              className="btn btn-primary  py-0"
-              onClick={() => HandleTableViewRows(5)}
-            >
-              5
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary  py-0"
-              onClick={() => HandleTableViewRows(20)}
-            >
-              20
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary  py-0"
-              onClick={() => HandleTableViewRows(100)}
-            >
-              100
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary  py-0"
-              onClick={() => HandleTableViewRows(500)}
-            >
-              500
-            </button>
-          </div>
-        )}
+        <LoadMoreChittiListing tableListingData={tableListingData} HandleTableViewRows={HandleTableViewRows} />
       </div>
     </>
   );

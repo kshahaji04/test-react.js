@@ -4,7 +4,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import CreateChittiMaster from './CreateChitti/CreateChittiMaster';
 import SearchListingTable from './ChittiListing/SearchListingTable';
 import UseChittiHook from '../../hooks/Chitti/chitti-page-hook';
-import ListingTable from '../ListingTable';
+import ListingTable from '../ChittiListing/ListingTable';
 import '../../Style/chitti.css';
 
 const ChittiMaster = () => {
@@ -68,16 +68,12 @@ const ChittiMaster = () => {
   const filteredList =
     chittiListingData?.length > 0 &&
       chittiListingData !== null &&
-      (searchInputValues.submitted_date ||
-        searchInputValues.from_date ||
-        searchInputValues.to_date ||
-        searchInputValues.chitti_no ||
-        searchClientName ||
-        searchInputValues.status)
+      (searchInputValues.submitted_date || searchInputValues.from_date || searchInputValues.to_date ||
+        searchInputValues.chitti_no || searchClientName || searchInputValues.status)
       ? chittiListingData.filter((item: any) => {
-        const submittedDateMatch = searchInputValues.submitted_date
-          ? item?.submitted_date?.includes(searchInputValues.submitted_date)
-          : true;
+        // const submittedDateMatch = searchInputValues.submitted_date
+        //   ? item?.submitted_date?.includes(searchInputValues.submitted_date)
+        //   : true;
         const fromDateAndToDateMatch =
           searchInputValues.from_date && searchInputValues.to_date
             ? item.date >= searchInputValues.from_date && item.date <= searchInputValues.to_date
@@ -86,15 +82,13 @@ const ChittiMaster = () => {
           ? item?.number?.includes(searchInputValues.chitti_no)
           : true;
         const clientNameMatch = searchClientName
-          ? item?.client_name
-            ?.toLowerCase()
-            .includes(searchClientName.toLowerCase())
+          ? item?.client_name?.toLowerCase()?.includes(searchClientName.toLowerCase())
           : true;
 
         if (searchInputValues.status === 'Draft') {
           return (
             item?.docstatus === 0 &&
-            submittedDateMatch &&
+            // submittedDateMatch &&
             fromDateAndToDateMatch &&
             numberMatch &&
             clientNameMatch
@@ -102,7 +96,7 @@ const ChittiMaster = () => {
         } else if (searchInputValues.status === 'Submitted') {
           return (
             item?.docstatus === 1 &&
-            submittedDateMatch &&
+            // submittedDateMatch &&
             fromDateAndToDateMatch &&
             numberMatch &&
             clientNameMatch
@@ -110,18 +104,15 @@ const ChittiMaster = () => {
         } else if (searchInputValues.status === 'Cancel') {
           return (
             item?.docstatus === 2 &&
-            submittedDateMatch &&
+            // submittedDateMatch &&
             fromDateAndToDateMatch &&
             numberMatch &&
             clientNameMatch
           );
         }
-
         return (
-          submittedDateMatch &&
-          fromDateAndToDateMatch &&
-          numberMatch &&
-          clientNameMatch
+          // submittedDateMatch &&
+          fromDateAndToDateMatch && numberMatch && clientNameMatch
         );
       })
       : chittiListingData;
@@ -136,7 +127,7 @@ const ChittiMaster = () => {
             <Tabs
               defaultActiveKey="chitti-listing"
               id="justify-tab-example"
-              className="w-75 "
+              className="w-75 border-0"
               justify
             >
               <Tab eventKey="chitti-listing" title="Chitti List"  >
@@ -163,7 +154,7 @@ const ChittiMaster = () => {
                 </div>
               </Tab>
               <Tab eventKey="longer-tab" title="Create Chitti">
-                <div className='col-lg-9  col-12 mx-auto'>
+                <div className='col-lg-9 col-12 mx-auto mt-2'>
                   <CreateChittiMaster
                     HandleCreateChittiSubmit={HandleCreateChittiSubmit}
                     currentDate={currentDate}
