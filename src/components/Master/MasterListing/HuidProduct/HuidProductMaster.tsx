@@ -13,7 +13,7 @@ const HuidProductMaster = () => {
   const [inputPcs, setInputPcs] = useState('');
   const [tableViewData, setTableViewData] = useState<any>(20);
 
-  const HandleTableViewRows: any = (data: any) => {
+  const handleTableViewRows: any = (data: any) => {
     setTableViewData(data);
   };
 
@@ -24,7 +24,7 @@ const HuidProductMaster = () => {
   const handleInputChange2 = (event: any) => {
     setInputPcs(event.target.value);
   };
-  console.log('huidDataFromStore in tex', huidProductData);
+
   const filteredList: any = huidProductData || [];
 
   // Now you can apply additional filters if needed
@@ -51,7 +51,6 @@ const HuidProductMaster = () => {
 
   return (
     <div className="container">
-
       <div className="row justify-content-center mt-3">
         <div className="col-lg-9 chitti-nav-tabs tab-container">
           <Tabs
@@ -72,7 +71,7 @@ const HuidProductMaster = () => {
 
               <HuidProductListing
                 listingData={filteredListWithAdditionalFilters}
-                HandleTableViewRows={HandleTableViewRows}
+                handleTableViewRows={handleTableViewRows}
                 tableViewData={tableViewData}
               />
             </Tab>

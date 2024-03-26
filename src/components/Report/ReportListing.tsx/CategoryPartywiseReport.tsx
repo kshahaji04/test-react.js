@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import UseCategoryPartywiseReportHook from '../../../hooks/report/category-partywise-hook';
+import useCategoryPartywiseReportHook from '../../../hooks/report/category-partywise-hook';
 import FilterReportListing from './FilterReportListing';
-import UseClientNameHook from '../../../hooks/Master/client-name-hook';
-import UseCategoryHook from '../../../hooks/Master/category-hook';
+import useClientNameHook from '../../../hooks/Master/client-name-hook';
+import useCategoryHook from '../../../hooks/Master/category-hook';
 import { useSelector } from 'react-redux';
-import { get_chitti_challan } from '../../../store/slices/Chitti/get-chitti-challan-list-slice';
 import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
 import { useDispatch } from 'react-redux';
 import { getCategoryPartywiseReportData } from '../../../store/slices/report/get-category-partywise-report-slice';
@@ -13,18 +12,12 @@ import DownloadReportApi from '../../../services/api/report/download-report-api'
 
 const CategoryPartyWiseReport = () => {
   const dispatch = useDispatch();
-  const { categoryPartywiseReportData }: any = UseCategoryPartywiseReportHook();
-  console.log(
-    'categoryPartywiseReportData in tssx',
-    categoryPartywiseReportData
-  );
+  const { categoryPartywiseReportData }: any = useCategoryPartywiseReportHook();
 
-  const challan_data_from_store: any = useSelector(get_chitti_challan);
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
-  console.log('challandata', challan_data_from_store);
-  const { clientNameList }: any = UseClientNameHook();
-  const { CategoryList }: any = UseCategoryHook();
+  const { clientNameList }: any = useClientNameHook();
+  const { CategoryList }: any = useCategoryHook();
 
   const [searchInputValues, setSearchInputValues] = useState({
     fromDate: '',
@@ -38,7 +31,7 @@ const CategoryPartyWiseReport = () => {
   const [searchClientName, setSearchclientName] = useState<any>('');
   const [searchCategory, setSearchCategory] = useState<any>('');
 
-  const HandleSearchInput: any = (e: any) => {
+  const handleSearchInput: any = (e: any) => {
     const { name, value } = e.target;
     setSearchInputValues({
       ...searchInputValues,
@@ -46,12 +39,10 @@ const CategoryPartyWiseReport = () => {
     });
   };
 
-  console.log('search category', searchCategory);
-
   useEffect(() => {
     const handleFilterList: any = () => {
       const reqParams: any = {
-        token: AccessToken?.token,
+        token: accessToken?.token,
         category: searchCategory,
         client_name: searchClientName,
         from_date: searchInputValues?.fromDate,
@@ -97,7 +88,7 @@ const CategoryPartyWiseReport = () => {
 
   const handleDownloadReport: any = async () => {
     const reqParams: any = {
-      token: AccessToken?.token,
+      token: accessToken?.token,
       method: 'get_category_partywise_report_print',
       entity: 'report_print_category_wise',
       category: searchCategory,
@@ -112,12 +103,11 @@ const CategoryPartyWiseReport = () => {
     }
   };
 
-
   return (
     <div className="container">
-      <div className='row justify-content-center'>
-        <div className='col-lg-10 col-12 '>
-          <div className='col-lg-9 col-12 mx-auto'>
+      <div className="row justify-content-center">
+        <div className="col-lg-10 col-12 ">
+          <div className="col-lg-9 col-12 mx-auto">
             <div className="mt-1 d-flex justify-content-between">
               <h5>Category Partywise Report</h5>
               <button
@@ -136,7 +126,7 @@ const CategoryPartyWiseReport = () => {
             CategoryList={CategoryList}
             searchCategory={searchCategory}
             setSearchCategory={setSearchCategory}
-            HandleSearchInput={HandleSearchInput}
+            handleSearchInput={handleSearchInput}
             showCategoryInFilter={showCategoryInFilter}
             showClientNameInFilter={showClientNameInFilter}
             showDateInFilter={showDateInFilter}
@@ -156,22 +146,24 @@ const CategoryPartyWiseReport = () => {
               </thead>
               <tbody>
                 {categoryPartywiseReportData?.length > 0 &&
-                  categoryPartywiseReportData !== null ? (
+                categoryPartywiseReportData !== null ? (
                   <>
-                    {categoryPartywiseReportData.map((data: any, index: any) => {
-                      return (
-                        <>
-                          <tr className="report-table-row" key={index}>
-                            <td>{index + 1}</td>
-                            <td>{data.category}</td>
-                            <td>{data.client_name}</td>
-                            <td>{data.total_gross_weight?.toFixed(3)}</td>
-                            <td>{data.total_net_weight?.toFixed(3)}</td>
-                            <td>{data.total_amount?.toFixed(2)}</td>
-                          </tr>
-                        </>
-                      );
-                    })}
+                    {categoryPartywiseReportData.map(
+                      (data: any, index: any) => {
+                        return (
+                          <>
+                            <tr className="report-table-row" key={index}>
+                              <td>{index + 1}</td>
+                              <td>{data.category}</td>
+                              <td>{data.client_name}</td>
+                              <td>{data.total_gross_weight?.toFixed(3)}</td>
+                              <td>{data.total_net_weight?.toFixed(3)}</td>
+                              <td>{data.total_amount?.toFixed(2)}</td>
+                            </tr>
+                          </>
+                        );
+                      }
+                    )}
                     <ShowTotalAmountOfReportData
                       data={categoryPartywiseReportData}
                       colSpan="3"

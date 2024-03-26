@@ -21,8 +21,6 @@ const EmeraldChittiTable = ({
 
   const showCategoryDropdown: any = useRef<any>(true);
 
-  console.log('productItemList', productItemList);
-
   useEffect(() => {
     if (
       defaultData?.length > 0 &&
@@ -35,7 +33,7 @@ const EmeraldChittiTable = ({
     }
   }, [defaultData, setTableData]);
 
-  const HandleAddRow: any = () => {
+  const handleAddRow: any = () => {
     const newRow = {
       id: tableData.length + 1,
       sub_category: '',
@@ -69,7 +67,7 @@ const EmeraldChittiTable = ({
     setamountValue(newColumnTotals);
   };
 
-  const HandleDeleteRow: any = (id: any) => {
+  const handleDeleteRow: any = (id: any) => {
     if (tableData?.length > 1) {
       const updatedData = tableData
         .filter((row: any) => row.id !== id)
@@ -81,7 +79,7 @@ const EmeraldChittiTable = ({
 
   const handleKeyDown = (event: any, id: any) => {
     if (event.key === 'Tab' && id === tableData[tableData.length - 1].id) {
-      HandleAddRow();
+      handleAddRow();
       setStateForDocStatus(true);
     }
   };
@@ -114,7 +112,7 @@ const EmeraldChittiTable = ({
     setamountValue(newColumnTotals);
   }, [tableData]);
 
-  const HandleGrossWeightValue = (e: any, id: any) => {
+  const handleGrossWeightValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
       row.id === id
         ? { ...row, gross_weight: parseFloat(e.target.value) || 0 }
@@ -124,7 +122,7 @@ const EmeraldChittiTable = ({
     setStateForDocStatus(true);
   };
 
-  const HandleNetWeightValue = (e: any, id: any) => {
+  const handleNetWeightValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
       row.id === id
         ? { ...row, net_weight: parseFloat(e.target.value) || 0 }
@@ -134,8 +132,7 @@ const EmeraldChittiTable = ({
     setStateForDocStatus(true);
   };
 
-  const HandleSubCategory = (value: any, id: any) => {
-    console.log('handlecategory', value);
+  const handleSubCategory = (value: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, sub_category: value } : row
     );
@@ -144,15 +141,14 @@ const EmeraldChittiTable = ({
       setStateForDocStatus(true);
     }
   };
-  const HandleCategoryForNewSubcategory = (value: any, id: any) => {
-    console.log('handlecategory', value);
+  const handleCategoryForNewSubcategory = (value: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, category: value } : row
     );
     setTableData(updatedData);
   };
 
-  const HandleProductItem = (value: any, id: any) => {
+  const handleProductItem = (value: any, id: any) => {
     console.log('handlecategory', value);
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, product: value } : row
@@ -163,7 +159,7 @@ const EmeraldChittiTable = ({
     }
   };
 
-  const HandleAmountValue = (e: any, id: any) => {
+  const handleAmountValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, amount: parseFloat(e.target.value) || 0 } : row
     );
@@ -171,18 +167,6 @@ const EmeraldChittiTable = ({
     setStateForDocStatus(true);
   };
 
-  const GetProductItemList: any = () => {
-    const getDummy = () => {
-      return (
-        productItemList?.length > 0 &&
-        productItemList !== null &&
-        productItemList.map((item: any) => item.name)
-      );
-    };
-    const dummyData = getDummy();
-    return dummyData;
-  };
-  console.log('GetProductItemList', GetProductItemList);
   return (
     <>
       <div className="table-responsive">
@@ -191,7 +175,7 @@ const EmeraldChittiTable = ({
             <caption>Emerald Chitti Table</caption>
             <p
               className="cursor-pointer my-auto btn-link"
-              onClick={HandleAddRow}
+              onClick={handleAddRow}
             >
               Add Row
             </p>
@@ -227,18 +211,18 @@ const EmeraldChittiTable = ({
                             key={row.id}
                             rowId={row.id}
                             placeholderValue="Sub Category"
-                            HandleData={HandleSubCategory}
+                            HandleData={handleSubCategory}
                             selectedDropdownValue={row.sub_category}
                             setSelectedDropdownValue={(value: any) =>
-                              HandleSubCategory(value, row.id)
+                              handleSubCategory(value, row.id)
                             }
                             defaultData={row.sub_category}
                             setStateForDocStatus={setStateForDocStatus}
                             readOnly={readOnly === true ? true : false}
                             dropdownIndex={row.id}
-                            HandleCategoryData={HandleCategoryForNewSubcategory}
+                            HandleCategoryData={handleCategoryForNewSubcategory}
                             setSelectedCategoryForSubcategory={(value: any) =>
-                              HandleCategoryForNewSubcategory(value, row.id)
+                              handleCategoryForNewSubcategory(value, row.id)
                             }
                             showCategoryDropdown={showCategoryDropdown}
                           />
@@ -255,11 +239,11 @@ const EmeraldChittiTable = ({
                             data={row.product}
                             key={row.id}
                             rowId={row.id}
-                            HandleData={HandleProductItem}
+                            HandleData={handleProductItem}
                             placeholderValue="Product"
                             selectedDropdownValue={row.product}
                             setSelectedDropdownValue={(value: any) =>
-                              HandleProductItem(value, row.id)
+                              handleProductItem(value, row.id)
                             }
                             defaultData={row.product}
                             setStateForDocStatus={setStateForDocStatus}
@@ -278,7 +262,7 @@ const EmeraldChittiTable = ({
                             row.gross_weight >= 0 ? row.gross_weight : ''
                           }
                           value={row.gross_weight > 0 ? row.gross_weight : ''}
-                          onChange={(e) => HandleGrossWeightValue(e, row.id)}
+                          onChange={(e) => handleGrossWeightValue(e, row.id)}
                           readOnly={readOnly === true ? true : false}
                         />
                       </td>
@@ -292,7 +276,7 @@ const EmeraldChittiTable = ({
                             row.net_weight >= 0 ? row.net_weight : ''
                           }
                           value={row.net_weight > 0 ? row.net_weight : ''}
-                          onChange={(e) => HandleNetWeightValue(e, row.id)}
+                          onChange={(e) => handleNetWeightValue(e, row.id)}
                           readOnly={readOnly === true ? true : false}
                         />
                       </td>
@@ -305,14 +289,14 @@ const EmeraldChittiTable = ({
                           onKeyDown={(e) => handleKeyDown(e, row.id)}
                           defaultValue={row.amount >= 0 ? row.amount : ''}
                           value={row.amount > 0 ? row.amount : ''}
-                          onChange={(e) => HandleAmountValue(e, row.id)}
+                          onChange={(e) => handleAmountValue(e, row.id)}
                           readOnly={readOnly === true ? true : false}
                         />
                       </td>
                       <td className="table-data-input">
                         <div
                           className="d-flex align-items-center delete-link"
-                          onClick={() => HandleDeleteRow(row.id)}
+                          onClick={() => handleDeleteRow(row.id)}
                         >
                           <i className="fa-solid fa-xmark fs-5"></i>
                         </div>
@@ -368,99 +352,6 @@ const EmeraldChittiTable = ({
             </table>
           </div>
         </div>
-
-        {/* <div className="container border rounded-3 py-1">
-          <div className="d-flex justify-content-between mb-1 table-heading-row">
-            <caption>Emerald Chitti Table</caption>
-            <p
-              className="cursor-pointer my-auto btn-link"
-              onClick={HandleAddRow}
-            >
-              Add Row
-            </p>
-          </div>
-          <table className="table  table-striped caption-top table-hover my-1">
-            <thead>
-              <tr className="table-header-row">
-                <th scope="col">No.</th>
-                <th scope="col" className="w-25">
-                  Sub Category
-                </th>
-                <th scope="col" className="w-25">
-                  Product
-                </th>
-                <th scope="col">Gross Weight</th>
-                <th scope="col">Net Weight</th>
-                <th scope="col">Amount</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {tableData.map((row) => (
-                <tr key={row.id}>
-                  <td>{row.id}</td>
-                  <td>
-                    <select
-                      id="category"
-                      name="category"
-                      className="form-select py-0 custom-input-field"
-                      aria-label=".form-select-sm example"
-                    >
-                      <option></option>
-                      <option>BOM</option>
-                      <option>Emerald</option>
-                    </select>
-                  </td>
-                  <td>
-                    <select
-                      id="product"
-                      name="product"
-                      className="form-select py-0 custom-input-field"
-                      aria-label=".form-select-sm example"
-                    >
-                      <option></option>
-                      <option>ANT AHM</option>
-                      <option>ANT TEMPLE</option>
-                      <option>Antique</option>
-                    </select>
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      className="form-control custom-input-field"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-sm"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      className="form-control custom-input-field"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-sm"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      className="form-control custom-input-field"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-sm"
-                    />
-                  </td>
-                  <td>
-                    <div
-                      className="d-flex align-items-center delete-link"
-                      onClick={() => HandleDeleteRow(row.id)}
-                    >
-                      <i className="fa-solid fa-xmark fs-4"></i>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div> */}
       </div>
     </>
   );

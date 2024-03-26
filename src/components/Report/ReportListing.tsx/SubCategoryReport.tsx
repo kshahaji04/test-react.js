@@ -1,9 +1,9 @@
 import { useRef, useState, useEffect } from 'react';
-import UseSubCategoryReportHook from '../../../hooks/report/subCategory-report-hook';
+import useSubCategoryReportHook from '../../../hooks/report/subCategory-report-hook';
 import FilterReportListing from './FilterReportListing';
-import UseClientNameHook from '../../../hooks/Master/client-name-hook';
-import UseCategoryHook from '../../../hooks/Master/category-hook';
-import UseSubCategoryHook from '../../../hooks/Master/sub-category-hook';
+import useClientNameHook from '../../../hooks/Master/client-name-hook';
+import useCategoryHook from '../../../hooks/Master/category-hook';
+import useSubCategoryHook from '../../../hooks/Master/sub-category-hook';
 import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
 import { useDispatch } from 'react-redux';
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
@@ -13,13 +13,11 @@ import DownloadReportApi from '../../../services/api/report/download-report-api'
 
 const SubCategoryReport = () => {
   const dispatch = useDispatch();
-  const { subCategoryReportData }: any = UseSubCategoryReportHook();
-  const { clientNameList }: any = UseClientNameHook();
-  const { CategoryList }: any = UseCategoryHook();
-  const { subCategoryList }: any = UseSubCategoryHook();
-  const AccessToken: any = useSelector(get_access_token);
-
-  console.log('SubcategoryReport data', subCategoryList);
+  const { subCategoryReportData }: any = useSubCategoryReportHook();
+  const { clientNameList }: any = useClientNameHook();
+  const { CategoryList }: any = useCategoryHook();
+  const { subCategoryList }: any = useSubCategoryHook();
+  const accessToken: any = useSelector(get_access_token);
 
   const [searchInputValues, setSearchInputValues] = useState({
     fromDate: '',
@@ -36,7 +34,7 @@ const SubCategoryReport = () => {
   const [searchCategory, setSearchCategory] = useState<any>('');
   const [searchSubCategory, setSearchSubCategory] = useState<any>('');
 
-  const HandleSearchInput: any = (e: any) => {
+  const handleSearchInput: any = (e: any) => {
     const { name, value } = e.target;
     setSearchInputValues({
       ...searchInputValues,
@@ -47,7 +45,7 @@ const SubCategoryReport = () => {
   useEffect(() => {
     const handleFilterList: any = () => {
       const reqParams: any = {
-        token: AccessToken?.token,
+        token: accessToken?.token,
         category: searchCategory,
         sub_category: searchSubCategory,
         client_name: searchClientName,
@@ -103,7 +101,7 @@ const SubCategoryReport = () => {
 
   const handleDownloadReport: any = async () => {
     const reqParams: any = {
-      token: AccessToken?.token,
+      token: accessToken?.token,
       method: 'get_subcategory_report_print',
       entity: 'report_print',
       category: searchCategory,
@@ -121,9 +119,9 @@ const SubCategoryReport = () => {
 
   return (
     <div className="container mb-5">
-      <div className='row justify-content-center'>
-        <div className='col-lg-10 col-12'>
-          <div className='col-lg-10 col-10 mx-auto'>
+      <div className="row justify-content-center">
+        <div className="col-lg-10 col-12">
+          <div className="col-lg-10 col-10 mx-auto">
             <div className="my-1 d-flex justify-content-between">
               <h5>Sub Category Report</h5>
               <button
@@ -144,7 +142,7 @@ const SubCategoryReport = () => {
             setSearchCategory={setSearchCategory}
             searchSubCategory={searchSubCategory}
             setSearchSubCategory={setSearchSubCategory}
-            HandleSearchInput={HandleSearchInput}
+            handleSearchInput={handleSearchInput}
             showCategoryInFilter={showCategoryInFilter}
             showSubCategoryInFilter={showSubCategoryInFilter}
             showClientNameInFilter={showClientNameInFilter}
@@ -166,17 +164,17 @@ const SubCategoryReport = () => {
               </thead>
               <tbody>
                 {subCategoryReportData?.length > 0 &&
-                  subCategoryReportData !== null ? (
+                subCategoryReportData !== null ? (
                   <>
                     {subCategoryReportData.map((data: any, index: any) => {
                       const subCategory = data.sub_category;
                       const textColor =
                         subCategory ===
-                          subCategoryReportData[index - 1]?.sub_category
+                        subCategoryReportData[index - 1]?.sub_category
                           ? lastSubCategoryColor
                           : lastSubCategoryColor === 'text-danger'
-                            ? 'text-dark'
-                            : 'text-danger';
+                          ? 'text-dark'
+                          : 'text-danger';
                       lastSubCategoryColor = textColor; // Update the color for the next iteration
                       return (
                         <tr className="report-table-row" key={index}>

@@ -8,18 +8,17 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 
-const UseGetSpecificClientGroup = () => {
+const useGetSpecificClientGroup = () => {
   const dispatch = useDispatch();
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
   const { id } = useParams();
   const clientGroupDataFromStore: any = useSelector(get_specific_client_group);
-  console.log('clientGroupDataFromStore', clientGroupDataFromStore);
 
   const [clientGroup, setClientGroup] = useState<any>('');
   useEffect(() => {
     const params = {
       name: id,
-      token: AccessToken?.token,
+      token: accessToken?.token,
     };
     dispatch(getSpecificClientGroup(params));
   }, []);
@@ -36,4 +35,4 @@ const UseGetSpecificClientGroup = () => {
   return { clientGroup };
 };
 
-export default UseGetSpecificClientGroup;
+export default useGetSpecificClientGroup;

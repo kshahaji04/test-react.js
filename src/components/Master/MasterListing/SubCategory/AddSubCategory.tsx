@@ -13,15 +13,15 @@ const AddSubCategory = ({ CategoryList }: any) => {
   const [title, setTitle] = useState<any>('');
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
-  const HandleSubmit: any = async () => {
+  const handleSubmit: any = async () => {
     if (inputValue.trim() === '') {
       setError('Input field cannot be empty');
     } else {
       if (Object?.keys(selectedDropdownValue)?.length > 0) {
         let apiRes: any = await AddSubCategoryApi(
-          AccessToken?.token,
+          accessToken?.token,
           title,
           selectedDropdownValue
         );
@@ -30,7 +30,7 @@ const AddSubCategory = ({ CategoryList }: any) => {
         setTitle('');
         if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
           toast.success('Sub Category Created');
-          dispatch(getSubCategoryCategory(AccessToken?.token));
+          dispatch(getSubCategoryCategory(accessToken?.token));
         } else {
           toast.error('Sub category already exist');
         }
@@ -43,7 +43,7 @@ const AddSubCategory = ({ CategoryList }: any) => {
     }
   };
 
-  const HandleInputValue = (e: any) => {
+  const handleInputValue = (e: any) => {
     setError('');
     setTitle(e.target.value);
     setInputValue(e.target.value);
@@ -62,7 +62,7 @@ const AddSubCategory = ({ CategoryList }: any) => {
           className="form-control ps-2"
           id="basic-url"
           aria-describedby="basic-addon3"
-          onChange={HandleInputValue}
+          onChange={handleInputValue}
           value={inputValue}
         />
       </div>
@@ -86,7 +86,7 @@ const AddSubCategory = ({ CategoryList }: any) => {
       <div className="d-flex justify-content-start ">
         <button
           type="submit"
-          onClick={HandleSubmit}
+          onClick={handleSubmit}
           className=" btn btn-outline-primary py-1 mt-2 form-submit-button"
         >
           Save

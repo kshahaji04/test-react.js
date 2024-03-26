@@ -10,22 +10,22 @@ import SingleItemAdd from '../SingleItemAdd';
 const CreateNewSupplierGroup = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState<any>('');
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
 
-  const HandleSubmit = async () => {
+  const handleSubmit = async () => {
     if (inputValue.trim() === '') {
       setError('Input field cannot be empty');
     } else {
       let apiRes: any = await CreateNewSupplierGroupApi(
-        AccessToken?.token,
+        accessToken?.token,
         title
       );
       console.log('apires', apiRes);
       if (apiRes?.data?.message?.status === 'success') {
         toast.success('Supplier Group Create');
-        dispatch(getSupplierGroupList(AccessToken?.token));
+        dispatch(getSupplierGroupList(accessToken?.token));
       } else {
         toast.error('Supplier group already exist');
       }
@@ -35,7 +35,7 @@ const CreateNewSupplierGroup = () => {
     }
   };
 
-  const HandleInputValue = (e: any) => {
+  const handleInputValue = (e: any) => {
     setError('');
     setTitle(e.target.value);
     setInputValue(e.target.value);
@@ -44,9 +44,9 @@ const CreateNewSupplierGroup = () => {
     <div>
       <SingleItemAdd
         inputValue={inputValue}
-        HandleInputValue={HandleInputValue}
+        handleInputValue={handleInputValue}
         error={error}
-        HandleSubmit={HandleSubmit}
+        handleSubmit={handleSubmit}
       />
     </div>
   );

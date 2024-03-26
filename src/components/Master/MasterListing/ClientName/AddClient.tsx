@@ -14,16 +14,16 @@ const AddClient = ({ clientGroupList }: any) => {
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
-  const HandleSubmit: any = async () => {
+  const handleSubmit: any = async () => {
     console.log('submit va', title, selectedDropdownValue);
     if (inputValue.trim() === '') {
       setError('Input field cannot be empty');
     } else {
       if (Object?.keys(selectedDropdownValue)?.length > 0) {
         let apiRes: any = await AddClientNameApi(
-          AccessToken?.token,
+          accessToken?.token,
           title,
           selectedDropdownValue
         );
@@ -32,7 +32,7 @@ const AddClient = ({ clientGroupList }: any) => {
         setTitle('');
         if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
           toast.success('New Client Created');
-          dispatch(getClientNameClientGroup(AccessToken?.token));
+          dispatch(getClientNameClientGroup(accessToken?.token));
         } else {
           toast.error('Client already exist');
         }
@@ -45,7 +45,7 @@ const AddClient = ({ clientGroupList }: any) => {
     }
   };
 
-  const HandleInputValue = (e: any) => {
+  const handleInputValue = (e: any) => {
     setError('');
     setTitle(e.target.value);
     setInputValue(e.target.value);
@@ -64,7 +64,7 @@ const AddClient = ({ clientGroupList }: any) => {
           className="form-control ps-2"
           id="title"
           aria-describedby="basic-addon3"
-          onChange={HandleInputValue}
+          onChange={handleInputValue}
           value={inputValue}
         />
       </div>
@@ -87,7 +87,7 @@ const AddClient = ({ clientGroupList }: any) => {
       <div className="d-flex justify-content-start ">
         <button
           type="submit"
-          onClick={HandleSubmit}
+          onClick={handleSubmit}
           className=" btn btn-outline-primary py-1 mt-2 form-submit-button"
         >
           Save

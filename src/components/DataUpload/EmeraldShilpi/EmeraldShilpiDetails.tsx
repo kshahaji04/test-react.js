@@ -1,4 +1,4 @@
-import UseEmeraldShilpiDetails from '../../../hooks/emerald-shilpi/emerald-shilpi-detail-hook';
+import UseEmeraldShilpiDetails from '../../../hooks/emeraldShilpi/emerald-shilpi-detail-hook';
 import { useNavigate, useParams } from 'react-router-dom';
 import { get_Emerald_shilpi_details } from '../../../store/slices/emerald-shilpi/get-emerald-shilpi-details-slice';
 import { useSelector } from 'react-redux';

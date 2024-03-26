@@ -32,25 +32,23 @@ import {
 import { getSpecificChittiChallan } from '../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
 import { useNavigate, useParams } from 'react-router-dom';
 import DeleteChallanChittiApi from '../../services/api/Chitti/delete-challan-chitti-api';
-import UseCustomChittiHook from './custom-chitti-page-hook';
+import useCustomChittiHook from './custom-chitti-page-hook';
 import { challanAmendApi } from '../../services/api/general/amend-api';
 
-const UseChittiHook = () => {
+const useChittiHook = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
-  const AccessToken: any = useSelector(get_access_token);
-  const ChittiChallanData: any = useSelector(get_chitti_challan);
-  const ClientNameDataFromStore: any = useSelector(get_client_name);
-  const ClientGroupDataFromStore: any = useSelector(get_client_group);
-  const SubCategoryDataFromStore: any = useSelector(get_subcategory_list);
-  const ProductListDataFromStore: any = useSelector(get_product_list);
-  console.log('ChittiChallanData in hook', ChittiChallanData);
+  const accessToken: any = useSelector(get_access_token);
+  const chittiChallanData: any = useSelector(get_chitti_challan);
+  const clientNameDataFromStore: any = useSelector(get_client_name);
+  const clientGroupDataFromStore: any = useSelector(get_client_group);
+  const subCategoryDataFromStore: any = useSelector(get_subcategory_list);
+  const productListDataFromStore: any = useSelector(get_product_list);
   const [chittiListingData, setChittiListingData] = useState<any>([]);
   const [subCategoryList, setSubCategoryList] = useState<any>([]);
   const [productList, setProductList] = useState<any>([]);
   const [clientNameList, setClientNameList] = useState<any>([]);
-
   const [clientGroupList, setClientGroupList] = useState<any>([]);
   const [tableData, setTableData] = useState<any>([{ id: 1 }]);
   const [narrationTableData, setNarrationTableData] = useState<any>([
@@ -74,7 +72,7 @@ const UseChittiHook = () => {
   ] = useState<any>('');
   const [showSaveButtonForAmendFlow, setShowSaveButtonForAmendFlow] =
     useState<any>(false);
-  console.log(narrationUpdatedTableData);
+
   const {
     totalGrossWeightOfChallanTable,
     totalHuidWeightOfHuidTable,
@@ -82,95 +80,95 @@ const UseChittiHook = () => {
     setTotalHuidWeightOfHuidTable,
     checkGrossAndNetWeight,
     setCheckGrossAndNetWeight,
-  } = UseCustomChittiHook();
+    checkObjectHasValuesInHuid,
+    checkObjectHasValues,
+  } = useCustomChittiHook();
 
   useEffect(() => {
-    dispatch(getChittiChallan(AccessToken?.token));
-    dispatch(getClientName(AccessToken?.token));
-    dispatch(getSubCategoryList(AccessToken?.token));
-    dispatch(getProductList(AccessToken?.token));
-    dispatch(getClientGroupList(AccessToken?.token));
+    dispatch(getChittiChallan(accessToken?.token));
+    dispatch(getClientName(accessToken?.token));
+    dispatch(getSubCategoryList(accessToken?.token));
+    dispatch(getProductList(accessToken?.token));
+    dispatch(getClientGroupList(accessToken?.token));
     setCurrentDate(new Date());
   }, []);
 
   useEffect(() => {
     if (
-      ChittiChallanData?.data?.length > 0 &&
-      ChittiChallanData?.data !== null
+      chittiChallanData?.data?.length > 0 &&
+      chittiChallanData?.data !== null
     ) {
-      setChittiListingData([...ChittiChallanData?.data]);
+      setChittiListingData([...chittiChallanData?.data]);
     } else {
       setChittiListingData([]);
     }
-  }, [ChittiChallanData]);
+  }, [chittiChallanData]);
 
   useEffect(() => {
     if (
-      ClientNameDataFromStore?.data?.length > 0 &&
-      ClientNameDataFromStore?.data !== null
+      clientNameDataFromStore?.data?.length > 0 &&
+      clientNameDataFromStore?.data !== null
     ) {
-      setClientNameList([...ClientNameDataFromStore?.data]);
+      setClientNameList([...clientNameDataFromStore?.data]);
     } else {
       setClientNameList([]);
     }
-  }, [ClientNameDataFromStore]);
+  }, [clientNameDataFromStore]);
 
   useEffect(() => {
     if (
-      SubCategoryDataFromStore?.data?.length > 0 &&
-      SubCategoryDataFromStore?.data !== null
+      subCategoryDataFromStore?.data?.length > 0 &&
+      subCategoryDataFromStore?.data !== null
     ) {
-      setSubCategoryList([...SubCategoryDataFromStore?.data]);
+      setSubCategoryList([...subCategoryDataFromStore?.data]);
     } else {
       setSubCategoryList([]);
     }
-  }, [SubCategoryDataFromStore]);
+  }, [subCategoryDataFromStore]);
 
   useEffect(() => {
-
-    console.log("product list from store", ProductListDataFromStore)
     if (
-      ProductListDataFromStore?.data?.length > 0 &&
-      ProductListDataFromStore?.data !== null
+      productListDataFromStore?.data?.length > 0 &&
+      productListDataFromStore?.data !== null
     ) {
-      setProductList([...ProductListDataFromStore?.data]);
+      setProductList([...productListDataFromStore?.data]);
     } else {
       setProductList([]);
     }
-  }, [ProductListDataFromStore]);
+  }, [productListDataFromStore]);
 
   useEffect(() => {
     if (
-      ClientGroupDataFromStore?.data?.length > 0 &&
-      ClientGroupDataFromStore?.data !== null
+      clientGroupDataFromStore?.data?.length > 0 &&
+      clientGroupDataFromStore?.data !== null
     ) {
-      setClientGroupList([...ClientGroupDataFromStore?.data]);
+      setClientGroupList([...clientGroupDataFromStore?.data]);
     } else {
       setClientGroupList([]);
     }
-  }, [ClientGroupDataFromStore]);
+  }, [clientGroupDataFromStore]);
 
-  const HandleGoldRate: any = (e: any) => {
+  const handleGoldRate: any = (e: any) => {
     setGoldRate(e.target.value);
     setStateForDocStatus(true);
   };
 
-  const HandleRemarks: any = (e: any) => {
+  const handleRemarks: any = (e: any) => {
     setRemarks(e.target.value);
     setStateForDocStatus(true);
   };
 
-  const HandleClientGroup: any = (e: any) => {
+  const handleClientGroup: any = (e: any) => {
     setClientGroupName(e.target.value);
     setStateForDocStatus(true);
   };
 
-  const HandleDateChange: any = (e: any) => {
+  const handleDateChange: any = (e: any) => {
     setDate(e.target.value);
     setStateForDocStatus(true);
   };
 
-  const HandleEmptyChallanChittiTable: any = () => {
+  const handleEmptyChallanChittiTable: any = () => {
     setTableData([{ id: 1 }]);
     setNarrationTableData([{ id: 1 }]);
     setSelectedDropdownValue('');
@@ -186,19 +184,19 @@ const UseChittiHook = () => {
     });
   };
 
-  const HandleSubmitChallanChitti: any = async () => {
+  const handleSubmitChallanChitti: any = async () => {
     let updateDocStatus: any = await UpdateDocStatusWithSubmittedChallanApi(
-      AccessToken?.token,
+      accessToken?.token,
       '1',
       new Date()?.toISOString()?.split('T')[0],
       showSubmitButtonAfterCreateChitti?.length > 0
         ? showSubmitButtonAfterCreateChitti
         : id
     );
-    console.log('update doc', updateDocStatus);
+
     if (Object?.keys(updateDocStatus?.data)?.length > 0) {
       const params: any = {
-        token: AccessToken?.token,
+        token: accessToken?.token,
         name:
           showSubmitButtonAfterCreateChitti?.length > 0
             ? showSubmitButtonAfterCreateChitti
@@ -208,18 +206,18 @@ const UseChittiHook = () => {
     }
   };
 
-  const HandleCancelChallanChitti = async () => {
+  const handleCancelChallanChitti = async () => {
     let updateDocStatus: any = await UpdateDocStatusChallanApi(
-      AccessToken?.token,
+      accessToken?.token,
       '2',
       showSubmitButtonAfterCreateChitti?.length > 0
         ? showSubmitButtonAfterCreateChitti
         : id
     );
-    console.log('update doc', updateDocStatus);
+
     if (Object.keys(updateDocStatus?.data)?.length > 0) {
       const params: any = {
-        token: AccessToken?.token,
+        token: accessToken?.token,
         name:
           showSubmitButtonAfterCreateChitti?.length > 0
             ? showSubmitButtonAfterCreateChitti
@@ -230,7 +228,6 @@ const UseChittiHook = () => {
       dispatch(getSpecificChittiChallan(params));
     }
   };
-
   // for removing id key from list
   useEffect(() => {
     if (tableData?.length > 0 && tableData !== null) {
@@ -249,12 +246,9 @@ const UseChittiHook = () => {
     }
   }, [tableData, narrationTableData]);
 
-  console.log('amend before', tableData, challanTableData, narrationTableData);
-
-  const HandleAmendButtonForDuplicateChitti: any = async () => {
-    console.log('amend ', tableData, challanTableData, narrationTableData);
+  const handleAmendButtonForDuplicateChitti: any = async () => {
     const reqParams: any = {
-      token: AccessToken?.token,
+      token: accessToken?.token,
       client_name: selectedDropdownValue,
       gold_rate: goldRate,
       remarks: remarks,
@@ -263,32 +257,27 @@ const UseChittiHook = () => {
       narration_data: narrationTableData,
     };
     let amendApi: any = await challanAmendApi(reqParams);
-    console.log('challan amend api res', amendApi);
+
     if (
       amendApi?.data?.hasOwnProperty('data') &&
       Object?.keys(amendApi?.data?.data)?.length > 0
     ) {
       navigate(`/chitti/${amendApi?.data?.data?.name}`);
-      // await UpdateDocStatusChallanApi(
-      //   AccessToken?.token,
-      //   '0',
-      //   amendApi?.data?.data?.name
-      // );
+
       const params: any = {
-        token: AccessToken?.token,
+        token: accessToken?.token,
         name: amendApi?.data?.data?.name,
       };
       dispatch(getSpecificChittiChallan(params));
       setTimeout(() => {
         setStateForDocStatus(false);
       }, 300);
-      // dispatch(getChittiChallan(AccessToken?.token));
     }
   };
 
-  const HandleDeleteChallanChitti = async () => {
+  const handleDeleteChallanChitti = async () => {
     let deleteChallanApiRes: any = await DeleteChallanChittiApi(
-      AccessToken?.token,
+      accessToken?.token,
       showSubmitButtonAfterCreateChitti?.length > 0
         ? showSubmitButtonAfterCreateChitti
         : id
@@ -296,63 +285,19 @@ const UseChittiHook = () => {
 
     if (deleteChallanApiRes?.message?.status === 'success') {
       navigate('/chitti');
-      // window?.location?.reload();
     } else {
       toast.error(deleteChallanApiRes?.message?.message);
     }
   };
 
-  const HandleCreateChittiSubmit: any = async () => {
-    console.log('submit values', challanTableData, narrationTableData);
+  const handleCreateChittiSubmit: any = async () => {
     const NoDataChallanTableData = challanTableData?.some(
       (item: any) => Object?.keys(item)?.length === 0
     );
 
-    // // Function to add decimal values
-    // const addDecimalValues = (item: any) => {
-    //   // Check if the item has the "gross_weight" key
-    //   if (!item.hasOwnProperty('gross_weight')) {
-    //     // If not, add "gross_weight" key with a value of 0
-    //     item.gross_weight = 0;
-    //   }
+    const filteredChallanTable: any = checkObjectHasValues(challanTableData);
 
-    //   // Format gross_weight, net_weight, and amount with desired decimal places
-    //   item.gross_weight = item.gross_weight.toFixed(3); // 3 decimal places
-    //   item.net_weight = item.net_weight.toFixed(3); // 3 decimal places
-    //   item.amount = item.amount.toFixed(2); // 2 decimal places
-
-    //   return item;
-    // };
-
-    const CheckObjectHasValues = () => {
-      return challanTableData.filter((item: any) => {
-        const hasSubCategory = item.hasOwnProperty('sub_category');
-        const hasGrossWeight =
-          item.hasOwnProperty('gross_weight') && item.gross_weight > 0;
-        const hasNetWeight =
-          item.hasOwnProperty('net_weight') && item.net_weight > 0;
-        const hasAmount = item.hasOwnProperty('amount') && item.amount > 0;
-
-        // Include a check for sub_category and at least one of gross_weight, net_weight, or amount
-        return hasSubCategory && (hasGrossWeight || hasNetWeight || hasAmount);
-      });
-    };
-
-    const filteredChallanTable: any = CheckObjectHasValues();
-
-    console.log("filter challan table", filteredChallanTable)
-
-    const CheckObjectHasValuesInHuid = () => {
-      return narrationTableData.filter((item: any) => {
-        return (
-          item.hasOwnProperty('product') &&
-          item.product !== null &&
-          item.product !== undefined &&
-          item.product !== ''
-        );
-      });
-    };
-    const filteredHuidTable: any = CheckObjectHasValuesInHuid();
+    const filteredHuidTable = checkObjectHasValuesInHuid(narrationTableData);
 
     let errMsgList: any = [];
     if (Object?.keys(selectedDropdownValue)?.length === 0) {
@@ -411,17 +356,16 @@ const UseChittiHook = () => {
             remarks: remarks,
             challanTableData: challanTableWithGrossWeight,
             narrationTableData: filteredHuidTable,
-            token: AccessToken?.token,
+            token: accessToken?.token,
           };
           let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
-          console.log('Createchittiapires', CreateChittiApiRes);
 
           if (
             Object?.keys(clientGroupName)?.length > 0 &&
             Object?.keys(clientNameList)?.length > 0
           ) {
             await AddClientNameApi(
-              AccessToken?.token,
+              accessToken?.token,
               selectedDropdownValue,
               clientGroupName
             );
@@ -432,7 +376,7 @@ const UseChittiHook = () => {
             navigate(`${CreateChittiApiRes?.data?.message?.data}`);
 
             await UpdateDocStatusChallanApi(
-              AccessToken?.token,
+              accessToken?.token,
               '0',
               CreateChittiApiRes?.data?.message?.data
             );
@@ -440,75 +384,33 @@ const UseChittiHook = () => {
             setShowSubmitButtonAfterCreateChitti(
               CreateChittiApiRes?.data?.message?.data
             );
-            dispatch(getChittiChallan(AccessToken?.token));
+            dispatch(getChittiChallan(accessToken?.token));
           } else {
             toast.error('Failed to create chitti');
           }
-
-          // const BodyData: any = {
-          //   date: date,
-          //   clientName: selectedDropdownValue,
-          //   clientGroup: clientGroupName,
-          //   goldRate: goldRate,
-          //   remarks: remarks,
-          //   challanTableData: filteredChallanTable,
-          //   narrationTableData: filteredHuidTable,
-          //   token: AccessToken?.token,
-          // };
-          // let CreateChittiApiRes: any = await CreateChittiApi(BodyData);
-          // console.log('Createchittiapires', CreateChittiApiRes);
-
-          // if (
-          //   Object?.keys(clientGroupName)?.length > 0 &&
-          //   Object?.keys(clientNameList)?.length > 0
-          // ) {
-          //   await AddClientNameApi(
-          //     AccessToken?.token,
-          //     selectedDropdownValue,
-          //     clientGroupName
-          //   );
-          // }
-
-          // if (CreateChittiApiRes?.data?.message?.msg === 'success') {
-          //   toast.success('Chitti Created');
-          //   navigate(`${CreateChittiApiRes?.data?.message?.data}`);
-
-          //   await UpdateDocStatusChallanApi(
-          //     AccessToken?.token,
-          //     '0',
-          //     CreateChittiApiRes?.data?.message?.data
-          //   );
-
-          //   setShowSubmitButtonAfterCreateChitti(
-          //     CreateChittiApiRes?.data?.message?.data
-          //   );
-          //   dispatch(getChittiChallan(AccessToken?.token));
-          // } else {
-          //   toast.error('Failed to create chitti');
-          // }
         }
       }
     }
   };
-  console.log('chittiListingData in hook end', chittiListingData);
+
   return {
     chittiListingData,
     currentDate,
     selectedDropdownValue,
     setSelectedDropdownValue,
-    HandleGoldRate,
-    HandleRemarks,
+    handleGoldRate,
+    handleRemarks,
     tableData,
     setTableData,
     narrationTableData,
     setNarrationTableData,
-    HandleCreateChittiSubmit,
+    handleCreateChittiSubmit,
     clientNameList,
     subCategoryList,
     productList,
     clientGroupList,
-    HandleClientGroup,
-    HandleDateChange,
+    handleClientGroup,
+    handleDateChange,
     date,
     goldRate,
     remarks,
@@ -518,16 +420,16 @@ const UseChittiHook = () => {
     setStateForDocStatus,
     setRemarks,
     setGoldRate,
-    HandleEmptyChallanChittiTable,
+    handleEmptyChallanChittiTable,
     showSubmitButtonAfterCreateChitti,
-    HandleSubmitChallanChitti,
-    HandleCancelChallanChitti,
-    HandleDeleteChallanChitti,
+    handleSubmitChallanChitti,
+    handleCancelChallanChitti,
+    handleDeleteChallanChitti,
     totalGrossWeightOfChallanTable,
     totalHuidWeightOfHuidTable,
     setTotalGrossWeightOfChallanTable,
     setTotalHuidWeightOfHuidTable,
-    HandleAmendButtonForDuplicateChitti,
+    handleAmendButtonForDuplicateChitti,
     setShowSaveButtonForAmendFlow,
     showSaveButtonForAmendFlow,
     checkGrossAndNetWeight,
@@ -535,5 +437,4 @@ const UseChittiHook = () => {
     narrationUpdatedTableData,
   };
 };
-
-export default UseChittiHook;
+export default useChittiHook;

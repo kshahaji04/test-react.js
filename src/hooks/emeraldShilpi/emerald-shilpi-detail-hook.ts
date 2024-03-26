@@ -8,21 +8,20 @@ import {
 } from '../../store/slices/emerald-shilpi/get-emerald-shilpi-details-slice';
 import { useParams } from 'react-router-dom';
 
-const UseEmeraldShilpiDetails: any = () => {
+const useEmeraldShilpiDetails: any = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
   const [emeraldShilpiDetails, setemeraldShilpiDetails] = useState<any>([]);
 
   const emeraldShilpiDetailsDataFromStore: any = useSelector(
     get_Emerald_shilpi_details
   );
-  console.log('emeraldShilpiDetailsData', emeraldShilpiDetailsDataFromStore);
 
   useEffect(() => {
     const params: any = {
-      token: AccessToken?.token,
+      token: accessToken?.token,
       id: id,
     };
     dispatch(getEmeraldShilpiDetails(params));
@@ -41,4 +40,4 @@ const UseEmeraldShilpiDetails: any = () => {
   return { emeraldShilpiDetails };
 };
 
-export default UseEmeraldShilpiDetails;
+export default useEmeraldShilpiDetails;

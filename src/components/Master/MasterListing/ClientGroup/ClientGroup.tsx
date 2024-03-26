@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import AddClientGroup from './AddClientGroup';
-import UseClientGroupHook from '../../../../hooks/Master/client-group-hook';
+import useClientGroupHook from '../../../../hooks/Master/client-group-hook';
 import MasterSingleListingSearch from '../MasterSingleListingSearch';
 import SingleItemListingInMaster from '../SingleItemListingInMaster';
 
 const ClientGroup = () => {
-  const { clientGroupList } = UseClientGroupHook();
+  const { clientGroupList } = useClientGroupHook();
 
   const [searchField, setSearchField] = useState<any>('');
   const [tableViewData, setTableViewData] = useState<any>(20);
 
-  const HandleTableViewRows: any = (data: any) => {
+  const handleTableViewRows: any = (data: any) => {
     setTableViewData(data);
   };
 
-  const HandleSearchInput: any = (e: any) => {
+  const handleSearchInput: any = (e: any) => {
     setSearchField(e.target.value);
   };
 
@@ -41,17 +41,16 @@ const ClientGroup = () => {
             <Tab eventKey="chitti-listing" title="Client Group List">
               <MasterSingleListingSearch
                 placeholder="Client group"
-                HandleSearchInput={HandleSearchInput}
+                handleSearchInput={handleSearchInput}
                 listingData={filterList}
                 tableViewData={tableViewData}
               />
               <SingleItemListingInMaster
                 listingData={filterList}
-                HandleTableViewRows={HandleTableViewRows}
+                handleTableViewRows={handleTableViewRows}
                 tableViewData={tableViewData}
                 heading="Client Group"
               />
-
             </Tab>
             <Tab eventKey="longer-tab" title="Add Client Group">
               <AddClientGroup />

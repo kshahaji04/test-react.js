@@ -1,7 +1,7 @@
 import { get_specific_client_group } from '../../../../store/slices/Master/get-specific-client-group-slice';
 import { useSelector } from 'react-redux';
-import UseClientGroupHook from '../../../../hooks/Master/client-group-hook';
-import UseGetSpecificClientGroup from '../../../../hooks/Master/get-specific-client-group-hook';
+import useClientGroupHook from '../../../../hooks/Master/client-group-hook';
+import useGetSpecificClientGroup from '../../../../hooks/Master/get-specific-client-group-hook';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -10,8 +10,8 @@ const MasterPageClientNameDetail = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const { } = UseClientGroupHook();
-  const { } = UseGetSpecificClientGroup();
+  const {} = useClientGroupHook();
+  const {} = useGetSpecificClientGroup();
 
   return (
     <div className="container ">

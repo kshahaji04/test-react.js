@@ -7,13 +7,12 @@ const SelectedInputDropdown = ({
   selectedDropdownValue,
   setSelectedDropdownValue,
   clientGroupList,
-  HandleClientGroup,
+  handleClientGroup,
   defaultData,
   setStateForDocStatus,
   title,
   readOnly,
 }: any) => {
-  console.log('defaultt', readOnly);
   const [showDropDown, setShowDropdown] = useState<any>(false);
   const [noRecords, setNoRecordsFound] = useState<any>(false);
   const [filterDropdownList, setFilterDropdownList] = useState<any>([]);
@@ -29,14 +28,12 @@ const SelectedInputDropdown = ({
   }, []);
 
   const handleSelectedOption = (data: any) => {
-    console.log('dataa', data);
     setSelectedDropdownValue(data);
     setShowDropdown(false);
     setStateForDocStatus(true);
   };
 
-  const HandleInputField = (e: any) => {
-    console.log('input value', e.target.value);
+  const handleInputField = (e: any) => {
     setShowDropdown(true);
     setSelectedDropdownValue(e.target.value);
     const query = e.target.value;
@@ -93,13 +90,14 @@ const SelectedInputDropdown = ({
       <div className="dropdown-input-container">
         <input
           type="text"
-          className={`${bgColor?.current === true
+          className={`${
+            bgColor?.current === true
               ? 'form-control dropdown-input client-name-input-chitti'
               : 'form-control input-fields input-field-chitti dropdown-input'
-            }`}
+          }`}
           id="exampleInputEmail1"
           placeholder={placeholderValue}
-          onChange={HandleInputField}
+          onChange={handleInputField}
           onClick={handleShowDropdown}
           defaultValue={defaultData?.client_name}
           value={selectedDropdownValue}
@@ -116,15 +114,17 @@ const SelectedInputDropdown = ({
           >
             {noRecords === false && filterDropdownList?.length === 0 ? (
               <>
-                {drowpdownlist?.length > 0 && drowpdownlist !== null && drowpdownlist.map((list: any, index: any) => (
-                  <li
-                    key={index}
-                    onClick={() => handleSelectedOption(list)}
-                    className="dropdown-list"
-                  >
-                    {list}
-                  </li>
-                ))}
+                {drowpdownlist?.length > 0 &&
+                  drowpdownlist !== null &&
+                  drowpdownlist.map((list: any, index: any) => (
+                    <li
+                      key={index}
+                      onClick={() => handleSelectedOption(list)}
+                      className="dropdown-list"
+                    >
+                      {list}
+                    </li>
+                  ))}
               </>
             ) : (
               <>
@@ -148,7 +148,7 @@ const SelectedInputDropdown = ({
                       <select
                         className="form-select form-select-sm "
                         aria-label="Default select example"
-                        onChange={HandleClientGroup}
+                        onChange={handleClientGroup}
                         onBlur={HandleClientBlur}
                       >
                         <option>Select client group</option>

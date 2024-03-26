@@ -33,7 +33,7 @@ const NarrationTable = ({
     setTotalHuidWeightOfHuidTable(totalAmountValue?.huid_weight);
   }, [totalAmountValue]);
 
-  const HandleAddRow: any = () => {
+  const handleAddRow: any = () => {
     const newRow = {
       id: narrationTableData.length + 1,
       product: '',
@@ -64,7 +64,7 @@ const NarrationTable = ({
     setStateForDocStatus(true);
   };
 
-  const HandleDeleteRow: any = (id: any) => {
+  const handleDeleteRow: any = (id: any) => {
     if (narrationTableData?.length > 1) {
       const updatedData = narrationTableData
         .filter((row: any) => row.id !== id)
@@ -91,7 +91,7 @@ const NarrationTable = ({
     setTotalAmountValue(newColumnTotals);
   }, [narrationTableData]);
 
-  const HandlePiecesAmount = (e: any, id: any) => {
+  const handlePiecesAmount = (e: any, id: any) => {
     const updatedData = narrationTableData.map((row: any) =>
       row.id === id ? { ...row, huid_pieces: parseFloat(e.target.value) } : row
     );
@@ -99,7 +99,7 @@ const NarrationTable = ({
     setStateForDocStatus(true);
   };
 
-  const HandleWeightAmount = (e: any, id: any) => {
+  const handleWeightAmount = (e: any, id: any) => {
     const updatedData = narrationTableData.map((row: any) =>
       row.id === id ? { ...row, huid_weight: parseFloat(e.target.value) } : row
     );
@@ -112,13 +112,12 @@ const NarrationTable = ({
       event.key === 'Tab' &&
       id === narrationTableData[narrationTableData.length - 1].id
     ) {
-      HandleAddRow();
+      handleAddRow();
       setStateForDocStatus(true);
     }
   };
 
-  const HandleCategory = (value: any, rowId: any) => {
-    console.log('handlecategory', value, rowId);
+  const handleCategory = (value: any, rowId: any) => {
     const updatedData = narrationTableData.map((row: any) =>
       row.id === rowId ? { ...row, product: value } : row
     );
@@ -130,7 +129,14 @@ const NarrationTable = ({
     <div className="container chitti-table-container mt-2 border rounded-3  mb-5">
       <div className="d-flex justify-content-between table-heading-row ">
         <caption>Narration- HUID</caption>
-        <p className="cursor-pointer my-auto btn-link" onClick={() => { if (!readOnly) { HandleAddRow() } }}>
+        <p
+          className="cursor-pointer my-auto btn-link"
+          onClick={() => {
+            if (!readOnly) {
+              handleAddRow();
+            }
+          }}
+        >
           Add Row
         </p>
       </div>
@@ -144,7 +150,9 @@ const NarrationTable = ({
               Product
             </th>
             <th scope="col">HUID Pieces</th>
-            <th scope="col" className='huid_wt_header_col'>HUID Weight</th>
+            <th scope="col" className="huid_wt_header_col">
+              HUID Weight
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -164,11 +172,11 @@ const NarrationTable = ({
                       data={row.product}
                       key={row.id}
                       rowId={row.id}
-                      HandleData={HandleCategory}
+                      HandleData={handleCategory}
                       placeholderValue="HUID Product"
                       selectedDropdownValue={row.sub_category}
                       setSelectedDropdownValue={(value: any) =>
-                        HandleCategory(value, row.id)
+                        handleCategory(value, row.id)
                       }
                       defaultData={row.sub_category}
                       setStateForDocStatus={setStateForDocStatus}
@@ -185,7 +193,7 @@ const NarrationTable = ({
                   aria-describedby="inputGroup-sizing-sm"
                   defaultValue={row.huid_pieces}
                   value={row.huid_pieces}
-                  onChange={(e) => HandlePiecesAmount(e, row.id)}
+                  onChange={(e) => handlePiecesAmount(e, row.id)}
                   readOnly={readOnly === true ? true : false}
                 />
               </td>
@@ -198,14 +206,14 @@ const NarrationTable = ({
                   onKeyDown={(e) => handleKeyDown(e, row.id)}
                   defaultValue={row.huid_weight}
                   value={row.huid_weight}
-                  onChange={(e) => HandleWeightAmount(e, row.id)}
+                  onChange={(e) => handleWeightAmount(e, row.id)}
                   readOnly={readOnly === true ? true : false}
                 />
               </td>
               <td className="table-data-input">
                 <div
                   className="d-flex align-items-center delete-link cursor-pointer"
-                  onClick={() => HandleDeleteRow(row.id)}
+                  onClick={() => handleDeleteRow(row.id)}
                 >
                   <i className="fa-solid fa-xmark fs-5"></i>
                 </div>

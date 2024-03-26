@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
-import UseCategorySummaryReportHook from '../../../hooks/report/category-summary-report-hook';
+import useCategorySummaryReportHook from '../../../hooks/report/category-summary-report-hook';
 import FilterReportListing from './FilterReportListing';
-import UseCategoryHook from '../../../hooks/Master/category-hook';
+import useCategoryHook from '../../../hooks/Master/category-hook';
 import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
@@ -11,11 +11,10 @@ import DownloadReportApi from '../../../services/api/report/download-report-api'
 
 const CategorySummaryReport = () => {
   const dispatch = useDispatch();
-  const { categorySummaryReportData }: any = UseCategorySummaryReportHook();
-  const { CategoryList }: any = UseCategoryHook();
-  console.log('categorySummaryReportData in tsx', categorySummaryReportData);
+  const { categorySummaryReportData }: any = useCategorySummaryReportHook();
+  const { CategoryList }: any = useCategoryHook();
 
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
   const [searchInputValues, setSearchInputValues] = useState({
     fromDate: '',
@@ -27,7 +26,7 @@ const CategorySummaryReport = () => {
 
   const [searchCategory, setSearchCategory] = useState<any>('');
 
-  const HandleSearchInput: any = (e: any) => {
+  const handleSearchInput: any = (e: any) => {
     const { name, value } = e.target;
     setSearchInputValues({
       ...searchInputValues,
@@ -38,7 +37,7 @@ const CategorySummaryReport = () => {
   useEffect(() => {
     const handleFilterList: any = () => {
       const reqParams: any = {
-        token: AccessToken?.token,
+        token: accessToken?.token,
         category: searchCategory,
         from_date: searchInputValues?.fromDate,
         to_date: searchInputValues?.toDate,
@@ -72,7 +71,7 @@ const CategorySummaryReport = () => {
 
   const handleDownloadReport: any = async () => {
     const reqParams: any = {
-      token: AccessToken?.token,
+      token: accessToken?.token,
       method: 'get_category_summary_report_print',
       entity: 'print_report_category_summary',
       category: searchCategory,
@@ -87,9 +86,9 @@ const CategorySummaryReport = () => {
 
   return (
     <div className="container">
-      <div className='row justify-content-center'>
-        <div className='col-lg-10 col-12'>
-          <div className='col-lg-9 col-12 mx-auto'>
+      <div className="row justify-content-center">
+        <div className="col-lg-10 col-12">
+          <div className="col-lg-9 col-12 mx-auto">
             <div className="d-flex justify-content-between my-1">
               <h5>Category Summary Report</h5>
               <button
@@ -105,7 +104,7 @@ const CategorySummaryReport = () => {
             CategoryList={CategoryList}
             searchCategory={searchCategory}
             setSearchCategory={setSearchCategory}
-            HandleSearchInput={HandleSearchInput}
+            handleSearchInput={handleSearchInput}
             showCategoryInFilter={showCategoryInFilter}
             showDateInFilter={showDateInFilter}
           />
@@ -122,7 +121,7 @@ const CategorySummaryReport = () => {
               </thead>
               <tbody>
                 {categorySummaryReportData?.length > 0 &&
-                  categorySummaryReportData !== null ? (
+                categorySummaryReportData !== null ? (
                   <>
                     {categorySummaryReportData.map((data: any, index: any) => {
                       return (

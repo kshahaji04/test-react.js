@@ -1,139 +1,122 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-const UseCustomEmeraldChittiHook = () => {
+const useCustomEmeraldChittiHook = () => {
+  const initialTableData = [
+    {
+      a: '',
+      b: '',
+      c: '',
+      d: '',
+      e: '',
+      gross_weight: '',
+      stn_wt: '21',
+      h: '',
+      i: '',
+      j: '',
+      net_weight: '',
+      project: '',
+      product: '',
+      n: '',
+      o: '',
+      p: '',
+      q: '',
+      r: '',
+      sub_category: '',
+      category: '',
+      cz_amt: '',
+      cs_amt: '',
+      amount: '',
+    },
+  ];
 
-    const initialTableData = [
-        {
-            a: "",
-            b: "",
-            c: "",
-            d: "",
-            e: "",
-            gross_weight: '',
-            stn_wt: '21',
-            h: "",
-            i: "",
-            j: "",
-            net_weight: '',
-            project: "",
-            product: "",
-            n: "",
-            o: "",
-            p: "",
-            q: "",
-            r: "",
-            sub_category: "",
-            category: "",
-            cz_amt: '',
-            cs_amt: '',
-            amount: ''
-        }
+  const [tableData, setTableData] = useState<any>(initialTableData);
 
-    ];
-
-    const [tableData, setTableData] = useState<any>(initialTableData);
-
-
-    const HandleAddRow: any = () => {
-        const newRow = {
-            a: "",
-            b: "",
-            c: "",
-            d: "",
-            e: "",
-            gross_weight: '',
-            stn_wt: '',
-            h: "",
-            i: "",
-            j: "",
-            net_weight: '',
-            project: "",
-            product: "",
-            n: "",
-            o: "",
-            p: "",
-            q: "",
-            r: "",
-            sub_category: "",
-            category: "",
-            cz_amt: '',
-            cs_amt: '',
-            amount: ''
-        }
-
-
-        // Add the new row to the tableData
-        setTableData([...tableData, newRow]);
-        // setStateForDocStatus(true);
-
-        // // Calculate the new total values, including the new row
-        // const newColumnTotals = tableData.reduce(
-        //     (totals: any, row: any) => {
-        //         totals.gross_weight += row.gross_weight;
-        //         totals.net_weight += row.net_weight;
-        //         totals.amount += row.amount;
-        //         return totals;
-        //     },
-        //     { gross_weight: 0, net_weight: 0, amount: 0 }
-        // );
-
-        // // Add the values of the new row to the totals
-        // newColumnTotals.gross_weight += newRow.gross_weight;
-        // newColumnTotals.net_weight += newRow.net_weight;
-        // newColumnTotals.amount += newRow.amount;
-
-        // // Update the total values
-        // setamountValue(newColumnTotals);
-    };
-    const findDuplicateValuesInEmeraldChittiTable = (arr: any) => {
-        const counts: any = {};
-        const duplicates = [];
-
-        for (const obj of arr) {
-            const keyA = obj.a !== null && obj.a !== undefined ? String(obj.a) : '___empty___';
-            const grossWeight = obj.gross_weight !== null && obj.gross_weight !== undefined
-                ? String(obj.gross_weight)
-                : '___empty___';
-
-            // Combine "a" value and gross_weight value for comparison
-            const combinedValue = `${keyA}_${grossWeight}`;
-
-            counts[combinedValue] = (counts[combinedValue] || 0) + 1;
-
-            if (counts[combinedValue] === 2) {
-                duplicates.push(combinedValue);
-            }
-        }
-
-        return duplicates;
+  const handleAddRow: any = () => {
+    const newRow = {
+      a: '',
+      b: '',
+      c: '',
+      d: '',
+      e: '',
+      gross_weight: '',
+      stn_wt: '',
+      h: '',
+      i: '',
+      j: '',
+      net_weight: '',
+      project: '',
+      product: '',
+      n: '',
+      o: '',
+      p: '',
+      q: '',
+      r: '',
+      sub_category: '',
+      category: '',
+      cz_amt: '',
+      cs_amt: '',
+      amount: '',
     };
 
-    const findDuplicateIndicesInEmeraldChittiTable = (arr: any) => {
-        const indices: any = {};
-        const duplicateIndices = [];
+    // Add the new row to the tableData
+    setTableData([...tableData, newRow]);
+  };
+  const findDuplicateValuesInEmeraldChittiTable = (arr: any) => {
+    const counts: any = {};
+    const duplicates = [];
 
-        for (const { a, gross_weight, index } of arr) {
-            const keyA = a !== null && a !== undefined ? String(a) : '___empty___';
-            const normalizedValue = gross_weight !== null && gross_weight !== undefined
-                ? String(gross_weight)
-                : '___empty___';
+    for (const obj of arr) {
+      const keyA =
+        obj.a !== null && obj.a !== undefined ? String(obj.a) : '___empty___';
+      const grossWeight =
+        obj.gross_weight !== null && obj.gross_weight !== undefined
+          ? String(obj.gross_weight)
+          : '___empty___';
 
-            // Combine "a" value and gross_weight value for comparison
-            const combinedValue = `${keyA}_${normalizedValue}`;
+      // Combine "a" value and gross_weight value for comparison
+      const combinedValue = `${keyA}_${grossWeight}`;
 
-            if (indices[combinedValue] !== undefined) {
-                duplicateIndices.push([indices[combinedValue], index]);
-            } else {
-                indices[combinedValue] = index;
-            }
-        }
+      counts[combinedValue] = (counts[combinedValue] || 0) + 1;
 
-        return duplicateIndices;
+      if (counts[combinedValue] === 2) {
+        duplicates.push(combinedValue);
+      }
     }
 
+    return duplicates;
+  };
 
-    console.log("table data set", tableData)
-    return { HandleAddRow, tableData, setTableData, findDuplicateValuesInEmeraldChittiTable, findDuplicateIndicesInEmeraldChittiTable }
-}
+  const findDuplicateIndicesInEmeraldChittiTable = (arr: any) => {
+    const indices: any = {};
+    const duplicateIndices = [];
 
-export default UseCustomEmeraldChittiHook;
+    for (const { a, gross_weight, index } of arr) {
+      const keyA = a !== null && a !== undefined ? String(a) : '___empty___';
+      const normalizedValue =
+        gross_weight !== null && gross_weight !== undefined
+          ? String(gross_weight)
+          : '___empty___';
+
+      // Combine "a" value and gross_weight value for comparison
+      const combinedValue = `${keyA}_${normalizedValue}`;
+
+      if (indices[combinedValue] !== undefined) {
+        duplicateIndices.push([indices[combinedValue], index]);
+      } else {
+        indices[combinedValue] = index;
+      }
+    }
+
+    return duplicateIndices;
+  };
+
+  return {
+    handleAddRow,
+    tableData,
+    setTableData,
+    findDuplicateValuesInEmeraldChittiTable,
+    findDuplicateIndicesInEmeraldChittiTable,
+  };
+};
+
+export default useCustomEmeraldChittiHook;

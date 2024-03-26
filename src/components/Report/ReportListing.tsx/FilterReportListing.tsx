@@ -7,7 +7,7 @@ const FilterReportListing = ({
   CategoryList,
   searchCategory,
   setSearchCategory,
-  HandleSearchInput,
+  handleSearchInput,
   showCategoryInFilter,
   showClientNameInFilter,
   showDateInFilter,
@@ -64,7 +64,7 @@ const FilterReportListing = ({
               id="project"
               className="form-control input-fields custom-input-field "
               title="Project"
-              onChange={HandleSearchInput}
+              onChange={handleSearchInput}
             />
           </div>
         )}
@@ -77,8 +77,8 @@ const FilterReportListing = ({
               title="Select Sub Category"
               selectedDropdownValue={searchSubCategory}
               setSelectedDropdownValue={setSearchSubCategory}
-            // clientGroupList={clientGroupList}
-            // HandleClientGroup={HandleClientGroup}
+              // clientGroupList={clientGroupList}
+              // HandleClientGroup={HandleClientGroup}
             />
           </div>
         )}
@@ -91,8 +91,8 @@ const FilterReportListing = ({
               title="Select Client Name"
               selectedDropdownValue={searchClientName}
               setSelectedDropdownValue={setSearchclientName}
-            // clientGroupList={clientGroupList}
-            // HandleClientGroup={HandleClientGroup}
+              // clientGroupList={clientGroupList}
+              // HandleClientGroup={HandleClientGroup}
             />
           </div>
         )}
@@ -106,7 +106,7 @@ const FilterReportListing = ({
                 name="fromDate"
                 id="fromDate"
                 className="form-control input-fields custom-input-field "
-                onChange={HandleSearchInput}
+                onChange={handleSearchInput}
               />
             </div>
             <div className="col-lg-2 col-md-4 col-4">
@@ -116,7 +116,7 @@ const FilterReportListing = ({
                 name="toDate"
                 id="toDate"
                 className="form-control input-fields custom-input-field"
-                onChange={HandleSearchInput}
+                onChange={handleSearchInput}
               />
             </div>
           </>

@@ -10,19 +10,19 @@ import SingleItemAdd from '../SingleItemAdd';
 const AddClientGroup = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState<any>('');
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
 
-  const HandleSubmit = async () => {
+  const handleSubmit = async () => {
     if (inputValue.trim() === '') {
       setError('Input field cannot be empty');
     } else {
-      let apiRes: any = await AddClientGroupApi(AccessToken?.token, title);
+      let apiRes: any = await AddClientGroupApi(accessToken?.token, title);
       console.log('apires', apiRes);
       if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
         toast.success('Client Group Created');
-        dispatch(getClientGroupList(AccessToken?.token));
+        dispatch(getClientGroupList(accessToken?.token));
       } else {
         toast.error('Client group already exist');
       }
@@ -31,14 +31,7 @@ const AddClientGroup = () => {
     }
   };
 
-  // const HandleKeyDownFun: any = (e: any) => {
-  //   console.log('eee', e);
-  //   if (e.key === 'Enter') {
-  //     HandleSubmit();
-  //   }
-  // };
-
-  const HandleInputValue = (e: any) => {
+  const handleInputValue = (e: any) => {
     setError('');
     setTitle(e.target.value);
     setInputValue(e.target.value);
@@ -47,9 +40,9 @@ const AddClientGroup = () => {
     <>
       <SingleItemAdd
         inputValue={inputValue}
-        HandleInputValue={HandleInputValue}
+        handleInputValue={handleInputValue}
         error={error}
-        HandleSubmit={HandleSubmit}
+        handleSubmit={handleSubmit}
       />
     </>
   );

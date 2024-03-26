@@ -12,30 +12,37 @@ import PrintChallanChittiApi from '../../services/api/Chitti/print-challan-chitt
 import PrintEmeraldChittiApi from '../../services/api/Emerald/print-emerald-chitti-api';
 import { UpdateDocStatusChallanApi } from '../../services/api/general/update-doc-status-challan--api';
 import { UpdateDocStatusEmeraldChittiApi } from '../../services/api/general/update-doc-status-emrald-chitti-api';
-import { getSpecificEmeraldChitti, get_specific_emerald_chitti } from '../../store/slices/Emerald/get-specific-emrald-slice';
+import {
+  getSpecificEmeraldChitti,
+  get_specific_emerald_chitti,
+} from '../../store/slices/Emerald/get-specific-emrald-slice';
 import LoadMoreChittiListing from './LoadMoreChittiListing';
 
 const ListingTable = ({ tableListingData }: any) => {
-  console.log('tableListingData', tableListingData);
+  // console.log('tableListingData', tableListingData);
   const dispatch = useDispatch();
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
-  const EmeraldChittiDataFromStore: any = useSelector(get_specific_emerald_chitti);
+  const emeraldChittiDataFromStore: any = useSelector(
+    get_specific_emerald_chitti
+  );
 
   const storedNumberOfRows = sessionStorage.getItem('numberOfRows');
-  let pathName: any = window?.location?.pathname
+  let pathName: any = window?.location?.pathname;
 
   const [headingData, setHeadingData] = useState<any>('');
-  const [tableViewData, setTableViewData] = useState<number>(storedNumberOfRows ? parseInt(storedNumberOfRows) : 5);
+  const [tableViewData, setTableViewData] = useState<number>(
+    storedNumberOfRows ? parseInt(storedNumberOfRows) : 5
+  );
 
   const HandleTableViewRows: any = (rows: any) => {
-    sessionStorage.setItem("numberOfRows", rows)
+    sessionStorage.setItem('numberOfRows', rows);
     setTableViewData(rows);
   };
 
   useEffect(() => {
-    sessionStorage.removeItem("numberOfRows");
-  }, [pathName])
+    sessionStorage.removeItem('numberOfRows');
+  }, [pathName]);
 
   useEffect(() => {
     if (Object?.keys(tableListingData)?.length > 0) {
@@ -44,10 +51,10 @@ const ListingTable = ({ tableListingData }: any) => {
     }
   }, [tableListingData]);
 
-  const HandleSubmitChittiData: any = async (name: any) => {
+  const handleSubmitChittiData: any = async (name: any) => {
     if (window?.location?.pathname === '/chitti') {
       let updateDocStatus: any = await UpdateDocStatusChallanApi(
-        AccessToken?.token,
+        accessToken?.token,
         '1',
         name
       );
@@ -56,23 +63,26 @@ const ListingTable = ({ tableListingData }: any) => {
         updateDocStatus?.status === 200 &&
         Object.keys(updateDocStatus?.data)?.length > 0
       ) {
-        dispatch(getChittiChallan(AccessToken?.token));
+        dispatch(getChittiChallan(accessToken?.token));
       }
     } else if (window?.location?.pathname === '/emeraldchitti') {
       const params: any = {
-        token: AccessToken?.token,
+        token: accessToken?.token,
         name: name,
       };
       dispatch(getSpecificEmeraldChitti(params));
 
-      if (EmeraldChittiDataFromStore?.data?.length > 0) {
-        const hasEmptySubCategory = EmeraldChittiDataFromStore?.data[0]?.challan_table?.some((obj: any) => !obj.sub_category);
-        console.log("has category", hasEmptySubCategory)
+      if (emeraldChittiDataFromStore?.data?.length > 0) {
+        const hasEmptySubCategory =
+          emeraldChittiDataFromStore?.data[0]?.challan_table?.some(
+            (obj: any) => !obj.sub_category
+          );
+        console.log('has category', hasEmptySubCategory);
         if (hasEmptySubCategory) {
-          toast.error("Please Select Sub Category")
+          toast.error('Please Select Sub Category');
         } else {
           let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
-            AccessToken?.token,
+            accessToken?.token,
             '1',
             name
           );
@@ -80,19 +90,17 @@ const ListingTable = ({ tableListingData }: any) => {
             updateDocStatus?.status === 200 &&
             Object.keys(updateDocStatus?.data)?.length > 0
           ) {
-            dispatch(getEmeraldChallan(AccessToken?.token));
+            dispatch(getEmeraldChallan(accessToken?.token));
           }
         }
       }
-
-
     }
-  }
+  };
 
-  const HandleDeleteChitti: any = async (name: any) => {
+  const handleDeleteChitti: any = async (name: any) => {
     if (window?.location?.pathname === '/chitti') {
       let deleteChallanApiRes: any = await DeleteChallanChittiApi(
-        AccessToken?.token,
+        accessToken?.token,
         name
       );
 
@@ -100,29 +108,29 @@ const ListingTable = ({ tableListingData }: any) => {
 
       if (deleteChallanApiRes?.message?.status === 'success') {
         toast.success('Chitti Deleted');
-        dispatch(getChittiChallan(AccessToken?.token));
+        dispatch(getChittiChallan(accessToken?.token));
       } else {
         toast.error(deleteChallanApiRes?.message?.message);
       }
     } else if (window?.location?.pathname === '/emeraldchitti') {
       let deleteEmeraldApiRes: any = await DeleteEmeraldChittiApi(
-        AccessToken?.token,
+        accessToken?.token,
         name
       );
       console.log('deleteChallanApiRes', deleteEmeraldApiRes);
       if (deleteEmeraldApiRes?.message?.status === 'success') {
         toast.success('Chitti Deleted');
-        dispatch(getEmeraldChallan(AccessToken?.token));
+        dispatch(getEmeraldChallan(accessToken?.token));
       } else {
         toast.error(deleteEmeraldApiRes?.message?.message);
       }
     }
   };
 
-  const HandleCancelChitti: any = async (name: any) => {
+  const handleCancelChitti: any = async (name: any) => {
     if (window?.location?.pathname === '/chitti') {
       let updateDocStatus: any = await UpdateDocStatusChallanApi(
-        AccessToken?.token,
+        accessToken?.token,
         '2',
         name
       );
@@ -131,11 +139,11 @@ const ListingTable = ({ tableListingData }: any) => {
         updateDocStatus?.status === 200 &&
         Object.keys(updateDocStatus?.data)?.length > 0
       ) {
-        dispatch(getChittiChallan(AccessToken?.token));
+        dispatch(getChittiChallan(accessToken?.token));
       }
     } else if (window?.location?.pathname === '/emeraldchitti') {
       let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
-        AccessToken?.token,
+        accessToken?.token,
         '2',
         name
       );
@@ -143,15 +151,15 @@ const ListingTable = ({ tableListingData }: any) => {
         updateDocStatus?.status === 200 &&
         Object.keys(updateDocStatus?.data)?.length > 0
       ) {
-        dispatch(getEmeraldChallan(AccessToken?.token));
+        dispatch(getEmeraldChallan(accessToken?.token));
       }
     }
   };
 
-  const HandlePrint = async (name: any) => {
+  const handlePrint = async (name: any) => {
     if (window?.location?.pathname === '/chitti') {
       let printApiRes: any = await PrintChallanChittiApi(
-        AccessToken?.token,
+        accessToken?.token,
         name
       );
       if (printApiRes?.status === 'success') {
@@ -161,7 +169,7 @@ const ListingTable = ({ tableListingData }: any) => {
       }
     } else if (window?.location?.pathname === '/emeraldchitti') {
       let printApiRes: any = await PrintEmeraldChittiApi(
-        AccessToken?.token,
+        accessToken?.token,
         name
       );
       if (printApiRes?.status === 'success') {
@@ -212,7 +220,7 @@ const ListingTable = ({ tableListingData }: any) => {
                 return (
                   <tr className="table-body-row" key={i}>
                     {headingData?.length > 0 && (
-                      <td className='border-0'>{i + 1}</td>
+                      <td className="border-0">{i + 1}</td>
                     )}
                     {headingData?.length > 0 &&
                       headingData !== null &&
@@ -224,12 +232,12 @@ const ListingTable = ({ tableListingData }: any) => {
                               {v !== 'docstatus'
                                 ? data[v]
                                 : data[v] === 0
-                                  ? 'Draft'
-                                  : data[v] === 1
-                                    ? 'Submitted'
-                                    : data[v] === 2
-                                      ? 'Cancel'
-                                      : data[v]}
+                                ? 'Draft'
+                                : data[v] === 1
+                                ? 'Submitted'
+                                : data[v] === 2
+                                ? 'Cancel'
+                                : data[v]}
                             </td>
                           );
                         }
@@ -250,7 +258,9 @@ const ListingTable = ({ tableListingData }: any) => {
                             </div>
                             <div className="col-lg-4 col-md-4 col-12">
                               <a
-                                onClick={() => HandleSubmitChittiData(data.name)}
+                                onClick={() =>
+                                  handleSubmitChittiData(data.name)
+                                }
                                 className="button-section-text text-danger "
                               >
                                 Submit
@@ -274,7 +284,7 @@ const ListingTable = ({ tableListingData }: any) => {
                           <div className="row justify-content-center gx-0">
                             <div className="col-lg-2 col-md-4 col-12">
                               <a
-                                onClick={() => HandlePrint(data.name)}
+                                onClick={() => handlePrint(data.name)}
                                 className="button-section-text text-primary"
                               >
                                 Print
@@ -282,7 +292,7 @@ const ListingTable = ({ tableListingData }: any) => {
                             </div>
                             <div className="col-lg-4 col-md-4 col-12">
                               <a
-                                onClick={() => HandleCancelChitti(data.name)}
+                                onClick={() => handleCancelChitti(data.name)}
                                 className="button-section-text text-danger "
                               >
                                 Cancel
@@ -307,18 +317,18 @@ const ListingTable = ({ tableListingData }: any) => {
                             <div className="col-lg-2 col-md-4 col-12">
                               {data?.date ===
                                 new Date()?.toISOString()?.split('T')[0] && (
-                                  <NavLink
-                                    to={`${data.name}`}
-                                    className="button-section-text text-info "
-                                  >
-                                    Amend
-                                  </NavLink>
-                                )}
+                                <NavLink
+                                  to={`${data.name}`}
+                                  className="button-section-text text-info "
+                                >
+                                  Amend
+                                </NavLink>
+                              )}
                             </div>
 
                             <div className="col-lg-4 col-md-4 col-12">
                               <a
-                                onClick={() => HandleDeleteChitti(data.name)}
+                                onClick={() => handleDeleteChitti(data.name)}
                                 className="button-section-text text-danger "
                               >
                                 Delete
@@ -362,18 +372,17 @@ const ListingTable = ({ tableListingData }: any) => {
         <table className="table table table-striped table-hover listing-table border-0">
           <thead className="table-heading">
             <tr className="table-heading-row px-0">
-              {headingData?.length > 0 && (
-                <th>Sr No.</th>
-              )}
+              {headingData?.length > 0 && <th>Sr No.</th>}
               {TableHeading()}
               <th className="w-25" scope="col"></th>
             </tr>
           </thead>
-          <tbody>
-
-            {TableBodyData()}</tbody>
+          <tbody>{TableBodyData()}</tbody>
         </table>
-        <LoadMoreChittiListing tableListingData={tableListingData} HandleTableViewRows={HandleTableViewRows} />
+        <LoadMoreChittiListing
+          tableListingData={tableListingData}
+          HandleTableViewRows={HandleTableViewRows}
+        />
       </div>
     </>
   );

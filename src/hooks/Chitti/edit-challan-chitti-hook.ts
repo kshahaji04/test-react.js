@@ -6,27 +6,23 @@ import {
   getSpecificChittiChallan,
   get_specific_chitti_challan,
 } from '../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
-import UseChittiHook from './chitti-page-hook';
+import useChittiHook from './chitti-page-hook';
 import { useParams } from 'react-router-dom';
 import UpdateChittiApi from '../../services/api/Chitti/update-challan-chitti-api';
 import { toast } from 'react-toastify';
 import { UpdateDocStatusChallanApi } from '../../services/api/general/update-doc-status-challan--api';
 import PrintChallanChittiApi from '../../services/api/Chitti/print-challan-chitti-api';
 
-const UseEditChallanChitti: any = () => {
+const useEditChallanChitti: any = () => {
   const dispatch = useDispatch();
 
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
   const emeraldDetailDataFromStore: any = useSelector(
     get_specific_chitti_challan
   );
 
   const [challanDetail, setChallanDetail] = useState<any>('');
-  // const [tableData, setTableData] = useState<any>([{ id: 1 }]);
-
-  console.log('emeraldDetailDataFromStore', emeraldDetailDataFromStore);
   const { id } = useParams();
-  console.log('params', id);
 
   const {
     setNarrationTableData,
@@ -39,9 +35,9 @@ const UseEditChallanChitti: any = () => {
     goldRate,
     remarks,
     narrationTableData,
-    HandleGoldRate,
-    HandleDateChange,
-    HandleRemarks,
+    handleGoldRate,
+    handleDateChange,
+    handleRemarks,
     clientGroupList,
     clientGroupName,
     stateForDocStatus,
@@ -50,24 +46,23 @@ const UseEditChallanChitti: any = () => {
     setTableData,
     setRemarks,
     setGoldRate,
-    HandleSubmitChallanChitti,
-    HandleCancelChallanChitti,
-    HandleDeleteChallanChitti,
+    handleSubmitChallanChitti,
+    handleCancelChallanChitti,
+    handleDeleteChallanChitti,
     totalGrossWeightOfChallanTable,
     totalHuidWeightOfHuidTable,
     setTotalGrossWeightOfChallanTable,
     setTotalHuidWeightOfHuidTable,
-    HandleAmendButtonForDuplicateChitti,
+    handleAmendButtonForDuplicateChitti,
     setShowSaveButtonForAmendFlow,
     showSaveButtonForAmendFlow,
     checkGrossAndNetWeight,
     setCheckGrossAndNetWeight,
-  }: any = UseChittiHook();
+  }: any = useChittiHook();
 
-  console.log('selectedDropdownValue', selectedDropdownValue);
   useEffect(() => {
     const params: any = {
-      token: AccessToken?.token,
+      token: accessToken?.token,
       name: id,
     };
     dispatch(getSpecificChittiChallan(params));
@@ -84,7 +79,7 @@ const UseEditChallanChitti: any = () => {
     }
   }, [emeraldDetailDataFromStore]);
 
-  const HandleUpdateChallanSubmit = async () => {
+  const handleUpdateChallanSubmit = async () => {
     console.log('narration update', narrationTableData);
     const isHUIDHasData = narrationTableData.map((obj: any) => {
       if (obj.hasOwnProperty('product')) {
@@ -93,9 +88,8 @@ const UseEditChallanChitti: any = () => {
         return obj;
       }
     });
-    console.log("filter huid table", isHUIDHasData)
 
-    const CheckObjectHasValuesInHuid = () => {
+    const checkObjectHasValuesInHuid = () => {
       return isHUIDHasData.filter((item: any) => {
         return (
           item.hasOwnProperty('product') &&
@@ -106,10 +100,9 @@ const UseEditChallanChitti: any = () => {
       });
     };
 
-    const filteredHuidTable: any = CheckObjectHasValuesInHuid();
-    console.log("filter huid table after check", filteredHuidTable)
+    const filteredHuidTable: any = checkObjectHasValuesInHuid();
 
-    const CheckObjectHasValues = () => {
+    const checkObjectHasValues = () => {
       return tableData.filter((item: any) => {
         const hasSubCategory = item.hasOwnProperty('sub_category');
         const hasGrossWeight =
@@ -128,7 +121,7 @@ const UseEditChallanChitti: any = () => {
         );
       });
     };
-    const filteredChallanTable: any = CheckObjectHasValues();
+    const filteredChallanTable: any = checkObjectHasValues();
     const hasSubCategoryKey =
       tableData?.length > 0 &&
       tableData.every(
@@ -155,10 +148,9 @@ const UseEditChallanChitti: any = () => {
         remarks: remarks,
         challanTableData: filteredChallanTable,
         narrationTableData: filteredHuidTable,
-        token: AccessToken?.token,
+        token: accessToken?.token,
       };
       let updateChittiApi: any = await UpdateChittiApi(BodyData);
-      console.log('updateChittiApi', updateChittiApi);
 
       if (
         updateChittiApi?.status === 200 &&
@@ -166,10 +158,10 @@ const UseEditChallanChitti: any = () => {
       ) {
         toast.success('Chitti Updated');
         // setStateForDocStatus(false);
-        await UpdateDocStatusChallanApi(AccessToken?.token, '0', id);
+        await UpdateDocStatusChallanApi(accessToken?.token, '0', id);
         setTimeout(() => {
           const params: any = {
-            token: AccessToken?.token,
+            token: accessToken?.token,
             name: id,
           };
           dispatch(getSpecificChittiChallan(params));
@@ -184,10 +176,8 @@ const UseEditChallanChitti: any = () => {
     }
   };
 
-  console.log('setStateForDocStatus in hook', stateForDocStatus);
-
-  const HandlePrintButton: any = async () => {
-    let printApiRes: any = await PrintChallanChittiApi(AccessToken?.token, id);
+  const handlePrintButton: any = async () => {
+    let printApiRes: any = await PrintChallanChittiApi(accessToken?.token, id);
     if (printApiRes?.status === 'success') {
       if (printApiRes?.data?.data?.length > 0) {
         window.open(printApiRes?.data?.data[0]?.print_url);
@@ -205,27 +195,27 @@ const UseEditChallanChitti: any = () => {
     drowpdownlist,
     clientNameList,
     setSelectedDropdownValue,
-    HandleUpdateChallanSubmit,
-    HandleGoldRate,
-    HandleRemarks,
-    HandleDateChange,
+    handleUpdateChallanSubmit,
+    handleGoldRate,
+    handleRemarks,
+    handleDateChange,
     narrationTableData,
     clientGroupList,
     stateForDocStatus,
     setStateForDocStatus,
     setRemarks,
     setGoldRate,
-    HandleSubmitChallanChitti,
-    HandleCancelChallanChitti,
-    HandleDeleteChallanChitti,
+    handleSubmitChallanChitti,
+    handleCancelChallanChitti,
+    handleDeleteChallanChitti,
     setTotalGrossWeightOfChallanTable,
     setTotalHuidWeightOfHuidTable,
-    HandleAmendButtonForDuplicateChitti,
+    handleAmendButtonForDuplicateChitti,
     setShowSaveButtonForAmendFlow,
     showSaveButtonForAmendFlow,
     setCheckGrossAndNetWeight,
-    HandlePrintButton,
+    handlePrintButton,
   };
 };
 
-export default UseEditChallanChitti;
+export default useEditChallanChitti;

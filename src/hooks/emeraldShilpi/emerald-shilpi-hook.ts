@@ -7,9 +7,9 @@ import {
 } from '../../store/slices/emerald-shilpi/get-emerald-shilpi-slice';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 
-const UseEmeraldShilpiHook: any = () => {
+const useEmeraldShilpiHook: any = () => {
   const dispatch = useDispatch();
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
   const [emeraldShilpiListData, setemeraldShilpiListData] = useState<any>([]);
 
@@ -17,7 +17,7 @@ const UseEmeraldShilpiHook: any = () => {
   console.log('emeraldShilpiDataFromStore', emeraldShilpiDataFromStore);
 
   useEffect(() => {
-    dispatch(getEmeraldShilpiList(AccessToken?.token));
+    dispatch(getEmeraldShilpiList(accessToken?.token));
   }, []);
 
   useEffect(() => {
@@ -35,4 +35,4 @@ const UseEmeraldShilpiHook: any = () => {
   };
 };
 
-export default UseEmeraldShilpiHook;
+export default useEmeraldShilpiHook;

@@ -2,21 +2,18 @@ import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import ClientNameListing from './ClientNameListing';
 import AddClient from './AddClient';
-
-import UseClientGroupHook from '../../../../hooks/Master/client-group-hook';
+import useClientGroupHook from '../../../../hooks/Master/client-group-hook';
 import MasterMultipleListingSearch from '../MasterMultipleListingSearch';
 
 const ClientName = () => {
   const { clientGroupList, clientNameClientGroupList }: any =
-    UseClientGroupHook();
-
-  console.log('clientNameClientGroupList', clientNameClientGroupList);
+    useClientGroupHook();
 
   const [inputName, setInputName] = useState('');
   const [inputGroup, setInputGroup] = useState('');
   const [tableViewData, setTableViewData] = useState<any>(20);
 
-  const HandleTableViewRows: any = (data: any) => {
+  const handleTableViewRows: any = (data: any) => {
     setTableViewData(data);
   };
 
@@ -37,7 +34,6 @@ const ClientName = () => {
         client.client_group.toLowerCase().includes(inputGroup.toLowerCase())
     );
 
-  console.log('ClientFilterList updated', filteredList);
   return (
     <div className="container">
       <div className="row justify-content-center mt-3">
@@ -56,9 +52,12 @@ const ClientName = () => {
                 handleInputChange2={handleInputChange2}
                 listingData={filteredList}
                 tableViewData={tableViewData}
-
               />
-              <ClientNameListing clientNameClientGroupList={filteredList} tableViewData={tableViewData} HandleTableViewRows={HandleTableViewRows} />
+              <ClientNameListing
+                clientNameClientGroupList={filteredList}
+                tableViewData={tableViewData}
+                handleTableViewRows={handleTableViewRows}
+              />
             </Tab>
             <Tab eventKey="longer-tab" title="Add Client">
               <AddClient clientGroupList={clientGroupList} />
@@ -67,7 +66,6 @@ const ClientName = () => {
         </div>
       </div>
     </div>
-
   );
 };
 

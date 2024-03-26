@@ -14,22 +14,22 @@ const AddSupplier = ({ GroupListdata }: any) => {
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
-  const HandleSubmit: any = async () => {
+  const handleSubmit: any = async () => {
     if (inputValue.trim() === '') {
       setError('Input field cannot be empty');
     } else {
       if (Object?.keys(selectedDropdownValue)?.length > 0) {
         let apiRes: any = await CreateNewSupplierApi(
-          AccessToken?.token,
+          accessToken?.token,
           title,
           selectedDropdownValue
         );
 
         if (apiRes?.data?.message?.status === 'success') {
           toast.success('New Supplier Created');
-          dispatch(getsupplierAndSupplierGroup(AccessToken?.token));
+          dispatch(getsupplierAndSupplierGroup(accessToken?.token));
           setInputValue('');
         } else if (apiRes?.data?.message?.status === 'error') {
           toast.error('Supplier already exist');
@@ -43,7 +43,7 @@ const AddSupplier = ({ GroupListdata }: any) => {
     }
   };
 
-  const HandleInputValue = (e: any) => {
+  const handleInputValue = (e: any) => {
     setError('');
     setTitle(e.target.value);
     setInputValue(e.target.value);
@@ -62,7 +62,7 @@ const AddSupplier = ({ GroupListdata }: any) => {
           className="form-control ps-2"
           id="title"
           aria-describedby="basic-addon3"
-          onChange={HandleInputValue}
+          onChange={handleInputValue}
           value={inputValue}
         />
       </div>
@@ -85,7 +85,7 @@ const AddSupplier = ({ GroupListdata }: any) => {
       <div className="d-flex justify-content-start ">
         <button
           type="submit"
-          onClick={HandleSubmit}
+          onClick={handleSubmit}
           className=" btn btn-outline-primary py-1 mt-2 form-submit-button"
         >
           Save

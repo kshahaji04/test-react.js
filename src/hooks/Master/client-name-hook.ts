@@ -8,28 +8,28 @@ import {
   get_client_name,
 } from '../../store/slices/Chitti/get-client-name-slice';
 
-const UseClientNameHook = () => {
+const useClientNameHook = () => {
   const dispatch = useDispatch();
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
-  const ClientNameDataFromStore: any = useSelector(get_client_name);
+  const clientNameDataFromStore: any = useSelector(get_client_name);
   const [clientNameList, setClientNameList] = useState<any>([]);
 
   useEffect(() => {
-    dispatch(getClientName(AccessToken?.token));
+    dispatch(getClientName(accessToken?.token));
   }, []);
 
   useEffect(() => {
     if (
-      ClientNameDataFromStore?.data?.length > 0 &&
-      ClientNameDataFromStore?.data !== null
+      clientNameDataFromStore?.data?.length > 0 &&
+      clientNameDataFromStore?.data !== null
     ) {
-      setClientNameList([...ClientNameDataFromStore?.data]);
+      setClientNameList([...clientNameDataFromStore?.data]);
     } else {
       setClientNameList([]);
     }
-  }, [ClientNameDataFromStore]);
+  }, [clientNameDataFromStore]);
   return { clientNameList };
 };
 
-export default UseClientNameHook;
+export default useClientNameHook;

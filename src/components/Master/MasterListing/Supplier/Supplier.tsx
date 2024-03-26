@@ -2,18 +2,18 @@ import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import MasterMultipleListingSearch from '../MasterMultipleListingSearch';
 import SupplierListing from './SupplierListing';
-import UseSupplierHook from '../../../../hooks/Master/Supplier-hook';
+import useSupplierHook from '../../../../hooks/Master/Supplier-hook';
 import AddSupplier from './AddSupplier';
 
 const Supplier = () => {
   const { supplierNameSupplierGroupList, supplierGroupList }: any =
-    UseSupplierHook();
+    useSupplierHook();
 
   const [inputName, setInputName] = useState('');
   const [inputGroup, setInputGroup] = useState('');
   const [tableViewData, setTableViewData] = useState<any>(20);
 
-  const HandleTableViewRows: any = (data: any) => {
+  const handleTableViewRows: any = (data: any) => {
     setTableViewData(data);
   };
   const handleInputChange1 = (event: any) => {
@@ -38,7 +38,6 @@ const Supplier = () => {
   console.log('ClientFilterList updated', filteredList);
   return (
     <div className="container">
-
       <div className="row justify-content-center mt-3">
         <div className="col-lg-9 chitti-nav-tabs tab-container">
           <Tabs
@@ -56,7 +55,11 @@ const Supplier = () => {
                 listingData={filteredList}
                 tableViewData={tableViewData}
               />
-              <SupplierListing listingData={filteredList} HandleTableViewRows={HandleTableViewRows} tableViewData={tableViewData} />
+              <SupplierListing
+                listingData={filteredList}
+                handleTableViewRows={handleTableViewRows}
+                tableViewData={tableViewData}
+              />
             </Tab>
             <Tab eventKey="longer-tab" title="Add Supplier">
               <AddSupplier GroupListdata={supplierGroupList} />

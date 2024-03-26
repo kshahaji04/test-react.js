@@ -5,7 +5,7 @@ const EmeraldCreateChitti = ({
   selectedDropdownValue,
   defaultData,
   setSelectedDropdownValue,
-  HandleClientGroup,
+  handleClientGroup,
   clientGroupList,
   clientNameList,
   currentDate,
@@ -33,7 +33,7 @@ const EmeraldCreateChitti = ({
               selectedDropdownValue={selectedDropdownValue}
               setSelectedDropdownValue={setSelectedDropdownValue}
               clientGroupList={clientGroupList}
-              HandleClientGroup={HandleClientGroup}
+              handleClientGroup={handleClientGroup}
               defaultData={defaultData}
               setStateForDocStatus={setStateForDocStatus}
               readOnly={readOnly === true ? true : false}

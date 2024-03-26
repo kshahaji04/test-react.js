@@ -1,16 +1,16 @@
 import { useSelector } from 'react-redux';
 import { get_specific_category } from '../../../../store/slices/Master/get-specific-category-slice';
-import UseCategoryHook from '../../../../hooks/Master/category-hook';
-import UseGetSpecificCategory from '../../../../hooks/Master/get-specific-category-hook';
+import useCategoryHook from '../../../../hooks/Master/category-hook';
+import useGetSpecificCategory from '../../../../hooks/Master/get-specific-category-hook';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
 const MasterPageSubCategoryDetail = () => {
-  const { }: any = UseCategoryHook();
+  const {}: any = useCategoryHook();
   const navigate = useNavigate();
 
   const { id } = useParams();
-  const { }: any = UseGetSpecificCategory();
+  const {}: any = useGetSpecificCategory();
   const categoryName: any = useSelector(get_specific_category);
   console.log('categoryName', categoryName);
 
@@ -26,7 +26,6 @@ const MasterPageSubCategoryDetail = () => {
             >
               Back
             </button>
-
           </div>
           <div className="card-body">
             <div className="row">

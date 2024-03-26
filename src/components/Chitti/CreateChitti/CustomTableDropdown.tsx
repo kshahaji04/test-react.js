@@ -6,11 +6,11 @@ const CustomTableDropdown = ({ dropdownlist }: any) => {
   const [showDropdownMenu, setShowDropdownMenu] = useState<any>(false);
   const [filterDropdownList, setFilterDropdownList] = useState<any>([]);
 
-  const HandleInputClick: any = () => {
+  const handleInputClick: any = () => {
     setShowDropdownMenu(true);
   };
 
-  const HandleInputValue = (e: any) => {
+  const handleInputValue = (e: any) => {
     setInputValue(e.target.value);
     setShowDropdownMenu(true);
     const query = e.target.value;
@@ -21,7 +21,7 @@ const CustomTableDropdown = ({ dropdownlist }: any) => {
     setFilterDropdownList(UpdatedFilterList);
   };
 
-  const HandleBlur = () => {
+  const handleBlur = () => {
     setShowDropdownMenu(false);
   };
   return (
@@ -32,9 +32,9 @@ const CustomTableDropdown = ({ dropdownlist }: any) => {
         aria-label="Small"
         aria-describedby="inputGroup-sizing-sm"
         value={inputValue}
-        onChange={HandleInputValue}
-        onClick={HandleInputClick}
-        onBlur={HandleBlur}
+        onChange={handleInputValue}
+        onClick={handleInputClick}
+        onBlur={handleBlur}
       />
       {showDropdownMenu && (
         <div className="custom-dropdown-menu">

@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import UseEmeraldHook from './emrald-page-hook';
+import useEmeraldHook from './emrald-page-hook';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
 import {
   getSpecificEmeraldChitti,
   get_specific_emerald_chitti,
@@ -13,29 +12,27 @@ import {
 import UpdateEmeraldChittiApi from '../../services/api/Emerald/update-emerald-chitti-api';
 import { UpdateDocStatusEmeraldChittiApi } from '../../services/api/general/update-doc-status-emrald-chitti-api';
 import PrintEmeraldChittiApi from '../../services/api/Emerald/print-emerald-chitti-api';
-import UseCustomEmeraldChittiHook from './custom-emerald-chitti-hook';
+import useCustomEmeraldChittiHook from './custom-emerald-chitti-hook';
 
-const UseEditEmeraldChittiHook: any = () => {
+const useEditEmeraldChittiHook: any = () => {
   const dispatch = useDispatch();
 
-  const AccessToken: any = useSelector(get_access_token);
-  const EmeraldChittiDataFromStore: any = useSelector(
+  const accessToken: any = useSelector(get_access_token);
+  const emeraldChittiDataFromStore: any = useSelector(
     get_specific_emerald_chitti
   );
 
   const [challanDetail, setChallanDetail] = useState<any>('');
 
-  console.log('EmeraldChittiDataFromStore', EmeraldChittiDataFromStore);
   const { id } = useParams();
-  console.log('params', id);
 
   const {
     emeraldChittiData,
     selectedDropdownValue,
     setSelectedDropdownValue,
     productItemList,
-    HandleClientGroup,
-    HandleCreateEmeraldChittiSubmit,
+    handleClientGroup,
+    handleCreateEmeraldChittiSubmit,
     clientGroupList,
     clientNameList,
     currentDate,
@@ -45,27 +42,27 @@ const UseEditEmeraldChittiHook: any = () => {
     setTableData,
     stateForDocStatus,
     setStateForDocStatus,
-    HandleSubmitEmeraldChittiData,
-    HandleCancelEmeraldChitti,
-    HandleDeleteEmeraldChitti,
+    handleSubmitEmeraldChittiData,
+    handleCancelEmeraldChitti,
+    handleDeleteEmeraldChitti,
     subCategoryList,
-    HandleAmendButtonForDuplicateChitti,
+    handleAmendButtonForDuplicateChitti,
     setShowSaveButtonForAmendFlow,
     showSaveButtonForAmendFlow,
-    HandleDeleteRow,
-    HandleAddRow,
+    handleDeleteRow,
+    handleAddRow,
     handleKeyDown,
     handleOnFocus,
-  }: any = UseEmeraldHook();
+  }: any = useEmeraldHook();
 
   const {
     findDuplicateValuesInEmeraldChittiTable,
     findDuplicateIndicesInEmeraldChittiTable,
-  } = UseCustomEmeraldChittiHook();
+  } = useCustomEmeraldChittiHook();
 
   useEffect(() => {
     const params: any = {
-      token: AccessToken?.token,
+      token: accessToken?.token,
       name: id,
     };
     dispatch(getSpecificEmeraldChitti(params));
@@ -73,16 +70,16 @@ const UseEditEmeraldChittiHook: any = () => {
 
   useEffect(() => {
     if (
-      EmeraldChittiDataFromStore?.data?.length > 0 &&
-      EmeraldChittiDataFromStore?.data !== null
+      emeraldChittiDataFromStore?.data?.length > 0 &&
+      emeraldChittiDataFromStore?.data !== null
     ) {
-      setChallanDetail([...EmeraldChittiDataFromStore?.data]);
+      setChallanDetail([...emeraldChittiDataFromStore?.data]);
     } else {
       setChallanDetail([]);
     }
-  }, [EmeraldChittiDataFromStore]);
+  }, [emeraldChittiDataFromStore]);
 
-  const HandleUpdateEmeraldChittiSubmit = async () => {
+  const handleUpdateEmeraldChittiSubmit = async () => {
     const reversedDate = new Date()
       ?.toISOString()
       ?.split('T')[0]
@@ -137,10 +134,9 @@ const UseEditEmeraldChittiHook: any = () => {
       transactionDate: transactionDate,
       // clientGroup: clientGroupName,
       challanTableData: updatedFilterEmeraldChitti,
-      token: AccessToken?.token,
+      token: accessToken?.token,
     };
     let updateChittiApi: any = await UpdateEmeraldChittiApi(BodyData);
-    console.log('UpdateEmeraldChittiApi', UpdateEmeraldChittiApi);
 
     if (
       updateChittiApi?.status === 200 &&
@@ -148,10 +144,10 @@ const UseEditEmeraldChittiHook: any = () => {
     ) {
       toast.success('Emerald Chitti Updated');
 
-      await UpdateDocStatusEmeraldChittiApi(AccessToken?.token, '0', id);
+      await UpdateDocStatusEmeraldChittiApi(accessToken?.token, '0', id);
       setTimeout(() => {
         const params: any = {
-          token: AccessToken?.token,
+          token: accessToken?.token,
           name: id,
         };
         dispatch(getSpecificEmeraldChitti(params));
@@ -162,12 +158,10 @@ const UseEditEmeraldChittiHook: any = () => {
     } else {
       toast.error('Failed to Update Emerald chitti');
     }
-
-
   };
 
-  const HandlePrintButton: any = async () => {
-    let printApiRes: any = await PrintEmeraldChittiApi(AccessToken?.token, id);
+  const handlePrintButton: any = async () => {
+    let printApiRes: any = await PrintEmeraldChittiApi(accessToken?.token, id);
     if (printApiRes?.status === 'success') {
       if (printApiRes?.data?.data?.length > 0) {
         window.open(printApiRes?.data?.data[0]?.print_url);
@@ -180,8 +174,8 @@ const UseEditEmeraldChittiHook: any = () => {
     selectedDropdownValue,
     setSelectedDropdownValue,
     productItemList,
-    HandleClientGroup,
-    HandleCreateEmeraldChittiSubmit,
+    handleClientGroup,
+    handleCreateEmeraldChittiSubmit,
     clientGroupList,
     clientNameList,
     currentDate,
@@ -190,22 +184,22 @@ const UseEditEmeraldChittiHook: any = () => {
     tableData,
     setTableData,
     challanDetail,
-    HandleUpdateEmeraldChittiSubmit,
+    handleUpdateEmeraldChittiSubmit,
     stateForDocStatus,
     setStateForDocStatus,
-    HandleSubmitEmeraldChittiData,
-    HandleCancelEmeraldChitti,
-    HandleDeleteEmeraldChitti,
+    handleSubmitEmeraldChittiData,
+    handleCancelEmeraldChitti,
+    handleDeleteEmeraldChitti,
     subCategoryList,
-    HandleAmendButtonForDuplicateChitti,
+    handleAmendButtonForDuplicateChitti,
     setShowSaveButtonForAmendFlow,
     showSaveButtonForAmendFlow,
-    HandleDeleteRow,
-    HandleAddRow,
+    handleDeleteRow,
+    handleAddRow,
     handleKeyDown,
     handleOnFocus,
-    HandlePrintButton,
+    handlePrintButton,
   };
 };
 
-export default UseEditEmeraldChittiHook;
+export default useEditEmeraldChittiHook;

@@ -14,22 +14,22 @@ const AddHuidProduct = () => {
     hm_pcs: '',
   });
   const [error, setError] = useState('');
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
-  const HandleSubmit: any = async () => {
+  const handleSubmit: any = async () => {
     if (inputValue.title.trim() === '') {
       setError('Input field cannot be empty');
     } else {
       if (Object.keys(inputValue.hm_pcs)?.length > 0) {
         let apiRes: any = await AddHuidProductApi(
-          AccessToken?.token,
+          accessToken?.token,
           inputValue
         );
         console.log('apires', apiRes);
 
         if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
           toast.success('HUID Product Added');
-          dispatch(getHuidProductList(AccessToken?.token));
+          dispatch(getHuidProductList(accessToken?.token));
         } else {
           toast.error('HUID product already exist');
         }
@@ -44,7 +44,7 @@ const AddHuidProduct = () => {
     }
   };
 
-  const HandleInputValue = (e: any) => {
+  const handleInputValue = (e: any) => {
     const { name, value } = e.target;
     setError('');
 
@@ -66,7 +66,7 @@ const AddHuidProduct = () => {
           className="form-control ps-2"
           id="title"
           aria-describedby="basic-addon3"
-          onChange={HandleInputValue}
+          onChange={handleInputValue}
           value={inputValue.title}
         />
       </div>
@@ -83,7 +83,7 @@ const AddHuidProduct = () => {
             className="form-control h-100 ps-2"
             id="hm_pcs"
             aria-describedby="basic-addon3"
-            onChange={HandleInputValue}
+            onChange={handleInputValue}
             value={inputValue.hm_pcs}
           />
         </div>
@@ -91,7 +91,7 @@ const AddHuidProduct = () => {
       <div className="d-flex justify-content-start ">
         <button
           type="submit"
-          onClick={HandleSubmit}
+          onClick={handleSubmit}
           className=" btn btn-outline-primary py-1 mt-2 form-submit-button"
         >
           Save

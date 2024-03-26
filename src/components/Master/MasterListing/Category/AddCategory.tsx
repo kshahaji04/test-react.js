@@ -10,18 +10,18 @@ import SingleItemAdd from '../SingleItemAdd';
 const AddCategory = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState<any>('');
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
 
-  const HandleSubmit = async () => {
+  const handleSubmit = async () => {
     if (inputValue.trim() === '') {
       setError('Input field cannot be empty');
     } else {
-      let apiRes: any = await AddCategoryApi(AccessToken?.token, title);
+      let apiRes: any = await AddCategoryApi(accessToken?.token, title);
       if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
         toast.success('Category Created');
-        dispatch(getCategoryList(AccessToken?.token));
+        dispatch(getCategoryList(accessToken?.token));
       } else {
         toast.error('Category already exist');
       }
@@ -30,7 +30,7 @@ const AddCategory = () => {
     }
   };
 
-  const HandleInputValue = (e: any) => {
+  const handleInputValue = (e: any) => {
     setError('');
     setTitle(e.target.value);
     setInputValue(e.target.value);
@@ -39,9 +39,9 @@ const AddCategory = () => {
     <>
       <SingleItemAdd
         inputValue={inputValue}
-        HandleInputValue={HandleInputValue}
+        handleInputValue={handleInputValue}
         error={error}
-        HandleSubmit={HandleSubmit}
+        handleSubmit={handleSubmit}
       />
     </>
   );

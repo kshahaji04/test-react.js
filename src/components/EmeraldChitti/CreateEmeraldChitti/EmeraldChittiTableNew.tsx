@@ -8,11 +8,10 @@ const EmeraldChittiTableNew = ({
   setTableData,
   subCategoryList,
   defaultData,
-  HandleAddRow,
+  handleAddRow,
   readOnly,
   setStateForDocStatus,
 }: any) => {
-
   const ShowCategoryDropdown: any = useRef<any>(true);
   const inputRef: any = useRef<HTMLInputElement>(null);
   const [calculationRow, setCalculationRow] = useState({
@@ -62,7 +61,6 @@ const EmeraldChittiTableNew = ({
     calculateLiveCalculations();
   }, [tableData, setTableData]);
 
-  console.log(tableData.length, 'tableData ');
   const calculateLiveCalculations = async () => {
     // Calculate live values based on tableData
     const liveCalculations = tableData.reduce(
@@ -124,7 +122,7 @@ const EmeraldChittiTableNew = ({
             .every((key) => updatedRow[key] !== '');
 
           if (isLastRow && allFieldsExceptExceptionsFilled) {
-            HandleAddRow(); // Add a new row
+            handleAddRow(); // Add a new row
           }
 
           setStateForDocStatus(true);
@@ -145,7 +143,7 @@ const EmeraldChittiTableNew = ({
     setStateForDocStatus(true);
   };
 
-  const HandleDeleteRow: any = (id: any) => {
+  const handleDeleteRow: any = (id: any) => {
     console.log('roww id', id);
     if (tableData?.length > 1) {
       const updatedData = tableData
@@ -156,8 +154,6 @@ const EmeraldChittiTableNew = ({
     }
   };
 
-
-
   console.log('updated tabled dataa', tableData);
   return (
     <div>
@@ -167,7 +163,11 @@ const EmeraldChittiTableNew = ({
             <caption>Emerald Chitti Table</caption>
             <p
               className="cursor-pointer my-auto btn-link"
-              onClick={() => { if (!readOnly) { HandleAddRow() } }}
+              onClick={() => {
+                if (!readOnly) {
+                  handleAddRow();
+                }
+              }}
             >
               Add Row
             </p>
@@ -514,13 +514,13 @@ const EmeraldChittiTableNew = ({
                               )
                             }
                             type="number"
-                            HandleAddRow={HandleAddRow}
+                            HandleAddRow={handleAddRow}
                           />
                         </td>
                         <td className="table-data-input">
                           <div
                             className="d-flex align-items-center delete-link cursor-pointer"
-                            onClick={() => HandleDeleteRow(row.idx)}
+                            onClick={() => handleDeleteRow(row.idx)}
                           >
                             <i className="fa-solid fa-xmark fs-5"></i>
                           </div>

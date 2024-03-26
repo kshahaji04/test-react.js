@@ -4,14 +4,14 @@ import SelectedInputDropdown from '../../SelectedInputDropdown';
 const CreateChittiForm = ({
   currentDate,
   selectedDropdownValue,
-  HandleGoldRate,
-  HandleRemarks,
+  handleGoldRate,
+  handleRemarks,
   setSelectedDropdownValue,
   clientNameList,
   clientGroupList,
-  HandleClientGroup,
+  handleClientGroup,
   defaultData,
-  HandleDateChange,
+  handleDateChange,
   setStateForDocStatus,
   setRemarks,
   setGoldRate,
@@ -28,7 +28,6 @@ const CreateChittiForm = ({
     }
   }, []);
 
-  console.log('defaultData', defaultData);
   return (
     <>
       <form className="d-flex flex-column">
@@ -52,9 +51,9 @@ const CreateChittiForm = ({
                 className="form-control custom-input-field py-0 px-2"
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-sm"
-                onChange={HandleDateChange}
+                onChange={handleDateChange}
                 readOnly
-              // readOnly={readOnlyField}
+                // readOnly={readOnlyField}
               />
             </div>
           </div>
@@ -70,7 +69,7 @@ const CreateChittiForm = ({
               selectedDropdownValue={selectedDropdownValue}
               setSelectedDropdownValue={setSelectedDropdownValue}
               clientGroupList={clientGroupList}
-              HandleClientGroup={HandleClientGroup}
+              HandleClientGroup={handleClientGroup}
               defaultData={defaultData}
               setStateForDocStatus={setStateForDocStatus}
               readOnly={readOnly === true ? true : false}
@@ -89,7 +88,7 @@ const CreateChittiForm = ({
               aria-describedby="inputGroup-sizing-sm"
               defaultValue={defaultData?.gold_rate}
               value={goldRate}
-              onChange={HandleGoldRate}
+              onChange={handleGoldRate}
               readOnly={readOnly === true ? true : false}
             />
           </div>
@@ -106,7 +105,7 @@ const CreateChittiForm = ({
               aria-describedby="inputGroup-sizing-sm"
               value={remarks}
               defaultValue={defaultData?.remarks}
-              onChange={HandleRemarks}
+              onChange={handleRemarks}
               readOnly={readOnly === true ? true : false}
             />
           </div>

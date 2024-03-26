@@ -5,7 +5,7 @@ import DataUploadMaster from '../components/DataUpload/DataUploadMaster';
 import MasterPage from '../pages/master';
 import ChittiPage from '../pages/chitti';
 import Report from '../pages/report';
-import Emerald from '../pages/emrald';
+import Emerald from '../pages/emerald';
 import ClientGroup from '../components/Master/MasterListing/ClientGroup/ClientGroup';
 import ClientName from '../components/Master/MasterListing/ClientName/ClientName';
 import Category from '../components/Master/MasterListing/Category/CategoryMaster';

@@ -11,51 +11,48 @@ import {
   get_client_name_client_group,
 } from '../../store/slices/Master/get-clientname-clientgroup-slice';
 
-const UseClientGroupHook = () => {
+const useClientGroupHook = () => {
   const dispatch = useDispatch();
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
-  const ClientGroupDataFromStore: any = useSelector(get_client_group);
-  const ClientNameClientGroupDataFromStore: any = useSelector(
+  const clientGroupDataFromStore: any = useSelector(get_client_group);
+  const clientNameclientGroupDataFromStore: any = useSelector(
     get_client_name_client_group
   );
   const [clientGroupList, setClientGroupList] = useState<any>([]);
   const [clientNameClientGroupList, setClientNameClientGroupList] =
     useState<any>([]);
-  console.log(
-    'ClientNameClientGroupDataFromStore',
-    ClientNameClientGroupDataFromStore
-  );
+
   useEffect(() => {
-    dispatch(getClientGroupList(AccessToken?.token));
-    dispatch(getClientNameClientGroup(AccessToken?.token));
+    dispatch(getClientGroupList(accessToken?.token));
+    dispatch(getClientNameClientGroup(accessToken?.token));
   }, []);
 
   useEffect(() => {
     if (
-      ClientGroupDataFromStore?.data?.length > 0 &&
-      ClientGroupDataFromStore?.data !== null
+      clientGroupDataFromStore?.data?.length > 0 &&
+      clientGroupDataFromStore?.data !== null
     ) {
-      setClientGroupList([...ClientGroupDataFromStore?.data]);
+      setClientGroupList([...clientGroupDataFromStore?.data]);
     } else {
       setClientGroupList([]);
     }
-  }, [ClientGroupDataFromStore]);
+  }, [clientGroupDataFromStore]);
 
   useEffect(() => {
     if (
-      ClientNameClientGroupDataFromStore?.data?.length > 0 &&
-      ClientNameClientGroupDataFromStore?.data !== null
+      clientNameclientGroupDataFromStore?.data?.length > 0 &&
+      clientNameclientGroupDataFromStore?.data !== null
     ) {
       setClientNameClientGroupList([
-        ...ClientNameClientGroupDataFromStore?.data,
+        ...clientNameclientGroupDataFromStore?.data,
       ]);
     } else {
       setClientNameClientGroupList([]);
     }
-  }, [ClientNameClientGroupDataFromStore]);
+  }, [clientNameclientGroupDataFromStore]);
 
   return { clientGroupList, clientNameClientGroupList };
 };
 
-export default UseClientGroupHook;
+export default useClientGroupHook;

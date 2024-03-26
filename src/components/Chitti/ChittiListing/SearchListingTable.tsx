@@ -4,7 +4,7 @@ const SearchListingTable = ({
   clientNameList,
   setSearchclientName,
   searchClientName,
-  HandleSearchInput,
+  handleSearchInput,
   searchInputValues,
 }: any) => {
   return (
@@ -31,9 +31,9 @@ const SearchListingTable = ({
             name="from_date"
             id="from_date"
             className="form-control custom-input-field px-2"
-            style={{ backgroundColor: "#E0E1F5" }}
+            style={{ backgroundColor: '#E0E1F5' }}
             value={searchInputValues?.from_date}
-            onChange={HandleSearchInput}
+            onChange={handleSearchInput}
           />
         </div>
         <div className="col-lg-2 col-md-3 ">
@@ -43,9 +43,9 @@ const SearchListingTable = ({
             name="to_date"
             id="to_date"
             className="form-control custom-input-field px-2"
-            style={{ backgroundColor: "#E0E1F5" }}
+            style={{ backgroundColor: '#E0E1F5' }}
             value={searchInputValues?.to_date}
-            onChange={HandleSearchInput}
+            onChange={handleSearchInput}
           />
         </div>
         <div className="col-lg-2 col-md-2">
@@ -62,7 +62,7 @@ const SearchListingTable = ({
                 ? searchInputValues?.chitti_no
                 : ''
             }
-            onChange={HandleSearchInput}
+            onChange={handleSearchInput}
           />
         </div>
 
@@ -74,8 +74,8 @@ const SearchListingTable = ({
             placeholderValue="Client Name"
             selectedDropdownValue={searchClientName}
             setSelectedDropdownValue={setSearchclientName}
-          // clientGroupList={clientGroupList}
-          // HandleClientGroup={HandleClientGroup}
+            // clientGroupList={clientGroupList}
+            // HandleClientGroup={HandleClientGroup}
           />
         </div>
         <div className="col-lg-2 col-md-2 my-lg-0 mb-lg-0 mb-3">
@@ -85,7 +85,7 @@ const SearchListingTable = ({
             id="status"
             className="form-select p-0 px-2 input-fields"
             aria-label="Default select example"
-            onChange={HandleSearchInput}
+            onChange={handleSearchInput}
           >
             <option>status</option>
             <option>Draft</option>

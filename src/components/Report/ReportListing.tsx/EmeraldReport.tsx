@@ -1,8 +1,8 @@
 import { useRef, useEffect, useState } from 'react';
-import UseEmeraldReportHook from '../../../hooks/report/emerald-report-hook';
-import UseSubCategoryHook from '../../../hooks/Master/sub-category-hook';
+import useEmeraldReportHook from '../../../hooks/report/emerald-report-hook';
+import useSubCategoryHook from '../../../hooks/Master/sub-category-hook';
 import FilterReportListing from './FilterReportListing';
-import UseDataUploadHook from '../../../hooks/dataUpload/data-upload-hook';
+import useDataUploadHook from '../../../hooks/dataUpload/data-upload-hook';
 import { useDispatch } from 'react-redux';
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
@@ -11,12 +11,11 @@ import { getEmeraldReportData } from '../../../store/slices/report/get-emerald-r
 
 const EmeraldReport = () => {
   const dispatch = useDispatch();
-  const { emeraldReportData } = UseEmeraldReportHook();
-  const { subCategoryList }: any = UseSubCategoryHook();
-  const { updatedSupplierList }: any = UseDataUploadHook();
-  console.log('emeraldReportData in tsx', emeraldReportData);
+  const { emeraldReportData } = useEmeraldReportHook();
+  const { subCategoryList }: any = useSubCategoryHook();
+  const { updatedSupplierList }: any = useDataUploadHook();
 
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
   const [searchInputValues, setSearchInputValues] = useState({
     project: '',
@@ -29,7 +28,7 @@ const EmeraldReport = () => {
   const [searchSupplier, setSearchSupplier] = useState<any>('');
   const [searchSubCategory, setSearchSubCategory] = useState<any>('');
 
-  const HandleSearchInput: any = (e: any) => {
+  const handleSearchInput: any = (e: any) => {
     const { name, value } = e.target;
     setSearchInputValues({
       ...searchInputValues,
@@ -40,7 +39,7 @@ const EmeraldReport = () => {
   useEffect(() => {
     const handleFilterList: any = () => {
       const reqParams: any = {
-        token: AccessToken?.token,
+        token: accessToken?.token,
         supplier: searchSupplier,
         project: searchInputValues?.project,
         sub_category: searchSubCategory,
@@ -103,7 +102,7 @@ const EmeraldReport = () => {
       <FilterReportListing
         searchSubCategory={searchSubCategory}
         setSearchSubCategory={setSearchSubCategory}
-        HandleSearchInput={HandleSearchInput}
+        handleSearchInput={handleSearchInput}
         showSubCategoryInFilter={showSubCategoryInFilter}
         subCategoryList={subCategoryList}
         showSupplierInFilter={showSupplierInFilter}

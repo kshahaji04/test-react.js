@@ -11,61 +11,58 @@ import {
   get_emerald_supplier,
 } from '../../store/slices/dataUpload/get-emerald-supplier-slice';
 
-const UseDataUploadHook = () => {
+const useDataUploadHook = () => {
   const dispatch = useDispatch();
 
-  const AccessToken: any = useSelector(get_access_token);
-  const SupplierDataFromStore: any = useSelector(get_supplier_list);
-  const EmeraldSupplierDataFromStore: any = useSelector(get_emerald_supplier);
+  const accessToken: any = useSelector(get_access_token);
+  const supplierDataFromStore: any = useSelector(get_supplier_list);
+  const emeraldsupplierDataFromStore: any = useSelector(get_emerald_supplier);
 
   const [supplierList, setSupplierList] = useState<any>([]);
   const [emeraldSupplierData, setEmeraldSupplierData] = useState<any>([]);
 
   const [updatedSupplierList, setUpdatedSupplierList] = useState<any>([]);
 
-  console.log('EmeraldSupplierDataFromStore', EmeraldSupplierDataFromStore);
-
-  console.log('SupplierDataFromStore', SupplierDataFromStore);
   useEffect(() => {
-    dispatch(getSupplierList(AccessToken?.token));
-    dispatch(getEmeraldSupplier(AccessToken?.token));
+    dispatch(getSupplierList(accessToken?.token));
+    dispatch(getEmeraldSupplier(accessToken?.token));
   }, []);
 
   useEffect(() => {
     if (
-      SupplierDataFromStore?.data?.length > 0 &&
-      SupplierDataFromStore?.data !== null
+      supplierDataFromStore?.data?.length > 0 &&
+      supplierDataFromStore?.data !== null
     ) {
-      setSupplierList([...SupplierDataFromStore?.data]);
+      setSupplierList([...supplierDataFromStore?.data]);
     } else {
       setSupplierList([]);
     }
-  }, [SupplierDataFromStore]);
+  }, [supplierDataFromStore]);
 
   useEffect(() => {
     if (
-      EmeraldSupplierDataFromStore?.data?.data?.length > 0 &&
-      EmeraldSupplierDataFromStore?.data?.data !== null
+      emeraldsupplierDataFromStore?.data?.data?.length > 0 &&
+      emeraldsupplierDataFromStore?.data?.data !== null
     ) {
-      setEmeraldSupplierData([...EmeraldSupplierDataFromStore?.data?.data]);
+      setEmeraldSupplierData([...emeraldsupplierDataFromStore?.data?.data]);
     } else {
       setEmeraldSupplierData([]);
     }
-  }, [EmeraldSupplierDataFromStore]);
+  }, [emeraldsupplierDataFromStore]);
 
   useEffect(() => {
     if (
-      SupplierDataFromStore?.data?.length > 0 &&
-      SupplierDataFromStore?.data !== null
+      supplierDataFromStore?.data?.length > 0 &&
+      supplierDataFromStore?.data !== null
     ) {
-      const updatedSupplierList: any = SupplierDataFromStore?.data.map(
+      const updatedSupplierList: any = supplierDataFromStore?.data.map(
         (list: any) => {
           return list.name;
         }
       );
       setUpdatedSupplierList(updatedSupplierList);
     }
-  }, [SupplierDataFromStore]);
+  }, [supplierDataFromStore]);
 
   return {
     supplierList,
@@ -74,4 +71,4 @@ const UseDataUploadHook = () => {
   };
 };
 
-export default UseDataUploadHook;
+export default useDataUploadHook;

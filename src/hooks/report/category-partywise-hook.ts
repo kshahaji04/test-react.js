@@ -7,42 +7,39 @@ import {
   get_category_partywise_report_data,
 } from '../../store/slices/report/get-category-partywise-report-slice';
 
-const UseCategoryPartywiseReportHook = () => {
+const useCategoryPartywiseReportHook = () => {
   const dispatch = useDispatch();
 
-  const CategoryPartywisereportDataFromStore: any = useSelector(
+  const categoryPartywisereportDataFromStore: any = useSelector(
     get_category_partywise_report_data
   );
-  console.log(
-    'CategoryPartywisereportDataFromStore from store',
-    CategoryPartywisereportDataFromStore
-  );
+
   const [categoryPartywiseReportData, setCategoryPartywiseReportData] =
     useState<any>([]);
 
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
   useEffect(() => {
     const reqParams: any = {
-      token: AccessToken?.token,
+      token: accessToken?.token,
     };
     dispatch(getCategoryPartywiseReportData(reqParams));
   }, []);
 
   useEffect(() => {
     if (
-      CategoryPartywisereportDataFromStore?.data?.length > 0 &&
-      CategoryPartywisereportDataFromStore?.data !== null
+      categoryPartywisereportDataFromStore?.data?.length > 0 &&
+      categoryPartywisereportDataFromStore?.data !== null
     ) {
       setCategoryPartywiseReportData([
-        ...CategoryPartywisereportDataFromStore?.data,
+        ...categoryPartywisereportDataFromStore?.data,
       ]);
     } else {
       setCategoryPartywiseReportData([]);
     }
-  }, [CategoryPartywisereportDataFromStore]);
+  }, [categoryPartywisereportDataFromStore]);
 
   return { categoryPartywiseReportData };
 };
 
-export default UseCategoryPartywiseReportHook;
+export default useCategoryPartywiseReportHook;
