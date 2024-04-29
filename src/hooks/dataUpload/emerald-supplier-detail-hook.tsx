@@ -9,24 +9,19 @@ import {
   get_emerald_supplier_details,
 } from '../../store/slices/dataUpload/get-emerald-supplier-details-slice';
 
-const UseEmeraldSupplierDetailHook: any = () => {
+const useEmeraldSupplierDetailHook: any = () => {
   const dispatch = useDispatch();
-  const AccessToken: any = useSelector(get_access_token);
-  const EmeraldSupplierDetailsFromStore: any = useSelector(
+  const accessToken: any = useSelector(get_access_token);
+  const emeraldSupplierDetailsFromStore: any = useSelector(
     get_emerald_supplier_details
   );
 
   const [emeraldSupplierDetail, setEmeraldSupplierDetail] = useState<any>('');
   const { id } = useParams();
 
-  console.log(
-    'EmeraldSupplierDetailsFromStore',
-    EmeraldSupplierDetailsFromStore
-  );
-
   useEffect(() => {
     const params: any = {
-      token: AccessToken?.token,
+      token: accessToken?.token,
       id: id,
     };
     dispatch(getEmeraldSupplierDetails(params));
@@ -34,17 +29,16 @@ const UseEmeraldSupplierDetailHook: any = () => {
 
   useEffect(() => {
     if (
-      Object.keys(EmeraldSupplierDetailsFromStore?.data)?.length > 0 &&
-      EmeraldSupplierDetailsFromStore?.data !== null
+      Object.keys(emeraldSupplierDetailsFromStore?.data)?.length > 0 &&
+      emeraldSupplierDetailsFromStore?.data !== null
     ) {
-      setEmeraldSupplierDetail([...EmeraldSupplierDetailsFromStore?.data]);
+      setEmeraldSupplierDetail([...emeraldSupplierDetailsFromStore?.data]);
     } else {
       setEmeraldSupplierDetail([]);
     }
-  }, [EmeraldSupplierDetailsFromStore]);
+  }, [emeraldSupplierDetailsFromStore]);
 
-  console.log('emerald detail data', emeraldSupplierDetail);
   return { emeraldSupplierDetail };
 };
 
-export default UseEmeraldSupplierDetailHook;
+export default useEmeraldSupplierDetailHook;

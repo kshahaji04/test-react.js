@@ -8,18 +8,17 @@ import {
   get_specific_category,
 } from '../../store/slices/Master/get-specific-category-slice';
 
-const UseGetSpecificCategory = () => {
+const useGetSpecificCategory = () => {
   const dispatch = useDispatch();
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
   const { id } = useParams();
   const categoryName: any = useSelector(get_specific_category);
-  console.log('clientGroupDataFromStore', categoryName);
 
   const [category, setCategory] = useState<any>('');
   useEffect(() => {
     const params = {
       name: id,
-      token: AccessToken?.token,
+      token: accessToken?.token,
     };
     dispatch(getSpecificCategory(params));
   }, []);
@@ -33,4 +32,4 @@ const UseGetSpecificCategory = () => {
   return { category };
 };
 
-export default UseGetSpecificCategory;
+export default useGetSpecificCategory;

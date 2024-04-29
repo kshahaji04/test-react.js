@@ -1,16 +1,21 @@
-
 import { NavLink } from 'react-router-dom';
 import LoadMoreTableDataInMaster from './LoadMoreTableDataInMaster';
 
-const SingleItemListingInMaster = ({ listingData, heading, tableViewData, HandleTableViewRows }: any) => {
+const SingleItemListingInMaster = ({
+  listingData,
+  heading,
+  tableViewData,
+  handleTableViewRows,
+}: any) => {
   return (
     <>
-
       <div className="container border mt-2">
         <table className="table table-striped mt-2">
           <thead>
             <tr className="text-start table-heading table-heading-row ">
-              <th scope="col" style={{ width: "9%", textAlign: "center" }}>Sr No.</th>
+              <th scope="col" style={{ width: '9%', textAlign: 'center' }}>
+                Sr No.
+              </th>
               <th scope="col ">{heading}</th>
             </tr>
           </thead>
@@ -22,9 +27,7 @@ const SingleItemListingInMaster = ({ listingData, heading, tableViewData, Handle
                 .map((group: any, index: any) => {
                   return (
                     <tr className="text-start table-body-row" key={index}>
-                      <td className='p-1 text-center'>
-                        {index + 1}
-                      </td>
+                      <td className="p-1 text-center">{index + 1}</td>
                       <td className="p-1 ps-2">
                         <NavLink
                           to={group}
@@ -36,14 +39,11 @@ const SingleItemListingInMaster = ({ listingData, heading, tableViewData, Handle
                     </tr>
                   );
                 })}
-
           </tbody>
         </table>
       </div>
       {listingData?.length > 19 && listingData !== null && (
-        <LoadMoreTableDataInMaster
-          HandleTableViewRows={HandleTableViewRows}
-        />
+        <LoadMoreTableDataInMaster handleTableViewRows={handleTableViewRows} />
       )}
     </>
   );

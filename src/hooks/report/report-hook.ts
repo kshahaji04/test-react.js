@@ -7,17 +7,17 @@ import {
 } from '../../store/slices/report/get-report-tableData-slice';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 
-const UseReportHook = () => {
+const useReportHook = () => {
   const dispatch = useDispatch();
 
   const reportDataFromStore: any = useSelector(get_report_table_data);
-  console.log('report data from store', reportDataFromStore);
+
   const [reportTableData, setReportTableData] = useState<any>([]);
 
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
   useEffect(() => {
-    dispatch(getReportTableData(AccessToken?.token));
+    dispatch(getReportTableData(accessToken?.token));
   }, []);
 
   useEffect(() => {
@@ -33,4 +33,4 @@ const UseReportHook = () => {
   return { reportTableData };
 };
 
-export default UseReportHook;
+export default useReportHook;

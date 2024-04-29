@@ -9,41 +9,38 @@ import {
   get_category_summary_report_data,
 } from '../../store/slices/report/get-category-summary-report-slice';
 
-const UseCategorySummaryReportHook = () => {
+const useCategorySummaryReportHook = () => {
   const dispatch = useDispatch();
 
-  const CategorySummaryreportDataFromStore: any = useSelector(
+  const categorySummaryreportDataFromStore: any = useSelector(
     get_category_summary_report_data
   );
-  console.log(
-    'CategorySummaryreportDataFromStore from store',
-    CategorySummaryreportDataFromStore
-  );
+
   const [categorySummaryReportData, setCategorySummaryReportData] =
     useState<any>([]);
 
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
   useEffect(() => {
     const reqParams: any = {
-      token: AccessToken?.token,
+      token: accessToken?.token,
     };
     dispatch(getCategorySummaryReportData(reqParams));
   }, []);
 
   useEffect(() => {
     if (
-      CategorySummaryreportDataFromStore?.data?.length > 0 &&
-      CategorySummaryreportDataFromStore?.data !== null
+      categorySummaryreportDataFromStore?.data?.length > 0 &&
+      categorySummaryreportDataFromStore?.data !== null
     ) {
       setCategorySummaryReportData([
-        ...CategorySummaryreportDataFromStore?.data,
+        ...categorySummaryreportDataFromStore?.data,
       ]);
     } else {
       setCategorySummaryReportData([]);
     }
-  }, [CategorySummaryreportDataFromStore]);
+  }, [categorySummaryreportDataFromStore]);
   return { categorySummaryReportData };
 };
 
-export default UseCategorySummaryReportHook;
+export default useCategorySummaryReportHook;

@@ -1,8 +1,8 @@
 const CreateNewProductData = ({
   inputValue,
-  HandleInputValue,
+  handleInputValue,
   error,
-  HandleSubmit,
+  handleSubmit,
 }: any) => {
   return (
     <div className="container mt-1">
@@ -17,7 +17,7 @@ const CreateNewProductData = ({
           className="form-control ps-2"
           id="basic-url"
           aria-describedby="basic-addon3"
-          onChange={HandleInputValue}
+          onChange={handleInputValue}
           value={inputValue}
           required
         />
@@ -33,7 +33,7 @@ const CreateNewProductData = ({
           className="form-control ps-2"
           id="basic-url"
           aria-describedby="basic-addon3"
-          onChange={HandleInputValue}
+          onChange={handleInputValue}
           value={inputValue}
           required
         />
@@ -42,7 +42,7 @@ const CreateNewProductData = ({
       <div className="d-flex justify-content-start ">
         <button
           type="submit"
-          onClick={HandleSubmit}
+          onClick={handleSubmit}
           //   onKeyDown={HandleKeyDownFun}
           className=" btn btn-outline-primary py-1 mt-2 form-submit-button"
         >

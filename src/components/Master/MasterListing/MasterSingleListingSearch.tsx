@@ -1,6 +1,9 @@
-
-const MasterSingleListingSearch = ({ placeholder, HandleSearchInput, listingData, tableViewData }: any) => {
-
+const MasterSingleListingSearch = ({
+  placeholder,
+  handleSearchInput,
+  listingData,
+  tableViewData,
+}: any) => {
   return (
     <div className="container d-flex justify-content-between mt-2">
       <div className="">
@@ -11,7 +14,7 @@ const MasterSingleListingSearch = ({ placeholder, HandleSearchInput, listingData
           className="form-control input-fields   py-1 ps-2"
           aria-describedby="emailHelp"
           placeholder={placeholder}
-          onChange={HandleSearchInput}
+          onChange={handleSearchInput}
         />
       </div>
       <div className="d-flex align-items-end">

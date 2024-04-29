@@ -2,20 +2,19 @@ import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import AddSubCategory from './AddSubCategory';
 import SubCategoryListing from './SubCategoryListing';
-import UseSubCategoryHook from '../../../../hooks/Master/sub-category-hook';
-import UseCategoryHook from '../../../../hooks/Master/category-hook';
+import useSubCategoryHook from '../../../../hooks/Master/sub-category-hook';
+import useCategoryHook from '../../../../hooks/Master/category-hook';
 import MasterMultipleListingSearch from '../MasterMultipleListingSearch';
 
 const SubCategoryMaster = () => {
-  const { subCategoryCategoryData }: any = UseSubCategoryHook();
-  const { CategoryList }: any = UseCategoryHook();
+  const { subCategoryCategoryData }: any = useSubCategoryHook();
+  const { CategoryList }: any = useCategoryHook();
 
-  console.log('subCategoryCategoryData', subCategoryCategoryData);
   const [inputName, setInputName] = useState('');
   const [inputGroup, setInputGroup] = useState('');
   const [tableViewData, setTableViewData] = useState<any>(20);
 
-  const HandleTableViewRows: any = (data: any) => {
+  const handleTableViewRows: any = (data: any) => {
     setTableViewData(data);
   };
   const handleInputChange1 = (event: any) => {
@@ -37,8 +36,7 @@ const SubCategoryMaster = () => {
 
   return (
     <div className="container">
-
-      <div className="row justify-content-center mt-3" >
+      <div className="row justify-content-center mt-3">
         <div className="col-lg-9 chitti-nav-tabs tab-container">
           <Tabs
             defaultActiveKey="default-tab"
@@ -55,7 +53,11 @@ const SubCategoryMaster = () => {
                 listingData={filteredList}
                 tableViewData={tableViewData}
               />
-              <SubCategoryListing filteredList={filteredList} HandleTableViewRows={HandleTableViewRows} tableViewData={tableViewData} />
+              <SubCategoryListing
+                filteredList={filteredList}
+                handleTableViewRows={handleTableViewRows}
+                tableViewData={tableViewData}
+              />
             </Tab>
 
             <Tab eventKey="longer-tab" title="Add Sub Category">

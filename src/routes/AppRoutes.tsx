@@ -5,14 +5,12 @@ import DataUploadMaster from '../components/DataUpload/DataUploadMaster';
 import MasterPage from '../pages/master';
 import ChittiPage from '../pages/chitti';
 import Report from '../pages/report';
-import Emerald from '../pages/emrald';
+import Emerald from '../pages/emerald';
 import ClientGroup from '../components/Master/MasterListing/ClientGroup/ClientGroup';
 import ClientName from '../components/Master/MasterListing/ClientName/ClientName';
 import Category from '../components/Master/MasterListing/Category/CategoryMaster';
 import SubCategory from '../components/Master/MasterListing/SubCategory/SubCategoryMaster';
 import HuidProduct from '../components/Master/MasterListing/HuidProduct/HuidProductMaster';
-import EmeraldChitti from '../components/Master/MasterListing/EmeraldChitti';
-import EmeraldListing from '../components/Master/MasterListing/Emerald';
 import EditChallanChitti from '../components/Chitti/ChittiListing/EditChallanChitti';
 import MasterPageClientNameDetail from '../components/Master/MasterListing/ClientName/MasterPageClientNameDetails';
 import MasterListing from '../components/Master/MasterListing';
@@ -34,6 +32,8 @@ import Supplier from '../components/Master/MasterListing/Supplier/Supplier';
 import SupplierGroup from '../components/Master/MasterListing/SupplierGroup/SupplierGroup';
 import MasterPageSupplierGroupDetail from '../components/Master/MasterListing/SupplierGroup/MasterPageSupplierGroupDetail';
 import MasterPageSupplierDetails from '../components/Master/MasterListing/Supplier/MasterPageSupplierDetails';
+import EmeraldChittiMaster from '../components/EmeraldChitti/EmeraldChittiMaster';
+import EmeraldShilpiListing from '../components/DataUpload/EmeraldShilpi/EmeraldShilpiListing';
 
 const AppRoutes = () => {
   return (
@@ -128,7 +128,7 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <MasterPage />
-              <EmeraldChitti />
+              <EmeraldChittiMaster />
             </ProtectedRoute>
           }
         />
@@ -138,7 +138,7 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <MasterPage />
-              <EmeraldListing />
+              <EmeraldShilpiListing />
             </ProtectedRoute>
           }
         />

@@ -21,7 +21,6 @@ const CustomDropdownForTable = ({
   data, // Pass a unique index for each instance
 }: any) => {
   const categoryDataFromStore: any = useSelector(get_category_list);
-  console.log('CategoryDataFromStore', categoryDataFromStore);
 
   const [showDropDown, setShowDropdown] = useState(false);
   const [noRecords, setNoRecordsFound] = useState(false);
@@ -44,10 +43,8 @@ const CustomDropdownForTable = ({
   useEffect(() => {
     if (manageSelectedValue) {
       setSelectedDropdownValue(rowId, selectedValue);
-
     }
   }, [selectedValue, setSelectedDropdownValue, rowId, manageSelectedValue]);
-
 
   const handleSelectedOption = (data: any) => {
     setSelectedDropdownValue(data);
@@ -65,8 +62,8 @@ const CustomDropdownForTable = ({
     HandleCategoryData(e.target.value, rowId);
   };
 
-  const HandleInputField = (e: any) => {
-    console.log("updated search text", e.target.value)
+  const handleInputField = (e: any) => {
+    console.log('updated search text', e.target.value);
     setShowDropdown(true); // Open the dropdown when typing
 
     const query = e.target.value;
@@ -119,18 +116,24 @@ const CustomDropdownForTable = ({
     console.log('onfocus', e.target.value);
   };
 
-  console.log("filter list", filterDropdownList, categoryDataFromStore, showCategoryDropdown?.current)
+  console.log(
+    'filter list',
+    filterDropdownList,
+    categoryDataFromStore,
+    showCategoryDropdown?.current
+  );
   return (
     <>
       <input
         type="text"
-        className={`${bgColor?.current === true
-          ? 'form-control dropdown-input client-name-input-chitti'
-          : 'form-control input-field-chitti-table dropdown-input'
-          }`}
+        className={`${
+          bgColor?.current === true
+            ? 'form-control dropdown-input client-name-input-chitti'
+            : 'form-control input-field-chitti-table dropdown-input'
+        }`}
         id="exampleInputEmail1"
         placeholder={placeholderValue}
-        onChange={HandleInputField}
+        onChange={handleInputField}
         onClick={handleShowDropdown}
         defaultValue={defaultData}
         value={data}
@@ -144,7 +147,7 @@ const CustomDropdownForTable = ({
       {showDropDown && (
         <ul
           // className="dropdown-ul-list border"
-          className={`${dropdownWidth ? "w-auto" : ""} dropdown-ul-list border`}
+          className={`${dropdownWidth ? 'w-auto' : ''} dropdown-ul-list border`}
           aria-label="Default select example"
         >
           {noRecords === false && filterDropdownList?.length === 0 ? (
@@ -175,36 +178,37 @@ const CustomDropdownForTable = ({
 
           {categoryDataFromStore?.data?.length > 0 && (
             <>
-              {noRecords === true && showCategoryDropdown?.current && filterDropdownList?.length === 0 && (
-                <>
-                  {/* <div className="text-uppercase px-2 mt-1">Category</div> */}
-                  <li className="dropdown-list p-1">
-                    <select
-                      className="form-select form-select-sm "
-                      aria-label="Default select example"
-                      onChange={HandleSelectedCategory}
-                    >
-                      <option>Select Category</option>
-                      {categoryDataFromStore?.data?.length > 0 &&
-                        categoryDataFromStore?.data !== null &&
-                        categoryDataFromStore?.data.map(
-                          (value: any, index: any) => {
-                            return (
-                              <>
-                                <option key={index}>{value}</option>
-                              </>
-                            );
-                          }
-                        )}
-                    </select>
-                  </li>
-                </>
-              )}
+              {noRecords === true &&
+                showCategoryDropdown?.current &&
+                filterDropdownList?.length === 0 && (
+                  <>
+                    {/* <div className="text-uppercase px-2 mt-1">Category</div> */}
+                    <li className="dropdown-list p-1">
+                      <select
+                        className="form-select form-select-sm "
+                        aria-label="Default select example"
+                        onChange={HandleSelectedCategory}
+                      >
+                        <option>Select Category</option>
+                        {categoryDataFromStore?.data?.length > 0 &&
+                          categoryDataFromStore?.data !== null &&
+                          categoryDataFromStore?.data.map(
+                            (value: any, index: any) => {
+                              return (
+                                <>
+                                  <option key={index}>{value}</option>
+                                </>
+                              );
+                            }
+                          )}
+                      </select>
+                    </li>
+                  </>
+                )}
             </>
           )}
         </ul>
       )}
-
     </>
   );
 };

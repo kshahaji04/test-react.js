@@ -8,35 +8,35 @@ import {
   get_subcategory_report_data,
 } from '../../store/slices/report/get-subcategory-report-slice';
 
-const UseSubCategoryReportHook = () => {
+const useSubCategoryReportHook = () => {
   const dispatch = useDispatch();
 
-  const SubCategoryreportDataFromStore: any = useSelector(
+  const subCategoryreportDataFromStore: any = useSelector(
     get_subcategory_report_data
   );
-  console.log('report data from store', SubCategoryreportDataFromStore);
+
   const [subCategoryReportData, setSubCategoryReportData] = useState<any>([]);
 
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
   useEffect(() => {
     const reqParams: any = {
-      token: AccessToken?.token,
+      token: accessToken?.token,
     };
     dispatch(getSubCategoryReportData(reqParams));
   }, []);
 
   useEffect(() => {
     if (
-      SubCategoryreportDataFromStore?.data?.length > 0 &&
-      SubCategoryreportDataFromStore?.data !== null
+      subCategoryreportDataFromStore?.data?.length > 0 &&
+      subCategoryreportDataFromStore?.data !== null
     ) {
-      setSubCategoryReportData([...SubCategoryreportDataFromStore?.data]);
+      setSubCategoryReportData([...subCategoryreportDataFromStore?.data]);
     } else {
       setSubCategoryReportData([]);
     }
-  }, [SubCategoryreportDataFromStore]);
+  }, [subCategoryreportDataFromStore]);
   return { subCategoryReportData };
 };
 
-export default UseSubCategoryReportHook;
+export default useSubCategoryReportHook;

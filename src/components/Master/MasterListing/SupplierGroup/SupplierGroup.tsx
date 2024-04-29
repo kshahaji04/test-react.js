@@ -2,19 +2,19 @@ import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import MasterSingleListingSearch from '../MasterSingleListingSearch';
 import SingleItemListingInMaster from '../SingleItemListingInMaster';
-import UseSupplierHook from '../../../../hooks/Master/Supplier-hook';
+import useSupplierHook from '../../../../hooks/Master/Supplier-hook';
 import CreateNewSupplierGroup from './CreateNewSupplierGroup';
 
 const SupplierGroup = () => {
-  const { supplierGroupList } = UseSupplierHook();
+  const { supplierGroupList } = useSupplierHook();
 
   const [searchField, setSearchField] = useState<any>('');
   const [tableViewData, setTableViewData] = useState<any>(20);
 
-  const HandleTableViewRows: any = (data: any) => {
+  const handleTableViewRows: any = (data: any) => {
     setTableViewData(data);
   };
-  const HandleSearchInput: any = (e: any) => {
+  const handleSearchInput: any = (e: any) => {
     setSearchField(e.target.value);
   };
 
@@ -39,13 +39,13 @@ const SupplierGroup = () => {
             <Tab eventKey="chitti-listing" title="Supplier Group List">
               <MasterSingleListingSearch
                 placeholder="Client group"
-                HandleSearchInput={HandleSearchInput}
+                handleSearchInput={handleSearchInput}
                 listingData={filterList}
                 tableViewData={tableViewData}
               />
               <SingleItemListingInMaster
                 listingData={filterList}
-                HandleTableViewRows={HandleTableViewRows}
+                handleTableViewRows={handleTableViewRows}
                 tableViewData={tableViewData}
                 heading="Supplier Group"
               />

@@ -7,28 +7,28 @@ import {
   get_category_list,
 } from '../../store/slices/Master/get-category-slice';
 
-const UseCategoryHook = () => {
+const useCategoryHook = () => {
   const dispatch = useDispatch();
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
-  const CategoryDataFromStore: any = useSelector(get_category_list);
+  const categoryDataFromStore: any = useSelector(get_category_list);
   const [CategoryList, setCategoryList] = useState<any>([]);
-  console.log('CategoryDataFromStore', CategoryDataFromStore);
+
   useEffect(() => {
-    dispatch(getCategoryList(AccessToken?.token));
+    dispatch(getCategoryList(accessToken?.token));
   }, []);
 
   useEffect(() => {
     if (
-      CategoryDataFromStore?.data?.length > 0 &&
-      CategoryDataFromStore?.data !== null
+      categoryDataFromStore?.data?.length > 0 &&
+      categoryDataFromStore?.data !== null
     ) {
-      setCategoryList([...CategoryDataFromStore?.data]);
+      setCategoryList([...categoryDataFromStore?.data]);
     } else {
       setCategoryList([]);
     }
-  }, [CategoryDataFromStore]);
+  }, [categoryDataFromStore]);
   return { CategoryList };
 };
 
-export default UseCategoryHook;
+export default useCategoryHook;

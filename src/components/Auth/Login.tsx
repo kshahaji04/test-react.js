@@ -16,15 +16,15 @@ const Login = () => {
 
   const [showPassword, setShowPassword] = useState<any>(false);
 
-  const HandleInputChange: any = (e: any) => {
+  const handleInputChange: any = (e: any) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
-  const HandleFormSubmit: any = async (e: any) => {
+  const handleFormSubmit: any = async (e: any) => {
     e.preventDefault();
-    const AccessTokenApiRes = await dispatch(getAccessToken(userData));
+    const accessTokenApiRes = await dispatch(getAccessToken(userData));
 
-    if (AccessTokenApiRes?.payload?.msg === 'success') {
+    if (accessTokenApiRes?.payload?.msg === 'success') {
       showToast('Login Successfully', 'success');
       navigate('/master');
     } else {
@@ -32,10 +32,9 @@ const Login = () => {
     }
   };
 
-  const HandleShowPassword: any = () => {
-    setShowPassword(!showPassword)
+  const handleShowPassword: any = () => {
+    setShowPassword(!showPassword);
   };
-
 
   return (
     <>
@@ -50,7 +49,7 @@ const Login = () => {
                 <p className="text-uppercase fs-3 text-center">login </p>
                 <div className="card-body p-0">
                   <form
-                    onSubmit={HandleFormSubmit}
+                    onSubmit={handleFormSubmit}
                     className="login-form p-2 mx-auto text-center"
                   >
                     <div className="mb-3">
@@ -58,7 +57,7 @@ const Login = () => {
                         type="text"
                         id="username"
                         name="username"
-                        onChange={HandleInputChange}
+                        onChange={handleInputChange}
                         className="form-control login-input-field px-2 shadow-none login-username-input"
                         placeholder="Username"
                         aria-describedby="emailHelp"
@@ -68,16 +67,20 @@ const Login = () => {
                     <div className="my-4">
                       <div className="d-flex justify-content-center input-pswd-field">
                         <input
-                          type={`${showPassword ? "text" : "password"}`}
+                          type={`${showPassword ? 'text' : 'password'}`}
                           id="password"
                           name="password"
-                          onChange={HandleInputChange}
+                          onChange={handleInputChange}
                           className="form-control login-input-field px-2 border-0 shadow-none"
                           placeholder="Password"
                           required
                         />
-                        <div onClick={HandleShowPassword}>
-                          <i className={`fa fa-eye p-1 fs-6 pswd-eye-icon ${showPassword ? "text-primary" : ""}`} ></i>
+                        <div onClick={handleShowPassword}>
+                          <i
+                            className={`fa fa-eye p-1 fs-6 pswd-eye-icon ${
+                              showPassword ? 'text-primary' : ''
+                            }`}
+                          ></i>
                         </div>
                       </div>
                     </div>

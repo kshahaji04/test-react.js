@@ -5,7 +5,7 @@ import LoadMoreTableDataInMaster from '../LoadMoreTableDataInMaster';
 const ClientGroupListing = ({ clientGroupList }: any) => {
   const [tableViewData, setTableViewData] = useState<any>(20);
 
-  const HandleTableViewRows: any = (data: any) => {
+  const handleTableViewRows: any = (data: any) => {
     setTableViewData(data);
   };
   return (
@@ -36,14 +36,11 @@ const ClientGroupListing = ({ clientGroupList }: any) => {
                     </tr>
                   );
                 })}
-
           </tbody>
         </table>
       </div>
       {clientGroupList?.length > 19 && clientGroupList !== null && (
-        <LoadMoreTableDataInMaster
-          HandleTableViewRows={HandleTableViewRows}
-        />
+        <LoadMoreTableDataInMaster handleTableViewRows={handleTableViewRows} />
       )}
     </>
   );

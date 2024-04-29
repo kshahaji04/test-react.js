@@ -5,7 +5,7 @@ import LoadMoreTableDataInMaster from '../LoadMoreTableDataInMaster';
 const CategoryListing = ({ CategoryList }: any) => {
   const [tableViewData, setTableViewData] = useState<any>(20);
 
-  const HandleTableViewRows: any = (data: any) => {
+  const handleTableViewRows: any = (data: any) => {
     setTableViewData(data);
   };
   return (
@@ -36,14 +36,11 @@ const CategoryListing = ({ CategoryList }: any) => {
                   );
                 }
               )}
-
           </tbody>
         </table>
       </div>
       {CategoryList?.length > 19 && CategoryList !== null && (
-        <LoadMoreTableDataInMaster
-          HandleTableViewRows={HandleTableViewRows}
-        />
+        <LoadMoreTableDataInMaster HandleTableViewRows={handleTableViewRows} />
       )}
     </>
   );

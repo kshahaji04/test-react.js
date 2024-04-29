@@ -5,16 +5,13 @@ import { get_huid_product_list } from '../../../../store/slices/Master/get-huid-
 const MasterPageHuidProductDetails = () => {
   const navigate = useNavigate();
 
-  const HuidDataFromStore: any = useSelector(get_huid_product_list);
+  const huidDataFromStore: any = useSelector(get_huid_product_list);
 
-  console.log('HuidDataFromStore', HuidDataFromStore);
   const { id } = useParams();
   const DetailPageList: any =
-    HuidDataFromStore?.data?.length > 0 &&
-    HuidDataFromStore?.data !== null &&
-    HuidDataFromStore?.data.filter((item: any) => item.title === id);
-
-  console.log('filteree', DetailPageList);
+    huidDataFromStore?.data?.length > 0 &&
+    huidDataFromStore?.data !== null &&
+    huidDataFromStore?.data.filter((item: any) => item.title === id);
 
   return (
     <div className="container">

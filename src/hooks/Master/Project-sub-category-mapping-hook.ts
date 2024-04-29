@@ -7,9 +7,9 @@ import {
   get_project_sub_category_mapping,
 } from '../../store/slices/Master/get-project-subcategory-mapping-slice';
 
-const UseProjectSubCategoryMappingHook: any = () => {
+const useProjectSubCategoryMappingHook: any = () => {
   const dispatch = useDispatch();
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
   const projectSubCategoryMappingDataFromStore: any = useSelector(
     get_project_sub_category_mapping
@@ -19,7 +19,7 @@ const UseProjectSubCategoryMappingHook: any = () => {
     useState<any>([]);
 
   useEffect(() => {
-    dispatch(getProjectSubCategoryMapping(AccessToken?.token));
+    dispatch(getProjectSubCategoryMapping(accessToken?.token));
   }, []);
 
   useEffect(() => {
@@ -37,4 +37,4 @@ const UseProjectSubCategoryMappingHook: any = () => {
   return { ProjectSubCategoryMappingList };
 };
 
-export default UseProjectSubCategoryMappingHook;
+export default useProjectSubCategoryMappingHook;

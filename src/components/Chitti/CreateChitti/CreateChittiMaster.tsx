@@ -7,11 +7,11 @@ import { get_specific_chitti_challan } from '../../../store/slices/Chitti/get-sp
 import HandleButtonsDisplayInChitti from '../../HandleButtonsDisplayInChitti';
 
 const CreateChittiMaster = ({
-  HandleCreateChittiSubmit,
+  handleCreateChittiSubmit,
   currentDate,
   selectedDropdownValue,
-  HandleGoldRate,
-  HandleRemarks,
+  handleGoldRate,
+  handleRemarks,
   tableData,
   setTableData,
   narrationTableData,
@@ -21,17 +21,17 @@ const CreateChittiMaster = ({
   subCategoryList,
   productList,
   clientGroupList,
-  HandleClientGroup,
-  HandleDateChange,
+  handleClientGroup,
+  handleDateChange,
   date,
   setStateForDocStatus,
-  HandleEmptyChallanChittiTable,
+  handleEmptyChallanChittiTable,
   goldRate,
   remarks,
   showSubmitButtonAfterCreateChitti,
-  HandleSubmitChallanChitti,
-  HandleCancelChallanChitti,
-  HandleDeleteChallanChitti,
+  handleSubmitChallanChitti,
+  handleCancelChallanChitti,
+  handleDeleteChallanChitti,
   setTotalGrossWeightOfChallanTable,
   setTotalHuidWeightOfHuidTable,
   checkGrossAndNetWeight,
@@ -51,17 +51,16 @@ const CreateChittiMaster = ({
         <div className="col-lg-10"></div>
         <div className="col-lg-2">
           <div className="d-flex justify-content-end">
-            {/* {HandleButtonsDisplay()} */}
             <HandleButtonsDisplayInChitti
-              HandleCreateChittiSubmit={HandleCreateChittiSubmit}
+              handleCreateChittiSubmit={handleCreateChittiSubmit}
               showButton={showButton}
               showSubmitButtonAfterCreateChitti={
                 showSubmitButtonAfterCreateChitti
               }
-              HandleSubmitChittiData={HandleSubmitChallanChitti}
-              HandleCancelChitti={HandleCancelChallanChitti}
-              HandleDeleteChitti={HandleDeleteChallanChitti}
-              HandleEmptyChitti={HandleEmptyChallanChittiTable}
+              handleSubmitChittiData={handleSubmitChallanChitti}
+              handleCancelChitti={handleCancelChallanChitti}
+              handleDeleteChitti={handleDeleteChallanChitti}
+              handleEmptyChitti={handleEmptyChallanChittiTable}
             />
           </div>
         </div>
@@ -69,13 +68,13 @@ const CreateChittiMaster = ({
       <CreateChittiForm
         currentDate={currentDate}
         selectedDropdownValue={selectedDropdownValue}
-        HandleGoldRate={HandleGoldRate}
-        HandleRemarks={HandleRemarks}
+        handleGoldRate={handleGoldRate}
+        handleRemarks={handleRemarks}
         setSelectedDropdownValue={setSelectedDropdownValue}
         clientNameList={clientNameList}
         clientGroupList={clientGroupList}
-        HandleClientGroup={HandleClientGroup}
-        HandleDateChange={HandleDateChange}
+        handleClientGroup={handleClientGroup}
+        handleDateChange={handleDateChange}
         date={date}
         goldRate={goldRate}
         remarks={remarks}

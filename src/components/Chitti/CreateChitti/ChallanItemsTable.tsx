@@ -43,7 +43,7 @@ const ChallanItemsTable = ({
     });
   }, [amountValue]);
 
-  const HandleAddRow: any = () => {
+  const handleAddRow: any = () => {
     const newRow = {
       id: tableData.length + 1,
       sub_category: '',
@@ -80,7 +80,7 @@ const ChallanItemsTable = ({
     setStateForDocStatus(true);
   };
 
-  const HandleDeleteRow: any = (id: any) => {
+  const handleDeleteRow: any = (id: any) => {
     if (tableData?.length > 1) {
       const updatedData = tableData
         .filter((row: any) => row.id !== id)
@@ -92,7 +92,7 @@ const ChallanItemsTable = ({
 
   const handleKeyDown = (event: any, id: any) => {
     if (event.key === 'Tab' && id === tableData[tableData.length - 1].id) {
-      HandleAddRow();
+      handleAddRow();
     }
   };
 
@@ -128,7 +128,7 @@ const ChallanItemsTable = ({
     setamountValue(newColumnTotals);
   }, [tableData]);
 
-  const HandleSubCategory: any = (value: any, id: any) => {
+  const handleSubCategory: any = (value: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, sub_category: value } : row
     );
@@ -136,7 +136,7 @@ const ChallanItemsTable = ({
     setStateForDocStatus(true);
   };
 
-  const HandleCategoryForNewSubcategory = (value: any, id: any) => {
+  const handleCategoryForNewSubcategory = (value: any, id: any) => {
     console.log('handlecategory', value);
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, category: value } : row
@@ -144,7 +144,7 @@ const ChallanItemsTable = ({
     setTableData(updatedData);
   };
 
-  const HandleGrossWeightValue = (e: any, id: any) => {
+  const handleGrossWeightValue = (e: any, id: any) => {
     const inputValue = parseFloat(e.target.value);
     const row = tableData.find((row: any) => row.id === id);
 
@@ -163,7 +163,7 @@ const ChallanItemsTable = ({
     }
   };
 
-  const HandleLessWeightValue = (e: any, id: any) => {
+  const handleLessWeightValue = (e: any, id: any) => {
     const inputValue = parseFloat(e.target.value);
     const row = tableData.find((row: any) => row.id === id);
 
@@ -182,7 +182,7 @@ const ChallanItemsTable = ({
     }
   };
 
-  const HandleNetWeightValue = (e: any, id: any) => {
+  const handleNetWeightValue = (e: any, id: any) => {
     const inputValue = parseFloat(e.target.value);
     const row = tableData.find((row: any) => row.id === id);
 
@@ -202,7 +202,7 @@ const ChallanItemsTable = ({
     }
   };
 
-  const HandleAmountValue = (e: any, id: any) => {
+  const handleAmountValue = (e: any, id: any) => {
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, amount: parseFloat(e.target.value) } : row
     );
@@ -215,7 +215,14 @@ const ChallanItemsTable = ({
       <div className="container mt-1 border rounded-3 chitti-table-container">
         <div className="d-flex justify-content-between table-heading-row">
           <caption>Challan Items</caption>
-          <p className="cursor-pointer my-auto btn-link" onClick={() => { if (!readOnly) { HandleAddRow() } }}>
+          <p
+            className="cursor-pointer my-auto btn-link"
+            onClick={() => {
+              if (!readOnly) {
+                handleAddRow();
+              }
+            }}
+          >
             Add Row
           </p>
         </div>
@@ -230,7 +237,9 @@ const ChallanItemsTable = ({
                   Sub Category
                   <span className="text-danger">*</span>
                 </th>
-                <th scope="col" className='challan_gr_wt_col'>Gross Weight</th>
+                <th scope="col" className="challan_gr_wt_col">
+                  Gross Weight
+                </th>
                 <th scope="col">Less Weight</th>
                 <th scope="col">Net Weight</th>
                 <th scope="col">Amount</th>
@@ -250,18 +259,18 @@ const ChallanItemsTable = ({
                             data={row.sub_category}
                             key={row.id}
                             rowId={row.id}
-                            HandleData={HandleSubCategory}
+                            HandleData={handleSubCategory}
                             placeholderValue="Sub Category"
                             selectedDropdownValue={row.sub_category}
                             setSelectedDropdownValue={(value: any) =>
-                              HandleSubCategory(value, row.id)
+                              handleSubCategory(value, row.id)
                             }
                             defaultData={row.sub_category}
                             setStateForDocStatus={setStateForDocStatus}
                             readOnly={readOnly === true ? true : false}
-                            HandleCategoryData={HandleCategoryForNewSubcategory}
+                            HandleCategoryData={handleCategoryForNewSubcategory}
                             setSelectedCategoryForSubcategory={(value: any) =>
-                              HandleCategoryForNewSubcategory(value, row.id)
+                              handleCategoryForNewSubcategory(value, row.id)
                             }
                             showCategoryDropdown={showCategoryDropdown}
                           />
@@ -276,7 +285,7 @@ const ChallanItemsTable = ({
                         aria-describedby="inputGroup-sizing-sm"
                         defaultValue={row.gross_weight}
                         value={row.gross_weight}
-                        onChange={(e) => HandleGrossWeightValue(e, row.id)}
+                        onChange={(e) => handleGrossWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
                     </td>
@@ -288,7 +297,7 @@ const ChallanItemsTable = ({
                         aria-describedby="inputGroup-sizing-sm"
                         defaultValue={row.less_wt}
                         value={row.less_wt}
-                        onChange={(e) => HandleLessWeightValue(e, row.id)}
+                        onChange={(e) => handleLessWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
                     </td>
@@ -302,7 +311,7 @@ const ChallanItemsTable = ({
                         // value={row.net_weight > 0 ? row.net_weight : ''}
                         defaultValue={row.net_weight}
                         value={row.net_weight}
-                        onChange={(e) => HandleNetWeightValue(e, row.id)}
+                        onChange={(e) => handleNetWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
                     </td>
@@ -315,14 +324,14 @@ const ChallanItemsTable = ({
                         defaultValue={row.amount}
                         value={row.amount}
                         onKeyDown={(e) => handleKeyDown(e, row.id)}
-                        onChange={(e) => HandleAmountValue(e, row.id)}
+                        onChange={(e) => handleAmountValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
                     </td>
                     <td className="table-data-input">
                       <div
                         className="d-flex align-items-center delete-link cursor-pointer"
-                        onClick={() => HandleDeleteRow(row.id)}
+                        onClick={() => handleDeleteRow(row.id)}
                       >
                         <i className="fa-solid fa-xmark fs-5"></i>
                       </div>

@@ -2,24 +2,23 @@ import { useState, useRef } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import ProjectSubCategoryMappingListing from './ProjectSubCategoryMappingListing';
 import AddProjectSubCategoryMapping from './AddProjectSubCategoryMapping';
-import UseProjectSubCategoryMappingHook from '../../../../hooks/Master/Project-sub-category-mapping-hook';
-import UseSubCategoryHook from '../../../../hooks/Master/sub-category-hook';
+import useProjectSubCategoryMappingHook from '../../../../hooks/Master/Project-sub-category-mapping-hook';
+import useSubCategoryHook from '../../../../hooks/Master/sub-category-hook';
 import MasterMultipleListingSearch from '../MasterMultipleListingSearch';
 
 const ProjectSubCategoryMappingMaster = () => {
   const { ProjectSubCategoryMappingList }: any =
-    UseProjectSubCategoryMappingHook();
+    useProjectSubCategoryMappingHook();
 
-  const { subCategoryCategoryData } = UseSubCategoryHook();
+  const { subCategoryCategoryData } = useSubCategoryHook();
   const showThirdInputField: any = useRef(true);
-  console.log('ProjectSubCategoryMappingList', subCategoryCategoryData);
 
   const [inputProject, setInputProject] = useState('');
   const [inputStone, setInputStone] = useState('');
   const [inputPlain, setInputPlain] = useState('');
   const [tableViewData, setTableViewData] = useState<any>(20);
 
-  const HandleTableViewRows: any = (data: any) => {
+  const handleTableViewRows: any = (data: any) => {
     setTableViewData(data);
   };
 
@@ -36,24 +35,20 @@ const ProjectSubCategoryMappingMaster = () => {
 
   const filteredList: any =
     ProjectSubCategoryMappingList?.length > 0 &&
-      ProjectSubCategoryMappingList !== null &&
-      (inputProject || inputStone || inputPlain)
+    ProjectSubCategoryMappingList !== null &&
+    (inputProject || inputStone || inputPlain)
       ? ProjectSubCategoryMappingList.filter(
-        (data: any) =>
-          data?.project
-            ?.toLowerCase()
-            ?.includes(inputProject?.toLowerCase()) &&
-          data?.stone?.toLowerCase()?.includes(inputStone?.toLowerCase()) &&
-          data?.plain?.toLowerCase()?.includes(inputPlain?.toLowerCase())
-      )
+          (data: any) =>
+            data?.project
+              ?.toLowerCase()
+              ?.includes(inputProject?.toLowerCase()) &&
+            data?.stone?.toLowerCase()?.includes(inputStone?.toLowerCase()) &&
+            data?.plain?.toLowerCase()?.includes(inputPlain?.toLowerCase())
+        )
       : ProjectSubCategoryMappingList;
-  console.log(
-    'ProjectSubCategoryMappingList in tsx',
-    ProjectSubCategoryMappingList
-  );
+
   return (
     <div className="container">
-
       <div className="row justify-content-center mt-3">
         <div className="col-lg-9 chitti-nav-tabs tab-container">
           <Tabs
@@ -80,13 +75,10 @@ const ProjectSubCategoryMappingMaster = () => {
               <ProjectSubCategoryMappingListing
                 ProjectSubCategoryMappingList={filteredList}
                 tableViewData={tableViewData}
-                HandleTableViewRows={HandleTableViewRows}
+                handleTableViewRows={handleTableViewRows}
               />
             </Tab>
-            <Tab
-              eventKey="longer-tab"
-              title="Add Project Sub Category Mapping"
-            >
+            <Tab eventKey="longer-tab" title="Add Project Sub Category Mapping">
               <AddProjectSubCategoryMapping
                 subCategoryCategoryData={subCategoryCategoryData}
               />

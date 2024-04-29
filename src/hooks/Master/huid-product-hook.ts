@@ -7,17 +7,16 @@ import {
   get_huid_product_list,
 } from '../../store/slices/Master/get-huid-product-slice';
 
-const UseHuidProductHook = () => {
+const useHuidProductHook = () => {
   const dispatch = useDispatch();
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
   const huidDataFromStore: any = useSelector(get_huid_product_list);
-  console.log('huidDataFromStore', huidDataFromStore);
 
   const [huidProductData, setHuidProductData] = useState<any>([]);
 
   useEffect(() => {
-    dispatch(getHuidProductList(AccessToken?.token));
+    dispatch(getHuidProductList(accessToken?.token));
   }, []);
 
   useEffect(() => {
@@ -34,4 +33,4 @@ const UseHuidProductHook = () => {
   return { huidProductData };
 };
 
-export default UseHuidProductHook;
+export default useHuidProductHook;

@@ -1,5 +1,5 @@
 import EmeraldShilpiListing from './EmeraldShilpiListing';
-import UseEmeraldShilpiHook from '../../../hooks/emerald-shilpi/emerald-shilpi-hook';
+import UseEmeraldShilpiHook from '../../../hooks/emeraldShilpi/emerald-shilpi-hook';
 
 const MasterEmeraldShilpi = () => {
   const { emeraldShilpiListData }: any = UseEmeraldShilpiHook();

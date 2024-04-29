@@ -1,18 +1,29 @@
 import { NavLink } from 'react-router-dom';
 import LoadMoreTableDataInMaster from '../LoadMoreTableDataInMaster';
 
-const SubCategoryListing = ({ filteredList, tableViewData, HandleTableViewRows }: any) => {
+const SubCategoryListing = ({
+  filteredList,
+  tableViewData,
+  handleTableViewRows,
+}: any) => {
   return (
     <>
       <div className="container border mt-2 ">
-
         <table className="table table-striped mt-2">
           <thead>
             <tr className="text-start table-heading table-heading-row row mx-0">
-              <th scope='col' className='col-lg-2 col-2 d-flex justify-content-center'>Sr No.</th>
-              <th scope='col' className='col-lg-5 col-5'>SubCategory </th>
-              <th scope='col' className='col-lg-5 col-5'>Category</th>
-
+              <th
+                scope="col"
+                className="col-lg-2 col-2 d-flex justify-content-center"
+              >
+                Sr No.
+              </th>
+              <th scope="col" className="col-lg-5 col-5">
+                SubCategory{' '}
+              </th>
+              <th scope="col" className="col-lg-5 col-5">
+                Category
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -21,10 +32,11 @@ const SubCategoryListing = ({ filteredList, tableViewData, HandleTableViewRows }
               filteredList
                 .slice(0, tableViewData)
                 .map((group: any, index: any) => (
-                  <tr className="text-start table-body-row row mx-0" key={index}>
-                    <td className='col-2 text-center p-1'>
-                      {index + 1}
-                    </td>
+                  <tr
+                    className="text-start table-body-row row mx-0"
+                    key={index}
+                  >
+                    <td className="col-2 text-center p-1">{index + 1}</td>
                     <td className="col-5 p-1">
                       <NavLink
                         to={`${group.name}`}
@@ -47,11 +59,8 @@ const SubCategoryListing = ({ filteredList, tableViewData, HandleTableViewRows }
         </table>
       </div>
       {filteredList?.length > 19 && filteredList !== null && (
-        <LoadMoreTableDataInMaster
-          HandleTableViewRows={HandleTableViewRows}
-        />
+        <LoadMoreTableDataInMaster handleTableViewRows={handleTableViewRows} />
       )}
-
     </>
   );
 };

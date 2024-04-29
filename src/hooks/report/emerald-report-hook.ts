@@ -9,21 +9,18 @@ import {
   get_emerald_report_data,
 } from '../../store/slices/report/get-emerald-report-slice';
 
-const UseEmeraldReportHook = () => {
+const useEmeraldReportHook = () => {
   const dispatch = useDispatch();
 
   const emeraldreportDataFromStore: any = useSelector(get_emerald_report_data);
-  console.log(
-    'emeraldreportDataFromStore from store',
-    emeraldreportDataFromStore
-  );
+
   const [emeraldReportData, setEmeraldReportData] = useState<any>([]);
 
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
   useEffect(() => {
     const reqParams: any = {
-      token: AccessToken?.token,
+      token: accessToken?.token,
     };
     dispatch(getEmeraldReportData(reqParams));
   }, []);
@@ -41,4 +38,4 @@ const UseEmeraldReportHook = () => {
   return { emeraldReportData };
 };
 
-export default UseEmeraldReportHook;
+export default useEmeraldReportHook;

@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import AddCategory from './AddCategory';
-import UseCategoryHook from '../../../../hooks/Master/category-hook';
+import useCategoryHook from '../../../../hooks/Master/category-hook';
 import MasterSingleListingSearch from '../MasterSingleListingSearch';
 import SingleItemListingInMaster from '../SingleItemListingInMaster';
 
 const CategoryMaster = () => {
-  const { CategoryList }: any = UseCategoryHook();
+  const { CategoryList }: any = useCategoryHook();
 
   const [searchField, setSearchField] = useState<any>('');
   const [tableViewData, setTableViewData] = useState<any>(20);
 
-  const HandleTableViewRows: any = (data: any) => {
+  const handleTableViewRows: any = (data: any) => {
     setTableViewData(data);
   };
 
-  const HandleSearchInput: any = (e: any) => {
+  const handleSearchInput: any = (e: any) => {
     setSearchField(e.target.value);
   };
 
@@ -39,13 +39,13 @@ const CategoryMaster = () => {
             <Tab eventKey="default-tab" title="Category List">
               <MasterSingleListingSearch
                 placeholder="Category"
-                HandleSearchInput={HandleSearchInput}
+                handleSearchInput={handleSearchInput}
                 listingData={filterList}
                 tableViewData={tableViewData}
               />
               <SingleItemListingInMaster
                 listingData={filterList}
-                HandleTableViewRows={HandleTableViewRows}
+                handleTableViewRows={handleTableViewRows}
                 tableViewData={tableViewData}
                 heading="Category"
               />

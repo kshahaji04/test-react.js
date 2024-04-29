@@ -2,15 +2,14 @@ import { useState, useEffect } from 'react';
 import EmeraldCreateChitti from './EmeraldCreateChitti';
 import { useSelector } from 'react-redux';
 import { get_specific_emerald_chitti } from '../../../store/slices/Emerald/get-specific-emrald-slice';
-
 import HandleButtonsDisplayInChitti from '../../HandleButtonsDisplayInChitti';
 import EmeraldChittiTableNew from './EmeraldChittiTableNew';
 
 const CreateEmeraldChittiMaster = ({
   selectedDropdownValue,
   setSelectedDropdownValue,
-  HandleClientGroup,
-  HandleCreateEmeraldChittiSubmit,
+  handleClientGroup,
+  handleCreateEmeraldChittiSubmit,
   clientGroupList,
   clientNameList,
   clientGroupName,
@@ -19,17 +18,17 @@ const CreateEmeraldChittiMaster = ({
   transactionDate,
   tableData,
   setTableData,
-  HandleAddRow,
-  HandleDeleteRow,
+  handleAddRow,
+  handleDeleteRow,
   subCategoryList,
   productItemList,
   showSubmitButtonAfterCreateChitti,
-  HandleSubmitEmeraldChittiData,
-  HandleCancelEmeraldChitti,
-  HandleDeleteEmeraldChitti,
-  HandleEmptyEmeraldChitti,
+  handleSubmitEmeraldChittiData,
+  handleCancelEmeraldChitti,
+  handleDeleteEmeraldChitti,
+  handleEmptyEmeraldChitti,
   setStateForDocStatus,
-  handleKeyDown
+  handleKeyDown,
 }: any) => {
   const [showButton, setShowButton] = useState<any>();
 
@@ -44,19 +43,19 @@ const CreateEmeraldChittiMaster = ({
     <>
       <div className="d-flex justify-content-end ">
         <HandleButtonsDisplayInChitti
-          HandleCreateChittiSubmit={HandleCreateEmeraldChittiSubmit}
+          handleCreateChittiSubmit={handleCreateEmeraldChittiSubmit}
           showButton={showButton}
           showSubmitButtonAfterCreateChitti={showSubmitButtonAfterCreateChitti}
-          HandleSubmitChittiData={HandleSubmitEmeraldChittiData}
-          HandleCancelChitti={HandleCancelEmeraldChitti}
-          HandleDeleteChitti={HandleDeleteEmeraldChitti}
-          HandleEmptyChitti={HandleEmptyEmeraldChitti}
+          handleSubmitChittiData={handleSubmitEmeraldChittiData}
+          handleCancelChitti={handleCancelEmeraldChitti}
+          handleDeleteChitti={handleDeleteEmeraldChitti}
+          handleEmptyChitti={handleEmptyEmeraldChitti}
         />
       </div>
       <EmeraldCreateChitti
         selectedDropdownValue={selectedDropdownValue}
         setSelectedDropdownValue={setSelectedDropdownValue}
-        HandleClientGroup={HandleClientGroup}
+        handleClientGroup={handleClientGroup}
         clientGroupList={clientGroupList}
         clientNameList={clientNameList}
         currentDate={currentDate}
@@ -70,13 +69,11 @@ const CreateEmeraldChittiMaster = ({
         setTableData={setTableData}
         subCategoryList={subCategoryList}
         productItemList={productItemList}
-        HandleAddRow={HandleAddRow}
-        HandleDeleteRow={HandleDeleteRow}
+        handleAddRow={handleAddRow}
+        handleDeleteRow={handleDeleteRow}
         setStateForDocStatus={setStateForDocStatus}
         handleKeyDown={handleKeyDown}
-
       />
-
     </>
   );
 };

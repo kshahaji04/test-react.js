@@ -3,18 +3,18 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import CreateChittiMaster from './CreateChitti/CreateChittiMaster';
 import SearchListingTable from './ChittiListing/SearchListingTable';
-import UseChittiHook from '../../hooks/Chitti/chitti-page-hook';
+import useChittiHook from '../../hooks/Chitti/chitti-page-hook';
 import ListingTable from '../ChittiListing/ListingTable';
 import '../../Style/chitti.css';
 
 const ChittiMaster = () => {
   const {
     chittiListingData,
-    HandleCreateChittiSubmit,
+    handleCreateChittiSubmit,
     currentDate,
     selectedDropdownValue,
-    HandleGoldRate,
-    HandleRemarks,
+    handleGoldRate,
+    handleRemarks,
     tableData,
     setTableData,
     narrationTableData,
@@ -24,23 +24,23 @@ const ChittiMaster = () => {
     subCategoryList,
     productList,
     clientGroupList,
-    HandleClientGroup,
-    HandleDateChange,
+    handleClientGroup,
+    handleDateChange,
     date,
     setStateForDocStatus,
     stateForDocStatus,
-    HandleEmptyChallanChittiTable,
+    handleEmptyChallanChittiTable,
     goldRate,
     remarks,
     showSubmitButtonAfterCreateChitti,
-    HandleSubmitChallanChitti,
-    HandleCancelChallanChitti,
-    HandleDeleteChallanChitti,
+    handleSubmitChallanChitti,
+    handleCancelChallanChitti,
+    handleDeleteChallanChitti,
     setTotalGrossWeightOfChallanTable,
     setTotalHuidWeightOfHuidTable,
     checkGrossAndNetWeight,
     setCheckGrossAndNetWeight,
-  }: any = UseChittiHook();
+  }: any = useChittiHook();
 
   console.log('chittiListingData', chittiListingData);
 
@@ -56,7 +56,7 @@ const ChittiMaster = () => {
     status: '',
   });
 
-  const HandleSearchInput: any = (e: any) => {
+  const handleSearchInput: any = (e: any) => {
     const { name, value } = e.target;
 
     setSearchInputValues({
@@ -67,57 +67,62 @@ const ChittiMaster = () => {
 
   const filteredList =
     chittiListingData?.length > 0 &&
-      chittiListingData !== null &&
-      (searchInputValues.submitted_date || searchInputValues.from_date || searchInputValues.to_date ||
-        searchInputValues.chitti_no || searchClientName || searchInputValues.status)
+    chittiListingData !== null &&
+    (searchInputValues.submitted_date ||
+      searchInputValues.from_date ||
+      searchInputValues.to_date ||
+      searchInputValues.chitti_no ||
+      searchClientName ||
+      searchInputValues.status)
       ? chittiListingData.filter((item: any) => {
-        // const submittedDateMatch = searchInputValues.submitted_date
-        //   ? item?.submitted_date?.includes(searchInputValues.submitted_date)
-        //   : true;
-        const fromDateAndToDateMatch =
-          searchInputValues.from_date && searchInputValues.to_date
-            ? item.date >= searchInputValues.from_date && item.date <= searchInputValues.to_date
+          // const submittedDateMatch = searchInputValues.submitted_date
+          //   ? item?.submitted_date?.includes(searchInputValues.submitted_date)
+          //   : true;
+          const fromDateAndToDateMatch =
+            searchInputValues.from_date && searchInputValues.to_date
+              ? item.date >= searchInputValues.from_date &&
+                item.date <= searchInputValues.to_date
+              : true;
+          const numberMatch = searchInputValues.chitti_no
+            ? item?.number?.includes(searchInputValues.chitti_no)
             : true;
-        const numberMatch = searchInputValues.chitti_no
-          ? item?.number?.includes(searchInputValues.chitti_no)
-          : true;
-        const clientNameMatch = searchClientName
-          ? item?.client_name?.toLowerCase()?.includes(searchClientName.toLowerCase())
-          : true;
+          const clientNameMatch = searchClientName
+            ? item?.client_name
+                ?.toLowerCase()
+                ?.includes(searchClientName.toLowerCase())
+            : true;
 
-        if (searchInputValues.status === 'Draft') {
+          if (searchInputValues.status === 'Draft') {
+            return (
+              item?.docstatus === 0 &&
+              // submittedDateMatch &&
+              fromDateAndToDateMatch &&
+              numberMatch &&
+              clientNameMatch
+            );
+          } else if (searchInputValues.status === 'Submitted') {
+            return (
+              item?.docstatus === 1 &&
+              // submittedDateMatch &&
+              fromDateAndToDateMatch &&
+              numberMatch &&
+              clientNameMatch
+            );
+          } else if (searchInputValues.status === 'Cancel') {
+            return (
+              item?.docstatus === 2 &&
+              // submittedDateMatch &&
+              fromDateAndToDateMatch &&
+              numberMatch &&
+              clientNameMatch
+            );
+          }
           return (
-            item?.docstatus === 0 &&
             // submittedDateMatch &&
-            fromDateAndToDateMatch &&
-            numberMatch &&
-            clientNameMatch
+            fromDateAndToDateMatch && numberMatch && clientNameMatch
           );
-        } else if (searchInputValues.status === 'Submitted') {
-          return (
-            item?.docstatus === 1 &&
-            // submittedDateMatch &&
-            fromDateAndToDateMatch &&
-            numberMatch &&
-            clientNameMatch
-          );
-        } else if (searchInputValues.status === 'Cancel') {
-          return (
-            item?.docstatus === 2 &&
-            // submittedDateMatch &&
-            fromDateAndToDateMatch &&
-            numberMatch &&
-            clientNameMatch
-          );
-        }
-        return (
-          // submittedDateMatch &&
-          fromDateAndToDateMatch && numberMatch && clientNameMatch
-        );
-      })
+        })
       : chittiListingData;
-
-  console.log("filter listing", filteredList)
 
   return (
     <>
@@ -130,10 +135,10 @@ const ChittiMaster = () => {
               className="w-75 border-0"
               justify
             >
-              <Tab eventKey="chitti-listing" title="Chitti List"  >
-                <div className='col-xl-9 col-md-12 col-12 mx-auto  '>
+              <Tab eventKey="chitti-listing" title="Chitti List">
+                <div className="col-xl-9 col-md-12 col-12 mx-auto  ">
                   <SearchListingTable
-                    HandleSearchInput={HandleSearchInput}
+                    handleSearchInput={handleSearchInput}
                     clientNameList={clientNameList}
                     chittiListingData={chittiListingData}
                     setSearchclientName={setSearchclientName}
@@ -149,18 +154,18 @@ const ChittiMaster = () => {
                     productList={productList}
                     selectedDropdownValue={selectedDropdownValue}
                     drowpdownlist={clientNameList}
-                    HandleSubmitChittiData={HandleSubmitChallanChitti}
+                    handleSubmitChittiData={handleSubmitChallanChitti}
                   />
                 </div>
               </Tab>
               <Tab eventKey="longer-tab" title="Create Chitti">
-                <div className='col-lg-9 col-12 mx-auto mt-2'>
+                <div className="col-lg-9 col-12 mx-auto mt-2">
                   <CreateChittiMaster
-                    HandleCreateChittiSubmit={HandleCreateChittiSubmit}
+                    handleCreateChittiSubmit={handleCreateChittiSubmit}
                     currentDate={currentDate}
                     selectedDropdownValue={selectedDropdownValue}
-                    HandleGoldRate={HandleGoldRate}
-                    HandleRemarks={HandleRemarks}
+                    handleGoldRate={handleGoldRate}
+                    handleRemarks={handleRemarks}
                     tableData={tableData}
                     setTableData={setTableData}
                     narrationTableData={narrationTableData}
@@ -170,24 +175,28 @@ const ChittiMaster = () => {
                     subCategoryList={subCategoryList}
                     productList={productList}
                     clientGroupList={clientGroupList}
-                    HandleClientGroup={HandleClientGroup}
-                    HandleDateChange={HandleDateChange}
+                    handleClientGroup={handleClientGroup}
+                    handleDateChange={handleDateChange}
                     date={date}
                     stateForDocStatus={stateForDocStatus}
                     setStateForDocStatus={setStateForDocStatus}
-                    HandleEmptyChallanChittiTable={HandleEmptyChallanChittiTable}
+                    handleEmptyChallanChittiTable={
+                      handleEmptyChallanChittiTable
+                    }
                     goldRate={goldRate}
                     remarks={remarks}
                     showSubmitButtonAfterCreateChitti={
                       showSubmitButtonAfterCreateChitti
                     }
-                    HandleSubmitChallanChitti={HandleSubmitChallanChitti}
-                    HandleCancelChallanChitti={HandleCancelChallanChitti}
-                    HandleDeleteChallanChitti={HandleDeleteChallanChitti}
+                    handleSubmitChallanChitti={handleSubmitChallanChitti}
+                    handleCancelChallanChitti={handleCancelChallanChitti}
+                    handleDeleteChallanChitti={handleDeleteChallanChitti}
                     setTotalGrossWeightOfChallanTable={
                       setTotalGrossWeightOfChallanTable
                     }
-                    setTotalHuidWeightOfHuidTable={setTotalHuidWeightOfHuidTable}
+                    setTotalHuidWeightOfHuidTable={
+                      setTotalHuidWeightOfHuidTable
+                    }
                     checkGrossAndNetWeight={checkGrossAndNetWeight}
                     setCheckGrossAndNetWeight={setCheckGrossAndNetWeight}
                   />

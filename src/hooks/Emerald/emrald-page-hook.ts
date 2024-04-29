@@ -35,16 +35,16 @@ import {
 import { EmeraldChittiAmendApi } from '../../services/api/Emerald/emerald-chitti-amend-api';
 import UseCustomEmeraldChittiHook from './custom-emerald-chitti-hook';
 
-const UseEmeraldHook = () => {
+const useEmeraldHook = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
-  const AccessToken: any = useSelector(get_access_token);
-  const EmeraldChittiDataFromStore: any = useSelector(get_Emerald_challan);
-  const ClientNameDataFromStore: any = useSelector(get_client_name);
-  const ClientGroupDataFromStore: any = useSelector(get_client_group);
+  const accessToken: any = useSelector(get_access_token);
+  const emeraldChittiDataFromStore: any = useSelector(get_Emerald_challan);
+  const clientNameDataFromStore: any = useSelector(get_client_name);
+  const clientGroupDataFromStore: any = useSelector(get_client_group);
   const subCategoryDataFromStore: any = useSelector(get_subcategory_list);
-  const ProductItemDataFromStore: any = useSelector(get_product_item);
+  const productItemDataFromStore: any = useSelector(get_product_item);
   const [clientNameList, setClientNameList] = useState<any>([]);
   const [emeraldChittiData, setEmeraldChittiData] = useState<any>([]);
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
@@ -96,64 +96,63 @@ const UseEmeraldHook = () => {
   ] = useState<any>('');
   const [showSaveButtonForAmendFlow, setShowSaveButtonForAmendFlow] =
     useState<any>(false);
-  console.log('ProductItemDataFromStore', ProductItemDataFromStore);
 
   const {
     findDuplicateValuesInEmeraldChittiTable,
     findDuplicateIndicesInEmeraldChittiTable,
   } = UseCustomEmeraldChittiHook();
   useEffect(() => {
-    dispatch(getEmeraldChallan(AccessToken?.token));
-    dispatch(getClientName(AccessToken?.token));
-    dispatch(getSubCategoryList(AccessToken?.token));
-    dispatch(getProductItem(AccessToken?.token));
-    dispatch(getClientGroupList(AccessToken?.token));
+    dispatch(getEmeraldChallan(accessToken?.token));
+    dispatch(getClientName(accessToken?.token));
+    dispatch(getSubCategoryList(accessToken?.token));
+    dispatch(getProductItem(accessToken?.token));
+    dispatch(getClientGroupList(accessToken?.token));
     setCurrentDate(new Date());
   }, []);
 
   useEffect(() => {
     if (
-      EmeraldChittiDataFromStore?.data?.length > 0 &&
-      EmeraldChittiDataFromStore?.data !== null
+      emeraldChittiDataFromStore?.data?.length > 0 &&
+      emeraldChittiDataFromStore?.data !== null
     ) {
-      setEmeraldChittiData([...EmeraldChittiDataFromStore?.data]);
+      setEmeraldChittiData([...emeraldChittiDataFromStore?.data]);
     } else {
       setEmeraldChittiData([]);
     }
-  }, [EmeraldChittiDataFromStore]);
+  }, [emeraldChittiDataFromStore]);
 
   useEffect(() => {
     if (
-      ClientNameDataFromStore?.data?.length > 0 &&
-      ClientNameDataFromStore?.data !== null
+      clientNameDataFromStore?.data?.length > 0 &&
+      clientNameDataFromStore?.data !== null
     ) {
-      setClientNameList([...ClientNameDataFromStore?.data]);
+      setClientNameList([...clientNameDataFromStore?.data]);
     } else {
       setClientNameList([]);
     }
-  }, [ClientNameDataFromStore]);
+  }, [clientNameDataFromStore]);
 
   useEffect(() => {
     if (
-      ClientGroupDataFromStore?.data?.length > 0 &&
-      ClientGroupDataFromStore?.data !== null
+      clientGroupDataFromStore?.data?.length > 0 &&
+      clientGroupDataFromStore?.data !== null
     ) {
-      setClientGroupList([...ClientGroupDataFromStore?.data]);
+      setClientGroupList([...clientGroupDataFromStore?.data]);
     } else {
       setClientGroupList([]);
     }
-  }, [ClientGroupDataFromStore]);
+  }, [clientGroupDataFromStore]);
 
   useEffect(() => {
     if (
-      ProductItemDataFromStore?.data?.length > 0 &&
-      ProductItemDataFromStore?.data !== null
+      productItemDataFromStore?.data?.length > 0 &&
+      productItemDataFromStore?.data !== null
     ) {
-      setProductItemList([...ProductItemDataFromStore?.data]);
+      setProductItemList([...productItemDataFromStore?.data]);
     } else {
       setProductItemList([]);
     }
-  }, [ProductItemDataFromStore]);
+  }, [productItemDataFromStore]);
 
   useEffect(() => {
     if (
@@ -166,12 +165,12 @@ const UseEmeraldHook = () => {
     }
   }, [subCategoryDataFromStore]);
 
-  const HandleClientGroup: any = (e: any) => {
+  const handleClientGroup: any = (e: any) => {
     setClientGroupName(e?.target?.value);
     setStateForDocStatus(true);
   };
 
-  const HandleAddRow: any = () => {
+  const handleAddRow: any = () => {
     const newRow = {
       idx: tableData?.length + 1,
       a: '',
@@ -202,10 +201,10 @@ const UseEmeraldHook = () => {
 
     // Add the new row to the tableData
     setTableData([...tableData, newRow]);
-    setStateForDocStatus(true)
+    setStateForDocStatus(true);
   };
 
-  const HandleDeleteRow: any = (id: any) => {
+  const handleDeleteRow: any = (id: any) => {
     console.log('id', id);
     if (tableData?.length > 1) {
       const updatedData = tableData.filter((row: any) => row.idx !== id);
@@ -220,8 +219,7 @@ const UseEmeraldHook = () => {
     setStateForDocStatus(true);
   };
 
-  const HandleEmptyEmeraldChitti: any = () => {
-    console.log('new emerald chitti');
+  const handleEmptyEmeraldChitti: any = () => {
     setTableData([{ idx: 1 }]);
     setSelectedDropdownValue('');
     setShowSubmitButtonAfterCreateChitti('');
@@ -234,26 +232,26 @@ const UseEmeraldHook = () => {
     });
   };
 
-  const HandleSubmitEmeraldChittiData: any = async () => {
-    console.log("handle submit emerald chitti", emeraldChittiTableData)
-    const hasEmptySubCategory = emeraldChittiTableData.some((obj: any) => !obj.sub_category);
+  const handleSubmitEmeraldChittiData: any = async () => {
+    const hasEmptySubCategory = emeraldChittiTableData.some(
+      (obj: any) => !obj.sub_category
+    );
 
     if (hasEmptySubCategory) {
-      toast.error("Please Select Sub Category")
+      toast.error('Please Select Sub Category');
     } else {
       let updateDocStatus: any =
         await UpdateDocStatusWithSubmittedEmeraldChittiApi(
-          AccessToken?.token,
+          accessToken?.token,
           '1',
           new Date()?.toISOString()?.split('T')[0],
           showSubmitButtonAfterCreateChitti?.length > 0
             ? showSubmitButtonAfterCreateChitti
             : id
         );
-      console.log('update doc', updateDocStatus);
       if (Object.keys(updateDocStatus?.data)?.length > 0) {
         const params: any = {
-          token: AccessToken?.token,
+          token: accessToken?.token,
           name:
             showSubmitButtonAfterCreateChitti?.length > 0
               ? showSubmitButtonAfterCreateChitti
@@ -264,18 +262,18 @@ const UseEmeraldHook = () => {
     }
   };
 
-  const HandleCancelEmeraldChitti = async () => {
+  const handleCancelEmeraldChitti = async () => {
     let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
-      AccessToken?.token,
+      accessToken?.token,
       '2',
       showSubmitButtonAfterCreateChitti?.length > 0
         ? showSubmitButtonAfterCreateChitti
         : id
     );
-    console.log('update doc', updateDocStatus);
+
     if (Object.keys(updateDocStatus?.data)?.length > 0) {
       const params: any = {
-        token: AccessToken?.token,
+        token: accessToken?.token,
         name:
           showSubmitButtonAfterCreateChitti?.length > 0
             ? showSubmitButtonAfterCreateChitti
@@ -286,9 +284,9 @@ const UseEmeraldHook = () => {
     }
   };
 
-  const HandleDeleteEmeraldChitti = async () => {
+  const handleDeleteEmeraldChitti = async () => {
     let deleteChallanApiRes: any = await DeleteEmeraldChittiApi(
-      AccessToken?.token,
+      accessToken?.token,
       showSubmitButtonAfterCreateChitti?.length > 0
         ? showSubmitButtonAfterCreateChitti
         : id
@@ -312,17 +310,17 @@ const UseEmeraldHook = () => {
   }, [tableData]);
 
   // amend create duplicate chitti
-  const HandleAmendButtonForDuplicateChitti: any = async () => {
+  const handleAmendButtonForDuplicateChitti: any = async () => {
     const reqParams: any = {
       clientName: selectedDropdownValue,
       clientGroup: clientGroupName,
       date: transactionDate,
       name: id,
       emeraldChittiTableData: emeraldChittiTableData,
-      token: AccessToken?.token,
+      token: accessToken?.token,
     };
     let amendApi: any = await EmeraldChittiAmendApi(reqParams);
-    console.log('challan amend api res', amendApi);
+
     if (
       amendApi?.data?.hasOwnProperty('data') &&
       Object?.keys(amendApi?.data?.data)?.length > 0
@@ -330,7 +328,7 @@ const UseEmeraldHook = () => {
       navigate(`/emeraldchitti/${amendApi?.data?.data?.name}`);
 
       const params: any = {
-        token: AccessToken?.token,
+        token: accessToken?.token,
         name: amendApi?.data?.data?.name,
       };
       dispatch(getSpecificEmeraldChitti(params));
@@ -340,9 +338,7 @@ const UseEmeraldHook = () => {
     }
   };
 
-  const HandleCreateEmeraldChittiSubmit: any = async () => {
-    console.log('submit create emerald chitti', emeraldChittiTableData);
-
+  const handleCreateEmeraldChittiSubmit: any = async () => {
     const reversedDate = new Date()
       ?.toISOString()
       ?.split('T')[0]
@@ -377,8 +373,6 @@ const UseEmeraldHook = () => {
         const rowIndicesMsg = Object.keys(uniqueRowsWithDuplicates)
           .map((row) => `row ${row}`)
           .join(', ');
-        console.log('uniqueRowsWithDuplicates', uniqueRowsWithDuplicates);
-
         toast.error(`Duplicate values found in column "A" in ${rowIndicesMsg}`);
         return;
       }
@@ -390,8 +384,6 @@ const UseEmeraldHook = () => {
       )
       .map((obj: any, index: any) => ({ ...obj, idx: index + 1 }));
 
-    console.log('`filtered data`', updatedFilterEmeraldChitti);
-
     let errMsgList: any = [];
     if (Object?.keys(selectedDropdownValue)?.length === 0) {
       errMsgList.push('Client Name');
@@ -402,27 +394,25 @@ const UseEmeraldHook = () => {
     console.log('show err msg', errMsgList);
 
     if (errMsgList?.length > 0 && errMsgList !== null) {
-      // const concatenatedErrMsg:any = errMsgList?.join(", ");
       toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
-    }
-    else {
+    } else {
       const BodyData: any = {
         clientName: selectedDropdownValue,
         date: reversedDate,
         transactionDate: transactionDate,
         clientGroup: clientGroupName,
         emeraldChittiTableData: updatedFilterEmeraldChitti,
-        token: AccessToken?.token,
+        token: accessToken?.token,
       };
       let createEmeraldChittiApiRes: any =
         await CreateEmeraldChittiApi(BodyData);
-      console.log('Createchittiapires', createEmeraldChittiApiRes);
+
       if (
         Object?.keys(clientGroupName)?.length > 0 &&
         Object?.keys(clientNameList)?.length > 0
       ) {
         await AddClientNameApi(
-          AccessToken?.token,
+          accessToken?.token,
           selectedDropdownValue,
           clientGroupName
         );
@@ -432,7 +422,7 @@ const UseEmeraldHook = () => {
         toast.success('Emerald Chitti Created');
         navigate(`${createEmeraldChittiApiRes?.data?.message?.data}`);
         await UpdateDocStatusEmeraldChittiApi(
-          AccessToken?.token,
+          accessToken?.token,
           '0',
           createEmeraldChittiApiRes?.data?.message?.data
         );
@@ -440,22 +430,20 @@ const UseEmeraldHook = () => {
         setShowSubmitButtonAfterCreateChitti(
           createEmeraldChittiApiRes?.data?.message?.data?.name
         );
-        dispatch(getEmeraldChallan(AccessToken?.token));
+        dispatch(getEmeraldChallan(accessToken?.token));
       } else {
         toast.error('Failed to Create Emerald Chitti');
       }
     }
   };
 
-  console.log('table dataaa', tableData);
-
   return {
     emeraldChittiData,
     selectedDropdownValue,
     setSelectedDropdownValue,
     productItemList,
-    HandleClientGroup,
-    HandleCreateEmeraldChittiSubmit,
+    handleClientGroup,
+    handleCreateEmeraldChittiSubmit,
     clientGroupList,
     clientNameList,
     currentDate,
@@ -465,19 +453,18 @@ const UseEmeraldHook = () => {
     transactionDate,
     stateForDocStatus,
     setStateForDocStatus,
-    HandleEmptyEmeraldChitti,
-    HandleSubmitEmeraldChittiData,
-    HandleCancelEmeraldChitti,
-    HandleDeleteEmeraldChitti,
+    handleEmptyEmeraldChitti,
+    handleSubmitEmeraldChittiData,
+    handleCancelEmeraldChitti,
+    handleDeleteEmeraldChitti,
     showSubmitButtonAfterCreateChitti,
     subCategoryList,
-    HandleAmendButtonForDuplicateChitti,
+    handleAmendButtonForDuplicateChitti,
     showSaveButtonForAmendFlow,
     setShowSaveButtonForAmendFlow,
-    HandleDeleteRow,
-    HandleAddRow,
-    // handleKeyDown
+    handleDeleteRow,
+    handleAddRow,
   };
 };
 
-export default UseEmeraldHook;
+export default useEmeraldHook;

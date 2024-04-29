@@ -11,22 +11,19 @@ const AddProjectSubCategoryMapping = ({ subCategoryCategoryData }: any) => {
   const dispatch = useDispatch();
   const [project, setProject] = useState<any>('');
 
-
-  console.log("subCategoryCategoryData list", subCategoryCategoryData)
-
   const [selectedStoneValue, setSelectedStoneValue] = useState<any>('');
   const [selectedPlainValue, setSelectedPlainValue] = useState<any>('');
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
-  const AccessToken: any = useSelector(get_access_token);
+  const accessToken: any = useSelector(get_access_token);
 
   //   const bgColor = useRef(true);
-  const HandleSubmit: any = async () => {
+  const handleSubmit: any = async () => {
     if (inputValue.trim() === '') {
       setError('Input field cannot be empty');
     } else {
       let apiRes: any = await AddProjectSubCategoryMappingApi(
-        AccessToken?.token,
+        accessToken?.token,
         project,
         selectedStoneValue,
         selectedPlainValue
@@ -35,7 +32,7 @@ const AddProjectSubCategoryMapping = ({ subCategoryCategoryData }: any) => {
       setProject('');
       if (apiRes?.data?.message?.status === 'success') {
         toast.success('Project sub category mapping created');
-        dispatch(getProjectSubCategoryMapping(AccessToken?.token));
+        dispatch(getProjectSubCategoryMapping(accessToken?.token));
         setInputValue('');
         setSelectedStoneValue('');
         setSelectedPlainValue('');
@@ -46,7 +43,7 @@ const AddProjectSubCategoryMapping = ({ subCategoryCategoryData }: any) => {
     }
   };
 
-  const HandleInputValue = (e: any) => {
+  const handleInputValue = (e: any) => {
     setError('');
     setProject(e.target.value);
     setInputValue(e.target.value);
@@ -64,7 +61,7 @@ const AddProjectSubCategoryMapping = ({ subCategoryCategoryData }: any) => {
           className="form-control ps-2"
           id="project"
           aria-describedby="basic-addon3"
-          onChange={HandleInputValue}
+          onChange={handleInputValue}
           value={inputValue}
         />
       </div>
@@ -75,7 +72,11 @@ const AddProjectSubCategoryMapping = ({ subCategoryCategoryData }: any) => {
       <div className="input-group w-50 master-input-field">
         <div className="w-100 ">
           <SelectedInputDropdown
-            drowpdownlist={subCategoryCategoryData?.length > 0 && subCategoryCategoryData !== null && subCategoryCategoryData.map((data: any) => data.name)}
+            drowpdownlist={
+              subCategoryCategoryData?.length > 0 &&
+              subCategoryCategoryData !== null &&
+              subCategoryCategoryData.map((data: any) => data.name)
+            }
             // placeholderValue="Group"
             selectedDropdownValue={selectedStoneValue}
             setSelectedDropdownValue={setSelectedStoneValue}
@@ -89,7 +90,11 @@ const AddProjectSubCategoryMapping = ({ subCategoryCategoryData }: any) => {
       <div className="input-group w-50 master-input-field">
         <div className="w-100 ">
           <SelectedInputDropdown
-            drowpdownlist={subCategoryCategoryData?.length > 0 && subCategoryCategoryData !== null && subCategoryCategoryData.map((data: any) => data.name)}
+            drowpdownlist={
+              subCategoryCategoryData?.length > 0 &&
+              subCategoryCategoryData !== null &&
+              subCategoryCategoryData.map((data: any) => data.name)
+            }
             // placeholderValue="Group"
             selectedDropdownValue={selectedPlainValue}
             setSelectedDropdownValue={setSelectedPlainValue}
@@ -99,7 +104,7 @@ const AddProjectSubCategoryMapping = ({ subCategoryCategoryData }: any) => {
       <div className="d-flex justify-content-start ">
         <button
           type="submit"
-          onClick={HandleSubmit}
+          onClick={handleSubmit}
           className=" btn btn-outline-primary py-1 mt-2 form-submit-button"
         >
           Save

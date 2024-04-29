@@ -1,15 +1,13 @@
 const HandleButtonsDisplayInChitti = ({
-  HandleCreateChittiSubmit,
+  handleCreateChittiSubmit,
   showButton,
   showSubmitButtonAfterCreateChitti,
-  HandleSubmitChittiData,
-  HandleCancelChitti,
-  HandleDeleteChitti,
-  HandleEmptyChitti,
+  handleSubmitChittiData,
+  handleCancelChitti,
+  handleDeleteChitti,
+  handleEmptyChitti,
 }: any) => {
-
-  console.log(HandleEmptyChitti)
-  const HandleButtonsDisplay: any = () => {
+  const handleButtonsDisplay: any = () => {
     if (showButton === 0 && showSubmitButtonAfterCreateChitti?.length > 0) {
       return (
         <>
@@ -23,7 +21,7 @@ const HandleButtonsDisplayInChitti = ({
 
           <button
             type="submit"
-            onClick={HandleSubmitChittiData}
+            onClick={handleSubmitChittiData}
             className=" btn btn-outline-primary px-2 py-0 form-submit-button"
           >
             Submit
@@ -36,7 +34,7 @@ const HandleButtonsDisplayInChitti = ({
         <button
           type="submit"
           className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
-          onClick={HandleCancelChitti}
+          onClick={handleCancelChitti}
         >
           Cancel
         </button>
@@ -47,7 +45,7 @@ const HandleButtonsDisplayInChitti = ({
         <button
           type="submit"
           className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
-          onClick={HandleDeleteChitti}
+          onClick={handleDeleteChitti}
         >
           Delete
         </button>
@@ -64,7 +62,7 @@ const HandleButtonsDisplayInChitti = ({
           </button> */}
           <button
             type="submit"
-            onClick={HandleCreateChittiSubmit}
+            onClick={handleCreateChittiSubmit}
             className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
           >
             Save
@@ -74,7 +72,7 @@ const HandleButtonsDisplayInChitti = ({
     }
   };
 
-  return <>{HandleButtonsDisplay()}</>;
+  return <>{handleButtonsDisplay()}</>;
 };
 
 export default HandleButtonsDisplayInChitti;
