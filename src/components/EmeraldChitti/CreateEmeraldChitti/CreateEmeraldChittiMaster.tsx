@@ -76,12 +76,7 @@ const CreateEmeraldChittiMaster = ({
         handleKeyDown={handleKeyDown}
 
       />
-      {/* <EmeraldChittiTable
-        tableData={tableData}
-        setTableData={setTableData}
-        subCategoryList={subCategoryList}
-        productItemList={productItemList}
-      /> */}
+
     </>
   );
 };

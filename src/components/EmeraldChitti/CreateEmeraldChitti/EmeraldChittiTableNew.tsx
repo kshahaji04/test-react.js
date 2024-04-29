@@ -347,8 +347,9 @@ const EmeraldChittiTableNew = ({
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="number"
                             value={row.net_weight}
-                            readOnly={readOnly}
+                            readOnly={true}
                             id={`net_weight-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(
@@ -357,7 +358,6 @@ const EmeraldChittiTableNew = ({
                                 e.target.value
                               )
                             }
-                            type="number"
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
