@@ -26,7 +26,6 @@ const CreateEmeraldChittiMaster = ({
   handleSubmitEmeraldChittiData,
   handleCancelEmeraldChitti,
   handleDeleteEmeraldChitti,
-  handleEmptyEmeraldChitti,
   setStateForDocStatus,
   handleKeyDown,
 }: any) => {
@@ -49,8 +48,7 @@ const CreateEmeraldChittiMaster = ({
           handleSubmitChittiData={handleSubmitEmeraldChittiData}
           handleCancelChitti={handleCancelEmeraldChitti}
           handleDeleteChitti={handleDeleteEmeraldChitti}
-          handleEmptyChitti={handleEmptyEmeraldChitti}
-        />
+          />
       </div>
       <EmeraldCreateChitti
         selectedDropdownValue={selectedDropdownValue}

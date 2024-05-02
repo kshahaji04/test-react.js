@@ -25,7 +25,6 @@ const CreateChittiMaster = ({
   handleDateChange,
   date,
   setStateForDocStatus,
-  handleEmptyChallanChittiTable,
   goldRate,
   remarks,
   showSubmitButtonAfterCreateChitti,
@@ -60,7 +59,6 @@ const CreateChittiMaster = ({
               handleSubmitChittiData={handleSubmitChallanChitti}
               handleCancelChitti={handleCancelChallanChitti}
               handleDeleteChitti={handleDeleteChallanChitti}
-              handleEmptyChitti={handleEmptyChallanChittiTable}
             />
           </div>
         </div>
