@@ -81,7 +81,7 @@ const SelectedInputDropdown = ({
     };
   }, []);
 
-  const HandleClientBlur = () => {
+  const handleClientBlur = () => {
     setShowDropdown(false);
   };
 
@@ -149,7 +149,7 @@ const SelectedInputDropdown = ({
                         className="form-select form-select-sm "
                         aria-label="Default select example"
                         onChange={handleClientGroup}
-                        onBlur={HandleClientBlur}
+                        onBlur={handleClientBlur}
                       >
                         <option>Select client group</option>
                         {clientGroupList?.length > 0 &&

@@ -28,7 +28,6 @@ const ClientGroup = () => {
 
   return (
     <div className="container">
-      {/* <div className="container mt-2"> */}
       <div className="row justify-content-center mt-2">
         <div className="col-lg-9 chitti-nav-tabs tab-container">
           <Tabs
@@ -37,7 +36,6 @@ const ClientGroup = () => {
             className="mb-1"
             justify
           >
-            {' '}
             <Tab eventKey="chitti-listing" title="Client Group List">
               <MasterSingleListingSearch
                 placeholder="Client group"

@@ -19,7 +19,6 @@ const AddClientGroup = () => {
       setError('Input field cannot be empty');
     } else {
       let apiRes: any = await AddClientGroupApi(accessToken?.token, title);
-      console.log('apires', apiRes);
       if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
         toast.success('Client Group Created');
         dispatch(getClientGroupList(accessToken?.token));

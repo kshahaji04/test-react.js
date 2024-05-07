@@ -84,7 +84,7 @@ const ChittiMaster = () => {
                 item.date <= searchInputValues.to_date
               : true;
           const numberMatch = searchInputValues.chitti_no
-            ? item?.number?.includes(searchInputValues.chitti_no)
+            ? item?.chitti_no?.includes(searchInputValues.chitti_no)
             : true;
           const clientNameMatch = searchClientName
             ? item?.client_name

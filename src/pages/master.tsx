@@ -1,4 +1,4 @@
-import Master from '../components/Master/master';
+import Master from '../components/Master/Master';
 
 const MasterPage = () => {
   return (
