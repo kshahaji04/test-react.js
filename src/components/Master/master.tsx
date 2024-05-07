@@ -3,9 +3,9 @@ import '../../Style/master.css';
 
 const Master = () => {
   return (
-    <div>
+    <>
       <MasterListing />
-    </div>
+    </>
   );
 };
 
