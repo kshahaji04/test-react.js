@@ -1,7 +1,7 @@
 import MasterListing from './MasterListing';
 import '../../Style/master.css';
 
-const Master = () => {
+const MasterComponent = () => {
   return (
     <>
       <MasterListing />
@@ -9,4 +9,4 @@ const Master = () => {
   );
 };
 
-export default Master;
+export default MasterComponent;
