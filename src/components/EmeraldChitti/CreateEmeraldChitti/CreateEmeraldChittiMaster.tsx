@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import EmeraldCreateChitti from './EmeraldCreateChitti';
 import { useSelector } from 'react-redux';
 import { get_specific_emerald_chitti } from '../../../store/slices/Emerald/get-specific-emrald-slice';
-
 import HandleButtonsDisplayInChitti from '../../HandleButtonsDisplayInChitti';
 import EmeraldChittiTableNew from './EmeraldChittiTableNew';
 
@@ -27,7 +26,6 @@ const CreateEmeraldChittiMaster = ({
   handleSubmitEmeraldChittiData,
   handleCancelEmeraldChitti,
   handleDeleteEmeraldChitti,
-  handleEmptyEmeraldChitti,
   setStateForDocStatus,
   handleKeyDown,
 }: any) => {
@@ -50,8 +48,7 @@ const CreateEmeraldChittiMaster = ({
           handleSubmitChittiData={handleSubmitEmeraldChittiData}
           handleCancelChitti={handleCancelEmeraldChitti}
           handleDeleteChitti={handleDeleteEmeraldChitti}
-          handleEmptyChitti={handleEmptyEmeraldChitti}
-        />
+          />
       </div>
       <EmeraldCreateChitti
         selectedDropdownValue={selectedDropdownValue}

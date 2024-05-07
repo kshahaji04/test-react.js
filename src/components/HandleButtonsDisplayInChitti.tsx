@@ -1,13 +1,20 @@
-const HandleButtonsDisplayInChitti = ({
+interface HandleButtonsDisplayProps {
+  handleCreateChittiSubmit: () => void;
+  showButton: number;
+  showSubmitButtonAfterCreateChitti: string;
+  handleSubmitChittiData: () => void;
+  handleCancelChitti: () => void;
+  handleDeleteChitti: () => void;
+}
+const HandleButtonsDisplayInChitti: React.FC<HandleButtonsDisplayProps> = ({
   handleCreateChittiSubmit,
   showButton,
   showSubmitButtonAfterCreateChitti,
   handleSubmitChittiData,
   handleCancelChitti,
   handleDeleteChitti,
-  handleEmptyChitti,
-}: any) => {
-  const handleButtonsDisplay: any = () => {
+  }) => {
+  const handleButtonsDisplay = () => {
     if (showButton === 0 && showSubmitButtonAfterCreateChitti?.length > 0) {
       return (
         <>

@@ -11,7 +11,6 @@ import ClientName from '../components/Master/MasterListing/ClientName/ClientName
 import Category from '../components/Master/MasterListing/Category/CategoryMaster';
 import SubCategory from '../components/Master/MasterListing/SubCategory/SubCategoryMaster';
 import HuidProduct from '../components/Master/MasterListing/HuidProduct/HuidProductMaster';
-
 import EditChallanChitti from '../components/Chitti/ChittiListing/EditChallanChitti';
 import MasterPageClientNameDetail from '../components/Master/MasterListing/ClientName/MasterPageClientNameDetails';
 import MasterListing from '../components/Master/MasterListing';
@@ -34,7 +33,7 @@ import SupplierGroup from '../components/Master/MasterListing/SupplierGroup/Supp
 import MasterPageSupplierGroupDetail from '../components/Master/MasterListing/SupplierGroup/MasterPageSupplierGroupDetail';
 import MasterPageSupplierDetails from '../components/Master/MasterListing/Supplier/MasterPageSupplierDetails';
 import EmeraldChittiMaster from '../components/EmeraldChitti/EmeraldChittiMaster';
-import MasterEmeraldShilpi from '../components/DataUpload/EmeraldShilpi/MasterEmeraldShilpi';
+import EmeraldShilpiListing from '../components/DataUpload/EmeraldShilpi/EmeraldShilpiListing';
 
 const AppRoutes = () => {
   return (
@@ -139,7 +138,7 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <MasterPage />
-              <MasterEmeraldShilpi />
+              <EmeraldShilpiListing />
             </ProtectedRoute>
           }
         />
