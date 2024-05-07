@@ -34,7 +34,6 @@ const EmeraldChittiTableNew = ({
       .every((key) => tableData[tableData.length - 1][key] === '');
 
     const otherInputFocused = document.activeElement !== inputRef.current;
-
     if (
       inputRef.current &&
       allFieldsExceptExceptionsFilled &&
