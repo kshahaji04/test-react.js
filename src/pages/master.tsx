@@ -1,9 +1,9 @@
-import Master from '../components/Master/Master';
+import MasterComponent from '../components/Master/Master';
 
 const MasterPage = () => {
   return (
     <>
-      <Master />
+      <MasterComponent />
     </>
   );
 };
