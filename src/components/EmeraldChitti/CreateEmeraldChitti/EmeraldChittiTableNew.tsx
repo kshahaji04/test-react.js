@@ -25,23 +25,25 @@ const EmeraldChittiTableNew = ({
     amount: 0,
     custom_hm_pcs: 0,
   });
+  useEffect(() => {
+    const handleFocusInOtherInput = (event) => {
+      event.stopPropagation(); // Prevent the focus event from bubbling up
+      // Do not set focus on the "a" column input
+    };
 
-  setTimeout(() => {
-    const allFieldsExceptExceptionsFilled = Object.keys(
-      tableData[tableData.length - 1]
-    )
-      .filter((key) => key !== 'idx')
-      .every((key) => tableData[tableData.length - 1][key] === '');
+    // Attach focus event listeners to other input fields
+    const otherInputFields = document.querySelectorAll('input:not(#a)');
+    otherInputFields.forEach((inputField) => {
+      inputField.addEventListener('focus', handleFocusInOtherInput);
+    });
 
-    const otherInputFocused = document.activeElement !== inputRef.current;
-    if (
-      inputRef.current &&
-      allFieldsExceptExceptionsFilled &&
-      !otherInputFocused
-    ) {
-      inputRef.current.focus();
-    }
-  }, 0);
+    return () => {
+      // Remove event listeners when component unmounts
+      otherInputFields.forEach((inputField) => {
+        inputField.removeEventListener('focus', handleFocusInOtherInput);
+      });
+    };
+  }, []);
 
   const addIdToRows = (rows: any) => {
     return rows.map((row: any, index: any) => ({
