@@ -25,13 +25,21 @@ const EmeraldChittiTableNew = ({
     amount: 0,
     custom_hm_pcs: 0,
   });
+
   setTimeout(() => {
     const allFieldsExceptExceptionsFilled = Object.keys(
       tableData[tableData.length - 1]
     )
       .filter((key) => key !== 'idx')
       .every((key) => tableData[tableData.length - 1][key] === '');
-    if (inputRef.current && allFieldsExceptExceptionsFilled) {
+
+    const otherInputFocused = document.activeElement !== inputRef.current;
+
+    if (
+      inputRef.current &&
+      allFieldsExceptExceptionsFilled &&
+      !otherInputFocused
+    ) {
       inputRef.current.focus();
     }
   }, 0);
@@ -43,7 +51,6 @@ const EmeraldChittiTableNew = ({
     }));
   };
   useEffect(() => {
-    console.log('default data', defaultData);
     if (
       defaultData?.length > 0 &&
       defaultData !== undefined &&
@@ -154,7 +161,7 @@ const EmeraldChittiTableNew = ({
     }
   };
 
-  console.log('updated tabled dataa', tableData);
+  // console.log('updated tabled dataa', tableData);
   return (
     <div>
       <div className="table-responsive">

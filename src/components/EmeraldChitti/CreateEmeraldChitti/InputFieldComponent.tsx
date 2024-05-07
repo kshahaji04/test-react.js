@@ -26,6 +26,7 @@ const InputFieldComponent = ({
         onChange={onChange}
         onKeyDown={(e) => handleKeyDown(e, 'custom_hm_pcs')}
         ref={inputRef}
+        autoComplete="off"
       />
     </div>
   );
