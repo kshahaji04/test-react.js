@@ -26,7 +26,7 @@ const EmeraldChittiTableNew = ({
     custom_hm_pcs: 0,
   });
   useEffect(() => {
-    const handleFocusInOtherInput = (event) => {
+    const handleFocusInOtherInput = (event: any) => {
       event.stopPropagation(); // Prevent the focus event from bubbling up
       // Do not set focus on the "a" column input
     };
