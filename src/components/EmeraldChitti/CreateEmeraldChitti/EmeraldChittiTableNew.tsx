@@ -25,25 +25,18 @@ const EmeraldChittiTableNew = ({
     amount: 0,
     custom_hm_pcs: 0,
   });
-  useEffect(() => {
-    const handleFocusInOtherInput = (event: any) => {
-      event.stopPropagation(); // Prevent the focus event from bubbling up
-      // Do not set focus on the "a" column input
-    };
 
-    // Attach focus event listeners to other input fields
-    const otherInputFields = document.querySelectorAll('input:not(#a)');
-    otherInputFields.forEach((inputField) => {
-      inputField.addEventListener('focus', handleFocusInOtherInput);
-    });
+  setTimeout(() => {
+    const allFieldsExceptExceptionsFilled = Object.keys(
+      tableData[tableData.length - 1]
+    )
+      .filter((key) => key !== 'idx')
+      .every((key) => tableData[tableData.length - 1][key] === '');
 
-    return () => {
-      // Remove event listeners when component unmounts
-      otherInputFields.forEach((inputField) => {
-        inputField.removeEventListener('focus', handleFocusInOtherInput);
-      });
-    };
-  }, []);
+    if (inputRef.current && allFieldsExceptExceptionsFilled && document?.activeElement?.id !== 'exampleInputEmail1') {
+      inputRef.current.focus();
+    }
+  }, 0);
 
   const addIdToRows = (rows: any) => {
     return rows.map((row: any, index: any) => ({
@@ -57,10 +50,8 @@ const EmeraldChittiTableNew = ({
       defaultData !== undefined &&
       defaultData !== null
     ) {
-      // defaultData.map((data: any) => {
       const dataWithIds = addIdToRows(defaultData);
       setTableData(dataWithIds);
-      //   });
     }
   }, [defaultData, setTableData]);
 
@@ -181,7 +172,7 @@ const EmeraldChittiTableNew = ({
             </p>
           </div>
           <div className="table-responsive">
-            <table className="table table-striped caption-top table-hover my-0 ">
+            <table className="table table-striped caption-top table-hover my-0" >
               <thead>
                 <tr className="table-header-row-emerald-chitti ">
                   <th scope="col" className="px-1">
