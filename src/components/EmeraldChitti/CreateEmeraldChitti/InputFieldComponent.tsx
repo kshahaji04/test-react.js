@@ -4,14 +4,15 @@ const InputFieldComponent = ({
   id,
   onChange,
   type,
-  HandleAddRow,
+  handleAddRow,
   inputRef,
 }: any) => {
   const handleKeyDown: any = (e: any, id: any) => {
     if (e.key === 'Tab' && id === 'custom_hm_pcs') {
-      HandleAddRow();
+      handleAddRow();
     }
   };
+
   return (
     <div>
       <input

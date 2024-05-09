@@ -33,7 +33,11 @@ const EmeraldChittiTableNew = ({
       .filter((key) => key !== 'idx')
       .every((key) => tableData[tableData.length - 1][key] === '');
 
-    if (inputRef.current && allFieldsExceptExceptionsFilled && document?.activeElement?.id !== 'exampleInputEmail1') {
+    if (
+      inputRef.current &&
+      allFieldsExceptExceptionsFilled &&
+      document?.activeElement?.id !== 'exampleInputEmail1'
+    ) {
       inputRef.current.focus();
     }
   }, 0);
@@ -107,7 +111,6 @@ const EmeraldChittiTableNew = ({
                 (parseFloat(updatedRow.k) || 0),
             };
           }
-
           // Check if the current row is the last row and all fields are filled
           const isLastRow = index === prevData.length - 1;
           const allFieldsExceptExceptionsFilled = Object.keys(updatedRow)
@@ -115,8 +118,7 @@ const EmeraldChittiTableNew = ({
               (key) =>
                 key !== 'custom_hm_pcs' &&
                 key !== 'sub_category' &&
-                key !== 'category' &&
-                key !== 'stn_wt'
+                key !== 'category'
             )
             .every((key) => updatedRow[key] !== '');
 
@@ -172,7 +174,7 @@ const EmeraldChittiTableNew = ({
             </p>
           </div>
           <div className="table-responsive">
-            <table className="table table-striped caption-top table-hover my-0" >
+            <table className="table table-striped caption-top table-hover my-0">
               <thead>
                 <tr className="table-header-row-emerald-chitti ">
                   <th scope="col" className="px-1">
@@ -348,7 +350,7 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             type="number"
                             value={row.net_weight}
-                            readOnly={true}
+                            readOnly={readOnly}
                             id={`net_weight-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(
@@ -425,13 +427,14 @@ const EmeraldChittiTableNew = ({
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="text"
                             value={row.r}
-                            readOnly={readOnly}
                             id={`r-${row.idx}`}
+                            readOnly={readOnly}
                             onChange={(e: any) =>
                               handleInputChange(row.idx, 'r', e.target.value)
                             }
-                            type="text"
+                            // handleAddRow={handleAddRow}
                           />
                         </td>
                         <td className="emerald_chitti_table_td position-relative">
@@ -513,7 +516,7 @@ const EmeraldChittiTableNew = ({
                               )
                             }
                             type="number"
-                            HandleAddRow={handleAddRow}
+                            handleAddRow={handleAddRow}
                           />
                         </td>
                         <td className="table-data-input">

@@ -35,7 +35,6 @@ const EmeraldChittiMaster = () => {
     handleKeyDown,
   }: any = useEmeraldHook();
 
-  // const { HandleAddRow, tableData, setTableData, HandleDeleteRow }: any = UseCustomEmeraldChittiHook()
   const { subCategoryList }: any = useSubCategoryHook();
 
   // const todayDate: any = currentDate?.toISOString()?.split('T')[0];
