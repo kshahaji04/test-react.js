@@ -8,7 +8,10 @@ const InputFieldComponent = ({
   inputRef,
 }: any) => {
   const handleKeyDown: any = (e: any, id: any) => {
-    if (e.key === 'Tab' && id === 'custom_hm_pcs') {
+    if (e.key === 'Tab' && id?.includes('custom_hm_pcs')) {
+      handleAddRow();
+    }
+    if (e.key === 'Enter' && id?.includes('r')) {
       handleAddRow();
     }
   };
@@ -18,14 +21,12 @@ const InputFieldComponent = ({
       <input
         type={type}
         className="form-control custom-input-field-t text-end"
-        aria-label="Sizing example input"
-        aria-describedby="inputGroup-sizing-sm"
         id={id}
         name={id}
         readOnly={readOnly}
         value={value}
         onChange={onChange}
-        onKeyDown={(e) => handleKeyDown(e, 'custom_hm_pcs')}
+        onKeyDown={(e) => handleKeyDown(e, id)}
         ref={inputRef}
         autoComplete="off"
       />

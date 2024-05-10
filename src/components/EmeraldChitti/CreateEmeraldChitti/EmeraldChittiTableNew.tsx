@@ -112,19 +112,24 @@ const EmeraldChittiTableNew = ({
             };
           }
           // Check if the current row is the last row and all fields are filled
-          const isLastRow = index === prevData.length - 1;
-          const allFieldsExceptExceptionsFilled = Object.keys(updatedRow)
-            .filter(
-              (key) =>
-                key !== 'custom_hm_pcs' &&
-                key !== 'sub_category' &&
-                key !== 'category'
-            )
-            .every((key) => updatedRow[key] !== '');
-
-          if (isLastRow && allFieldsExceptExceptionsFilled) {
-            handleAddRow(); // Add a new row
-          }
+          // const isLastRow = index === prevData.length - 1;
+          // const allFieldsExceptExceptionsFilled = Object.keys(updatedRow)
+          //   .filter(
+          //     (key) =>
+          //       key !== 'custom_hm_pcs' &&
+          //       key !== 'sub_category' &&
+          //       key !== 'category'
+          //   )
+          //   .every((key) => updatedRow[key] !== '');
+          // console.log(
+          //   'condn to create new row',
+          //   isLastRow,
+          //   allFieldsExceptExceptionsFilled,
+          //   updatedRow
+          // );
+          // if (isLastRow && allFieldsExceptExceptionsFilled) {
+          //   handleAddRow();
+          // }
 
           setStateForDocStatus(true);
           return updatedRow;
@@ -218,62 +223,63 @@ const EmeraldChittiTableNew = ({
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="text"
                             value={row.a}
                             readOnly={readOnly}
                             id={`a-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(row.idx, 'a', e.target.value)
                             }
-                            type="text"
                             inputRef={inputRef}
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="text"
                             value={row.b}
                             readOnly={readOnly}
                             id={`b-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(row.idx, 'b', e.target.value)
                             }
-                            type="text"
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="text"
                             value={row.c}
                             readOnly={readOnly}
                             id={`c-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(row.idx, 'c', e.target.value)
                             }
-                            type="text"
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="text"
                             value={row.d}
                             readOnly={readOnly}
                             id={`d-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(row.idx, 'd', e.target.value)
                             }
-                            type="text"
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="text"
                             value={row.e}
                             readOnly={readOnly}
                             id={`e-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(row.idx, 'e', e.target.value)
                             }
-                            type="text"
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="number"
                             value={row.gross_weight}
                             readOnly={readOnly}
                             id={`gross_weight-${row.idx}`}
@@ -284,11 +290,11 @@ const EmeraldChittiTableNew = ({
                                 e.target.value
                               )
                             }
-                            type="number"
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="number"
                             value={row.stn_wt}
                             readOnly={readOnly}
                             id={`stn_wt-${row.idx}`}
@@ -299,51 +305,50 @@ const EmeraldChittiTableNew = ({
                                 e.target.value
                               )
                             }
-                            type="number"
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="text"
                             value={row.h}
                             readOnly={readOnly}
                             id={`h-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(row.idx, 'h', e.target.value)
                             }
-                            type="text"
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="text"
                             value={row.i}
                             readOnly={readOnly}
                             id={`i-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(row.idx, 'i', e.target.value)
                             }
-                            type="text"
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="text"
                             value={row.j}
                             readOnly={readOnly}
                             id={`j-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(row.idx, 'j', e.target.value)
                             }
-                            type="text"
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="text"
                             value={row.k}
                             readOnly={readOnly}
                             id={`k-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(row.idx, 'k', e.target.value)
                             }
-                            type="text"
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -363,6 +368,7 @@ const EmeraldChittiTableNew = ({
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="text"
                             value={row.project}
                             readOnly={readOnly}
                             id={`project-${row.idx}`}
@@ -373,11 +379,11 @@ const EmeraldChittiTableNew = ({
                                 e.target.value
                               )
                             }
-                            type="text"
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="text"
                             value={row.product}
                             readOnly={readOnly}
                             id={`product-${row.idx}`}
@@ -388,41 +394,40 @@ const EmeraldChittiTableNew = ({
                                 e.target.value
                               )
                             }
-                            type="text"
                           />
                         </td>
 
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="text"
                             value={row.o}
                             readOnly={readOnly}
                             id={`o-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(row.idx, 'o', e.target.value)
                             }
-                            type="text"
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="text"
                             value={row.p}
                             readOnly={readOnly}
                             id={`p-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(row.idx, 'p', e.target.value)
                             }
-                            type="text"
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
                           <InputFieldComponent
+                            type="text"
                             value={row.q}
                             readOnly={readOnly}
                             id={`q-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(row.idx, 'q', e.target.value)
                             }
-                            type="text"
                           />
                         </td>
                         <td className="emerald_chitti_table_td">
@@ -434,7 +439,7 @@ const EmeraldChittiTableNew = ({
                             onChange={(e: any) =>
                               handleInputChange(row.idx, 'r', e.target.value)
                             }
-                            // handleAddRow={handleAddRow}
+                            handleAddRow={handleAddRow}
                           />
                         </td>
                         <td className="emerald_chitti_table_td position-relative">
