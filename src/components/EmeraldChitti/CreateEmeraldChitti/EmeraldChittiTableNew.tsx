@@ -112,24 +112,25 @@ const EmeraldChittiTableNew = ({
             };
           }
           // Check if the current row is the last row and all fields are filled
-          // const isLastRow = index === prevData.length - 1;
-          // const allFieldsExceptExceptionsFilled = Object.keys(updatedRow)
-          //   .filter(
-          //     (key) =>
-          //       key !== 'custom_hm_pcs' &&
-          //       key !== 'sub_category' &&
-          //       key !== 'category'
-          //   )
-          //   .every((key) => updatedRow[key] !== '');
-          // console.log(
-          //   'condn to create new row',
-          //   isLastRow,
-          //   allFieldsExceptExceptionsFilled,
-          //   updatedRow
-          // );
-          // if (isLastRow && allFieldsExceptExceptionsFilled) {
-          //   handleAddRow();
-          // }
+          const isLastRow = index === prevData.length - 1;
+          const allFieldsExceptExceptionsFilled = Object.keys(updatedRow)
+            .filter(
+              (key) =>
+                key !== 'custom_hm_pcs' &&
+                key !== 'sub_category' &&
+                key !== 'category' &&
+                key !== 'stn_wt'
+            )
+            .every((key) => updatedRow[key] !== '');
+          console.log(
+            'condn to create new row',
+            isLastRow,
+            allFieldsExceptExceptionsFilled,
+            updatedRow
+          );
+          if (isLastRow && allFieldsExceptExceptionsFilled) {
+            handleAddRow();
+          }
 
           setStateForDocStatus(true);
           return updatedRow;
