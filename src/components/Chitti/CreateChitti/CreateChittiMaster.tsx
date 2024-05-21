@@ -45,7 +45,7 @@ const CreateChittiMaster = ({
   }, [docStatusFromStore]);
 
   return (
-    <div>
+    <>
       <div className="row">
         <div className="col-lg-10"></div>
         <div className="col-lg-2">
@@ -93,7 +93,7 @@ const CreateChittiMaster = ({
         setStateForDocStatus={setStateForDocStatus}
         setTotalHuidWeightOfHuidTable={setTotalHuidWeightOfHuidTable}
       />
-    </div>
+    </>
   );
 };
 

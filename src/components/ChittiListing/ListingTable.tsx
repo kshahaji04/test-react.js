@@ -19,7 +19,7 @@ import {
 import LoadMoreChittiListing from './LoadMoreChittiListing';
 
 const ListingTable = ({ tableListingData }: any) => {
-  // console.log('tableListingData', tableListingData);
+
   const dispatch = useDispatch();
   const accessToken: any = useSelector(get_access_token);
 
@@ -77,7 +77,7 @@ const ListingTable = ({ tableListingData }: any) => {
           emeraldChittiDataFromStore?.data[0]?.challan_table?.some(
             (obj: any) => !obj.sub_category
           );
-        console.log('has category', hasEmptySubCategory);
+
         if (hasEmptySubCategory) {
           toast.error('Please Select Sub Category');
         } else {
@@ -104,8 +104,6 @@ const ListingTable = ({ tableListingData }: any) => {
         name
       );
 
-      console.log('deleteChallanApiRes', deleteChallanApiRes);
-
       if (deleteChallanApiRes?.message?.status === 'success') {
         toast.success('Chitti Deleted');
         dispatch(getChittiChallan(accessToken?.token));
@@ -117,7 +115,7 @@ const ListingTable = ({ tableListingData }: any) => {
         accessToken?.token,
         name
       );
-      console.log('deleteChallanApiRes', deleteEmeraldApiRes);
+
       if (deleteEmeraldApiRes?.message?.status === 'success') {
         toast.success('Chitti Deleted');
         dispatch(getEmeraldChallan(accessToken?.token));
@@ -134,7 +132,6 @@ const ListingTable = ({ tableListingData }: any) => {
         '2',
         name
       );
-
       if (
         updateDocStatus?.status === 200 &&
         Object.keys(updateDocStatus?.data)?.length > 0
@@ -186,8 +183,6 @@ const ListingTable = ({ tableListingData }: any) => {
         {headingData?.length > 0 &&
           headingData !== null &&
           headingData.map((heading: any, index: any) => {
-            console.log('heading name', heading);
-
             if (heading === 'docstatus') {
               return (
                 <th className="text-uppercase " key={index} scope="col">
@@ -232,12 +227,12 @@ const ListingTable = ({ tableListingData }: any) => {
                               {v !== 'docstatus'
                                 ? data[v]
                                 : data[v] === 0
-                                ? 'Draft'
-                                : data[v] === 1
-                                ? 'Submitted'
-                                : data[v] === 2
-                                ? 'Cancel'
-                                : data[v]}
+                                  ? 'Draft'
+                                  : data[v] === 1
+                                    ? 'Submitted'
+                                    : data[v] === 2
+                                      ? 'Cancel'
+                                      : data[v]}
                             </td>
                           );
                         }
@@ -317,13 +312,13 @@ const ListingTable = ({ tableListingData }: any) => {
                             <div className="col-lg-2 col-md-4 col-12">
                               {data?.date ===
                                 new Date()?.toISOString()?.split('T')[0] && (
-                                <NavLink
-                                  to={`${data.name}`}
-                                  className="button-section-text text-info "
-                                >
-                                  Amend
-                                </NavLink>
-                              )}
+                                  <NavLink
+                                    to={`${data.name}`}
+                                    className="button-section-text text-info "
+                                  >
+                                    Amend
+                                  </NavLink>
+                                )}
                             </div>
 
                             <div className="col-lg-4 col-md-4 col-12">

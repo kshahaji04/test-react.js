@@ -20,8 +20,6 @@ const ChallanItemsTable = ({
     amount: 0,
   });
 
-  console.log('initial table data', tableData);
-
   const showCategoryDropdown: any = useRef<any>(true);
   useEffect(() => {
     if (
@@ -47,10 +45,10 @@ const ChallanItemsTable = ({
     const newRow = {
       id: tableData.length + 1,
       sub_category: '',
-      gross_weight: 0,
-      less_wt: 0,
-      net_weight: 0,
-      amount: 0,
+      gross_weight: '',
+      less_wt: '',
+      net_weight: '',
+      amount: '',
     };
 
     // Add the new row to the tableData
@@ -59,20 +57,20 @@ const ChallanItemsTable = ({
     // Calculate the new total values, including the new row
     const newColumnTotals = tableData.reduce(
       (totals: any, row: any) => {
-        totals.gross_weight += row.gross_weight;
-        totals.less_wt += row.less_wt;
-        totals.net_weight += row.net_weight;
-        totals.amount += row.amount;
+        totals.gross_weight += row.gross_weight || 0;
+        totals.less_wt += row.less_wt || 0;
+        totals.net_weight += row.net_weight || 0;
+        totals.amount += row.amount || 0;
         return totals;
       },
       { gross_weight: 0, net_weight: 0, amount: 0 }
     );
 
     // Add the values of the new row to the totals
-    newColumnTotals.gross_weight += newRow.gross_weight;
-    newColumnTotals.less_wt += newRow.less_wt;
-    newColumnTotals.net_weight += newRow.net_weight;
-    newColumnTotals.amount += newRow.amount;
+    newColumnTotals.gross_weight += newRow.gross_weight || 0;
+    newColumnTotals.less_wt += newRow.less_wt || 0;
+    newColumnTotals.net_weight += newRow.net_weight || 0;
+    newColumnTotals.amount += newRow.amount || 0;
 
     // Update the total values
 
@@ -96,30 +94,15 @@ const ChallanItemsTable = ({
     }
   };
 
-  useEffect(() => {
-    // Calculate column totals whenever tableData changes
-    const newColumnTotals = tableData.reduce(
-      (totals: any, row: any) => {
-        totals.gross_weight += row.gross_weight;
-        totals.less_wt += row.less_wt;
-        totals.net_weight += row.net_weight;
-        totals.amount += row.amount;
-        return totals;
-      },
-      { gross_weight: 0, less_wt: 0, net_weight: 0, amount: 0 }
-    );
-
-    setamountValue(newColumnTotals);
-  }, [tableData]);
 
   useEffect(() => {
     // Calculate column totals whenever tableData changes
     const newColumnTotals = tableData.reduce(
       (totals: any, row: any) => {
-        totals.gross_weight += row.gross_weight;
-        totals.less_wt += row.less_wt;
-        totals.net_weight += row.net_weight;
-        totals.amount += row.amount;
+        totals.gross_weight += row.gross_weight || 0;
+        totals.less_wt += row.less_wt || 0;
+        totals.net_weight += row.net_weight || 0;
+        totals.amount += row.amount || 0;
         return totals;
       },
       { gross_weight: 0, less_wt: 0, net_weight: 0, amount: 0 }
@@ -137,7 +120,6 @@ const ChallanItemsTable = ({
   };
 
   const handleCategoryForNewSubcategory = (value: any, id: any) => {
-    console.log('handlecategory', value);
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, category: value } : row
     );
@@ -281,10 +263,8 @@ const ChallanItemsTable = ({
                       <input
                         type="number"
                         className="form-control custom-input-field-t text-end"
-                        aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-sm"
                         defaultValue={row.gross_weight}
-                        value={row.gross_weight}
+                        value={row.gross_weight || ''}
                         onChange={(e) => handleGrossWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
@@ -293,10 +273,8 @@ const ChallanItemsTable = ({
                       <input
                         type="number"
                         className="form-control custom-input-field-t text-end"
-                        aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-sm"
                         defaultValue={row.less_wt}
-                        value={row.less_wt}
+                        value={row.less_wt || ''}
                         onChange={(e) => handleLessWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
@@ -305,12 +283,8 @@ const ChallanItemsTable = ({
                       <input
                         type="number"
                         className="form-control custom-input-field-t text-end"
-                        aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-sm"
-                        // defaultValue={row.net_weight >= 0 ? row.net_weight : ''}
-                        // value={row.net_weight > 0 ? row.net_weight : ''}
                         defaultValue={row.net_weight}
-                        value={row.net_weight}
+                        value={row.net_weight || ''}
                         onChange={(e) => handleNetWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
@@ -319,10 +293,8 @@ const ChallanItemsTable = ({
                       <input
                         type="number"
                         className="form-control custom-input-field-t text-end"
-                        aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-sm"
                         defaultValue={row.amount}
-                        value={row.amount}
+                        value={row.amount || ''}
                         onKeyDown={(e) => handleKeyDown(e, row.id)}
                         onChange={(e) => handleAmountValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
@@ -359,7 +331,7 @@ const ChallanItemsTable = ({
                     className="form-control custom-input-field-t p-0 text-end"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
-                    value={amountValue.gross_weight.toFixed(3)}
+                    value={amountValue?.gross_weight?.toFixed(3)}
                     readOnly
                   />
                 </td>
@@ -369,7 +341,7 @@ const ChallanItemsTable = ({
                     className="form-control custom-input-field-t p-0 text-end"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
-                    value={amountValue.less_wt.toFixed(3)}
+                    value={amountValue?.less_wt?.toFixed(3)}
                     readOnly
                   />
                 </td>
@@ -379,7 +351,7 @@ const ChallanItemsTable = ({
                     className="form-control custom-input-field-t p-0 text-end"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
-                    value={amountValue.net_weight?.toFixed(3)}
+                    value={amountValue?.net_weight?.toFixed(3)}
                     readOnly
                   />
                 </td>
@@ -389,7 +361,7 @@ const ChallanItemsTable = ({
                     className="form-control custom-input-field-t  p-0 text-end"
                     aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-sm"
-                    value={amountValue.amount?.toFixed(2)}
+                    value={amountValue?.amount?.toFixed(2)}
                     readOnly
                   />
                 </td>

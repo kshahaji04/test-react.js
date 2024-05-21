@@ -10,7 +10,7 @@ const NarrationTable = ({
   setTotalHuidWeightOfHuidTable,
   readOnly,
 }: any) => {
-  console.log('product list', productList);
+  // console.log('product list', productList);
   const [totalAmountValue, setTotalAmountValue] = useState<any>({
     product: '',
     huid_pieces: 0,
@@ -37,8 +37,8 @@ const NarrationTable = ({
     const newRow = {
       id: narrationTableData.length + 1,
       product: '',
-      huid_pieces: 0,
-      huid_weight: 0,
+      huid_pieces: '',
+      huid_weight: '',
     };
 
     setNarrationTableData([...narrationTableData, newRow]);
@@ -46,17 +46,17 @@ const NarrationTable = ({
     const newColumnTotals = narrationTableData.reduce(
       (totals: any, row: any) => {
         totals.product += row.product;
-        totals.huid_pieces += row.huid_pieces;
-        totals.huid_weight += row.huid_weight;
+        totals.huid_pieces += row.huid_pieces || 0;
+        totals.huid_weight += row.huid_weight || 0;
         return totals;
       },
       { product: 0, huid_pieces: 0, huid_weight: 0 }
     );
 
     // Add the values of the new row to the totals
-    newColumnTotals.gross_weight += newRow.product;
-    newColumnTotals.net_weight += newRow.huid_pieces;
-    newColumnTotals.amount += newRow.huid_weight;
+    newColumnTotals.gross_weight += newRow.product || 0;
+    newColumnTotals.net_weight += newRow.huid_pieces || 0;
+    newColumnTotals.amount += newRow.huid_weight || 0;
 
     // Update the total values
 
@@ -80,8 +80,8 @@ const NarrationTable = ({
     // Calculate column totals whenever tableData changes
     const newColumnTotals = narrationTableData.reduce(
       (totals: any, row: any) => {
-        totals.huid_pieces += row.huid_pieces;
-        totals.huid_weight += row.huid_weight;
+        totals.huid_pieces += row.huid_pieces || 0;
+        totals.huid_weight += row.huid_weight || 0;
 
         return totals;
       },
