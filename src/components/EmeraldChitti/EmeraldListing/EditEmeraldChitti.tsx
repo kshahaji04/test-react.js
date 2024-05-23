@@ -76,7 +76,7 @@ const EditEmeraldChitti = () => {
       ) : (
         <>
           {Object?.keys(emeraldDetailDataFromStore?.data)?.length === 0 &&
-          emeraldDetailDataFromStore?.isLoading === 'succeeded' ? (
+            emeraldDetailDataFromStore?.isLoading === 'succeeded' ? (
             <NoRecord />
           ) : (
             <>
@@ -160,7 +160,7 @@ const EditEmeraldChitti = () => {
                   {challanDetail?.length > 0 &&
                     challanDetail !== null &&
                     challanDetail[0]?.date ===
-                      new Date()?.toISOString()?.split('T')[0] && (
+                    new Date()?.toISOString()?.split('T')[0] && (
                       <>
                         {showButton === 2 &&
                           showSaveButtonForAmendFlow === false && (

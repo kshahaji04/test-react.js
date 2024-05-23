@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import CustomDropdownForTable from '../../CustomDropdownForTable';
+import TotalAmountRowForChitti from './TotalAmountRowForChitti';
 
 const ChallanItemsTable = ({
   tableData,
@@ -94,6 +95,11 @@ const ChallanItemsTable = ({
     }
   };
 
+  const handleBlur = (event: any, id: any) => {
+    if (id === tableData[tableData.length - 1].id) {
+      handleAddRow();
+    }
+  }
 
   useEffect(() => {
     // Calculate column totals whenever tableData changes
@@ -297,6 +303,7 @@ const ChallanItemsTable = ({
                         value={row.amount || ''}
                         onKeyDown={(e) => handleKeyDown(e, row.id)}
                         onChange={(e) => handleAmountValue(e, row.id)}
+                        onBlur={(e) => handleBlur(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
                     </td>
@@ -311,62 +318,7 @@ const ChallanItemsTable = ({
                   </tr>
                 </>
               ))}
-              <tr>
-                <td></td>
-                <td className="py-1 px-2">
-                  <div className="custom-select-container">
-                    <input
-                      type="text"
-                      className="form-control custom-input-field-t text-center p-0 "
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-sm"
-                      placeholder="Total"
-                      readOnly
-                    />
-                  </div>
-                </td>
-                <td className="py-1 px-2">
-                  <input
-                    type="number"
-                    className="form-control custom-input-field-t p-0 text-end"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-sm"
-                    value={amountValue?.gross_weight?.toFixed(3)}
-                    readOnly
-                  />
-                </td>
-                <td className="py-1 px-2">
-                  <input
-                    type="number"
-                    className="form-control custom-input-field-t p-0 text-end"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-sm"
-                    value={amountValue?.less_wt?.toFixed(3)}
-                    readOnly
-                  />
-                </td>
-                <td className="py-1 px-2">
-                  <input
-                    type="number"
-                    className="form-control custom-input-field-t p-0 text-end"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-sm"
-                    value={amountValue?.net_weight?.toFixed(3)}
-                    readOnly
-                  />
-                </td>
-                <td className="py-1 px-2">
-                  <input
-                    type="number"
-                    className="form-control custom-input-field-t  p-0 text-end"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-sm"
-                    value={amountValue?.amount?.toFixed(2)}
-                    readOnly
-                  />
-                </td>
-                <td></td>
-              </tr>
+              <TotalAmountRowForChitti amountValue={amountValue} />
             </tbody>
           </table>
         </div>
