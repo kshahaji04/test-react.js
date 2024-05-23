@@ -192,6 +192,12 @@ const ChallanItemsTable = ({
     setStateForDocStatus(true);
   };
 
+  const handleBlur = (event: any, id: any) => {
+    if (id === tableData[tableData.length - 1].id) {
+      handleAddRow();
+    }
+  };
+
   return (
     <>
       <div className="container mt-1 border rounded-3 chitti-table-container">
@@ -297,6 +303,7 @@ const ChallanItemsTable = ({
                         value={row.amount || ''}
                         onKeyDown={(e) => handleKeyDown(e, row.id)}
                         onChange={(e) => handleAmountValue(e, row.id)}
+                        onBlur={(e) => handleBlur(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
                     </td>
