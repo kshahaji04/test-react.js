@@ -91,15 +91,19 @@ const ChallanItemsTable = ({
 
   const handleKeyDown = (event: any, id: any) => {
     if (event.key === 'Tab' && id === tableData[tableData.length - 1].id) {
+      event.preventDefault(); // Prevent the default tab behavior
       handleAddRow();
+      setTimeout(() => {
+        const nextInput: any = document.querySelector(
+          `.input-${tableData.length + 1}`
+        );
+        if (nextInput) {
+          nextInput.focus();
+        }
+      }, 0);
     }
   };
 
-  const handleBlur = (event: any, id: any) => {
-    if (id === tableData[tableData.length - 1].id) {
-      handleAddRow();
-    }
-  }
 
   useEffect(() => {
     // Calculate column totals whenever tableData changes
@@ -303,7 +307,6 @@ const ChallanItemsTable = ({
                         value={row.amount || ''}
                         onKeyDown={(e) => handleKeyDown(e, row.id)}
                         onChange={(e) => handleAmountValue(e, row.id)}
-                        onBlur={(e) => handleBlur(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
                     </td>
