@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import InputFieldComponent from './InputFieldComponent';
 import CustomDropdownForTable from '../../CustomDropdownForTable';
 import EmeraldChittiTableReadOnlyRow from './EmeraldChittiTableReadOnlyRow';
+import { toast } from 'react-toastify';
 
 const EmeraldChittiTableNew = ({
   tableData,
@@ -111,27 +112,18 @@ const EmeraldChittiTableNew = ({
                 (parseFloat(updatedRow.k) || 0),
             };
           }
-          // Check if the current row is the last row and all fields are filled
-          const isLastRow = index === prevData.length - 1;
-          const allFieldsExceptExceptionsFilled = Object.keys(updatedRow)
-            .filter(
-              (key) =>
-                key !== 'custom_hm_pcs' &&
-                key !== 'sub_category' &&
-                key !== 'category' &&
-                key !== 'stn_wt'
-            )
-            .every((key) => updatedRow[key] !== '');
-          console.log(
-            'condn to create new row',
-            isLastRow,
-            allFieldsExceptExceptionsFilled,
-            updatedRow
+          const isDuplicate = prevData.some((existingRow: any) => 
+            existingRow !== row &&
+            Object.keys(updatedRow).every(key => 
+              key === 'idx' || updatedRow[key] === existingRow[key])
           );
-          if (isLastRow && allFieldsExceptExceptionsFilled) {
-            handleAddRow();
+          if (isDuplicate) {
+            toast.error("Duplicate entry found. Please enter uniique values")
+            handleDeleteRow(id)
+            return row
           }
-
+          // Check if the current row is the last row and all fields are filled
+          
           setStateForDocStatus(true);
           return updatedRow;
         } else {
@@ -140,7 +132,22 @@ const EmeraldChittiTableNew = ({
       })
     );
   };
-
+  useEffect(() => {
+    const lastRow = tableData[tableData.length - 1];
+    const allFieldsFilledExceptExceptions = Object.keys(lastRow)
+      .filter(
+        key =>
+          key !== 'custom_hm_pcs' &&
+          key !== 'sub_category' &&
+          key !== 'category' &&
+          key !== 'stn_wt'
+      )
+      .every(key => lastRow[key] !== '');
+  
+    if (allFieldsFilledExceptExceptions) {
+      handleAddRow();
+    }
+  }, [tableData]);
   const handleDropdownSelect = (rowId: any, selectedValue: any) => {
     setTableData((prevData: any) =>
       prevData.map((row: any) =>
