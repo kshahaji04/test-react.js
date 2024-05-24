@@ -45,7 +45,6 @@ const EmeraldChittiTableNew = ({
     }));
   };
   useEffect(() => {
-    console.log('default data', defaultData);
     if (
       defaultData?.length > 0 &&
       defaultData !== undefined &&
@@ -169,7 +168,6 @@ const EmeraldChittiTableNew = ({
     }
   };
 
-  console.log('updated tabled dataa', tableData);
   return (
     <div>
       <div className="table-responsive">

@@ -205,7 +205,6 @@ const useEmeraldHook = () => {
   };
 
   const handleDeleteRow: any = (id: any) => {
-    console.log('id', id);
     if (tableData?.length > 1) {
       const updatedData = tableData.filter((row: any) => row.idx !== id);
       // .map((row: any, index: number) => ({ ...row, id: index + 1 }));
@@ -214,7 +213,6 @@ const useEmeraldHook = () => {
     }
   };
   const handleDateChange: any = (e: any) => {
-    console.log('clientgro', e.target.value);
     setTransactionDate(e.target.value);
     setStateForDocStatus(true);
   };
@@ -291,7 +289,6 @@ const useEmeraldHook = () => {
         ? showSubmitButtonAfterCreateChitti
         : id
     );
-    console.log('deletec', deleteChallanApiRes);
     if (deleteChallanApiRes?.message?.status === 'success') {
       navigate('/emeraldchitti');
     } else {
@@ -391,7 +388,6 @@ const useEmeraldHook = () => {
     if (updatedFilterEmeraldChitti?.length === 0) {
       errMsgList.push('Emerald Chitti Table');
     }
-    console.log('show err msg', errMsgList);
 
     if (errMsgList?.length > 0 && errMsgList !== null) {
       toast.error(`Mandatory fields ${errMsgList.join(', ')}`);

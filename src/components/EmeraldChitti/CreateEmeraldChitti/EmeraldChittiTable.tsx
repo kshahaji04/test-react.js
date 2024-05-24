@@ -149,7 +149,6 @@ const EmeraldChittiTable = ({
   };
 
   const handleProductItem = (value: any, id: any) => {
-    console.log('handlecategory', value);
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, product: value } : row
     );
