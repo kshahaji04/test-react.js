@@ -385,6 +385,7 @@ const useChittiHook = () => {
               CreateChittiApiRes?.data?.message?.data
             );
             dispatch(getChittiChallan(accessToken?.token));
+
           } else {
             toast.error('Failed to create chitti');
           }

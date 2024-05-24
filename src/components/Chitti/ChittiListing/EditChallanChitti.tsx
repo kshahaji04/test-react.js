@@ -77,6 +77,8 @@ const EditChallanChitti = () => {
     setReadOnly(false);
   };
 
+  // console.log("stateForDocStatus in btn section", stateForDocStatus)
+
   return (
     <div className="container">
       <div className="col-lg-9 col-12 mx-auto mt-2">
@@ -85,7 +87,7 @@ const EditChallanChitti = () => {
         ) : (
           <>
             {Object.keys(challanDetailDataFromStore?.data)?.length === 0 &&
-            challanDetailDataFromStore?.isLoading === 'succeeded' ? (
+              challanDetailDataFromStore?.isLoading === 'succeeded' ? (
               <NoRecord />
             ) : (
               <>
@@ -168,7 +170,7 @@ const EditChallanChitti = () => {
                     {challanDetail?.length > 0 &&
                       challanDetail !== null &&
                       challanDetail[0]?.date ===
-                        new Date()?.toISOString()?.split('T')[0] && (
+                      new Date()?.toISOString()?.split('T')[0] && (
                         <>
                           {showButton === 2 &&
                             showSaveButtonForAmendFlow === false && (
@@ -211,52 +213,52 @@ const EditChallanChitti = () => {
                 <div className="">
                   {challanDetail?.length > 0 && challanDetail !== null
                     ? challanDetail.map((data: any) => {
-                        return (
-                          <>
-                            <CreateChittiForm
-                              defaultData={data}
-                              handleDateChange={handleDateChange}
-                              selectedDropdownValue={selectedDropdownValue}
-                              clientNameList={clientNameList}
-                              setSelectedDropdownValue={
-                                setSelectedDropdownValue
-                              }
-                              handleGoldRate={handleGoldRate}
-                              handleRemarks={handleRemarks}
-                              clientGroupList={clientGroupList}
-                              setStateForDocStatus={setStateForDocStatus}
-                              setRemarks={setRemarks}
-                              setGoldRate={setGoldRate}
-                              readOnly={readOnly}
-                            />
-                            <ChallanItemsTable
-                              defaultData={data?.challan_table}
-                              tableData={tableData}
-                              setTableData={setTableData}
-                              subCategoryList={subCategoryList}
-                              setStateForDocStatus={setStateForDocStatus}
-                              setTotalGrossWeightOfChallanTable={
-                                setTotalGrossWeightOfChallanTable
-                              }
-                              setCheckGrossAndNetWeight={
-                                setCheckGrossAndNetWeight
-                              }
-                              readOnly={readOnly}
-                            />
-                            <NarrationTable
-                              defaultData={data?.narrations}
-                              narrationTableData={narrationTableData}
-                              setNarrationTableData={setNarrationTableData}
-                              productList={productList}
-                              setStateForDocStatus={setStateForDocStatus}
-                              setTotalHuidWeightOfHuidTable={
-                                setTotalHuidWeightOfHuidTable
-                              }
-                              readOnly={readOnly}
-                            />
-                          </>
-                        );
-                      })
+                      return (
+                        <>
+                          <CreateChittiForm
+                            defaultData={data}
+                            handleDateChange={handleDateChange}
+                            selectedDropdownValue={selectedDropdownValue}
+                            clientNameList={clientNameList}
+                            setSelectedDropdownValue={
+                              setSelectedDropdownValue
+                            }
+                            handleGoldRate={handleGoldRate}
+                            handleRemarks={handleRemarks}
+                            clientGroupList={clientGroupList}
+                            setStateForDocStatus={setStateForDocStatus}
+                            setRemarks={setRemarks}
+                            setGoldRate={setGoldRate}
+                            readOnly={readOnly}
+                          />
+                          <ChallanItemsTable
+                            defaultData={data?.challan_table}
+                            tableData={tableData}
+                            setTableData={setTableData}
+                            subCategoryList={subCategoryList}
+                            setStateForDocStatus={setStateForDocStatus}
+                            setTotalGrossWeightOfChallanTable={
+                              setTotalGrossWeightOfChallanTable
+                            }
+                            setCheckGrossAndNetWeight={
+                              setCheckGrossAndNetWeight
+                            }
+                            readOnly={readOnly}
+                          />
+                          <NarrationTable
+                            defaultData={data?.narrations}
+                            narrationTableData={narrationTableData}
+                            setNarrationTableData={setNarrationTableData}
+                            productList={productList}
+                            setStateForDocStatus={setStateForDocStatus}
+                            setTotalHuidWeightOfHuidTable={
+                              setTotalHuidWeightOfHuidTable
+                            }
+                            readOnly={readOnly}
+                          />
+                        </>
+                      );
+                    })
                     : ''}
                 </div>
               </>

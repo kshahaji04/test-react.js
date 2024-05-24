@@ -74,13 +74,17 @@ const useEditChallanChitti: any = () => {
       emeraldDetailDataFromStore?.data !== null
     ) {
       setChallanDetail([...emeraldDetailDataFromStore?.data]);
+
+      setTimeout(() => {
+        setStateForDocStatus(false);
+      }, 300);
     } else {
       setChallanDetail([]);
     }
   }, [emeraldDetailDataFromStore]);
 
   const handleUpdateChallanSubmit = async () => {
-    console.log('narration update', narrationTableData);
+
     const isHUIDHasData = narrationTableData.map((obj: any) => {
       if (obj.hasOwnProperty('product')) {
         return { ...obj, huid_pieces: 0, huid_weight: 0 };
@@ -169,7 +173,7 @@ const useEditChallanChitti: any = () => {
 
         setTimeout(() => {
           setStateForDocStatus(false);
-        }, 600);
+        }, 900);
       } else {
         toast.error('Failed to Update chitti');
       }
@@ -184,6 +188,8 @@ const useEditChallanChitti: any = () => {
       }
     }
   };
+
+  console.log("stateForDocStatus in detail hook", stateForDocStatus)
   return {
     challanDetail,
     setNarrationTableData,
