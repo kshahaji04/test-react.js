@@ -46,19 +46,26 @@ const useCustomChittiHook: any = () => {
     });
   };
 
-  const checkObjectHasValues: any = (challanTableData: any) => {
-    return challanTableData.filter((item: any) => {
-      const hasSubCategory = item.hasOwnProperty('sub_category');
-      const hasGrossWeight =
-        item.hasOwnProperty('gross_weight') && item.gross_weight > 0;
-      const hasNetWeight =
-        item.hasOwnProperty('net_weight') && item.net_weight > 0;
-      const hasAmount = item.hasOwnProperty('amount') && item.amount > 0;
+  const checkObjectHasValues = (challanTableData: any) => {
+    return challanTableData.map((item: any) => {
+      // Update missing or null values to 0
+      const updatedItem = {
+        ...item,
+        gross_weight: item.gross_weight || 0,
+        net_weight: item.net_weight || 0,
+        amount: item.amount || 0,
+      };
 
-      // Include a check for sub_category and at least one of gross_weight, net_weight, or amount
-      return hasSubCategory && (hasGrossWeight || hasNetWeight || hasAmount);
-    });
+      const hasSubCategory = updatedItem.hasOwnProperty('sub_category');
+      const hasGrossWeight = updatedItem.gross_weight > 0;
+      const hasNetWeight = updatedItem.net_weight > 0;
+      const hasAmount = updatedItem.amount > 0;
+
+      // Return the updated item if it meets the conditions
+      return hasSubCategory && (hasGrossWeight || hasNetWeight || hasAmount) ? updatedItem : null;
+    }).filter((item: any) => item !== null);
   };
+
 
   return {
     totalGrossWeightOfChallanTable,

@@ -83,6 +83,26 @@ const useEditChallanChitti: any = () => {
     }
   }, [emeraldDetailDataFromStore]);
 
+  const checkObjectHasValues = (challanTableData: any) => {
+    return challanTableData.map((item: any) => {
+      // Update missing or null values to 0
+      const updatedItem = {
+        ...item,
+        gross_weight: item.gross_weight || 0,
+        net_weight: item.net_weight || 0,
+        amount: item.amount || 0,
+      };
+
+      const hasSubCategory = updatedItem.hasOwnProperty('sub_category');
+      const hasGrossWeight = updatedItem.gross_weight > 0;
+      const hasNetWeight = updatedItem.net_weight > 0;
+      const hasAmount = updatedItem.amount > 0;
+
+      // Return the updated item if it meets the conditions
+      return hasSubCategory && (hasGrossWeight || hasNetWeight || hasAmount) ? updatedItem : null;
+    }).filter((item: any) => item !== null);
+  };
+
   const handleUpdateChallanSubmit = async () => {
 
     const isHUIDHasData = narrationTableData.map((obj: any) => {
@@ -106,26 +126,7 @@ const useEditChallanChitti: any = () => {
 
     const filteredHuidTable: any = checkObjectHasValuesInHuid();
 
-    const checkObjectHasValues = () => {
-      return tableData.filter((item: any) => {
-        const hasSubCategory = item.hasOwnProperty('sub_category');
-        const hasGrossWeight =
-          (item.hasOwnProperty('gross_weight') && item.gross_weight > 0) || 0;
-        const hasNetWeight =
-          item.hasOwnProperty('net_weight') && item.net_weight > 0;
-        const hasAmount =
-          (item.hasOwnProperty('amount') && item.amount > 0) || 0;
-
-        // Include a check for sub_category and exclude rows where sub_category has data but others don't
-        return (
-          (hasSubCategory && (hasGrossWeight || hasNetWeight || hasAmount)) ||
-          hasGrossWeight ||
-          hasNetWeight ||
-          hasAmount
-        );
-      });
-    };
-    const filteredChallanTable: any = checkObjectHasValues();
+    const filteredChallanTable: any = checkObjectHasValues(tableData);
     const hasSubCategoryKey =
       tableData?.length > 0 &&
       tableData.every(

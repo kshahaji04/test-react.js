@@ -141,7 +141,7 @@ const ChallanItemsTable = ({
     const row = tableData.find((row: any) => row.id === id);
 
     if (row) {
-      const lessWeight = row.less_wt;
+      const lessWeight = row.less_wt || 0;
       const netWeight = inputValue - lessWeight;
 
       const updatedData = tableData.map((row: any) =>
@@ -160,7 +160,7 @@ const ChallanItemsTable = ({
     const row = tableData.find((row: any) => row.id === id);
 
     if (row) {
-      const grossWeight = row.gross_weight;
+      const grossWeight = row.gross_weight || 0;
       const netWeight = grossWeight - inputValue;
 
       const updatedData = tableData.map((row: any) =>
@@ -179,7 +179,7 @@ const ChallanItemsTable = ({
     const row = tableData.find((row: any) => row.id === id);
 
     if (row) {
-      const grossWeight = row.gross_weight;
+      const grossWeight = row.gross_weight || 0;
       const lessWeight = grossWeight - inputValue;
       // const grossWeightUpdated = row.less_wt + inputValue
 
@@ -194,6 +194,7 @@ const ChallanItemsTable = ({
   };
 
   const handleAmountValue = (e: any, id: any) => {
+
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, amount: parseFloat(e.target.value) } : row
     );
@@ -236,10 +237,10 @@ const ChallanItemsTable = ({
                   <span className="text-danger">*</span>
                 </th>
                 <th scope="col" className="challan_gr_wt_col">
-                  Gross Weight
+                  Gross Wt
                 </th>
-                <th scope="col">Less Weight</th>
-                <th scope="col">Net Weight</th>
+                <th scope="col">Less Wt</th>
+                <th scope="col">Net Wt</th>
                 <th scope="col">Amount</th>
                 <th scope="col"></th>
               </tr>
@@ -280,7 +281,7 @@ const ChallanItemsTable = ({
                         type="number"
                         className="form-control custom-input-field-t text-end"
                         defaultValue={row.gross_weight}
-                        value={row.gross_weight || ''}
+                        value={row.gross_weight}
                         onChange={(e) => handleGrossWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
@@ -290,7 +291,7 @@ const ChallanItemsTable = ({
                         type="number"
                         className="form-control custom-input-field-t text-end"
                         defaultValue={row.less_wt}
-                        value={row.less_wt || ''}
+                        value={row.less_wt}
                         onChange={(e) => handleLessWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
@@ -300,7 +301,7 @@ const ChallanItemsTable = ({
                         type="number"
                         className="form-control custom-input-field-t text-end"
                         defaultValue={row.net_weight}
-                        value={row.net_weight || ''}
+                        value={row.net_weight}
                         onChange={(e) => handleNetWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
@@ -310,7 +311,7 @@ const ChallanItemsTable = ({
                         type="number"
                         className="form-control custom-input-field-t text-end"
                         defaultValue={row.amount}
-                        value={row.amount || ''}
+                        value={row.amount}
                         onKeyDown={(e) => handleKeyDown(e, row.id)}
                         onChange={(e) => handleAmountValue(e, row.id)}
                         onBlur={(e) => handleBlur(e, row.id)}
