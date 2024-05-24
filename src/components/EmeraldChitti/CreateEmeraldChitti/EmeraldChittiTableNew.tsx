@@ -139,8 +139,7 @@ const EmeraldChittiTableNew = ({
           key !== 'custom_hm_pcs' &&
           key !== 'sub_category' &&
           key !== 'category' &&
-          key !== 'stn_wt'&&
-          key !== 'net_weight'
+          key !== 'stn_wt'
       )
       .every(key => lastRow[key] !== '');
     if (allFieldsFilledExceptExceptions) {
@@ -362,7 +361,7 @@ const EmeraldChittiTableNew = ({
                           <InputFieldComponent
                             type="number"
                             value={row.net_weight}
-                            readOnly={true}
+                            readOnly={readOnly}
                             id={`net_weight-${row.idx}`}
                             onChange={(e: any) =>
                               handleInputChange(
