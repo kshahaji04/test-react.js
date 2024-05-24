@@ -140,14 +140,14 @@ const EmeraldChittiTableNew = ({
           key !== 'custom_hm_pcs' &&
           key !== 'sub_category' &&
           key !== 'category' &&
-          key !== 'stn_wt'
+          key !== 'stn_wt'&&
+          key !== 'net_weight'
       )
       .every(key => lastRow[key] !== '');
-
     if (allFieldsFilledExceptExceptions) {
       handleAddRow();
     }
-  }, [tableData]);
+  }, [tableData,handleAddRow]);
 
   const handleDropdownSelect = (rowId: any, selectedValue: any) => {
     setTableData((prevData: any) =>
@@ -169,7 +169,6 @@ const EmeraldChittiTableNew = ({
     }
   };
 
-  console.log('updated tabled dataa', tableData);
   return (
     <div>
       <div className="table-responsive">
