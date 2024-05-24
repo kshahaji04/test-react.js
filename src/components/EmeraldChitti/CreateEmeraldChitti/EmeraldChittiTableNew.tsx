@@ -96,7 +96,7 @@ const EmeraldChittiTableNew = ({
 
   const handleInputChange: any = (id: any, field: string, newValue: any) => {
     setTableData((prevData: any) =>
-      prevData.map((row: any, index: number) => {
+      prevData.map((row: any) => {
         if (row.idx === id) {
           let updatedRow = { ...row, [field]: newValue };
 
