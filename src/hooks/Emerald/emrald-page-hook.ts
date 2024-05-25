@@ -231,7 +231,14 @@ const useEmeraldHook = () => {
   };
 
   const handleSubmitEmeraldChittiData: any = async () => {
-    const hasEmptySubCategory = emeraldChittiTableData.some(
+
+    const updatedFilterEmeraldChitti = emeraldChittiTableData
+      .filter((obj: any) =>
+        Object.keys(obj).some((key) => key !== 'idx' && obj[key] !== '')
+      )
+      .map((obj: any, index: any) => ({ ...obj, idx: index + 1 }));
+
+    const hasEmptySubCategory = updatedFilterEmeraldChitti.some(
       (obj: any) => !obj.sub_category
     );
 

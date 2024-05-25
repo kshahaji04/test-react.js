@@ -74,6 +74,9 @@ const useEditEmeraldChittiHook: any = () => {
       emeraldChittiDataFromStore?.data !== null
     ) {
       setChallanDetail([...emeraldChittiDataFromStore?.data]);
+      setTimeout(() => {
+        setStateForDocStatus(false);
+      }, 300);
     } else {
       setChallanDetail([]);
     }
