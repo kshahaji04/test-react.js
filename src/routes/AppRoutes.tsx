@@ -34,6 +34,8 @@ import MasterPageSupplierGroupDetail from '../components/Master/MasterListing/Su
 import MasterPageSupplierDetails from '../components/Master/MasterListing/Supplier/MasterPageSupplierDetails';
 import EmeraldChittiMaster from '../components/EmeraldChitti/EmeraldChittiMaster';
 import EmeraldShilpiListing from '../components/DataUpload/EmeraldShilpi/EmeraldShilpiListing';
+import PurchaseReceipt from '../pages/purchaseReceipt';
+import SalesReturn from '../pages/salesReturn';
 
 const AppRoutes = () => {
   return (
@@ -226,6 +228,33 @@ const AppRoutes = () => {
         />
 
         <Route
+          path="/purchase-receipt"
+          element={
+            <ProtectedRoute>
+              <PurchaseReceipt />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/chitti"
+          element={
+            <ProtectedRoute>
+              <ChittiPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/sales-return"
+          element={
+            <ProtectedRoute>
+              <SalesReturn />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path="/report/subcategory"
           element={
             <ProtectedRoute>
@@ -278,14 +307,7 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/chitti"
-          element={
-            <ProtectedRoute>
-              <ChittiPage />
-            </ProtectedRoute>
-          }
-        />
+
         <Route
           path="/report"
           element={
