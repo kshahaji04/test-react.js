@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { get_category_list } from '../store/slices/Master/get-category-slice';
 import { useSelector } from 'react-redux';
+import useAutoCompleteInputHook from '../hooks/auto-complete-input-hook';
 
 const CustomDropdownForTable = ({
   drowpdownlist,
@@ -22,22 +23,29 @@ const CustomDropdownForTable = ({
 }: any) => {
   const categoryDataFromStore: any = useSelector(get_category_list);
 
-  const [showDropDown, setShowDropdown] = useState(false);
-  const [noRecords, setNoRecordsFound] = useState(false);
-  const [filterDropdownList, setFilterDropdownList] = useState([]);
   const [selectedValue, setSelectedValue] = useState(data || '');
 
-  const inputRef = useRef<any>(null);
-
-  useEffect(() => {
-    if (
-      defaultData !== undefined &&
-      defaultData !== null &&
-      Object?.keys(defaultData)?.length > 0
-    ) {
-      setSelectedDropdownValue(defaultData);
-    }
-  }, []);
+  const {
+    handleInputField,
+    // handleClientBlur,
+    handleKeyDown,
+    setSelectedIndex,
+    showDropDown,
+    handleShowDropdown,
+    filterDropdownList,
+    noRecords,
+    inputRef,
+    setShowDropdown,
+    dropdownRef,
+    // handleSelectedOption,
+    selectedIndex,
+  } = useAutoCompleteInputHook({
+    defaultData,
+    setSelectedDropdownValue,
+    setStateForDocStatus,
+    drowpdownlist,
+    readOnly,
+  });
 
   //for emerald chitti table
   useEffect(() => {
@@ -46,10 +54,11 @@ const CustomDropdownForTable = ({
     }
   }, [selectedValue, setSelectedDropdownValue, rowId, manageSelectedValue]);
 
-  const handleSelectedOption = (data: any) => {
+  const handleSelectedOption = (data: any, i: any) => {
     setSelectedDropdownValue(data);
     setSelectedValue(selectedValue);
     setShowDropdown(false);
+    setSelectedIndex(i !== undefined ? i : -1);
     if (setStateForDocStatus !== undefined) {
       setStateForDocStatus(true);
     }
@@ -60,68 +69,9 @@ const CustomDropdownForTable = ({
   const HandleSelectedCategory: any = (e: any) => {
     setSelectedCategoryForSubcategory(e.target.value);
     HandleCategoryData(e.target.value, rowId);
+    setShowDropdown(false);
   };
 
-  const handleInputField = (e: any) => {
-    console.log('updated search text', e.target.value);
-    setShowDropdown(true); // Open the dropdown when typing
-
-    const query = e.target.value;
-
-    const UpdatedFilterList: any = drowpdownlist?.filter((item: any) => {
-      return item?.toLowerCase()?.indexOf(query?.toLowerCase()) !== -1;
-    });
-
-    setFilterDropdownList(UpdatedFilterList);
-    setNoRecordsFound(true);
-    setSelectedDropdownValue(query);
-  };
-
-  const handleKeyDown = (e: any) => {
-    if (e.key === 'Tab') {
-      setShowDropdown(false); // Close the dropdown on Tab press
-    }
-    if (e.key === 'Escape') {
-      setShowDropdown(false); // Close the dropdown on Escape press
-    }
-  };
-
-  useEffect(() => {
-    // for close dropdown when click outside
-    const handleDocumentClick = (e: any) => {
-      // Check if the input element itself was clicked
-      if (
-        e?.target !== inputRef?.current &&
-        !inputRef?.current?.contains(e.target) &&
-        !document?.querySelector('.form-select-sm')?.contains(e?.target)
-      ) {
-        setShowDropdown(false);
-      }
-    };
-
-    document.addEventListener('click', handleDocumentClick);
-
-    return () => {
-      document.removeEventListener('click', handleDocumentClick);
-    };
-  }, []);
-
-  const handleShowDropdown = () => {
-    if (readOnly === false || readOnly === undefined) {
-      setShowDropdown(!showDropDown); // Toggle the dropdown
-    }
-  };
-
-  const handleOnFocus: any = (e: any) => {
-    console.log('onfocus', e.target.value);
-  };
-
-  console.log(
-    'filter list',
-    filterDropdownList,
-    categoryDataFromStore,
-    showCategoryDropdown?.current
-  );
   return (
     <>
       <input
@@ -142,33 +92,38 @@ const CustomDropdownForTable = ({
         title={title}
         readOnly={readOnly}
         ref={inputRef}
-        onFocus={handleOnFocus}
+        // onFocus={handleOnFocus}
       />
       {showDropDown && (
         <ul
-          // className="dropdown-ul-list border"
           className={`${dropdownWidth ? 'w-auto' : ''} dropdown-ul-list border`}
           aria-label="Default select example"
+          ref={dropdownRef}
         >
           {noRecords === false && filterDropdownList?.length === 0 ? (
             <>
-              {drowpdownlist.map((list: any, index: any) => (
-                <li
-                  key={index}
-                  onClick={() => handleSelectedOption(list)}
-                  className="dropdown-list"
-                >
-                  {list}
-                </li>
-              ))}
+              {drowpdownlist?.length > 0 &&
+                drowpdownlist.map((list: any, index: any) => (
+                  <li
+                    key={index}
+                    onClick={() => handleSelectedOption(list, index)}
+                    className={`dropdown-list ${
+                      index === selectedIndex ? 'selected-dropdown-index' : ''
+                    }`}
+                  >
+                    {list}
+                  </li>
+                ))}
             </>
           ) : (
             <>
               {filterDropdownList.map((list: any, index: any) => (
                 <li
                   key={index}
-                  onClick={() => handleSelectedOption(list)}
-                  className="dropdown-list"
+                  onClick={() => handleSelectedOption(list, index)}
+                  className={`dropdown-list ${
+                    index === selectedIndex ? 'selected-dropdown-index' : ''
+                  }`}
                 >
                   {list}
                 </li>

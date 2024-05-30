@@ -90,6 +90,7 @@ const ChallanItemsTable = ({
   };
 
   const handleKeyDown = (event: any, id: any) => {
+    console.log('add row', event.key, id);
     if (event.key === 'Tab' && id === tableData[tableData.length - 1].id) {
       event.preventDefault(); // Prevent the default tab behavior
       handleAddRow();
@@ -103,7 +104,6 @@ const ChallanItemsTable = ({
       }, 0);
     }
   };
-
 
   useEffect(() => {
     // Calculate column totals whenever tableData changes
@@ -194,7 +194,6 @@ const ChallanItemsTable = ({
   };
 
   const handleAmountValue = (e: any, id: any) => {
-
     const updatedData = tableData.map((row: any) =>
       row.id === id ? { ...row, amount: parseFloat(e.target.value) } : row
     );
@@ -203,7 +202,7 @@ const ChallanItemsTable = ({
   };
 
   const handleBlur = (event: any, id: any) => {
-    console.log(event)
+    console.log('add row on blur', event, id);
     if (id === tableData[tableData.length - 1].id) {
       handleAddRow();
     }

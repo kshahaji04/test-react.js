@@ -24,6 +24,7 @@ const SelectedInputDropdown = ({
     inputRef,
     handleSelectedOption,
     selectedIndex,
+    dropdownRef,
   } = useAutoCompleteInputHook({
     defaultData,
     setSelectedDropdownValue,
@@ -58,6 +59,7 @@ const SelectedInputDropdown = ({
           <ul
             className=" dropdown-ul-list border"
             aria-label="Default select example"
+            ref={dropdownRef}
           >
             {noRecords === false && filterDropdownList?.length === 0 ? (
               <>
@@ -77,17 +79,18 @@ const SelectedInputDropdown = ({
               </>
             ) : (
               <>
-                {filterDropdownList.map((list: any, index: any) => (
-                  <li
-                    key={index}
-                    onClick={() => handleSelectedOption(list, index)}
-                    className={`dropdown-list ${
-                      index === selectedIndex ? 'selected-dropdown-index' : ''
-                    }`}
-                  >
-                    {list}
-                  </li>
-                ))}
+                {filterDropdownList?.length > 0 &&
+                  filterDropdownList.map((list: any, index: any) => (
+                    <li
+                      key={index}
+                      onClick={() => handleSelectedOption(list, index)}
+                      className={`dropdown-list ${
+                        index === selectedIndex ? 'selected-dropdown-index' : ''
+                      }`}
+                    >
+                      {list}
+                    </li>
+                  ))}
               </>
             )}
             {clientGroupList?.length > 0 && (

@@ -32,7 +32,6 @@ const CreateEmeraldChittiMaster = ({
   const [showButton, setShowButton] = useState<any>();
 
   const docStatusFromStore: any = useSelector(get_specific_emerald_chitti);
-  console.log('docStatus', docStatusFromStore?.docStatus);
 
   useEffect(() => {
     setShowButton(docStatusFromStore?.docStatus);
@@ -48,7 +47,7 @@ const CreateEmeraldChittiMaster = ({
           handleSubmitChittiData={handleSubmitEmeraldChittiData}
           handleCancelChitti={handleCancelEmeraldChitti}
           handleDeleteChitti={handleDeleteEmeraldChitti}
-          />
+        />
       </div>
       <EmeraldCreateChitti
         selectedDropdownValue={selectedDropdownValue}
