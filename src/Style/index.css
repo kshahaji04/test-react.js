@@ -21,6 +21,10 @@
   border-radius: 9px !important;
 }
 
+.selected-dropdown-index {
+  background-color: #c8c9ce;
+}
+
 .listing-table td {
   padding: 0px !important;
 }
