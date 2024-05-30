@@ -14,6 +14,7 @@ const useAutoCompleteInputHook = ({
   const [filterDropdownList, setFilterDropdownList] = useState<any>([]);
   const inputRef = useRef<any>(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
+  console.log(scrollIndex);
   useEffect(() => {
     if (
       defaultData !== undefined &&
