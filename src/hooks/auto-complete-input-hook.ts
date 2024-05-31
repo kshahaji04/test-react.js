@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
 const useAutoCompleteInputHook = ({
-  defaultData,
   setSelectedDropdownValue,
   setStateForDocStatus,
   drowpdownlist,
@@ -15,16 +14,17 @@ const useAutoCompleteInputHook = ({
   const inputRef = useRef<any>(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
 
-  useEffect(() => {
-    if (
-      defaultData !== undefined &&
-      defaultData !== null &&
-      defaultData !== '' &&
-      Object?.keys(defaultData?.client_name)?.length > 0
-    ) {
-      setSelectedDropdownValue(defaultData?.client_name);
-    }
-  }, []);
+  // console.log("default data", defaultData)
+  // useEffect(() => {
+  //   if (
+  //     defaultData !== undefined &&
+  //     defaultData !== null &&
+  //     defaultData !== '' &&
+  //     Object?.keys(defaultData?.client_name)?.length > 0
+  //   ) {
+  //     setSelectedDropdownValue(defaultData?.client_name);
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (showDropDown && dropdownRef.current) {

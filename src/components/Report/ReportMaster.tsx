@@ -3,10 +3,9 @@ import '../../Style/report.css';
 
 const ReportMaster = () => {
   const reportlist: any = [
+    'Sub Category ',
     'Category Partywise',
     'Category Summary',
-    'Sub Category ',
-    // 'Emerald',
   ];
   return (
     <>

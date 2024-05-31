@@ -17,11 +17,14 @@ import {
   get_specific_emerald_chitti,
 } from '../../store/slices/Emerald/get-specific-emrald-slice';
 import LoadMoreChittiListing from './LoadMoreChittiListing';
+import DeleteAlertModal from '../Modal/DeleteAlertModal';
 
 const ListingTable = ({ tableListingData }: any) => {
 
   const dispatch = useDispatch();
   const accessToken: any = useSelector(get_access_token);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [receiptId, setReceiptId] = useState("");
 
   const emeraldChittiDataFromStore: any = useSelector(
     get_specific_emerald_chitti
@@ -98,32 +101,44 @@ const ListingTable = ({ tableListingData }: any) => {
   };
 
   const handleDeleteChitti: any = async (name: any) => {
-    if (window?.location?.pathname === '/chitti') {
-      let deleteChallanApiRes: any = await DeleteChallanChittiApi(
-        accessToken?.token,
-        name
-      );
+    setIsModalOpen(true);
+    setReceiptId(name)
+  };
 
-      if (deleteChallanApiRes?.message?.status === 'success') {
-        toast.success('Chitti Deleted');
-        dispatch(getChittiChallan(accessToken?.token));
-      } else {
-        toast.error(deleteChallanApiRes?.message?.message);
-      }
-    } else if (window?.location?.pathname === '/emeraldchitti') {
-      let deleteEmeraldApiRes: any = await DeleteEmeraldChittiApi(
-        accessToken?.token,
-        name
-      );
 
-      if (deleteEmeraldApiRes?.message?.status === 'success') {
-        toast.success('Chitti Deleted');
-        dispatch(getEmeraldChallan(accessToken?.token));
-      } else {
-        toast.error(deleteEmeraldApiRes?.message?.message);
+  const handleDeleteBtn = async () => {
+
+    if (receiptId) {
+      if (window?.location?.pathname === '/chitti') {
+        let deleteChallanApiRes: any = await DeleteChallanChittiApi(
+          accessToken?.token,
+          receiptId
+        );
+
+        if (deleteChallanApiRes?.message?.status === 'success') {
+          toast.success('Chitti Deleted');
+          dispatch(getChittiChallan(accessToken?.token));
+        } else {
+          toast.error(deleteChallanApiRes?.message?.message);
+        }
+      } else if (window?.location?.pathname === '/emeraldchitti') {
+        let deleteEmeraldApiRes: any = await DeleteEmeraldChittiApi(
+          accessToken?.token,
+          receiptId
+        );
+
+        if (deleteEmeraldApiRes?.message?.status === 'success') {
+          toast.success('Chitti Deleted');
+          dispatch(getEmeraldChallan(accessToken?.token));
+        } else {
+          toast.error(deleteEmeraldApiRes?.message?.message);
+        }
       }
+      setIsModalOpen(false);
     }
   };
+
+
 
   const handleCancelChitti: any = async (name: any) => {
     if (window?.location?.pathname === '/chitti') {
@@ -244,6 +259,7 @@ const ListingTable = ({ tableListingData }: any) => {
                         <td className=" button-section-td border-0 ">
                           <div className="row justify-content-center gx-0">
                             <div className="col-lg-2 col-md-4 col-12">
+
                               <NavLink
                                 to={`${data.name}`}
                                 className="button-section-text text-info "
@@ -252,14 +268,15 @@ const ListingTable = ({ tableListingData }: any) => {
                               </NavLink>
                             </div>
                             <div className="col-lg-4 col-md-4 col-12">
-                              <a
-                                onClick={() =>
-                                  handleSubmitChittiData(data.name)
-                                }
-                                className="button-section-text text-danger "
-                              >
-                                Submit
-                              </a>
+                              <button type="button" className="btn btn-link button-section-text p-0"
+                                disabled={data?.date !== new Date()?.toISOString()?.split('T')[0]}
+                                onClick={() => {
+                                  if (data?.date === new Date().toISOString().split('T')[0]) {
+                                    handleSubmitChittiData(data.name)
+                                  }
+                                }}
+                              >Submit
+                              </button>
                             </div>
                             <div className="col-lg-2 col-md-4 col-12">
                               <NavLink
@@ -310,24 +327,27 @@ const ListingTable = ({ tableListingData }: any) => {
                         <td className="button-section-td border-0">
                           <div className="row justify-content-center gx-0">
                             <div className="col-lg-2 col-md-4 col-12">
-                              {data?.date ===
-                                new Date()?.toISOString()?.split('T')[0] && (
-                                  <NavLink
-                                    to={`${data.name}`}
-                                    className="button-section-text text-info "
-                                  >
-                                    Amend
-                                  </NavLink>
-                                )}
+                              <button type="button" className="btn btn-link button-section-text p-0"
+                                disabled={data?.date !== new Date()?.toISOString()?.split('T')[0]}
+                                onClick={() => {
+                                  if (data?.date === new Date().toISOString().split('T')[0]) {
+                                    window.location.href = `/${data.name}`;
+                                  }
+                                }}
+                              >Amend
+                              </button>
                             </div>
 
                             <div className="col-lg-4 col-md-4 col-12">
-                              <a
-                                onClick={() => handleDeleteChitti(data.name)}
-                                className="button-section-text text-danger "
-                              >
-                                Delete
-                              </a>
+                              <button type="button" className="btn btn-link button-section-text p-0"
+                                disabled={data?.date !== new Date()?.toISOString()?.split('T')[0]}
+                                onClick={() => {
+                                  if (data?.date === new Date().toISOString().split('T')[0]) {
+                                    handleDeleteChitti(data.name)
+                                  }
+                                }}
+                              >Delete
+                              </button>
                             </div>
                             <div className="col-lg-2 col-md-4 col-12">
                               <NavLink
@@ -379,6 +399,8 @@ const ListingTable = ({ tableListingData }: any) => {
           HandleTableViewRows={HandleTableViewRows}
         />
       </div>
+
+      {isModalOpen && <DeleteAlertModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} handleDeleteBtn={handleDeleteBtn} />}
     </>
   );
 };

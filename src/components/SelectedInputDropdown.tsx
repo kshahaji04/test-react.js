@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import useAutoCompleteInputHook from '../hooks/auto-complete-input-hook';
 
 const SelectedInputDropdown = ({
@@ -33,16 +34,26 @@ const SelectedInputDropdown = ({
     readOnly,
   });
 
+  useEffect(() => {
+    if (
+      defaultData !== undefined &&
+      defaultData !== null &&
+      defaultData !== '' &&
+      Object?.keys(defaultData?.client_name)?.length > 0
+    ) {
+      setSelectedDropdownValue(defaultData?.client_name);
+    }
+  }, []);
+
   return (
     <>
       <div className="dropdown-input-container">
         <input
           type="text"
-          className={`${
-            bgColor?.current === true
-              ? 'form-control dropdown-input client-name-input-chitti'
-              : 'form-control input-fields input-field-chitti dropdown-input'
-          }`}
+          className={`${bgColor?.current === true
+            ? 'form-control dropdown-input client-name-input-chitti'
+            : 'form-control input-fields input-field-chitti dropdown-input'
+            }`}
           id="exampleInputEmail1"
           placeholder={placeholderValue}
           onChange={handleInputField}
@@ -69,9 +80,8 @@ const SelectedInputDropdown = ({
                     <li
                       key={index}
                       onClick={() => handleSelectedOption(list, index)}
-                      className={`dropdown-list ${
-                        index === selectedIndex ? 'selected-dropdown-index' : ''
-                      }`}
+                      className={`dropdown-list ${index === selectedIndex ? 'selected-dropdown-index' : ''
+                        }`}
                     >
                       {list}
                     </li>
@@ -84,9 +94,8 @@ const SelectedInputDropdown = ({
                     <li
                       key={index}
                       onClick={() => handleSelectedOption(list, index)}
-                      className={`dropdown-list ${
-                        index === selectedIndex ? 'selected-dropdown-index' : ''
-                      }`}
+                      className={`dropdown-list ${index === selectedIndex ? 'selected-dropdown-index' : ''
+                        }`}
                     >
                       {list}
                     </li>

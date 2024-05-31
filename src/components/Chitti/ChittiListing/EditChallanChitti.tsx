@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { get_specific_chitti_challan } from '../../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
 import Loader from '../../Loader';
 import NoRecord from '../../NoRecord';
+import DeleteAlertModal from '../../Modal/DeleteAlertModal';
 
 const EditChallanChitti = () => {
   const {
@@ -44,23 +45,19 @@ const EditChallanChitti = () => {
   const navigate = useNavigate();
   const [showButton, setShowButton] = useState<any>();
   const [readOnly, setReadOnly] = useState<boolean>(false);
-
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const HandleBackButton = () => {
     navigate(-1);
   };
 
-  console.log(
-    'challan detail current date',
-    new Date()?.toISOString()?.split('T')[0]
-  );
-
   const challanDetailDataFromStore: any = useSelector(
     get_specific_chitti_challan
   );
-  console.log(
-    'challanDetailDataFromStore from store',
-    challanDetailDataFromStore
-  );
+
+  const handleDeleteBtn: any = () => {
+    handleDeleteChallanChitti()
+  }
+
 
   useEffect(() => {
     setShowButton(challanDetailDataFromStore?.docStatus);
@@ -143,7 +140,11 @@ const EditChallanChitti = () => {
                     {stateForDocStatus === false && showButton === 0 && (
                       <button
                         type="submit"
-                        className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
+                        className=" btn btn-outline-primary px-2 py-0 form-submit-button"
+                        disabled={challanDetail?.length > 0 &&
+                          challanDetail !== null &&
+                          challanDetail[0]?.date !==
+                          new Date()?.toISOString()?.split('T')[0]}
                         onClick={handleSubmitChallanChitti}
                       >
                         Submit
@@ -167,23 +168,21 @@ const EditChallanChitti = () => {
                         Cancel
                       </button>
                     )}
-                    {challanDetail?.length > 0 &&
-                      challanDetail !== null &&
-                      challanDetail[0]?.date ===
-                      new Date()?.toISOString()?.split('T')[0] && (
+
+                    {showButton === 2 &&
+                      showSaveButtonForAmendFlow === false && (
                         <>
-                          {showButton === 2 &&
-                            showSaveButtonForAmendFlow === false && (
-                              <>
-                                <button
-                                  type="submit"
-                                  className=" btn btn-outline-primary px-2 me-2 py-0  form-submit-button"
-                                  onClick={handleAmendButtonChanges}
-                                >
-                                  Amend
-                                </button>
-                              </>
-                            )}
+                          <button
+                            type="submit"
+                            className=" btn btn-outline-primary px-2 me-2 py-0 form-submit-button"
+                            disabled={challanDetail?.length > 0 &&
+                              challanDetail !== null &&
+                              challanDetail[0]?.date !==
+                              new Date()?.toISOString()?.split('T')[0]}
+                            onClick={handleAmendButtonChanges}
+                          >
+                            Amend
+                          </button>
                         </>
                       )}
 
@@ -202,8 +201,12 @@ const EditChallanChitti = () => {
                     {showButton === 2 && (
                       <button
                         type="submit"
-                        className=" btn btn-outline-primary px-2 py-0  form-submit-button"
-                        onClick={handleDeleteChallanChitti}
+                        className="btn btn-outline-primary px-2 py-0  form-submit-button"
+                        disabled={challanDetail?.length > 0 &&
+                          challanDetail !== null &&
+                          challanDetail[0]?.date !==
+                          new Date()?.toISOString()?.split('T')[0]}
+                        onClick={() => setIsModalOpen(true)}
                       >
                         Delete
                       </button>
@@ -266,7 +269,9 @@ const EditChallanChitti = () => {
           </>
         )}
       </div>
+      {isModalOpen && <DeleteAlertModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} handleDeleteBtn={handleDeleteBtn} />}
     </div>
+
   );
 };
 

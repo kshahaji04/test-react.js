@@ -8,6 +8,7 @@ import EmeraldChittiTableNew from '../CreateEmeraldChitti/EmeraldChittiTableNew'
 import { get_specific_chitti_challan } from '../../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
 import Loader from '../../Loader';
 import NoRecord from '../../NoRecord';
+import DeleteAlertModal from '../../Modal/DeleteAlertModal';
 
 const EditEmeraldChitti = () => {
   const navigate = useNavigate();
@@ -51,6 +52,7 @@ const EditEmeraldChitti = () => {
 
   const [showButton, setShowButton] = useState<any>();
   const [readOnly, setReadOnly] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const docStatusFromStore: any = useSelector(get_specific_emerald_chitti);
 
@@ -68,6 +70,10 @@ const EditEmeraldChitti = () => {
     setStateForDocStatus(true);
     setReadOnly(false);
   };
+
+  const handleDeleteBtn: any = () => {
+    handleDeleteEmeraldChitti()
+  }
 
   return (
     <div className="container">
@@ -133,6 +139,10 @@ const EditEmeraldChitti = () => {
                     <button
                       type="submit"
                       className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
+                      disabled={challanDetail?.length > 0 &&
+                        challanDetail !== null &&
+                        challanDetail[0]?.date !==
+                        new Date()?.toISOString()?.split('T')[0]}
                       onClick={handleSubmitEmeraldChittiData}
                     >
                       Submit
@@ -157,25 +167,24 @@ const EditEmeraldChitti = () => {
                     </button>
                   )}
 
-                  {challanDetail?.length > 0 &&
-                    challanDetail !== null &&
-                    challanDetail[0]?.date ===
-                    new Date()?.toISOString()?.split('T')[0] && (
+
+                  {showButton === 2 &&
+                    showSaveButtonForAmendFlow === false && (
                       <>
-                        {showButton === 2 &&
-                          showSaveButtonForAmendFlow === false && (
-                            <>
-                              <button
-                                type="submit"
-                                className=" btn btn-outline-primary px-2 me-2 py-0  form-submit-button"
-                                onClick={handleAmendButtonChanges}
-                              >
-                                Amend
-                              </button>
-                            </>
-                          )}
+                        <button
+                          type="submit"
+                          className=" btn btn-outline-primary px-2 me-2 py-0  form-submit-button"
+                          disabled={challanDetail?.length > 0 &&
+                            challanDetail !== null &&
+                            challanDetail[0]?.date !==
+                            new Date()?.toISOString()?.split('T')[0]}
+                          onClick={handleAmendButtonChanges}
+                        >
+                          Amend
+                        </button>
                       </>
                     )}
+
                   {showSaveButtonForAmendFlow &&
                     stateForDocStatus &&
                     readOnly === false && (
@@ -192,7 +201,11 @@ const EditEmeraldChitti = () => {
                     <button
                       type="submit"
                       className=" btn btn-outline-primary px-2 py-0  form-submit-button"
-                      onClick={handleDeleteEmeraldChitti}
+                      disabled={challanDetail?.length > 0 &&
+                        challanDetail !== null &&
+                        challanDetail[0]?.date !==
+                        new Date()?.toISOString()?.split('T')[0]}
+                      onClick={() => setIsModalOpen(true)}
                     >
                       Delete
                     </button>
@@ -242,6 +255,7 @@ const EditEmeraldChitti = () => {
           )}
         </>
       )}
+      {isModalOpen && <DeleteAlertModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} handleDeleteBtn={handleDeleteBtn} />}
     </div>
   );
 };

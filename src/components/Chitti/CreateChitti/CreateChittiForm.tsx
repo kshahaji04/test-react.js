@@ -53,7 +53,7 @@ const CreateChittiForm = ({
                 aria-describedby="inputGroup-sizing-sm"
                 onChange={handleDateChange}
                 readOnly
-                // readOnly={readOnlyField}
+              // readOnly={readOnlyField}
               />
             </div>
           </div>
@@ -74,7 +74,6 @@ const CreateChittiForm = ({
               setStateForDocStatus={setStateForDocStatus}
               readOnly={readOnly === true ? true : false}
             />
-            {/* <CustomDropDown /> */}
           </div>
           <div className="col-lg-3 col-md-6">
             <label className="form-Form.Label fs-6 text-dark form-label-bold">
