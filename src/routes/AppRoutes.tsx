@@ -36,6 +36,7 @@ import EmeraldChittiMaster from '../components/EmeraldChitti/EmeraldChittiMaster
 import EmeraldShilpiListing from '../components/DataUpload/EmeraldShilpi/EmeraldShilpiListing';
 import PurchaseReceipt from '../pages/purchaseReceipt';
 import SalesReturn from '../pages/salesReturn';
+import DetailPagePurchaseReceipt from '../components/PurchaseReceipt/DetailPagePurchaseReceipt/DetailPagePurchaseReceipt';
 
 const AppRoutes = () => {
   return (
@@ -232,6 +233,14 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <PurchaseReceipt />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/purchase-receipt/:id"
+          element={
+            <ProtectedRoute>
+              <DetailPagePurchaseReceipt />
             </ProtectedRoute>
           }
         />

@@ -50,7 +50,7 @@ const useEmeraldHook = () => {
   const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
   const [subCategoryList, setSubCategoryList] = useState<any>([]);
   const [clientGroupList, setClientGroupList] = useState<any>([]);
-
+  const [topSectionInputData, setTopSectionInputData] = useState<any>({});
   const [currentDate, setCurrentDate] = useState<any>(new Date());
   const [transactionDate, setTransactionDate] = useState<any>(
     new Date()?.toISOString()?.split('T')[0]
@@ -212,8 +212,11 @@ const useEmeraldHook = () => {
       //   setStateForDocStatus(true);
     }
   };
-  const handleDateChange: any = (e: any) => {
-    setTransactionDate(e.target.value);
+  const handleTopSectionData: any = (value: any, fieldName: any) => {
+    setTopSectionInputData((prevState: any) => ({
+      ...prevState,
+      [fieldName]: value,
+    }));
     setStateForDocStatus(true);
   };
 
@@ -231,7 +234,6 @@ const useEmeraldHook = () => {
   };
 
   const handleSubmitEmeraldChittiData: any = async () => {
-
     const updatedFilterEmeraldChitti = emeraldChittiTableData
       .filter((obj: any) =>
         Object.keys(obj).some((key) => key !== 'idx' && obj[key] !== '')
@@ -316,7 +318,8 @@ const useEmeraldHook = () => {
   // amend create duplicate chitti
   const handleAmendButtonForDuplicateChitti: any = async () => {
     const reqParams: any = {
-      clientName: selectedDropdownValue,
+      clientName: topSectionInputData?.client_name,
+      remarks: topSectionInputData?.remarks,
       clientGroup: clientGroupName,
       date: transactionDate,
       name: id,
@@ -387,9 +390,8 @@ const useEmeraldHook = () => {
         Object.keys(obj).some((key) => key !== 'idx' && obj[key] !== '')
       )
       .map((obj: any, index: any) => ({ ...obj, idx: index + 1 }));
-
     let errMsgList: any = [];
-    if (Object?.keys(selectedDropdownValue)?.length === 0) {
+    if (Object?.keys(topSectionInputData?.client_name)?.length === 0) {
       errMsgList.push('Client Name');
     }
     if (updatedFilterEmeraldChitti?.length === 0) {
@@ -400,9 +402,10 @@ const useEmeraldHook = () => {
       toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
     } else {
       const BodyData: any = {
-        clientName: selectedDropdownValue,
+        clientName: topSectionInputData?.client_name,
         date: reversedDate,
         transactionDate: transactionDate,
+        remarks: topSectionInputData?.remarks,
         clientGroup: clientGroupName,
         emeraldChittiTableData: updatedFilterEmeraldChitti,
         token: accessToken?.token,
@@ -450,7 +453,7 @@ const useEmeraldHook = () => {
     clientGroupList,
     clientNameList,
     currentDate,
-    handleDateChange,
+    handleTopSectionData,
     tableData,
     setTableData,
     transactionDate,

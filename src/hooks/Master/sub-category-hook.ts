@@ -48,8 +48,6 @@ const useSubCategoryHook = () => {
     }
   }, [subCategoryCategoryDataFromStore]);
 
-  console.log('subCategoryCategoryData in hoook end', subCategoryCategoryData);
-
   return { subCategoryList, subCategoryCategoryData };
 };
 

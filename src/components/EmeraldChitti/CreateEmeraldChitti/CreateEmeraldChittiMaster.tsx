@@ -6,15 +6,14 @@ import HandleButtonsDisplayInChitti from '../../HandleButtonsDisplayInChitti';
 import EmeraldChittiTableNew from './EmeraldChittiTableNew';
 
 const CreateEmeraldChittiMaster = ({
-  selectedDropdownValue,
-  setSelectedDropdownValue,
+  topSectionInputData,
   handleClientGroup,
   handleCreateEmeraldChittiSubmit,
   clientGroupList,
   clientNameList,
   clientGroupName,
   currentDate,
-  handleDateChange,
+  handleTopSectionData,
   transactionDate,
   tableData,
   setTableData,
@@ -50,13 +49,12 @@ const CreateEmeraldChittiMaster = ({
         />
       </div>
       <EmeraldCreateChitti
-        selectedDropdownValue={selectedDropdownValue}
-        setSelectedDropdownValue={setSelectedDropdownValue}
+        topSectionInputData={topSectionInputData}
         handleClientGroup={handleClientGroup}
         clientGroupList={clientGroupList}
         clientNameList={clientNameList}
         currentDate={currentDate}
-        handleDateChange={handleDateChange}
+        handleTopSectionData={handleTopSectionData}
         transactionDate={transactionDate}
         clientGroupName={clientGroupName}
       />
