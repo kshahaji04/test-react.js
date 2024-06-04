@@ -6,7 +6,7 @@ export const getChittiChallan: any = createAsyncThunk(
   'challanChitti/getChallanChitti',
   async (token: any) => {
     const ChittiChallanData: any = await GetChallanList(token);
-    console.log('ChittiChallanData res', ChittiChallanData);
+
     return ChittiChallanData;
   }
 );

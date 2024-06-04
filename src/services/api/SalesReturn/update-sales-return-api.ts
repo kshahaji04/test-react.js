@@ -4,14 +4,18 @@ import { BASE_URL } from '../../config/api-config';
 const UpdateSalesReturnApi = async (request: any) => {
   let response: any;
 
-  const params = `/api/resource/Challan/${request.name}`;
+  const params = `/api/method/challan.sdk.api`;
 
   let body = {
+    version: 'v1',
+    method: 'put_sales_return',
+    entity: 'sales_return',
     abb: request.date,
+    name: request.name,
     client_name: request.clientName,
     gold_rate: request.goldRate,
     remarks: request.remarks,
-    sales_return_table: request.challanTableData,
+    sales_return_table: request.salesReturnTableData,
   };
 
   const config = {
@@ -23,7 +27,6 @@ const UpdateSalesReturnApi = async (request: any) => {
   await axios
     .put(`${BASE_URL}${params}`, body, config)
     .then((res: any) => {
-      console.log('create chitti res', res);
       response = res;
     })
     .catch((err: any) => {

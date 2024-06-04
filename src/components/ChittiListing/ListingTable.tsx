@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import useListingHook from '../../hooks/listing-hook';
 import DeleteAlertModal from '../Modal/DeleteAlertModal';
 import LoadMoreChittiListing from './LoadMoreChittiListing';
@@ -19,12 +19,14 @@ const ListingTable = ({ tableListingData }: any) => {
     setHeadingData,
   } = useListingHook();
 
+  const navigate = useNavigate();
   useEffect(() => {
     if (Object?.keys(tableListingData)?.length > 0) {
       let column: any = Object?.keys(tableListingData[0]);
       setHeadingData(column);
     }
   }, [tableListingData]);
+  // console.log('tableListingData', tableListingData, headingData);
 
   const TableHeading: any = () => {
     return (
@@ -32,17 +34,17 @@ const ListingTable = ({ tableListingData }: any) => {
         {headingData?.length > 0 &&
           headingData !== null &&
           headingData.map((heading: any, index: any) => {
-            if (heading === 'docstatus') {
-              return (
-                <th className="text-uppercase" key={index} scope="col">
-                  Status
-                </th>
-              );
-            }
             if (heading !== 'name') {
               return (
                 <th className="text-uppercase" key={index} scope="col">
                   {heading?.replace('_', ' ')}
+                </th>
+              );
+            }
+            if (heading === 'docstatus') {
+              return (
+                <th className="text-uppercase" key={index} scope="col">
+                  Status
                 </th>
               );
             }
@@ -181,7 +183,7 @@ const ListingTable = ({ tableListingData }: any) => {
                                     data?.date ===
                                     new Date().toISOString().split('T')[0]
                                   ) {
-                                    window.location.href = `/${data.name}`;
+                                    navigate(`${data.name}`);
                                   }
                                 }}
                               >

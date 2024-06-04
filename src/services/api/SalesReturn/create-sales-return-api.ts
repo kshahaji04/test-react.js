@@ -13,11 +13,11 @@ const CreateSalesReturnApi = async (request: any) => {
     method: method,
     entity: entity,
     abb: request.date,
-    karigar_name: request.clientName,
+    client_name: request.clientName,
     client_group: request.clientGroup,
     gold_rate: request.goldRate,
     remarks: request.remarks,
-    purchase_receipt_table: request.challanTableData,
+    sales_return_table: request.challanTableData,
   };
 
   const config = {

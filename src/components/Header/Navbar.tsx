@@ -3,8 +3,13 @@ import TopNavbar from './TopNavbar';
 const Navbar = () => {
   return (
     <>
-      <TopNavbar />
-      <MainNavigationTab />
+      <div className="container">
+        <div className="d-flex justify-content-center mt-3">
+          <MainNavigationTab />
+          <TopNavbar />
+        </div>
+        <hr className="hr_line" />
+      </div>
     </>
   );
 };

@@ -7,9 +7,6 @@ const TopNavbar = () => {
       <div className="bg-light">
         <nav className="container navbar navbar-light p-0">
           <div className="container-fluid my-1">
-            {/* <NavLink className="navbar-brand" to="/master">
-            <img src={logo} alt="" height="55px" width="auto" />
-          </NavLink> */}
             <div></div>
             <div className="dropdown">
               <button

@@ -6,10 +6,6 @@ import CreatePurchaseReceiptApi from '../../services/api/PurchaseReceipt/create-
 import { UpdatePurchaseReceiptDocStatusApi } from '../../services/api/PurchaseReceipt/update-docStatus-api';
 import UpdatePurchaseReceiptApi from '../../services/api/PurchaseReceipt/update-purchase-receipt-api';
 import {
-  getChittiChallan,
-  get_chitti_challan,
-} from '../../store/slices/Chitti/get-chitti-challan-list-slice';
-import {
   getClientName,
   get_client_name,
 } from '../../store/slices/Chitti/get-client-name-slice';
@@ -18,15 +14,19 @@ import {
   get_subcategory_list,
 } from '../../store/slices/Chitti/get-subcategory-slice';
 import { getDetailPurchaseReceipt } from '../../store/slices/PurchaseReceipt/get-detail-purchase-receipt-slice';
+import {
+  getSalesReturnListing,
+  get_sales_return_listing,
+} from '../../store/slices/SalesReturn/get-sales-return-listing-slice';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import useCustomChittiHook from '../Chitti/custom-chitti-page-hook';
-import useCustomPurchaseReceiptHook from './custom-purchase-receipt-hook';
-import {
-  getPurchaseReceiptListing,
-  get_purchase_receipt_listing,
-} from '../../store/slices/PurchaseReceipt/get-purchase-receipt-listing-slice';
+import useCustomPurchaseReceiptHook from './custom-sales-return-hook';
+import CreateSalesReturnApi from '../../services/api/SalesReturn/create-sales-return-api';
+import { UpdateSalesReturnDocStatusApi } from '../../services/api/SalesReturn/update-docStatus-api';
+import UpdateSalesReturnApi from '../../services/api/SalesReturn/update-sales-return-api';
+import { getDetailSalesReturn } from '../../store/slices/SalesReturn/get-detail-sales-return-slice';
 
-const usePurchaseReceiptMasterHook = () => {
+const useSalesReturnMasterHook = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -34,7 +34,7 @@ const usePurchaseReceiptMasterHook = () => {
   const accessToken: any = useSelector(get_access_token);
   const subCategoryDataFromStore: any = useSelector(get_subcategory_list);
   const clientNameDataFromStore: any = useSelector(get_client_name);
-  const purchaseReceiptData: any = useSelector(get_purchase_receipt_listing);
+  const salesReturnData: any = useSelector(get_sales_return_listing);
 
   const [subCategoryList, setSubCategoryList] = useState<any>(false);
   const [clientNameList, setClientNameList] = useState<any>([]);
@@ -59,10 +59,6 @@ const usePurchaseReceiptMasterHook = () => {
     totalHuidWeightOfHuidTable,
     checkGrossAndNetWeight,
     checkObjectHasValues,
-    // setTotalGrossWeightOfChallanTable,
-    // setTotalHuidWeightOfHuidTable,
-    // setCheckGrossAndNetWeight,
-    // checkObjectHasValuesInHuid,
   } = useCustomChittiHook();
 
   const handlePurchaseTableFieldChange: any = (
@@ -70,7 +66,7 @@ const usePurchaseReceiptMasterHook = () => {
     fieldName: any,
     id: any
   ) => {
-    console.log('field values', value, fieldName, id);
+    // console.log('field values', value, fieldName, id);
     const numericFields = [
       'gross_weight',
       'less_weight',
@@ -107,15 +103,12 @@ const usePurchaseReceiptMasterHook = () => {
   }, [purchaseReceiptTable]);
 
   useEffect(() => {
-    if (
-      purchaseReceiptData?.data?.length > 0 &&
-      purchaseReceiptData?.data !== null
-    ) {
-      setListingData([...purchaseReceiptData?.data]);
+    if (salesReturnData?.data?.length > 0 && salesReturnData?.data !== null) {
+      setListingData([...salesReturnData?.data]);
     } else {
       setListingData([]);
     }
-  }, [purchaseReceiptData]);
+  }, [salesReturnData]);
 
   useEffect(() => {
     if (
@@ -141,7 +134,7 @@ const usePurchaseReceiptMasterHook = () => {
   }, [clientNameDataFromStore]);
 
   useEffect(() => {
-    dispatch(getPurchaseReceiptListing(accessToken?.token));
+    dispatch(getSalesReturnListing(accessToken?.token));
     dispatch(getSubCategoryList(accessToken?.token));
     dispatch(getClientName(accessToken?.token));
   }, []);
@@ -202,16 +195,15 @@ const usePurchaseReceiptMasterHook = () => {
           toast.error('Gross weight cannot be less than Net weight');
         } else {
           const BodyData: any = {
+            token: accessToken?.token,
             // date: date,
             clientName: topSectionInputData?.client_name,
             // clientGroup: clientGroupName,
             goldRate: topSectionInputData?.gold_rate,
             remarks: topSectionInputData?.remarks,
             challanTableData: challanTableWithGrossWeight,
-            token: accessToken?.token,
           };
-          let purchaseReceiptApiRes: any =
-            await CreatePurchaseReceiptApi(BodyData);
+          let purchaseReceiptApiRes: any = await CreateSalesReturnApi(BodyData);
 
           // if (
           //   Object?.keys(clientGroupName)?.length > 0 &&
@@ -225,16 +217,14 @@ const usePurchaseReceiptMasterHook = () => {
           // }
 
           if (purchaseReceiptApiRes?.data?.message?.status === 'success') {
-            toast.success('Purchase Receipt Created', purchaseReceiptApiRes);
+            toast.success('Sales Return Created', purchaseReceiptApiRes);
             navigate(`${purchaseReceiptApiRes?.data?.message?.data}`);
 
-            await UpdatePurchaseReceiptDocStatusApi(
+            await UpdateSalesReturnDocStatusApi(
               accessToken?.token,
               purchaseReceiptApiRes?.data?.message?.data,
               '0'
             );
-
-            // dispatch(getChittiChallan(accessToken?.token));
           } else {
             toast.error('Failed to create chitti');
           }
@@ -264,22 +254,22 @@ const usePurchaseReceiptMasterHook = () => {
       toast.error('No values inserted');
     } else {
       const BodyData: any = {
+        token: accessToken?.token,
         name: id,
         // date: date,
-        clientName: topSectionInputData?.karigar_name,
+        clientName: topSectionInputData?.client_name,
         // clientGroup: clientGroupName,
         goldRate: topSectionInputData?.gold_rate,
         remarks: topSectionInputData?.remarks,
-        purchaseReceiptTableData: filteredChallanTable,
-        token: accessToken?.token,
+        salesReturnTableData: filteredChallanTable,
       };
-      let updateChittiApi: any = await UpdatePurchaseReceiptApi(BodyData);
+      let updateSalesReturn: any = await UpdateSalesReturnApi(BodyData);
 
       if (
-        updateChittiApi?.status === 200 &&
-        updateChittiApi?.hasOwnProperty('data')
+        updateSalesReturn?.status === 200 &&
+        updateSalesReturn?.hasOwnProperty('data')
       ) {
-        toast.success('Purchase Receipt Updated');
+        toast.success('Sales Return Updated');
         // setStateForDocStatus(false);
         await UpdatePurchaseReceiptDocStatusApi(accessToken?.token, id, '0');
         setTimeout(() => {
@@ -287,14 +277,14 @@ const usePurchaseReceiptMasterHook = () => {
             token: accessToken?.token,
             name: id,
           };
-          dispatch(getDetailPurchaseReceipt(params));
+          dispatch(getDetailSalesReturn(params));
         }, 300);
 
         setTimeout(() => {
           setStateForDocStatus(false);
         }, 900);
       } else {
-        toast.error('Failed to Update Purchase Receipt');
+        toast.error('Failed to Update Sales Return');
       }
     }
   };
@@ -320,4 +310,4 @@ const usePurchaseReceiptMasterHook = () => {
   };
 };
 
-export default usePurchaseReceiptMasterHook;
+export default useSalesReturnMasterHook;

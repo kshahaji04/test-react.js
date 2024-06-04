@@ -4,14 +4,18 @@ import { BASE_URL } from '../../config/api-config';
 const UpdatePurchaseReceiptApi = async (request: any) => {
   let response: any;
 
-  const params = `/api/resource/Challan/${request.name}`;
+  const params = `/api/method/challan.sdk.api`;
 
   let body = {
+    version: 'v1',
+    method: 'put_purchase_receipt',
+    entity: 'custom_purchase_receipt',
     abb: request.date,
-    client_name: request.clientName,
+    name: request.name,
+    karigar_name: request.clientName,
     gold_rate: request.goldRate,
     remarks: request.remarks,
-    purchase_receipt_table: request.challanTableData,
+    purchase_receipt_table: request.purchaseReceiptTableData,
   };
 
   const config = {
@@ -23,7 +27,6 @@ const UpdatePurchaseReceiptApi = async (request: any) => {
   await axios
     .put(`${BASE_URL}${params}`, body, config)
     .then((res: any) => {
-      console.log('create chitti res', res);
       response = res;
     })
     .catch((err: any) => {

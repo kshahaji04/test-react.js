@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useCustomPurchaseReceiptHook = () => {
+const useCustomSalesReturnHook = () => {
   const initialTableState: any = {
     idx: 1,
     sub_category: '',
@@ -106,4 +106,4 @@ const useCustomPurchaseReceiptHook = () => {
   };
 };
 
-export default useCustomPurchaseReceiptHook;
+export default useCustomSalesReturnHook;

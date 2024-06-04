@@ -24,7 +24,6 @@ export const UpdateDocStatusChallanApi: any = async (
   await axios
     .put(`${BASE_URL}${params}`, body, config)
     .then((res: any) => {
-      console.log('create chitti res', res);
       response = res;
     })
     .catch((err: any) => {
@@ -53,7 +52,6 @@ export const UpdateDocStatusWithSubmittedChallanApi = async (
       Authorization: token,
     },
   };
-  console.log('body', body);
 
   await axios
     .put(`${BASE_URL}${params}`, body, config)

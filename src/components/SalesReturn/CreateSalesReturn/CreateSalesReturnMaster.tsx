@@ -1,7 +1,7 @@
-import PurchaseReceiptTopSection from './PurchaseReceiptTopSection';
-import PurchaseReceiptTable from './PurchaseReceiptTable';
+import SalesReturnTable from './SalesReturnTable';
+import SalesReturnTopSection from './SalesReturnTopSection';
 
-const CreatePurchaseReceiptMaster = ({
+const CreateSalesReturnMaster = ({
   purchaseReceiptTable,
   setPurchaseReceiptTable,
   handlePurchaseTableFieldChange,
@@ -27,12 +27,12 @@ const CreatePurchaseReceiptMaster = ({
           Save
         </button>
       </div>
-      <PurchaseReceiptTopSection
+      <SalesReturnTopSection
         handlePRTopSectionData={handlePRTopSectionData}
         clientNameList={clientNameList}
         topSectionInputData={topSectionInputData}
       />
-      <PurchaseReceiptTable
+      <SalesReturnTable
         purchaseReceiptTable={purchaseReceiptTable}
         setPurchaseReceiptTable={setPurchaseReceiptTable}
         handlePurchaseTableFieldChange={handlePurchaseTableFieldChange}
@@ -47,4 +47,4 @@ const CreatePurchaseReceiptMaster = ({
   );
 };
 
-export default CreatePurchaseReceiptMaster;
+export default CreateSalesReturnMaster;

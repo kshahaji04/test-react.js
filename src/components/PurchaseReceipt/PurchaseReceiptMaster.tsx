@@ -21,7 +21,7 @@ const PurchaseReceiptMaster = () => {
     handleCreatePR,
     listingData,
   } = usePurchaseReceiptMasterHook();
-
+  // console.log('ListingTable', listingData);
   const [searchClientName, setSearchclientName] = useState<any>('');
   const [searchInputValues, setSearchInputValues] = useState({
     submitted_date: '',
@@ -60,7 +60,7 @@ const PurchaseReceiptMaster = () => {
             ? item?.chitti_no?.includes(searchInputValues.chitti_no)
             : true;
           const clientNameMatch = searchClientName
-            ? item?.client_name
+            ? item?.karigar_name
                 ?.toLowerCase()
                 ?.includes(searchClientName.toLowerCase())
             : true;

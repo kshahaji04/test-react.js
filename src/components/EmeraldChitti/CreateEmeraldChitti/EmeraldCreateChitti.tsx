@@ -29,6 +29,29 @@ const EmeraldCreateChitti = ({
       <div className="row justify-content-around">
         <div className="col-lg-3 col-6">
           <label className="form-Form.Label text-dark form-label-bold">
+            Transaction Date
+          </label>
+          <div className="d-flex justify-content-between h-100">
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value={
+                defaultData === undefined
+                  ? currentDate?.toISOString()?.split('T')[0]
+                  : defaultData?.date
+              }
+              defaultValue={defaultData?.date}
+              className="form-control custom-input-field emerald-input-field"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-sm"
+              // onChange={handleDateChange}
+              readOnly
+            />
+          </div>
+        </div>
+        <div className="col-lg-3 col-6">
+          <label className="form-Form.Label text-dark form-label-bold">
             Client Name
             <span className="text-danger">*</span>
           </label>
@@ -57,29 +80,7 @@ const EmeraldCreateChitti = ({
             />
           </div>
         </div>
-        <div className="col-lg-3 col-6">
-          <label className="form-Form.Label text-dark form-label-bold">
-            Transaction Date
-          </label>
-          <div className="d-flex justify-content-between h-100">
-            <input
-              type="date"
-              id="date"
-              name="date"
-              value={
-                defaultData === undefined
-                  ? currentDate?.toISOString()?.split('T')[0]
-                  : defaultData?.date
-              }
-              defaultValue={defaultData?.date}
-              className="form-control custom-input-field emerald-input-field"
-              aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-sm"
-              // onChange={handleDateChange}
-              readOnly
-            />
-          </div>
-        </div>
+
         <div className="col-lg-3 col-6">
           <label className="form-Form.Label text-dark form-label-bold">
             Remarks

@@ -1,7 +1,7 @@
 import AutoCompleteInput from '../../InputDropdown/AutoCompleteInput';
 import TotalAmountRowForChitti from '../../Chitti/CreateChitti/TotalAmountRowForChitti';
 
-const PurchaseReceiptTable = ({
+const SalesReturnTable = ({
   purchaseReceiptTable,
   setPurchaseReceiptTable,
   handlePurchaseTableFieldChange,
@@ -48,8 +48,8 @@ const PurchaseReceiptTable = ({
               <th scope="col" className="challan_gr_wt_col">
                 Gross Wt
               </th>
-              <th scope="col">Less Wt</th>
-              <th scope="col">Net Wt</th>
+              {/* <th scope="col">Less Wt</th>
+              <th scope="col">Net Wt</th> */}
               <th scope="col">Amount</th>
               <th scope="col"></th>
             </tr>
@@ -93,7 +93,7 @@ const PurchaseReceiptTable = ({
                         //   readOnly={readOnly === true ? true : false}
                       />
                     </td>
-                    <td className="table-data-input">
+                    {/* <td className="table-data-input">
                       <input
                         type="number"
                         className="form-control custom-input-field-t text-end"
@@ -124,7 +124,7 @@ const PurchaseReceiptTable = ({
                         }
                         //   readOnly={readOnly === true ? true : false}
                       />
-                    </td>
+                    </td> */}
                     <td className="table-data-input">
                       <input
                         type="number"
@@ -154,7 +154,10 @@ const PurchaseReceiptTable = ({
                   </tr>
                 </>
               ))}
-            <TotalAmountRowForChitti amountValue={amountValue} />
+            <TotalAmountRowForChitti
+              amountValue={amountValue}
+              hideWeights={true}
+            />
           </tbody>
         </table>
       </div>
@@ -162,4 +165,4 @@ const PurchaseReceiptTable = ({
   );
 };
 
-export default PurchaseReceiptTable;
+export default SalesReturnTable;

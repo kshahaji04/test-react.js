@@ -1,11 +1,11 @@
-import usePurchaseReceiptDetailHook from '../../../hooks/PurchaseReceiptHook/purchase-receipt-detail-hook';
-import PurchaseReceiptTopSection from '../CreatePurchaseReceipt/PurchaseReceiptTopSection';
-import PurchaseReceiptTable from '../CreatePurchaseReceipt/PurchaseReceiptTable';
-import ButtonSectionComponent from '../../ButtonSectionComponent';
-import { get_detail_purchase_receipt } from '../../../store/slices/PurchaseReceipt/get-detail-purchase-receipt-slice';
 import { useSelector } from 'react-redux';
+import useSalesReturnDetailHook from '../../../hooks/SalesReturn/sales-return-detail-hook';
+import { get_detail_purchase_receipt } from '../../../store/slices/PurchaseReceipt/get-detail-purchase-receipt-slice';
+import ButtonSectionComponent from '../../ButtonSectionComponent';
+import PurchaseReceiptTable from '../CreateSalesReturn/SalesReturnTable';
+import PurchaseReceiptTopSection from '../CreateSalesReturn/SalesReturnTopSection';
 
-const DetailPagePurchaseReceipt = () => {
+const DetailPageSalesReturn = () => {
   const {
     purchaseReceiptTable,
     setPurchaseReceiptTable,
@@ -27,7 +27,7 @@ const DetailPagePurchaseReceipt = () => {
     handleDeleteRecord,
     handlePrintRecord,
     handleAmendRecord,
-  } = usePurchaseReceiptDetailHook();
+  } = useSalesReturnDetailHook();
 
   const purchaseReceiptDetailFromStore: any = useSelector(
     get_detail_purchase_receipt
@@ -73,4 +73,4 @@ const DetailPagePurchaseReceipt = () => {
   );
 };
 
-export default DetailPagePurchaseReceipt;
+export default DetailPageSalesReturn;

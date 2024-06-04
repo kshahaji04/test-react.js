@@ -29,16 +29,23 @@ import GetEmeraldSupplierDetailsReducer from './slices/dataUpload/get-emerald-su
 import GetProjectSubCategoryMappingReducer from './slices/Master/get-project-subcategory-mapping-slice';
 import GetSupplierAndSupplierGroupReducer from './slices/Master/get-supplier-supplierGroup-slice';
 import GetSupplierGroupReducer from './slices/Master/get-supplier-group-slice';
+import GetDetailPurchaseReceiptReducer from './slices/PurchaseReceipt/get-detail-purchase-receipt-slice';
+import GetPurchaseReceiptListingReducer from './slices/PurchaseReceipt/get-purchase-receipt-listing-slice';
+import GetSalesReturnListingReducer from './slices/SalesReturn/get-sales-return-listing-slice';
+import GetDetailSalesReturnReducer from './slices/SalesReturn/get-detail-sales-return-slice';
 
 const appReducer = combineReducers({
   GetAccessTokenScreen: GetAccessTokenReducer,
   GetChittiChallanScreen: GetChittiChallanReducer,
   GetSpecificChittiChallanScreen: GetSpecificChittiChallanReducer,
+  GetDetailPurchaseReceiptScreen: GetDetailPurchaseReceiptReducer,
+  GetPurchaseReceiptListingScreen: GetPurchaseReceiptListingReducer,
   GetClientNameScreen: GetClientNameReducer,
   GetSubCategoryListScreen: GetSubCategoryListReducer,
   GetProductListScreen: GetProductListReducer,
   GetClientGroupScreen: GetClientGroupReducer,
   GetEmeraldChallanScreen: GetEmeraldChallanReducer,
+  GetSalesReturnListingScreen: GetSalesReturnListingReducer,
   GetCategoryListScreen: GetCategoryListReducer,
   GetHuidProductListScreen: GetHuidProductListReducer,
   GetProductItemScreen: GetProductItemReducer,
@@ -61,6 +68,7 @@ const appReducer = combineReducers({
   GetProjectSubCategoryMappingScreen: GetProjectSubCategoryMappingReducer,
   GetSupplierAndSupplierGroupScreen: GetSupplierAndSupplierGroupReducer,
   GetSupplierGroupScreen: GetSupplierGroupReducer,
+  GetDetailSalesReturnScreen: GetDetailSalesReturnReducer,
 });
 
 const rootReducer = (state: any, action: any) => {

@@ -1,5 +1,4 @@
-const TotalAmountRowForChitti = ({ amountValue }: any) => {
-  console.log('amounttt', amountValue);
+const TotalAmountRowForChitti = ({ amountValue, hideWeights }: any) => {
   return (
     <tr>
       <td></td>
@@ -25,26 +24,31 @@ const TotalAmountRowForChitti = ({ amountValue }: any) => {
           readOnly
         />
       </td>
-      <td className="py-1 px-2">
-        <input
-          type="number"
-          className="form-control custom-input-field-t p-0 text-end"
-          aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-sm"
-          value={Number(amountValue?.less_wt)?.toFixed(3)}
-          readOnly
-        />
-      </td>
-      <td className="py-1 px-2">
-        <input
-          type="number"
-          className="form-control custom-input-field-t p-0 text-end"
-          aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-sm"
-          value={Number(amountValue?.net_weight)?.toFixed(3)}
-          readOnly
-        />
-      </td>
+      {hideWeights && (
+        <>
+          <td className="py-1 px-2">
+            <input
+              type="number"
+              className="form-control custom-input-field-t p-0 text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-sm"
+              value={Number(amountValue?.less_wt)?.toFixed(3)}
+              readOnly
+            />
+          </td>
+          <td className="py-1 px-2">
+            <input
+              type="number"
+              className="form-control custom-input-field-t p-0 text-end"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-sm"
+              value={Number(amountValue?.net_weight)?.toFixed(3)}
+              readOnly
+            />
+          </td>
+        </>
+      )}
+
       <td className="py-1 px-2">
         <input
           type="number"

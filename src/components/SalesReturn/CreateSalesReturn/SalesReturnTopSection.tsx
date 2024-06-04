@@ -1,6 +1,6 @@
 import AutoCompleteInput from '../../InputDropdown/AutoCompleteInput';
 
-const PurchaseReceiptTopSection = ({
+const SalesReturnTopSection = ({
   handlePRTopSectionData,
   clientNameList,
   topSectionInputData,
@@ -39,7 +39,7 @@ const PurchaseReceiptTopSection = ({
         </div>
         <div className="col-lg-3 col-md-6">
           <label className="form-Form.Label fs-6 text-dark form-label-bold">
-            Karigar Name <span className="text-danger">*</span>
+            Client Name <span className="text-danger">*</span>
           </label>
           <AutoCompleteInput
             data={clientData}
@@ -89,4 +89,4 @@ const PurchaseReceiptTopSection = ({
   );
 };
 
-export default PurchaseReceiptTopSection;
+export default SalesReturnTopSection;

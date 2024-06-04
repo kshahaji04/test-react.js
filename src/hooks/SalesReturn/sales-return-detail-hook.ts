@@ -7,20 +7,25 @@ import {
   getDetailPurchaseReceipt,
   get_detail_purchase_receipt,
 } from '../../store/slices/PurchaseReceipt/get-detail-purchase-receipt-slice';
-import usePurchaseReceiptMasterHook from './purchase-receipt-master-hook';
+import usePurchaseReceiptMasterHook from './sales-return-master-hook';
 import DeletePurchaseReceiptApi from '../../services/api/PurchaseReceipt/delete-purchase-receipt-api';
 import { toast } from 'react-toastify';
 import { UpdatePurchaseReceiptDocStatusApi } from '../../services/api/PurchaseReceipt/update-docStatus-api';
 import { AmendPurchaseReceiptApi } from '../../services/api/PurchaseReceipt/amend-purchase-receipt-api';
+import {
+  getDetailSalesReturn,
+  get_detail_sales_return,
+} from '../../store/slices/SalesReturn/get-detail-sales-return-slice';
+import { AmendSalesReturnApi } from '../../services/api/SalesReturn/amend-sales-return-api';
+import { UpdateSalesReturnDocStatusApi } from '../../services/api/SalesReturn/update-docStatus-api';
+import DeleteSalesReturnApi from '../../services/api/SalesReturn/delete-sales-return-api';
 
-const usePurchaseReceiptDetailHook: any = () => {
+const useSalesReturnDetailHook: any = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
   const accessToken: any = useSelector(get_access_token);
-  const purchaseReceiptDetailFromStore: any = useSelector(
-    get_detail_purchase_receipt
-  );
+  const salesReturnDetailFromStore: any = useSelector(get_detail_sales_return);
 
   const [readOnlyFields, setReadOnlyFields] = useState<boolean>(false);
 
@@ -49,20 +54,20 @@ const usePurchaseReceiptDetailHook: any = () => {
       token: accessToken?.token,
       name: id,
     };
-    dispatch(getDetailPurchaseReceipt(params));
+    dispatch(getDetailSalesReturn(params));
   }, []);
 
   useEffect(() => {
     if (
-      purchaseReceiptDetailFromStore?.data?.length > 0 &&
-      purchaseReceiptDetailFromStore?.data !== null
+      salesReturnDetailFromStore?.data?.length > 0 &&
+      salesReturnDetailFromStore?.data !== null
     ) {
-      if (purchaseReceiptDetailFromStore?.data?.length > 0) {
+      if (salesReturnDetailFromStore?.data?.length > 0) {
         setPurchaseReceiptTable([
-          ...purchaseReceiptDetailFromStore?.data[0]?.purchase_receipt_table,
+          ...salesReturnDetailFromStore?.data[0]?.sales_return_table,
         ]);
       }
-      setTopSectionInputData(purchaseReceiptDetailFromStore?.data[0]);
+      setTopSectionInputData(salesReturnDetailFromStore?.data[0]);
       // setTimeout(() => {
       //   setStateForDocStatus(false);
       // }, 300);
@@ -70,20 +75,20 @@ const usePurchaseReceiptDetailHook: any = () => {
       setPurchaseReceiptTable([]);
       setTopSectionInputData([]);
     }
-  }, [purchaseReceiptDetailFromStore]);
+  }, [salesReturnDetailFromStore]);
 
   const handleAmendRecord: any = async () => {
     const reqParams: any = {
       amended_from: id,
       name: id,
       date: topSectionInputData?.date,
-      karigar_name: topSectionInputData?.karigar_name,
+      client_name: topSectionInputData?.client_name,
       // client_group: topSectionInputData?.karigar_name,
       gold_rate: topSectionInputData?.karigar_name,
       remarks: topSectionInputData?.remarks,
-      purchase_receipt_table: purchaseReceiptTable,
+      sales_return_table: purchaseReceiptTable,
     };
-    let amendApi: any = await AmendPurchaseReceiptApi(
+    let amendApi: any = await AmendSalesReturnApi(
       accessToken?.token,
       reqParams
     );
@@ -92,13 +97,13 @@ const usePurchaseReceiptDetailHook: any = () => {
       amendApi?.data?.hasOwnProperty('data') &&
       Object?.keys(amendApi?.data?.data)?.length > 0
     ) {
-      navigate(`/purchase-receipt/${amendApi?.data?.data?.name}`);
+      navigate(`/sales-return/${amendApi?.data?.data?.name}`);
 
       const params: any = {
         token: accessToken?.token,
         name: amendApi?.data?.data?.name,
       };
-      dispatch(getDetailPurchaseReceipt(params));
+      dispatch(getDetailSalesReturn(params));
       setTimeout(() => {
         setStateForDocStatus(false);
       }, 300);
@@ -106,7 +111,7 @@ const usePurchaseReceiptDetailHook: any = () => {
   };
 
   const handleUpdateDocstatusBtn: any = async (value: any) => {
-    let updateDocStatus: any = await UpdatePurchaseReceiptDocStatusApi(
+    let updateDocStatus: any = await UpdateSalesReturnDocStatusApi(
       accessToken?.token,
       id,
       value
@@ -119,17 +124,17 @@ const usePurchaseReceiptDetailHook: any = () => {
         token: accessToken?.token,
         name: id,
       };
-      dispatch(getDetailPurchaseReceipt(params));
+      dispatch(getDetailSalesReturn(params));
     }
   };
   const handleDeleteRecord: any = async () => {
-    let deleteChallanApiRes: any = await DeletePurchaseReceiptApi(
+    let deleteChallanApiRes: any = await DeleteSalesReturnApi(
       accessToken?.token,
       id
     );
 
     if (deleteChallanApiRes?.message?.status === 'success') {
-      navigate('/purchase-receipt');
+      navigate('/sales-return');
     } else {
       toast.error(deleteChallanApiRes?.message?.message);
     }
@@ -164,4 +169,4 @@ const usePurchaseReceiptDetailHook: any = () => {
   };
 };
 
-export default usePurchaseReceiptDetailHook;
+export default useSalesReturnDetailHook;

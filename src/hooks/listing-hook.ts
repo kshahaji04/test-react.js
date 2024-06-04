@@ -15,6 +15,9 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { get_access_token } from '../store/slices/auth/token-login-slice';
 import { useEffect, useState } from 'react';
+import { UpdatePurchaseReceiptDocStatusApi } from '../services/api/PurchaseReceipt/update-docStatus-api';
+import DeletePurchaseReceiptApi from '../services/api/PurchaseReceipt/delete-purchase-receipt-api';
+import { getPurchaseReceiptListing } from '../store/slices/PurchaseReceipt/get-purchase-receipt-listing-slice';
 
 const useListingHook: any = () => {
   const dispatch = useDispatch();
@@ -44,7 +47,7 @@ const useListingHook: any = () => {
   }, [pathName]);
 
   const handleSubmitChittiData: any = async (name: any) => {
-    if (window?.location?.pathname === '/chitti') {
+    if (pathName === '/chitti') {
       let updateDocStatus: any = await UpdateDocStatusChallanApi(
         accessToken?.token,
         '1',
@@ -57,7 +60,7 @@ const useListingHook: any = () => {
       ) {
         dispatch(getChittiChallan(accessToken?.token));
       }
-    } else if (window?.location?.pathname === '/emeraldchitti') {
+    } else if (pathName === '/emeraldchitti') {
       const params: any = {
         token: accessToken?.token,
         name: name,
@@ -86,6 +89,17 @@ const useListingHook: any = () => {
           }
         }
       }
+    } else if (pathName === '/purchase-receipt') {
+      let updateDocStatus: any = await UpdatePurchaseReceiptDocStatusApi(
+        accessToken?.token,
+        name,
+        '1'
+      );
+
+      if (Object.keys(updateDocStatus?.data)?.length > 0) {
+        dispatch(getPurchaseReceiptListing(accessToken?.token));
+      }
+    } else if (pathName === '/sales-return') {
     }
   };
 
@@ -96,7 +110,7 @@ const useListingHook: any = () => {
 
   const handleDeleteBtn = async () => {
     if (receiptId) {
-      if (window?.location?.pathname === '/chitti') {
+      if (pathName === '/chitti') {
         let deleteChallanApiRes: any = await DeleteChallanChittiApi(
           accessToken?.token,
           receiptId
@@ -108,7 +122,7 @@ const useListingHook: any = () => {
         } else {
           toast.error(deleteChallanApiRes?.message?.message);
         }
-      } else if (window?.location?.pathname === '/emeraldchitti') {
+      } else if (pathName === '/emeraldchitti') {
         let deleteEmeraldApiRes: any = await DeleteEmeraldChittiApi(
           accessToken?.token,
           receiptId
@@ -120,13 +134,26 @@ const useListingHook: any = () => {
         } else {
           toast.error(deleteEmeraldApiRes?.message?.message);
         }
+      } else if (pathName === '/purchase-receipt') {
+        let deleteChallanApiRes: any = await DeletePurchaseReceiptApi(
+          accessToken?.token,
+          receiptId
+        );
+
+        if (deleteChallanApiRes?.message?.status === 'success') {
+          toast.success('Purchase Receipt Deleted');
+          dispatch(getPurchaseReceiptListing(accessToken?.token));
+        } else {
+          toast.error(deleteChallanApiRes?.message?.message);
+        }
+      } else if (pathName === '/sales-return') {
       }
       setIsModalOpen(false);
     }
   };
 
   const handleCancelChitti: any = async (name: any) => {
-    if (window?.location?.pathname === '/chitti') {
+    if (pathName === '/chitti') {
       let updateDocStatus: any = await UpdateDocStatusChallanApi(
         accessToken?.token,
         '2',
@@ -138,7 +165,7 @@ const useListingHook: any = () => {
       ) {
         dispatch(getChittiChallan(accessToken?.token));
       }
-    } else if (window?.location?.pathname === '/emeraldchitti') {
+    } else if (pathName === '/emeraldchitti') {
       let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
         accessToken?.token,
         '2',
@@ -150,6 +177,17 @@ const useListingHook: any = () => {
       ) {
         dispatch(getEmeraldChallan(accessToken?.token));
       }
+    } else if (pathName === '/purchase-receipt') {
+      let updateDocStatus: any = await UpdatePurchaseReceiptDocStatusApi(
+        accessToken?.token,
+        name,
+        '2'
+      );
+
+      if (Object.keys(updateDocStatus?.data)?.length > 0) {
+        dispatch(getPurchaseReceiptListing(accessToken?.token));
+      }
+    } else if (pathName === '/sales-return') {
     }
   };
 
