@@ -40,6 +40,7 @@ const EditEmeraldChitti = () => {
     handleKeyDown,
     handleOnFocus,
     handlePrintButton,
+    topSectionInputData,
   }: any = useEditEmeraldChittiHook();
 
   const emeraldDetailDataFromStore: any = useSelector(
@@ -236,6 +237,7 @@ const EditEmeraldChitti = () => {
                             transactionDate={transactionDate}
                             setStateForDocStatus={setStateForDocStatus}
                             readOnly={readOnly}
+                            topSectionInputData={topSectionInputData}
                           />
 
                           <EmeraldChittiTableNew

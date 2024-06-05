@@ -12,7 +12,6 @@ const MasterPageSubCategoryDetail = () => {
   const { id } = useParams();
   const {}: any = useGetSpecificCategory();
   const categoryName: any = useSelector(get_specific_category);
-  console.log('categoryName', categoryName);
 
   return (
     <div className="container">

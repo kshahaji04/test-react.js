@@ -470,6 +470,7 @@ const useEmeraldHook = () => {
     setShowSaveButtonForAmendFlow,
     handleDeleteRow,
     handleAddRow,
+    topSectionInputData,
   };
 };
 

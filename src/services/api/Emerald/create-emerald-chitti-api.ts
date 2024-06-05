@@ -2,8 +2,6 @@ import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
 
 const CreateEmeraldChittiApi = async (request: any) => {
-  console.log('create chitti req', request);
-
   let response: any;
   const version = 'v1';
   const method = 'create_emerald_subcategory_new';
@@ -17,6 +15,7 @@ const CreateEmeraldChittiApi = async (request: any) => {
     entity: entity,
     client_name: request.clientName,
     client_group: request.clientGroup,
+    remarks: request.remarks,
     abb: request.date,
     date: request.transactionDate,
     emerald_chitti_table: request.emeraldChittiTableData,
@@ -28,12 +27,10 @@ const CreateEmeraldChittiApi = async (request: any) => {
       Authorization: request.token,
     },
   };
-  console.log('body', body);
 
   await axios
     .post(`${BASE_URL}${params}`, body, config)
     .then((res: any) => {
-      console.log('create chitti res', res);
       response = res;
     })
     .catch((err: any) => {

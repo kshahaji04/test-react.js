@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import useEmeraldHook from './emrald-page-hook';
+import useEmeraldChittiHook from './emrald-page-hook';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -53,7 +53,8 @@ const useEditEmeraldChittiHook: any = () => {
     handleAddRow,
     handleKeyDown,
     handleOnFocus,
-  }: any = useEmeraldHook();
+    topSectionInputData,
+  }: any = useEmeraldChittiHook();
 
   const {
     findDuplicateValuesInEmeraldChittiTable,
@@ -117,7 +118,6 @@ const useEditEmeraldChittiHook: any = () => {
         const rowIndicesMsg = Object.keys(uniqueRowsWithDuplicates)
           .map((row) => `row ${row}`)
           .join(', ');
-        console.log('uniqueRowsWithDuplicates', uniqueRowsWithDuplicates);
 
         toast.error(`Duplicate values found in column "A" in ${rowIndicesMsg}`);
         return;
@@ -132,9 +132,10 @@ const useEditEmeraldChittiHook: any = () => {
 
     const BodyData: any = {
       name: id,
-      clientName: selectedDropdownValue,
+      clientName: topSectionInputData?.client_name,
       date: reversedDate,
       transactionDate: transactionDate,
+      remarks: topSectionInputData?.remarks,
       // clientGroup: clientGroupName,
       challanTableData: updatedFilterEmeraldChitti,
       token: accessToken?.token,
@@ -202,6 +203,7 @@ const useEditEmeraldChittiHook: any = () => {
     handleKeyDown,
     handleOnFocus,
     handlePrintButton,
+    topSectionInputData,
   };
 };
 

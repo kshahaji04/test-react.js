@@ -17,7 +17,6 @@ const AddClient = ({ clientGroupList }: any) => {
   const accessToken: any = useSelector(get_access_token);
 
   const handleSubmit: any = async () => {
-    console.log('submit va', title, selectedDropdownValue);
     if (inputValue.trim() === '') {
       setError('Input field cannot be empty');
     } else {
@@ -27,7 +26,6 @@ const AddClient = ({ clientGroupList }: any) => {
           title,
           selectedDropdownValue
         );
-        console.log('apires', apiRes);
 
         setTitle('');
         if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {

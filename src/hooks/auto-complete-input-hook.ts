@@ -14,7 +14,6 @@ const useAutoCompleteInputHook = ({
   const inputRef = useRef<any>(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
 
-  // console.log("default data", defaultData)
   // useEffect(() => {
   //   if (
   //     defaultData !== undefined &&

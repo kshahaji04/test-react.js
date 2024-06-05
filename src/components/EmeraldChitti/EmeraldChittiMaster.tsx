@@ -1,7 +1,7 @@
 import { Tab } from 'react-bootstrap';
 import Tabs from 'react-bootstrap/Tabs';
 import CreateEmeraldChittiMaster from './CreateEmeraldChitti/CreateEmeraldChittiMaster';
-import useEmeraldHook from '../../hooks/Emerald/emrald-page-hook';
+import useEmeraldChittiHook from '../../hooks/Emerald/emrald-page-hook';
 import useSubCategoryHook from '../../hooks/Master/sub-category-hook';
 import SearchListingTable from '../Chitti/ChittiListing/SearchListingTable';
 import { useState } from 'react';
@@ -33,7 +33,8 @@ const EmeraldChittiMaster = () => {
     setClientGroupName,
     setStateForDocStatus,
     handleKeyDown,
-  }: any = useEmeraldHook();
+    topSectionInputData,
+  }: any = useEmeraldChittiHook();
 
   const { subCategoryList }: any = useSubCategoryHook();
 
@@ -173,6 +174,7 @@ const EmeraldChittiMaster = () => {
                 setClientGroupName={setClientGroupName}
                 setStateForDocStatus={setStateForDocStatus}
                 handleKeyDown={handleKeyDown}
+                topSectionInputData={topSectionInputData}
               />
             </Tab>
           </Tabs>

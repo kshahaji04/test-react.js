@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import SelectedInputDropdown from '../../SelectedInputDropdown';
 import AutoCompleteInput from '../../InputDropdown/AutoCompleteInput';
 
 const EmeraldCreateChitti = ({
@@ -8,7 +7,6 @@ const EmeraldCreateChitti = ({
   clientGroupList,
   clientNameList,
   currentDate,
-  handleDateChange,
   setStateForDocStatus,
   readOnly,
   handleTopSectionData,
@@ -20,12 +18,8 @@ const EmeraldCreateChitti = ({
     link_data: clientNameList,
   };
 
-  const bgColor = useRef(true);
   return (
-    <form
-      //  onSubmit={handleSubmit}
-      className=""
-    >
+    <form className="">
       <div className="row justify-content-around">
         <div className="col-lg-3 col-6">
           <label className="form-Form.Label text-dark form-label-bold">
@@ -56,25 +50,13 @@ const EmeraldCreateChitti = ({
             <span className="text-danger">*</span>
           </label>
           <div className="h-25">
-            {/* <SelectedInputDropdown
-              drowpdownlist={clientNameList}
-              bgColor={bgColor}
-              placeholderValue="Client Name"
-              selectedDropdownValue={selectedDropdownValue}
-              setSelectedDropdownValue={setSelectedDropdownValue}
-              clientGroupList={clientGroupList}
-              handleClientGroup={handleClientGroup}
-              defaultData={defaultData}
-              setStateForDocStatus={setStateForDocStatus}
-              readOnly={readOnly === true ? true : false}
-            /> */}
             <AutoCompleteInput
               data={clientData}
               handleSearchInput={(value: any, fieldName: any) =>
                 handleTopSectionData(value, fieldName)
               }
-              defaultValue={defaultData?.karigar_name}
-              value={topSectionInputData?.karigar_name}
+              defaultValue={defaultData?.client_name}
+              value={topSectionInputData?.client_name}
               readOnlyFields={readOnly}
               setStateForDocStatus={setStateForDocStatus}
             />
@@ -92,8 +74,8 @@ const EmeraldCreateChitti = ({
               name="remarks"
               value={topSectionInputData?.remarks}
               defaultValue={defaultData?.remarks}
-              className="form-control custom-input-field emerald-input-field"
               onChange={(e) => handleTopSectionData(e.target.value, 'remarks')}
+              className="form-control custom-input-field emerald-input-field"
               readOnly={readOnly}
             />
           </div>

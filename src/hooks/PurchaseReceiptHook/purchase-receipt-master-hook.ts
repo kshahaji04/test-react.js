@@ -70,7 +70,6 @@ const usePurchaseReceiptMasterHook = () => {
     fieldName: any,
     id: any
   ) => {
-    console.log('field values', value, fieldName, id);
     const numericFields = [
       'gross_weight',
       'less_weight',
@@ -129,7 +128,6 @@ const usePurchaseReceiptMasterHook = () => {
   }, [subCategoryDataFromStore]);
 
   useEffect(() => {
-    // console.log('clientNameDataFromStore', clientNameDataFromStore);
     if (
       clientNameDataFromStore?.data?.length > 0 &&
       clientNameDataFromStore?.data !== null

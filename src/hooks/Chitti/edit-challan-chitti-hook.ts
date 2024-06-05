@@ -84,27 +84,30 @@ const useEditChallanChitti: any = () => {
   }, [emeraldDetailDataFromStore]);
 
   const checkObjectHasValues = (challanTableData: any) => {
-    return challanTableData.map((item: any) => {
-      // Update missing or null values to 0
-      const updatedItem = {
-        ...item,
-        gross_weight: item.gross_weight || 0,
-        net_weight: item.net_weight || 0,
-        amount: item.amount || 0,
-      };
+    return challanTableData
+      .map((item: any) => {
+        // Update missing or null values to 0
+        const updatedItem = {
+          ...item,
+          gross_weight: item.gross_weight || 0,
+          net_weight: item.net_weight || 0,
+          amount: item.amount || 0,
+        };
 
-      const hasSubCategory = updatedItem.hasOwnProperty('sub_category');
-      const hasGrossWeight = updatedItem.gross_weight > 0;
-      const hasNetWeight = updatedItem.net_weight > 0;
-      const hasAmount = updatedItem.amount > 0;
+        const hasSubCategory = updatedItem.hasOwnProperty('sub_category');
+        const hasGrossWeight = updatedItem.gross_weight > 0;
+        const hasNetWeight = updatedItem.net_weight > 0;
+        const hasAmount = updatedItem.amount > 0;
 
-      // Return the updated item if it meets the conditions
-      return hasSubCategory && (hasGrossWeight || hasNetWeight || hasAmount) ? updatedItem : null;
-    }).filter((item: any) => item !== null);
+        // Return the updated item if it meets the conditions
+        return hasSubCategory && (hasGrossWeight || hasNetWeight || hasAmount)
+          ? updatedItem
+          : null;
+      })
+      .filter((item: any) => item !== null);
   };
 
   const handleUpdateChallanSubmit = async () => {
-
     const isHUIDHasData = narrationTableData.map((obj: any) => {
       if (obj.hasOwnProperty('product')) {
         return { ...obj, huid_pieces: 0, huid_weight: 0 };
@@ -190,7 +193,6 @@ const useEditChallanChitti: any = () => {
     }
   };
 
-  console.log("stateForDocStatus in detail hook", stateForDocStatus)
   return {
     challanDetail,
     setNarrationTableData,

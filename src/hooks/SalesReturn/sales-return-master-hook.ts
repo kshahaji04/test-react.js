@@ -62,7 +62,6 @@ const useSalesReturnMasterHook = () => {
     fieldName: any,
     id: any
   ) => {
-    // console.log('field values', value, fieldName, id);
     const numericFields = [
       'gross_weight',
       'less_weight',
