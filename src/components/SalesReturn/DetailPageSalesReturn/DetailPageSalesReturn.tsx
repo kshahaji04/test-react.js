@@ -35,39 +35,41 @@ const DetailPageSalesReturn = () => {
   return (
     <>
       <div className="container">
-        <ButtonSectionComponent
-          stateForDocStatus={stateForDocStatus}
-          setStateForDocStatus={setStateForDocStatus}
-          docStatus={salesReturnDetailFromStore?.docStatus}
-          readOnly={readOnlyFields}
-          setReadOnlyFields={setReadOnlyFields}
-          handleUpdateRecordBtn={handleUpdateRecord}
-          handleUpdateDocstatusBtn={handleUpdateDocstatusBtn}
-          handleDeleteBtn={handleDeleteRecord}
-          handleAmendBtn={handleAmendRecord}
-          handlePrintBtn={handlePrintRecord}
-          details={salesReturnDetailFromStore?.data}
-        />
+        <div className='col-lg-9 col-12 mx-auto mt-2"'>
+          <ButtonSectionComponent
+            stateForDocStatus={stateForDocStatus}
+            setStateForDocStatus={setStateForDocStatus}
+            docStatus={salesReturnDetailFromStore?.docStatus}
+            readOnly={readOnlyFields}
+            setReadOnlyFields={setReadOnlyFields}
+            handleUpdateRecordBtn={handleUpdateRecord}
+            handleUpdateDocstatusBtn={handleUpdateDocstatusBtn}
+            handleDeleteBtn={handleDeleteRecord}
+            handleAmendBtn={handleAmendRecord}
+            handlePrintBtn={handlePrintRecord}
+            details={salesReturnDetailFromStore?.data}
+          />
 
-        <PurchaseReceiptTopSection
-          handleSRTopSectionData={handleSRTopSectionData}
-          clientNameList={clientNameList}
-          topSectionInputData={topSectionInputData}
-          readOnlyFields={readOnlyFields}
-        />
+          <PurchaseReceiptTopSection
+            handleSRTopSectionData={handleSRTopSectionData}
+            clientNameList={clientNameList}
+            topSectionInputData={topSectionInputData}
+            readOnlyFields={readOnlyFields}
+          />
 
-        <SalesReturnTable
-          salesReturnTable={salesReturnTable}
-          setSalesReturnTable={setSalesReturnTable}
-          handlePurchaseTableFieldChange={handlePurchaseTableFieldChange}
-          handleDeleteRow={handleDeleteRow}
-          stateForDocStatus={stateForDocStatus}
-          subCategoryList={subCategoryList}
-          handleAddRow={handleAddRow}
-          amountValue={amountValue}
-          handleKeyDown={handleKeyDown}
-          readOnlyFields={readOnlyFields}
-        />
+          <SalesReturnTable
+            salesReturnTable={salesReturnTable}
+            setSalesReturnTable={setSalesReturnTable}
+            handlePurchaseTableFieldChange={handlePurchaseTableFieldChange}
+            handleDeleteRow={handleDeleteRow}
+            stateForDocStatus={stateForDocStatus}
+            subCategoryList={subCategoryList}
+            handleAddRow={handleAddRow}
+            amountValue={amountValue}
+            handleKeyDown={handleKeyDown}
+            readOnlyFields={readOnlyFields}
+          />
+        </div>
       </div>
     </>
   );

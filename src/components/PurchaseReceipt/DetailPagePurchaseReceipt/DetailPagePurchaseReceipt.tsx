@@ -36,39 +36,41 @@ const DetailPagePurchaseReceipt = () => {
   return (
     <>
       <div className="container">
-        <ButtonSectionComponent
-          stateForDocStatus={stateForDocStatus}
-          setStateForDocStatus={setStateForDocStatus}
-          docStatus={purchaseReceiptDetailFromStore?.docStatus}
-          readOnly={readOnlyFields}
-          setReadOnlyFields={setReadOnlyFields}
-          handleUpdateRecordBtn={handleUpdateRecord}
-          handleUpdateDocstatusBtn={handleUpdateDocstatusBtn}
-          handleDeleteBtn={handleDeleteRecord}
-          handleAmendBtn={handleAmendRecord}
-          handlePrintBtn={handlePrintRecord}
-          details={purchaseReceiptDetailFromStore?.data}
-        />
+        <div className='col-lg-9 col-12 mx-auto mt-2"'>
+          <ButtonSectionComponent
+            stateForDocStatus={stateForDocStatus}
+            setStateForDocStatus={setStateForDocStatus}
+            docStatus={purchaseReceiptDetailFromStore?.docStatus}
+            readOnly={readOnlyFields}
+            setReadOnlyFields={setReadOnlyFields}
+            handleUpdateRecordBtn={handleUpdateRecord}
+            handleUpdateDocstatusBtn={handleUpdateDocstatusBtn}
+            handleDeleteBtn={handleDeleteRecord}
+            handleAmendBtn={handleAmendRecord}
+            handlePrintBtn={handlePrintRecord}
+            details={purchaseReceiptDetailFromStore?.data}
+          />
 
-        <PurchaseReceiptTopSection
-          handlePRTopSectionData={handlePRTopSectionData}
-          clientNameList={clientNameList}
-          topSectionInputData={topSectionInputData}
-          readOnlyFields={readOnlyFields}
-        />
+          <PurchaseReceiptTopSection
+            handlePRTopSectionData={handlePRTopSectionData}
+            clientNameList={clientNameList}
+            topSectionInputData={topSectionInputData}
+            readOnlyFields={readOnlyFields}
+          />
 
-        <PurchaseReceiptTable
-          purchaseReceiptTable={purchaseReceiptTable}
-          setPurchaseReceiptTable={setPurchaseReceiptTable}
-          handlePurchaseTableFieldChange={handlePurchaseTableFieldChange}
-          handleDeleteRow={handleDeleteRow}
-          stateForDocStatus={stateForDocStatus}
-          subCategoryList={subCategoryList}
-          handleAddRow={handleAddRow}
-          amountValue={amountValue}
-          handleKeyDown={handleKeyDown}
-          readOnlyFields={readOnlyFields}
-        />
+          <PurchaseReceiptTable
+            purchaseReceiptTable={purchaseReceiptTable}
+            setPurchaseReceiptTable={setPurchaseReceiptTable}
+            handlePurchaseTableFieldChange={handlePurchaseTableFieldChange}
+            handleDeleteRow={handleDeleteRow}
+            stateForDocStatus={stateForDocStatus}
+            subCategoryList={subCategoryList}
+            handleAddRow={handleAddRow}
+            amountValue={amountValue}
+            handleKeyDown={handleKeyDown}
+            readOnlyFields={readOnlyFields}
+          />
+        </div>
       </div>
     </>
   );
