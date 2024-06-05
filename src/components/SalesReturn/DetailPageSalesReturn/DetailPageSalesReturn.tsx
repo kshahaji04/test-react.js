@@ -1,15 +1,16 @@
 import { useSelector } from 'react-redux';
 import useSalesReturnDetailHook from '../../../hooks/SalesReturn/sales-return-detail-hook';
-import { get_detail_purchase_receipt } from '../../../store/slices/PurchaseReceipt/get-detail-purchase-receipt-slice';
-import ButtonSectionComponent from '../../ButtonSectionComponent';
-import PurchaseReceiptTable from '../CreateSalesReturn/SalesReturnTable';
+import { get_detail_sales_return } from '../../../store/slices/SalesReturn/get-detail-sales-return-slice';
+
+import SalesReturnTable from '../CreateSalesReturn/SalesReturnTable';
 import PurchaseReceiptTopSection from '../CreateSalesReturn/SalesReturnTopSection';
+import ButtonSectionComponent from '../../General/ButtonSectionComponent';
 
 const DetailPageSalesReturn = () => {
   const {
-    purchaseReceiptTable,
-    setPurchaseReceiptTable,
-    handlePRTopSectionData,
+    salesReturnTable,
+    setSalesReturnTable,
+    handleSRTopSectionData,
     clientNameList,
     topSectionInputData,
     handlePurchaseTableFieldChange,
@@ -29,9 +30,7 @@ const DetailPageSalesReturn = () => {
     handleAmendRecord,
   } = useSalesReturnDetailHook();
 
-  const purchaseReceiptDetailFromStore: any = useSelector(
-    get_detail_purchase_receipt
-  );
+  const salesReturnDetailFromStore: any = useSelector(get_detail_sales_return);
   // console.log('purchaseReceiptDetails in tsx', purchaseReceiptDetailFromStore);
   return (
     <>
@@ -39,7 +38,7 @@ const DetailPageSalesReturn = () => {
         <ButtonSectionComponent
           stateForDocStatus={stateForDocStatus}
           setStateForDocStatus={setStateForDocStatus}
-          docStatus={purchaseReceiptDetailFromStore?.docStatus}
+          docStatus={salesReturnDetailFromStore?.docStatus}
           readOnly={readOnlyFields}
           setReadOnlyFields={setReadOnlyFields}
           handleUpdateRecordBtn={handleUpdateRecord}
@@ -47,18 +46,19 @@ const DetailPageSalesReturn = () => {
           handleDeleteBtn={handleDeleteRecord}
           handleAmendBtn={handleAmendRecord}
           handlePrintBtn={handlePrintRecord}
+          details={salesReturnDetailFromStore?.data}
         />
 
         <PurchaseReceiptTopSection
-          handlePRTopSectionData={handlePRTopSectionData}
+          handleSRTopSectionData={handleSRTopSectionData}
           clientNameList={clientNameList}
           topSectionInputData={topSectionInputData}
           readOnlyFields={readOnlyFields}
         />
 
-        <PurchaseReceiptTable
-          purchaseReceiptTable={purchaseReceiptTable}
-          setPurchaseReceiptTable={setPurchaseReceiptTable}
+        <SalesReturnTable
+          salesReturnTable={salesReturnTable}
+          setSalesReturnTable={setSalesReturnTable}
           handlePurchaseTableFieldChange={handlePurchaseTableFieldChange}
           handleDeleteRow={handleDeleteRow}
           stateForDocStatus={stateForDocStatus}

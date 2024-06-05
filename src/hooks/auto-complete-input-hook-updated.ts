@@ -3,12 +3,8 @@ import React, { useEffect, useRef, useState } from 'react';
 const useAutoCompleteInputUpdatedHook = ({
   data,
   handleSearchInput,
-  defaultValue,
   setStateForDocStatus,
   readOnlyFields,
-  clientGroupList,
-  handleSelectClientGroup,
-  labelText,
 }: any) => {
   const inputRef = useRef<any>(null);
   const dropdownRef = useRef<HTMLUListElement>(null);

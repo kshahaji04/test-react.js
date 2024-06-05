@@ -18,6 +18,9 @@ import { useEffect, useState } from 'react';
 import { UpdatePurchaseReceiptDocStatusApi } from '../services/api/PurchaseReceipt/update-docStatus-api';
 import DeletePurchaseReceiptApi from '../services/api/PurchaseReceipt/delete-purchase-receipt-api';
 import { getPurchaseReceiptListing } from '../store/slices/PurchaseReceipt/get-purchase-receipt-listing-slice';
+import DeleteSalesReturnApi from '../services/api/SalesReturn/delete-sales-return-api';
+import { getSalesReturnListing } from '../store/slices/SalesReturn/get-sales-return-listing-slice';
+import { UpdateSalesReturnDocStatusApi } from '../services/api/SalesReturn/update-docStatus-api';
 
 const useListingHook: any = () => {
   const dispatch = useDispatch();
@@ -100,6 +103,15 @@ const useListingHook: any = () => {
         dispatch(getPurchaseReceiptListing(accessToken?.token));
       }
     } else if (pathName === '/sales-return') {
+      let updateDocStatus: any = await UpdateSalesReturnDocStatusApi(
+        accessToken?.token,
+        name,
+        '1'
+      );
+
+      if (Object.keys(updateDocStatus?.data)?.length > 0) {
+        dispatch(getSalesReturnListing(accessToken?.token));
+      }
     }
   };
 
@@ -135,18 +147,29 @@ const useListingHook: any = () => {
           toast.error(deleteEmeraldApiRes?.message?.message);
         }
       } else if (pathName === '/purchase-receipt') {
-        let deleteChallanApiRes: any = await DeletePurchaseReceiptApi(
+        let deleteApiRes: any = await DeletePurchaseReceiptApi(
           accessToken?.token,
           receiptId
         );
 
-        if (deleteChallanApiRes?.message?.status === 'success') {
+        if (deleteApiRes?.message?.status === 'success') {
           toast.success('Purchase Receipt Deleted');
           dispatch(getPurchaseReceiptListing(accessToken?.token));
         } else {
-          toast.error(deleteChallanApiRes?.message?.message);
+          toast.error(deleteApiRes?.message?.message);
         }
       } else if (pathName === '/sales-return') {
+        let deleteApiRes: any = await DeleteSalesReturnApi(
+          accessToken?.token,
+          receiptId
+        );
+
+        if (deleteApiRes?.message?.status === 'success') {
+          toast.success('Sales Return Deleted');
+          dispatch(getSalesReturnListing(accessToken?.token));
+        } else {
+          toast.error(deleteApiRes?.message?.message);
+        }
       }
       setIsModalOpen(false);
     }
@@ -188,6 +211,15 @@ const useListingHook: any = () => {
         dispatch(getPurchaseReceiptListing(accessToken?.token));
       }
     } else if (pathName === '/sales-return') {
+      let updateDocStatus: any = await UpdateSalesReturnDocStatusApi(
+        accessToken?.token,
+        name,
+        '2'
+      );
+
+      if (Object.keys(updateDocStatus?.data)?.length > 0) {
+        dispatch(getSalesReturnListing(accessToken?.token));
+      }
     }
   };
 

@@ -1,14 +1,11 @@
-import AutoCompleteInput from '../../InputDropdown/AutoCompleteInput';
 import TotalAmountRowForChitti from '../../Chitti/CreateChitti/TotalAmountRowForChitti';
+import AutoCompleteInput from '../../InputDropdown/AutoCompleteInput';
 
 const PurchaseReceiptTable = ({
   purchaseReceiptTable,
-  setPurchaseReceiptTable,
   handlePurchaseTableFieldChange,
   handleDeleteRow,
   handleAddRow,
-  stateForDocStatus,
-  setStateForDocStatus,
   subCategoryList,
   amountValue,
   handleKeyDown,

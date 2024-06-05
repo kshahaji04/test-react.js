@@ -41,7 +41,7 @@ const MainNavigationTab = () => {
         <div className="container d-flex align-items-center justify-content-center flex-wrap ">
           {navList.map((pageName, index) => {
             const linkTo = `/${pageName.url}`;
-            const isActive = window.location.pathname === linkTo;
+            const isActive = window.location.pathname?.startsWith(linkTo);
 
             return (
               <div

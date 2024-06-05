@@ -1,9 +1,9 @@
 import usePurchaseReceiptDetailHook from '../../../hooks/PurchaseReceiptHook/purchase-receipt-detail-hook';
 import PurchaseReceiptTopSection from '../CreatePurchaseReceipt/PurchaseReceiptTopSection';
 import PurchaseReceiptTable from '../CreatePurchaseReceipt/PurchaseReceiptTable';
-import ButtonSectionComponent from '../../ButtonSectionComponent';
 import { get_detail_purchase_receipt } from '../../../store/slices/PurchaseReceipt/get-detail-purchase-receipt-slice';
 import { useSelector } from 'react-redux';
+import ButtonSectionComponent from '../../General/ButtonSectionComponent';
 
 const DetailPagePurchaseReceipt = () => {
   const {
@@ -47,6 +47,7 @@ const DetailPagePurchaseReceipt = () => {
           handleDeleteBtn={handleDeleteRecord}
           handleAmendBtn={handleAmendRecord}
           handlePrintBtn={handlePrintRecord}
+          details={purchaseReceiptDetailFromStore?.data}
         />
 
         <PurchaseReceiptTopSection

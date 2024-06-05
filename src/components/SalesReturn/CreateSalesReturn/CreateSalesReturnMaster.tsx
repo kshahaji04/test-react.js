@@ -2,8 +2,8 @@ import SalesReturnTable from './SalesReturnTable';
 import SalesReturnTopSection from './SalesReturnTopSection';
 
 const CreateSalesReturnMaster = ({
-  purchaseReceiptTable,
-  setPurchaseReceiptTable,
+  salesReturnTable,
+  setSalesReturnTable,
   handlePurchaseTableFieldChange,
   handleDeleteRow,
   stateForDocStatus,
@@ -11,7 +11,7 @@ const CreateSalesReturnMaster = ({
   handleAddRow,
   amountValue,
   handleKeyDown,
-  handlePRTopSectionData,
+  handleSRTopSectionData,
   clientNameList,
   topSectionInputData,
   handleCreatePR,
@@ -28,13 +28,13 @@ const CreateSalesReturnMaster = ({
         </button>
       </div>
       <SalesReturnTopSection
-        handlePRTopSectionData={handlePRTopSectionData}
+        handleSRTopSectionData={handleSRTopSectionData}
         clientNameList={clientNameList}
         topSectionInputData={topSectionInputData}
       />
       <SalesReturnTable
-        purchaseReceiptTable={purchaseReceiptTable}
-        setPurchaseReceiptTable={setPurchaseReceiptTable}
+        salesReturnTable={salesReturnTable}
+        setSalesReturnTable={setSalesReturnTable}
         handlePurchaseTableFieldChange={handlePurchaseTableFieldChange}
         handleDeleteRow={handleDeleteRow}
         stateForDocStatus={stateForDocStatus}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import DeleteAlertModal from './Modal/DeleteAlertModal';
+
 import { useNavigate } from 'react-router-dom';
+import DeleteAlertModal from '../Modal/DeleteAlertModal';
 
 const ButtonSectionComponent = ({
   stateForDocStatus,
@@ -11,7 +12,7 @@ const ButtonSectionComponent = ({
   handleDeleteBtn,
   handleUpdateDocstatusBtn,
   handleAmendBtn,
-  handlePrintBtn,
+  details,
   handleUpdateRecordBtn,
 }: any) => {
   const navigate: any = useNavigate();
@@ -83,18 +84,17 @@ const ButtonSectionComponent = ({
           <button
             type="submit"
             className=" btn btn-outline-primary px-2 py-0 form-submit-button"
-            // disabled={
-            //   challanDetail?.length > 0 &&
-            //   challanDetail !== null &&
-            //   challanDetail[0]?.date !==
-            //     new Date()?.toISOString()?.split('T')[0]
-            // }
+            disabled={
+              details?.length > 0 &&
+              details !== null &&
+              details[0]?.date !== new Date()?.toISOString()?.split('T')[0]
+            }
             onClick={() => handleUpdateDocstatusBtn('1')}
           >
             Submit
           </button>
         )}
-        {docStatus === 1 && (
+        {/* {docStatus === 1 && (
           <button
             type="submit"
             className=" btn btn-outline-primary me-2 px-2 py-0 form-submit-button"
@@ -102,7 +102,7 @@ const ButtonSectionComponent = ({
           >
             Print
           </button>
-        )}
+        )} */}
         {docStatus === 1 && (
           <button
             type="submit"
@@ -118,12 +118,11 @@ const ButtonSectionComponent = ({
             <button
               type="submit"
               className=" btn btn-outline-primary px-2 me-2 py-0 form-submit-button"
-              //   disabled={
-              //     challanDetail?.length > 0 &&
-              //     challanDetail !== null &&
-              //     challanDetail[0]?.date !==
-              //       new Date()?.toISOString()?.split('T')[0]
-              //   }
+              disabled={
+                details?.length > 0 &&
+                details !== null &&
+                details[0]?.date !== new Date()?.toISOString()?.split('T')[0]
+              }
               onClick={handleAmendButtonChanges}
             >
               Amend
@@ -147,12 +146,11 @@ const ButtonSectionComponent = ({
           <button
             type="submit"
             className="btn btn-outline-primary px-2 py-0  form-submit-button"
-            // disabled={
-            //   challanDetail?.length > 0 &&
-            //   challanDetail !== null &&
-            //   challanDetail[0]?.date !==
-            //     new Date()?.toISOString()?.split('T')[0]
-            // }
+            disabled={
+              details?.length > 0 &&
+              details !== null &&
+              details[0]?.date !== new Date()?.toISOString()?.split('T')[0]
+            }
             onClick={() => setIsModalOpen(true)}
           >
             Delete

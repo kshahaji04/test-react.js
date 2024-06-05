@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import CreatePurchaseReceiptApi from '../../services/api/PurchaseReceipt/create-purchase-receipt-api';
-import { UpdatePurchaseReceiptDocStatusApi } from '../../services/api/PurchaseReceipt/update-docStatus-api';
-import UpdatePurchaseReceiptApi from '../../services/api/PurchaseReceipt/update-purchase-receipt-api';
+import CreateSalesReturnApi from '../../services/api/SalesReturn/create-sales-return-api';
+import { UpdateSalesReturnDocStatusApi } from '../../services/api/SalesReturn/update-docStatus-api';
+import UpdateSalesReturnApi from '../../services/api/SalesReturn/update-sales-return-api';
 import {
   getClientName,
   get_client_name,
@@ -13,18 +13,14 @@ import {
   getSubCategoryList,
   get_subcategory_list,
 } from '../../store/slices/Chitti/get-subcategory-slice';
-import { getDetailPurchaseReceipt } from '../../store/slices/PurchaseReceipt/get-detail-purchase-receipt-slice';
+import { getDetailSalesReturn } from '../../store/slices/SalesReturn/get-detail-sales-return-slice';
 import {
   getSalesReturnListing,
   get_sales_return_listing,
 } from '../../store/slices/SalesReturn/get-sales-return-listing-slice';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import useCustomChittiHook from '../Chitti/custom-chitti-page-hook';
-import useCustomPurchaseReceiptHook from './custom-sales-return-hook';
-import CreateSalesReturnApi from '../../services/api/SalesReturn/create-sales-return-api';
-import { UpdateSalesReturnDocStatusApi } from '../../services/api/SalesReturn/update-docStatus-api';
-import UpdateSalesReturnApi from '../../services/api/SalesReturn/update-sales-return-api';
-import { getDetailSalesReturn } from '../../store/slices/SalesReturn/get-detail-sales-return-slice';
+import useCustomSalesReturnHook from './custom-sales-return-hook';
 
 const useSalesReturnMasterHook = () => {
   const dispatch = useDispatch();
@@ -40,8 +36,8 @@ const useSalesReturnMasterHook = () => {
   const [clientNameList, setClientNameList] = useState<any>([]);
   const [listingData, setListingData] = useState<any>([]);
   const {
-    purchaseReceiptTable,
-    setPurchaseReceiptTable,
+    salesReturnTable,
+    setSalesReturnTable,
     handleAddRow,
     stateForDocStatus,
     handleKeyDown,
@@ -50,9 +46,9 @@ const useSalesReturnMasterHook = () => {
     setamountValue,
     topSectionInputData,
     setTopSectionInputData,
-    handlePRTopSectionData,
+    handleSRTopSectionData,
     handleDeleteRow,
-  } = useCustomPurchaseReceiptHook();
+  } = useCustomSalesReturnHook();
 
   const {
     totalGrossWeightOfChallanTable,
@@ -73,7 +69,7 @@ const useSalesReturnMasterHook = () => {
       'net_weight',
       'amount',
     ];
-    const updatedTable = purchaseReceiptTable.map((item: any) => {
+    const updatedTable = salesReturnTable.map((item: any) => {
       if (item.idx === id) {
         const updatedValue = numericFields.includes(fieldName)
           ? parseFloat(value) || 0
@@ -82,13 +78,13 @@ const useSalesReturnMasterHook = () => {
       }
       return item;
     });
-    setPurchaseReceiptTable(updatedTable);
+    setSalesReturnTable(updatedTable);
     setStateForDocStatus(true);
   };
 
   useEffect(() => {
     // Calculate column totals whenever tableData changes
-    const newColumnTotals = purchaseReceiptTable.reduce(
+    const newColumnTotals = salesReturnTable.reduce(
       (totals: any, row: any) => {
         totals.gross_weight += row.gross_weight || 0;
         totals.less_wt += row.less_weight || 0;
@@ -100,7 +96,7 @@ const useSalesReturnMasterHook = () => {
     );
 
     setamountValue(newColumnTotals);
-  }, [purchaseReceiptTable]);
+  }, [salesReturnTable]);
 
   useEffect(() => {
     if (salesReturnData?.data?.length > 0 && salesReturnData?.data !== null) {
@@ -140,12 +136,11 @@ const useSalesReturnMasterHook = () => {
   }, []);
 
   const handleCreatePR: any = async () => {
-    const NoDataChallanTableData = purchaseReceiptTable?.some(
+    const NoDataChallanTableData = salesReturnTable?.some(
       (item: any) => Object?.keys(item)?.length === 0
     );
 
-    const filteredChallanTable: any =
-      checkObjectHasValues(purchaseReceiptTable);
+    const filteredChallanTable: any = checkObjectHasValues(salesReturnTable);
 
     let errMsgList: any = [];
     // if (Object?.keys(selectedDropdownValue)?.length === 0) {
@@ -234,11 +229,10 @@ const useSalesReturnMasterHook = () => {
   };
 
   const handleUpdateRecord: any = async () => {
-    const filteredChallanTable: any =
-      checkObjectHasValues(purchaseReceiptTable);
+    const filteredChallanTable: any = checkObjectHasValues(salesReturnTable);
     const hasSubCategoryKey =
-      purchaseReceiptTable?.length > 0 &&
-      purchaseReceiptTable.every(
+      salesReturnTable?.length > 0 &&
+      salesReturnTable.every(
         (obj: any) => 'sub_category' in obj && obj.sub_category !== ''
       );
 
@@ -271,7 +265,7 @@ const useSalesReturnMasterHook = () => {
       ) {
         toast.success('Sales Return Updated');
         // setStateForDocStatus(false);
-        await UpdatePurchaseReceiptDocStatusApi(accessToken?.token, id, '0');
+        await UpdateSalesReturnDocStatusApi(accessToken?.token, id, '0');
         setTimeout(() => {
           const params: any = {
             token: accessToken?.token,
@@ -290,8 +284,8 @@ const useSalesReturnMasterHook = () => {
   };
 
   return {
-    purchaseReceiptTable,
-    setPurchaseReceiptTable,
+    salesReturnTable,
+    setSalesReturnTable,
     handlePurchaseTableFieldChange,
     handleDeleteRow,
     stateForDocStatus,
@@ -300,7 +294,7 @@ const useSalesReturnMasterHook = () => {
     handleAddRow,
     amountValue,
     handleKeyDown,
-    handlePRTopSectionData,
+    handleSRTopSectionData,
     clientNameList,
     topSectionInputData,
     setTopSectionInputData,

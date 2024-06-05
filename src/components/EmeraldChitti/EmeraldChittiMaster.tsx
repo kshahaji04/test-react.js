@@ -5,7 +5,7 @@ import useEmeraldHook from '../../hooks/Emerald/emrald-page-hook';
 import useSubCategoryHook from '../../hooks/Master/sub-category-hook';
 import SearchListingTable from '../Chitti/ChittiListing/SearchListingTable';
 import { useState } from 'react';
-import ListingTable from '../ChittiListing/ListingTable';
+import ListingTable from '../General/ListingTable';
 
 const EmeraldChittiMaster = () => {
   const {
@@ -33,7 +33,6 @@ const EmeraldChittiMaster = () => {
     setClientGroupName,
     setStateForDocStatus,
     handleKeyDown,
-    topSectionInputData,
   }: any = useEmeraldHook();
 
   const { subCategoryList }: any = useSubCategoryHook();

@@ -1,24 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { get_access_token } from '../../store/slices/auth/token-login-slice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-  getDetailPurchaseReceipt,
-  get_detail_purchase_receipt,
-} from '../../store/slices/PurchaseReceipt/get-detail-purchase-receipt-slice';
-import usePurchaseReceiptMasterHook from './sales-return-master-hook';
-import DeletePurchaseReceiptApi from '../../services/api/PurchaseReceipt/delete-purchase-receipt-api';
 import { toast } from 'react-toastify';
-import { UpdatePurchaseReceiptDocStatusApi } from '../../services/api/PurchaseReceipt/update-docStatus-api';
-import { AmendPurchaseReceiptApi } from '../../services/api/PurchaseReceipt/amend-purchase-receipt-api';
+import { AmendSalesReturnApi } from '../../services/api/SalesReturn/amend-sales-return-api';
+import DeleteSalesReturnApi from '../../services/api/SalesReturn/delete-sales-return-api';
+import { UpdateSalesReturnDocStatusApi } from '../../services/api/SalesReturn/update-docStatus-api';
 import {
   getDetailSalesReturn,
   get_detail_sales_return,
 } from '../../store/slices/SalesReturn/get-detail-sales-return-slice';
-import { AmendSalesReturnApi } from '../../services/api/SalesReturn/amend-sales-return-api';
-import { UpdateSalesReturnDocStatusApi } from '../../services/api/SalesReturn/update-docStatus-api';
-import DeleteSalesReturnApi from '../../services/api/SalesReturn/delete-sales-return-api';
+import { get_access_token } from '../../store/slices/auth/token-login-slice';
+import useSalesReturnMasterHook from './sales-return-master-hook';
 
 const useSalesReturnDetailHook: any = () => {
   const dispatch = useDispatch();
@@ -26,12 +18,11 @@ const useSalesReturnDetailHook: any = () => {
   const navigate = useNavigate();
   const accessToken: any = useSelector(get_access_token);
   const salesReturnDetailFromStore: any = useSelector(get_detail_sales_return);
-
   const [readOnlyFields, setReadOnlyFields] = useState<boolean>(false);
 
   const {
-    purchaseReceiptTable,
-    setPurchaseReceiptTable,
+    salesReturnTable,
+    setSalesReturnTable,
     handlePurchaseTableFieldChange,
     handleDeleteRow,
     stateForDocStatus,
@@ -40,14 +31,14 @@ const useSalesReturnDetailHook: any = () => {
     handleAddRow,
     amountValue,
     handleKeyDown,
-    handlePRTopSectionData,
+    handleSRTopSectionData,
     clientNameList,
     topSectionInputData,
     setTopSectionInputData,
     handleCreatePR,
     listingData,
     handleUpdateRecord,
-  } = usePurchaseReceiptMasterHook();
+  } = useSalesReturnMasterHook();
 
   useEffect(() => {
     const params: any = {
@@ -63,17 +54,18 @@ const useSalesReturnDetailHook: any = () => {
       salesReturnDetailFromStore?.data !== null
     ) {
       if (salesReturnDetailFromStore?.data?.length > 0) {
-        setPurchaseReceiptTable([
+        setSalesReturnTable([
           ...salesReturnDetailFromStore?.data[0]?.sales_return_table,
         ]);
       }
       setTopSectionInputData(salesReturnDetailFromStore?.data[0]);
-      // setTimeout(() => {
-      //   setStateForDocStatus(false);
-      // }, 300);
     } else {
-      setPurchaseReceiptTable([]);
+      setSalesReturnTable([]);
       setTopSectionInputData([]);
+    }
+
+    if (salesReturnDetailFromStore?.docStatus > 0) {
+      setReadOnlyFields(true);
     }
   }, [salesReturnDetailFromStore]);
 
@@ -86,7 +78,7 @@ const useSalesReturnDetailHook: any = () => {
       // client_group: topSectionInputData?.karigar_name,
       gold_rate: topSectionInputData?.karigar_name,
       remarks: topSectionInputData?.remarks,
-      sales_return_table: purchaseReceiptTable,
+      sales_return_table: salesReturnTable,
     };
     let amendApi: any = await AmendSalesReturnApi(
       accessToken?.token,
@@ -119,7 +111,7 @@ const useSalesReturnDetailHook: any = () => {
 
     if (Object.keys(updateDocStatus?.data)?.length > 0) {
       setStateForDocStatus(false);
-      // setShowSaveButtonForAmendFlow(false);
+
       const params: any = {
         token: accessToken?.token,
         name: id,
@@ -143,10 +135,9 @@ const useSalesReturnDetailHook: any = () => {
   const handlePrintRecord: any = () => {};
 
   return {
-    // purchaseReceiptDetails,
     readOnlyFields,
-    purchaseReceiptTable,
-    setPurchaseReceiptTable,
+    salesReturnTable,
+    setSalesReturnTable,
     handlePurchaseTableFieldChange,
     handleDeleteRow,
     stateForDocStatus,
@@ -155,7 +146,7 @@ const useSalesReturnDetailHook: any = () => {
     handleAddRow,
     amountValue,
     handleKeyDown,
-    handlePRTopSectionData,
+    handleSRTopSectionData,
     clientNameList,
     topSectionInputData,
     handleCreatePR,

@@ -7,7 +7,6 @@ export const getDetailSalesReturn: any = createAsyncThunk(
   async (params: any) => {
     const detailOfSalesReturnData: any =
       await GetDetailOfSalesReturnApi(params);
-    // console.log('detailOfSalesReturnData res', detailOfSalesReturnData);
     return detailOfSalesReturnData;
   }
 );

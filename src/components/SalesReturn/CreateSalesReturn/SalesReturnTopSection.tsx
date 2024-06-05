@@ -1,7 +1,7 @@
 import AutoCompleteInput from '../../InputDropdown/AutoCompleteInput';
 
 const SalesReturnTopSection = ({
-  handlePRTopSectionData,
+  handleSRTopSectionData,
   clientNameList,
   topSectionInputData,
   defaultData,
@@ -44,10 +44,10 @@ const SalesReturnTopSection = ({
           <AutoCompleteInput
             data={clientData}
             handleSearchInput={(value: any, fieldName: any) =>
-              handlePRTopSectionData(value, fieldName)
+              handleSRTopSectionData(value, fieldName)
             }
-            defaultValue={topSectionInputData?.karigar_name}
-            value={topSectionInputData?.karigar_name}
+            defaultValue={topSectionInputData?.client_name}
+            value={topSectionInputData?.client_name}
             readOnlyFields={readOnlyFields}
           />
         </div>
@@ -62,7 +62,7 @@ const SalesReturnTopSection = ({
             defaultValue={topSectionInputData?.gold_rate}
             value={topSectionInputData?.gold_rate}
             onChange={(e) =>
-              handlePRTopSectionData(e.target.value, 'gold_rate')
+              handleSRTopSectionData(e.target.value, 'gold_rate')
             }
             readOnly={readOnlyFields}
             autoComplete="off"
@@ -79,7 +79,7 @@ const SalesReturnTopSection = ({
             className="form-control custom-input-field px-1"
             value={topSectionInputData?.remarks}
             defaultValue={topSectionInputData?.remarks}
-            onChange={(e) => handlePRTopSectionData(e.target.value, 'remarks')}
+            onChange={(e) => handleSRTopSectionData(e.target.value, 'remarks')}
             readOnly={readOnlyFields}
             autoComplete="off"
           />

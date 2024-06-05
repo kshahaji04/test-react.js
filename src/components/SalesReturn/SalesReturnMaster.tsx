@@ -2,20 +2,21 @@ import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import useSalesReturnMasterHook from '../../hooks/SalesReturn/sales-return-master-hook';
 import ListingFilterSection from '../Chitti/ChittiListing/SearchListingTable';
-import ListingTable from '../ChittiListing/ListingTable';
+
 import CreateSalesReturnMaster from './CreateSalesReturn/CreateSalesReturnMaster';
+import ListingTable from '../General/ListingTable';
 
 const SalesReturnMaster = () => {
   const {
-    purchaseReceiptTable,
-    setPurchaseReceiptTable,
+    salesReturnTable,
+    setSalesReturnTable,
     handlePurchaseTableFieldChange,
     handleDeleteRow,
     subCategoryList,
     handleAddRow,
     amountValue,
     handleKeyDown,
-    handlePRTopSectionData,
+    handleSRTopSectionData,
     clientNameList,
     topSectionInputData,
     handleCreatePR,
@@ -123,12 +124,12 @@ const SalesReturnMaster = () => {
             <Tab eventKey="longer-tab" title="Create Sales Return">
               <div className="col-lg-9 col-12 mx-auto mt-2">
                 <CreateSalesReturnMaster
-                  purchaseReceiptTable={purchaseReceiptTable}
-                  setPurchaseReceiptTable={setPurchaseReceiptTable}
+                  salesReturnTable={salesReturnTable}
+                  setSalesReturnTable={setSalesReturnTable}
                   handlePurchaseTableFieldChange={
                     handlePurchaseTableFieldChange
                   }
-                  handlePRTopSectionData={handlePRTopSectionData}
+                  handleSRTopSectionData={handleSRTopSectionData}
                   subCategoryList={subCategoryList}
                   handleAddRow={handleAddRow}
                   handleDeleteRow={handleDeleteRow}

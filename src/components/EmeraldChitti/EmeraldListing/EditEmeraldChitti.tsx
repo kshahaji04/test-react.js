@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { get_specific_emerald_chitti } from '../../../store/slices/Emerald/get-specific-emrald-slice';
 import EmeraldChittiTableNew from '../CreateEmeraldChitti/EmeraldChittiTableNew';
 import { get_specific_chitti_challan } from '../../../store/slices/Chitti/get-specific-chitti-listing-data-slice';
-import Loader from '../../Loader';
+import Loader from '../../General/Loader';
 import NoRecord from '../../NoRecord';
 import DeleteAlertModal from '../../Modal/DeleteAlertModal';
 
@@ -72,8 +72,8 @@ const EditEmeraldChitti = () => {
   };
 
   const handleDeleteBtn: any = () => {
-    handleDeleteEmeraldChitti()
-  }
+    handleDeleteEmeraldChitti();
+  };
 
   return (
     <div className="container">
@@ -82,7 +82,7 @@ const EditEmeraldChitti = () => {
       ) : (
         <>
           {Object?.keys(emeraldDetailDataFromStore?.data)?.length === 0 &&
-            emeraldDetailDataFromStore?.isLoading === 'succeeded' ? (
+          emeraldDetailDataFromStore?.isLoading === 'succeeded' ? (
             <NoRecord />
           ) : (
             <>
@@ -139,10 +139,12 @@ const EditEmeraldChitti = () => {
                     <button
                       type="submit"
                       className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-                      disabled={challanDetail?.length > 0 &&
+                      disabled={
+                        challanDetail?.length > 0 &&
                         challanDetail !== null &&
                         challanDetail[0]?.date !==
-                        new Date()?.toISOString()?.split('T')[0]}
+                          new Date()?.toISOString()?.split('T')[0]
+                      }
                       onClick={handleSubmitEmeraldChittiData}
                     >
                       Submit
@@ -167,23 +169,23 @@ const EditEmeraldChitti = () => {
                     </button>
                   )}
 
-
-                  {showButton === 2 &&
-                    showSaveButtonForAmendFlow === false && (
-                      <>
-                        <button
-                          type="submit"
-                          className=" btn btn-outline-primary px-2 me-2 py-0  form-submit-button"
-                          disabled={challanDetail?.length > 0 &&
-                            challanDetail !== null &&
-                            challanDetail[0]?.date !==
-                            new Date()?.toISOString()?.split('T')[0]}
-                          onClick={handleAmendButtonChanges}
-                        >
-                          Amend
-                        </button>
-                      </>
-                    )}
+                  {showButton === 2 && showSaveButtonForAmendFlow === false && (
+                    <>
+                      <button
+                        type="submit"
+                        className=" btn btn-outline-primary px-2 me-2 py-0  form-submit-button"
+                        disabled={
+                          challanDetail?.length > 0 &&
+                          challanDetail !== null &&
+                          challanDetail[0]?.date !==
+                            new Date()?.toISOString()?.split('T')[0]
+                        }
+                        onClick={handleAmendButtonChanges}
+                      >
+                        Amend
+                      </button>
+                    </>
+                  )}
 
                   {showSaveButtonForAmendFlow &&
                     stateForDocStatus &&
@@ -201,10 +203,12 @@ const EditEmeraldChitti = () => {
                     <button
                       type="submit"
                       className=" btn btn-outline-primary px-2 py-0  form-submit-button"
-                      disabled={challanDetail?.length > 0 &&
+                      disabled={
+                        challanDetail?.length > 0 &&
                         challanDetail !== null &&
                         challanDetail[0]?.date !==
-                        new Date()?.toISOString()?.split('T')[0]}
+                          new Date()?.toISOString()?.split('T')[0]
+                      }
                       onClick={() => setIsModalOpen(true)}
                     >
                       Delete
@@ -255,7 +259,13 @@ const EditEmeraldChitti = () => {
           )}
         </>
       )}
-      {isModalOpen && <DeleteAlertModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} handleDeleteBtn={handleDeleteBtn} />}
+      {isModalOpen && (
+        <DeleteAlertModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          handleDeleteBtn={handleDeleteBtn}
+        />
+      )}
     </div>
   );
 };

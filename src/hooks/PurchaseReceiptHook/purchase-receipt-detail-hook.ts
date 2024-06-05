@@ -63,12 +63,12 @@ const usePurchaseReceiptDetailHook: any = () => {
         ]);
       }
       setTopSectionInputData(purchaseReceiptDetailFromStore?.data[0]);
-      // setTimeout(() => {
-      //   setStateForDocStatus(false);
-      // }, 300);
     } else {
       setPurchaseReceiptTable([]);
       setTopSectionInputData([]);
+    }
+    if (purchaseReceiptDetailFromStore?.docStatus > 0) {
+      setReadOnlyFields(true);
     }
   }, [purchaseReceiptDetailFromStore]);
 
@@ -114,7 +114,7 @@ const usePurchaseReceiptDetailHook: any = () => {
 
     if (Object.keys(updateDocStatus?.data)?.length > 0) {
       setStateForDocStatus(false);
-      // setShowSaveButtonForAmendFlow(false);
+
       const params: any = {
         token: accessToken?.token,
         name: id,
@@ -138,7 +138,6 @@ const usePurchaseReceiptDetailHook: any = () => {
   const handlePrintRecord: any = () => {};
 
   return {
-    // purchaseReceiptDetails,
     readOnlyFields,
     purchaseReceiptTable,
     setPurchaseReceiptTable,

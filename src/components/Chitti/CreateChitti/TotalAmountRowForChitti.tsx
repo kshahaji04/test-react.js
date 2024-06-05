@@ -24,7 +24,7 @@ const TotalAmountRowForChitti = ({ amountValue, hideWeights }: any) => {
           readOnly
         />
       </td>
-      {hideWeights && (
+      {!hideWeights && (
         <>
           <td className="py-1 px-2">
             <input

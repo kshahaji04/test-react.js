@@ -2,18 +2,16 @@ import AutoCompleteInput from '../../InputDropdown/AutoCompleteInput';
 import TotalAmountRowForChitti from '../../Chitti/CreateChitti/TotalAmountRowForChitti';
 
 const SalesReturnTable = ({
-  purchaseReceiptTable,
-  setPurchaseReceiptTable,
+  salesReturnTable,
   handlePurchaseTableFieldChange,
   handleDeleteRow,
   handleAddRow,
-  stateForDocStatus,
-  setStateForDocStatus,
+  readOnlyFields,
   subCategoryList,
   amountValue,
   handleKeyDown,
 }: any) => {
-  //   console.log('purchase receipt table data', purchaseReceiptTable);
+  //   console.log('purchase receipt table data', salesReturnTable);
   const subCategoryData: any = {
     fieldname: 'sub_category',
     fieldtype: 'Link',
@@ -26,9 +24,9 @@ const SalesReturnTable = ({
         <p
           className="cursor-pointer my-auto btn-link"
           onClick={() => {
-            // if (!readOnly) {
-            handleAddRow();
-            // }
+            if (!readOnlyFields) {
+              handleAddRow();
+            }
           }}
         >
           Add Row
@@ -55,8 +53,8 @@ const SalesReturnTable = ({
             </tr>
           </thead>
           <tbody>
-            {purchaseReceiptTable?.length > 0 &&
-              purchaseReceiptTable.map((row: any) => (
+            {salesReturnTable?.length > 0 &&
+              salesReturnTable.map((row: any) => (
                 <>
                   <tr key={row.idx}>
                     <td className="p-0">{row.idx}</td>
@@ -73,11 +71,11 @@ const SalesReturnTable = ({
                             )
                           }
                           defaultValue={row?.sub_category}
-                          // readOnlyFields={readOnlyFields}
+                          readOnlyFields={readOnlyFields}
                         />
                       </div>
                     </td>
-                    <td className="table-data-input">
+                    <td className="table-data-input w-25">
                       <input
                         type="number"
                         className="form-control custom-input-field-t text-end"
@@ -90,7 +88,7 @@ const SalesReturnTable = ({
                             row.idx
                           )
                         }
-                        //   readOnly={readOnly === true ? true : false}
+                        readOnly={readOnlyFields}
                       />
                     </td>
                     {/* <td className="table-data-input">
@@ -140,13 +138,17 @@ const SalesReturnTable = ({
                           )
                         }
                         //   onBlur={(e) => handleBlur(e, row.id)}
-                        //   readOnly={readOnly === true ? true : false}
+                        readOnly={readOnlyFields}
                       />
                     </td>
                     <td className="table-data-input">
                       <div
                         className="d-flex align-items-center delete-link cursor-pointer"
-                        onClick={() => handleDeleteRow(row.idx)}
+                        onClick={() => {
+                          if (!readOnlyFields) {
+                            handleDeleteRow(row.idx);
+                          }
+                        }}
                       >
                         <i className="fa-solid fa-xmark fs-5"></i>
                       </div>

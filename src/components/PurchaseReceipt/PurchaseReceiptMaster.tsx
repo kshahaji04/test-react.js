@@ -1,9 +1,9 @@
 import { Tab, Tabs } from 'react-bootstrap';
 import CreatePurchaseReceiptMaster from './CreatePurchaseReceipt/CreatePurchaseReceiptMaster';
 import usePurchaseReceiptMasterHook from '../../hooks/PurchaseReceiptHook/purchase-receipt-master-hook';
-import ListingTable from '../ChittiListing/ListingTable';
 import { useState } from 'react';
 import ListingFilterSection from '../Chitti/ChittiListing/SearchListingTable';
+import ListingTable from '../General/ListingTable';
 
 const PurchaseReceiptMaster = () => {
   const {

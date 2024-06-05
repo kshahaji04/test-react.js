@@ -1,8 +1,8 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import useListingHook from '../../hooks/listing-hook';
-import DeleteAlertModal from '../Modal/DeleteAlertModal';
-import LoadMoreChittiListing from './LoadMoreChittiListing';
 import { useEffect } from 'react';
+import LoadMoreChittiListing from './PaginationComponent';
+import DeleteAlertModal from '../Modal/DeleteAlertModal';
+import useListingHook from '../../hooks/listing-hook';
 
 const ListingTable = ({ tableListingData }: any) => {
   const {
@@ -20,6 +20,8 @@ const ListingTable = ({ tableListingData }: any) => {
   } = useListingHook();
 
   const navigate = useNavigate();
+  let pathname: any = window.location.pathname;
+
   useEffect(() => {
     if (Object?.keys(tableListingData)?.length > 0) {
       let column: any = Object?.keys(tableListingData[0]);
@@ -139,12 +141,15 @@ const ListingTable = ({ tableListingData }: any) => {
                         <td className="button-section-td border-0">
                           <div className="row justify-content-center gx-0">
                             <div className="col-lg-2 col-md-4 col-12">
-                              <a
-                                onClick={() => handlePrint(data.name)}
-                                className="button-section-text text-primary"
-                              >
-                                Print
-                              </a>
+                              {pathname !== '/sales-return' &&
+                                pathname !== '/purchase-receipt' && (
+                                  <a
+                                    onClick={() => handlePrint(data.name)}
+                                    className="button-section-text text-primary"
+                                  >
+                                    Print
+                                  </a>
+                                )}
                             </div>
                             <div className="col-lg-4 col-md-4 col-12">
                               <a

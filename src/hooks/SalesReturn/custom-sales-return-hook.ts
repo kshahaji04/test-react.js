@@ -10,7 +10,7 @@ const useCustomSalesReturnHook = () => {
     amount: '',
   };
 
-  const [purchaseReceiptTable, setPurchaseReceiptTable] = useState<any>([
+  const [salesReturnTable, setSalesReturnTable] = useState<any>([
     initialTableState,
   ]);
   const [topSectionInputData, setTopSectionInputData] = useState<any>({});
@@ -20,13 +20,13 @@ const useCustomSalesReturnHook = () => {
   const handleKeyDown = (event: any, id: any) => {
     if (
       event.key === 'Tab' &&
-      id === purchaseReceiptTable[purchaseReceiptTable.length - 1].idx
+      id === salesReturnTable[salesReturnTable.length - 1].idx
     ) {
       event.preventDefault(); // Prevent the default tab behavior
       handleAddRow();
       setTimeout(() => {
         const nextInput: any = document.querySelector(
-          `.input-${purchaseReceiptTable.length + 1}`
+          `.input-${salesReturnTable.length + 1}`
         );
         if (nextInput) {
           nextInput.focus();
@@ -37,7 +37,7 @@ const useCustomSalesReturnHook = () => {
 
   const handleAddRow: any = () => {
     const newRow = {
-      idx: purchaseReceiptTable?.length + 1,
+      idx: salesReturnTable?.length + 1,
       sub_category: '',
       gross_weight: '',
       less_weight: '',
@@ -46,10 +46,10 @@ const useCustomSalesReturnHook = () => {
     };
 
     // Add the new row to the tableData
-    setPurchaseReceiptTable([...purchaseReceiptTable, newRow]);
+    setSalesReturnTable([...salesReturnTable, newRow]);
 
     // Calculate the new total values, including the new row
-    const newColumnTotals = purchaseReceiptTable.reduce(
+    const newColumnTotals = salesReturnTable.reduce(
       (totals: any, row: any) => {
         totals.gross_weight += row.gross_weight || 0;
         totals.less_wt += row.less_wt || 0;
@@ -73,16 +73,16 @@ const useCustomSalesReturnHook = () => {
   };
 
   const handleDeleteRow: any = (id: any) => {
-    if (purchaseReceiptTable?.length > 1) {
-      const updatedData = purchaseReceiptTable
+    if (salesReturnTable?.length > 1) {
+      const updatedData = salesReturnTable
         .filter((row: any) => row.idx !== id)
         .map((row: any, index: number) => ({ ...row, idx: index + 1 }));
-      setPurchaseReceiptTable(updatedData);
+      setSalesReturnTable(updatedData);
       setStateForDocStatus(true);
     }
   };
 
-  const handlePRTopSectionData: any = (value: any, fieldName: any) => {
+  const handleSRTopSectionData: any = (value: any, fieldName: any) => {
     setTopSectionInputData((prevState: any) => ({
       ...prevState,
       [fieldName]: value,
@@ -91,15 +91,15 @@ const useCustomSalesReturnHook = () => {
   };
 
   return {
-    purchaseReceiptTable,
-    setPurchaseReceiptTable,
+    salesReturnTable,
+    setSalesReturnTable,
     handleAddRow,
     amountValue,
     stateForDocStatus,
     handleKeyDown,
     setStateForDocStatus,
     setamountValue,
-    handlePRTopSectionData,
+    handleSRTopSectionData,
     topSectionInputData,
     setTopSectionInputData,
     handleDeleteRow,
