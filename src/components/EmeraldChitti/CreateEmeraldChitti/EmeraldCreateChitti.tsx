@@ -2,8 +2,8 @@ import { useRef } from 'react';
 import AutoCompleteInput from '../../InputDropdown/AutoCompleteInput';
 
 const EmeraldCreateChitti = ({
-  handleClientGroup,
-  clientGroupList,
+  // handleClientGroup,
+  // clientGroupList,
   clientNameList,
   currentDate,
   setStateForDocStatus,

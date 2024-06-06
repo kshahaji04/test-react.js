@@ -6,10 +6,6 @@ import CreatePurchaseReceiptApi from '../../services/api/PurchaseReceipt/create-
 import { UpdatePurchaseReceiptDocStatusApi } from '../../services/api/PurchaseReceipt/update-docStatus-api';
 import UpdatePurchaseReceiptApi from '../../services/api/PurchaseReceipt/update-purchase-receipt-api';
 import {
-  getChittiChallan,
-  get_chitti_challan,
-} from '../../store/slices/Chitti/get-chitti-challan-list-slice';
-import {
   getClientName,
   get_client_name,
 } from '../../store/slices/Chitti/get-client-name-slice';
@@ -18,13 +14,13 @@ import {
   get_subcategory_list,
 } from '../../store/slices/Chitti/get-subcategory-slice';
 import { getDetailPurchaseReceipt } from '../../store/slices/PurchaseReceipt/get-detail-purchase-receipt-slice';
-import { get_access_token } from '../../store/slices/auth/token-login-slice';
-import useCustomChittiHook from '../Chitti/custom-chitti-page-hook';
-import useCustomPurchaseReceiptHook from './custom-purchase-receipt-hook';
 import {
   getPurchaseReceiptListing,
   get_purchase_receipt_listing,
 } from '../../store/slices/PurchaseReceipt/get-purchase-receipt-listing-slice';
+import { get_access_token } from '../../store/slices/auth/token-login-slice';
+import useCustomChittiHook from '../Chitti/custom-chitti-page-hook';
+import useCustomPurchaseReceiptHook from './custom-purchase-receipt-hook';
 
 const usePurchaseReceiptMasterHook = () => {
   const dispatch = useDispatch();

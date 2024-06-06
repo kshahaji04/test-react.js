@@ -1,4 +1,3 @@
-import useAutoCompleteInputHook from '../../hooks/auto-complete-input-hook';
 import useAutoCompleteInputUpdatedHook from '../../hooks/auto-complete-input-hook-updated';
 
 const AutoCompleteInput = ({
@@ -26,7 +25,7 @@ const AutoCompleteInput = ({
     selectedIndex,
     noRecords,
     filterDropdownList,
-    showClientGroupSelect,
+    // showClientGroupSelect,
     inputRef,
     dropdownRef,
   }: any = useAutoCompleteInputUpdatedHook({
@@ -39,7 +38,7 @@ const AutoCompleteInput = ({
     handleSelectClientGroup,
     labelText,
   });
-  let hintOptionList: any = data?.length > 0 && data.map((value: any) => value);
+  // let hintOptionList: any = data?.length > 0 && data.map((value: any) => value);
 
   return (
     <>
@@ -90,7 +89,7 @@ const AutoCompleteInput = ({
                   filterDropdownList.map((name: any, i: any) => (
                     <li
                       key={i}
-                      onMouseDown={(e) => {
+                      onMouseDown={(e: any) => {
                         handleSelectedOption(name, i, data.fieldname);
                       }}
                       className={`dropdown-list ${
@@ -123,7 +122,10 @@ const AutoCompleteInput = ({
                         {clientGroupList?.length > 0 &&
                           clientGroupList !== null &&
                           clientGroupList.map((data: any, index: any) => (
-                            <option value={data.client_group}></option>
+                            <option
+                              value={data.client_group}
+                              key={index}
+                            ></option>
                           ))}
                       </select>
                     </li>

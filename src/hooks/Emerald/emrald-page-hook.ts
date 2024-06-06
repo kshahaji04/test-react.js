@@ -1,38 +1,37 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {
-  getClientName,
-  get_client_name,
-} from '../../store/slices/Chitti/get-client-name-slice';
-import { useSelector } from 'react-redux';
-import { get_access_token } from '../../store/slices/auth/token-login-slice';
-import {
-  getSubCategoryList,
-  get_subcategory_list,
-} from '../../store/slices/Chitti/get-subcategory-slice';
-import {
-  getClientGroupList,
-  get_client_group,
-} from '../../store/slices/Chitti/get-client-group-list-slice';
-import {
-  getEmeraldChallan,
-  get_Emerald_challan,
-} from '../../store/slices/Emerald/get-emerald-list-slice';
-import { toast } from 'react-toastify';
-import {
-  getProductItem,
-  get_product_item,
-} from '../../store/slices/Emerald/get-product-item-slice';
-import CreateEmeraldChittiApi from '../../services/api/Emerald/create-emerald-chitti-api';
-import { getSpecificEmeraldChitti } from '../../store/slices/Emerald/get-specific-emrald-slice';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import CreateEmeraldChittiApi from '../../services/api/Emerald/create-emerald-chitti-api';
 import DeleteEmeraldChittiApi from '../../services/api/Emerald/delete-emerald-chitti-api';
+import { EmeraldChittiAmendApi } from '../../services/api/Emerald/emerald-chitti-amend-api';
 import AddClientNameApi from '../../services/api/Master/add-client-name-api';
 import {
   UpdateDocStatusEmeraldChittiApi,
   UpdateDocStatusWithSubmittedEmeraldChittiApi,
 } from '../../services/api/general/update-doc-status-emrald-chitti-api';
-import { EmeraldChittiAmendApi } from '../../services/api/Emerald/emerald-chitti-amend-api';
+import {
+  getClientGroupList,
+  get_client_group,
+} from '../../store/slices/Chitti/get-client-group-list-slice';
+import {
+  getClientName,
+  get_client_name,
+} from '../../store/slices/Chitti/get-client-name-slice';
+import {
+  getSubCategoryList,
+  get_subcategory_list,
+} from '../../store/slices/Chitti/get-subcategory-slice';
+import {
+  getEmeraldChallan,
+  get_Emerald_challan,
+} from '../../store/slices/Emerald/get-emerald-list-slice';
+import {
+  getProductItem,
+  get_product_item,
+} from '../../store/slices/Emerald/get-product-item-slice';
+import { getSpecificEmeraldChitti } from '../../store/slices/Emerald/get-specific-emrald-slice';
+import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import UseCustomEmeraldChittiHook from './custom-emerald-chitti-hook';
 
 const useEmeraldHook = () => {
@@ -86,6 +85,8 @@ const useEmeraldHook = () => {
       custom_hm_pcs: '',
     },
   ];
+
+  console.log(setTransactionDate);
 
   const [tableData, setTableData] = useState<any>(initialTableData);
   const [emeraldChittiTableData, setEmeraldChittiTableData] = useState<any>([]);

@@ -8,7 +8,6 @@ const EmeraldChittiTableNew = ({
   tableData,
   setTableData,
   subCategoryList,
-  defaultData,
   handleAddRow,
   readOnly,
   setStateForDocStatus,
@@ -28,12 +27,12 @@ const EmeraldChittiTableNew = ({
     custom_hm_pcs: 0,
   });
 
-  const addIdToRows = (rows: any) => {
-    return rows.map((row: any, index: any) => ({
-      ...row,
-      id: index + 1,
-    }));
-  };
+  // const addIdToRows = (rows: any) => {
+  //   return rows.map((row: any, index: any) => ({
+  //     ...row,
+  //     id: index + 1,
+  //   }));
+  // };
   // useEffect(() => {
   //   if (
   //     defaultData?.length > 0 &&

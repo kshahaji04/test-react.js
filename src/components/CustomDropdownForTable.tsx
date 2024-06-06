@@ -8,7 +8,6 @@ const CustomDropdownForTable = ({
   placeholderValue,
   bgColor,
   setSelectedDropdownValue,
-  HandleData,
   setSelectedCategoryForSubcategory,
   HandleCategoryData,
   defaultData,
