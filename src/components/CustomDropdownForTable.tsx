@@ -63,7 +63,7 @@ const CustomDropdownForTable = ({
       setStateForDocStatus(true);
     }
 
-    HandleData(data, rowId);
+    // HandleData(data, rowId);
   };
 
   const HandleSelectedCategory: any = (e: any) => {

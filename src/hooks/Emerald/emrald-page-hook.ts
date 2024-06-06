@@ -320,6 +320,7 @@ const useEmeraldHook = () => {
     const reqParams: any = {
       clientName: topSectionInputData?.client_name,
       remarks: topSectionInputData?.remarks,
+      goldRate: topSectionInputData?.gold_rate,
       clientGroup: clientGroupName,
       date: transactionDate,
       name: id,
@@ -406,6 +407,7 @@ const useEmeraldHook = () => {
         date: reversedDate,
         transactionDate: transactionDate,
         remarks: topSectionInputData?.remarks,
+        goldRate: topSectionInputData?.gold_rate,
         clientGroup: clientGroupName,
         emeraldChittiTableData: updatedFilterEmeraldChitti,
         token: accessToken?.token,
@@ -471,6 +473,7 @@ const useEmeraldHook = () => {
     handleDeleteRow,
     handleAddRow,
     topSectionInputData,
+    setTopSectionInputData,
   };
 };
 

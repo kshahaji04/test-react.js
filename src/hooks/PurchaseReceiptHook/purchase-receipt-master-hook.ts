@@ -65,6 +65,29 @@ const usePurchaseReceiptMasterHook = () => {
     // checkObjectHasValuesInHuid,
   } = useCustomChittiHook();
 
+  // const handlePurchaseTableFieldChange: any = (
+  //   value: any,
+  //   fieldName: any,
+  //   id: any
+  // ) => {
+  //   const numericFields = [
+  //     'gross_weight',
+  //     'less_weight',
+  //     'net_weight',
+  //     'amount',
+  //   ];
+  //   const updatedTable = purchaseReceiptTable.map((item: any) => {
+  //     if (item.idx === id) {
+  //       const updatedValue = numericFields.includes(fieldName)
+  //         ? parseFloat(value) || 0
+  //         : value;
+  //       return { ...item, [fieldName]: updatedValue };
+  //     }
+  //     return item;
+  //   });
+  //   setPurchaseReceiptTable(updatedTable);
+  //   setStateForDocStatus(true);
+  // };
   const handlePurchaseTableFieldChange: any = (
     value: any,
     fieldName: any,
@@ -76,15 +99,41 @@ const usePurchaseReceiptMasterHook = () => {
       'net_weight',
       'amount',
     ];
+
     const updatedTable = purchaseReceiptTable.map((item: any) => {
       if (item.idx === id) {
         const updatedValue = numericFields.includes(fieldName)
           ? parseFloat(value) || 0
           : value;
-        return { ...item, [fieldName]: updatedValue };
+
+        let updatedItem = { ...item, [fieldName]: updatedValue };
+
+        // If the field is 'gross_weight', recalculate 'net_weight'
+        if (fieldName === 'gross_weight') {
+          const lessWeight = item.less_weight || 0;
+          const netWeight = updatedValue - lessWeight;
+          updatedItem = { ...updatedItem, net_weight: netWeight };
+        }
+
+        // If the field is 'less_weight', recalculate 'net_weight'
+        if (fieldName === 'less_weight') {
+          const grossWeight = item.gross_weight || 0;
+          const netWeight = grossWeight - updatedValue;
+          updatedItem = { ...updatedItem, net_weight: netWeight };
+        }
+
+        // If the field is 'net_weight', recalculate 'less_weight'
+        if (fieldName === 'net_weight') {
+          const grossWeight = item.gross_weight || 0;
+          const lessWeight = grossWeight - updatedValue;
+          updatedItem = { ...updatedItem, less_weight: lessWeight };
+        }
+
+        return updatedItem;
       }
       return item;
     });
+
     setPurchaseReceiptTable(updatedTable);
     setStateForDocStatus(true);
   };

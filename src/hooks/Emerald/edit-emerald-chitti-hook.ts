@@ -22,8 +22,6 @@ const useEditEmeraldChittiHook: any = () => {
     get_specific_emerald_chitti
   );
 
-  const [challanDetail, setChallanDetail] = useState<any>('');
-
   const { id } = useParams();
 
   const {
@@ -54,6 +52,7 @@ const useEditEmeraldChittiHook: any = () => {
     handleKeyDown,
     handleOnFocus,
     topSectionInputData,
+    setTopSectionInputData,
   }: any = useEmeraldChittiHook();
 
   const {
@@ -74,14 +73,18 @@ const useEditEmeraldChittiHook: any = () => {
       emeraldChittiDataFromStore?.data?.length > 0 &&
       emeraldChittiDataFromStore?.data !== null
     ) {
-      setChallanDetail([...emeraldChittiDataFromStore?.data]);
+      setTableData(emeraldChittiDataFromStore?.data[0]?.challan_table);
+      setTopSectionInputData(emeraldChittiDataFromStore?.data[0]);
       setTimeout(() => {
         setStateForDocStatus(false);
       }, 300);
     } else {
-      setChallanDetail([]);
+      setTableData([]);
+      setTopSectionInputData({});
     }
-  }, [emeraldChittiDataFromStore]);
+  }, []);
+
+  // console.log('first', tableData);
 
   const handleUpdateEmeraldChittiSubmit = async () => {
     const reversedDate = new Date()
@@ -136,6 +139,7 @@ const useEditEmeraldChittiHook: any = () => {
       date: reversedDate,
       transactionDate: transactionDate,
       remarks: topSectionInputData?.remarks,
+      goldRate: topSectionInputData?.gold_rate,
       // clientGroup: clientGroupName,
       challanTableData: updatedFilterEmeraldChitti,
       token: accessToken?.token,
@@ -187,7 +191,6 @@ const useEditEmeraldChittiHook: any = () => {
     transactionDate,
     tableData,
     setTableData,
-    challanDetail,
     handleUpdateEmeraldChittiSubmit,
     stateForDocStatus,
     setStateForDocStatus,

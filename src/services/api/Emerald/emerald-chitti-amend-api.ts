@@ -11,6 +11,7 @@ export const EmeraldChittiAmendApi: any = async (request: any) => {
     client_name: request.clientName,
     client_group: request.clientGroup,
     remarks: request.remarks,
+    gold_rate: request.goldRate,
     abb: request.date,
     date: request.date,
     emerald_chitti_table: request.emeraldChittiTableData,

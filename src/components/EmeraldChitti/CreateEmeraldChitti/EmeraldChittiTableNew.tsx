@@ -34,18 +34,18 @@ const EmeraldChittiTableNew = ({
       id: index + 1,
     }));
   };
-  useEffect(() => {
-    if (
-      defaultData?.length > 0 &&
-      defaultData !== undefined &&
-      defaultData !== null
-    ) {
-      // defaultData.map((data: any) => {
-      const dataWithIds = addIdToRows(defaultData);
-      setTableData(dataWithIds);
-      //   });
-    }
-  }, [defaultData, setTableData]);
+  // useEffect(() => {
+  //   if (
+  //     defaultData?.length > 0 &&
+  //     defaultData !== undefined &&
+  //     defaultData !== null
+  //   ) {
+  //     // defaultData.map((data: any) => {
+  //     const dataWithIds = addIdToRows(defaultData);
+  //     setTableData(dataWithIds);
+  //     //   });
+  //   }
+  // }, [defaultData, setTableData]);
 
   useEffect(() => {
     // Recalculate live calculations whenever tableData changes

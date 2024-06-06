@@ -12,8 +12,8 @@ const UpdateEmeraldChittiApi = async (request: any) => {
     abb: request.date,
     date: request.transactionDate,
     remarks: request.remarks,
+    gold_rate: request.goldRate,
     emerald_chitti_table: request.challanTableData,
-    // challan_table: request.challanTableData,
   };
 
   const config = {
