@@ -109,7 +109,7 @@ const SalesReturnMaster = () => {
             justify
           >
             <Tab eventKey="SR-listing" title="Sales Return List">
-              <div className="col-xl-9 col-md-12 col-12 mx-auto  ">
+              <div className="col-xl-11 col-md-12 col-12 mx-auto  ">
                 <ListingFilterSection
                   handleSearchInput={handleSearchInput}
                   clientNameList={clientNameList}

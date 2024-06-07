@@ -102,6 +102,7 @@ const useEmeraldHook = () => {
     findDuplicateValuesInEmeraldChittiTable,
     findDuplicateIndicesInEmeraldChittiTable,
   } = UseCustomEmeraldChittiHook();
+
   useEffect(() => {
     dispatch(getEmeraldChallan(accessToken?.token));
     dispatch(getClientName(accessToken?.token));

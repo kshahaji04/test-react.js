@@ -108,7 +108,7 @@ const PurchaseReceiptMaster = () => {
             justify
           >
             <Tab eventKey="purchase-listing" title="Purchase Receipt List">
-              <div className="col-xl-9 col-md-12 col-12 mx-auto  ">
+              <div className="col-xl-11 col-md-12 col-12 mx-auto  ">
                 <ListingFilterSection
                   handleSearchInput={handleSearchInput}
                   clientNameList={clientNameList}

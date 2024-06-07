@@ -51,7 +51,7 @@ const EmeraldCreateChitti = ({
               handleSearchInput={(value: any, fieldName: any) =>
                 handleTopSectionData(value, fieldName)
               }
-              defaultValue={topSectionInputData?.client_name}
+              // defaultValue={topSectionInputData?.client_name}
               value={topSectionInputData?.client_name}
               readOnlyFields={readOnly}
               setStateForDocStatus={setStateForDocStatus}

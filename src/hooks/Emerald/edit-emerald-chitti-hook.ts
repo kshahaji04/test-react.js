@@ -50,6 +50,7 @@ const useEditEmeraldChittiHook: any = () => {
     handleOnFocus,
     topSectionInputData,
     setTopSectionInputData,
+    handleTopSectionData,
     findDuplicateValuesInEmeraldChittiTable,
     findDuplicateIndicesInEmeraldChittiTable,
   }: any = useEmeraldChittiHook();
@@ -72,8 +73,8 @@ const useEditEmeraldChittiHook: any = () => {
         }, 300);
       }
     } else {
-      setTableData([]);
-      setTopSectionInputData({});
+      // setTableData([]);
+      // setTopSectionInputData({});
     }
   }, [emeraldChittiDataFromStore]);
 
@@ -198,6 +199,7 @@ const useEditEmeraldChittiHook: any = () => {
     handleOnFocus,
     handlePrintButton,
     topSectionInputData,
+    handleTopSectionData,
   };
 };
 

@@ -10,6 +10,7 @@ const AutoCompleteInput = ({
   handleSelectClientGroup,
   labelText,
   bgColor,
+  value,
 }: any) => {
   // console.log("data for input dropdown", data)
 
@@ -58,6 +59,7 @@ const AutoCompleteInput = ({
               : 'form-control input-field-chitti-table dropdown-input'
           }`}
           defaultValue={defaultValue}
+          value={value}
           readOnly={readOnlyFields}
           onKeyDown={(e: any) => handleKeyDown(e, data.fieldname)}
           autoComplete="off"

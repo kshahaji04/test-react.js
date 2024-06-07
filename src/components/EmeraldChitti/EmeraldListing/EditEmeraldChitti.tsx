@@ -41,6 +41,7 @@ const EditEmeraldChitti = () => {
     handleOnFocus,
     handlePrintButton,
     topSectionInputData,
+    handleTopSectionData,
   }: any = useEditEmeraldChittiHook();
 
   // console.log('details of emerald chitti', tableData, topSectionInputData);
@@ -221,6 +222,8 @@ const EditEmeraldChitti = () => {
               </div>
 
               <EmeraldCreateChitti
+                topSectionInputData={topSectionInputData}
+                handleTopSectionData={handleTopSectionData}
                 selectedDropdownValue={selectedDropdownValue}
                 setSelectedDropdownValue={setSelectedDropdownValue}
                 handleClientGroup={handleClientGroup}
@@ -231,7 +234,6 @@ const EditEmeraldChitti = () => {
                 transactionDate={transactionDate}
                 setStateForDocStatus={setStateForDocStatus}
                 readOnly={readOnly}
-                topSectionInputData={topSectionInputData}
               />
 
               <EmeraldChittiTableNew
