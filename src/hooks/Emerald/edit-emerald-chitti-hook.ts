@@ -10,12 +10,10 @@ import {
   get_specific_emerald_chitti,
 } from '../../store/slices/Emerald/get-specific-emrald-slice';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
-import useCustomEmeraldChittiHook from './custom-emerald-chitti-hook';
 import useEmeraldChittiHook from './emrald-page-hook';
 
 const useEditEmeraldChittiHook: any = () => {
   const dispatch = useDispatch();
-
   const accessToken: any = useSelector(get_access_token);
   const emeraldChittiDataFromStore: any = useSelector(
     get_specific_emerald_chitti
@@ -52,12 +50,9 @@ const useEditEmeraldChittiHook: any = () => {
     handleOnFocus,
     topSectionInputData,
     setTopSectionInputData,
-  }: any = useEmeraldChittiHook();
-
-  const {
     findDuplicateValuesInEmeraldChittiTable,
     findDuplicateIndicesInEmeraldChittiTable,
-  } = useCustomEmeraldChittiHook();
+  }: any = useEmeraldChittiHook();
 
   useEffect(() => {
     const params: any = {
@@ -68,22 +63,19 @@ const useEditEmeraldChittiHook: any = () => {
   }, []);
 
   useEffect(() => {
-    if (
-      emeraldChittiDataFromStore?.data?.length > 0 &&
-      emeraldChittiDataFromStore?.data !== null
-    ) {
-      setTableData(emeraldChittiDataFromStore?.data[0]?.challan_table);
-      setTopSectionInputData(emeraldChittiDataFromStore?.data[0]);
-      setTimeout(() => {
-        setStateForDocStatus(false);
-      }, 300);
+    if (emeraldChittiDataFromStore?.hasOwnProperty('data')) {
+      if (emeraldChittiDataFromStore?.data?.length > 0) {
+        setTableData(emeraldChittiDataFromStore?.data[0]?.challan_table);
+        setTopSectionInputData(emeraldChittiDataFromStore?.data[0]);
+        setTimeout(() => {
+          setStateForDocStatus(false);
+        }, 300);
+      }
     } else {
       setTableData([]);
       setTopSectionInputData({});
     }
-  }, []);
-
-  // console.log('first', tableData);
+  }, [emeraldChittiDataFromStore]);
 
   const handleUpdateEmeraldChittiSubmit = async () => {
     const reversedDate = new Date()
@@ -110,8 +102,8 @@ const useEditEmeraldChittiHook: any = () => {
         // Collect unique row numbers with duplicate values
         const uniqueRowsWithDuplicates: { [key: string]: boolean } = {};
 
-        duplicateIndices.forEach((indices) => {
-          indices.forEach((idx) => {
+        duplicateIndices.forEach((indices: any) => {
+          indices.forEach((idx: any) => {
             const rowNumber = idx + 1;
             uniqueRowsWithDuplicates[rowNumber] = true;
           });

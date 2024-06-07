@@ -475,6 +475,8 @@ const useEmeraldHook = () => {
     handleAddRow,
     topSectionInputData,
     setTopSectionInputData,
+    findDuplicateValuesInEmeraldChittiTable,
+    findDuplicateIndicesInEmeraldChittiTable,
   };
 };
 
