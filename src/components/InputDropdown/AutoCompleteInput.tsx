@@ -89,7 +89,7 @@ const AutoCompleteInput = ({
                   filterDropdownList.map((name: any, i: any) => (
                     <li
                       key={i}
-                      onMouseDown={(e: any) => {
+                      onMouseDown={() => {
                         handleSelectedOption(name, i, data.fieldname);
                       }}
                       className={`dropdown-list ${
