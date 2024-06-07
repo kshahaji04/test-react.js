@@ -9,6 +9,7 @@ const PurchaseReceiptTable = ({
   subCategoryList,
   amountValue,
   handleKeyDown,
+  readOnlyFields,
 }: any) => {
   //   console.log('purchase receipt table data', purchaseReceiptTable);
   const subCategoryData: any = {
@@ -23,9 +24,9 @@ const PurchaseReceiptTable = ({
         <p
           className="cursor-pointer my-auto btn-link"
           onClick={() => {
-            // if (!readOnly) {
-            handleAddRow();
-            // }
+            if (!readOnlyFields) {
+              handleAddRow();
+            }
           }}
         >
           Add Row
@@ -70,7 +71,7 @@ const PurchaseReceiptTable = ({
                             )
                           }
                           defaultValue={row?.sub_category}
-                          // readOnlyFields={readOnlyFields}
+                          readOnlyFields={readOnlyFields}
                         />
                       </div>
                     </td>
@@ -87,7 +88,7 @@ const PurchaseReceiptTable = ({
                             row.idx
                           )
                         }
-                        //   readOnly={readOnly === true ? true : false}
+                        readOnly={readOnlyFields}
                       />
                     </td>
                     <td className="table-data-input">
@@ -103,7 +104,7 @@ const PurchaseReceiptTable = ({
                             row.idx
                           )
                         }
-                        //   readOnly={readOnly === true ? true : false}
+                        readOnly={readOnlyFields}
                       />
                     </td>
                     <td className="table-data-input">
@@ -119,7 +120,7 @@ const PurchaseReceiptTable = ({
                             row.idx
                           )
                         }
-                        //   readOnly={readOnly === true ? true : false}
+                        readOnly={readOnlyFields}
                       />
                     </td>
                     <td className="table-data-input">
@@ -137,7 +138,7 @@ const PurchaseReceiptTable = ({
                           )
                         }
                         //   onBlur={(e) => handleBlur(e, row.id)}
-                        //   readOnly={readOnly === true ? true : false}
+                        readOnly={readOnlyFields}
                       />
                     </td>
                     <td className="table-data-input">

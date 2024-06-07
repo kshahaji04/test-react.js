@@ -49,9 +49,17 @@ const AutoCompleteInput = ({
           id={data?.fieldname}
           name={data?.fieldname}
           placeholder={data?.label}
-          onBlur={handleClientBlur}
+          onBlur={() => {
+            if (!readOnlyFields) {
+              handleClientBlur();
+            }
+          }}
           onChange={(e) => handleFieldChange(e, data.fieldname)}
-          onClick={handleDocumentClick}
+          onClick={() => {
+            if (!readOnlyFields) {
+              handleDocumentClick();
+            }
+          }}
           onMouseDown={handleShowDropdown}
           className={`${
             bgColor?.current === true

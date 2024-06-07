@@ -4,6 +4,7 @@ import PurchaseReceiptTable from '../CreatePurchaseReceipt/PurchaseReceiptTable'
 import { get_detail_purchase_receipt } from '../../../store/slices/PurchaseReceipt/get-detail-purchase-receipt-slice';
 import { useSelector } from 'react-redux';
 import ButtonSectionComponent from '../../General/ButtonSectionComponent';
+import { useEffect } from 'react';
 
 const DetailPagePurchaseReceipt = () => {
   const {
@@ -32,7 +33,15 @@ const DetailPagePurchaseReceipt = () => {
   const purchaseReceiptDetailFromStore: any = useSelector(
     get_detail_purchase_receipt
   );
-  // console.log('purchaseReceiptDetails in tsx', purchaseReceiptDetailFromStore);
+
+  useEffect(() => {
+    if (purchaseReceiptDetailFromStore?.docStatus > 0) {
+      setReadOnlyFields(true);
+    } else {
+      setReadOnlyFields(false);
+    }
+  }, [purchaseReceiptDetailFromStore]);
+
   return (
     <>
       <div className="container">

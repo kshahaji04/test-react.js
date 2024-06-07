@@ -67,9 +67,6 @@ const usePurchaseReceiptDetailHook: any = () => {
       setPurchaseReceiptTable([]);
       setTopSectionInputData([]);
     }
-    if (purchaseReceiptDetailFromStore?.docStatus > 0) {
-      setReadOnlyFields(true);
-    }
   }, [purchaseReceiptDetailFromStore]);
 
   const handleAmendRecord: any = async () => {
