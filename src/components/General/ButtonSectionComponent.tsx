@@ -14,8 +14,10 @@ const ButtonSectionComponent = ({
   handleAmendBtn,
   details,
   handleUpdateRecordBtn,
+  userRolesData
 }: any) => {
   const navigate: any = useNavigate();
+  let pathname: any = window.location.pathname
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [showSaveButtonForAmendFlow, setShowSaveButtonForAmendFlow] =
     useState<boolean>(false);
@@ -29,6 +31,44 @@ const ButtonSectionComponent = ({
   const handleBackButton = () => {
     navigate(-1);
   };
+
+  const userRoleWiseShow: any = () => {
+    let userRoleHasSubmitAccess: any = userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Submit Access"))
+    let userRoleHasSaveSubmitAccess: any = userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Save Submit Access"))
+    if (pathname.includes("/purchase-receipt") || pathname.includes("/sales-return")) {
+      if ((userRoleHasSubmitAccess || userRoleHasSaveSubmitAccess)) {
+        return (
+          <button
+            type="submit"
+            className=" btn btn-outline-primary px-2 py-0 form-submit-button"
+            disabled={
+              details?.length > 0 &&
+              details !== null &&
+              details[0]?.date !== new Date()?.toISOString()?.split('T')[0]
+            }
+            onClick={() => handleUpdateDocstatusBtn('1')}
+          >
+            Submit
+          </button>
+        )
+      }
+    } else {
+      return (
+        <button
+          type="submit"
+          className=" btn btn-outline-primary px-2 py-0 form-submit-button"
+          disabled={
+            details?.length > 0 &&
+            details !== null &&
+            details[0]?.date !== new Date()?.toISOString()?.split('T')[0]
+          }
+          onClick={() => handleUpdateDocstatusBtn('1')}
+        >
+          Submit
+        </button>
+      )
+    }
+  }
 
   return (
     <div className="d-flex justify-content-between  my-3">
@@ -81,18 +121,11 @@ const ButtonSectionComponent = ({
           </button>
         )}
         {stateForDocStatus === false && docStatus === 0 && (
-          <button
-            type="submit"
-            className=" btn btn-outline-primary px-2 py-0 form-submit-button"
-            disabled={
-              details?.length > 0 &&
-              details !== null &&
-              details[0]?.date !== new Date()?.toISOString()?.split('T')[0]
-            }
-            onClick={() => handleUpdateDocstatusBtn('1')}
-          >
-            Submit
-          </button>
+          <>
+            {userRoleWiseShow(details)}
+
+
+          </>
         )}
         {/* {docStatus === 1 && (
           <button

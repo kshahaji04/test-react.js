@@ -21,6 +21,7 @@ import {
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import useCustomChittiHook from '../Chitti/custom-chitti-page-hook';
 import useCustomSalesReturnHook from './custom-sales-return-hook';
+import getUserRoleApi from '../../services/api/general/user-role-api';
 
 const useSalesReturnMasterHook = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const useSalesReturnMasterHook = () => {
   const [subCategoryList, setSubCategoryList] = useState<any>(false);
   const [clientNameList, setClientNameList] = useState<any>([]);
   const [listingData, setListingData] = useState<any>([]);
+  const [userRolesData, setUserRolesData] = useState<any>([]);
   const {
     salesReturnTable,
     setSalesReturnTable,
@@ -56,6 +58,21 @@ const useSalesReturnMasterHook = () => {
     checkGrossAndNetWeight,
     checkObjectHasValues,
   } = useCustomChittiHook();
+
+  useEffect(() => {
+    dispatch(getSalesReturnListing(accessToken?.token));
+    dispatch(getSubCategoryList(accessToken?.token));
+    dispatch(getClientName(accessToken?.token));
+    getUserRoles()
+  }, []);
+
+  const getUserRoles: any = async () => {
+    let userRolesData: any = await getUserRoleApi(accessToken?.token)
+    console.log("userRoleData", userRolesData)
+    if (userRolesData?.data?.message?.status === "success") {
+      setUserRolesData(userRolesData?.data?.message?.data)
+    }
+  }
 
   const handlePurchaseTableFieldChange: any = (
     value: any,
@@ -127,12 +144,6 @@ const useSalesReturnMasterHook = () => {
       setClientNameList([]);
     }
   }, [clientNameDataFromStore]);
-
-  useEffect(() => {
-    dispatch(getSalesReturnListing(accessToken?.token));
-    dispatch(getSubCategoryList(accessToken?.token));
-    dispatch(getClientName(accessToken?.token));
-  }, []);
 
   const handleCreatePR: any = async () => {
     const NoDataChallanTableData = salesReturnTable?.some(
@@ -300,6 +311,7 @@ const useSalesReturnMasterHook = () => {
     handleCreatePR,
     listingData,
     handleUpdateRecord,
+    userRolesData
   };
 };
 

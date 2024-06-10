@@ -38,6 +38,7 @@ const useSalesReturnDetailHook: any = () => {
     handleCreatePR,
     listingData,
     handleUpdateRecord,
+    userRolesData
   } = useSalesReturnMasterHook();
 
   useEffect(() => {
@@ -132,7 +133,7 @@ const useSalesReturnDetailHook: any = () => {
     }
   };
 
-  const handlePrintRecord: any = () => {};
+  const handlePrintRecord: any = () => { };
 
   return {
     readOnlyFields,
@@ -157,6 +158,7 @@ const useSalesReturnDetailHook: any = () => {
     handleDeleteRecord,
     handlePrintRecord,
     handleAmendRecord,
+    userRolesData
   };
 };
 

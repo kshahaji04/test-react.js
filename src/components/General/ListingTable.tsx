@@ -4,7 +4,7 @@ import LoadMoreChittiListing from './PaginationComponent';
 import DeleteAlertModal from '../Modal/DeleteAlertModal';
 import useListingHook from '../../hooks/listing-hook';
 
-const ListingTable = ({ tableListingData }: any) => {
+const ListingTable = ({ tableListingData, userRolesData }: any) => {
   const {
     headingData,
     tableViewData,
@@ -28,7 +28,57 @@ const ListingTable = ({ tableListingData }: any) => {
       setHeadingData(column);
     }
   }, [tableListingData]);
-  // console.log('tableListingData', tableListingData, headingData);
+
+  const userRoleWiseShow: any = (data: any) => {
+    let userRoleHasSubmitAccess: any = userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Submit Access"))
+    let userRoleHasSaveSubmitAccess: any = userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Save Submit Access"))
+
+    if (pathname === "/purchase-receipt" || pathname === "/sales-return") {
+      if ((userRoleHasSubmitAccess || userRoleHasSaveSubmitAccess)) {
+        return (
+          <button
+            type="button"
+            className="btn btn-link button-section-text p-0"
+            disabled={
+              data?.date !==
+              new Date()?.toISOString()?.split('T')[0]
+            }
+            onClick={() => {
+              if (
+                data?.date ===
+                new Date().toISOString().split('T')[0]
+              ) {
+                handleSubmitChittiData(data.name);
+              }
+            }}
+          >
+            Submit
+          </button>
+        )
+      }
+    } else {
+      return (
+        <button
+          type="button"
+          className="btn btn-link button-section-text p-0"
+          disabled={
+            data?.date !==
+            new Date()?.toISOString()?.split('T')[0]
+          }
+          onClick={() => {
+            if (
+              data?.date ===
+              new Date().toISOString().split('T')[0]
+            ) {
+              handleSubmitChittiData(data.name);
+            }
+          }}
+        >
+          Submit
+        </button>
+      )
+    }
+  }
 
   const TableHeading: any = () => {
     return (
@@ -80,12 +130,12 @@ const ListingTable = ({ tableListingData }: any) => {
                               {v !== 'docstatus'
                                 ? data[v]
                                 : data[v] === 0
-                                ? 'Draft'
-                                : data[v] === 1
-                                ? 'Submitted'
-                                : data[v] === 2
-                                ? 'Cancel'
-                                : data[v]}
+                                  ? 'Draft'
+                                  : data[v] === 1
+                                    ? 'Submitted'
+                                    : data[v] === 2
+                                      ? 'Cancel'
+                                      : data[v]}
                             </td>
                           );
                         }
@@ -105,24 +155,9 @@ const ListingTable = ({ tableListingData }: any) => {
                               </NavLink>
                             </div>
                             <div className="col-lg-4 col-md-4 col-12">
-                              <button
-                                type="button"
-                                className="btn btn-link button-section-text p-0"
-                                disabled={
-                                  data?.date !==
-                                  new Date()?.toISOString()?.split('T')[0]
-                                }
-                                onClick={() => {
-                                  if (
-                                    data?.date ===
-                                    new Date().toISOString().split('T')[0]
-                                  ) {
-                                    handleSubmitChittiData(data.name);
-                                  }
-                                }}
-                              >
-                                Submit
-                              </button>
+                              {userRoleWiseShow(data)}
+
+
                             </div>
                             <div className="col-lg-2 col-md-4 col-12">
                               <NavLink

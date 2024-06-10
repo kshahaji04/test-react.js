@@ -74,8 +74,8 @@ const SearchListingTable = ({
             placeholderValue="Client Name"
             selectedDropdownValue={searchClientName}
             setSelectedDropdownValue={setSearchclientName}
-            // clientGroupList={clientGroupList}
-            // HandleClientGroup={HandleClientGroup}
+          // clientGroupList={clientGroupList}
+          // HandleClientGroup={HandleClientGroup}
           />
         </div>
         <div className="col-lg-2 col-md-2 my-lg-0 mb-lg-0 mb-3">

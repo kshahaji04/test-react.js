@@ -28,6 +28,7 @@ const DetailPagePurchaseReceipt = () => {
     handleDeleteRecord,
     handlePrintRecord,
     handleAmendRecord,
+    userRolesData
   } = usePurchaseReceiptDetailHook();
 
   const purchaseReceiptDetailFromStore: any = useSelector(
@@ -58,6 +59,7 @@ const DetailPagePurchaseReceipt = () => {
             handleAmendBtn={handleAmendRecord}
             handlePrintBtn={handlePrintRecord}
             details={purchaseReceiptDetailFromStore?.data}
+            userRolesData={userRolesData}
           />
 
           <PurchaseReceiptTopSection

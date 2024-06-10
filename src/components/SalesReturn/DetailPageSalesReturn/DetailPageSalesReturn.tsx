@@ -28,6 +28,7 @@ const DetailPageSalesReturn = () => {
     handleDeleteRecord,
     handlePrintRecord,
     handleAmendRecord,
+    userRolesData
   } = useSalesReturnDetailHook();
 
   const salesReturnDetailFromStore: any = useSelector(get_detail_sales_return);
@@ -48,6 +49,7 @@ const DetailPageSalesReturn = () => {
             handleAmendBtn={handleAmendRecord}
             handlePrintBtn={handlePrintRecord}
             details={salesReturnDetailFromStore?.data}
+            userRolesData={userRolesData}
           />
 
           <PurchaseReceiptTopSection

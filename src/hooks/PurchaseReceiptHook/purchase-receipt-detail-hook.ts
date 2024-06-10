@@ -42,6 +42,7 @@ const usePurchaseReceiptDetailHook: any = () => {
     handleCreatePR,
     listingData,
     handleUpdateRecord,
+    userRolesData
   } = usePurchaseReceiptMasterHook();
 
   useEffect(() => {
@@ -132,7 +133,7 @@ const usePurchaseReceiptDetailHook: any = () => {
     }
   };
 
-  const handlePrintRecord: any = () => {};
+  const handlePrintRecord: any = () => { };
 
   return {
     readOnlyFields,
@@ -157,6 +158,7 @@ const usePurchaseReceiptDetailHook: any = () => {
     handleDeleteRecord,
     handlePrintRecord,
     handleAmendRecord,
+    userRolesData
   };
 };
 

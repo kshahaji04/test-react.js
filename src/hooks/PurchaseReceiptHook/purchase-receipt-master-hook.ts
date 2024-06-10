@@ -21,6 +21,7 @@ import {
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import useCustomChittiHook from '../Chitti/custom-chitti-page-hook';
 import useCustomPurchaseReceiptHook from './custom-purchase-receipt-hook';
+import getUserRoleApi from '../../services/api/general/user-role-api';
 
 const usePurchaseReceiptMasterHook = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,8 @@ const usePurchaseReceiptMasterHook = () => {
   const [subCategoryList, setSubCategoryList] = useState<any>(false);
   const [clientNameList, setClientNameList] = useState<any>([]);
   const [listingData, setListingData] = useState<any>([]);
+  const [userRolesData, setUserRolesData] = useState<any>([]);
+
   const {
     purchaseReceiptTable,
     setPurchaseReceiptTable,
@@ -61,29 +64,21 @@ const usePurchaseReceiptMasterHook = () => {
     // checkObjectHasValuesInHuid,
   } = useCustomChittiHook();
 
-  // const handlePurchaseTableFieldChange: any = (
-  //   value: any,
-  //   fieldName: any,
-  //   id: any
-  // ) => {
-  //   const numericFields = [
-  //     'gross_weight',
-  //     'less_weight',
-  //     'net_weight',
-  //     'amount',
-  //   ];
-  //   const updatedTable = purchaseReceiptTable.map((item: any) => {
-  //     if (item.idx === id) {
-  //       const updatedValue = numericFields.includes(fieldName)
-  //         ? parseFloat(value) || 0
-  //         : value;
-  //       return { ...item, [fieldName]: updatedValue };
-  //     }
-  //     return item;
-  //   });
-  //   setPurchaseReceiptTable(updatedTable);
-  //   setStateForDocStatus(true);
-  // };
+  useEffect(() => {
+    dispatch(getPurchaseReceiptListing(accessToken?.token));
+    dispatch(getSubCategoryList(accessToken?.token));
+    dispatch(getClientName(accessToken?.token));
+    getUserRoles()
+  }, []);
+
+  const getUserRoles: any = async () => {
+    let userRolesData: any = await getUserRoleApi(accessToken?.token)
+    console.log("userRoleData", userRolesData)
+    if (userRolesData?.data?.message?.status === "success") {
+      setUserRolesData(userRolesData?.data?.message?.data)
+    }
+  }
+
   const handlePurchaseTableFieldChange: any = (
     value: any,
     fieldName: any,
@@ -183,11 +178,9 @@ const usePurchaseReceiptMasterHook = () => {
     }
   }, [clientNameDataFromStore]);
 
-  useEffect(() => {
-    dispatch(getPurchaseReceiptListing(accessToken?.token));
-    dispatch(getSubCategoryList(accessToken?.token));
-    dispatch(getClientName(accessToken?.token));
-  }, []);
+
+
+
 
   const handleCreatePR: any = async () => {
     const NoDataChallanTableData = purchaseReceiptTable?.some(
@@ -360,6 +353,7 @@ const usePurchaseReceiptMasterHook = () => {
     handleCreatePR,
     listingData,
     handleUpdateRecord,
+    userRolesData
   };
 };
 
