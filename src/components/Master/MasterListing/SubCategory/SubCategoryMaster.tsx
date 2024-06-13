@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import AddSubCategory from './AddSubCategory';
-import SubCategoryListing from './SubCategoryListing';
-import useSubCategoryHook from '../../../../hooks/Master/sub-category-hook';
 import useCategoryHook from '../../../../hooks/Master/category-hook';
+import useSubCategoryHook from '../../../../hooks/Master/sub-category-hook';
 import MasterMultipleListingSearch from '../MasterMultipleListingSearch';
+import AddSubCategory from './AddSubCategory';
+import MasterTableListing from '../../MasterTableListing';
+
 
 const SubCategoryMaster = () => {
   const { subCategoryCategoryData }: any = useSubCategoryHook();
@@ -53,10 +54,11 @@ const SubCategoryMaster = () => {
                 listingData={filteredList}
                 tableViewData={tableViewData}
               />
-              <SubCategoryListing
+              <MasterTableListing
                 filteredList={filteredList}
                 handleTableViewRows={handleTableViewRows}
                 tableViewData={tableViewData}
+                dropdownData={CategoryList}
               />
             </Tab>
 

@@ -23,16 +23,14 @@ const MasterListing = () => {
             const isActive: any = window?.location?.pathname === linkTo;
             return (
               <div
-                className={`mx-lg-2 mx-1 my-1 master-heading p-1 ${
-                  isActive ? 'activePage border-0' : ''
-                }`}
+                className={`mx-lg-2 mx-1 my-1 master-heading p-1 ${isActive ? 'activePage border-0' : ''
+                  }`}
                 key={index}
               >
                 <NavLink
                   to={`/master/${processedStr}`}
-                  className={`text-decoration-none navlink-class ${
-                    isActive ? 'text-white ' : ''
-                  }`}
+                  className={`text-decoration-none navlink-class ${isActive ? 'text-white ' : ''
+                    }`}
                 >
                   <div className="rounded-4">
                     <div className="d-flex justify-content-center align-items-center master-listing-card-body">

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import AddClientGroup from './AddClientGroup';
 import useClientGroupHook from '../../../../hooks/Master/client-group-hook';
 import MasterSingleListingSearch from '../MasterSingleListingSearch';
-import SingleItemListingInMaster from '../SingleItemListingInMaster';
+import MasterTableListing from '../../MasterTableListing';
+import AddClientGroup from './AddClientGroup';
 
 const ClientGroup = () => {
   const { clientGroupList } = useClientGroupHook();
@@ -43,8 +43,8 @@ const ClientGroup = () => {
                 listingData={filterList}
                 tableViewData={tableViewData}
               />
-              <SingleItemListingInMaster
-                listingData={filterList}
+              <MasterTableListing
+                filteredList={filterList}
                 handleTableViewRows={handleTableViewRows}
                 tableViewData={tableViewData}
                 heading="Client Group"

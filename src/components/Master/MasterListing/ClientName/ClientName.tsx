@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import ClientNameListing from './ClientNameListing';
-import AddClient from './AddClient';
 import useClientGroupHook from '../../../../hooks/Master/client-group-hook';
 import MasterMultipleListingSearch from '../MasterMultipleListingSearch';
+import AddClient from './AddClient';
+import MasterTableListing from '../../MasterTableListing';
 
 const ClientName = () => {
   const { clientGroupList, clientNameClientGroupList }: any =
@@ -34,6 +34,7 @@ const ClientName = () => {
         client.client_group.toLowerCase().includes(inputGroup.toLowerCase())
     );
 
+
   return (
     <div className="container">
       <div className="row justify-content-center mt-3">
@@ -53,10 +54,11 @@ const ClientName = () => {
                 listingData={filteredList}
                 tableViewData={tableViewData}
               />
-              <ClientNameListing
-                clientNameClientGroupList={filteredList}
+              <MasterTableListing
+                filteredList={filteredList}
                 tableViewData={tableViewData}
                 handleTableViewRows={handleTableViewRows}
+                dropdownData={clientGroupList}
               />
             </Tab>
             <Tab eventKey="longer-tab" title="Add Client">

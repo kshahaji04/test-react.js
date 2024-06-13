@@ -1,10 +1,11 @@
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import ProjectSubCategoryMappingListing from './ProjectSubCategoryMappingListing';
-import AddProjectSubCategoryMapping from './AddProjectSubCategoryMapping';
 import useProjectSubCategoryMappingHook from '../../../../hooks/Master/Project-sub-category-mapping-hook';
 import useSubCategoryHook from '../../../../hooks/Master/sub-category-hook';
 import MasterMultipleListingSearch from '../MasterMultipleListingSearch';
+
+import AddProjectSubCategoryMapping from './AddProjectSubCategoryMapping';
+import MasterTableListing from '../../MasterTableListing';
 
 const ProjectSubCategoryMappingMaster = () => {
   const { ProjectSubCategoryMappingList }: any =
@@ -35,16 +36,16 @@ const ProjectSubCategoryMappingMaster = () => {
 
   const filteredList: any =
     ProjectSubCategoryMappingList?.length > 0 &&
-    ProjectSubCategoryMappingList !== null &&
-    (inputProject || inputStone || inputPlain)
+      ProjectSubCategoryMappingList !== null &&
+      (inputProject || inputStone || inputPlain)
       ? ProjectSubCategoryMappingList.filter(
-          (data: any) =>
-            data?.project
-              ?.toLowerCase()
-              ?.includes(inputProject?.toLowerCase()) &&
-            data?.stone?.toLowerCase()?.includes(inputStone?.toLowerCase()) &&
-            data?.plain?.toLowerCase()?.includes(inputPlain?.toLowerCase())
-        )
+        (data: any) =>
+          data?.project
+            ?.toLowerCase()
+            ?.includes(inputProject?.toLowerCase()) &&
+          data?.stone?.toLowerCase()?.includes(inputStone?.toLowerCase()) &&
+          data?.plain?.toLowerCase()?.includes(inputPlain?.toLowerCase())
+      )
       : ProjectSubCategoryMappingList;
 
   return (
@@ -72,10 +73,11 @@ const ProjectSubCategoryMappingMaster = () => {
                 listingData={filteredList}
                 tableViewData={tableViewData}
               />
-              <ProjectSubCategoryMappingListing
-                ProjectSubCategoryMappingList={filteredList}
+              <MasterTableListing
+                filteredList={filteredList}
                 tableViewData={tableViewData}
                 handleTableViewRows={handleTableViewRows}
+                dropdownData={subCategoryCategoryData}
               />
             </Tab>
             <Tab eventKey="longer-tab" title="Add Project Sub Category Mapping">

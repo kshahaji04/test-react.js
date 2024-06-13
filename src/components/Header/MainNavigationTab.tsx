@@ -33,6 +33,7 @@ const MainNavigationTab = () => {
       name: 'Daily Reports',
       url: 'report',
     },
+
   ];
 
   return (
@@ -45,31 +46,27 @@ const MainNavigationTab = () => {
 
             return (
               <div
-                className={`header-card-container mx-4 px-1 my-1 ${
-                  isActive ? 'activePage' : ''
-                }`}
+                className={`header-card-container mx-4 px-1 my-1 ${isActive ? 'activePage' : ''
+                  }`}
                 key={index}
               >
                 <NavLink
                   to={linkTo}
-                  className={`text-decoration-none navlink-class ${
-                    isActive ? 'activeNavLink' : ''
-                  }`}
+                  className={`text-decoration-none navlink-class ${isActive ? 'activeNavLink' : ''
+                    }`}
                 >
                   <div className="d-flex align-items-center header-card">
                     <span
-                      className={`${
-                        isActive
-                          ? 'text-white master-heading-icon'
-                          : 'master-icon-color'
-                      }`}
+                      className={`${isActive
+                        ? 'text-white master-heading-icon'
+                        : 'master-icon-color'
+                        }`}
                     >
                       <i className={pageName.icon}></i>
                     </span>
                     <p
-                      className={`text-body-secondary my-auto px-1 headers-heading ${
-                        isActive ? ' border-0 text-white' : ''
-                      }`}
+                      className={`text-body-secondary my-auto px-1 headers-heading ${isActive ? ' border-0 text-white' : ''
+                        }`}
                     >
                       {pageName.name}
                     </p>
@@ -78,6 +75,7 @@ const MainNavigationTab = () => {
               </div>
             );
           })}
+
         </div>
       </div>
     </>

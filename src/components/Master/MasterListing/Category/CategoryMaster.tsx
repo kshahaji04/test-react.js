@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import AddCategory from './AddCategory';
 import useCategoryHook from '../../../../hooks/Master/category-hook';
 import MasterSingleListingSearch from '../MasterSingleListingSearch';
-import SingleItemListingInMaster from '../SingleItemListingInMaster';
+import AddCategory from './AddCategory';
+import MasterTableListing from '../../MasterTableListing';
 
 const CategoryMaster = () => {
   const { CategoryList }: any = useCategoryHook();
@@ -43,8 +43,8 @@ const CategoryMaster = () => {
                 listingData={filterList}
                 tableViewData={tableViewData}
               />
-              <SingleItemListingInMaster
-                listingData={filterList}
+              <MasterTableListing
+                filteredList={filterList}
                 handleTableViewRows={handleTableViewRows}
                 tableViewData={tableViewData}
                 heading="Category"

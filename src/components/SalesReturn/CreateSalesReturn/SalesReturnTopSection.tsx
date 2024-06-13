@@ -71,9 +71,19 @@ const SalesReturnTopSection = ({
 
         <div className="col-lg-3 col-md-6">
           <label className="form-Form.Label fs-6 text-dark form-label-bold">
-            Remarks
+            Category
           </label>
-          <input
+          <div>
+            <div className="form-check form-check-inline">
+              <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
+              <label className="form-check-label">916</label>
+            </div>
+            <div className="form-check form-check-inline">
+              <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
+              <label className="form-check-label">75</label>
+            </div>
+          </div>
+          {/* <input
             type="text"
             name="remarks"
             className="form-control custom-input-field px-1"
@@ -82,7 +92,7 @@ const SalesReturnTopSection = ({
             onChange={(e) => handleSRTopSectionData(e.target.value, 'remarks')}
             readOnly={readOnlyFields}
             autoComplete="off"
-          />
+          /> */}
         </div>
       </div>
     </form>

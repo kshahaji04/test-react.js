@@ -107,6 +107,7 @@ const ListingTable = ({ tableListingData, userRolesData }: any) => {
     );
   };
 
+  console.log("tableListingData", tableListingData, new Date()?.toLocaleDateString('en-GB').split('/').join('-'))
   const TableBodyData: any = () => {
     return (
       <>

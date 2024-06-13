@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import MasterSingleListingSearch from '../MasterSingleListingSearch';
-import SingleItemListingInMaster from '../SingleItemListingInMaster';
 import useSupplierHook from '../../../../hooks/Master/Supplier-hook';
+import MasterSingleListingSearch from '../MasterSingleListingSearch';
+
 import CreateNewSupplierGroup from './CreateNewSupplierGroup';
+import MasterTableListing from '../../MasterTableListing';
 
 const SupplierGroup = () => {
   const { supplierGroupList } = useSupplierHook();
@@ -35,7 +36,6 @@ const SupplierGroup = () => {
             className="mb-1"
             justify
           >
-            {' '}
             <Tab eventKey="chitti-listing" title="Supplier Group List">
               <MasterSingleListingSearch
                 placeholder="Client group"
@@ -43,8 +43,8 @@ const SupplierGroup = () => {
                 listingData={filterList}
                 tableViewData={tableViewData}
               />
-              <SingleItemListingInMaster
-                listingData={filterList}
+              <MasterTableListing
+                filteredList={filterList}
                 handleTableViewRows={handleTableViewRows}
                 tableViewData={tableViewData}
                 heading="Supplier Group"

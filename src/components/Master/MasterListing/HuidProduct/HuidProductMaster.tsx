@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import AddHuidProduct from './AddHuidProduct';
 import UseHuidProductHook from '../../../../hooks/Master/huid-product-hook';
-
-import HuidProductListing from './HuidProductListing';
+import AddHuidProduct from './AddHuidProduct';
 import MasterMultipleListingSearch from '../MasterMultipleListingSearch';
+import MasterTableListing from '../../MasterTableListing';
 
 const HuidProductMaster = () => {
   const { huidProductData }: any = UseHuidProductHook();
@@ -69,8 +68,8 @@ const HuidProductMaster = () => {
                 tableViewData={tableViewData}
               />
 
-              <HuidProductListing
-                listingData={filteredListWithAdditionalFilters}
+              <MasterTableListing
+                filteredList={filteredListWithAdditionalFilters}
                 handleTableViewRows={handleTableViewRows}
                 tableViewData={tableViewData}
               />

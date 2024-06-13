@@ -2,16 +2,15 @@ import { Button, Modal } from "react-bootstrap"
 
 
 const DeleteAlertModal = ({ isModalOpen, setIsModalOpen, handleDeleteBtn }: any) => {
-
     const handleClose = () => {
         setIsModalOpen(false);
     };
     return (
         <Modal show={isModalOpen} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Delete Receipt</Modal.Title>
+                <Modal.Title>Delete Record</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Are you sure you want to Delete this receipt?</Modal.Body>
+            <Modal.Body>Do you want to proceed with deletion?</Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                     Cancel

@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import MasterMultipleListingSearch from '../MasterMultipleListingSearch';
-import SupplierListing from './SupplierListing';
 import useSupplierHook from '../../../../hooks/Master/Supplier-hook';
+import MasterMultipleListingSearch from '../MasterMultipleListingSearch';
+
 import AddSupplier from './AddSupplier';
+import MasterTableListing from '../../MasterTableListing';
 
 const Supplier = () => {
   const { supplierNameSupplierGroupList, supplierGroupList }: any =
@@ -54,10 +55,11 @@ const Supplier = () => {
                 listingData={filteredList}
                 tableViewData={tableViewData}
               />
-              <SupplierListing
-                listingData={filteredList}
+              <MasterTableListing
+                filteredList={filteredList}
                 handleTableViewRows={handleTableViewRows}
                 tableViewData={tableViewData}
+                dropdownData={supplierGroupList}
               />
             </Tab>
             <Tab eventKey="longer-tab" title="Add Supplier">
