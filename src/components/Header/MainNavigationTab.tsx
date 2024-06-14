@@ -1,5 +1,5 @@
-import '../../Style/Navbar.css';
 import { NavLink } from 'react-router-dom';
+import '../../Style/Navbar.css';
 
 const MainNavigationTab = () => {
   const navList = [
@@ -75,7 +75,7 @@ const MainNavigationTab = () => {
               </div>
             );
           })}
-
+          {/* <NotificationToggle /> */}
         </div>
       </div>
     </>

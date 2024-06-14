@@ -1,10 +1,10 @@
-import ReportMaster from '../components/Report/ReportMaster';
+import ReportMaster from '../components/Report/ReportsTab/ReportTabs';
 
 const Report = () => {
   return (
-    <div>
+    <>
       <ReportMaster />
-    </div>
+    </>
   );
 };
 

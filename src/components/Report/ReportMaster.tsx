@@ -1,48 +1,48 @@
-import { NavLink } from 'react-router-dom';
-import '../../Style/report.css';
+import React from 'react'
+import ReportListingTable from './ReportListingTable'
+import useReportHook from '../../hooks/report/report-hook'
+import ReportsFilters from './ReportsFilters'
+import { useLocation } from 'react-router-dom'
 
 const ReportMaster = () => {
-  const reportlist: any = [
-    'Sub Category ',
-    'Category Partywise',
-    'Category Summary',
-  ];
-  return (
-    <>
-      <div className="container mt-3 mb-4">
-        <div className="d-flex justify-content-center flex-wrap  card-listing-container">
-          {reportlist?.length > 0 &&
-            reportlist !== null &&
-            reportlist.map((data: any, index: any) => {
-              const processedStr: any = data.replace(/\s+/g, '').toLowerCase();
-              const linkTo: any = `/report/${processedStr}`;
-              const isActive: any = window?.location?.pathname === linkTo;
-              return (
-                <div
-                  className={`mx-lg-3 my-lg-0 my-1 master-heading  px-lg-2  ${
-                    isActive ? 'activePage border-0' : ''
-                  }`}
-                  key={index}
-                >
-                  <NavLink
-                    to={`/report/${processedStr}`}
-                    className={`text-decoration-none navlink-class ${
-                      isActive ? 'text-white' : ''
-                    }`}
-                  >
-                    <div className="d-flex justify-content-center align-items-center px-1">
-                      <div className="reports-heading me-1 m-0">{data}</div>
-                      <i className="fa-solid fa-arrow-turn-down d-flex align-items-center master-head-icon"></i>
-                    </div>
-                  </NavLink>
-                </div>
-              );
-            })}
-        </div>
-        {/* <hr className="my-0 mt-2 " /> */}
-      </div>
-    </>
-  );
-};
 
-export default ReportMaster;
+    const { reportData, searchInputValues, setSearchInputValues, handleSearchInput, handlePrintBtn, handleSearchBtn }: any = useReportHook()
+    const location: any = useLocation()
+
+    const generateDynamicHeading = (path: string | undefined) => {
+        if (!path) {
+            return "";
+        }
+        switch (true) {
+            case path.includes("subcategory"):
+                return "Sub Category Report";
+
+            case path.includes("categorypartywise"):
+                return "Category Partywise Report";
+
+            case path.includes("categorysummary"):
+                return "Category Summary Report";
+
+            default:
+                return "";
+        }
+    };
+    return (
+        <div className='container'>
+            <div className="d-flex justify-content-between my-1">
+                <h5>{generateDynamicHeading(location.pathname)}</h5>
+                <button
+                    type="button"
+                    className="btn btn-primary btn-sm py-0 px-3 download-report-btn"
+                    onClick={handlePrintBtn}
+                >
+                    <span className="fs-6">Print</span>
+                </button>
+            </div>
+            <ReportsFilters searchInputValues={searchInputValues} setSearchInputValues={setSearchInputValues} handleSearchInput={handleSearchInput} handleSearchBtn={handleSearchBtn} dropdownData={reportData} />
+            <ReportListingTable reportData={reportData} searchInputValues={searchInputValues} setSearchInputValues={setSearchInputValues} />
+        </div>
+    )
+}
+
+export default ReportMaster

@@ -1,43 +1,48 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Login from '../components/Auth/Login';
-import ProtectedRoute from './ProtectedRoute';
-import DataUploadMaster from '../components/DataUpload/DataUploadMaster';
-import MasterPage from '../pages/master';
-import ChittiPage from '../pages/chitti';
-import Report from '../pages/report';
-import Emerald from '../pages/emerald';
-import ClientGroup from '../components/Master/MasterListing/ClientGroup/ClientGroup';
-import ClientName from '../components/Master/MasterListing/ClientName/ClientName';
-import Category from '../components/Master/MasterListing/Category/CategoryMaster';
-import SubCategory from '../components/Master/MasterListing/SubCategory/SubCategoryMaster';
-import HuidProduct from '../components/Master/MasterListing/HuidProduct/HuidProductMaster';
 import EditChallanChitti from '../components/Chitti/ChittiListing/EditChallanChitti';
-import MasterPageClientNameDetail from '../components/Master/MasterListing/ClientName/MasterPageClientNameDetails';
-import MasterListing from '../components/Master/MasterListing';
-import MasterPageSubCategoryDetail from '../components/Master/MasterListing/SubCategory/MasterPageSubCagegoryDetail';
-import EditEmeraldChitti from '../components/EmeraldChitti/EmeraldListing/EditEmeraldChitti';
+import DataUploadMaster from '../components/DataUpload/DataUploadMaster';
+import EmeraldShilpiDetails from '../components/DataUpload/EmeraldShilpi/EmeraldShilpiDetails';
+import EmeraldShilpiListing from '../components/DataUpload/EmeraldShilpi/EmeraldShilpiListing';
 import EmeraldSupplierDetailPage from '../components/DataUpload/ViewUpload/EmeraldSupplierDetailPage';
-import ReportMaster from '../components/Report/ReportMaster';
-import SubCategoryReport from '../components/Report/ReportListing.tsx/SubCategoryReport';
+import EmeraldChittiMaster from '../components/EmeraldChitti/EmeraldChittiMaster';
+import EditEmeraldChitti from '../components/EmeraldChitti/EmeraldListing/EditEmeraldChitti';
+import MasterListing from '../components/Master/MasterListing';
+import Category from '../components/Master/MasterListing/Category/CategoryMaster';
+import MasterPageCategoryDetails from '../components/Master/MasterListing/Category/MasterPageCategoryDetails';
+import ClientGroup from '../components/Master/MasterListing/ClientGroup/ClientGroup';
+import MasterPageClientGroupDetails from '../components/Master/MasterListing/ClientGroup/MasterPageClientGroupDetails';
+import ClientName from '../components/Master/MasterListing/ClientName/ClientName';
+import MasterPageClientNameDetail from '../components/Master/MasterListing/ClientName/MasterPageClientNameDetails';
+import HuidProduct from '../components/Master/MasterListing/HuidProduct/HuidProductMaster';
+import MasterPageHuidProductDetails from '../components/Master/MasterListing/HuidProduct/MasterPageHuidProductDetails';
+import MasterPageProjectSubCategoryMapping from '../components/Master/MasterListing/ProjectSubCategoryMapping/MasterPageProjectSubCategoryMapping';
+import ProjectSubCategoryMappingMaster from '../components/Master/MasterListing/ProjectSubCategoryMapping/ProjectSubCategoryMappingMaster';
+import MasterPageSubCategoryDetail from '../components/Master/MasterListing/SubCategory/MasterPageSubCagegoryDetail';
+import SubCategory from '../components/Master/MasterListing/SubCategory/SubCategoryMaster';
+import MasterPageSupplierDetails from '../components/Master/MasterListing/Supplier/MasterPageSupplierDetails';
+import Supplier from '../components/Master/MasterListing/Supplier/Supplier';
+import MasterPageSupplierGroupDetail from '../components/Master/MasterListing/SupplierGroup/MasterPageSupplierGroupDetail';
+import SupplierGroup from '../components/Master/MasterListing/SupplierGroup/SupplierGroup';
+import DetailPagePurchaseReceipt from '../components/PurchaseReceipt/DetailPagePurchaseReceipt/DetailPagePurchaseReceipt';
 import CategoryPartyWiseReport from '../components/Report/ReportListing.tsx/CategoryPartywiseReport';
 import CategorySummaryReport from '../components/Report/ReportListing.tsx/CategorySummaryReport';
-import MasterPageClientGroupDetails from '../components/Master/MasterListing/ClientGroup/MasterPageClientGroupDetails';
-import MasterPageCategoryDetails from '../components/Master/MasterListing/Category/MasterPageCategoryDetails';
-import MasterPageHuidProductDetails from '../components/Master/MasterListing/HuidProduct/MasterPageHuidProductDetails';
 import EmeraldReport from '../components/Report/ReportListing.tsx/EmeraldReport';
-import EmeraldShilpiDetails from '../components/DataUpload/EmeraldShilpi/EmeraldShilpiDetails';
-import ProjectSubCategoryMappingMaster from '../components/Master/MasterListing/ProjectSubCategoryMapping/ProjectSubCategoryMappingMaster';
-import MasterPageProjectSubCategoryMapping from '../components/Master/MasterListing/ProjectSubCategoryMapping/MasterPageProjectSubCategoryMapping';
-import Supplier from '../components/Master/MasterListing/Supplier/Supplier';
-import SupplierGroup from '../components/Master/MasterListing/SupplierGroup/SupplierGroup';
-import MasterPageSupplierGroupDetail from '../components/Master/MasterListing/SupplierGroup/MasterPageSupplierGroupDetail';
-import MasterPageSupplierDetails from '../components/Master/MasterListing/Supplier/MasterPageSupplierDetails';
-import EmeraldChittiMaster from '../components/EmeraldChitti/EmeraldChittiMaster';
-import EmeraldShilpiListing from '../components/DataUpload/EmeraldShilpi/EmeraldShilpiListing';
-import PurchaseReceipt from '../pages/purchaseReceipt';
-import SalesReturn from '../pages/salesReturn';
-import DetailPagePurchaseReceipt from '../components/PurchaseReceipt/DetailPagePurchaseReceipt/DetailPagePurchaseReceipt';
+import SubCategoryReport from '../components/Report/ReportListing.tsx/SubCategoryReport';
+import ReportMaster from '../components/Report/ReportMaster';
+import ChittiReportsTab from '../components/Report/ReportsTab/ChittiReportsTab';
+import EmeralChittiReportsTab from '../components/Report/ReportsTab/EmeraldChittiReportsTab';
+import PurchaseReceiptsReportsTab from '../components/Report/ReportsTab/PurchaseReceiptReportsTab';
+import ReportTabs from '../components/Report/ReportsTab/ReportTabs';
+import SalesReturnReportsTab from '../components/Report/ReportsTab/SalesReturnReportsTab';
 import DetailPageSalesReturn from '../components/SalesReturn/DetailPageSalesReturn/DetailPageSalesReturn';
+import ChittiPage from '../pages/chitti';
+import Emerald from '../pages/emerald';
+import MasterPage from '../pages/master';
+import PurchaseReceipt from '../pages/purchaseReceipt';
+import Report from '../pages/report';
+import SalesReturn from '../pages/salesReturn';
+import ProtectedRoute from './ProtectedRoute';
 
 const AppRoutes = () => {
   return (
@@ -273,28 +278,28 @@ const AppRoutes = () => {
         />
 
         <Route
-          path="/report/subcategory"
+          path="/report/chitti/subcategory"
           element={
             <ProtectedRoute>
-              <ReportMaster />
+              <ChittiReportsTab />
               <SubCategoryReport />
             </ProtectedRoute>
           }
         />
         <Route
-          path="/report/categorypartywise"
+          path="/report/chitti/categorypartywise"
           element={
             <ProtectedRoute>
-              <ReportMaster />
+              <ChittiReportsTab />
               <CategoryPartyWiseReport />
             </ProtectedRoute>
           }
         />
         <Route
-          path="/report/categorysummary"
+          path="/report/chitti/categorysummary"
           element={
             <ProtectedRoute>
-              <ReportMaster />
+              <ChittiReportsTab />
               <CategorySummaryReport />
             </ProtectedRoute>
           }
@@ -303,7 +308,7 @@ const AppRoutes = () => {
           path="/report/emerald"
           element={
             <ProtectedRoute>
-              <ReportMaster />
+              <ReportTabs />
               <EmeraldReport />
             </ProtectedRoute>
           }
@@ -331,6 +336,65 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <Report />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/report/chitti"
+          element={
+            <ProtectedRoute>
+              <ChittiReportsTab />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/report/purchasereceipt"
+          element={
+            <ProtectedRoute>
+              <PurchaseReceiptsReportsTab />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/report/purchasereceipt/:id"
+          element={
+            <ProtectedRoute>
+              <PurchaseReceiptsReportsTab />
+              <ReportMaster />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/report/emeraldchitti"
+          element={
+            <ProtectedRoute>
+              <EmeralChittiReportsTab />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/report/emeraldchitti/:id"
+          element={
+            <ProtectedRoute>
+              <EmeralChittiReportsTab />
+              <ReportMaster />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/report/salesreturn"
+          element={
+            <ProtectedRoute>
+              <SalesReturnReportsTab />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/report/salesreturn/:id"
+          element={
+            <ProtectedRoute>
+              <SalesReturnReportsTab />
+              <ReportMaster />
             </ProtectedRoute>
           }
         />
