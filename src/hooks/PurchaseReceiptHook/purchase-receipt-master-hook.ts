@@ -68,16 +68,16 @@ const usePurchaseReceiptMasterHook = () => {
     dispatch(getPurchaseReceiptListing(accessToken?.token));
     dispatch(getSubCategoryList(accessToken?.token));
     dispatch(getClientName(accessToken?.token));
-    getUserRoles()
+    getUserRoles();
   }, []);
 
   const getUserRoles: any = async () => {
-    let userRolesData: any = await getUserRoleApi(accessToken?.token)
-    console.log("userRoleData", userRolesData)
-    if (userRolesData?.data?.message?.status === "success") {
-      setUserRolesData(userRolesData?.data?.message?.data)
+    let userRolesData: any = await getUserRoleApi(accessToken?.token);
+    console.log('userRoleData', userRolesData);
+    if (userRolesData?.data?.message?.status === 'success') {
+      setUserRolesData(userRolesData?.data?.message?.data);
     }
-  }
+  };
 
   const handlePurchaseTableFieldChange: any = (
     value: any,
@@ -178,10 +178,6 @@ const usePurchaseReceiptMasterHook = () => {
     }
   }, [clientNameDataFromStore]);
 
-
-
-
-
   const handleCreatePR: any = async () => {
     const NoDataChallanTableData = purchaseReceiptTable?.some(
       (item: any) => Object?.keys(item)?.length === 0
@@ -242,7 +238,8 @@ const usePurchaseReceiptMasterHook = () => {
             clientName: topSectionInputData?.client_name,
             // clientGroup: clientGroupName,
             goldRate: topSectionInputData?.gold_rate,
-            remarks: topSectionInputData?.remarks,
+            check_916: topSectionInputData?.check_916,
+            check_75: topSectionInputData?.check_75,
             challanTableData: challanTableWithGrossWeight,
             token: accessToken?.token,
           };
@@ -305,7 +302,8 @@ const usePurchaseReceiptMasterHook = () => {
         clientName: topSectionInputData?.karigar_name,
         // clientGroup: clientGroupName,
         goldRate: topSectionInputData?.gold_rate,
-        remarks: topSectionInputData?.remarks,
+        check_916: topSectionInputData?.check_916,
+        check_75: topSectionInputData?.check_75,
         purchaseReceiptTableData: filteredChallanTable,
         token: accessToken?.token,
       };
@@ -353,7 +351,7 @@ const usePurchaseReceiptMasterHook = () => {
     handleCreatePR,
     listingData,
     handleUpdateRecord,
-    userRolesData
+    userRolesData,
   };
 };
 

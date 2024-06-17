@@ -74,6 +74,12 @@ const EditChallanChitti = () => {
   };
 
   // console.log("stateForDocStatus in btn section", stateForDocStatus)
+  let todayDate: any = new Date()
+    .toISOString()
+    .split('T')[0]
+    .split('-')
+    .reverse()
+    .join('-');
 
   return (
     <div className="container">
@@ -143,8 +149,7 @@ const EditChallanChitti = () => {
                         disabled={
                           challanDetail?.length > 0 &&
                           challanDetail !== null &&
-                          challanDetail[0]?.date !==
-                            new Date()?.toISOString()?.split('T')[0]
+                          challanDetail[0]?.date !== todayDate
                         }
                         onClick={handleSubmitChallanChitti}
                       >
@@ -179,8 +184,7 @@ const EditChallanChitti = () => {
                             disabled={
                               challanDetail?.length > 0 &&
                               challanDetail !== null &&
-                              challanDetail[0]?.date !==
-                                new Date()?.toISOString()?.split('T')[0]
+                              challanDetail[0]?.date !== todayDate
                             }
                             onClick={handleAmendButtonChanges}
                           >
@@ -208,8 +212,7 @@ const EditChallanChitti = () => {
                         disabled={
                           challanDetail?.length > 0 &&
                           challanDetail !== null &&
-                          challanDetail[0]?.date !==
-                            new Date()?.toISOString()?.split('T')[0]
+                          challanDetail[0]?.date !== todayDate
                         }
                         onClick={() => setIsModalOpen(true)}
                       >

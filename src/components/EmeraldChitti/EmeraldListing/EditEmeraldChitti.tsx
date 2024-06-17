@@ -79,6 +79,12 @@ const EditEmeraldChitti = () => {
     handleDeleteEmeraldChitti();
   };
 
+  let todayDate: any = new Date()
+    .toISOString()
+    .split('T')[0]
+    .split('-')
+    .reverse()
+    .join('-');
   return (
     <div className="container">
       {emeraldDetailDataFromStore?.isLoading === 'pending' ? (
@@ -146,8 +152,7 @@ const EditEmeraldChitti = () => {
                       disabled={
                         challanDetail?.length > 0 &&
                         challanDetail !== null &&
-                        challanDetail[0]?.date !==
-                          new Date()?.toISOString()?.split('T')[0]
+                        challanDetail[0]?.date !== todayDate
                       }
                       onClick={handleSubmitEmeraldChittiData}
                     >
@@ -181,8 +186,7 @@ const EditEmeraldChitti = () => {
                         disabled={
                           challanDetail?.length > 0 &&
                           challanDetail !== null &&
-                          challanDetail[0]?.date !==
-                            new Date()?.toISOString()?.split('T')[0]
+                          challanDetail[0]?.date !== todayDate
                         }
                         onClick={handleAmendButtonChanges}
                       >
@@ -210,8 +214,7 @@ const EditEmeraldChitti = () => {
                       disabled={
                         challanDetail?.length > 0 &&
                         challanDetail !== null &&
-                        challanDetail[0]?.date !==
-                          new Date()?.toISOString()?.split('T')[0]
+                        challanDetail[0]?.date !== todayDate
                       }
                       onClick={() => setIsModalOpen(true)}
                     >

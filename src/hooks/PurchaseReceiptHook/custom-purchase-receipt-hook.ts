@@ -83,9 +83,11 @@ const useCustomPurchaseReceiptHook = () => {
   };
 
   const handlePRTopSectionData: any = (value: any, fieldName: any) => {
+    console.log('handle data', value, fieldName);
+    const processedValue = typeof value === 'boolean' ? (value ? 1 : 0) : value;
     setTopSectionInputData((prevState: any) => ({
       ...prevState,
-      [fieldName]: value,
+      [fieldName]: processedValue,
     }));
     setStateForDocStatus(true);
   };

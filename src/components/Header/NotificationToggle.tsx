@@ -95,7 +95,7 @@ const NotificationToggle = () => {
                 role="tabpanel"
                 aria-labelledby="nav-home-tab"
               >
-                {/* {pendingPRRecords} */}
+                No New notifications
               </div>
               <div
                 className="tab-pane fade"
@@ -103,7 +103,7 @@ const NotificationToggle = () => {
                 role="tabpanel"
                 aria-labelledby="nav-profile-tab"
               >
-                SR{' '}
+                No New notifications
               </div>
             </div>
           </Tooltip>

@@ -28,7 +28,7 @@ const DetailPagePurchaseReceipt = () => {
     handleDeleteRecord,
     handlePrintRecord,
     handleAmendRecord,
-    userRolesData
+    userRolesData,
   } = usePurchaseReceiptDetailHook();
 
   const purchaseReceiptDetailFromStore: any = useSelector(

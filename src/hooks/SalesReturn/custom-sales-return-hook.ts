@@ -83,12 +83,15 @@ const useCustomSalesReturnHook = () => {
   };
 
   const handleSRTopSectionData: any = (value: any, fieldName: any) => {
+    const processedValue = typeof value === 'boolean' ? (value ? 1 : 0) : value;
+
     setTopSectionInputData((prevState: any) => ({
       ...prevState,
-      [fieldName]: value,
+      [fieldName]: processedValue,
     }));
     setStateForDocStatus(true);
   };
+  console.log('topSectionInputData', topSectionInputData);
 
   return {
     salesReturnTable,

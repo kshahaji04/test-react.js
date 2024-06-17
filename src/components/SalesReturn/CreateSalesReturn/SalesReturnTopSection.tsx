@@ -75,24 +75,33 @@ const SalesReturnTopSection = ({
           </label>
           <div>
             <div className="form-check form-check-inline">
-              <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="inlineCheckbox1"
+                value={topSectionInputData?.check_916}
+                defaultChecked={topSectionInputData?.check_916 === 1}
+                onChange={(e) =>
+                  handleSRTopSectionData(e.target.checked, 'check_916')
+                }
+                // defaultChecked={}
+              />
               <label className="form-check-label">916</label>
             </div>
             <div className="form-check form-check-inline">
-              <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="inlineCheckbox2"
+                value={topSectionInputData?.check_75}
+                defaultChecked={topSectionInputData?.check_75 === 1}
+                onChange={(e) =>
+                  handleSRTopSectionData(e.target.checked, 'check_75')
+                }
+              />
               <label className="form-check-label">75</label>
             </div>
           </div>
-          {/* <input
-            type="text"
-            name="remarks"
-            className="form-control custom-input-field px-1"
-            value={topSectionInputData?.remarks}
-            defaultValue={topSectionInputData?.remarks}
-            onChange={(e) => handleSRTopSectionData(e.target.value, 'remarks')}
-            readOnly={readOnlyFields}
-            autoComplete="off"
-          /> */}
         </div>
       </div>
     </form>

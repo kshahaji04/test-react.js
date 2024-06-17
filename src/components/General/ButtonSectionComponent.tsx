@@ -14,10 +14,10 @@ const ButtonSectionComponent = ({
   handleAmendBtn,
   details,
   handleUpdateRecordBtn,
-  userRolesData
+  userRolesData,
 }: any) => {
   const navigate: any = useNavigate();
-  let pathname: any = window.location.pathname
+  let pathname: any = window.location.pathname;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [showSaveButtonForAmendFlow, setShowSaveButtonForAmendFlow] =
     useState<boolean>(false);
@@ -32,11 +32,25 @@ const ButtonSectionComponent = ({
     navigate(-1);
   };
 
+  let todayDate: any = new Date()
+    .toISOString()
+    .split('T')[0]
+    .split('-')
+    .reverse()
+    .join('-');
+
   const userRoleWiseShow: any = () => {
-    let userRoleHasSubmitAccess: any = userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Submit Access"))
-    let userRoleHasSaveSubmitAccess: any = userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Save Submit Access"))
-    if (pathname.includes("/purchase-receipt") || pathname.includes("/sales-return")) {
-      if ((userRoleHasSubmitAccess || userRoleHasSaveSubmitAccess)) {
+    let userRoleHasSubmitAccess: any =
+      userRolesData?.length > 0 &&
+      userRolesData.some((roles: any) => roles.includes('Submit Access'));
+    let userRoleHasSaveSubmitAccess: any =
+      userRolesData?.length > 0 &&
+      userRolesData.some((roles: any) => roles.includes('Save Submit Access'));
+    if (
+      pathname.includes('/purchase-receipt') ||
+      pathname.includes('/sales-return')
+    ) {
+      if (userRoleHasSubmitAccess || userRoleHasSaveSubmitAccess) {
         return (
           <button
             type="submit"
@@ -44,13 +58,13 @@ const ButtonSectionComponent = ({
             disabled={
               details?.length > 0 &&
               details !== null &&
-              details[0]?.date !== new Date()?.toISOString()?.split('T')[0]
+              details[0]?.date !== todayDate
             }
             onClick={() => handleUpdateDocstatusBtn('1')}
           >
             Submit
           </button>
-        )
+        );
       }
     } else {
       return (
@@ -60,15 +74,15 @@ const ButtonSectionComponent = ({
           disabled={
             details?.length > 0 &&
             details !== null &&
-            details[0]?.date !== new Date()?.toISOString()?.split('T')[0]
+            details[0]?.date !== todayDate
           }
           onClick={() => handleUpdateDocstatusBtn('1')}
         >
           Submit
         </button>
-      )
+      );
     }
-  }
+  };
 
   return (
     <div className="d-flex justify-content-between  my-3">
@@ -121,11 +135,7 @@ const ButtonSectionComponent = ({
           </button>
         )}
         {stateForDocStatus === false && docStatus === 0 && (
-          <>
-            {userRoleWiseShow(details)}
-
-
-          </>
+          <>{userRoleWiseShow(details)}</>
         )}
         {/* {docStatus === 1 && (
           <button
@@ -154,7 +164,7 @@ const ButtonSectionComponent = ({
               disabled={
                 details?.length > 0 &&
                 details !== null &&
-                details[0]?.date !== new Date()?.toISOString()?.split('T')[0]
+                details[0]?.date !== todayDate
               }
               onClick={handleAmendButtonChanges}
             >
@@ -182,7 +192,7 @@ const ButtonSectionComponent = ({
             disabled={
               details?.length > 0 &&
               details !== null &&
-              details[0]?.date !== new Date()?.toISOString()?.split('T')[0]
+              details[0]?.date !== todayDate
             }
             onClick={() => setIsModalOpen(true)}
           >

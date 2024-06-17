@@ -1,7 +1,6 @@
-import UserProfile from './UserProfile';
 import '../../Style/Navbar.css';
 import NotificationToggle from './NotificationToggle';
-import { Nav } from 'react-bootstrap';
+import UserProfile from './UserProfile';
 
 const TopNavbar = () => {
   return (

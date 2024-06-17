@@ -42,7 +42,7 @@ const usePurchaseReceiptDetailHook: any = () => {
     handleCreatePR,
     listingData,
     handleUpdateRecord,
-    userRolesData
+    userRolesData,
   } = usePurchaseReceiptMasterHook();
 
   useEffect(() => {
@@ -78,7 +78,8 @@ const usePurchaseReceiptDetailHook: any = () => {
       karigar_name: topSectionInputData?.karigar_name,
       // client_group: topSectionInputData?.karigar_name,
       gold_rate: topSectionInputData?.karigar_name,
-      remarks: topSectionInputData?.remarks,
+      check_916: topSectionInputData?.check_916,
+      check_75: topSectionInputData?.check_75,
       purchase_receipt_table: purchaseReceiptTable,
     };
     let amendApi: any = await AmendPurchaseReceiptApi(
@@ -133,7 +134,7 @@ const usePurchaseReceiptDetailHook: any = () => {
     }
   };
 
-  const handlePrintRecord: any = () => { };
+  const handlePrintRecord: any = () => {};
 
   return {
     readOnlyFields,
@@ -158,7 +159,7 @@ const usePurchaseReceiptDetailHook: any = () => {
     handleDeleteRecord,
     handlePrintRecord,
     handleAmendRecord,
-    userRolesData
+    userRolesData,
   };
 };
 

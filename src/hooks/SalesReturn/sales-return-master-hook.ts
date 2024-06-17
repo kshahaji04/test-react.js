@@ -63,16 +63,16 @@ const useSalesReturnMasterHook = () => {
     dispatch(getSalesReturnListing(accessToken?.token));
     dispatch(getSubCategoryList(accessToken?.token));
     dispatch(getClientName(accessToken?.token));
-    getUserRoles()
+    getUserRoles();
   }, []);
 
   const getUserRoles: any = async () => {
-    let userRolesData: any = await getUserRoleApi(accessToken?.token)
-    console.log("userRoleData", userRolesData)
-    if (userRolesData?.data?.message?.status === "success") {
-      setUserRolesData(userRolesData?.data?.message?.data)
+    let userRolesData: any = await getUserRoleApi(accessToken?.token);
+    console.log('userRoleData', userRolesData);
+    if (userRolesData?.data?.message?.status === 'success') {
+      setUserRolesData(userRolesData?.data?.message?.data);
     }
-  }
+  };
 
   const handlePurchaseTableFieldChange: any = (
     value: any,
@@ -205,7 +205,8 @@ const useSalesReturnMasterHook = () => {
             clientName: topSectionInputData?.client_name,
             // clientGroup: clientGroupName,
             goldRate: topSectionInputData?.gold_rate,
-            remarks: topSectionInputData?.remarks,
+            check_916: topSectionInputData?.check_916,
+            check_75: topSectionInputData?.check_75,
             challanTableData: challanTableWithGrossWeight,
           };
           let purchaseReceiptApiRes: any = await CreateSalesReturnApi(BodyData);
@@ -264,7 +265,8 @@ const useSalesReturnMasterHook = () => {
         clientName: topSectionInputData?.client_name,
         // clientGroup: clientGroupName,
         goldRate: topSectionInputData?.gold_rate,
-        remarks: topSectionInputData?.remarks,
+        check_916: topSectionInputData?.check_916,
+        check_75: topSectionInputData?.check_75,
         salesReturnTableData: filteredChallanTable,
       };
       let updateSalesReturn: any = await UpdateSalesReturnApi(BodyData);
@@ -311,7 +313,7 @@ const useSalesReturnMasterHook = () => {
     handleCreatePR,
     listingData,
     handleUpdateRecord,
-    userRolesData
+    userRolesData,
   };
 };
 
