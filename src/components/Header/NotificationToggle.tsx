@@ -8,8 +8,8 @@ const NotificationToggle = () => {
 
   return (
     <>
-      <div ref={target} onClick={() => setShow(!show)}>
-        <i className="fa-regular fa-bell"></i>
+      <div ref={target} className="px-4" onClick={() => setShow(!show)}>
+        <i className="fa-regular fa-bell fs-5"></i>
       </div>
       <Overlay target={target.current} show={show} placement="left">
         {(props) => (

@@ -29,56 +29,55 @@ const ListingTable = ({ tableListingData, userRolesData }: any) => {
     }
   }, [tableListingData]);
 
-  const userRoleWiseShow: any = (data: any) => {
-    let userRoleHasSubmitAccess: any = userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Submit Access"))
-    let userRoleHasSaveSubmitAccess: any = userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Save Submit Access"))
+  let todayDate: any = new Date()
+    .toISOString()
+    .split('T')[0]
+    .split('-')
+    .reverse()
+    .join('-');
 
-    if (pathname === "/purchase-receipt" || pathname === "/sales-return") {
-      if ((userRoleHasSubmitAccess || userRoleHasSaveSubmitAccess)) {
+  const userRoleWiseShow: any = (data: any) => {
+    let userRoleHasSubmitAccess: any =
+      userRolesData?.length > 0 &&
+      userRolesData.some((roles: any) => roles.includes('Submit Access'));
+    let userRoleHasSaveSubmitAccess: any =
+      userRolesData?.length > 0 &&
+      userRolesData.some((roles: any) => roles.includes('Save Submit Access'));
+
+    if (pathname === '/purchase-receipt' || pathname === '/sales-return') {
+      if (userRoleHasSubmitAccess || userRoleHasSaveSubmitAccess) {
         return (
           <button
             type="button"
             className="btn btn-link button-section-text p-0"
-            disabled={
-              data?.date !==
-              new Date()?.toISOString()?.split('T')[0]
-            }
+            disabled={data?.date !== todayDate}
             onClick={() => {
-              if (
-                data?.date ===
-                new Date().toISOString().split('T')[0]
-              ) {
+              if (data?.date === todayDate) {
                 handleSubmitChittiData(data.name);
               }
             }}
           >
             Submit
           </button>
-        )
+        );
       }
     } else {
       return (
         <button
           type="button"
           className="btn btn-link button-section-text p-0"
-          disabled={
-            data?.date !==
-            new Date()?.toISOString()?.split('T')[0]
-          }
+          disabled={data?.date !== todayDate}
           onClick={() => {
-            if (
-              data?.date ===
-              new Date().toISOString().split('T')[0]
-            ) {
+            if (data?.date === todayDate) {
               handleSubmitChittiData(data.name);
             }
           }}
         >
           Submit
         </button>
-      )
+      );
     }
-  }
+  };
 
   const TableHeading: any = () => {
     return (
@@ -107,7 +106,6 @@ const ListingTable = ({ tableListingData, userRolesData }: any) => {
     );
   };
 
-  console.log("tableListingData", tableListingData, new Date()?.toLocaleDateString('en-GB').split('/').join('-'))
   const TableBodyData: any = () => {
     return (
       <>
@@ -131,12 +129,12 @@ const ListingTable = ({ tableListingData, userRolesData }: any) => {
                               {v !== 'docstatus'
                                 ? data[v]
                                 : data[v] === 0
-                                  ? 'Draft'
-                                  : data[v] === 1
-                                    ? 'Submitted'
-                                    : data[v] === 2
-                                      ? 'Cancel'
-                                      : data[v]}
+                                ? 'Draft'
+                                : data[v] === 1
+                                ? 'Submitted'
+                                : data[v] === 2
+                                ? 'Cancel'
+                                : data[v]}
                             </td>
                           );
                         }
@@ -157,8 +155,6 @@ const ListingTable = ({ tableListingData, userRolesData }: any) => {
                             </div>
                             <div className="col-lg-4 col-md-4 col-12">
                               {userRoleWiseShow(data)}
-
-
                             </div>
                             <div className="col-lg-2 col-md-4 col-12">
                               <NavLink
@@ -215,15 +211,9 @@ const ListingTable = ({ tableListingData, userRolesData }: any) => {
                               <button
                                 type="button"
                                 className="btn btn-link button-section-text p-0"
-                                disabled={
-                                  data?.date !==
-                                  new Date()?.toISOString()?.split('T')[0]
-                                }
+                                disabled={data?.date !== todayDate}
                                 onClick={() => {
-                                  if (
-                                    data?.date ===
-                                    new Date().toISOString().split('T')[0]
-                                  ) {
+                                  if (data?.date === todayDate) {
                                     navigate(`${data.name}`);
                                   }
                                 }}
@@ -236,15 +226,9 @@ const ListingTable = ({ tableListingData, userRolesData }: any) => {
                               <button
                                 type="button"
                                 className="btn btn-link button-section-text p-0"
-                                disabled={
-                                  data?.date !==
-                                  new Date()?.toISOString()?.split('T')[0]
-                                }
+                                disabled={data?.date !== todayDate}
                                 onClick={() => {
-                                  if (
-                                    data?.date ===
-                                    new Date().toISOString().split('T')[0]
-                                  ) {
+                                  if (data?.date === todayDate) {
                                     handleDeleteChitti(data.name);
                                   }
                                 }}
