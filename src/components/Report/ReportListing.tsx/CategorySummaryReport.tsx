@@ -7,7 +7,7 @@ import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getCategorySummaryReportData } from '../../../store/slices/report/get-category-summary-report-slice';
-import DownloadReportApi from '../../../services/api/report/download-report-api';
+import DownloadReportApi from '../../../services/api/report/Chitti/download-report-api';
 
 const CategorySummaryReport = () => {
   const dispatch = useDispatch();
@@ -87,8 +87,8 @@ const CategorySummaryReport = () => {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-lg-10 col-12">
-          <div className="col-lg-9 col-12 mx-auto">
+        <div className="col-lg-12 col-12">
+          <div className="col-lg-12 col-12 mx-auto">
             <div className="d-flex justify-content-between my-1">
               <h5>Category Summary Report</h5>
               <button
@@ -108,7 +108,7 @@ const CategorySummaryReport = () => {
             showCategoryInFilter={showCategoryInFilter}
             showDateInFilter={showDateInFilter}
           />
-          <div className="col-lg-9 col-12 mx-auto table-responsive report-table-container">
+          <div className="col-lg-12 col-12 mx-auto table-responsive report-table-container">
             <table className="table table-striped table-hover">
               <thead className="report-table-head-row sticky-top">
                 <tr className="report-table-head-tr text-uppercase">

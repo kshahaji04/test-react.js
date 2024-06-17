@@ -1,12 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../root-reducer';
-import getSubCategoryReportApi from '../../../services/api/report/get-sub-category-report-api';
+import getSubCategoryReportApi from '../../../services/api/report/Chitti/get-sub-category-report-api';
 
 export const getSubCategoryReportData: any = createAsyncThunk(
   'getSubCategoryReport/getSubCategoryReportData',
   async (params: any) => {
     const getSubCategoryReportData: any = await getSubCategoryReportApi(params);
-    console.log('getSubCategoryReportData res', getSubCategoryReportData);
     return getSubCategoryReportData;
   }
 );
