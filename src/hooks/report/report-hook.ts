@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
@@ -27,9 +27,8 @@ import {
 import { EmeraldChittiCategoryPartywisePrintApi } from '../../services/api/report/get-emerald-chitti-print-api';
 
 const useReportHook = () => {
-  const dispatch = useDispatch();
   const location = useLocation();
-  console.log('navigate', location);
+
   let path: any = location.pathname;
 
   const [reportData, setReportData] = useState<any>([]);

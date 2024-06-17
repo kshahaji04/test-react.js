@@ -27,7 +27,9 @@ export const SRCategorySummaryPrintApi = async (request: any, params: any) => {
     .then((res: any) => {
       response = res;
     })
-    .catch((err: any) => {});
+    .catch((err: any) => {
+      console.log(err);
+    });
   return response;
 };
 
@@ -59,7 +61,9 @@ export const SRCategoryPartywisePrintApi = async (
     .then((res: any) => {
       response = res;
     })
-    .catch((err: any) => {});
+    .catch((err: any) => {
+      console.log(err);
+    });
   return response;
 };
 
@@ -89,6 +93,8 @@ export const SRSubcategoryPrintApi = async (request: any, params: any) => {
     .then((res: any) => {
       response = res;
     })
-    .catch((err: any) => {});
+    .catch((err: any) => {
+      console.log(err);
+    });
   return response;
 };

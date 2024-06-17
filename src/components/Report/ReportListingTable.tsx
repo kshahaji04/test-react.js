@@ -1,18 +1,9 @@
-import { useState } from 'react';
-import LoadMoreTableDataInMaster from '../Master/MasterListing/LoadMoreTableDataInMaster';
 import Loader from '../General/Loader';
 
 const ReportListingTable = ({ reportData }: any) => {
-  const [tableViewData, setTableViewData] = useState<any>(10);
-
-  const handleTableViewRows: any = (data: any) => {
-    if (data !== 5) {
-      setTableViewData(data);
-    }
-  };
   const headers =
     reportData.length > 0 && reportData[0] ? Object.keys(reportData[0]) : [];
-  console.log('pagination', tableViewData);
+
   return (
     <div className="row justify-content-center">
       {reportData?.length > 0 ? (

@@ -29,6 +29,8 @@ export const EmeraldChittiCategoryPartywisePrintApi = async (
     .then((res: any) => {
       response = res;
     })
-    .catch((err: any) => {});
+    .catch((err: any) => {
+      console.log(err);
+    });
   return response;
 };
