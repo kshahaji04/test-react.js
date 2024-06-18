@@ -84,6 +84,7 @@ const SalesReturnTopSection = ({
                 onChange={(e) =>
                   handleSRTopSectionData(e.target.checked, 'check_916')
                 }
+                disabled={readOnlyFields}
               />
               <label className="form-check-label">916</label>
             </div>
@@ -97,6 +98,7 @@ const SalesReturnTopSection = ({
                 onChange={(e) =>
                   handleSRTopSectionData(e.target.checked, 'check_75')
                 }
+                disabled={readOnlyFields}
               />
               <label className="form-check-label">75</label>
             </div>

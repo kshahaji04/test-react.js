@@ -1,5 +1,5 @@
 import '../../Style/Navbar.css';
-import NotificationToggle from './NotificationToggle';
+// import NotificationToggle from './NotificationToggle';
 import UserProfile from './UserProfile';
 
 const TopNavbar = () => {
