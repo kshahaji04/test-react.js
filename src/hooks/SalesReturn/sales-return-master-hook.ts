@@ -174,7 +174,7 @@ const useSalesReturnMasterHook = () => {
     if (!topSectionInputData?.check_75 || !topSectionInputData.check_916) {
       if (
         topSectionInputData.check_75 === 1 ||
-        topSectionInputData.check_915 === 1
+        topSectionInputData.check_916 === 1
       ) {
         return;
       } else {
