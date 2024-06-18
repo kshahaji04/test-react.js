@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import '../../Style/Navbar.css';
-import NotificationToggle from './NotificationToggle';
+// import NotificationToggle from './NotificationToggle';
 
 const MainNavigationTab = () => {
   const navList = [
