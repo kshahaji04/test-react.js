@@ -205,14 +205,13 @@ const usePurchaseReceiptMasterHook = () => {
     }
 
     if (
-      (!topSectionInputData.hasOwnProperty('check_915') ||
+      (!('check_915' in topSectionInputData) ||
         topSectionInputData.check_915 !== 1) &&
-      (!topSectionInputData.hasOwnProperty('check_75') ||
+      (!('check_75' in topSectionInputData) ||
         topSectionInputData.check_75 !== 1)
     ) {
       errMsgList.push('Category');
     }
-
     return errMsgList;
   };
 
@@ -220,6 +219,7 @@ const usePurchaseReceiptMasterHook = () => {
     const filteredChallanTable = checkObjectHasValues(purchaseReceiptTable);
 
     const errMsgList = validateForm(topSectionInputData, purchaseReceiptTable);
+
     if (errMsgList?.length > 0 && errMsgList !== null) {
       toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
     } else {
