@@ -35,7 +35,7 @@ const useSalesReturnDetailHook: any = () => {
     clientNameList,
     topSectionInputData,
     setTopSectionInputData,
-    handleCreatePR,
+    handleCreateSR,
     listingData,
     handleUpdateRecord,
     userRolesData,
@@ -70,11 +70,16 @@ const useSalesReturnDetailHook: any = () => {
     }
   }, [salesReturnDetailFromStore]);
 
+  const reverseDate = (dateString: string) => {
+    const [day, month, year] = dateString.split('-');
+    return `${year}-${month}-${day}`;
+  };
   const handleAmendRecord: any = async () => {
+    let updatedDate: any = reverseDate(topSectionInputData?.date);
     const reqParams: any = {
       amended_from: id,
       name: id,
-      date: topSectionInputData?.date,
+      date: updatedDate,
       client_name: topSectionInputData?.client_name,
       // client_group: topSectionInputData?.karigar_name,
       gold_rate: topSectionInputData?.karigar_name,
@@ -151,7 +156,7 @@ const useSalesReturnDetailHook: any = () => {
     handleSRTopSectionData,
     clientNameList,
     topSectionInputData,
-    handleCreatePR,
+    handleCreateSR,
     listingData,
     setReadOnlyFields,
     handleUpdateRecord,

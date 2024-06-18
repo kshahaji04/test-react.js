@@ -41,6 +41,7 @@ const EditChallanChitti = () => {
     showSaveButtonForAmendFlow,
     setCheckGrossAndNetWeight,
     handlePrintButton,
+    currentDate,
   }: any = useEditChallanChitti();
   const navigate = useNavigate();
   const [showButton, setShowButton] = useState<any>();
@@ -241,6 +242,7 @@ const EditChallanChitti = () => {
                               setRemarks={setRemarks}
                               setGoldRate={setGoldRate}
                               readOnly={readOnly}
+                              currentDate={currentDate}
                             />
                             <ChallanItemsTable
                               defaultData={data?.challan_table}

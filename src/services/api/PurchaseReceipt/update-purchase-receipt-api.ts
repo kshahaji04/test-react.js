@@ -14,7 +14,8 @@ const UpdatePurchaseReceiptApi = async (request: any) => {
     name: request.name,
     karigar_name: request.clientName,
     gold_rate: request.goldRate,
-    remarks: request.remarks,
+    check_916: request?.check_916,
+    check_75: request?.check_75,
     purchase_receipt_table: request.purchaseReceiptTableData,
   };
 

@@ -145,7 +145,7 @@ const useSalesReturnMasterHook = () => {
     }
   }, [clientNameDataFromStore]);
 
-  const handleCreatePR: any = async () => {
+  const handleCreateSR: any = async () => {
     const NoDataChallanTableData = salesReturnTable?.some(
       (item: any) => Object?.keys(item)?.length === 0
     );
@@ -310,7 +310,7 @@ const useSalesReturnMasterHook = () => {
     clientNameList,
     topSectionInputData,
     setTopSectionInputData,
-    handleCreatePR,
+    handleCreateSR,
     listingData,
     handleUpdateRecord,
     userRolesData,

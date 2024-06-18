@@ -82,15 +82,28 @@ const useCustomSalesReturnHook = () => {
     }
   };
 
-  const handleSRTopSectionData: any = (value: any, fieldName: any) => {
+  const handleSRTopSectionData = (value: any, fieldName: any) => {
     const processedValue = typeof value === 'boolean' ? (value ? 1 : 0) : value;
 
-    setTopSectionInputData((prevState: any) => ({
-      ...prevState,
-      [fieldName]: processedValue,
-    }));
+    setTopSectionInputData((prevState: any) => {
+      const newState = {
+        ...prevState,
+        [fieldName]: processedValue,
+      };
+
+      // Ensure only one checkbox is checked at a time
+      if (fieldName === 'check_916' && processedValue === 1) {
+        newState.check_75 = 0;
+      } else if (fieldName === 'check_75' && processedValue === 1) {
+        newState.check_916 = 0;
+      }
+
+      return newState;
+    });
+
     setStateForDocStatus(true);
   };
+
   console.log('topSectionInputData', topSectionInputData);
 
   return {

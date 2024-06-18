@@ -16,7 +16,8 @@ const CreatePurchaseReceiptApi = async (request: any) => {
     karigar_name: request.clientName,
     client_group: request.clientGroup,
     gold_rate: request.goldRate,
-    remarks: request.remarks,
+    check_916: request.check_916,
+    check_75: request.check_75,
     purchase_receipt_table: request.challanTableData,
   };
 

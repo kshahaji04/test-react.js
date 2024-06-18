@@ -58,6 +58,7 @@ const useEditChallanChitti: any = () => {
     showSaveButtonForAmendFlow,
     checkGrossAndNetWeight,
     setCheckGrossAndNetWeight,
+    currentDate,
   }: any = useChittiHook();
 
   useEffect(() => {
@@ -224,6 +225,7 @@ const useEditChallanChitti: any = () => {
     showSaveButtonForAmendFlow,
     setCheckGrossAndNetWeight,
     handlePrintButton,
+    currentDate,
   };
 };
 

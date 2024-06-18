@@ -19,9 +19,9 @@ const SalesReturnMaster = () => {
     handleSRTopSectionData,
     clientNameList,
     topSectionInputData,
-    handleCreatePR,
+    handleCreateSR,
     listingData,
-    userRolesData
+    userRolesData,
   } = useSalesReturnMasterHook();
   // console.log('ListingTable', listingData);
   const [searchClientName, setSearchclientName] = useState<any>('');
@@ -45,75 +45,76 @@ const SalesReturnMaster = () => {
 
   const filteredList =
     listingData?.length > 0 &&
-      listingData !== null &&
-      (searchInputValues.submitted_date ||
-        searchInputValues.from_date ||
-        searchInputValues.to_date ||
-        searchInputValues.chitti_no ||
-        searchClientName ||
-        searchInputValues.status)
+    listingData !== null &&
+    (searchInputValues.submitted_date ||
+      searchInputValues.from_date ||
+      searchInputValues.to_date ||
+      searchInputValues.chitti_no ||
+      searchClientName ||
+      searchInputValues.status)
       ? listingData.filter((item: any) => {
-        const fromDateAndToDateMatch =
-          searchInputValues.from_date && searchInputValues.to_date
-            ? item.date >= searchInputValues.from_date &&
-            item.date <= searchInputValues.to_date
+          const fromDateAndToDateMatch =
+            searchInputValues.from_date && searchInputValues.to_date
+              ? item.date >= searchInputValues.from_date &&
+                item.date <= searchInputValues.to_date
+              : true;
+          const numberMatch = searchInputValues.chitti_no
+            ? item?.chitti_no?.includes(searchInputValues.chitti_no)
             : true;
-        const numberMatch = searchInputValues.chitti_no
-          ? item?.chitti_no?.includes(searchInputValues.chitti_no)
-          : true;
-        const clientNameMatch = searchClientName
-          ? item?.client_name
-            ?.toLowerCase()
-            ?.includes(searchClientName.toLowerCase())
-          : true;
+          const clientNameMatch = searchClientName
+            ? item?.client_name
+                ?.toLowerCase()
+                ?.includes(searchClientName.toLowerCase())
+            : true;
 
-        if (searchInputValues.status === 'Draft') {
+          if (searchInputValues.status === 'Draft') {
+            return (
+              item?.docstatus === 0 &&
+              // submittedDateMatch &&
+              fromDateAndToDateMatch &&
+              numberMatch &&
+              clientNameMatch
+            );
+          } else if (searchInputValues.status === 'Submitted') {
+            return (
+              item?.docstatus === 1 &&
+              // submittedDateMatch &&
+              fromDateAndToDateMatch &&
+              numberMatch &&
+              clientNameMatch
+            );
+          } else if (searchInputValues.status === 'Cancel') {
+            return (
+              item?.docstatus === 2 &&
+              // submittedDateMatch &&
+              fromDateAndToDateMatch &&
+              numberMatch &&
+              clientNameMatch
+            );
+          }
           return (
-            item?.docstatus === 0 &&
             // submittedDateMatch &&
-            fromDateAndToDateMatch &&
-            numberMatch &&
-            clientNameMatch
+            fromDateAndToDateMatch && numberMatch && clientNameMatch
           );
-        } else if (searchInputValues.status === 'Submitted') {
-          return (
-            item?.docstatus === 1 &&
-            // submittedDateMatch &&
-            fromDateAndToDateMatch &&
-            numberMatch &&
-            clientNameMatch
-          );
-        } else if (searchInputValues.status === 'Cancel') {
-          return (
-            item?.docstatus === 2 &&
-            // submittedDateMatch &&
-            fromDateAndToDateMatch &&
-            numberMatch &&
-            clientNameMatch
-          );
-        }
-        return (
-          // submittedDateMatch &&
-          fromDateAndToDateMatch && numberMatch && clientNameMatch
-        );
-      })
+        })
       : listingData;
 
-
   const userRoleWiseShow: any = () => {
-    let userRoleHasSaveAccess: any = userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Save Access"))
-    let userRoleHasSaveSubmitAccess: any = userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Save Submit Access"))
+    let userRoleHasSaveAccess: any =
+      userRolesData?.length > 0 &&
+      userRolesData.some((roles: any) => roles.includes('Save Access'));
+    let userRoleHasSaveSubmitAccess: any =
+      userRolesData?.length > 0 &&
+      userRolesData.some((roles: any) => roles.includes('Save Submit Access'));
 
-    if ((userRoleHasSaveAccess || userRoleHasSaveSubmitAccess)) {
+    if (userRoleHasSaveAccess || userRoleHasSaveSubmitAccess) {
       return (
         <Tab eventKey="longer-tab" title="Create Sales Return">
           <div className="col-lg-9 col-12 mx-auto mt-2">
             <CreateSalesReturnMaster
               salesReturnTable={salesReturnTable}
               setSalesReturnTable={setSalesReturnTable}
-              handlePurchaseTableFieldChange={
-                handlePurchaseTableFieldChange
-              }
+              handlePurchaseTableFieldChange={handlePurchaseTableFieldChange}
               handleSRTopSectionData={handleSRTopSectionData}
               subCategoryList={subCategoryList}
               handleAddRow={handleAddRow}
@@ -122,13 +123,13 @@ const SalesReturnMaster = () => {
               handleKeyDown={handleKeyDown}
               clientNameList={clientNameList}
               topSectionInputData={topSectionInputData}
-              handleCreatePR={handleCreatePR}
+              handleCreateSR={handleCreateSR}
             />
           </div>
         </Tab>
-      )
+      );
     }
-  }
+  };
 
   return (
     <div className="container mt-3">
@@ -150,7 +151,10 @@ const SalesReturnMaster = () => {
                   searchClientName={searchClientName}
                   searchInputValues={searchInputValues}
                 />
-                <ListingTable tableListingData={filteredList} userRolesData={userRolesData} />
+                <ListingTable
+                  tableListingData={filteredList}
+                  userRolesData={userRolesData}
+                />
               </div>
             </Tab>
             {userRoleWiseShow()}

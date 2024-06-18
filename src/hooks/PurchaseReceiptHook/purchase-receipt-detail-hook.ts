@@ -70,11 +70,16 @@ const usePurchaseReceiptDetailHook: any = () => {
     }
   }, [purchaseReceiptDetailFromStore]);
 
+  const reverseDate = (dateString: string) => {
+    const [day, month, year] = dateString.split('-');
+    return `${year}-${month}-${day}`;
+  };
   const handleAmendRecord: any = async () => {
+    let updatedDate: any = reverseDate(topSectionInputData?.date);
     const reqParams: any = {
       amended_from: id,
       name: id,
-      date: topSectionInputData?.date,
+      date: updatedDate,
       karigar_name: topSectionInputData?.karigar_name,
       // client_group: topSectionInputData?.karigar_name,
       gold_rate: topSectionInputData?.karigar_name,

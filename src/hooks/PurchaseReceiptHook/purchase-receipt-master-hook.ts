@@ -178,30 +178,48 @@ const usePurchaseReceiptMasterHook = () => {
     }
   }, [clientNameDataFromStore]);
 
-  const handleCreatePR: any = async () => {
+  const validateForm = (
+    topSectionInputData: any,
+    purchaseReceiptTable: any
+  ) => {
     const NoDataChallanTableData = purchaseReceiptTable?.some(
       (item: any) => Object?.keys(item)?.length === 0
     );
 
-    const filteredChallanTable: any =
-      checkObjectHasValues(purchaseReceiptTable);
+    const filteredChallanTable = checkObjectHasValues(purchaseReceiptTable);
 
-    let errMsgList: any = [];
-    // if (Object?.keys(selectedDropdownValue)?.length === 0) {
-    //   errMsgList.push('Client Name');
-    // }
+    let errMsgList = [];
+
     if (NoDataChallanTableData) {
       errMsgList.push('Challan Table');
     }
+
     const hasSubCategoryKey =
       filteredChallanTable?.length > 0 &&
       filteredChallanTable.every(
         (obj: any) => 'sub_category' in obj && obj.sub_category !== ''
       );
 
-    if (!hasSubCategoryKey && errMsgList?.length === 0) {
+    if (!hasSubCategoryKey && errMsgList.length === 0) {
       errMsgList.push('Sub Category in Challan table');
     }
+
+    if (
+      (!topSectionInputData.hasOwnProperty('check_915') ||
+        topSectionInputData.check_915 !== 1) &&
+      (!topSectionInputData.hasOwnProperty('check_75') ||
+        topSectionInputData.check_75 !== 1)
+    ) {
+      errMsgList.push('Category');
+    }
+
+    return errMsgList;
+  };
+
+  const handleCreatePR: any = async () => {
+    const filteredChallanTable = checkObjectHasValues(purchaseReceiptTable);
+
+    const errMsgList = validateForm(topSectionInputData, purchaseReceiptTable);
     if (errMsgList?.length > 0 && errMsgList !== null) {
       toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
     } else {
