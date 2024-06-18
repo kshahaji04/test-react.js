@@ -204,21 +204,27 @@ const usePurchaseReceiptMasterHook = () => {
       errMsgList.push('Sub Category in Challan table');
     }
 
-    if (
-      (!('check_915' in topSectionInputData) ||
-        topSectionInputData.check_915 !== 1) &&
-      (!('check_75' in topSectionInputData) ||
-        topSectionInputData.check_75 !== 1)
-    ) {
-      errMsgList.push('Category');
+    if (!topSectionInputData?.check_75 || !topSectionInputData.check_916) {
+      if (
+        topSectionInputData.check_75 === 1 ||
+        topSectionInputData.check_915 === 1
+      ) {
+        return;
+      } else {
+        errMsgList.push('Category');
+      }
     }
+
     return errMsgList;
   };
 
   const handleCreatePR: any = async () => {
     const filteredChallanTable = checkObjectHasValues(purchaseReceiptTable);
 
-    const errMsgList = validateForm(topSectionInputData, purchaseReceiptTable);
+    const errMsgList: any = validateForm(
+      topSectionInputData,
+      purchaseReceiptTable
+    );
 
     if (errMsgList?.length > 0 && errMsgList !== null) {
       toast.error(`Mandatory fields ${errMsgList.join(', ')}`);

@@ -171,13 +171,15 @@ const useSalesReturnMasterHook = () => {
       errMsgList.push('Sub Category in Challan table');
     }
 
-    if (
-      (!('check_915' in topSectionInputData) ||
-        topSectionInputData.check_915 !== 1) &&
-      (!('check_75' in topSectionInputData) ||
-        topSectionInputData.check_75 !== 1)
-    ) {
-      errMsgList.push('Category');
+    if (!topSectionInputData?.check_75 || !topSectionInputData.check_916) {
+      if (
+        topSectionInputData.check_75 === 1 ||
+        topSectionInputData.check_915 === 1
+      ) {
+        return;
+      } else {
+        errMsgList.push('Category');
+      }
     }
     return errMsgList;
   };
@@ -185,7 +187,7 @@ const useSalesReturnMasterHook = () => {
   const handleCreateSR: any = async () => {
     const filteredChallanTable: any = checkObjectHasValues(salesReturnTable);
 
-    const errMsgList = validateForm(topSectionInputData, salesReturnTable);
+    const errMsgList: any = validateForm(topSectionInputData, salesReturnTable);
 
     if (errMsgList?.length > 0 && errMsgList !== null) {
       toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
