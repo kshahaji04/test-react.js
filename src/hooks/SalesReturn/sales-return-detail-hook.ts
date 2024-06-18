@@ -11,6 +11,7 @@ import {
 } from '../../store/slices/SalesReturn/get-detail-sales-return-slice';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import useSalesReturnMasterHook from './sales-return-master-hook';
+import PrintSalesReturnApi from '../../services/api/SalesReturn/print-sales-return-api';
 
 const useSalesReturnDetailHook: any = () => {
   const dispatch = useDispatch();
@@ -139,7 +140,14 @@ const useSalesReturnDetailHook: any = () => {
     }
   };
 
-  const handlePrintRecord: any = () => {};
+  const handlePrintRecord: any = async () => {
+    let printApiRes: any = await PrintSalesReturnApi(accessToken?.token, id);
+    if (printApiRes?.status === 'success') {
+      if (printApiRes?.data?.data?.length > 0) {
+        window.open(printApiRes?.data?.data[0]?.print_url);
+      }
+    }
+  };
 
   return {
     readOnlyFields,

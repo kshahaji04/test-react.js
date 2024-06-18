@@ -21,6 +21,8 @@ import { getPurchaseReceiptListing } from '../store/slices/PurchaseReceipt/get-p
 import DeleteSalesReturnApi from '../services/api/SalesReturn/delete-sales-return-api';
 import { getSalesReturnListing } from '../store/slices/SalesReturn/get-sales-return-listing-slice';
 import { UpdateSalesReturnDocStatusApi } from '../services/api/SalesReturn/update-docStatus-api';
+import PrintPurchaseReceiptApi from '../services/api/PurchaseReceipt/print-purchase-receipt-api';
+import PrintSalesReturnApi from '../services/api/SalesReturn/print-sales-return-api';
 
 const useListingHook: any = () => {
   const dispatch = useDispatch();
@@ -244,8 +246,29 @@ const useListingHook: any = () => {
           window.open(printApiRes?.data?.data[0]?.print_url);
         }
       }
+    } else if (window?.location?.pathname === '/purchase-receipt') {
+      let printApiRes: any = await PrintPurchaseReceiptApi(
+        accessToken?.token,
+        name
+      );
+      if (printApiRes?.status === 'success') {
+        if (printApiRes?.data?.data?.length > 0) {
+          window.open(printApiRes?.data?.data[0]?.print_url);
+        }
+      }
+    } else if (window?.location?.pathname === '/sales-return') {
+      let printApiRes: any = await PrintSalesReturnApi(
+        accessToken?.token,
+        name
+      );
+      if (printApiRes?.status === 'success') {
+        if (printApiRes?.data?.data?.length > 0) {
+          window.open(printApiRes?.data?.data[0]?.print_url);
+        }
+      }
     }
   };
+
   return {
     headingData,
     tableViewData,

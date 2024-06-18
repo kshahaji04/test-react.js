@@ -14,29 +14,33 @@ const ReportsFilters = ({
     fieldname: 'karigar_Name',
     fieldtype: 'Link',
     link_data:
-      dropdownData?.length > 0 &&
-      dropdownData.map((data: any) => data.karigar_name),
+      dropdownData?.length > 0
+        ? [...new Set(dropdownData.map((data: any) => data.karigar_name))]
+        : [],
   };
   const categoryData: any = {
     fieldname: 'category',
     fieldtype: 'Link',
     link_data:
-      dropdownData?.length > 0 &&
-      dropdownData.map((data: any) => data.category),
+      dropdownData?.length > 0
+        ? [...new Set(dropdownData.map((data: any) => data.category))]
+        : [],
   };
   const subCategoryData: any = {
     fieldname: 'sub_category',
     fieldtype: 'Link',
     link_data:
-      dropdownData?.length > 0 &&
-      dropdownData.map((data: any) => data.sub_category),
+      dropdownData?.length > 0
+        ? [...new Set(dropdownData.map((data: any) => data.sub_category))]
+        : [],
   };
   const clientNameData: any = {
     fieldname: 'client_name',
     fieldtype: 'Link',
     link_data:
-      dropdownData?.length > 0 &&
-      dropdownData.map((data: any) => data.client_name),
+      dropdownData?.length > 0
+        ? [...new Set(dropdownData.map((data: any) => data.client_name))]
+        : [],
   };
 
   return (

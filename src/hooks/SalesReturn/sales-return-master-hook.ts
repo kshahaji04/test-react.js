@@ -68,7 +68,7 @@ const useSalesReturnMasterHook = () => {
 
   const getUserRoles: any = async () => {
     let userRolesData: any = await getUserRoleApi(accessToken?.token);
-    console.log('userRoleData', userRolesData);
+
     if (userRolesData?.data?.message?.status === 'success') {
       setUserRolesData(userRolesData?.data?.message?.data);
     }
@@ -253,7 +253,7 @@ const useSalesReturnMasterHook = () => {
               '0'
             );
           } else {
-            toast.error('Failed to create chitti');
+            toast.error('Failed to create Sales Return');
           }
         }
       }

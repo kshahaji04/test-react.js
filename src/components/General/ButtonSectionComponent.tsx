@@ -15,6 +15,7 @@ const ButtonSectionComponent = ({
   details,
   handleUpdateRecordBtn,
   userRolesData,
+  handlePrintBtn,
 }: any) => {
   const navigate: any = useNavigate();
   let pathname: any = window.location.pathname;
@@ -137,7 +138,7 @@ const ButtonSectionComponent = ({
         {stateForDocStatus === false && docStatus === 0 && (
           <>{userRoleWiseShow(details)}</>
         )}
-        {/* {docStatus === 1 && (
+        {docStatus === 1 && (
           <button
             type="submit"
             className=" btn btn-outline-primary me-2 px-2 py-0 form-submit-button"
@@ -145,7 +146,7 @@ const ButtonSectionComponent = ({
           >
             Print
           </button>
-        )} */}
+        )}
         {docStatus === 1 && (
           <button
             type="submit"

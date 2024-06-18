@@ -12,6 +12,7 @@ import DeletePurchaseReceiptApi from '../../services/api/PurchaseReceipt/delete-
 import { toast } from 'react-toastify';
 import { UpdatePurchaseReceiptDocStatusApi } from '../../services/api/PurchaseReceipt/update-docStatus-api';
 import { AmendPurchaseReceiptApi } from '../../services/api/PurchaseReceipt/amend-purchase-receipt-api';
+import PrintPurchaseReceiptApi from '../../services/api/PurchaseReceipt/print-purchase-receipt-api';
 
 const usePurchaseReceiptDetailHook: any = () => {
   const dispatch = useDispatch();
@@ -139,7 +140,17 @@ const usePurchaseReceiptDetailHook: any = () => {
     }
   };
 
-  const handlePrintRecord: any = () => {};
+  const handlePrintRecord: any = async () => {
+    let printApiRes: any = await PrintPurchaseReceiptApi(
+      accessToken?.token,
+      id
+    );
+    if (printApiRes?.status === 'success') {
+      if (printApiRes?.data?.data?.length > 0) {
+        window.open(printApiRes?.data?.data[0]?.print_url);
+      }
+    }
+  };
 
   return {
     readOnlyFields,

@@ -1,12 +1,12 @@
 import '../../Style/Navbar.css';
-// import NotificationToggle from './NotificationToggle';
+import NotificationToggle from './NotificationToggle';
 import UserProfile from './UserProfile';
 
 const TopNavbar = () => {
   return (
     <>
       <div className="bg-light d-flex align-items-center">
-        {/* <NotificationToggle /> */}
+        <NotificationToggle />
 
         <nav className="container navbar navbar-light p-0">
           <div className="container-fluid my-1">

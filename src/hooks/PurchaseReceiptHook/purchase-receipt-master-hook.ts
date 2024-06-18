@@ -293,7 +293,7 @@ const usePurchaseReceiptMasterHook = () => {
 
             // dispatch(getChittiChallan(accessToken?.token));
           } else {
-            toast.error('Failed to create chitti');
+            toast.error('Failed to create Purchase Receipt');
           }
         }
       }
