@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
-
 import { useState } from 'react';
 import LoadMoreTableDataInMaster from './MasterListing/LoadMoreTableDataInMaster';
 import DeleteAlertModal from '../Modal/DeleteAlertModal';
 import MasterUpdateModal from '../Modal/MasterUpdateModal';
 import Loader from '../Loader';
+import useMasterUpdateHook from '../../hooks/Master/master-update-hook';
 
 const MasterTableListing = ({
   filteredList,
@@ -17,12 +17,13 @@ const MasterTableListing = ({
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState<boolean>(false);
   const [tableData, setTableData] = useState<any>({});
 
-  const handleDeleteBtn = () => {
-    // Handle delete logic here
-  };
+  const { handleDeleteBtn }: any = useMasterUpdateHook({
+    data: tableData,
+    setIsModalOpen,
+  });
 
-  const handleDltRecord = (name: any) => {
-    console.log(name);
+  const handleDltRecord = (data: any) => {
+    setTableData(data?.name);
     setIsModalOpen(true);
   };
 
@@ -36,10 +37,11 @@ const MasterTableListing = ({
     filteredList &&
     filteredList.length > 0 &&
     typeof filteredList[0] === 'object';
-  const columnKeys = heading
+  const columnKeys: any = heading
     ? [heading]
     : isObjectList
-    ? Object.keys(filteredList[0])
+    ? Object.keys(filteredList[0])?.length > 0 &&
+      Object.keys(filteredList[0]).filter((key) => key !== 'delete')
     : [];
 
   return (
@@ -52,12 +54,13 @@ const MasterTableListing = ({
                 <th scope="col" className="text-center">
                   Sr No.
                 </th>
-                {columnKeys.map((key: any, index: any) => (
-                  <th key={index} scope="col">
-                    {key.charAt(0).toUpperCase() +
-                      key.slice(1)?.split('_')?.join(' ')}
-                  </th>
-                ))}
+                {columnKeys?.length > 0 &&
+                  columnKeys.map((key: any, index: any) => (
+                    <th key={index} scope="col">
+                      {key.charAt(0).toUpperCase() +
+                        key.slice(1)?.split('_')?.join(' ')}
+                    </th>
+                  ))}
                 <th scope="col" className="text-center "></th>
                 <th scope="col" className="text-center"></th>
               </tr>
@@ -71,7 +74,7 @@ const MasterTableListing = ({
                     <tr className="text-start table-body-row mx-0" key={index}>
                       <td className="text-center p-1">{index + 1}</td>
                       {isObjectList ? (
-                        columnKeys.map((key, idx) => (
+                        columnKeys.map((key: any, idx: any) => (
                           <td key={idx} className="p-1 ps-2">
                             <NavLink
                               to={`${data[key]}`}
@@ -105,6 +108,7 @@ const MasterTableListing = ({
                           type="button"
                           className="btn btn-link button-section-text p-0 m-0 text-dark"
                           onClick={() => handleDltRecord(data)}
+                          disabled={data.delete === 0}
                         >
                           Delete
                         </button>
@@ -132,7 +136,6 @@ const MasterTableListing = ({
         <MasterUpdateModal
           isModalOpen={isUpdateModalOpen}
           setIsModalOpen={setIsUpdateModalOpen}
-          handleDeleteBtn={handleDeleteBtn}
           data={tableData}
           dropdownData={dropdownData}
         />

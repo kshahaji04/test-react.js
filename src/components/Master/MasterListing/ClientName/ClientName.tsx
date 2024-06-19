@@ -30,10 +30,10 @@ const ClientName = () => {
     clientNameClientGroupList !== null &&
     clientNameClientGroupList.filter(
       (client: any) =>
-        client.name.toLowerCase().includes(inputName.toLowerCase()) &&
-        client.client_group.toLowerCase().includes(inputGroup.toLowerCase())
+        client?.name?.toLowerCase()?.includes(inputName.toLowerCase()) &&
+        client?.client_group?.toLowerCase()?.includes(inputGroup.toLowerCase())
     );
-
+  console.log('filter client name', filteredList);
 
   return (
     <div className="container">

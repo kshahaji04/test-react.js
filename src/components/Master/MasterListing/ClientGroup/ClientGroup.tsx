@@ -21,9 +21,8 @@ const ClientGroup = () => {
 
   const filterList: any =
     clientGroupList?.length > 0 &&
-    clientGroupList !== null &&
     clientGroupList.filter((value: any) => {
-      return value.toLowerCase().includes(searchField?.toLowerCase());
+      return value?.name?.toLowerCase()?.includes(searchField?.toLowerCase());
     });
 
   return (
@@ -47,7 +46,6 @@ const ClientGroup = () => {
                 filteredList={filterList}
                 handleTableViewRows={handleTableViewRows}
                 tableViewData={tableViewData}
-                heading="Client Group"
               />
             </Tab>
             <Tab eventKey="longer-tab" title="Add Client Group">

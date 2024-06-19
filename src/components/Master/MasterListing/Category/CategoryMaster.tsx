@@ -23,7 +23,7 @@ const CategoryMaster = () => {
     CategoryList?.length > 0 &&
     CategoryList !== null &&
     CategoryList.filter((value: any) => {
-      return value.toLowerCase().includes(searchField?.toLowerCase());
+      return value?.name?.toLowerCase().includes(searchField?.toLowerCase());
     });
 
   return (
@@ -47,7 +47,6 @@ const CategoryMaster = () => {
                 filteredList={filterList}
                 handleTableViewRows={handleTableViewRows}
                 tableViewData={tableViewData}
-                heading="Category"
               />
             </Tab>
             <Tab eventKey="chitti-listing" title="Add Category">

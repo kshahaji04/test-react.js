@@ -55,7 +55,9 @@ const useAutoCompleteInputHook = ({
       return item?.toLowerCase()?.indexOf(query?.toLowerCase()) !== -1;
     });
 
-    setFilterDropdownList(updatedFilterList);
+    if (updatedFilterList?.length > 0) {
+      setFilterDropdownList(updatedFilterList);
+    }
     if (updatedFilterList?.length === 1) {
       setSelectedIndex(0);
     } else {

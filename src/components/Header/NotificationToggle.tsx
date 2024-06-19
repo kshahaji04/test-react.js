@@ -2,56 +2,36 @@ import { useRef, useState } from 'react';
 import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { useSelector } from 'react-redux';
-import { get_purchase_receipt_listing } from '../../store/slices/PurchaseReceipt/get-purchase-receipt-listing-slice';
-import { get_sales_return_listing } from '../../store/slices/SalesReturn/get-sales-return-listing-slice';
+import pendingSubmissionRecords from '../../services/api/general/pending-submission-records-api';
+import { get_access_token } from '../../store/slices/auth/token-login-slice';
 
 const NotificationToggle = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState<boolean>(false);
+  const [pendingSubmission, setPendingSubmission] = useState<any>({});
   const target = useRef(null);
-  const purchaseReceiptData: any = useSelector(get_purchase_receipt_listing);
-  const salesReturnData: any = useSelector(get_sales_return_listing);
-  console.log('data for notify PR', purchaseReceiptData);
-  console.log('data for notify SR', salesReturnData);
 
-  const checkPendingRecords = (
-    purchaseReceiptData: any,
-    salesReturnData: any
-  ) => {
-    let todayDate: any = new Date()
-      .toISOString()
-      .split('T')[0]
-      .split('-')
-      .reverse()
-      .join('-');
+  const accessToken: any = useSelector(get_access_token);
 
-    const pendingPRRecords =
-      (purchaseReceiptData?.data?.length > 0 &&
-        purchaseReceiptData?.data !== '' &&
-        purchaseReceiptData?.data.filter(
-          (data: any) => data.date === todayDate && data.docstatus === 0
-        )) ??
-      [];
-
-    const pendingSRRecords =
-      (salesReturnData?.data?.length > 0 &&
-        salesReturnData?.data !== '' &&
-        salesReturnData?.data.filter(
-          (data: any) => data.date === todayDate && data.docstatus === 0
-        )) ??
-      [];
-
-    return { pendingPRRecords, pendingSRRecords };
+  const handleNotificationClick = async () => {
+    setShow(!show);
+    let pendingRecords: any = await pendingSubmissionRecords(accessToken.token);
+    if (pendingRecords?.data?.message?.status === 'success') {
+      setPendingSubmission(pendingRecords?.data?.message?.data);
+    }
   };
-  const { pendingPRRecords, pendingSRRecords } = checkPendingRecords(
-    purchaseReceiptData,
-    salesReturnData
-  );
 
-  console.log('records', pendingPRRecords, pendingSRRecords);
   return (
     <>
-      <div ref={target} className="px-4" onClick={() => setShow(!show)}>
+      <div
+        ref={target}
+        className="pe-4 notification-icon"
+        onClick={handleNotificationClick}
+      >
         <i className="fa-regular fa-bell fs-5 text-secondary cursor-pointer"></i>
+        {(pendingSubmission?.PR?.length > 0 ||
+          pendingSubmission?.SR?.length > 0) && (
+          <span className="notification-alert"></span>
+        )}
       </div>
       <div className="">
         <Overlay target={target.current} show={show} placement="left">
@@ -99,11 +79,18 @@ const NotificationToggle = () => {
                   role="tabpanel"
                   aria-labelledby="nav-home-tab"
                 >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-                  voluptas consequatur, necessitatibus laudantium magni earum
-                  delectus suscipit reprehenderit repudiandae, quidem accusamus
-                  a numquam laborum repellendus vero perferendis rerum aliquam
-                  illum?
+                  <div className="text-start py-3">
+                    <span className="fw-bold fs-6">Pending Submissions</span>
+                    {pendingSubmission?.PR?.length > 0
+                      ? pendingSubmission?.PR.map((data: any, index: any) => {
+                          return (
+                            <ul key={index} className="py-3">
+                              <li className="fs-6">{data}</li>
+                            </ul>
+                          );
+                        })
+                      : 'No New notifications'}
+                  </div>
                 </div>
                 <div
                   className="tab-pane fade"
@@ -111,7 +98,18 @@ const NotificationToggle = () => {
                   role="tabpanel"
                   aria-labelledby="nav-profile-tab"
                 >
-                  No New notifications
+                  <div className="text-start py-3">
+                    <span className="fw-bold fs-6">Pending Submissions</span>
+                    {pendingSubmission?.SR?.length > 0
+                      ? pendingSubmission?.SR.map((data: any, index: any) => {
+                          return (
+                            <ul key={index} className="py-3">
+                              <li className="fs-6">{data}</li>
+                            </ul>
+                          );
+                        })
+                      : 'No New notifications'}
+                  </div>
                 </div>
               </div>
             </Tooltip>

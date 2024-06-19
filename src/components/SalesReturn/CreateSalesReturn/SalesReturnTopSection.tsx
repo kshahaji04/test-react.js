@@ -4,7 +4,6 @@ const SalesReturnTopSection = ({
   handleSRTopSectionData,
   clientNameList,
   topSectionInputData,
-  defaultData,
   readOnlyFields,
 }: any) => {
   const clientData: any = {
@@ -12,6 +11,15 @@ const SalesReturnTopSection = ({
     fieldtype: 'Link',
     link_data: clientNameList,
   };
+
+  const convertDateFormat = (dateStr: any) => {
+    if (dateStr !== undefined) {
+      const [day, month, year] = dateStr !== undefined && dateStr?.split('-');
+      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    }
+  };
+
+  const newDateStr = convertDateFormat(topSectionInputData?.date);
 
   return (
     <form className="d-flex flex-column">
@@ -27,9 +35,9 @@ const SalesReturnTopSection = ({
               id="date"
               name="date"
               value={
-                defaultData === undefined
+                newDateStr === undefined
                   ? new Date()?.toISOString()?.split('T')[0]
-                  : defaultData?.date
+                  : newDateStr
               }
               defaultValue={topSectionInputData?.date}
               className="form-control custom-input-field py-0 px-2"

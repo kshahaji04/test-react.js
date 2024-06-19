@@ -30,8 +30,8 @@ const Supplier = () => {
     supplierNameSupplierGroupList !== null &&
     supplierNameSupplierGroupList.filter(
       (client: any) =>
-        client.name?.toLowerCase()?.includes(inputName?.toLowerCase()) &&
-        client.supplier_group
+        client?.name?.toLowerCase()?.includes(inputName?.toLowerCase()) &&
+        client?.supplier_group
           ?.toLowerCase()
           ?.includes(inputGroup?.toLowerCase())
     );

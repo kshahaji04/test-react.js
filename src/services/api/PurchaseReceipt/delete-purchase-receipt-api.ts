@@ -2,7 +2,6 @@ import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
 
 const DeletePurchaseReceiptApi = async (token: any, name: any) => {
-  console.log('tokennnn', token);
   let response: any;
   const version = 'v1';
   const method = 'delete_purchase_receipt';

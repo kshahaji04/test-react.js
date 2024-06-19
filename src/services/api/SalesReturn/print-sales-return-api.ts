@@ -4,8 +4,8 @@ import { BASE_URL } from '../../config/api-config';
 const PrintSalesReturnApi = async (token: any, name: any) => {
   let response: any;
   const version = 'v1';
-  const method = 'get_print';
-  const entity = 'print_api';
+  const method = 'get_sales_return_print';
+  const entity = 'sales_return';
 
   const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}&name=${name}`;
 

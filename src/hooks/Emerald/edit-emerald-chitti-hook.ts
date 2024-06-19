@@ -64,17 +64,12 @@ const useEditEmeraldChittiHook: any = () => {
   }, []);
 
   useEffect(() => {
-    if (emeraldChittiDataFromStore?.hasOwnProperty('data')) {
-      if (emeraldChittiDataFromStore?.data?.length > 0) {
-        setTableData(emeraldChittiDataFromStore?.data[0]?.challan_table);
-        setTopSectionInputData(emeraldChittiDataFromStore?.data[0]);
-        setTimeout(() => {
-          setStateForDocStatus(false);
-        }, 300);
-      }
-    } else {
-      // setTableData([]);
-      // setTopSectionInputData({});
+    if (emeraldChittiDataFromStore?.data?.length > 0) {
+      setTableData(emeraldChittiDataFromStore?.data[0]?.challan_table);
+      setTopSectionInputData(emeraldChittiDataFromStore?.data[0]);
+      setTimeout(() => {
+        setStateForDocStatus(false);
+      }, 400);
     }
   }, [emeraldChittiDataFromStore]);
 
@@ -168,6 +163,8 @@ const useEditEmeraldChittiHook: any = () => {
       }
     }
   };
+
+  console.log('tableData in hook end', tableData);
 
   return {
     emeraldChittiData,
