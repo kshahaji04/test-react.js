@@ -4,7 +4,6 @@ const PurchaseReceiptTopSection = ({
   handlePRTopSectionData,
   clientNameList,
   topSectionInputData,
-  defaultData,
   readOnlyFields,
 }: any) => {
   const clientData: any = {
