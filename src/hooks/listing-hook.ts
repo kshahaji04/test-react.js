@@ -2,8 +2,14 @@ import { toast } from 'react-toastify';
 import PrintChallanChittiApi from '../services/api/Chitti/print-challan-chitti-api';
 import DeleteEmeraldChittiApi from '../services/api/Emerald/delete-emerald-chitti-api';
 import PrintEmeraldChittiApi from '../services/api/Emerald/print-emerald-chitti-api';
-import { UpdateDocStatusChallanApi } from '../services/api/general/update-doc-status-challan--api';
-import { UpdateDocStatusEmeraldChittiApi } from '../services/api/general/update-doc-status-emrald-chitti-api';
+import {
+  UpdateDocStatusChallanApi,
+  UpdateDocStatusWithSubmittedChallanApi,
+} from '../services/api/general/update-doc-status-challan--api';
+import {
+  UpdateDocStatusEmeraldChittiApi,
+  UpdateDocStatusWithSubmittedEmeraldChittiApi,
+} from '../services/api/general/update-doc-status-emrald-chitti-api';
 import { getChittiChallan } from '../store/slices/Chitti/get-chitti-challan-list-slice';
 import { getEmeraldChallan } from '../store/slices/Emerald/get-emerald-list-slice';
 import DeleteChallanChittiApi from '../services/api/Chitti/delete-challan-chitti-api';
@@ -15,12 +21,18 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { get_access_token } from '../store/slices/auth/token-login-slice';
 import { useEffect, useState } from 'react';
-import { UpdatePurchaseReceiptDocStatusApi } from '../services/api/PurchaseReceipt/update-docStatus-api';
+import {
+  UpdatePurchaseReceiptDocStatusApi,
+  updatePurchaseReceiptSubmitDocStatusApi,
+} from '../services/api/PurchaseReceipt/update-docStatus-api';
 import DeletePurchaseReceiptApi from '../services/api/PurchaseReceipt/delete-purchase-receipt-api';
 import { getPurchaseReceiptListing } from '../store/slices/PurchaseReceipt/get-purchase-receipt-listing-slice';
 import DeleteSalesReturnApi from '../services/api/SalesReturn/delete-sales-return-api';
 import { getSalesReturnListing } from '../store/slices/SalesReturn/get-sales-return-listing-slice';
-import { UpdateSalesReturnDocStatusApi } from '../services/api/SalesReturn/update-docStatus-api';
+import {
+  UpdateSalesReturnDocStatusApi,
+  updateSalesReturnSubmitDocStatusApi,
+} from '../services/api/SalesReturn/update-docStatus-api';
 import PrintPurchaseReceiptApi from '../services/api/PurchaseReceipt/print-purchase-receipt-api';
 import PrintSalesReturnApi from '../services/api/SalesReturn/print-sales-return-api';
 
@@ -53,9 +65,10 @@ const useListingHook: any = () => {
 
   const handleSubmitChittiData: any = async (name: any) => {
     if (pathName === '/chitti') {
-      let updateDocStatus: any = await UpdateDocStatusChallanApi(
+      let updateDocStatus: any = await UpdateDocStatusWithSubmittedChallanApi(
         accessToken?.token,
         '1',
+        new Date()?.toISOString()?.split('T')[0],
         name
       );
 
@@ -81,11 +94,13 @@ const useListingHook: any = () => {
         if (hasEmptySubCategory) {
           toast.error('Please Select Sub Category');
         } else {
-          let updateDocStatus: any = await UpdateDocStatusEmeraldChittiApi(
-            accessToken?.token,
-            '1',
-            name
-          );
+          let updateDocStatus: any =
+            await UpdateDocStatusWithSubmittedEmeraldChittiApi(
+              accessToken?.token,
+              '1',
+              new Date()?.toISOString()?.split('T')[0],
+              name
+            );
           if (
             updateDocStatus?.status === 200 &&
             Object.keys(updateDocStatus?.data)?.length > 0
@@ -95,9 +110,10 @@ const useListingHook: any = () => {
         }
       }
     } else if (pathName === '/purchase-receipt') {
-      let updateDocStatus: any = await UpdatePurchaseReceiptDocStatusApi(
+      let updateDocStatus: any = await updatePurchaseReceiptSubmitDocStatusApi(
         accessToken?.token,
         name,
+        new Date()?.toISOString()?.split('T')[0],
         '1'
       );
 
@@ -105,9 +121,10 @@ const useListingHook: any = () => {
         dispatch(getPurchaseReceiptListing(accessToken?.token));
       }
     } else if (pathName === '/sales-return') {
-      let updateDocStatus: any = await UpdateSalesReturnDocStatusApi(
+      let updateDocStatus: any = await updateSalesReturnSubmitDocStatusApi(
         accessToken?.token,
         name,
+        new Date()?.toISOString()?.split('T')[0],
         '1'
       );
 

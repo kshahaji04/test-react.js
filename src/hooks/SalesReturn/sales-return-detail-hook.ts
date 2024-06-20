@@ -4,7 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AmendSalesReturnApi } from '../../services/api/SalesReturn/amend-sales-return-api';
 import DeleteSalesReturnApi from '../../services/api/SalesReturn/delete-sales-return-api';
-import { UpdateSalesReturnDocStatusApi } from '../../services/api/SalesReturn/update-docStatus-api';
+import {
+  UpdateSalesReturnDocStatusApi,
+  updateSalesReturnSubmitDocStatusApi,
+} from '../../services/api/SalesReturn/update-docStatus-api';
 import {
   getDetailSalesReturn,
   get_detail_sales_return,
@@ -111,12 +114,21 @@ const useSalesReturnDetailHook: any = () => {
   };
 
   const handleUpdateDocstatusBtn: any = async (value: any) => {
-    let updateDocStatus: any = await UpdateSalesReturnDocStatusApi(
-      accessToken?.token,
-      id,
-      value
-    );
-
+    let updateDocStatus: any;
+    if (value === '1') {
+      updateDocStatus = await updateSalesReturnSubmitDocStatusApi(
+        accessToken?.token,
+        id,
+        new Date()?.toISOString()?.split('T')[0],
+        value
+      );
+    } else {
+      updateDocStatus = await UpdateSalesReturnDocStatusApi(
+        accessToken?.token,
+        id,
+        value
+      );
+    }
     if (Object.keys(updateDocStatus?.data)?.length > 0) {
       setStateForDocStatus(false);
 

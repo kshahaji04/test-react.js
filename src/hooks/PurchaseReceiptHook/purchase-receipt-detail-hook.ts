@@ -10,7 +10,10 @@ import {
 import usePurchaseReceiptMasterHook from './purchase-receipt-master-hook';
 import DeletePurchaseReceiptApi from '../../services/api/PurchaseReceipt/delete-purchase-receipt-api';
 import { toast } from 'react-toastify';
-import { UpdatePurchaseReceiptDocStatusApi } from '../../services/api/PurchaseReceipt/update-docStatus-api';
+import {
+  UpdatePurchaseReceiptDocStatusApi,
+  updatePurchaseReceiptSubmitDocStatusApi,
+} from '../../services/api/PurchaseReceipt/update-docStatus-api';
 import { AmendPurchaseReceiptApi } from '../../services/api/PurchaseReceipt/amend-purchase-receipt-api';
 import PrintPurchaseReceiptApi from '../../services/api/PurchaseReceipt/print-purchase-receipt-api';
 
@@ -111,11 +114,21 @@ const usePurchaseReceiptDetailHook: any = () => {
   };
 
   const handleUpdateDocstatusBtn: any = async (value: any) => {
-    let updateDocStatus: any = await UpdatePurchaseReceiptDocStatusApi(
-      accessToken?.token,
-      id,
-      value
-    );
+    let updateDocStatus: any;
+    if (value === '1') {
+      updateDocStatus = await updatePurchaseReceiptSubmitDocStatusApi(
+        accessToken?.token,
+        id,
+        new Date()?.toISOString()?.split('T')[0],
+        value
+      );
+    } else {
+      updateDocStatus = await UpdatePurchaseReceiptDocStatusApi(
+        accessToken?.token,
+        id,
+        value
+      );
+    }
 
     if (Object.keys(updateDocStatus?.data)?.length > 0) {
       setStateForDocStatus(false);
@@ -127,6 +140,7 @@ const usePurchaseReceiptDetailHook: any = () => {
       dispatch(getDetailPurchaseReceipt(params));
     }
   };
+
   const handleDeleteRecord: any = async () => {
     let deleteChallanApiRes: any = await DeletePurchaseReceiptApi(
       accessToken?.token,
