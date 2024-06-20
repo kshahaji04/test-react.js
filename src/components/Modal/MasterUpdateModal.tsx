@@ -9,7 +9,6 @@ const MasterUpdateModal = ({
   data,
   dropdownData,
 }: any) => {
-  console.log('data', data);
   let location = useLocation();
   let path: any = location.pathname;
   const {
@@ -23,10 +22,16 @@ const MasterUpdateModal = ({
   const dropdownDataList: any = {
     fieldname: '',
     fieldtype: 'Link',
-    link_data: path.includes('projectsubcategorymapping')
-      ? dropdownData?.length > 0 && dropdownData.map((data: any) => data.name)
-      : dropdownData,
+    link_data:
+      path.includes('projectsubcategorymapping') ||
+      path.includes('subcategory') ||
+      path.includes('supplier') ||
+      path.includes('clientname')
+        ? dropdownData?.length > 0 && dropdownData.map((data: any) => data.name)
+        : dropdownData,
   };
+
+  console.log('dataaa while update', data);
   return (
     <Modal
       show={isModalOpen}
@@ -41,39 +46,42 @@ const MasterUpdateModal = ({
       <Modal.Body>
         <div className="row">
           {typeof data === 'object' && !Array.isArray(data) ? (
-            Object.keys(data).map((key: any) => (
-              <div className="col-6" key={key}>
-                <label htmlFor={key}>
-                  {key.charAt(0).toUpperCase() +
-                    key.slice(1)?.split('_')?.join(' ')}
-                  :
-                </label>
-                {key === 'client_group' ||
-                key === 'category' ||
-                key === 'supplier_group' ||
-                key === 'stone' ||
-                key === 'plain' ? (
-                  <AutoCompleteInput
-                    data={dropdownDataList}
-                    handleSearchInput={(value: any) =>
-                      handleInputChange(value, key)
-                    }
-                    value={formData[key]}
-                  />
-                ) : (
-                  <input
-                    type="text"
-                    className="form-control ps-1"
-                    aria-describedby="basic-addon3"
-                    id={key}
-                    name={key}
-                    defaultValue={data[key] || ''}
-                    value={formData[key]}
-                    onChange={(e) => handleInputChange(e.target.value, key)}
-                  />
-                )}
-              </div>
-            ))
+            Object.keys(data).map((key: any) => {
+              if (key === 'delete') return null;
+              return (
+                <div className="col-6" key={key}>
+                  <label htmlFor={key}>
+                    {key.charAt(0).toUpperCase() +
+                      key.slice(1)?.split('_')?.join(' ')}
+                    :
+                  </label>
+                  {key === 'client_group' ||
+                  key === 'category' ||
+                  key === 'supplier_group' ||
+                  key === 'stone' ||
+                  key === 'plain' ? (
+                    <AutoCompleteInput
+                      data={dropdownDataList}
+                      handleSearchInput={(value: any) =>
+                        handleInputChange(value, key)
+                      }
+                      value={formData[key]}
+                    />
+                  ) : (
+                    <input
+                      type="text"
+                      className="form-control ps-1"
+                      aria-describedby="basic-addon3"
+                      id={key}
+                      name={key}
+                      defaultValue={data[key] || ''}
+                      value={formData[key]}
+                      onChange={(e) => handleInputChange(e.target.value, key)}
+                    />
+                  )}
+                </div>
+              );
+            })
           ) : (
             <input
               type="text"

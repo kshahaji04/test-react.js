@@ -205,3 +205,35 @@ export const updateHuidProductApi = async (
     });
   return response;
 };
+
+export const updateProjectSubcategoryMappingApi = async (
+  token: any,
+  name: string,
+  project: string,
+  stone: string,
+  plain: string
+) => {
+  let response: any;
+
+  let body = {
+    version: 'v1',
+    method: 'update_project_mapping',
+    entity: 'project_mapping',
+    name: name,
+    project: project,
+    stone: stone,
+    plain: plain,
+  };
+
+  const getHeaders = headerGenerator(token);
+
+  await axios
+    .put(`${BASE_URL}/api/method/challan.sdk.api`, body, getHeaders)
+    .then((res: any) => {
+      response = res;
+    })
+    .catch((err: any) => {
+      response = handleApiError(err);
+    });
+  return response;
+};

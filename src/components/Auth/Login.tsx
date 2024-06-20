@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import '../../Style/Login.css';
 import { useDispatch } from 'react-redux';
-import { getAccessToken } from '../../store/slices/auth/token-login-slice';
 import { useNavigate } from 'react-router-dom';
+import '../../Style/Login.css';
+import {
+  getAccessToken,
+  getUserRolesPermission,
+} from '../../store/slices/auth/token-login-slice';
 import { showToast } from '../ToastNotification';
 
 const Login = () => {
@@ -27,6 +30,12 @@ const Login = () => {
     if (accessTokenApiRes?.payload?.msg === 'success') {
       showToast('Login Successfully', 'success');
       navigate('/master');
+
+      dispatch(
+        getUserRolesPermission(
+          accessTokenApiRes?.payload?.data?.access_token
+        ) as any
+      );
     } else {
       showToast('Invalid Credentials', 'error');
     }

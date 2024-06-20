@@ -127,3 +127,24 @@ export const deleteSupplierApi = async (token: any, name: any) => {
     });
   return response;
 };
+
+export const deleteProjectSubcategoryMappingApi = async (
+  token: any,
+  name: any
+) => {
+  let response: any;
+
+  const params = `/api/resource/Project Sub Category Mapping/${name}`;
+
+  const getHeaders = headerGenerator(token);
+
+  await axios
+    .delete(`${BASE_URL}${params}`, getHeaders)
+    .then((res: any) => {
+      response = res;
+    })
+    .catch((err: any) => {
+      response = handleApiError(err);
+    });
+  return response;
+};

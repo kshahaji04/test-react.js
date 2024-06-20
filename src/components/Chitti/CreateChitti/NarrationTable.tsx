@@ -167,7 +167,7 @@ const NarrationTable = ({
                       drowpdownlist={
                         productList?.length > 0 &&
                         productList !== null &&
-                        productList.map((huidProduct: any) => huidProduct.title)
+                        productList.map((huidProduct: any) => huidProduct.name)
                       }
                       data={row.product}
                       key={row.id}

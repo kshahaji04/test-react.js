@@ -5,6 +5,12 @@ import DeleteAlertModal from '../Modal/DeleteAlertModal';
 import MasterUpdateModal from '../Modal/MasterUpdateModal';
 import Loader from '../Loader';
 import useMasterUpdateHook from '../../hooks/Master/master-update-hook';
+import {
+  Button,
+  ButtonToolbar,
+  OverlayTrigger,
+  Tooltip,
+} from 'react-bootstrap';
 
 const MasterTableListing = ({
   filteredList,
@@ -43,6 +49,14 @@ const MasterTableListing = ({
     ? Object.keys(filteredList[0])?.length > 0 &&
       Object.keys(filteredList[0]).filter((key) => key !== 'delete')
     : [];
+
+  const tooltip = (
+    <Tooltip id="tooltip">
+      <span className="del-tooltip-content">
+        Unable to delete. Transactions exist for this entry.
+      </span>
+    </Tooltip>
+  );
 
   return (
     <>
@@ -103,7 +117,7 @@ const MasterTableListing = ({
                           Update
                         </button>
                       </td>
-                      <td className="text-center p-0">
+                      <td className="text-center p-0 d-flex">
                         <button
                           type="button"
                           className="btn btn-link button-section-text p-0 m-0 text-dark"
@@ -112,6 +126,17 @@ const MasterTableListing = ({
                         >
                           Delete
                         </button>
+                        {data.delete === 0 && (
+                          <OverlayTrigger
+                            placement="left"
+                            trigger={['hover', 'click']}
+                            overlay={tooltip}
+                          >
+                            <span className="ps-2">
+                              <i className="fa-solid fa-circle-exclamation cursor-pointer"></i>
+                            </span>
+                          </OverlayTrigger>
+                        )}
                       </td>
                     </tr>
                   ))}

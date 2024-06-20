@@ -78,7 +78,7 @@ const AddClient = ({ clientGroupList }: any) => {
           <SelectedInputDropdown
             drowpdownlist={
               clientGroupList?.length > 0 &&
-              clientGroupList.map((data: any) => data.title)
+              clientGroupList.map((data: any) => data.name)
             }
             // bgColor={bgColor}
             placeholderValue="Client Group"

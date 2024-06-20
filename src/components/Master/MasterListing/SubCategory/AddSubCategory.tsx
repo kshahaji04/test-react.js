@@ -43,6 +43,8 @@ const AddSubCategory = ({ CategoryList }: any) => {
     }
   };
 
+  console.log('CategoryList', CategoryList);
+
   const handleInputValue = (e: any) => {
     setError('');
     setTitle(e.target.value);
@@ -74,7 +76,10 @@ const AddSubCategory = ({ CategoryList }: any) => {
       </label>
       <div className="w-50">
         <SelectedInputDropdown
-          drowpdownlist={CategoryList}
+          drowpdownlist={
+            CategoryList?.length > 0 &&
+            CategoryList.map((data: any) => data.name)
+          }
           // bgColor={bgColor}
           placeholderValue="Category Name"
           selectedDropdownValue={selectedDropdownValue}

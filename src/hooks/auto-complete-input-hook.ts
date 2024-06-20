@@ -57,6 +57,8 @@ const useAutoCompleteInputHook = ({
 
     if (updatedFilterList?.length > 0) {
       setFilterDropdownList(updatedFilterList);
+    } else {
+      setFilterDropdownList([]);
     }
     if (updatedFilterList?.length === 1) {
       setSelectedIndex(0);

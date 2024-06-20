@@ -1,24 +1,34 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import GetTokenLoginApi from '../../../services/api/auth/access-token-api';
 import { RootState } from '../../root-reducer';
+import getUserRoleApi from '../../../services/api/general/user-role-api';
 
 export const getAccessToken: any = createAsyncThunk(
   'accessToken/getAccessToken',
   async (param: any) => {
     const AccessTokenData: any = await GetTokenLoginApi(param);
-    console.log('AccessTokenData res', AccessTokenData);
     return AccessTokenData;
+  }
+);
+
+export const getUserRolesPermission = createAsyncThunk(
+  'accessToken/getUserRolesPermission',
+  async (token: any) => {
+    const response = await getUserRoleApi(token);
+    return response;
   }
 );
 
 interface RepoAccessTokenState {
   token: any;
+  userRoles: any;
   error: string;
   isLoading: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
 const initialState: RepoAccessTokenState = {
   token: '',
+  userRoles: [],
   error: '',
   isLoading: 'idle',
 };
@@ -37,6 +47,7 @@ export const GetAccessTokenScreen = createSlice({
     builder.addCase(getAccessToken.pending, (state) => {
       state.isLoading = 'pending';
       state.token = '';
+      state.userRoles = [];
     });
     builder.addCase(getAccessToken.fulfilled, (state, action) => {
       if (action?.payload?.msg === 'success') {
@@ -45,9 +56,16 @@ export const GetAccessTokenScreen = createSlice({
         }
       }
     });
+    builder.addCase(getUserRolesPermission.fulfilled, (state, action) => {
+      console.log('actionss', action.payload);
+      if (action?.payload?.data?.message?.status === 'success') {
+        state.userRoles = action?.payload?.data.message?.data;
+      }
+    });
     builder.addCase(getAccessToken.rejected, (state) => {
       state.isLoading = 'failed';
       state.token = '';
+      state.userRoles = '';
       state.error = 'failed to store token';
     });
   },

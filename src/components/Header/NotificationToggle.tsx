@@ -81,15 +81,19 @@ const NotificationToggle = () => {
                 >
                   <div className="text-start py-3">
                     <span className="fw-bold fs-6">Pending Submissions</span>
-                    {pendingSubmission?.PR?.length > 0
-                      ? pendingSubmission?.PR.map((data: any, index: any) => {
-                          return (
-                            <ul key={index} className="py-3">
-                              <li className="fs-6">{data}</li>
-                            </ul>
-                          );
-                        })
-                      : 'No New notifications'}
+                    {pendingSubmission?.PR?.length > 0 ? (
+                      pendingSubmission?.PR.map((data: any, index: any) => {
+                        return (
+                          <ul key={index} className="py-3">
+                            <li className="fs-6">{data}</li>
+                          </ul>
+                        );
+                      })
+                    ) : (
+                      <div className="py-3">
+                        No pending submissions for today!
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div
@@ -100,15 +104,19 @@ const NotificationToggle = () => {
                 >
                   <div className="text-start py-3">
                     <span className="fw-bold fs-6">Pending Submissions</span>
-                    {pendingSubmission?.SR?.length > 0
-                      ? pendingSubmission?.SR.map((data: any, index: any) => {
-                          return (
-                            <ul key={index} className="py-3">
-                              <li className="fs-6">{data}</li>
-                            </ul>
-                          );
-                        })
-                      : 'No New notifications'}
+                    {pendingSubmission?.SR?.length > 0 ? (
+                      pendingSubmission?.SR.map((data: any, index: any) => {
+                        return (
+                          <ul key={index} className="py-3">
+                            <li className="fs-6">{data}</li>
+                          </ul>
+                        );
+                      })
+                    ) : (
+                      <div className="py-3">
+                        No pending submissions for today!
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

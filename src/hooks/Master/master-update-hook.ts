@@ -7,6 +7,7 @@ import {
   deleteClientApi,
   deleteClientGroupApi,
   deleteHuidProductApi,
+  deleteProjectSubcategoryMappingApi,
   deleteSubCategoryApi,
   deleteSupplierApi,
   deleteSupplierGroupApi,
@@ -16,6 +17,7 @@ import {
   updateClientApi,
   updateClientGroupApi,
   updateHuidProductApi,
+  updateProjectSubcategoryMappingApi,
   updateSubCategoryApi,
   updateSupplierApi,
   updateSupplierGroupApi,
@@ -28,6 +30,7 @@ import { getSupplierGroupList } from '../../store/slices/Master/get-supplier-gro
 import { getsupplierAndSupplierGroup } from '../../store/slices/Master/get-supplier-supplierGroup-slice';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import { getHuidProductList } from '../../store/slices/Master/get-huid-product-slice';
+import { getProjectSubCategoryMapping } from '../../store/slices/Master/get-project-subcategory-mapping-slice';
 
 const useMasterUpdateHook = ({ data, setIsModalOpen }: any) => {
   let location = useLocation();
@@ -71,6 +74,9 @@ const useMasterUpdateHook = ({ data, setIsModalOpen }: any) => {
       case path.includes('/supplier'):
         dispatch(getSupplierGroupList(accessToken?.token));
         break;
+      case path.includes('/projectsubcategorymapping'):
+        dispatch(getProjectSubCategoryMapping(accessToken?.token));
+        break;
       default:
         break;
     }
@@ -83,8 +89,8 @@ const useMasterUpdateHook = ({ data, setIsModalOpen }: any) => {
       case path.includes('/clientgroup'):
         updateRecord = await updateClientGroupApi(
           accessToken.token,
-          data,
-          formData
+          data?.name,
+          formData?.name
         );
         break;
       case path.includes('/clientname'):
@@ -98,8 +104,8 @@ const useMasterUpdateHook = ({ data, setIsModalOpen }: any) => {
       case path.includes('/category'):
         updateRecord = await updateCategoryApi(
           accessToken.token,
-          data,
-          formData
+          data?.name,
+          formData?.name
         );
         break;
       case path.includes('/subcategory'):
@@ -113,16 +119,16 @@ const useMasterUpdateHook = ({ data, setIsModalOpen }: any) => {
       case path.includes('/huidproduct'):
         updateRecord = await updateHuidProductApi(
           accessToken.token,
-          data?.title,
-          formData?.title,
+          data?.name,
+          formData?.name,
           formData?.custom_hm_pcs
         );
         break;
       case path.includes('/suppliergroup'):
         updateRecord = await updateSupplierGroupApi(
           accessToken.token,
-          data,
-          formData
+          data?.name,
+          formData?.name
         );
         break;
       case path.includes('/supplier'):
@@ -133,11 +139,20 @@ const useMasterUpdateHook = ({ data, setIsModalOpen }: any) => {
           formData?.supplier_group
         );
         break;
+      case path.includes('/projectsubcategorymapping'):
+        updateRecord = await updateProjectSubcategoryMappingApi(
+          accessToken.token,
+          data?.name,
+          formData?.name,
+          formData?.stone,
+          formData?.plain
+        );
+        break;
 
       default:
         break;
     }
-    console.log('api ressss', updateRecord);
+
     if (
       updateRecord?.data?.message?.status === 'success' &&
       updateRecord?.status === 200
@@ -156,28 +171,28 @@ const useMasterUpdateHook = ({ data, setIsModalOpen }: any) => {
         deleteRecord = await deleteClientGroupApi(accessToken.token, data);
         break;
       case path.includes('/clientname'):
-        deleteRecord = await deleteClientApi(accessToken.token, data?.name);
+        deleteRecord = await deleteClientApi(accessToken.token, data);
         break;
       case path.includes('/category'):
         deleteRecord = await deleteCategoryApi(accessToken.token, data);
         break;
       case path.includes('/subcategory'):
-        deleteRecord = await deleteSubCategoryApi(
-          accessToken.token,
-          data?.name
-        );
+        deleteRecord = await deleteSubCategoryApi(accessToken.token, data);
         break;
       case path.includes('/huidproduct'):
-        deleteRecord = await deleteHuidProductApi(
-          accessToken.token,
-          data?.title
-        );
+        deleteRecord = await deleteHuidProductApi(accessToken.token, data);
         break;
       case path.includes('/suppliergroup'):
         deleteRecord = await deleteSupplierGroupApi(accessToken.token, data);
         break;
       case path.includes('/supplier'):
-        deleteRecord = await deleteSupplierApi(accessToken.token, data?.name);
+        deleteRecord = await deleteSupplierApi(accessToken.token, data);
+        break;
+      case path.includes('/projectsubcategorymapping'):
+        deleteRecord = await deleteProjectSubcategoryMappingApi(
+          accessToken.token,
+          data
+        );
         break;
       default:
         break;
