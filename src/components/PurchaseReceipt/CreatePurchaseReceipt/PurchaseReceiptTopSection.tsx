@@ -80,6 +80,7 @@ const PurchaseReceiptTopSection = ({
         <div className="col-lg-3 col-md-6">
           <label className="form-Form.Label fs-6 text-dark form-label-bold">
             Category
+            <span className="text-danger">*</span>
           </label>
           <div>
             <div className="form-check form-check-inline">

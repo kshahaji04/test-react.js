@@ -106,7 +106,7 @@ const MasterTableListing = ({
                       <td className="text-center p-0">
                         <button
                           type="button"
-                          className="btn btn-link button-section-text p-0 m-0 text-dark"
+                          className="btn btn-link button-section-text p-0 m-0 text-primary"
                           onClick={() => handleUpdateRecord(data)}
                         >
                           Update
@@ -115,7 +115,7 @@ const MasterTableListing = ({
                       <td className="text-center p-0 d-flex">
                         <button
                           type="button"
-                          className="btn btn-link button-section-text p-0 m-0 text-dark"
+                          className="btn btn-link button-section-text p-0 m-0 text-danger"
                           onClick={() => handleDltRecord(data)}
                           disabled={data.delete === 0}
                         >
