@@ -25,7 +25,6 @@ const EditEmeraldChitti = () => {
     transactionDate,
     tableData,
     setTableData,
-    challanDetail,
     handleUpdateEmeraldChittiSubmit,
     stateForDocStatus,
     setStateForDocStatus,
@@ -85,6 +84,8 @@ const EditEmeraldChitti = () => {
     .split('-')
     .reverse()
     .join('-');
+
+  console.log('dateee', topSectionInputData);
   return (
     <div className="container">
       {emeraldDetailDataFromStore?.isLoading === 'pending' ? (
@@ -149,11 +150,7 @@ const EditEmeraldChitti = () => {
                     <button
                       type="submit"
                       className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-                      disabled={
-                        challanDetail?.length > 0 &&
-                        challanDetail !== null &&
-                        challanDetail[0]?.date !== todayDate
-                      }
+                      disabled={topSectionInputData?.date !== todayDate}
                       onClick={handleSubmitEmeraldChittiData}
                     >
                       Submit
@@ -183,11 +180,7 @@ const EditEmeraldChitti = () => {
                       <button
                         type="submit"
                         className=" btn btn-outline-primary px-2 me-2 py-0  form-submit-button"
-                        disabled={
-                          challanDetail?.length > 0 &&
-                          challanDetail !== null &&
-                          challanDetail[0]?.date !== todayDate
-                        }
+                        disabled={topSectionInputData?.date !== todayDate}
                         onClick={handleAmendButtonChanges}
                       >
                         Amend
@@ -211,11 +204,7 @@ const EditEmeraldChitti = () => {
                     <button
                       type="submit"
                       className=" btn btn-outline-primary px-2 py-0  form-submit-button"
-                      disabled={
-                        challanDetail?.length > 0 &&
-                        challanDetail !== null &&
-                        challanDetail[0]?.date !== todayDate
-                      }
+                      disabled={topSectionInputData?.date !== todayDate}
                       onClick={() => setIsModalOpen(true)}
                     >
                       Delete
