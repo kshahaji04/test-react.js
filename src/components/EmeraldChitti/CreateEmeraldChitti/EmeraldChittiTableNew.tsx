@@ -174,6 +174,7 @@ const EmeraldChittiTableNew = ({
               onClick={() => {
                 if (!readOnly) {
                   handleAddRow();
+                  setStateForDocStatus(true);
                 }
               }}
             >
