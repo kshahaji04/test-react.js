@@ -84,7 +84,12 @@ const MasterTableListing = ({
                       <td className="text-center p-1">{index + 1}</td>
                       {isObjectList ? (
                         columnKeys.map((key: any, idx: any) => (
-                          <td key={idx} className="p-1 ps-2">
+                          <td
+                            key={idx}
+                            className={`p-1 ps-2 ${
+                              Object.keys(data)?.length === 2 ? 'w-50' : ''
+                            }`}
+                          >
                             <NavLink
                               to={`${data[key]}`}
                               className="text-decoration-none text-dark"
@@ -112,26 +117,30 @@ const MasterTableListing = ({
                           Update
                         </button>
                       </td>
-                      <td className="text-center p-0 d-flex">
-                        <button
-                          type="button"
-                          className="btn btn-link button-section-text p-0 m-0 text-danger"
-                          onClick={() => handleDltRecord(data)}
-                          disabled={data.delete === 0}
-                        >
-                          Delete
-                        </button>
-                        {data.delete === 0 && (
-                          <OverlayTrigger
-                            placement="left"
-                            trigger={['hover', 'click']}
-                            overlay={tooltip}
+                      <td className="text-center p-0">
+                        <div className="d-flex justify-content-center">
+                          <button
+                            type="button"
+                            className="btn btn-link button-section-text p-0 m-0 text-danger"
+                            onClick={() => handleDltRecord(data)}
+                            disabled={data.delete === 0}
                           >
-                            <span className="ps-2">
-                              <i className="fa-solid fa-circle-exclamation cursor-pointer"></i>
-                            </span>
-                          </OverlayTrigger>
-                        )}
+                            Delete
+                          </button>
+                          {data.delete === 0 ? (
+                            <OverlayTrigger
+                              placement="left"
+                              trigger={['hover', 'click']}
+                              overlay={tooltip}
+                            >
+                              <span className="ps-2 d-flex align-items-center">
+                                <i className="fa-solid fa-circle-exclamation cursor-pointer"></i>
+                              </span>
+                            </OverlayTrigger>
+                          ) : (
+                            <span className="px-2 pe-3"></span>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   ))}

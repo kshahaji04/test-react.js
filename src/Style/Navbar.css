@@ -243,6 +243,10 @@
 color: black;
 }
 
+.notification-tooltip.show{
+  opacity: 1 !important;
+}
+
 .notification-icon {
   position: relative;
   display: inline-block;

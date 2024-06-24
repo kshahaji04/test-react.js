@@ -9,7 +9,6 @@ const ReportTabs = () => {
     'Sales Return',
   ];
 
-  console.log('path', window.location.pathname);
   return (
     <>
       <div className="container mt-3 mb-3">
