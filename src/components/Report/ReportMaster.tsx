@@ -13,6 +13,7 @@ const ReportMaster = () => {
     handleSearchBtn,
   }: any = useReportHook();
   const location: any = useLocation();
+  // const navigate: any = useNavigate();
 
   const generateDynamicHeading = (path: string | undefined) => {
     if (!path) {
@@ -34,6 +35,15 @@ const ReportMaster = () => {
   };
   return (
     <div className="container">
+      {/* <button
+        type="button"
+        className="btn btn-outline-primary my-2 py-1 px-3"
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
+        Back
+      </button> */}
       <div className="d-flex justify-content-between my-1">
         <h5>{generateDynamicHeading(location.pathname)}</h5>
         <button
@@ -51,11 +61,13 @@ const ReportMaster = () => {
         handleSearchBtn={handleSearchBtn}
         dropdownData={reportData}
       />
-      <ReportListingTable
-        reportData={reportData}
-        searchInputValues={searchInputValues}
-        setSearchInputValues={setSearchInputValues}
-      />
+      <div className="container">
+        <ReportListingTable
+          reportData={reportData}
+          searchInputValues={searchInputValues}
+          setSearchInputValues={setSearchInputValues}
+        />
+      </div>
     </div>
   );
 };
