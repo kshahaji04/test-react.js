@@ -16,7 +16,11 @@ const ReportTabs = () => {
           {reportlist?.length > 0 &&
             reportlist.map((data: any, index: any) => {
               const processedStr: any = data.replace(/\s+/g, '').toLowerCase();
-              const linkTo: any = `/report/${processedStr}`;
+              const linkTo: any = `/report/${processedStr}/${
+                processedStr === 'emeraldchitti'
+                  ? 'categorypartywise'
+                  : 'subcategory'
+              }`;
               const isActive: any =
                 window?.location?.pathname?.includes(linkTo);
               return (
@@ -27,7 +31,11 @@ const ReportTabs = () => {
                   key={index}
                 >
                   <NavLink
-                    to={`/report/${processedStr}`}
+                    to={`/report/${processedStr}/${
+                      processedStr === 'emeraldchitti'
+                        ? 'categorypartywise'
+                        : 'subcategory'
+                    }`}
                     className={`text-decoration-none navlink-class ${
                       isActive ? 'text-white' : ''
                     }`}

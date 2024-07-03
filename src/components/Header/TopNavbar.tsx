@@ -9,7 +9,7 @@ const TopNavbar = () => {
 
   return (
     <>
-      <div className="bg-light d-flex align-items-center">
+      <div className="d-flex align-items-center">
         {((getUserRoles?.userRoles?.length > 0 &&
           getUserRoles?.userRoles.some((roles: any) =>
             roles.includes('Save Access')
