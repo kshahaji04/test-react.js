@@ -14,14 +14,14 @@ const CreateSalesReturnMaster = ({
   handleSRTopSectionData,
   clientNameList,
   topSectionInputData,
-  handleCreatePR,
+  handleCreateSR,
 }: any) => {
   return (
     <>
       <div className="d-flex justify-content-end">
         <button
           type="submit"
-          onClick={handleCreatePR}
+          onClick={handleCreateSR}
           className="btn btn-outline-primary  px-2 py-0 form-submit-button"
         >
           Save

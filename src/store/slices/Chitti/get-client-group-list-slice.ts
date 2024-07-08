@@ -6,7 +6,6 @@ export const getClientGroupList: any = createAsyncThunk(
   'clientGroup/getClientGroup',
   async (token: any) => {
     const ClientGroupListData: any = await GetClientGroupList(token);
-
     return ClientGroupListData;
   }
 );
@@ -35,7 +34,7 @@ export const GetClientGroupScreen = createSlice({
     builder.addCase(getClientGroupList.fulfilled, (state, action) => {
       if (action?.payload?.message?.status === 'success') {
         if (action?.payload?.message?.hasOwnProperty('data')) {
-          state.data = action?.payload?.message?.data?.data;
+          state.data = action?.payload?.message?.data;
           state.isLoading = 'succeeded';
         }
       }

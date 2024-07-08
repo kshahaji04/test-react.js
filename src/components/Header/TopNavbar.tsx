@@ -1,10 +1,24 @@
-import UserProfile from './UserProfile';
+import { useSelector } from 'react-redux';
 import '../../Style/Navbar.css';
+import NotificationToggle from './NotificationToggle';
+import UserProfile from './UserProfile';
+import { get_access_token } from '../../store/slices/auth/token-login-slice';
 
 const TopNavbar = () => {
+  const getUserRoles: any = useSelector(get_access_token);
+
   return (
     <>
-      <div className="bg-light">
+      <div className="d-flex align-items-center">
+        {((getUserRoles?.userRoles?.length > 0 &&
+          getUserRoles?.userRoles.some((roles: any) =>
+            roles.includes('Save Access')
+          )) ||
+          (getUserRoles?.userRoles?.length > 0 &&
+            getUserRoles?.userRoles?.some((roles: any) =>
+              roles.includes('Save Submit Access')
+            ))) && <NotificationToggle />}
+
         <nav className="container navbar navbar-light p-0">
           <div className="container-fluid my-1">
             <div></div>

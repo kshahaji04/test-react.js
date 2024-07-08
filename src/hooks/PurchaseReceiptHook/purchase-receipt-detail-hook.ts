@@ -10,8 +10,12 @@ import {
 import usePurchaseReceiptMasterHook from './purchase-receipt-master-hook';
 import DeletePurchaseReceiptApi from '../../services/api/PurchaseReceipt/delete-purchase-receipt-api';
 import { toast } from 'react-toastify';
-import { UpdatePurchaseReceiptDocStatusApi } from '../../services/api/PurchaseReceipt/update-docStatus-api';
+import {
+  UpdatePurchaseReceiptDocStatusApi,
+  updatePurchaseReceiptSubmitDocStatusApi,
+} from '../../services/api/PurchaseReceipt/update-docStatus-api';
 import { AmendPurchaseReceiptApi } from '../../services/api/PurchaseReceipt/amend-purchase-receipt-api';
+import PrintPurchaseReceiptApi from '../../services/api/PurchaseReceipt/print-purchase-receipt-api';
 
 const usePurchaseReceiptDetailHook: any = () => {
   const dispatch = useDispatch();
@@ -42,7 +46,7 @@ const usePurchaseReceiptDetailHook: any = () => {
     handleCreatePR,
     listingData,
     handleUpdateRecord,
-    userRolesData
+    userRolesData,
   } = usePurchaseReceiptMasterHook();
 
   useEffect(() => {
@@ -70,15 +74,21 @@ const usePurchaseReceiptDetailHook: any = () => {
     }
   }, [purchaseReceiptDetailFromStore]);
 
+  const reverseDate = (dateString: string) => {
+    const [day, month, year] = dateString.split('-');
+    return `${year}-${month}-${day}`;
+  };
   const handleAmendRecord: any = async () => {
+    let updatedDate: any = reverseDate(topSectionInputData?.date);
     const reqParams: any = {
       amended_from: id,
       name: id,
-      date: topSectionInputData?.date,
+      date: updatedDate,
       karigar_name: topSectionInputData?.karigar_name,
       // client_group: topSectionInputData?.karigar_name,
       gold_rate: topSectionInputData?.karigar_name,
-      remarks: topSectionInputData?.remarks,
+      check_916: topSectionInputData?.check_916,
+      check_75: topSectionInputData?.check_75,
       purchase_receipt_table: purchaseReceiptTable,
     };
     let amendApi: any = await AmendPurchaseReceiptApi(
@@ -104,11 +114,21 @@ const usePurchaseReceiptDetailHook: any = () => {
   };
 
   const handleUpdateDocstatusBtn: any = async (value: any) => {
-    let updateDocStatus: any = await UpdatePurchaseReceiptDocStatusApi(
-      accessToken?.token,
-      id,
-      value
-    );
+    let updateDocStatus: any;
+    if (value === '1') {
+      updateDocStatus = await updatePurchaseReceiptSubmitDocStatusApi(
+        accessToken?.token,
+        id,
+        new Date()?.toISOString()?.split('T')[0],
+        value
+      );
+    } else {
+      updateDocStatus = await UpdatePurchaseReceiptDocStatusApi(
+        accessToken?.token,
+        id,
+        value
+      );
+    }
 
     if (Object.keys(updateDocStatus?.data)?.length > 0) {
       setStateForDocStatus(false);
@@ -120,6 +140,7 @@ const usePurchaseReceiptDetailHook: any = () => {
       dispatch(getDetailPurchaseReceipt(params));
     }
   };
+
   const handleDeleteRecord: any = async () => {
     let deleteChallanApiRes: any = await DeletePurchaseReceiptApi(
       accessToken?.token,
@@ -133,7 +154,17 @@ const usePurchaseReceiptDetailHook: any = () => {
     }
   };
 
-  const handlePrintRecord: any = () => { };
+  const handlePrintRecord: any = async () => {
+    let printApiRes: any = await PrintPurchaseReceiptApi(
+      accessToken?.token,
+      id
+    );
+    if (printApiRes?.status === 'success') {
+      if (printApiRes?.data?.data?.length > 0) {
+        window.open(printApiRes?.data?.data[0]?.print_url);
+      }
+    }
+  };
 
   return {
     readOnlyFields,
@@ -158,7 +189,7 @@ const usePurchaseReceiptDetailHook: any = () => {
     handleDeleteRecord,
     handlePrintRecord,
     handleAmendRecord,
-    userRolesData
+    userRolesData,
   };
 };
 

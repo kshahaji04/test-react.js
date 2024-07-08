@@ -20,7 +20,7 @@ const PurchaseReceiptMaster = () => {
     topSectionInputData,
     handleCreatePR,
     listingData,
-    userRolesData
+    userRolesData,
   } = usePurchaseReceiptMasterHook();
 
   const {
@@ -34,10 +34,9 @@ const PurchaseReceiptMaster = () => {
   return (
     <div className="container mt-3">
       <div className="">
-
         <div className="row justify-content-center chitti-nav-tabs tab-container">
           <Tabs
-            defaultActiveKey="purchase-listing"
+            defaultActiveKey="longer-tab"
             id="justify-tab-example"
             className="w-75 border-0"
             justify
@@ -51,38 +50,43 @@ const PurchaseReceiptMaster = () => {
                   setSearchclientName={setSearchClientName}
                   searchClientName={searchClientName}
                   searchInputValues={searchInputValues}
-
                 />
-                <ListingTable tableListingData={filteredList} userRolesData={userRolesData} />
+                <ListingTable
+                  tableListingData={filteredList}
+                  userRolesData={userRolesData}
+                />
               </div>
             </Tab>
 
-
-            {(userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Save Access")) || userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Save Submit Access"))) && (
-              <Tab eventKey="longer-tab" title="Create Purchase Receipt">
-                <div className="col-lg-9 col-12 mx-auto mt-2">
-                  <CreatePurchaseReceiptMaster
-                    purchaseReceiptTable={purchaseReceiptTable}
-                    setPurchaseReceiptTable={setPurchaseReceiptTable}
-                    handlePurchaseTableFieldChange={
-                      handlePurchaseTableFieldChange
-                    }
-                    handlePRTopSectionData={handlePRTopSectionData}
-                    subCategoryList={subCategoryList}
-                    handleAddRow={handleAddRow}
-                    handleDeleteRow={handleDeleteRow}
-                    amountValue={amountValue}
-                    handleKeyDown={handleKeyDown}
-                    clientNameList={clientNameList}
-                    topSectionInputData={topSectionInputData}
-                    handleCreatePR={handleCreatePR}
-                  />
-                </div>
-              </Tab>
-            )}
-
-
-
+            {((userRolesData?.length > 0 &&
+              userRolesData.some((roles: any) =>
+                roles.includes('Save Access')
+              )) ||
+              (userRolesData?.length > 0 &&
+                userRolesData.some((roles: any) =>
+                  roles.includes('Save Submit Access')
+                ))) && (
+                <Tab eventKey="longer-tab" title="Create Purchase Receipt">
+                  <div className="col-lg-9 col-12 mx-auto mt-2">
+                    <CreatePurchaseReceiptMaster
+                      purchaseReceiptTable={purchaseReceiptTable}
+                      setPurchaseReceiptTable={setPurchaseReceiptTable}
+                      handlePurchaseTableFieldChange={
+                        handlePurchaseTableFieldChange
+                      }
+                      handlePRTopSectionData={handlePRTopSectionData}
+                      subCategoryList={subCategoryList}
+                      handleAddRow={handleAddRow}
+                      handleDeleteRow={handleDeleteRow}
+                      amountValue={amountValue}
+                      handleKeyDown={handleKeyDown}
+                      clientNameList={clientNameList}
+                      topSectionInputData={topSectionInputData}
+                      handleCreatePR={handleCreatePR}
+                    />
+                  </div>
+                </Tab>
+              )}
           </Tabs>
         </div>
       </div>

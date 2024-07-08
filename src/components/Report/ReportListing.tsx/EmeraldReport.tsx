@@ -6,7 +6,6 @@ import useDataUploadHook from '../../../hooks/dataUpload/data-upload-hook';
 import { useDispatch } from 'react-redux';
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
-
 import { getEmeraldReportData } from '../../../store/slices/report/get-emerald-report-slice';
 
 const EmeraldReport = () => {

@@ -30,7 +30,7 @@ const HuidProductMaster = () => {
   const filteredListWithAdditionalFilters: any =
     filteredList.length > 0 &&
     filteredList.filter((client: any) => {
-      const titleMatch = client?.title
+      const titleMatch = client?.name
         ?.toLowerCase()
         ?.includes(inputName?.toLowerCase());
 

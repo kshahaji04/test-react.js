@@ -63,16 +63,16 @@ const useSalesReturnMasterHook = () => {
     dispatch(getSalesReturnListing(accessToken?.token));
     dispatch(getSubCategoryList(accessToken?.token));
     dispatch(getClientName(accessToken?.token));
-    getUserRoles()
+    getUserRoles();
   }, []);
 
   const getUserRoles: any = async () => {
-    let userRolesData: any = await getUserRoleApi(accessToken?.token)
-    console.log("userRoleData", userRolesData)
-    if (userRolesData?.data?.message?.status === "success") {
-      setUserRolesData(userRolesData?.data?.message?.data)
+    let userRolesData: any = await getUserRoleApi(accessToken?.token);
+
+    if (userRolesData?.data?.message?.status === 'success') {
+      setUserRolesData(userRolesData?.data?.message?.data);
     }
-  }
+  };
 
   const handlePurchaseTableFieldChange: any = (
     value: any,
@@ -145,29 +145,50 @@ const useSalesReturnMasterHook = () => {
     }
   }, [clientNameDataFromStore]);
 
-  const handleCreatePR: any = async () => {
-    const NoDataChallanTableData = salesReturnTable?.some(
+  const validateForm = (
+    topSectionInputData: any,
+    purchaseReceiptTable: any
+  ) => {
+    const NoDataChallanTableData = purchaseReceiptTable?.some(
       (item: any) => Object?.keys(item)?.length === 0
     );
 
-    const filteredChallanTable: any = checkObjectHasValues(salesReturnTable);
+    const filteredChallanTable = checkObjectHasValues(purchaseReceiptTable);
 
-    let errMsgList: any = [];
-    // if (Object?.keys(selectedDropdownValue)?.length === 0) {
-    //   errMsgList.push('Client Name');
-    // }
+    let errMsgList = [];
+
     if (NoDataChallanTableData) {
       errMsgList.push('Challan Table');
     }
+
     const hasSubCategoryKey =
       filteredChallanTable?.length > 0 &&
       filteredChallanTable.every(
         (obj: any) => 'sub_category' in obj && obj.sub_category !== ''
       );
 
-    if (!hasSubCategoryKey && errMsgList?.length === 0) {
+    if (!hasSubCategoryKey && errMsgList.length === 0) {
       errMsgList.push('Sub Category in Challan table');
     }
+
+    if (!topSectionInputData?.check_75 || !topSectionInputData.check_916) {
+      if (
+        topSectionInputData.check_75 === 1 ||
+        topSectionInputData.check_916 === 1
+      ) {
+        return;
+      } else {
+        errMsgList.push('Category');
+      }
+    }
+    return errMsgList;
+  };
+
+  const handleCreateSR: any = async () => {
+    const filteredChallanTable: any = checkObjectHasValues(salesReturnTable);
+
+    const errMsgList: any = validateForm(topSectionInputData, salesReturnTable);
+
     if (errMsgList?.length > 0 && errMsgList !== null) {
       toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
     } else {
@@ -205,7 +226,8 @@ const useSalesReturnMasterHook = () => {
             clientName: topSectionInputData?.client_name,
             // clientGroup: clientGroupName,
             goldRate: topSectionInputData?.gold_rate,
-            remarks: topSectionInputData?.remarks,
+            check_916: topSectionInputData?.check_916,
+            check_75: topSectionInputData?.check_75,
             challanTableData: challanTableWithGrossWeight,
           };
           let purchaseReceiptApiRes: any = await CreateSalesReturnApi(BodyData);
@@ -231,7 +253,7 @@ const useSalesReturnMasterHook = () => {
               '0'
             );
           } else {
-            toast.error('Failed to create chitti');
+            toast.error('Failed to create Sales Return');
           }
         }
       }
@@ -264,7 +286,8 @@ const useSalesReturnMasterHook = () => {
         clientName: topSectionInputData?.client_name,
         // clientGroup: clientGroupName,
         goldRate: topSectionInputData?.gold_rate,
-        remarks: topSectionInputData?.remarks,
+        check_916: topSectionInputData?.check_916,
+        check_75: topSectionInputData?.check_75,
         salesReturnTableData: filteredChallanTable,
       };
       let updateSalesReturn: any = await UpdateSalesReturnApi(BodyData);
@@ -308,10 +331,10 @@ const useSalesReturnMasterHook = () => {
     clientNameList,
     topSectionInputData,
     setTopSectionInputData,
-    handleCreatePR,
+    handleCreateSR,
     listingData,
     handleUpdateRecord,
-    userRolesData
+    userRolesData,
   };
 };
 

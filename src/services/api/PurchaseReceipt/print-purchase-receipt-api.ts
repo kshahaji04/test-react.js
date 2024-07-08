@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
 
-const DeletePurchaseReceiptApi = async (token: any, name: any) => {
+const PrintPurchaseReceiptApi = async (token: any, name: any) => {
   let response: any;
   const version = 'v1';
-  const method = 'delete_purchase_receipt';
+  const method = 'get_purchase_receipt_print';
   const entity = 'custom_purchase_receipt';
 
   const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}&name=${name}`;
@@ -16,9 +16,9 @@ const DeletePurchaseReceiptApi = async (token: any, name: any) => {
   };
 
   await axios
-    .delete(`${BASE_URL}${params}`, config)
+    .get(`${BASE_URL}${params}`, config)
     .then((res: any) => {
-      response = res.data;
+      response = res.data.message;
     })
     .catch((err: any) => {
       console.log(err);
@@ -26,4 +26,4 @@ const DeletePurchaseReceiptApi = async (token: any, name: any) => {
   return response;
 };
 
-export default DeletePurchaseReceiptApi;
+export default PrintPurchaseReceiptApi;

@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import SelectedInputDropdown from '../../SelectedInputDropdown';
 
 const SearchListingTable = ({
@@ -7,6 +8,8 @@ const SearchListingTable = ({
   handleSearchInput,
   searchInputValues,
 }: any) => {
+  const location = useLocation();
+
   return (
     <>
       <div className="row justify-content-center mt-1">
@@ -67,15 +70,23 @@ const SearchListingTable = ({
         </div>
 
         <div className="col-lg-2 col-md-2 ">
-          <label className="text-secondary ">Client name</label>
+          <label className="text-secondary ">
+            {location?.pathname?.includes('/purchase-receipt')
+              ? 'Karigar Name'
+              : 'Client name'}
+          </label>
           <SelectedInputDropdown
             drowpdownlist={clientNameList}
             // bgColor={bgColor}
-            placeholderValue="Client Name"
+            placeholderValue={
+              location?.pathname?.includes('/purchase-receipt')
+                ? 'Karigar Name'
+                : 'Client name'
+            }
             selectedDropdownValue={searchClientName}
             setSelectedDropdownValue={setSearchclientName}
-          // clientGroupList={clientGroupList}
-          // HandleClientGroup={HandleClientGroup}
+            // clientGroupList={clientGroupList}
+            // HandleClientGroup={HandleClientGroup}
           />
         </div>
         <div className="col-lg-2 col-md-2 my-lg-0 mb-lg-0 mb-3">

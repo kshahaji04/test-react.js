@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../root-reducer';
-import getCategoryPartywiseReportApi from '../../../services/api/report/get-category-partywise-report-api';
+import getCategoryPartywiseReportApi from '../../../services/api/report/Chitti/get-category-partywise-report-api';
 
 export const getCategoryPartywiseReportData: any = createAsyncThunk(
   'getCategoryPartywiseReport/getCategoryPartywiseReports',

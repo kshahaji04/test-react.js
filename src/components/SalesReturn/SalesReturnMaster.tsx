@@ -18,9 +18,9 @@ const SalesReturnMaster = () => {
     handleSRTopSectionData,
     clientNameList,
     topSectionInputData,
-    handleCreatePR,
+    handleCreateSR,
     listingData,
-    userRolesData
+    userRolesData,
   } = useSalesReturnMasterHook();
 
   const {
@@ -32,19 +32,21 @@ const SalesReturnMaster = () => {
   } = useListingFilterHook(listingData);
 
   const userRoleWiseShow: any = () => {
-    let userRoleHasSaveAccess: any = userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Save Access"))
-    let userRoleHasSaveSubmitAccess: any = userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Save Submit Access"))
+    let userRoleHasSaveAccess: any =
+      userRolesData?.length > 0 &&
+      userRolesData.some((roles: any) => roles.includes('Save Access'));
+    let userRoleHasSaveSubmitAccess: any =
+      userRolesData?.length > 0 &&
+      userRolesData.some((roles: any) => roles.includes('Save Submit Access'));
 
-    if ((userRoleHasSaveAccess || userRoleHasSaveSubmitAccess)) {
+    if (userRoleHasSaveAccess || userRoleHasSaveSubmitAccess) {
       return (
         <Tab eventKey="longer-tab" title="Create Sales Return">
           <div className="col-lg-9 col-12 mx-auto mt-2">
             <CreateSalesReturnMaster
               salesReturnTable={salesReturnTable}
               setSalesReturnTable={setSalesReturnTable}
-              handlePurchaseTableFieldChange={
-                handlePurchaseTableFieldChange
-              }
+              handlePurchaseTableFieldChange={handlePurchaseTableFieldChange}
               handleSRTopSectionData={handleSRTopSectionData}
               subCategoryList={subCategoryList}
               handleAddRow={handleAddRow}
@@ -53,20 +55,20 @@ const SalesReturnMaster = () => {
               handleKeyDown={handleKeyDown}
               clientNameList={clientNameList}
               topSectionInputData={topSectionInputData}
-              handleCreatePR={handleCreatePR}
+              handleCreateSR={handleCreateSR}
             />
           </div>
         </Tab>
-      )
+      );
     }
-  }
+  };
 
   return (
     <div className="container mt-3">
       <div className="">
         <div className="row justify-content-center chitti-nav-tabs tab-container">
           <Tabs
-            defaultActiveKey="SR-listing"
+            defaultActiveKey="longer-tab"
             id="justify-tab-example"
             className="w-75 border-0"
             justify
@@ -81,7 +83,10 @@ const SalesReturnMaster = () => {
                   searchClientName={searchClientName}
                   searchInputValues={searchInputValues}
                 />
-                <ListingTable tableListingData={filteredList} userRolesData={userRolesData} />
+                <ListingTable
+                  tableListingData={filteredList}
+                  userRolesData={userRolesData}
+                />
               </div>
             </Tab>
             {userRoleWiseShow()}

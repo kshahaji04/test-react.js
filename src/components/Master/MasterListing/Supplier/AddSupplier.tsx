@@ -74,7 +74,10 @@ const AddSupplier = ({ GroupListdata }: any) => {
       <div className="input-group w-50 master-input-field">
         <div className="w-100 ">
           <SelectedInputDropdown
-            drowpdownlist={GroupListdata}
+            drowpdownlist={
+              GroupListdata?.length > 0 &&
+              GroupListdata.map((data: any) => data.name)
+            }
             // bgColor={bgColor}
             placeholderValue="Supplier Group"
             selectedDropdownValue={selectedDropdownValue}

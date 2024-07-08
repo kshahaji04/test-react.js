@@ -23,7 +23,7 @@ const SupplierGroup = () => {
     supplierGroupList?.length > 0 &&
     supplierGroupList !== null &&
     supplierGroupList.filter((value: any) => {
-      return value?.toLowerCase()?.includes(searchField?.toLowerCase());
+      return value?.name?.toLowerCase()?.includes(searchField?.toLowerCase());
     });
 
   return (
@@ -47,7 +47,6 @@ const SupplierGroup = () => {
                 filteredList={filterList}
                 handleTableViewRows={handleTableViewRows}
                 tableViewData={tableViewData}
-                heading="Supplier Group"
               />
             </Tab>
             <Tab eventKey="longer-tab" title="Add Supplier Group">

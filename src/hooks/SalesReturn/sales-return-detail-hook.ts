@@ -4,13 +4,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AmendSalesReturnApi } from '../../services/api/SalesReturn/amend-sales-return-api';
 import DeleteSalesReturnApi from '../../services/api/SalesReturn/delete-sales-return-api';
-import { UpdateSalesReturnDocStatusApi } from '../../services/api/SalesReturn/update-docStatus-api';
+import {
+  UpdateSalesReturnDocStatusApi,
+  updateSalesReturnSubmitDocStatusApi,
+} from '../../services/api/SalesReturn/update-docStatus-api';
 import {
   getDetailSalesReturn,
   get_detail_sales_return,
 } from '../../store/slices/SalesReturn/get-detail-sales-return-slice';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import useSalesReturnMasterHook from './sales-return-master-hook';
+import PrintSalesReturnApi from '../../services/api/SalesReturn/print-sales-return-api';
 
 const useSalesReturnDetailHook: any = () => {
   const dispatch = useDispatch();
@@ -35,10 +39,10 @@ const useSalesReturnDetailHook: any = () => {
     clientNameList,
     topSectionInputData,
     setTopSectionInputData,
-    handleCreatePR,
+    handleCreateSR,
     listingData,
     handleUpdateRecord,
-    userRolesData
+    userRolesData,
   } = useSalesReturnMasterHook();
 
   useEffect(() => {
@@ -70,15 +74,21 @@ const useSalesReturnDetailHook: any = () => {
     }
   }, [salesReturnDetailFromStore]);
 
+  const reverseDate = (dateString: string) => {
+    const [day, month, year] = dateString.split('-');
+    return `${year}-${month}-${day}`;
+  };
   const handleAmendRecord: any = async () => {
+    let updatedDate: any = reverseDate(topSectionInputData?.date);
     const reqParams: any = {
       amended_from: id,
       name: id,
-      date: topSectionInputData?.date,
+      date: updatedDate,
       client_name: topSectionInputData?.client_name,
       // client_group: topSectionInputData?.karigar_name,
       gold_rate: topSectionInputData?.karigar_name,
-      remarks: topSectionInputData?.remarks,
+      check_916: topSectionInputData?.check_916,
+      check_75: topSectionInputData?.check_75,
       sales_return_table: salesReturnTable,
     };
     let amendApi: any = await AmendSalesReturnApi(
@@ -104,12 +114,21 @@ const useSalesReturnDetailHook: any = () => {
   };
 
   const handleUpdateDocstatusBtn: any = async (value: any) => {
-    let updateDocStatus: any = await UpdateSalesReturnDocStatusApi(
-      accessToken?.token,
-      id,
-      value
-    );
-
+    let updateDocStatus: any;
+    if (value === '1') {
+      updateDocStatus = await updateSalesReturnSubmitDocStatusApi(
+        accessToken?.token,
+        id,
+        new Date()?.toISOString()?.split('T')[0],
+        value
+      );
+    } else {
+      updateDocStatus = await UpdateSalesReturnDocStatusApi(
+        accessToken?.token,
+        id,
+        value
+      );
+    }
     if (Object.keys(updateDocStatus?.data)?.length > 0) {
       setStateForDocStatus(false);
 
@@ -133,7 +152,14 @@ const useSalesReturnDetailHook: any = () => {
     }
   };
 
-  const handlePrintRecord: any = () => { };
+  const handlePrintRecord: any = async () => {
+    let printApiRes: any = await PrintSalesReturnApi(accessToken?.token, id);
+    if (printApiRes?.status === 'success') {
+      if (printApiRes?.data?.data?.length > 0) {
+        window.open(printApiRes?.data?.data[0]?.print_url);
+      }
+    }
+  };
 
   return {
     readOnlyFields,
@@ -150,7 +176,7 @@ const useSalesReturnDetailHook: any = () => {
     handleSRTopSectionData,
     clientNameList,
     topSectionInputData,
-    handleCreatePR,
+    handleCreateSR,
     listingData,
     setReadOnlyFields,
     handleUpdateRecord,
@@ -158,7 +184,7 @@ const useSalesReturnDetailHook: any = () => {
     handleDeleteRecord,
     handlePrintRecord,
     handleAmendRecord,
-    userRolesData
+    userRolesData,
   };
 };
 

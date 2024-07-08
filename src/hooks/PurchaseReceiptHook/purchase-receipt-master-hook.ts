@@ -68,16 +68,16 @@ const usePurchaseReceiptMasterHook = () => {
     dispatch(getPurchaseReceiptListing(accessToken?.token));
     dispatch(getSubCategoryList(accessToken?.token));
     dispatch(getClientName(accessToken?.token));
-    getUserRoles()
+    getUserRoles();
   }, []);
 
   const getUserRoles: any = async () => {
-    let userRolesData: any = await getUserRoleApi(accessToken?.token)
-    console.log("userRoleData", userRolesData)
-    if (userRolesData?.data?.message?.status === "success") {
-      setUserRolesData(userRolesData?.data?.message?.data)
+    let userRolesData: any = await getUserRoleApi(accessToken?.token);
+    console.log('userRoleData', userRolesData);
+    if (userRolesData?.data?.message?.status === 'success') {
+      setUserRolesData(userRolesData?.data?.message?.data);
     }
-  }
+  };
 
   const handlePurchaseTableFieldChange: any = (
     value: any,
@@ -178,34 +178,54 @@ const usePurchaseReceiptMasterHook = () => {
     }
   }, [clientNameDataFromStore]);
 
-
-
-
-
-  const handleCreatePR: any = async () => {
+  const validateForm = (
+    topSectionInputData: any,
+    purchaseReceiptTable: any
+  ) => {
     const NoDataChallanTableData = purchaseReceiptTable?.some(
       (item: any) => Object?.keys(item)?.length === 0
     );
 
-    const filteredChallanTable: any =
-      checkObjectHasValues(purchaseReceiptTable);
+    const filteredChallanTable = checkObjectHasValues(purchaseReceiptTable);
 
-    let errMsgList: any = [];
-    // if (Object?.keys(selectedDropdownValue)?.length === 0) {
-    //   errMsgList.push('Client Name');
-    // }
+    let errMsgList = [];
+
     if (NoDataChallanTableData) {
       errMsgList.push('Challan Table');
     }
+
     const hasSubCategoryKey =
       filteredChallanTable?.length > 0 &&
       filteredChallanTable.every(
         (obj: any) => 'sub_category' in obj && obj.sub_category !== ''
       );
 
-    if (!hasSubCategoryKey && errMsgList?.length === 0) {
+    if (!hasSubCategoryKey && errMsgList.length === 0) {
       errMsgList.push('Sub Category in Challan table');
     }
+
+    if (!topSectionInputData?.check_75 || !topSectionInputData.check_916) {
+      if (
+        topSectionInputData.check_75 === 1 ||
+        topSectionInputData.check_916 === 1
+      ) {
+        return;
+      } else {
+        errMsgList.push('Category');
+      }
+    }
+
+    return errMsgList;
+  };
+
+  const handleCreatePR: any = async () => {
+    const filteredChallanTable = checkObjectHasValues(purchaseReceiptTable);
+
+    const errMsgList: any = validateForm(
+      topSectionInputData,
+      purchaseReceiptTable
+    );
+
     if (errMsgList?.length > 0 && errMsgList !== null) {
       toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
     } else {
@@ -242,7 +262,8 @@ const usePurchaseReceiptMasterHook = () => {
             clientName: topSectionInputData?.client_name,
             // clientGroup: clientGroupName,
             goldRate: topSectionInputData?.gold_rate,
-            remarks: topSectionInputData?.remarks,
+            check_916: topSectionInputData?.check_916,
+            check_75: topSectionInputData?.check_75,
             challanTableData: challanTableWithGrossWeight,
             token: accessToken?.token,
           };
@@ -272,7 +293,7 @@ const usePurchaseReceiptMasterHook = () => {
 
             // dispatch(getChittiChallan(accessToken?.token));
           } else {
-            toast.error('Failed to create chitti');
+            toast.error('Failed to create Purchase Receipt');
           }
         }
       }
@@ -305,7 +326,8 @@ const usePurchaseReceiptMasterHook = () => {
         clientName: topSectionInputData?.karigar_name,
         // clientGroup: clientGroupName,
         goldRate: topSectionInputData?.gold_rate,
-        remarks: topSectionInputData?.remarks,
+        check_916: topSectionInputData?.check_916,
+        check_75: topSectionInputData?.check_75,
         purchaseReceiptTableData: filteredChallanTable,
         token: accessToken?.token,
       };
@@ -353,7 +375,7 @@ const usePurchaseReceiptMasterHook = () => {
     handleCreatePR,
     listingData,
     handleUpdateRecord,
-    userRolesData
+    userRolesData,
   };
 };
 

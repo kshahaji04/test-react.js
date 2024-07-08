@@ -6,7 +6,6 @@ import MasterMultipleListingSearch from '../MasterMultipleListingSearch';
 import AddSubCategory from './AddSubCategory';
 import MasterTableListing from '../../MasterTableListing';
 
-
 const SubCategoryMaster = () => {
   const { subCategoryCategoryData }: any = useSubCategoryHook();
   const { CategoryList }: any = useCategoryHook();
@@ -31,8 +30,8 @@ const SubCategoryMaster = () => {
     subCategoryCategoryData !== null &&
     subCategoryCategoryData.filter(
       (client: any) =>
-        client.name.toLowerCase().includes(inputName.toLowerCase()) &&
-        client.category.toLowerCase().includes(inputGroup.toLowerCase())
+        client?.name?.toLowerCase()?.includes(inputName.toLowerCase()) &&
+        client?.category?.toLowerCase()?.includes(inputGroup.toLowerCase())
     );
 
   return (

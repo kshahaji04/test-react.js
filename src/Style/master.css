@@ -20,14 +20,9 @@
         padding: 3px 8px !important;
         /* margin: 0px 5px !important; */
     }
-
-
     .card-title {
         font-size: 12px;
     }
-
-
-
 }
 
 
@@ -47,4 +42,8 @@
 .load-more-table-data-btn {
 
     color: black;
+}
+
+.del-tooltip-content {
+    font-size: 12px;
 }

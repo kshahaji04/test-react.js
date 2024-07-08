@@ -4,7 +4,6 @@ const SalesReturnTopSection = ({
   handleSRTopSectionData,
   clientNameList,
   topSectionInputData,
-  defaultData,
   readOnlyFields,
 }: any) => {
   const clientData: any = {
@@ -12,6 +11,15 @@ const SalesReturnTopSection = ({
     fieldtype: 'Link',
     link_data: clientNameList,
   };
+
+  const convertDateFormat = (dateStr: any) => {
+    if (dateStr !== undefined) {
+      const [day, month, year] = dateStr !== undefined && dateStr?.split('-');
+      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    }
+  };
+
+  const newDateStr = convertDateFormat(topSectionInputData?.date);
 
   return (
     <form className="d-flex flex-column">
@@ -27,9 +35,9 @@ const SalesReturnTopSection = ({
               id="date"
               name="date"
               value={
-                defaultData === undefined
+                newDateStr === undefined
                   ? new Date()?.toISOString()?.split('T')[0]
-                  : defaultData?.date
+                  : newDateStr
               }
               defaultValue={topSectionInputData?.date}
               className="form-control custom-input-field py-0 px-2"
@@ -71,28 +79,38 @@ const SalesReturnTopSection = ({
 
         <div className="col-lg-3 col-md-6">
           <label className="form-Form.Label fs-6 text-dark form-label-bold">
-            Category
+            Category <span className="text-danger">*</span>
           </label>
           <div>
             <div className="form-check form-check-inline">
-              <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="inlineCheckbox1"
+                value={topSectionInputData?.check_916}
+                checked={topSectionInputData?.check_916 === 1}
+                onChange={(e) =>
+                  handleSRTopSectionData(e.target.checked, 'check_916')
+                }
+                disabled={readOnlyFields}
+              />
               <label className="form-check-label">916</label>
             </div>
             <div className="form-check form-check-inline">
-              <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="inlineCheckbox2"
+                value={topSectionInputData?.check_75}
+                checked={topSectionInputData?.check_75 === 1}
+                onChange={(e) =>
+                  handleSRTopSectionData(e.target.checked, 'check_75')
+                }
+                disabled={readOnlyFields}
+              />
               <label className="form-check-label">75</label>
             </div>
           </div>
-          {/* <input
-            type="text"
-            name="remarks"
-            className="form-control custom-input-field px-1"
-            value={topSectionInputData?.remarks}
-            defaultValue={topSectionInputData?.remarks}
-            onChange={(e) => handleSRTopSectionData(e.target.value, 'remarks')}
-            readOnly={readOnlyFields}
-            autoComplete="off"
-          /> */}
         </div>
       </div>
     </form>

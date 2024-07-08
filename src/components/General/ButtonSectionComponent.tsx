@@ -14,10 +14,11 @@ const ButtonSectionComponent = ({
   handleAmendBtn,
   details,
   handleUpdateRecordBtn,
-  userRolesData
+  userRolesData,
+  handlePrintBtn,
 }: any) => {
   const navigate: any = useNavigate();
-  let pathname: any = window.location.pathname
+  let pathname: any = window.location.pathname;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [showSaveButtonForAmendFlow, setShowSaveButtonForAmendFlow] =
     useState<boolean>(false);
@@ -32,11 +33,25 @@ const ButtonSectionComponent = ({
     navigate(-1);
   };
 
+  let todayDate: any = new Date()
+    .toISOString()
+    .split('T')[0]
+    .split('-')
+    .reverse()
+    .join('-');
+
   const userRoleWiseShow: any = () => {
-    let userRoleHasSubmitAccess: any = userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Submit Access"))
-    let userRoleHasSaveSubmitAccess: any = userRolesData?.length > 0 && userRolesData.some((roles: any) => roles.includes("Save Submit Access"))
-    if (pathname.includes("/purchase-receipt") || pathname.includes("/sales-return")) {
-      if ((userRoleHasSubmitAccess || userRoleHasSaveSubmitAccess)) {
+    let userRoleHasSubmitAccess: any =
+      userRolesData?.length > 0 &&
+      userRolesData.some((roles: any) => roles.includes('Submit Access'));
+    let userRoleHasSaveSubmitAccess: any =
+      userRolesData?.length > 0 &&
+      userRolesData.some((roles: any) => roles.includes('Save Submit Access'));
+    if (
+      pathname.includes('/purchase-receipt') ||
+      pathname.includes('/sales-return')
+    ) {
+      if (userRoleHasSubmitAccess || userRoleHasSaveSubmitAccess) {
         return (
           <button
             type="submit"
@@ -44,13 +59,13 @@ const ButtonSectionComponent = ({
             disabled={
               details?.length > 0 &&
               details !== null &&
-              details[0]?.date !== new Date()?.toISOString()?.split('T')[0]
+              details[0]?.date !== todayDate
             }
             onClick={() => handleUpdateDocstatusBtn('1')}
           >
             Submit
           </button>
-        )
+        );
       }
     } else {
       return (
@@ -60,136 +75,147 @@ const ButtonSectionComponent = ({
           disabled={
             details?.length > 0 &&
             details !== null &&
-            details[0]?.date !== new Date()?.toISOString()?.split('T')[0]
+            details[0]?.date !== todayDate
           }
           onClick={() => handleUpdateDocstatusBtn('1')}
         >
           Submit
         </button>
-      )
+      );
     }
-  }
+  };
 
   return (
-    <div className="d-flex justify-content-between  my-3">
-      <div className="d-flex align-items-center">
-        <div>
-          <button
-            type="submit"
-            onClick={handleBackButton}
-            className=" btn btn-outline-primary me-3 px-2 py-0 form-submit-button"
-          >
-            Back
-          </button>
-        </div>
-        {stateForDocStatus === true && docStatus === 0 && (
-          <button type="button" className="btn docstatus-button">
-            Not Saved
-          </button>
-        )}
-        {stateForDocStatus === false && docStatus === 0 && (
-          <button type="button" className="btn docstatus-button">
-            Draft
-          </button>
-        )}
-        {docStatus === 1 && (
-          <button type="button" className="btn docstatus-button">
-            Submit
-          </button>
-        )}
-        {docStatus === 2 && readOnly && (
-          <button type="button" className="btn docstatus-button">
-            Cancelled
-          </button>
-        )}
-        {showSaveButtonForAmendFlow &&
-          stateForDocStatus &&
-          readOnly === false && (
+    <>
+      <div className="d-flex justify-content-between  my-3">
+        <div className="d-flex align-items-center">
+          <div>
+            <button
+              type="submit"
+              onClick={handleBackButton}
+              className=" btn btn-outline-primary me-3 px-2 py-0 form-submit-button"
+            >
+              Back
+            </button>
+          </div>
+          {stateForDocStatus === true && docStatus === 0 && (
             <button type="button" className="btn docstatus-button">
-              Not saved
+              Not Saved
             </button>
           )}
-      </div>
-      <div>
-        {stateForDocStatus === true && docStatus === 0 && (
-          <button
-            type="submit"
-            onClick={handleUpdateRecordBtn}
-            className=" btn btn-outline-primary px-2 py-0 form-submit-button"
-          >
-            Save
-          </button>
-        )}
-        {stateForDocStatus === false && docStatus === 0 && (
-          <>
-            {userRoleWiseShow(details)}
-
-
-          </>
-        )}
-        {/* {docStatus === 1 && (
-          <button
-            type="submit"
-            className=" btn btn-outline-primary me-2 px-2 py-0 form-submit-button"
-            onClick={handlePrintBtn}
-          >
-            Print
-          </button>
-        )} */}
-        {docStatus === 1 && (
-          <button
-            type="submit"
-            className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-            onClick={() => handleUpdateDocstatusBtn('2')}
-          >
-            Cancel
-          </button>
-        )}
-
-        {docStatus === 2 && showSaveButtonForAmendFlow === false && (
-          <>
-            <button
-              type="submit"
-              className=" btn btn-outline-primary px-2 me-2 py-0 form-submit-button"
-              disabled={
-                details?.length > 0 &&
-                details !== null &&
-                details[0]?.date !== new Date()?.toISOString()?.split('T')[0]
-              }
-              onClick={handleAmendButtonChanges}
-            >
-              Amend
+          {stateForDocStatus === false && docStatus === 0 && (
+            <button type="button" className="btn docstatus-button">
+              Draft
             </button>
-          </>
-        )}
-
-        {showSaveButtonForAmendFlow &&
-          stateForDocStatus &&
-          readOnly === false && (
+          )}
+          {docStatus === 1 && (
+            <button type="button" className="btn docstatus-button">
+              Submit
+            </button>
+          )}
+          {docStatus === 2 && readOnly && (
+            <button type="button" className="btn docstatus-button">
+              Cancelled
+            </button>
+          )}
+          {showSaveButtonForAmendFlow &&
+            stateForDocStatus &&
+            readOnly === false && (
+              <button type="button" className="btn docstatus-button">
+                Not saved
+              </button>
+            )}
+        </div>
+        <div>
+          {stateForDocStatus === true && docStatus === 0 && (
             <button
               type="submit"
-              onClick={handleAmendBtn}
-              className=" btn btn-outline-primary px-2 py-0 me-2 form-submit-button"
+              onClick={handleUpdateRecordBtn}
+              className=" btn btn-outline-primary px-2 py-0 form-submit-button"
             >
               Save
             </button>
           )}
+          {stateForDocStatus === false && docStatus === 0 && (
+            <>{userRoleWiseShow(details)}</>
+          )}
+          {docStatus === 1 && (
+            <button
+              type="submit"
+              className=" btn btn-outline-primary me-2 px-2 py-0 form-submit-button"
+              onClick={handlePrintBtn}
+            >
+              Print
+            </button>
+          )}
+          {docStatus === 1 && (
+            <button
+              type="submit"
+              className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
+              onClick={() => handleUpdateDocstatusBtn('2')}
+            >
+              Cancel
+            </button>
+          )}
 
-        {docStatus === 2 && (
-          <button
-            type="submit"
-            className="btn btn-outline-primary px-2 py-0  form-submit-button"
-            disabled={
-              details?.length > 0 &&
-              details !== null &&
-              details[0]?.date !== new Date()?.toISOString()?.split('T')[0]
-            }
-            onClick={() => setIsModalOpen(true)}
-          >
-            Delete
-          </button>
-        )}
+          {docStatus === 2 && showSaveButtonForAmendFlow === false && (
+            <>
+              <button
+                type="submit"
+                className=" btn btn-outline-primary px-2 me-2 py-0 form-submit-button"
+                disabled={
+                  details?.length > 0 &&
+                  details !== null &&
+                  details[0]?.date !== todayDate
+                }
+                onClick={handleAmendButtonChanges}
+              >
+                Amend
+              </button>
+            </>
+          )}
+
+          {showSaveButtonForAmendFlow &&
+            stateForDocStatus &&
+            readOnly === false && (
+              <button
+                type="submit"
+                onClick={handleAmendBtn}
+                className=" btn btn-outline-primary px-2 py-0 me-2 form-submit-button"
+              >
+                Save
+              </button>
+            )}
+
+          {docStatus === 2 && (
+            <button
+              type="submit"
+              className="btn btn-outline-primary px-2 py-0  form-submit-button"
+              disabled={
+                details?.length > 0 &&
+                details !== null &&
+                details[0]?.date !== todayDate
+              }
+              onClick={() => setIsModalOpen(true)}
+            >
+              Delete
+            </button>
+          )}
+          {
+            userRolesData?.length > 0 &&
+            userRolesData.some((roles: any) => roles.includes('Save Submit Access')) && (
+              <button
+                type="submit"
+                onClick={handleBackButton}
+                className=" btn btn-primary ms-2 px-2 py-0 form-submit-button"
+              >
+                Create {pathname?.includes('/purchase-receipt') ? "PR" : "SR"}
+              </button>
+            )
+          }
+        </div>
       </div>
+
       {isModalOpen && (
         <DeleteAlertModal
           isModalOpen={isModalOpen}
@@ -197,7 +223,7 @@ const ButtonSectionComponent = ({
           handleDeleteBtn={handleDeleteBtn}
         />
       )}
-    </div>
+    </>
   );
 };
 

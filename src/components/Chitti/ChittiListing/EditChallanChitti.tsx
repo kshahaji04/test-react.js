@@ -41,6 +41,7 @@ const EditChallanChitti = () => {
     showSaveButtonForAmendFlow,
     setCheckGrossAndNetWeight,
     handlePrintButton,
+    currentDate,
   }: any = useEditChallanChitti();
   const navigate = useNavigate();
   const [showButton, setShowButton] = useState<any>();
@@ -74,6 +75,12 @@ const EditChallanChitti = () => {
   };
 
   // console.log("stateForDocStatus in btn section", stateForDocStatus)
+  let todayDate: any = new Date()
+    .toISOString()
+    .split('T')[0]
+    .split('-')
+    .reverse()
+    .join('-');
 
   return (
     <div className="container">
@@ -143,8 +150,7 @@ const EditChallanChitti = () => {
                         disabled={
                           challanDetail?.length > 0 &&
                           challanDetail !== null &&
-                          challanDetail[0]?.date !==
-                            new Date()?.toISOString()?.split('T')[0]
+                          challanDetail[0]?.date !== todayDate
                         }
                         onClick={handleSubmitChallanChitti}
                       >
@@ -179,8 +185,7 @@ const EditChallanChitti = () => {
                             disabled={
                               challanDetail?.length > 0 &&
                               challanDetail !== null &&
-                              challanDetail[0]?.date !==
-                                new Date()?.toISOString()?.split('T')[0]
+                              challanDetail[0]?.date !== todayDate
                             }
                             onClick={handleAmendButtonChanges}
                           >
@@ -208,8 +213,7 @@ const EditChallanChitti = () => {
                         disabled={
                           challanDetail?.length > 0 &&
                           challanDetail !== null &&
-                          challanDetail[0]?.date !==
-                            new Date()?.toISOString()?.split('T')[0]
+                          challanDetail[0]?.date !== todayDate
                         }
                         onClick={() => setIsModalOpen(true)}
                       >
@@ -238,6 +242,7 @@ const EditChallanChitti = () => {
                               setRemarks={setRemarks}
                               setGoldRate={setGoldRate}
                               readOnly={readOnly}
+                              currentDate={currentDate}
                             />
                             <ChallanItemsTable
                               defaultData={data?.challan_table}

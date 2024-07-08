@@ -8,7 +8,7 @@ import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
 import { useDispatch } from 'react-redux';
 import { getCategoryPartywiseReportData } from '../../../store/slices/report/get-category-partywise-report-slice';
 import { get_access_token } from '../../../store/slices/auth/token-login-slice';
-import DownloadReportApi from '../../../services/api/report/download-report-api';
+import DownloadReportApi from '../../../services/api/report/Chitti/download-report-api';
 
 const CategoryPartyWiseReport = () => {
   const dispatch = useDispatch();
@@ -106,8 +106,8 @@ const CategoryPartyWiseReport = () => {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-lg-10 col-12 ">
-          <div className="col-lg-9 col-12 mx-auto">
+        <div className="col-lg-12 col-12 ">
+          <div className="col-lg-12 col-12 mx-auto">
             <div className="mt-1 d-flex justify-content-between">
               <h5>Category Partywise Report</h5>
               <button
@@ -132,7 +132,7 @@ const CategoryPartyWiseReport = () => {
             showDateInFilter={showDateInFilter}
           />
 
-          <div className="col-lg-9 col-12 mx-auto table-responsive report-table-container mb-5">
+          <div className="col-lg-12 col-12 mx-auto table-responsive report-table-container mb-5">
             <table className=" table table-striped table-hover ">
               <thead className="report-table-head-row sticky-top">
                 <tr className="report-table-head-tr text-uppercase">

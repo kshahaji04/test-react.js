@@ -17,7 +17,14 @@ const EmeraldCreateChitti = ({
     link_data: clientNameList,
   };
   const bgColor = useRef(true);
+  const convertDateFormat = (dateStr: any) => {
+    if (dateStr !== undefined) {
+      const [day, month, year] = dateStr !== undefined && dateStr?.split('-');
+      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    }
+  };
 
+  const newDateStr = convertDateFormat(topSectionInputData?.date);
   return (
     <form className="">
       <div className="row justify-content-around">
@@ -30,12 +37,13 @@ const EmeraldCreateChitti = ({
               type="date"
               id="date"
               name="date"
-              value={currentDate?.toISOString()?.split('T')[0]}
+              value={
+                Object?.keys(topSectionInputData)?.length > 0
+                  ? newDateStr
+                  : currentDate?.toISOString()?.split('T')[0]
+              }
               defaultValue={topSectionInputData?.date}
               className="form-control custom-input-field emerald-input-field"
-              aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-sm"
-              // onChange={handleDateChange}
               readOnly
             />
           </div>

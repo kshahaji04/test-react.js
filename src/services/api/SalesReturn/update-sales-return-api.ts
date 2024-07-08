@@ -14,7 +14,8 @@ const UpdateSalesReturnApi = async (request: any) => {
     name: request.name,
     client_name: request.clientName,
     gold_rate: request.goldRate,
-    remarks: request.remarks,
+    check_916: request?.check_916,
+    check_75: request?.check_75,
     sales_return_table: request.salesReturnTableData,
   };
 

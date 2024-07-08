@@ -9,26 +9,36 @@ const ReportTabs = () => {
     'Sales Return',
   ];
 
-  console.log("path", window.location.pathname)
   return (
     <>
-      <div className="container mb-3">
+      <div className="container mt-3 mb-3">
         <div className="d-flex justify-content-center flex-wrap  card-listing-container">
           {reportlist?.length > 0 &&
             reportlist.map((data: any, index: any) => {
               const processedStr: any = data.replace(/\s+/g, '').toLowerCase();
-              const linkTo: any = `/report/${processedStr}`;
-              const isActive: any = window?.location?.pathname?.includes(linkTo);
+              const linkTo: any = `/report/${processedStr}/${
+                processedStr === 'emeraldchitti'
+                  ? 'categorypartywise'
+                  : 'subcategory'
+              }`;
+              const isActive: any =
+                window?.location?.pathname?.includes(linkTo);
               return (
                 <div
-                  className={`mx-lg-3 my-lg-0 my-1 master-heading  px-lg-2  ${isActive ? 'activePage border-0' : ''
-                    }`}
+                  className={`mx-lg-3 my-lg-0 my-1 master-heading  px-lg-2  ${
+                    isActive ? 'activePage border-0' : ''
+                  }`}
                   key={index}
                 >
                   <NavLink
-                    to={`/report/${processedStr}`}
-                    className={`text-decoration-none navlink-class ${isActive ? 'text-white' : ''
-                      }`}
+                    to={`/report/${processedStr}/${
+                      processedStr === 'emeraldchitti'
+                        ? 'categorypartywise'
+                        : 'subcategory'
+                    }`}
+                    className={`text-decoration-none navlink-class ${
+                      isActive ? 'text-white' : ''
+                    }`}
                   >
                     <div className="d-flex justify-content-center align-items-center px-1">
                       <div className="reports-heading me-1 m-0">{data}</div>
@@ -39,8 +49,189 @@ const ReportTabs = () => {
               );
             })}
         </div>
-
       </div>
+
+      {/* <div className="container mt-4">
+        <h4 className="my-3">Daily Reports</h4>
+        <div className="accordion accordion-flush" id="accordionFlushExample">
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne"
+                aria-expanded="false"
+                aria-controls="flush-collapseOne"
+              >
+                Purchase Receipt
+              </button>
+            </h2>
+            <div
+              id="flush-collapseOne"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionFlushExample"
+            >
+              <div className="accordion-body">
+                <ul className="list-group fs-6">
+                  <li className="list-group-item">
+                    <NavLink
+                      to="/report/purchasereceipt/subcategory"
+                      className="text-dark"
+                    >
+                      Sub Category Report
+                    </NavLink>
+                  </li>
+                  <li className="list-group-item">
+                    <NavLink
+                      to="/report/purchasereceipt/categorypartywise"
+                      className="text-dark"
+                    >
+                      Category Partywise Report
+                    </NavLink>
+                  </li>
+                  <li className="list-group-item">
+                    <NavLink
+                      to="/report/purchasereceipt/categorysummary"
+                      className="text-dark"
+                    >
+                      Category Summary Report
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseTwo"
+                aria-expanded="false"
+                aria-controls="flush-collapseTwo"
+              >
+                Chitti
+              </button>
+            </h2>
+            <div
+              id="flush-collapseTwo"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionFlushExample"
+            >
+              <div className="accordion-body">
+                <ul className="list-group fs-6">
+                  <li className="list-group-item">
+                    <NavLink
+                      to="/report/chitti/subcategory"
+                      className="text-dark"
+                    >
+                      Sub Category Report
+                    </NavLink>
+                  </li>
+                  <li className="list-group-item">
+                    <NavLink
+                      to="/report/chitti/categorypartywise"
+                      className="text-dark"
+                    >
+                      Category Partywise Report
+                    </NavLink>
+                  </li>
+                  <li className="list-group-item">
+                    <NavLink
+                      to="/report/chitti/categorysummary"
+                      className="text-dark"
+                    >
+                      Category Summary Report
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseThree"
+                aria-expanded="false"
+                aria-controls="flush-collapseThree"
+              >
+                Emerald Chitti
+              </button>
+            </h2>
+            <div
+              id="flush-collapseThree"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionFlushExample"
+            >
+              <div className="accordion-body">
+                <ul className="list-group fs-6">
+                  <li className="list-group-item">
+                    <NavLink
+                      to="/report/emeraldchitti/categorypartywise"
+                      className="text-dark"
+                    >
+                      Category Partywise Report
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseFour"
+                aria-expanded="false"
+                aria-controls="flush-collapseFour"
+              >
+                Sales Return
+              </button>
+            </h2>
+            <div
+              id="flush-collapseFour"
+              className="accordion-collapse collapse"
+              data-bs-parent="#accordionFlushExample"
+            >
+              <div className="accordion-body">
+                <ul className="list-group fs-6">
+                  <li className="list-group-item">
+                    <NavLink
+                      to="/report/salesreturn/subcategory"
+                      className="text-dark"
+                    >
+                      Sub Category Report
+                    </NavLink>
+                  </li>
+                  <li className="list-group-item">
+                    <NavLink
+                      to="/report/salesreturn/categorypartywise"
+                      className="text-dark"
+                    >
+                      Category Partywise Report
+                    </NavLink>
+                  </li>
+                  <li className="list-group-item">
+                    <NavLink
+                      to="/report/salesreturn/categorysummary"
+                      className="text-dark"
+                    >
+                      Category Summary Report
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> */}
     </>
   );
 };

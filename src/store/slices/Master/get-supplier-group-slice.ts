@@ -7,7 +7,7 @@ export const getSupplierGroupList: any = createAsyncThunk(
   'supplierGroup/getSupplierGroup',
   async (token: any) => {
     const supplierGroupData: any = await getSupplierGroupApi(token);
-    console.log('supplierGroupData from api', supplierGroupData);
+
     return supplierGroupData;
   }
 );
@@ -36,7 +36,7 @@ export const GetSupplierGroupScreen = createSlice({
     builder.addCase(getSupplierGroupList.fulfilled, (state, action) => {
       if (action?.payload?.data?.message?.status === 'success') {
         if (action?.payload?.data?.message?.hasOwnProperty('data')) {
-          state.data = action?.payload?.data?.message?.data?.data;
+          state.data = action?.payload?.data?.message?.data;
           state.isLoading = 'succeeded';
         }
       }

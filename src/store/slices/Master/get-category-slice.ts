@@ -39,7 +39,7 @@ export const GetCategoryListScreen = createSlice({
         action?.payload?.data?.message?.status === 'success'
       ) {
         if (action?.payload?.data?.message?.hasOwnProperty('data')) {
-          state.data = action?.payload?.data?.message?.data?.data;
+          state.data = action?.payload?.data?.message?.data;
           state.isLoading = 'succeeded';
         }
       }
