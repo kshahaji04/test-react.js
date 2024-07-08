@@ -1,11 +1,11 @@
 import { Tab } from 'react-bootstrap';
 import Tabs from 'react-bootstrap/Tabs';
-import CreateEmeraldChittiMaster from './CreateEmeraldChitti/CreateEmeraldChittiMaster';
 import useEmeraldChittiHook from '../../hooks/Emerald/emrald-page-hook';
 import useSubCategoryHook from '../../hooks/Master/sub-category-hook';
+import useListingFilterHook from '../../hooks/listing-filter-hook';
 import SearchListingTable from '../Chitti/ChittiListing/SearchListingTable';
-import { useState } from 'react';
 import ListingTable from '../General/ListingTable';
+import CreateEmeraldChittiMaster from './CreateEmeraldChitti/CreateEmeraldChittiMaster';
 
 const EmeraldChittiMaster = () => {
   const {
@@ -38,86 +38,13 @@ const EmeraldChittiMaster = () => {
 
   const { subCategoryList }: any = useSubCategoryHook();
 
-  // const todayDate: any = currentDate?.toISOString()?.split('T')[0];
-  const [searchClientName, setSearchclientName] = useState<any>('');
-  const [searchInputValues, setSearchInputValues] = useState({
-    submitted_date: '',
-    from_date: '',
-    to_date: '',
-    chitti_no: '',
-    name: '',
-    status: '',
-  });
-
-  const handleSearchInput: any = (e: any) => {
-    const { name, value } = e.target;
-    setSearchInputValues({
-      ...searchInputValues,
-      [name]: value,
-    });
-  };
-
-  const filteredList =
-    emeraldChittiData?.length > 0 &&
-    emeraldChittiData !== null &&
-    (searchInputValues.submitted_date ||
-      searchInputValues.from_date ||
-      searchInputValues.to_date ||
-      searchInputValues.chitti_no ||
-      searchClientName ||
-      searchInputValues.status)
-      ? emeraldChittiData.filter((item: any) => {
-          const submittedDateMatch = searchInputValues.submitted_date
-            ? item?.submitted_date?.includes(searchInputValues.submitted_date)
-            : true;
-
-          const fromDateAndToDateMatch =
-            searchInputValues.from_date && searchInputValues.to_date
-              ? item.date >= searchInputValues.from_date &&
-                item.date <= searchInputValues.to_date
-              : true;
-
-          const numberMatch = searchInputValues.chitti_no
-            ? item?.number?.includes(searchInputValues.chitti_no)
-            : true;
-          const clientNameMatch = searchClientName
-            ? item?.client_name?.includes(searchClientName)
-            : true;
-
-          if (searchInputValues.status === 'Draft') {
-            return (
-              item?.docstatus === 0 &&
-              submittedDateMatch &&
-              fromDateAndToDateMatch &&
-              numberMatch &&
-              clientNameMatch
-            );
-          } else if (searchInputValues.status === 'Submitted') {
-            return (
-              item?.docstatus === 1 &&
-              submittedDateMatch &&
-              fromDateAndToDateMatch &&
-              numberMatch &&
-              clientNameMatch
-            );
-          } else if (searchInputValues.status === 'Cancel') {
-            return (
-              item?.docstatus === 2 &&
-              submittedDateMatch &&
-              fromDateAndToDateMatch &&
-              numberMatch &&
-              clientNameMatch
-            );
-          }
-
-          return (
-            submittedDateMatch &&
-            fromDateAndToDateMatch &&
-            numberMatch &&
-            clientNameMatch
-          );
-        })
-      : emeraldChittiData;
+  const {
+    searchClientName,
+    setSearchClientName,
+    searchInputValues,
+    handleSearchInput,
+    filteredList,
+  } = useListingFilterHook(emeraldChittiData);
 
   return (
     <div className="container mt-3">
@@ -134,7 +61,7 @@ const EmeraldChittiMaster = () => {
                 <SearchListingTable
                   handleSearchInput={handleSearchInput}
                   clientNameList={clientNameList}
-                  setSearchclientName={setSearchclientName}
+                  setSearchclientName={setSearchClientName}
                   searchClientName={searchClientName}
                   searchInputValues={searchInputValues}
                 />

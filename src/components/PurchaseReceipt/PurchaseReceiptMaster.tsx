@@ -1,9 +1,9 @@
 import { Tab, Tabs } from 'react-bootstrap';
-import CreatePurchaseReceiptMaster from './CreatePurchaseReceipt/CreatePurchaseReceiptMaster';
 import usePurchaseReceiptMasterHook from '../../hooks/PurchaseReceiptHook/purchase-receipt-master-hook';
-import { useState } from 'react';
+import useListingFilterHook from '../../hooks/listing-filter-hook';
 import ListingFilterSection from '../Chitti/ChittiListing/SearchListingTable';
 import ListingTable from '../General/ListingTable';
+import CreatePurchaseReceiptMaster from './CreatePurchaseReceipt/CreatePurchaseReceiptMaster';
 
 const PurchaseReceiptMaster = () => {
   const {
@@ -22,84 +22,14 @@ const PurchaseReceiptMaster = () => {
     listingData,
     userRolesData
   } = usePurchaseReceiptMasterHook();
-  // console.log('ListingTable', listingData);
 
-  const [searchClientName, setSearchclientName] = useState<any>('');
-  const [searchInputValues, setSearchInputValues] = useState({
-    submitted_date: '',
-    from_date: '',
-    to_date: '',
-    chitti_no: '',
-    name: '',
-    status: '',
-  });
-
-  const handleSearchInput: any = (e: any) => {
-    const { name, value } = e.target;
-
-    setSearchInputValues({
-      ...searchInputValues,
-      [name]: value,
-    });
-  };
-
-  const filteredList =
-    listingData?.length > 0 &&
-      listingData !== null &&
-      (searchInputValues.submitted_date ||
-        searchInputValues.from_date ||
-        searchInputValues.to_date ||
-        searchInputValues.chitti_no ||
-        searchClientName ||
-        searchInputValues.status)
-      ? listingData.filter((item: any) => {
-        const fromDateAndToDateMatch =
-          searchInputValues.from_date && searchInputValues.to_date
-            ? item.date >= searchInputValues.from_date &&
-            item.date <= searchInputValues.to_date
-            : true;
-        const numberMatch = searchInputValues.chitti_no
-          ? item?.chitti_no?.includes(searchInputValues.chitti_no)
-          : true;
-        const clientNameMatch = searchClientName
-          ? item?.karigar_name
-            ?.toLowerCase()
-            ?.includes(searchClientName.toLowerCase())
-          : true;
-
-        if (searchInputValues.status === 'Draft') {
-          return (
-            item?.docstatus === 0 &&
-            // submittedDateMatch &&
-            fromDateAndToDateMatch &&
-            numberMatch &&
-            clientNameMatch
-          );
-        } else if (searchInputValues.status === 'Submitted') {
-          return (
-            item?.docstatus === 1 &&
-            // submittedDateMatch &&
-            fromDateAndToDateMatch &&
-            numberMatch &&
-            clientNameMatch
-          );
-        } else if (searchInputValues.status === 'Cancel') {
-          return (
-            item?.docstatus === 2 &&
-            // submittedDateMatch &&
-            fromDateAndToDateMatch &&
-            numberMatch &&
-            clientNameMatch
-          );
-        }
-        return (
-          // submittedDateMatch &&
-          fromDateAndToDateMatch && numberMatch && clientNameMatch
-        );
-      })
-      : listingData;
-
-  console.log("userRolesData", userRolesData)
+  const {
+    searchClientName,
+    setSearchClientName,
+    searchInputValues,
+    handleSearchInput,
+    filteredList,
+  } = useListingFilterHook(listingData);
 
   return (
     <div className="container mt-3">
@@ -118,7 +48,7 @@ const PurchaseReceiptMaster = () => {
                   handleSearchInput={handleSearchInput}
                   clientNameList={clientNameList}
                   chittiListingData={listingData}
-                  setSearchclientName={setSearchclientName}
+                  setSearchclientName={setSearchClientName}
                   searchClientName={searchClientName}
                   searchInputValues={searchInputValues}
 

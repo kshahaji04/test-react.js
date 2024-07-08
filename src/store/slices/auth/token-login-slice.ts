@@ -6,7 +6,6 @@ export const getAccessToken: any = createAsyncThunk(
   'accessToken/getAccessToken',
   async (param: any) => {
     const AccessTokenData: any = await GetTokenLoginApi(param);
-    console.log('AccessTokenData res', AccessTokenData);
     return AccessTokenData;
   }
 );

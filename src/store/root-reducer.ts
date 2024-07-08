@@ -72,7 +72,6 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state: any, action: any) => {
-  console.log('navbar rootreducer');
   if (action.type === 'getAccessToken/logoutUser') {
     state = undefined;
 

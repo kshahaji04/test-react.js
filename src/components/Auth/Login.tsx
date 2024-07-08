@@ -39,9 +39,6 @@ const Login = () => {
   return (
     <>
       <div className="container mt-5">
-        {/* <a className="navbar-brand">
-          <img src={logo} alt="" height="55px" width="auto" />
-        </a> */}
         <div className="container  d-flex justify-content-center login-page-container">
           <div className="row">
             <div className="col-lg-12 card login-card">
@@ -77,9 +74,8 @@ const Login = () => {
                         />
                         <div onClick={handleShowPassword}>
                           <i
-                            className={`fa fa-eye p-1 fs-6 pswd-eye-icon ${
-                              showPassword ? 'text-primary' : ''
-                            }`}
+                            className={`fa fa-eye p-1 fs-6 pswd-eye-icon ${showPassword ? 'text-primary' : ''
+                              }`}
                           ></i>
                         </div>
                       </div>
