@@ -16,6 +16,10 @@ import {
 } from '../../services/api/PurchaseReceipt/update-docStatus-api';
 import { AmendPurchaseReceiptApi } from '../../services/api/PurchaseReceipt/amend-purchase-receipt-api';
 import PrintPurchaseReceiptApi from '../../services/api/PurchaseReceipt/print-purchase-receipt-api';
+import {
+  btnLoadingStart,
+  btnLoadingStop,
+} from '../../store/slices/btn-loading-slice';
 
 const usePurchaseReceiptDetailHook: any = () => {
   const dispatch = useDispatch();
@@ -115,6 +119,7 @@ const usePurchaseReceiptDetailHook: any = () => {
 
   const handleUpdateDocstatusBtn: any = async (value: any) => {
     let updateDocStatus: any;
+    dispatch(btnLoadingStart());
     if (value === '1') {
       updateDocStatus = await updatePurchaseReceiptSubmitDocStatusApi(
         accessToken?.token,
@@ -132,12 +137,14 @@ const usePurchaseReceiptDetailHook: any = () => {
 
     if (Object.keys(updateDocStatus?.data)?.length > 0) {
       setStateForDocStatus(false);
-
+      dispatch(btnLoadingStop());
       const params: any = {
         token: accessToken?.token,
         name: id,
       };
       dispatch(getDetailPurchaseReceipt(params));
+    } else {
+      dispatch(btnLoadingStop());
     }
   };
 
@@ -155,6 +162,7 @@ const usePurchaseReceiptDetailHook: any = () => {
   };
 
   const handlePrintRecord: any = async () => {
+    dispatch(btnLoadingStart());
     let printApiRes: any = await PrintPurchaseReceiptApi(
       accessToken?.token,
       id
@@ -163,6 +171,9 @@ const usePurchaseReceiptDetailHook: any = () => {
       if (printApiRes?.data?.data?.length > 0) {
         window.open(printApiRes?.data?.data[0]?.print_url);
       }
+      dispatch(btnLoadingStop());
+    } else {
+      dispatch(btnLoadingStop());
     }
   };
 

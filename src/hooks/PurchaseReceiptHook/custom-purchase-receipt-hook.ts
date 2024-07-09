@@ -103,8 +103,6 @@ const useCustomPurchaseReceiptHook = () => {
     setStateForDocStatus(true);
   };
 
-  console.log('top section data', topSectionInputData);
-
   return {
     purchaseReceiptTable,
     setPurchaseReceiptTable,

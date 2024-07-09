@@ -11,6 +11,10 @@ import {
 } from '../../store/slices/Emerald/get-specific-emrald-slice';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import useEmeraldChittiHook from './emrald-page-hook';
+import {
+  btnLoadingStart,
+  btnLoadingStop,
+} from '../../store/slices/btn-loading-slice';
 
 const useEditEmeraldChittiHook: any = () => {
   const dispatch = useDispatch();
@@ -119,7 +123,7 @@ const useEditEmeraldChittiHook: any = () => {
         Object.keys(obj).some((key) => key !== 'idx' && obj[key] !== '')
       )
       .map((obj: any, index: any) => ({ ...obj, idx: index + 1 }));
-
+    dispatch(btnLoadingStart());
     const BodyData: any = {
       name: id,
       clientName: topSectionInputData?.client_name,
@@ -138,7 +142,7 @@ const useEditEmeraldChittiHook: any = () => {
       updateChittiApi?.hasOwnProperty('data')
     ) {
       toast.success('Emerald Chitti Updated');
-
+      dispatch(btnLoadingStop());
       await UpdateDocStatusEmeraldChittiApi(accessToken?.token, '0', id);
       setTimeout(() => {
         const params: any = {
@@ -151,20 +155,23 @@ const useEditEmeraldChittiHook: any = () => {
         setStateForDocStatus(false);
       }, 400);
     } else {
+      dispatch(btnLoadingStop());
       toast.error('Failed to Update Emerald chitti');
     }
   };
 
   const handlePrintButton: any = async () => {
+    dispatch(btnLoadingStart());
     let printApiRes: any = await PrintEmeraldChittiApi(accessToken?.token, id);
     if (printApiRes?.status === 'success') {
       if (printApiRes?.data?.data?.length > 0) {
         window.open(printApiRes?.data?.data[0]?.print_url);
       }
+      dispatch(btnLoadingStop());
+    } else {
+      dispatch(btnLoadingStop());
     }
   };
-
-  console.log('tableData in hook end', tableData);
 
   return {
     emeraldChittiData,

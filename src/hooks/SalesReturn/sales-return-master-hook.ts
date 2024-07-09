@@ -22,6 +22,10 @@ import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import useCustomChittiHook from '../Chitti/custom-chitti-page-hook';
 import useCustomSalesReturnHook from './custom-sales-return-hook';
 import getUserRoleApi from '../../services/api/general/user-role-api';
+import {
+  btnLoadingStart,
+  btnLoadingStop,
+} from '../../store/slices/btn-loading-slice';
 
 const useSalesReturnMasterHook = () => {
   const dispatch = useDispatch();
@@ -220,6 +224,7 @@ const useSalesReturnMasterHook = () => {
         if (hasGrossWeightLessThanNetWeight) {
           toast.error('Gross weight cannot be less than Net weight');
         } else {
+          dispatch(btnLoadingStart());
           const BodyData: any = {
             token: accessToken?.token,
             // date: date,
@@ -252,8 +257,10 @@ const useSalesReturnMasterHook = () => {
               purchaseReceiptApiRes?.data?.message?.data,
               '0'
             );
+            dispatch(btnLoadingStop());
           } else {
             toast.error('Failed to create Sales Return');
+            dispatch(btnLoadingStop());
           }
         }
       }
@@ -279,6 +286,7 @@ const useSalesReturnMasterHook = () => {
     } else if (filteredChallanTable?.length === 0) {
       toast.error('No values inserted');
     } else {
+      dispatch(btnLoadingStart());
       const BodyData: any = {
         token: accessToken?.token,
         name: id,
@@ -297,7 +305,7 @@ const useSalesReturnMasterHook = () => {
         updateSalesReturn?.hasOwnProperty('data')
       ) {
         toast.success('Sales Return Updated');
-        // setStateForDocStatus(false);
+        dispatch(btnLoadingStop());
         await UpdateSalesReturnDocStatusApi(accessToken?.token, id, '0');
         setTimeout(() => {
           const params: any = {
@@ -311,6 +319,7 @@ const useSalesReturnMasterHook = () => {
           setStateForDocStatus(false);
         }, 900);
       } else {
+        dispatch(btnLoadingStop());
         toast.error('Failed to Update Sales Return');
       }
     }

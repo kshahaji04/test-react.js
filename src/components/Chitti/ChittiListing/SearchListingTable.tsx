@@ -27,7 +27,14 @@ const SearchListingTable = ({
             onChange={HandleSearchInput}
           />
         </div> */}
-        <div className="col-lg-2 col-md-3 ">
+        <div
+          className={` ${
+            !location?.pathname?.includes('/purchase-receipt') &&
+            !location?.pathname?.includes('/sales-return')
+              ? ''
+              : 'h-100'
+          }  col-lg-2 col-md-3 `}
+        >
           <label className="text-secondary">From Date</label>
           <input
             type="date"
@@ -39,7 +46,14 @@ const SearchListingTable = ({
             onChange={handleSearchInput}
           />
         </div>
-        <div className="col-lg-2 col-md-3 ">
+        <div
+          className={` ${
+            !location?.pathname?.includes('/purchase-receipt') &&
+            !location?.pathname?.includes('/sales-return')
+              ? ''
+              : 'h-100'
+          }  col-lg-2 col-md-3 `}
+        >
           <label className="text-secondary">To Date</label>
           <input
             type="date"
@@ -51,23 +65,25 @@ const SearchListingTable = ({
             onChange={handleSearchInput}
           />
         </div>
-        <div className="col-lg-2 col-md-2">
-          <label className="text-secondary">Chitti no</label>
-          <input
-            type="number"
-            name="chitti_no"
-            id="chitti_no"
-            className="form-control input-fields custom-input-field "
-            aria-describedby="emailHelp"
-            placeholder="Chitti no"
-            value={
-              searchInputValues?.chitti_no >= 0
-                ? searchInputValues?.chitti_no
-                : ''
-            }
-            onChange={handleSearchInput}
-          />
-        </div>
+        {!location?.pathname?.includes('/purchase-receipt') &&
+          !location?.pathname?.includes('/sales-return') && (
+            <div className="col-lg-2 col-md-2">
+              <label className="text-secondary">Chitti no</label>
+              <input
+                type="number"
+                name="chitti_no"
+                id="chitti_no"
+                className="form-control input-fields custom-input-field"
+                placeholder="Chitti no"
+                value={
+                  searchInputValues?.chitti_no >= 0
+                    ? searchInputValues?.chitti_no
+                    : ''
+                }
+                onChange={handleSearchInput}
+              />
+            </div>
+          )}
 
         <div className="col-lg-2 col-md-2 ">
           <label className="text-secondary ">

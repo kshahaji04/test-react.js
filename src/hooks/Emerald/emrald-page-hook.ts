@@ -33,6 +33,10 @@ import {
 import { getSpecificEmeraldChitti } from '../../store/slices/Emerald/get-specific-emrald-slice';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import UseCustomEmeraldChittiHook from './custom-emerald-chitti-hook';
+import {
+  btnLoadingStart,
+  btnLoadingStop,
+} from '../../store/slices/btn-loading-slice';
 
 const useEmeraldHook = () => {
   const dispatch = useDispatch();
@@ -85,8 +89,6 @@ const useEmeraldHook = () => {
       custom_hm_pcs: '',
     },
   ];
-
-  console.log(setTransactionDate);
 
   const [tableData, setTableData] = useState<any>(initialTableData);
   const [emeraldChittiTableData, setEmeraldChittiTableData] = useState<any>([]);
@@ -403,6 +405,8 @@ const useEmeraldHook = () => {
     if (errMsgList?.length > 0 && errMsgList !== null) {
       toast.error(`Mandatory fields ${errMsgList.join(', ')}`);
     } else {
+      dispatch(btnLoadingStart());
+
       const BodyData: any = {
         clientName: topSectionInputData?.client_name,
         date: reversedDate,
@@ -429,6 +433,7 @@ const useEmeraldHook = () => {
 
       if (createEmeraldChittiApiRes?.data?.message?.msg === 'success') {
         toast.success('Emerald Chitti Created');
+        dispatch(btnLoadingStop());
         navigate(`${createEmeraldChittiApiRes?.data?.message?.data}`);
         await UpdateDocStatusEmeraldChittiApi(
           accessToken?.token,
@@ -441,6 +446,7 @@ const useEmeraldHook = () => {
         );
         dispatch(getEmeraldChallan(accessToken?.token));
       } else {
+        dispatch(btnLoadingStop());
         toast.error('Failed to Create Emerald Chitti');
       }
     }

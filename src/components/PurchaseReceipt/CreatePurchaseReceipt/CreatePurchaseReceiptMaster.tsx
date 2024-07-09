@@ -1,5 +1,7 @@
 import PurchaseReceiptTopSection from './PurchaseReceiptTopSection';
 import PurchaseReceiptTable from './PurchaseReceiptTable';
+import { useSelector } from 'react-redux';
+import { buttonLoadingState } from '../../../store/slices/btn-loading-slice';
 
 const CreatePurchaseReceiptMaster = ({
   purchaseReceiptTable,
@@ -16,14 +18,20 @@ const CreatePurchaseReceiptMaster = ({
   topSectionInputData,
   handleCreatePR,
 }: any) => {
+  const buttonLoadingStateFromStore: any = useSelector(buttonLoadingState);
+  console.log('buttonLoadingStateFromStore', buttonLoadingStateFromStore);
   return (
     <>
       <div className="d-flex justify-content-end">
         <button
           type="submit"
           onClick={handleCreatePR}
+          disabled={buttonLoadingStateFromStore.loading}
           className="btn btn-outline-primary  px-2 py-0 form-submit-button"
         >
+          {buttonLoadingStateFromStore?.loading === true && (
+            <i className="fa fa-spinner fa-spin me-1"></i>
+          )}
           Save
         </button>
       </div>

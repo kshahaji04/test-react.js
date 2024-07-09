@@ -22,6 +22,10 @@ import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import useCustomChittiHook from '../Chitti/custom-chitti-page-hook';
 import useCustomPurchaseReceiptHook from './custom-purchase-receipt-hook';
 import getUserRoleApi from '../../services/api/general/user-role-api';
+import {
+  btnLoadingStart,
+  btnLoadingStop,
+} from '../../store/slices/btn-loading-slice';
 
 const usePurchaseReceiptMasterHook = () => {
   const dispatch = useDispatch();
@@ -257,6 +261,7 @@ const usePurchaseReceiptMasterHook = () => {
         if (hasGrossWeightLessThanNetWeight) {
           toast.error('Gross weight cannot be less than Net weight');
         } else {
+          dispatch(btnLoadingStart());
           const BodyData: any = {
             // date: date,
             clientName: topSectionInputData?.client_name,
@@ -291,9 +296,10 @@ const usePurchaseReceiptMasterHook = () => {
               '0'
             );
 
-            // dispatch(getChittiChallan(accessToken?.token));
+            dispatch(btnLoadingStop());
           } else {
             toast.error('Failed to create Purchase Receipt');
+            dispatch(btnLoadingStop());
           }
         }
       }
@@ -320,6 +326,7 @@ const usePurchaseReceiptMasterHook = () => {
     } else if (filteredChallanTable?.length === 0) {
       toast.error('No values inserted');
     } else {
+      dispatch(btnLoadingStart());
       const BodyData: any = {
         name: id,
         // date: date,
@@ -338,7 +345,7 @@ const usePurchaseReceiptMasterHook = () => {
         updateChittiApi?.hasOwnProperty('data')
       ) {
         toast.success('Purchase Receipt Updated');
-        // setStateForDocStatus(false);
+        dispatch(btnLoadingStop());
         await UpdatePurchaseReceiptDocStatusApi(accessToken?.token, id, '0');
         setTimeout(() => {
           const params: any = {
@@ -353,6 +360,7 @@ const usePurchaseReceiptMasterHook = () => {
         }, 900);
       } else {
         toast.error('Failed to Update Purchase Receipt');
+        dispatch(btnLoadingStop());
       }
     }
   };

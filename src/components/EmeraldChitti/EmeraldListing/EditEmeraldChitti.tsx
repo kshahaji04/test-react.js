@@ -9,6 +9,7 @@ import { get_specific_chitti_challan } from '../../../store/slices/Chitti/get-sp
 import Loader from '../../General/Loader';
 import NoRecord from '../../NoRecord';
 import DeleteAlertModal from '../../Modal/DeleteAlertModal';
+import { buttonLoadingState } from '../../../store/slices/btn-loading-slice';
 
 const EditEmeraldChitti = () => {
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ const EditEmeraldChitti = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const docStatusFromStore: any = useSelector(get_specific_emerald_chitti);
+  const buttonLoadingStateFromStore: any = useSelector(buttonLoadingState);
 
   useEffect(() => {
     setShowButton(docStatusFromStore?.docStatus);
@@ -85,7 +87,6 @@ const EditEmeraldChitti = () => {
     .reverse()
     .join('-');
 
-  console.log('dateee', topSectionInputData);
   return (
     <div className="container">
       {emeraldDetailDataFromStore?.isLoading === 'pending' ? (
@@ -141,8 +142,12 @@ const EditEmeraldChitti = () => {
                     <button
                       type="submit"
                       onClick={handleUpdateEmeraldChittiSubmit}
+                      disabled={buttonLoadingStateFromStore?.loading}
                       className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
                     >
+                      {buttonLoadingStateFromStore?.loading === true && (
+                        <i className="fa fa-spinner fa-spin me-1"></i>
+                      )}
                       Save
                     </button>
                   )}
@@ -160,8 +165,12 @@ const EditEmeraldChitti = () => {
                     <button
                       type="submit"
                       className=" btn btn-outline-primary me-2 px-2 py-0 form-submit-button"
+                      disabled={buttonLoadingStateFromStore?.loading}
                       onClick={handlePrintButton}
                     >
+                      {buttonLoadingStateFromStore?.loading === true && (
+                        <i className="fa fa-spinner fa-spin me-1"></i>
+                      )}
                       Print
                     </button>
                   )}
@@ -169,8 +178,12 @@ const EditEmeraldChitti = () => {
                     <button
                       type="submit"
                       className=" btn btn-outline-primary px-2 py-0 form-submit-button"
+                      disabled={buttonLoadingStateFromStore?.loading}
                       onClick={handleCancelEmeraldChitti}
                     >
+                      {buttonLoadingStateFromStore?.loading === true && (
+                        <i className="fa fa-spinner fa-spin me-1"></i>
+                      )}
                       Cancel
                     </button>
                   )}
@@ -194,8 +207,12 @@ const EditEmeraldChitti = () => {
                       <button
                         type="submit"
                         onClick={handleAmendButtonForDuplicateChitti}
+                        disabled={buttonLoadingStateFromStore?.loading}
                         className=" btn btn-outline-primary px-2 py-0 me-2 form-submit-button"
                       >
+                        {buttonLoadingStateFromStore?.loading === true && (
+                          <i className="fa fa-spinner fa-spin me-1"></i>
+                        )}
                         Save
                       </button>
                     )}

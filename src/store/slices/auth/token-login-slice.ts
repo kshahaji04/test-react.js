@@ -21,6 +21,7 @@ export const getUserRolesPermission = createAsyncThunk(
 
 interface RepoAccessTokenState {
   token: any;
+  username: any;
   userRoles: any;
   error: string;
   isLoading: 'idle' | 'pending' | 'succeeded' | 'failed';
@@ -28,6 +29,7 @@ interface RepoAccessTokenState {
 
 const initialState: RepoAccessTokenState = {
   token: '',
+  username: '',
   userRoles: [],
   error: '',
   isLoading: 'idle',
@@ -39,6 +41,7 @@ export const GetAccessTokenScreen = createSlice({
   reducers: {
     ClearToken(state?: any) {
       state.token = '';
+      state.username = '';
       state.error = '';
       state.isLoading = 'idle';
     },
@@ -47,12 +50,14 @@ export const GetAccessTokenScreen = createSlice({
     builder.addCase(getAccessToken.pending, (state) => {
       state.isLoading = 'pending';
       state.token = '';
+      state.username = '';
       state.userRoles = [];
     });
     builder.addCase(getAccessToken.fulfilled, (state, action) => {
       if (action?.payload?.msg === 'success') {
         if (action?.payload?.hasOwnProperty('data')) {
           state.token = action?.payload?.data?.access_token;
+          state.username = action?.payload?.data?.username;
         }
       }
     });
@@ -65,6 +70,7 @@ export const GetAccessTokenScreen = createSlice({
     builder.addCase(getAccessToken.rejected, (state) => {
       state.isLoading = 'failed';
       state.token = '';
+      state.username = '';
       state.userRoles = '';
       state.error = 'failed to store token';
     });

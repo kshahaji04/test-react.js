@@ -34,6 +34,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import DeleteChallanChittiApi from '../../services/api/Chitti/delete-challan-chitti-api';
 import useCustomChittiHook from './custom-chitti-page-hook';
 import { challanAmendApi } from '../../services/api/general/amend-api';
+import {
+  btnLoadingStart,
+  btnLoadingStop,
+} from '../../store/slices/btn-loading-slice';
 
 const useChittiHook = () => {
   const dispatch = useDispatch();
@@ -185,6 +189,7 @@ const useChittiHook = () => {
   };
 
   const handleSubmitChallanChitti: any = async () => {
+    dispatch(btnLoadingStart());
     let updateDocStatus: any = await UpdateDocStatusWithSubmittedChallanApi(
       accessToken?.token,
       '1',
@@ -203,10 +208,14 @@ const useChittiHook = () => {
             : id,
       };
       dispatch(getSpecificChittiChallan(params));
+      dispatch(btnLoadingStop());
+    } else {
+      dispatch(btnLoadingStop());
     }
   };
 
   const handleCancelChallanChitti = async () => {
+    dispatch(btnLoadingStart());
     let updateDocStatus: any = await UpdateDocStatusChallanApi(
       accessToken?.token,
       '2',
@@ -223,9 +232,12 @@ const useChittiHook = () => {
             ? showSubmitButtonAfterCreateChitti
             : id,
       };
+      dispatch(btnLoadingStop());
       setStateForDocStatus(false);
       setShowSaveButtonForAmendFlow(false);
       dispatch(getSpecificChittiChallan(params));
+    } else {
+      dispatch(btnLoadingStop());
     }
   };
   // for removing id key from list
@@ -247,6 +259,7 @@ const useChittiHook = () => {
   }, [tableData, narrationTableData]);
 
   const handleAmendButtonForDuplicateChitti: any = async () => {
+    dispatch(btnLoadingStart());
     const reqParams: any = {
       token: accessToken?.token,
       client_name: selectedDropdownValue,
@@ -272,7 +285,9 @@ const useChittiHook = () => {
       setTimeout(() => {
         setStateForDocStatus(false);
       }, 300);
+      dispatch(btnLoadingStop());
     }
+    dispatch(btnLoadingStop());
   };
 
   const handleDeleteChallanChitti = async () => {
@@ -348,6 +363,7 @@ const useChittiHook = () => {
         if (hasGrossWeightLessThanNetWeight) {
           toast.error('Gross weight cannot be less than Net weight');
         } else {
+          dispatch(btnLoadingStart());
           const BodyData: any = {
             date: date,
             clientName: selectedDropdownValue,
@@ -381,11 +397,13 @@ const useChittiHook = () => {
               CreateChittiApiRes?.data?.message?.data
             );
 
+            dispatch(btnLoadingStop());
             setShowSubmitButtonAfterCreateChitti(
               CreateChittiApiRes?.data?.message?.data
             );
             dispatch(getChittiChallan(accessToken?.token));
           } else {
+            dispatch(btnLoadingStop());
             toast.error('Failed to create chitti');
           }
         }

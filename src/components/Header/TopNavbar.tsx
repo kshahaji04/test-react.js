@@ -1,25 +1,57 @@
 import { useSelector } from 'react-redux';
 import '../../Style/Navbar.css';
 import NotificationToggle from './NotificationToggle';
-import UserProfile from './UserProfile';
-import { get_access_token } from '../../store/slices/auth/token-login-slice';
+import {
+  ClearToken,
+  get_access_token,
+} from '../../store/slices/auth/token-login-slice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { btnLoadingStop } from '../../store/slices/btn-loading-slice';
 
 const TopNavbar = () => {
-  const getUserRoles: any = useSelector(get_access_token);
+  const userData: any = useSelector(get_access_token);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const handleLogout = () => {
+    dispatch(ClearToken());
+    dispatch(btnLoadingStop());
+    navigate('/');
+  };
   return (
     <>
       <div className="d-flex align-items-center">
-        {((getUserRoles?.userRoles?.length > 0 &&
-          getUserRoles?.userRoles.some((roles: any) =>
+        {((userData?.userRoles?.length > 0 &&
+          userData?.userRoles.some((roles: any) =>
             roles.includes('Save Access')
           )) ||
-          (getUserRoles?.userRoles?.length > 0 &&
-            getUserRoles?.userRoles?.some((roles: any) =>
+          (userData?.userRoles?.length > 0 &&
+            userData?.userRoles?.some((roles: any) =>
               roles.includes('Save Submit Access')
             ))) && <NotificationToggle />}
 
-        <nav className="container navbar navbar-light p-0">
+        <div className="dropdown">
+          <button
+            className="btn btn-light dropdown-toggle px-3"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {userData?.username || (
+              <i className="fa fa-user-circle fs-3 px-2"></i>
+            )}
+          </button>
+          <ul className="dropdown-menu px-0 py-1">
+            <li>
+              <a className="dropdown-item" onClick={handleLogout}>
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        {/* <nav className="container navbar navbar-light p-0">
           <div className="container-fluid my-1">
             <div></div>
             <div className="dropdown">
@@ -38,7 +70,7 @@ const TopNavbar = () => {
               <UserProfile />
             </div>
           </div>
-        </nav>
+        </nav> */}
       </div>
     </>
   );

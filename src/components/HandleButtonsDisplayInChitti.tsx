@@ -1,3 +1,6 @@
+import { useSelector } from 'react-redux';
+import { buttonLoadingState } from '../store/slices/btn-loading-slice';
+
 interface HandleButtonsDisplayProps {
   handleCreateChittiSubmit: () => void;
   showButton: number;
@@ -13,19 +16,13 @@ const HandleButtonsDisplayInChitti: React.FC<HandleButtonsDisplayProps> = ({
   handleSubmitChittiData,
   handleCancelChitti,
   handleDeleteChitti,
-  }) => {
+}) => {
+  const buttonLoadingStateFromStore: any = useSelector(buttonLoadingState);
+
   const handleButtonsDisplay = () => {
     if (showButton === 0 && showSubmitButtonAfterCreateChitti?.length > 0) {
       return (
         <>
-          {/* <button
-            type="submit"
-            onClick={HandleEmptyChitti}
-            className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-          >
-            New
-          </button> */}
-
           <button
             type="submit"
             onClick={handleSubmitChittiData}
@@ -60,18 +57,15 @@ const HandleButtonsDisplayInChitti: React.FC<HandleButtonsDisplayProps> = ({
     } else {
       return (
         <>
-          {/* <button
-            type="submit"
-            onClick={HandleEmptyChitti}
-            className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
-          >
-            New
-          </button> */}
           <button
             type="submit"
             onClick={handleCreateChittiSubmit}
+            disabled={buttonLoadingStateFromStore?.loading}
             className=" btn btn-outline-primary mx-3 px-2 py-0 form-submit-button"
           >
+            {buttonLoadingStateFromStore?.loading === true && (
+              <i className="fa fa-spinner fa-spin me-1"></i>
+            )}
             Save
           </button>
         </>

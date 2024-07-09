@@ -9,6 +9,7 @@ import { get_specific_chitti_challan } from '../../../store/slices/Chitti/get-sp
 import Loader from '../../General/Loader';
 import NoRecord from '../../NoRecord';
 import DeleteAlertModal from '../../Modal/DeleteAlertModal';
+import { buttonLoadingState } from '../../../store/slices/btn-loading-slice';
 
 const EditChallanChitti = () => {
   const {
@@ -54,7 +55,7 @@ const EditChallanChitti = () => {
   const challanDetailDataFromStore: any = useSelector(
     get_specific_chitti_challan
   );
-
+  const buttonLoadingStateFromStore: any = useSelector(buttonLoadingState);
   const handleDeleteBtn: any = () => {
     handleDeleteChallanChitti();
   };
@@ -138,8 +139,12 @@ const EditChallanChitti = () => {
                       <button
                         type="submit"
                         onClick={handleUpdateChallanSubmit}
+                        disabled={buttonLoadingStateFromStore?.loading}
                         className=" btn btn-outline-primary px-2 py-0 form-submit-button"
                       >
+                        {buttonLoadingStateFromStore?.loading === true && (
+                          <i className="fa fa-spinner fa-spin me-1"></i>
+                        )}
                         Save
                       </button>
                     )}
@@ -154,6 +159,9 @@ const EditChallanChitti = () => {
                         }
                         onClick={handleSubmitChallanChitti}
                       >
+                        {buttonLoadingStateFromStore?.loading === true && (
+                          <i className="fa fa-spinner fa-spin me-1"></i>
+                        )}
                         Submit
                       </button>
                     )}
@@ -161,8 +169,12 @@ const EditChallanChitti = () => {
                       <button
                         type="submit"
                         className=" btn btn-outline-primary me-2 px-2 py-0 form-submit-button"
+                        disabled={buttonLoadingStateFromStore?.loading}
                         onClick={handlePrintButton}
                       >
+                        {buttonLoadingStateFromStore?.loading === true && (
+                          <i className="fa fa-spinner fa-spin me-1"></i>
+                        )}
                         Print
                       </button>
                     )}
@@ -170,8 +182,12 @@ const EditChallanChitti = () => {
                       <button
                         type="submit"
                         className=" btn btn-outline-primary  px-2 py-0 form-submit-button"
+                        disabled={buttonLoadingStateFromStore?.loading}
                         onClick={handleCancelChallanChitti}
                       >
+                        {buttonLoadingStateFromStore?.loading === true && (
+                          <i className="fa fa-spinner fa-spin me-1"></i>
+                        )}
                         Cancel
                       </button>
                     )}
@@ -199,9 +215,13 @@ const EditChallanChitti = () => {
                       readOnly === false && (
                         <button
                           type="submit"
+                          disabled={buttonLoadingStateFromStore?.loading}
                           onClick={handleAmendButtonForDuplicateChitti}
                           className=" btn btn-outline-primary px-2 py-0 me-2 form-submit-button"
                         >
+                          {buttonLoadingStateFromStore?.loading === true && (
+                            <i className="fa fa-spinner fa-spin me-1"></i>
+                          )}
                           Save
                         </button>
                       )}

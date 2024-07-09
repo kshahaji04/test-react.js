@@ -12,6 +12,10 @@ import UpdateChittiApi from '../../services/api/Chitti/update-challan-chitti-api
 import { toast } from 'react-toastify';
 import { UpdateDocStatusChallanApi } from '../../services/api/general/update-doc-status-challan--api';
 import PrintChallanChittiApi from '../../services/api/Chitti/print-challan-chitti-api';
+import {
+  btnLoadingStart,
+  btnLoadingStop,
+} from '../../store/slices/btn-loading-slice';
 
 const useEditChallanChitti: any = () => {
   const dispatch = useDispatch();
@@ -148,6 +152,7 @@ const useEditChallanChitti: any = () => {
     } else if (filteredChallanTable?.length === 0) {
       toast.error('No values inserted');
     } else {
+      dispatch(btnLoadingStart());
       const BodyData: any = {
         name: id,
         // date: date,
@@ -166,7 +171,7 @@ const useEditChallanChitti: any = () => {
         updateChittiApi?.hasOwnProperty('data')
       ) {
         toast.success('Chitti Updated');
-        // setStateForDocStatus(false);
+        dispatch(btnLoadingStop());
         await UpdateDocStatusChallanApi(accessToken?.token, '0', id);
         setTimeout(() => {
           const params: any = {
@@ -180,17 +185,22 @@ const useEditChallanChitti: any = () => {
           setStateForDocStatus(false);
         }, 900);
       } else {
+        dispatch(btnLoadingStop());
         toast.error('Failed to Update chitti');
       }
     }
   };
 
   const handlePrintButton: any = async () => {
+    dispatch(btnLoadingStart());
     let printApiRes: any = await PrintChallanChittiApi(accessToken?.token, id);
     if (printApiRes?.status === 'success') {
       if (printApiRes?.data?.data?.length > 0) {
         window.open(printApiRes?.data?.data[0]?.print_url);
       }
+      dispatch(btnLoadingStop());
+    } else {
+      dispatch(btnLoadingStop());
     }
   };
 
