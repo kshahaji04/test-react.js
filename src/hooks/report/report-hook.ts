@@ -25,14 +25,29 @@ import {
   SRSubcategoryPrintApi,
 } from '../../services/api/report/get-SR-print-api';
 import { EmeraldChittiCategoryPartywisePrintApi } from '../../services/api/report/get-emerald-chitti-print-api';
+import {
+  chittiCategoryPartywiseReportApi,
+  chittiCategorySummaryReportApi,
+  chittiSubcategoryReportApi,
+} from '../../services/api/report/get-chitti-reports-api';
+import {
+  chittiCategoryPartywisePrintApi,
+  chittiCategorySummaryPrintApi,
+  chittiSubcategoryPrintApi,
+} from '../../services/api/report/get-chitti-print-api';
 
 const useReportHook = () => {
   const location = useLocation();
 
   let path: any = location.pathname;
+  const todayDate: any = new Date()?.toISOString()?.split('T')[0];
 
   const [reportData, setReportData] = useState<any>([]);
-  const [searchInputValues, setSearchInputValues] = useState<any>({});
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [searchInputValues, setSearchInputValues] = useState<any>({
+    from_date: todayDate,
+    to_date: todayDate,
+  });
 
   const accessToken: any = useSelector(get_access_token);
   useEffect(() => {
@@ -41,6 +56,7 @@ const useReportHook = () => {
 
   const getReportData: any = async () => {
     let reportData;
+    setIsLoading(true);
     if (path === '/report/purchasereceipt/subcategory') {
       reportData = await PRSubcategoryReportApi(
         accessToken.token,
@@ -53,6 +69,21 @@ const useReportHook = () => {
       );
     } else if (path === '/report/purchasereceipt/categorysummary') {
       reportData = await PRCategorySummaryReportApi(
+        accessToken.token,
+        searchInputValues
+      );
+    } else if (path === '/report/chitti/subcategory') {
+      reportData = await chittiSubcategoryReportApi(
+        accessToken.token,
+        searchInputValues
+      );
+    } else if (path === '/report/chitti/categorypartywise') {
+      reportData = await chittiCategoryPartywiseReportApi(
+        accessToken.token,
+        searchInputValues
+      );
+    } else if (path === '/report/chitti/categorysummary') {
+      reportData = await chittiCategorySummaryReportApi(
         accessToken.token,
         searchInputValues
       );
@@ -81,12 +112,13 @@ const useReportHook = () => {
     if (reportData?.data?.message?.status === 'success') {
       setReportData(reportData?.data?.message?.data);
       if (reportData?.data?.message?.data?.length > 0) {
-        // setIsLoading(1);
+        setIsLoading(false);
       } else {
-        // setIsLoading(2);
+        setIsLoading(false);
       }
     } else {
       setReportData([]);
+      setIsLoading(false);
     }
   };
 
@@ -108,6 +140,24 @@ const useReportHook = () => {
           break;
         case '/report/purchasereceipt/categorysummary':
           reportPrint = await PRCategorySummaryPrintApi(
+            accessToken.token,
+            searchInputValues
+          );
+          break;
+        case '/report/chitti/subcategory':
+          reportPrint = await chittiSubcategoryPrintApi(
+            accessToken.token,
+            searchInputValues
+          );
+          break;
+        case '/report/chitti/categorypartywise':
+          reportPrint = await chittiCategoryPartywisePrintApi(
+            accessToken.token,
+            searchInputValues
+          );
+          break;
+        case '/report/chitti/categorysummary':
+          reportPrint = await chittiCategorySummaryPrintApi(
             accessToken.token,
             searchInputValues
           );
@@ -137,7 +187,6 @@ const useReportHook = () => {
           );
           break;
         default:
-          console.warn(`Unhandled path: ${path}`);
           return;
       }
       console.log('reports print', reportPrint);
@@ -169,6 +218,7 @@ const useReportHook = () => {
     handleSearchInput,
     handleSearchBtn,
     handlePrintBtn,
+    isLoading,
   };
 };
 

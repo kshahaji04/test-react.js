@@ -20,12 +20,37 @@ const FilterReportListing = ({
   searchSupplier,
   setSearchSupplier,
   supplierList,
+  searchInputValues,
 }: any) => {
-  console.log('supply', supplierList);
-
   return (
     <div className="container">
       <div className="row justify-content-center mt-2">
+        {showDateInFilter?.current && (
+          <>
+            <div className="col-lg-2 col-md-4 col-4">
+              <label className="text-secondary ">From Date</label>
+              <input
+                type="date"
+                name="fromDate"
+                id="fromDate"
+                className="form-control input-fields custom-input-field "
+                value={searchInputValues?.fromDate}
+                onChange={handleSearchInput}
+              />
+            </div>
+            <div className="col-lg-2 col-md-4 col-4">
+              <label className="text-secondary ">To Date</label>
+              <input
+                type="date"
+                name="toDate"
+                id="toDate"
+                value={searchInputValues?.toDate}
+                className="form-control input-fields custom-input-field"
+                onChange={handleSearchInput}
+              />
+            </div>
+          </>
+        )}
         {showCategoryInFilter?.current && (
           <div className="col-lg-2 col-md-4 col-4">
             <label className="text-secondary ">Category</label>
@@ -97,30 +122,6 @@ const FilterReportListing = ({
           </div>
         )}
 
-        {showDateInFilter?.current && (
-          <>
-            <div className="col-lg-2 col-md-4 col-4">
-              <label className="text-secondary ">From Date</label>
-              <input
-                type="date"
-                name="fromDate"
-                id="fromDate"
-                className="form-control input-fields custom-input-field "
-                onChange={handleSearchInput}
-              />
-            </div>
-            <div className="col-lg-2 col-md-4 col-4">
-              <label className="text-secondary ">To Date</label>
-              <input
-                type="date"
-                name="toDate"
-                id="toDate"
-                className="form-control input-fields custom-input-field"
-                onChange={handleSearchInput}
-              />
-            </div>
-          </>
-        )}
         {/* <div className="col-md-2 d-flex align-items-center">
           <button
             className="btn btn-primary search-btn-challan-list"

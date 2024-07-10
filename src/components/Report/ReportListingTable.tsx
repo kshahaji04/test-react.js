@@ -1,6 +1,7 @@
 import Loader from '../General/Loader';
+import NoRecord from '../NoRecord';
 
-const ReportListingTable = ({ reportData }: any) => {
+const ReportListingTable = ({ reportData, isLoading }: any) => {
   const headers =
     reportData.length > 0 && reportData[0] ? Object.keys(reportData[0]) : [];
 
@@ -88,7 +89,7 @@ const ReportListingTable = ({ reportData }: any) => {
           )}
         </div>
       ) : (
-        <Loader />
+        <>{isLoading ? <Loader /> : <NoRecord />}</>
       )}
     </div>
   );

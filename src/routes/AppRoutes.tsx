@@ -278,6 +278,15 @@ const AppRoutes = () => {
         />
 
         <Route
+          path="/report/chitti/:id"
+          element={
+            <ProtectedRoute>
+              <ChittiReportsTab />
+              <ReportMaster />
+            </ProtectedRoute>
+          }
+        />
+        {/* <Route
           path="/report/chitti/subcategory"
           element={
             <ProtectedRoute>
@@ -285,8 +294,8 @@ const AppRoutes = () => {
               <SubCategoryReport />
             </ProtectedRoute>
           }
-        />
-        <Route
+        /> */}
+        {/* <Route
           path="/report/chitti/categorypartywise"
           element={
             <ProtectedRoute>
@@ -303,7 +312,7 @@ const AppRoutes = () => {
               <CategorySummaryReport />
             </ProtectedRoute>
           }
-        />
+        /> */}
         <Route
           path="/report/emerald"
           element={

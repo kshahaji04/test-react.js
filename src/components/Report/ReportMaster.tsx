@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import useReportHook from '../../hooks/report/report-hook';
 import ReportListingTable from './ReportListingTable';
 import ReportsFilters from './ReportsFilters';
+import ChittiSubCategoryReportListing from './ReportListing.tsx/ChittiSubCategoryReportListing';
 
 const ReportMaster = () => {
   const {
@@ -11,9 +12,9 @@ const ReportMaster = () => {
     handleSearchInput,
     handlePrintBtn,
     handleSearchBtn,
+    isLoading,
   }: any = useReportHook();
   const location: any = useLocation();
-  // const navigate: any = useNavigate();
 
   const generateDynamicHeading = (path: string | undefined) => {
     if (!path) {
@@ -33,17 +34,9 @@ const ReportMaster = () => {
         return '';
     }
   };
+
   return (
     <div className="container">
-      {/* <button
-        type="button"
-        className="btn btn-outline-primary my-2 py-1 px-3"
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </button> */}
       <div className="d-flex justify-content-between my-1">
         <h5>{generateDynamicHeading(location.pathname)}</h5>
         <button
@@ -62,11 +55,19 @@ const ReportMaster = () => {
         dropdownData={reportData}
       />
       <div className="container">
-        <ReportListingTable
-          reportData={reportData}
-          searchInputValues={searchInputValues}
-          setSearchInputValues={setSearchInputValues}
-        />
+        {location.pathname !== '/report/chitti/subcategory' ? (
+          <ReportListingTable
+            reportData={reportData}
+            searchInputValues={searchInputValues}
+            setSearchInputValues={setSearchInputValues}
+            isLoading={isLoading}
+          />
+        ) : (
+          <ChittiSubCategoryReportListing
+            reportData={reportData}
+            isLoading={isLoading}
+          />
+        )}
       </div>
     </div>
   );

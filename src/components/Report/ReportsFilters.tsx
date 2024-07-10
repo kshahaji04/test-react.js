@@ -84,7 +84,7 @@ const ReportsFilters = ({
             </div>
           </>
         )}
-        {path?.includes('/salesreturn') && (
+        {(path?.includes('/salesreturn') || path.includes('chitti')) && (
           <>
             <div className="col-lg-2 col-md-4 col-4 ">
               <label className="text-secondary">Client</label>
@@ -115,7 +115,8 @@ const ReportsFilters = ({
           </>
         )}
         {(path?.includes('/purchasereceipt/subcategory') ||
-          path?.includes('/salesreturn/subcategory')) && (
+          path?.includes('/salesreturn/subcategory') ||
+          path.includes('chitti')) && (
           <>
             <div className="col-lg-2 col-md-4 col-4">
               <label className="text-secondary">Sub Category</label>

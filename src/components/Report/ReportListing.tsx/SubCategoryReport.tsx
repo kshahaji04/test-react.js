@@ -10,6 +10,7 @@ import { get_access_token } from '../../../store/slices/auth/token-login-slice';
 import { useSelector } from 'react-redux';
 import { getSubCategoryReportData } from '../../../store/slices/report/get-subcategory-report-slice';
 import DownloadReportApi from '../../../services/api/report/Chitti/download-report-api';
+import ChittiSubCategoryReportListing from './ChittiSubCategoryReportListing';
 
 const SubCategoryReport = () => {
   const dispatch = useDispatch();
@@ -18,10 +19,11 @@ const SubCategoryReport = () => {
   const { CategoryList }: any = useCategoryHook();
   const { subCategoryList }: any = useSubCategoryHook();
   const accessToken: any = useSelector(get_access_token);
+  const todayDate: any = new Date()?.toISOString()?.split('T')[0];
 
   const [searchInputValues, setSearchInputValues] = useState({
-    fromDate: '',
-    toDate: '',
+    fromDate: todayDate,
+    toDate: todayDate,
   });
   let lastSubCategoryColor: any = 'text-dark';
 
@@ -143,6 +145,7 @@ const SubCategoryReport = () => {
             searchSubCategory={searchSubCategory}
             setSearchSubCategory={setSearchSubCategory}
             handleSearchInput={handleSearchInput}
+            searchInputValues={searchInputValues}
             showCategoryInFilter={showCategoryInFilter}
             showSubCategoryInFilter={showSubCategoryInFilter}
             showClientNameInFilter={showClientNameInFilter}
@@ -150,57 +153,7 @@ const SubCategoryReport = () => {
             subCategoryList={subCategoryList}
           />
 
-          <div className="col-lg-12 col-12 mx-auto table-responsive report-table-container">
-            <table className="table table-striped table-hover">
-              <thead className="report-table-head-row sticky-top">
-                <tr className="report-table-head-tr text-uppercase">
-                  <th scope="col">Sr No.</th>
-                  <th scope="col">Sub Category</th>
-                  <th scope="col">Client Name</th>
-                  <th scope="col">Gross Weight</th>
-                  <th scope="col">Net Weight</th>
-                  <th scope="col">Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                {subCategoryReportData?.length > 0 &&
-                subCategoryReportData !== null ? (
-                  <>
-                    {subCategoryReportData.map((data: any, index: any) => {
-                      const subCategory = data.sub_category;
-                      const textColor =
-                        subCategory ===
-                        subCategoryReportData[index - 1]?.sub_category
-                          ? lastSubCategoryColor
-                          : lastSubCategoryColor === 'text-danger'
-                          ? 'text-dark'
-                          : 'text-danger';
-                      lastSubCategoryColor = textColor; // Update the color for the next iteration
-                      return (
-                        <tr className="report-table-row" key={index}>
-                          <td>{index + 1}</td>
-
-                          <td className={`${textColor} subcategory-title`}>
-                            {data.sub_category}
-                          </td>
-                          <td>{data.client_name}</td>
-                          <td>{data.total_gross_weight?.toFixed(3)}</td>
-                          <td>{data.total_net_weight?.toFixed(3)}</td>
-                          <td>{data.total_amount?.toFixed(2)}</td>
-                        </tr>
-                      );
-                    })}
-                    <ShowTotalAmountOfReportData
-                      data={subCategoryReportData}
-                      colSpan="3"
-                    />
-                  </>
-                ) : (
-                  ''
-                )}
-              </tbody>
-            </table>
-          </div>
+          <ChittiSubCategoryReportListing reportData={subCategoryReportData} />
         </div>
       </div>
     </div>

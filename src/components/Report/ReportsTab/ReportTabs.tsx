@@ -1,7 +1,9 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import '../../../Style/report.css';
 
 const ReportTabs = () => {
+  const {} = useLocation();
+
   const reportlist: any = [
     'Purchase Receipt',
     'Chitti',
@@ -16,13 +18,12 @@ const ReportTabs = () => {
           {reportlist?.length > 0 &&
             reportlist.map((data: any, index: any) => {
               const processedStr: any = data.replace(/\s+/g, '').toLowerCase();
-              const linkTo: any = `/report/${processedStr}/${
-                processedStr === 'emeraldchitti'
-                  ? 'categorypartywise'
-                  : 'subcategory'
-              }`;
-              const isActive: any =
-                window?.location?.pathname?.includes(linkTo);
+
+              console.log('process', processedStr);
+
+              const isActive = location.pathname
+                .split('/')
+                .includes(processedStr);
               return (
                 <div
                   className={`mx-lg-3 my-lg-0 my-1 master-heading  px-lg-2  ${
