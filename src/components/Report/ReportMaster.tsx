@@ -1,8 +1,8 @@
 import { useLocation } from 'react-router-dom';
 import useReportHook from '../../hooks/report/report-hook';
+import ChittiSubCategoryReportListing from './ReportListing.tsx/ChittiSubCategoryReportListing';
 import ReportListingTable from './ReportListingTable';
 import ReportsFilters from './ReportsFilters';
-import ChittiSubCategoryReportListing from './ReportListing.tsx/ChittiSubCategoryReportListing';
 
 const ReportMaster = () => {
   const {
@@ -56,12 +56,7 @@ const ReportMaster = () => {
       />
       <div className="container">
         {location.pathname !== '/report/chitti/subcategory' ? (
-          <ReportListingTable
-            reportData={reportData}
-            searchInputValues={searchInputValues}
-            setSearchInputValues={setSearchInputValues}
-            isLoading={isLoading}
-          />
+          <ReportListingTable reportData={reportData} isLoading={isLoading} />
         ) : (
           <ChittiSubCategoryReportListing
             reportData={reportData}

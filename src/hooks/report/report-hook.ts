@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import { toast } from 'react-toastify';
+import { EmeraldChittiCategoryPartywiseReportApi } from '../../services/api/report/get-emerald-chitti-reports-api';
+import { EmeraldChittiCategoryPartywisePrintApi } from '../../services/api/report/get-emerald-chitti-print-api';
 import {
   PRCategoryPartywisePrintApi,
   PRCategorySummaryPrintApi,
@@ -12,19 +15,16 @@ import {
   PRCategorySummaryReportApi,
   PRSubcategoryReportApi,
 } from '../../services/api/report/get-PR-reports-api';
-import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import {
   SRCategoryPartywiseReportApi,
   SRCategorySummaryReportApi,
   SRSubcategoryReportApi,
 } from '../../services/api/report/get-SR-reports-api';
-import { EmeraldChittiCategoryPartywiseReportApi } from '../../services/api/report/get-emerald-chitti-reports-api';
 import {
   SRCategoryPartywisePrintApi,
   SRCategorySummaryPrintApi,
   SRSubcategoryPrintApi,
 } from '../../services/api/report/get-SR-print-api';
-import { EmeraldChittiCategoryPartywisePrintApi } from '../../services/api/report/get-emerald-chitti-print-api';
 import {
   chittiCategoryPartywiseReportApi,
   chittiCategorySummaryReportApi,
@@ -51,61 +51,67 @@ const useReportHook = () => {
 
   const accessToken: any = useSelector(get_access_token);
   useEffect(() => {
-    getReportData();
+    getReportData('date');
+    setSearchInputValues({
+      from_date: todayDate,
+      to_date: todayDate,
+    });
   }, [path]);
 
-  const getReportData: any = async () => {
+  const getReportData: any = async (date?: any) => {
     let reportData;
     setIsLoading(true);
+    const currentDate: any = { from_date: todayDate, to_date: todayDate };
+
     if (path === '/report/purchasereceipt/subcategory') {
       reportData = await PRSubcategoryReportApi(
         accessToken.token,
-        searchInputValues
+        date ? currentDate : searchInputValues
       );
     } else if (path === '/report/purchasereceipt/categorypartywise') {
       reportData = await PRCategoryPartywiseReportApi(
         accessToken.token,
-        searchInputValues
+        date ? currentDate : searchInputValues
       );
     } else if (path === '/report/purchasereceipt/categorysummary') {
       reportData = await PRCategorySummaryReportApi(
         accessToken.token,
-        searchInputValues
+        date ? currentDate : searchInputValues
       );
     } else if (path === '/report/chitti/subcategory') {
       reportData = await chittiSubcategoryReportApi(
         accessToken.token,
-        searchInputValues
+        date ? currentDate : searchInputValues
       );
     } else if (path === '/report/chitti/categorypartywise') {
       reportData = await chittiCategoryPartywiseReportApi(
         accessToken.token,
-        searchInputValues
+        date ? currentDate : searchInputValues
       );
     } else if (path === '/report/chitti/categorysummary') {
       reportData = await chittiCategorySummaryReportApi(
         accessToken.token,
-        searchInputValues
+        date ? currentDate : searchInputValues
       );
     } else if (path === '/report/salesreturn/subcategory') {
       reportData = await SRSubcategoryReportApi(
         accessToken.token,
-        searchInputValues
+        date ? currentDate : searchInputValues
       );
     } else if (path === '/report/salesreturn/categorypartywise') {
       reportData = await SRCategoryPartywiseReportApi(
         accessToken.token,
-        searchInputValues
+        date ? currentDate : searchInputValues
       );
     } else if (path === '/report/salesreturn/categorysummary') {
       reportData = await SRCategorySummaryReportApi(
         accessToken.token,
-        searchInputValues
+        date ? currentDate : searchInputValues
       );
     } else if (path === '/report/emeraldchitti/categorypartywise') {
       reportData = await EmeraldChittiCategoryPartywiseReportApi(
         accessToken.token,
-        searchInputValues
+        date ? currentDate : searchInputValues
       );
     }
 
@@ -189,7 +195,7 @@ const useReportHook = () => {
         default:
           return;
       }
-      console.log('reports print', reportPrint);
+
       if (reportPrint?.data?.message?.status === 'success') {
         window.open(reportPrint?.data?.message?.data?.print_url);
       } else {
@@ -206,10 +212,10 @@ const useReportHook = () => {
       [fieldName]: value,
     }));
   };
+
   const handleSearchBtn: any = () => {
     getReportData();
   };
-  console.log('report data in hook end', reportData);
 
   return {
     reportData,

@@ -25,15 +25,10 @@ import Supplier from '../components/Master/MasterListing/Supplier/Supplier';
 import MasterPageSupplierGroupDetail from '../components/Master/MasterListing/SupplierGroup/MasterPageSupplierGroupDetail';
 import SupplierGroup from '../components/Master/MasterListing/SupplierGroup/SupplierGroup';
 import DetailPagePurchaseReceipt from '../components/PurchaseReceipt/DetailPagePurchaseReceipt/DetailPagePurchaseReceipt';
-import CategoryPartyWiseReport from '../components/Report/ReportListing.tsx/CategoryPartywiseReport';
-import CategorySummaryReport from '../components/Report/ReportListing.tsx/CategorySummaryReport';
-import EmeraldReport from '../components/Report/ReportListing.tsx/EmeraldReport';
-import SubCategoryReport from '../components/Report/ReportListing.tsx/SubCategoryReport';
 import ReportMaster from '../components/Report/ReportMaster';
 import ChittiReportsTab from '../components/Report/ReportsTab/ChittiReportsTab';
 import EmeralChittiReportsTab from '../components/Report/ReportsTab/EmeraldChittiReportsTab';
 import PurchaseReceiptsReportsTab from '../components/Report/ReportsTab/PurchaseReceiptReportsTab';
-import ReportTabs from '../components/Report/ReportsTab/ReportTabs';
 import SalesReturnReportsTab from '../components/Report/ReportsTab/SalesReturnReportsTab';
 import DetailPageSalesReturn from '../components/SalesReturn/DetailPageSalesReturn/DetailPageSalesReturn';
 import ChittiPage from '../pages/chitti';
@@ -286,43 +281,6 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
-        {/* <Route
-          path="/report/chitti/subcategory"
-          element={
-            <ProtectedRoute>
-              <ChittiReportsTab />
-              <SubCategoryReport />
-            </ProtectedRoute>
-          }
-        /> */}
-        {/* <Route
-          path="/report/chitti/categorypartywise"
-          element={
-            <ProtectedRoute>
-              <ChittiReportsTab />
-              <CategoryPartyWiseReport />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/report/chitti/categorysummary"
-          element={
-            <ProtectedRoute>
-              <ChittiReportsTab />
-              <CategorySummaryReport />
-            </ProtectedRoute>
-          }
-        /> */}
-        <Route
-          path="/report/emerald"
-          element={
-            <ProtectedRoute>
-              <ReportTabs />
-              <EmeraldReport />
-            </ProtectedRoute>
-          }
-        />
-
         <Route
           path="/emeraldchitti/:id"
           element={

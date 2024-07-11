@@ -1,24 +1,24 @@
-import React from 'react';
+import NoRecord from '../../NoRecord';
 import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
 
 const ChittiSubCategoryReportListing = ({ reportData }: any) => {
   let lastSubCategoryColor: any = 'text-dark';
   return (
     <div className="col-lg-12 col-12 mx-auto table-responsive report-table-container">
-      <table className="table table-striped table-hover">
-        <thead className="report-table-head-row sticky-top">
-          <tr className="report-table-head-tr text-uppercase">
-            <th scope="col">Sr No.</th>
-            <th scope="col">Sub Category</th>
-            <th scope="col">Client Name</th>
-            <th scope="col">Gross Weight</th>
-            <th scope="col">Net Weight</th>
-            <th scope="col">Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          {reportData?.length > 0 && reportData !== null ? (
-            <>
+      {reportData?.length > 0 && reportData !== null ? (
+        <>
+          <table className="table table-striped table-hover">
+            <thead className="report-table-head-row sticky-top">
+              <tr className="report-table-head-tr text-uppercase">
+                <th scope="col">Sr No.</th>
+                <th scope="col">Sub Category</th>
+                <th scope="col">Client Name</th>
+                <th scope="col">Gross Weight</th>
+                <th scope="col">Net Weight</th>
+                <th scope="col">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
               {reportData.map((data: any, index: any) => {
                 const subCategory = data.sub_category;
                 const textColor =
@@ -43,12 +43,12 @@ const ChittiSubCategoryReportListing = ({ reportData }: any) => {
                 );
               })}
               <ShowTotalAmountOfReportData data={reportData} colSpan="3" />
-            </>
-          ) : (
-            ''
-          )}
-        </tbody>
-      </table>
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <NoRecord />
+      )}
     </div>
   );
 };
