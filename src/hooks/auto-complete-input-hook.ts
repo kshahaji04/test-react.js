@@ -57,14 +57,15 @@ const useAutoCompleteInputHook = ({
 
     if (updatedFilterList?.length > 0) {
       setFilterDropdownList(updatedFilterList);
+      if (updatedFilterList?.length === 1) {
+        setSelectedIndex(0);
+      } else {
+        setSelectedIndex(-1);
+      }
     } else {
-      setFilterDropdownList([]);
+      // setFilterDropdownList([]);
     }
-    if (updatedFilterList?.length === 1) {
-      setSelectedIndex(0);
-    } else {
-      setSelectedIndex(-1);
-    }
+
     // handleKeyDown(e, fieldname);
     setNoRecordsFound(true);
   };
