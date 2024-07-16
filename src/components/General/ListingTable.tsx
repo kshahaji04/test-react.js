@@ -1,5 +1,5 @@
-import { NavLink, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import LoadMoreChittiListing from './PaginationComponent';
 import DeleteAlertModal from '../Modal/DeleteAlertModal';
 import useListingHook from '../../hooks/listing-hook';
@@ -129,12 +129,12 @@ const ListingTable = ({ tableListingData, userRolesData }: any) => {
                               {v !== 'docstatus'
                                 ? data[v]
                                 : data[v] === 0
-                                  ? 'Draft'
-                                  : data[v] === 1
-                                    ? 'Submitted'
-                                    : data[v] === 2
-                                      ? 'Cancel'
-                                      : data[v]}
+                                ? 'Draft'
+                                : data[v] === 1
+                                ? 'Submitted'
+                                : data[v] === 2
+                                ? 'Cancel'
+                                : data[v]}
                             </td>
                           );
                         }
@@ -191,7 +191,7 @@ const ListingTable = ({ tableListingData, userRolesData }: any) => {
                             <div className="col-lg-2 col-md-4 col-12">
                               <NavLink
                                 to={`${data.name}`}
-                                className="button-section-text text-info "
+                                className="button-section-text text-info"
                               >
                                 View
                               </NavLink>
@@ -259,14 +259,12 @@ const ListingTable = ({ tableListingData, userRolesData }: any) => {
   return (
     <>
       <div className="table-responsive ">
-        {tableListingData?.length > 0 && (
-          <div className="text-end text-gray">
-            {tableListingData?.slice(0, tableViewData)?.length} of{' '}
-            {tableListingData?.length < 10
-              ? '0' + tableListingData?.length
-              : tableListingData?.length}
-          </div>
-        )}
+        <div className="text-end text-gray">
+          {tableListingData?.slice(0, tableViewData)?.length} of{' '}
+          {tableListingData?.length < 10
+            ? '0' + tableListingData?.length
+            : tableListingData?.length}
+        </div>
 
         <table className="table table table-striped table-hover listing-table border-0">
           <thead className="table-heading">

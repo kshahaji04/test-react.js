@@ -3,7 +3,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import useEmeraldChittiHook from '../../hooks/Emerald/emrald-page-hook';
 import useSubCategoryHook from '../../hooks/Master/sub-category-hook';
 import useListingFilterHook from '../../hooks/listing-filter-hook';
-import SearchListingTable from '../Chitti/ChittiListing/SearchListingTable';
+import SearchListingTable from '../General/SearchListingTable';
 import ListingTable from '../General/ListingTable';
 import CreateEmeraldChittiMaster from './CreateEmeraldChitti/CreateEmeraldChittiMaster';
 

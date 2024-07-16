@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import SelectedInputDropdown from '../../SelectedInputDropdown';
+import SelectedInputDropdown from '../SelectedInputDropdown';
 
 const SearchListingTable = ({
   clientNameList,
@@ -13,20 +13,6 @@ const SearchListingTable = ({
   return (
     <>
       <div className="row justify-content-center mt-1">
-        {/* <div className="col-lg-2  col-md-3 ">
-          <label className="text-secondary submitted-date-label-chitti">
-            Submitted Date
-          </label>
-          <input
-            type="date"
-            name="submitted_date"
-            id="submitted_date"
-            className="form-control custom-input-field px-2"
-            style={{ backgroundColor: '#E0E1F5' }}
-            value={searchInputValues?.submitted_date}
-            onChange={HandleSearchInput}
-          />
-        </div> */}
         <div
           className={` ${
             !location?.pathname?.includes('/purchase-receipt') &&
