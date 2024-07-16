@@ -225,8 +225,10 @@ const ButtonSectionComponent = ({
             </button>
           )}
           {userRolesData?.length > 0 &&
-            userRolesData.some((roles: any) =>
-              roles.includes('Save Submit Access')
+            userRolesData.some(
+              (roles: any) =>
+                roles.includes('Save Submit Access') ||
+                roles.includes('Save Access')
             ) && (
               <button
                 type="submit"
