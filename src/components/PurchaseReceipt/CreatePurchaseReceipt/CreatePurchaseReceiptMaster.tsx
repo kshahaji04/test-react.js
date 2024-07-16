@@ -19,7 +19,7 @@ const CreatePurchaseReceiptMaster = ({
   handleCreatePR,
 }: any) => {
   const buttonLoadingStateFromStore: any = useSelector(buttonLoadingState);
-  console.log('buttonLoadingStateFromStore', buttonLoadingStateFromStore);
+
   return (
     <>
       <div className="d-flex justify-content-end">
