@@ -104,8 +104,6 @@ const useCustomSalesReturnHook = () => {
     setStateForDocStatus(true);
   };
 
-  console.log('topSectionInputData', topSectionInputData);
-
   return {
     salesReturnTable,
     setSalesReturnTable,

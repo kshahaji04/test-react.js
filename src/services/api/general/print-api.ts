@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from './error-handler';
 
 const PrintApi = async (token: any, name: any) => {
-  console.log('tokennnn', token);
   let response: any;
   const version = 'v1';
   const method = 'get_print';
@@ -22,7 +22,7 @@ const PrintApi = async (token: any, name: any) => {
       response = res.data.message;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

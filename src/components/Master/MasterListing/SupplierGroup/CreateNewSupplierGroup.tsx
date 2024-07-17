@@ -22,7 +22,7 @@ const CreateNewSupplierGroup = () => {
         accessToken?.token,
         title
       );
-      console.log('apires', apiRes);
+
       if (apiRes?.data?.message?.status === 'success') {
         toast.success('Supplier Group Create');
         dispatch(getSupplierGroupList(accessToken?.token));

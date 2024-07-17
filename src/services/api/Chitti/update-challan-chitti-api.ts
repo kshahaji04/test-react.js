@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from '../general/error-handler';
 
 const UpdateChittiApi = async (request: any) => {
-  console.log('create chitti req', request);
-  console.log('create chitti req na', request.narrationTableData);
   let response: any;
 
   const params = `/api/resource/Challan/${request.name}`;
@@ -22,16 +21,14 @@ const UpdateChittiApi = async (request: any) => {
       Authorization: request.token,
     },
   };
-  console.log('body', body);
 
   await axios
     .put(`${BASE_URL}${params}`, body, config)
     .then((res: any) => {
-      console.log('create chitti res', res);
       response = res;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

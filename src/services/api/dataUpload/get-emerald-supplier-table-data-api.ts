@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from '../general/error-handler';
 
 const DownloadEmeraldSupplierTableData: any = async (
   token: any,
@@ -25,7 +26,7 @@ const DownloadEmeraldSupplierTableData: any = async (
       response = res;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

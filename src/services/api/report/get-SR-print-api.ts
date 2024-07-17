@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from '../general/error-handler';
 
 export const SRCategorySummaryPrintApi = async (request: any, params: any) => {
   let response: any;
@@ -28,7 +29,7 @@ export const SRCategorySummaryPrintApi = async (request: any, params: any) => {
       response = res;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };
@@ -62,7 +63,7 @@ export const SRCategoryPartywisePrintApi = async (
       response = res;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };
@@ -94,7 +95,7 @@ export const SRSubcategoryPrintApi = async (request: any, params: any) => {
       response = res;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

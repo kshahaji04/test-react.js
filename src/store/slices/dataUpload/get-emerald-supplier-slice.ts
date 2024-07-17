@@ -7,7 +7,7 @@ export const getEmeraldSupplier: any = createAsyncThunk(
   'getEmeraldSupplier/getEmeraldSupplier',
   async (token: any) => {
     const getSupplierData: any = await GetEmeraldSupplier(token);
-    console.log('getEmeraldSupplierData res', getSupplierData);
+
     return getSupplierData;
   }
 );

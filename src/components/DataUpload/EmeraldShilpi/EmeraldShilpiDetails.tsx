@@ -8,7 +8,7 @@ const EmeraldShilpiDetails = () => {
   const navigate = useNavigate();
   const { id }: any = useParams();
   const { emeraldShilpiDetails }: any = UseEmeraldShilpiDetails();
-  console.log('emeraldshilpidetails', emeraldShilpiDetails);
+
   const emeraldShilpiDetailsDataFromStore: any = useSelector(
     get_Emerald_shilpi_details
   );

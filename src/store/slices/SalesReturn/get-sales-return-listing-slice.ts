@@ -6,7 +6,7 @@ export const getSalesReturnListing: any = createAsyncThunk(
   'salesReturnListing/getSalesReturnListing',
   async (token: any) => {
     const salesReturnData: any = await GetSalesReturnListingApi(token);
-    console.log('salesReturnData  data', salesReturnData);
+
     return salesReturnData;
   }
 );

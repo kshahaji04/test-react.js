@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from '../../../config/api-config';
+import { handleApiError } from '../../general/error-handler';
 
 const DownloadReportApi = async (request: any) => {
   console.log('request', request);
@@ -39,7 +40,7 @@ const DownloadReportApi = async (request: any) => {
       response = res.data.message;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

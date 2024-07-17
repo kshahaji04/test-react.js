@@ -12,8 +12,6 @@ const AutoCompleteInput = ({
   bgColor,
   value,
 }: any) => {
-  // console.log("data for input dropdown", data)
-
   const {
     handleShowDropdown,
     handleSelectedOption,
@@ -26,7 +24,6 @@ const AutoCompleteInput = ({
     selectedIndex,
     noRecords,
     filterDropdownList,
-    // showClientGroupSelect,
     inputRef,
     dropdownRef,
   }: any = useAutoCompleteInputUpdatedHook({

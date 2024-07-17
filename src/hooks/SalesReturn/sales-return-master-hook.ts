@@ -138,7 +138,6 @@ const useSalesReturnMasterHook = () => {
   }, [subCategoryDataFromStore]);
 
   useEffect(() => {
-    // console.log('clientNameDataFromStore', clientNameDataFromStore);
     if (
       clientNameDataFromStore?.data?.length > 0 &&
       clientNameDataFromStore?.data !== null

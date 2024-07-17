@@ -25,7 +25,6 @@ const AddSubCategory = ({ CategoryList }: any) => {
           title,
           selectedDropdownValue
         );
-        console.log('apires', apiRes);
 
         setTitle('');
         if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
@@ -42,8 +41,6 @@ const AddSubCategory = ({ CategoryList }: any) => {
       }
     }
   };
-
-  console.log('CategoryList', CategoryList);
 
   const handleInputValue = (e: any) => {
     setError('');

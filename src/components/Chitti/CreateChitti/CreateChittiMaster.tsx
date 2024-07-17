@@ -8,25 +8,18 @@ import HandleButtonsDisplayInChitti from '../../HandleButtonsDisplayInChitti';
 
 const CreateChittiMaster = ({
   handleCreateChittiSubmit,
-  currentDate,
-  selectedDropdownValue,
-  handleGoldRate,
-  handleRemarks,
+  handleTopSectionData,
   tableData,
   setTableData,
   narrationTableData,
   setNarrationTableData,
-  setSelectedDropdownValue,
+  topSectionInputData,
   clientNameList,
   subCategoryList,
   productList,
   clientGroupList,
   handleClientGroup,
-  handleDateChange,
-  date,
   setStateForDocStatus,
-  goldRate,
-  remarks,
   showSubmitButtonAfterCreateChitti,
   handleSubmitChallanChitti,
   handleCancelChallanChitti,
@@ -64,18 +57,11 @@ const CreateChittiMaster = ({
         </div>
       </div>
       <CreateChittiForm
-        currentDate={currentDate}
-        selectedDropdownValue={selectedDropdownValue}
-        handleGoldRate={handleGoldRate}
-        handleRemarks={handleRemarks}
-        setSelectedDropdownValue={setSelectedDropdownValue}
+        topSectionInputData={topSectionInputData}
+        handleTopSectionData={handleTopSectionData}
         clientNameList={clientNameList}
         clientGroupList={clientGroupList}
         handleClientGroup={handleClientGroup}
-        handleDateChange={handleDateChange}
-        date={date}
-        goldRate={goldRate}
-        remarks={remarks}
       />
       <ChallanItemsTable
         tableData={tableData}

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from './error-handler';
 
 export const UpdateDocStatusEmeraldChittiApi = async (
   token: any,
@@ -58,7 +59,7 @@ export const UpdateDocStatusWithSubmittedEmeraldChittiApi = async (
       response = res;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

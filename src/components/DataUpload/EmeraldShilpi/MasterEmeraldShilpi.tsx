@@ -3,7 +3,7 @@ import UseEmeraldShilpiHook from '../../../hooks/emeraldShilpi/emerald-shilpi-ho
 
 const MasterEmeraldShilpi = () => {
   const { emeraldShilpiListData }: any = UseEmeraldShilpiHook();
-  console.log('emeraldShilpiListData', emeraldShilpiListData);
+
   return (
     <div>
       <EmeraldShilpiListing emeraldShilpiListData={emeraldShilpiListData} />

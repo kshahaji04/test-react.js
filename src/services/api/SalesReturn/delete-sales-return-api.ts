@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from '../general/error-handler';
 
 const DeleteSalesReturnApi = async (token: any, name: any) => {
   console.log('tokennnn', token);
@@ -22,7 +23,7 @@ const DeleteSalesReturnApi = async (token: any, name: any) => {
       response = res.data;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

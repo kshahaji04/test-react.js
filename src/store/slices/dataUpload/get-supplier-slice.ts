@@ -7,7 +7,7 @@ export const getSupplierList: any = createAsyncThunk(
   'getSupplier/getSupplierList',
   async (token: any) => {
     const getSupplierData: any = await GetSupplierList(token);
-    console.log('getSupplierData res', getSupplierData);
+
     return getSupplierData;
   }
 );

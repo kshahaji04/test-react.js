@@ -275,17 +275,6 @@ const usePurchaseReceiptMasterHook = () => {
           let purchaseReceiptApiRes: any =
             await CreatePurchaseReceiptApi(BodyData);
 
-          // if (
-          //   Object?.keys(clientGroupName)?.length > 0 &&
-          //   Object?.keys(clientNameList)?.length > 0
-          // ) {
-          //   await AddClientNameApi(
-          //     accessToken?.token,
-          //     selectedDropdownValue,
-          //     clientGroupName
-          //   );
-          // }
-
           if (purchaseReceiptApiRes?.data?.message?.status === 'success') {
             toast.success('Purchase Receipt Created', purchaseReceiptApiRes);
             navigate(`${purchaseReceiptApiRes?.data?.message?.data}`);

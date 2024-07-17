@@ -11,7 +11,6 @@ const PurchaseReceiptTable = ({
   handleKeyDown,
   readOnlyFields,
 }: any) => {
-  //   console.log('purchase receipt table data', purchaseReceiptTable);
   const subCategoryData: any = {
     fieldname: 'sub_category',
     fieldtype: 'Link',

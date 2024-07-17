@@ -28,7 +28,7 @@ const AddProjectSubCategoryMapping = ({ subCategoryCategoryData }: any) => {
         selectedStoneValue,
         selectedPlainValue
       );
-      console.log('apires', apiRes);
+
       setProject('');
       if (apiRes?.data?.message?.status === 'success') {
         toast.success('Project sub category mapping created');

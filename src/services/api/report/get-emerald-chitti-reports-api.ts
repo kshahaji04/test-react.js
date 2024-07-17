@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BASE_URL, headerGenerator } from '../../config/api-config';
+import { handleApiError } from '../general/error-handler';
 
 export const EmeraldChittiCategoryPartywiseReportApi = async (
   get_access_token: any,
@@ -27,15 +28,7 @@ export const EmeraldChittiCategoryPartywiseReportApi = async (
       response = res;
     })
     .catch((err: any) => {
-      if (err.code === 'ECONNABORTED') {
-        response = 'Request timed out';
-      } else if (err.code === 'ERR_BAD_REQUEST') {
-        response = 'Bad Request';
-      } else if (err.code === 'ERR_INVALID_URL') {
-        response = 'Invalid URL';
-      } else {
-        response = err;
-      }
+      response = handleApiError(err);
     });
 
   return response;

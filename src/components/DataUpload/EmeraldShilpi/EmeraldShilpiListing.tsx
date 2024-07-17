@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
 const EmeraldShilpiListing = ({ emeraldShilpiListData }: any) => {
-  console.log('emeraldShilpiListData', emeraldShilpiListData);
   return (
     <div className="container">
       <table className="table table table-striped table-hover listing-table border-0">

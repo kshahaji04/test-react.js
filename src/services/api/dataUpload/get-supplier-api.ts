@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from '../general/error-handler';
 
 const GetSupplierList = async (token: any) => {
-  console.log('tokennnn', token);
   let response: any;
 
   const params = `/api/resource/Supplier`;
@@ -19,7 +19,7 @@ const GetSupplierList = async (token: any) => {
       response = res;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

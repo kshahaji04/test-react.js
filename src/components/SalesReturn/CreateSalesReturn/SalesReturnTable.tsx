@@ -11,7 +11,6 @@ const SalesReturnTable = ({
   amountValue,
   handleKeyDown,
 }: any) => {
-  //   console.log('purchase receipt table data', salesReturnTable);
   const subCategoryData: any = {
     fieldname: 'sub_category',
     fieldtype: 'Link',

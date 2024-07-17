@@ -44,8 +44,6 @@ const EditEmeraldChitti = () => {
     handleTopSectionData,
   }: any = useEditEmeraldChittiHook();
 
-  // console.log('details of emerald chitti', tableData, topSectionInputData);
-
   const emeraldDetailDataFromStore: any = useSelector(
     get_specific_chitti_challan
   );

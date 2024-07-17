@@ -87,7 +87,6 @@ const useAutoCompleteInputHook = ({
     }
     if (!readOnly) {
       if (e.key === 'ArrowDown' && !showDropDown) {
-        console.log('arrow down');
         e.preventDefault();
         setShowDropdown(true);
         setSelectedIndex(-1);

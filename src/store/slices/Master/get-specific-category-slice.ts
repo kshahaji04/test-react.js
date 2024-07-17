@@ -6,7 +6,7 @@ export const getSpecificCategory: any = createAsyncThunk(
   'getSpecificCategory/getSpecificCategory',
   async (params: any) => {
     const getSpecificCategoryData: any = await getSpecificCategoryApi(params);
-    console.log('getSpecificClientGroupData res', getSpecificCategoryData);
+
     return getSpecificCategoryData;
   }
 );

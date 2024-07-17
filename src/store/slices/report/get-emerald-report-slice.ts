@@ -6,7 +6,7 @@ export const getEmeraldReportData: any = createAsyncThunk(
   'getEmeraldReport/getEmeraldReports',
   async (params: any) => {
     const getEmeraldReportData: any = await getEmeraldReportApi(params);
-    console.log('getSubCategoryReportData res', getEmeraldReportData);
+
     return getEmeraldReportData;
   }
 );

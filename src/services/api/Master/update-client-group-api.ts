@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from '../general/error-handler';
 
 const UpdateClientGroup: any = async (
   token: any,
@@ -23,11 +24,10 @@ const UpdateClientGroup: any = async (
   await axios
     .put(`${BASE_URL}/${params}`, body, config)
     .then((res: any) => {
-      console.log('resss', res);
       response = res;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

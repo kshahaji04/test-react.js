@@ -31,7 +31,6 @@ const MasterUpdateModal = ({
         : dropdownData,
   };
 
-  console.log('dataaa while update', data);
   return (
     <Modal
       show={isModalOpen}

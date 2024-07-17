@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import {
   getChittiChallan,
   get_chitti_challan,
@@ -7,7 +8,6 @@ import {
 import { useSelector } from 'react-redux';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
 import CreateChittiApi from '../../services/api/Chitti/create-chitti-api';
-import { toast } from 'react-toastify';
 import {
   getClientName,
   get_client_name,
@@ -61,14 +61,9 @@ const useChittiHook = () => {
   const [challanTableData, setChallanTableData] = useState<any>([]);
   const [narrationUpdatedTableData, setNarrationUpdatedTableData] =
     useState<any>([]);
-  const [currentDate, setCurrentDate] = useState<any>(new Date());
-  const [selectedDropdownValue, setSelectedDropdownValue] = useState<any>('');
-  const [goldRate, setGoldRate] = useState<any>('');
-  const [remarks, setRemarks] = useState<any>('');
+  const [topSectionInputData, setTopSectionInputData] = useState<any>({});
   const [clientGroupName, setClientGroupName] = useState<any>('');
-  const [date, setDate] = useState<any>(
-    new Date().toLocaleDateString('en-GB').split('/').join('-')
-  );
+
   const [stateForDocStatus, setStateForDocStatus] = useState<boolean>(false);
   const [
     showSubmitButtonAfterCreateChitti,
@@ -94,7 +89,6 @@ const useChittiHook = () => {
     dispatch(getSubCategoryList(accessToken?.token));
     dispatch(getProductList(accessToken?.token));
     dispatch(getClientGroupList(accessToken?.token));
-    setCurrentDate(new Date());
   }, []);
 
   useEffect(() => {
@@ -152,32 +146,24 @@ const useChittiHook = () => {
     }
   }, [clientGroupDataFromStore]);
 
-  const handleGoldRate: any = (e: any) => {
-    setGoldRate(e.target.value);
-    setStateForDocStatus(true);
-  };
-
-  const handleRemarks: any = (e: any) => {
-    setRemarks(e.target.value);
-    setStateForDocStatus(true);
-  };
-
   const handleClientGroup: any = (e: any) => {
     setClientGroupName(e.target.value);
     setStateForDocStatus(true);
   };
 
-  const handleDateChange: any = (e: any) => {
-    setDate(e.target.value);
+  const handleTopSectionData = (value: any, fieldName: any) => {
+    setTopSectionInputData((prevState: any) => ({
+      ...prevState,
+      [fieldName]: value,
+    }));
+
     setStateForDocStatus(true);
   };
 
   const handleEmptyChallanChittiTable: any = () => {
     setTableData([{ id: 1 }]);
     setNarrationTableData([{ id: 1 }]);
-    setSelectedDropdownValue('');
-    setGoldRate('');
-    setRemarks('');
+    setTopSectionInputData({});
     setShowSubmitButtonAfterCreateChitti('');
     // Set the value of the select tag to an empty string
     const selectElements: any = document?.querySelectorAll(
@@ -262,9 +248,9 @@ const useChittiHook = () => {
     dispatch(btnLoadingStart());
     const reqParams: any = {
       token: accessToken?.token,
-      client_name: selectedDropdownValue,
-      gold_rate: goldRate,
-      remarks: remarks,
+      client_name: topSectionInputData?.client_name,
+      gold_rate: topSectionInputData?.gold_rate,
+      remarks: topSectionInputData?.remarks,
       name: id,
       challan_data: challanTableData,
       narration_data: narrationTableData,
@@ -315,7 +301,7 @@ const useChittiHook = () => {
     const filteredHuidTable = checkObjectHasValuesInHuid(narrationTableData);
 
     let errMsgList: any = [];
-    if (Object?.keys(selectedDropdownValue)?.length === 0) {
+    if (!topSectionInputData.client_name) {
       errMsgList.push('Client Name');
     }
     if (NoDataChallanTableData) {
@@ -365,11 +351,11 @@ const useChittiHook = () => {
         } else {
           dispatch(btnLoadingStart());
           const BodyData: any = {
-            date: date,
-            clientName: selectedDropdownValue,
+            date: new Date().toLocaleDateString('en-GB').split('/').join('-'),
+            clientName: topSectionInputData.client_name,
             clientGroup: clientGroupName,
-            goldRate: goldRate,
-            remarks: remarks,
+            goldRate: topSectionInputData.gold_rate,
+            remarks: topSectionInputData.remarks,
             challanTableData: challanTableWithGrossWeight,
             narrationTableData: filteredHuidTable,
             token: accessToken?.token,
@@ -382,7 +368,7 @@ const useChittiHook = () => {
           ) {
             await AddClientNameApi(
               accessToken?.token,
-              selectedDropdownValue,
+              topSectionInputData.client_name,
               clientGroupName
             );
           }
@@ -413,11 +399,6 @@ const useChittiHook = () => {
 
   return {
     chittiListingData,
-    currentDate,
-    selectedDropdownValue,
-    setSelectedDropdownValue,
-    handleGoldRate,
-    handleRemarks,
     tableData,
     setTableData,
     narrationTableData,
@@ -428,16 +409,10 @@ const useChittiHook = () => {
     productList,
     clientGroupList,
     handleClientGroup,
-    handleDateChange,
-    date,
-    goldRate,
-    remarks,
     challanTableData,
     clientGroupName,
     stateForDocStatus,
     setStateForDocStatus,
-    setRemarks,
-    setGoldRate,
     handleEmptyChallanChittiTable,
     showSubmitButtonAfterCreateChitti,
     handleSubmitChallanChitti,
@@ -453,6 +428,9 @@ const useChittiHook = () => {
     checkGrossAndNetWeight,
     setCheckGrossAndNetWeight,
     narrationUpdatedTableData,
+    topSectionInputData,
+    setTopSectionInputData,
+    handleTopSectionData,
   };
 };
 export default useChittiHook;

@@ -7,7 +7,7 @@ export const getProductItem: any = createAsyncThunk(
   'getProductItem/getProductItem',
   async (token: any) => {
     const getProductItemData: any = await GetProductItemList(token);
-    console.log('getProductItemData res', getProductItemData);
+
     return getProductItemData;
   }
 );

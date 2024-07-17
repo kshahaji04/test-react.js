@@ -82,7 +82,6 @@ const useMasterUpdateHook = ({ data, setIsModalOpen }: any) => {
     }
   };
 
-  console.log('values', data, formData);
   const handleSaveBtn: any = async () => {
     let updateRecord;
     switch (true) {

@@ -6,7 +6,7 @@ export const getSubCategoryCategory: any = createAsyncThunk(
   'getSubCategoryCategoryList/getSubCategory',
   async (token: any) => {
     const CategoryListData: any = await getSubCategoryCategoryApi(token);
-    console.log('getSubCategoryCategoryApi res', CategoryListData);
+
     return CategoryListData;
   }
 );

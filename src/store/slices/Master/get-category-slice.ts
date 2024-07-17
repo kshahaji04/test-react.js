@@ -7,7 +7,7 @@ export const getCategoryList: any = createAsyncThunk(
   'getCategoryList/getCategoryList',
   async (token: any) => {
     const CategoryListData: any = await getCategoryApi(token);
-    console.log('ChittiChallanData res', CategoryListData);
+
     return CategoryListData;
   }
 );

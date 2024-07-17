@@ -1,33 +1,12 @@
-import { useEffect, useRef } from 'react';
-import SelectedInputDropdown from '../../SelectedInputDropdown';
+import AutoCompleteInput from '../../InputDropdown/AutoCompleteInput';
 
 const CreateChittiForm = ({
-  currentDate,
-  selectedDropdownValue,
-  handleGoldRate,
-  handleRemarks,
-  setSelectedDropdownValue,
+  handleTopSectionData,
+  topSectionInputData,
   clientNameList,
-  clientGroupList,
-  handleClientGroup,
   defaultData,
-  handleDateChange,
-  setStateForDocStatus,
-  setRemarks,
-  setGoldRate,
-  goldRate,
-  remarks,
   readOnly,
 }: any) => {
-  const bgColor = useRef(true);
-
-  useEffect(() => {
-    if (defaultData !== undefined && defaultData !== null) {
-      setGoldRate(defaultData?.gold_rate);
-      setRemarks(defaultData?.remarks);
-    }
-  }, []);
-
   const convertDateFormat = (dateStr: any) => {
     if (dateStr !== undefined) {
       const [day, month, year] = dateStr !== undefined && dateStr?.split('-');
@@ -35,7 +14,12 @@ const CreateChittiForm = ({
     }
   };
 
-  const newDateStr = convertDateFormat(defaultData?.date);
+  const newDateStr = convertDateFormat(topSectionInputData?.date);
+  const clientData: any = {
+    fieldname: 'client_name',
+    fieldtype: 'Link',
+    link_data: clientNameList,
+  };
 
   return (
     <>
@@ -53,14 +37,12 @@ const CreateChittiForm = ({
                 name="date"
                 value={
                   defaultData === undefined
-                    ? currentDate?.toISOString()?.split('T')[0]
+                    ? new Date()?.toISOString()?.split('T')[0]
                     : newDateStr
                 }
                 defaultValue={defaultData?.date}
                 className="form-control custom-input-field py-0 px-2"
-                onChange={handleDateChange}
                 readOnly
-                // readOnly={readOnlyField}
               />
             </div>
           </div>
@@ -69,17 +51,14 @@ const CreateChittiForm = ({
               Client Name <span className="text-danger">*</span>
             </label>
 
-            <SelectedInputDropdown
-              drowpdownlist={clientNameList}
-              bgColor={bgColor}
-              placeholderValue="Client Name"
-              selectedDropdownValue={selectedDropdownValue}
-              setSelectedDropdownValue={setSelectedDropdownValue}
-              clientGroupList={clientGroupList}
-              HandleClientGroup={handleClientGroup}
-              defaultData={defaultData}
-              setStateForDocStatus={setStateForDocStatus}
-              readOnly={readOnly === true ? true : false}
+            <AutoCompleteInput
+              data={clientData}
+              handleSearchInput={(value: any, fieldName: any) =>
+                handleTopSectionData(value, fieldName)
+              }
+              defaultValue={topSectionInputData?.client_name}
+              value={topSectionInputData?.client_name}
+              readOnlyFields={readOnly === true ? true : false}
             />
           </div>
           <div className="col-lg-3 col-md-6">
@@ -88,13 +67,15 @@ const CreateChittiForm = ({
             </label>
             <input
               type="text"
-              name="gold"
+              name="gold_rate"
               className="form-control custom-input-field px-1"
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-sm"
-              defaultValue={defaultData?.gold_rate}
-              value={goldRate}
-              onChange={handleGoldRate}
+              defaultValue={topSectionInputData?.gold_rate}
+              value={topSectionInputData.gold_rate}
+              onChange={(e) =>
+                handleTopSectionData(e.target.value, 'gold_rate')
+              }
               readOnly={readOnly === true ? true : false}
             />
           </div>
@@ -105,13 +86,12 @@ const CreateChittiForm = ({
             </label>
             <input
               type="text"
-              name="remark"
+              name="remarks"
+              id="remarks"
               className="form-control custom-input-field px-1"
-              aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-sm"
-              value={remarks}
-              defaultValue={defaultData?.remarks}
-              onChange={handleRemarks}
+              value={topSectionInputData.remarks}
+              defaultValue={topSectionInputData?.remarks}
+              onChange={(e) => handleTopSectionData(e.target.value, 'remarks')}
               readOnly={readOnly === true ? true : false}
             />
           </div>

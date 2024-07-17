@@ -2,8 +2,6 @@ import { useRef } from 'react';
 import AutoCompleteInput from '../../InputDropdown/AutoCompleteInput';
 
 const EmeraldCreateChitti = ({
-  // handleClientGroup,
-  // clientGroupList,
   clientNameList,
   currentDate,
   setStateForDocStatus,
@@ -59,7 +57,6 @@ const EmeraldCreateChitti = ({
               handleSearchInput={(value: any, fieldName: any) =>
                 handleTopSectionData(value, fieldName)
               }
-              // defaultValue={topSectionInputData?.client_name}
               value={topSectionInputData?.client_name}
               readOnlyFields={readOnly}
               setStateForDocStatus={setStateForDocStatus}

@@ -36,7 +36,6 @@ export const GetDetailSalesReturnScreen = createSlice({
       state.docStatus = '';
     });
     builder.addCase(getDetailSalesReturn.fulfilled, (state, action) => {
-      // console.log('first', action?.payload?.message);
       if (action?.payload?.message?.status === 'success') {
         if (action?.payload?.message?.hasOwnProperty('data')) {
           if (action?.payload?.message?.data?.length > 0) {

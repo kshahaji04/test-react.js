@@ -28,11 +28,11 @@ const DetailPageSalesReturn = () => {
     handleDeleteRecord,
     handlePrintRecord,
     handleAmendRecord,
-    userRolesData
+    userRolesData,
   } = useSalesReturnDetailHook();
 
   const salesReturnDetailFromStore: any = useSelector(get_detail_sales_return);
-  // console.log('purchaseReceiptDetails in tsx', purchaseReceiptDetailFromStore);
+
   return (
     <>
       <div className="container">

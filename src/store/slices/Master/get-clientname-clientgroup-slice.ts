@@ -7,7 +7,7 @@ export const getClientNameClientGroup: any = createAsyncThunk(
   'getClientNameClientGroup/getClientName',
   async (token: any) => {
     const CategoryListData: any = await getClientNameAndClientGrpApi(token);
-    console.log('ChittiChallanData res', CategoryListData);
+
     return CategoryListData;
   }
 );

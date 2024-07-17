@@ -18,38 +18,33 @@ import {
 } from '../../store/slices/btn-loading-slice';
 
 const useEditChallanChitti: any = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
 
   const accessToken: any = useSelector(get_access_token);
-  const emeraldDetailDataFromStore: any = useSelector(
+  const challanChittiDetailDataFromStore: any = useSelector(
     get_specific_chitti_challan
   );
 
   const [challanDetail, setChallanDetail] = useState<any>('');
-  const { id } = useParams();
 
   const {
     setNarrationTableData,
     subCategoryList,
     productList,
-    selectedDropdownValue,
     drowpdownlist,
     clientNameList,
     setSelectedDropdownValue,
-    goldRate,
-    remarks,
     narrationTableData,
-    handleGoldRate,
-    handleDateChange,
-    handleRemarks,
     clientGroupList,
     clientGroupName,
     stateForDocStatus,
     setStateForDocStatus,
     tableData,
     setTableData,
-    setRemarks,
-    setGoldRate,
+    topSectionInputData,
+    setTopSectionInputData,
+    handleTopSectionData,
     handleSubmitChallanChitti,
     handleCancelChallanChitti,
     handleDeleteChallanChitti,
@@ -62,7 +57,6 @@ const useEditChallanChitti: any = () => {
     showSaveButtonForAmendFlow,
     checkGrossAndNetWeight,
     setCheckGrossAndNetWeight,
-    currentDate,
   }: any = useChittiHook();
 
   useEffect(() => {
@@ -75,18 +69,18 @@ const useEditChallanChitti: any = () => {
 
   useEffect(() => {
     if (
-      emeraldDetailDataFromStore?.data?.length > 0 &&
-      emeraldDetailDataFromStore?.data !== null
+      challanChittiDetailDataFromStore?.data?.length > 0 &&
+      challanChittiDetailDataFromStore?.data !== null
     ) {
-      setChallanDetail([...emeraldDetailDataFromStore?.data]);
-
+      setChallanDetail([...challanChittiDetailDataFromStore?.data]);
+      setTopSectionInputData({ ...challanChittiDetailDataFromStore?.data[0] });
       setTimeout(() => {
         setStateForDocStatus(false);
       }, 300);
     } else {
       setChallanDetail([]);
     }
-  }, [emeraldDetailDataFromStore]);
+  }, [challanChittiDetailDataFromStore]);
 
   const checkObjectHasValues = (challanTableData: any) => {
     return challanTableData
@@ -153,18 +147,17 @@ const useEditChallanChitti: any = () => {
       toast.error('No values inserted');
     } else {
       dispatch(btnLoadingStart());
-      const BodyData: any = {
+      const bodyData: any = {
         name: id,
-        // date: date,
-        clientName: selectedDropdownValue,
+        clientName: topSectionInputData.client_name,
         clientGroup: clientGroupName,
-        goldRate: goldRate,
-        remarks: remarks,
+        goldRate: topSectionInputData.gold_rate,
+        remarks: topSectionInputData.remarks,
         challanTableData: filteredChallanTable,
         narrationTableData: filteredHuidTable,
         token: accessToken?.token,
       };
-      let updateChittiApi: any = await UpdateChittiApi(BodyData);
+      let updateChittiApi: any = await UpdateChittiApi(bodyData);
 
       if (
         updateChittiApi?.status === 200 &&
@@ -211,20 +204,14 @@ const useEditChallanChitti: any = () => {
     tableData,
     setTableData,
     productList,
-    selectedDropdownValue,
     drowpdownlist,
     clientNameList,
     setSelectedDropdownValue,
     handleUpdateChallanSubmit,
-    handleGoldRate,
-    handleRemarks,
-    handleDateChange,
     narrationTableData,
     clientGroupList,
     stateForDocStatus,
     setStateForDocStatus,
-    setRemarks,
-    setGoldRate,
     handleSubmitChallanChitti,
     handleCancelChallanChitti,
     handleDeleteChallanChitti,
@@ -235,7 +222,8 @@ const useEditChallanChitti: any = () => {
     showSaveButtonForAmendFlow,
     setCheckGrossAndNetWeight,
     handlePrintButton,
-    currentDate,
+    topSectionInputData,
+    handleTopSectionData,
   };
 };
 

@@ -10,7 +10,6 @@ const NarrationTable = ({
   setTotalHuidWeightOfHuidTable,
   readOnly,
 }: any) => {
-  // console.log('product list', productList);
   const [totalAmountValue, setTotalAmountValue] = useState<any>({
     product: '',
     huid_pieces: 0,

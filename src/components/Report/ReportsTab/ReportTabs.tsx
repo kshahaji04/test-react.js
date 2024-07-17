@@ -59,7 +59,7 @@ const ReportTabs = () => {
             })
           ) : (
             <div className="d-flex justify-content-center mt-5 fs-5">
-              You Don't have Access for the Reports
+              You are not allowed to access the report
             </div>
           )}
         </div>

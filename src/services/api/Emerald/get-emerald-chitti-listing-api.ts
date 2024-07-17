@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from '../general/error-handler';
 
 const GetEmeraldList = async (token: any) => {
-  console.log('tokennnn', token);
   let response: any;
   const version = 'v1';
   const method = 'get_emeralds_chitti';
@@ -22,7 +22,7 @@ const GetEmeraldList = async (token: any) => {
       response = res.data;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

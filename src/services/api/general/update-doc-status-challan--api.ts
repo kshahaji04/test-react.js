@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from './error-handler';
 
 export const UpdateDocStatusChallanApi: any = async (
   token: any,
@@ -19,7 +20,6 @@ export const UpdateDocStatusChallanApi: any = async (
       Authorization: token,
     },
   };
-  console.log('body', body);
 
   await axios
     .put(`${BASE_URL}${params}`, body, config)
@@ -56,11 +56,10 @@ export const UpdateDocStatusWithSubmittedChallanApi = async (
   await axios
     .put(`${BASE_URL}${params}`, body, config)
     .then((res: any) => {
-      console.log('create chitti res', res);
       response = res;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

@@ -38,7 +38,6 @@ export const GetEmeraldShilpiDetailsScreen = createSlice({
     });
     builder.addCase(getEmeraldShilpiDetails.fulfilled, (state, action) => {
       if (action?.payload?.data?.message?.status === 'success') {
-        console.log('payload', action?.payload?.data?.message);
         state.data = action?.payload?.data?.message?.data?.data;
         state.isLoading = 'succeeded';
       }

@@ -6,7 +6,7 @@ export const getEmeraldTableData: any = createAsyncThunk(
   'emeraldTableData/getEmeraldTableData',
   async (params: any) => {
     const EmeraldTableData: any = await GetEmeraldShilpiDetailsApi(params);
-    console.log('EmeraldChallanData res', EmeraldTableData);
+
     return EmeraldTableData;
   }
 );

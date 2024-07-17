@@ -6,7 +6,7 @@ export const getsupplierAndSupplierGroup: any = createAsyncThunk(
   'getSuplierAndSupplierGroup/getSupplierAndGroup',
   async (token: any) => {
     const supplierData: any = await getSupplierNameAndSupplierGrpApi(token);
-    console.log('supplierData res', supplierData);
+
     return supplierData;
   }
 );

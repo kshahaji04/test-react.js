@@ -7,7 +7,7 @@ export const getHuidProductList: any = createAsyncThunk(
   'getHuidProductList/getHuidList',
   async (token: any) => {
     const huidProudctListData: any = await getHuidProductApi(token);
-    console.log('huidProudctListData res', huidProudctListData);
+
     return huidProudctListData;
   }
 );

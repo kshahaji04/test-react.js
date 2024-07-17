@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from '../general/error-handler';
 
 const GetEmeraldSupplier: any = async (request: any) => {
-  console.log('tokennnn', request);
   let response: any;
   const version = 'v1';
   const method = 'get_emerald_supplier';
@@ -22,7 +22,7 @@ const GetEmeraldSupplier: any = async (request: any) => {
       response = res;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from '../../../config/api-config';
+import { handleApiError } from '../../general/error-handler';
 
 const getCategorySummaryReportApi: any = async (request?: any) => {
   let response: any;
@@ -31,7 +32,7 @@ const getCategorySummaryReportApi: any = async (request?: any) => {
       response = res;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

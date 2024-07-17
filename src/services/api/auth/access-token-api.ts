@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from '../general/error-handler';
 
 const GetTokenLoginApi: any = async (values: any) => {
-  console.log('token req', values);
   const user: any = values.username;
   const password: any = encodeURIComponent(values.password);
   const version: any = 'v1';
@@ -24,7 +24,7 @@ const GetTokenLoginApi: any = async (values: any) => {
     const res = await axios.post(`${BASE_URL}${params}`, undefined, config);
     response = res?.data?.message;
   } catch (err) {
-    console.log(err);
+    response = handleApiError(err);
   }
 
   return response;

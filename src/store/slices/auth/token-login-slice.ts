@@ -62,7 +62,6 @@ export const GetAccessTokenScreen = createSlice({
       }
     });
     builder.addCase(getUserRolesPermission.fulfilled, (state, action) => {
-      console.log('actionss', action.payload);
       if (action?.payload?.data?.message?.status === 'success') {
         state.userRoles = action?.payload?.data.message?.data;
       }

@@ -25,7 +25,6 @@ const AddHuidProduct = () => {
           accessToken?.token,
           inputValue
         );
-        console.log('apires', apiRes);
 
         if (apiRes?.status === 200 && apiRes?.hasOwnProperty('data')) {
           toast.success('HUID Product Added');

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from '../general/error-handler';
 
 const getHuidProductApi: any = async (token: any) => {
   let response: any;
@@ -21,7 +22,7 @@ const getHuidProductApi: any = async (token: any) => {
       response = res;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

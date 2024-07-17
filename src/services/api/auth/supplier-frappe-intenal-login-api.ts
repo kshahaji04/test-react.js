@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from '../general/error-handler';
 
 const InternalLoginApi: any = async (token: any) => {
   let response: any;
@@ -17,32 +18,10 @@ const InternalLoginApi: any = async (token: any) => {
       response = res;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
 
   return response;
 };
 
-// fetch('https://shilpijewels.8848digitalerp.com/api/method/login', {
-//   method: 'POST',
-//   headers: {
-//     Accept: 'application/json',
-//     'Content-Type': 'application/json',
-//   },
-//   body: JSON.stringify({
-//     usr: 'Administrator',
-//     pwd: 'Erp@123',
-//   }),
-// })
-//   .then((r) => {
-//     r.json();
-//     console.log('res', r);
-//     window.open(
-//       'https://shilpijewels.8848digitalerp.com/app/emerald-supplier/new-emerald-supplier-1'
-//     );
-//   })
-//   .then((r) => {
-//     console.log(r);
-//   });
-// };
 export default InternalLoginApi;

@@ -43,8 +43,6 @@ const AddClient = ({ clientGroupList }: any) => {
     }
   };
 
-  console.log('clientGroupList', clientGroupList);
-
   const handleInputValue = (e: any) => {
     setError('');
     setTitle(e.target.value);

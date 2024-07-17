@@ -7,7 +7,7 @@ export const getCategorySummaryReportData: any = createAsyncThunk(
   async (params: any) => {
     const getSubCategoryReportData: any =
       await getCategorySummaryReportApi(params);
-    console.log('getSubCategoryReportData res', getSubCategoryReportData);
+
     return getSubCategoryReportData;
   }
 );

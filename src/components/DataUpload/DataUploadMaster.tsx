@@ -9,7 +9,7 @@ import MasterEmeraldShilpi from './EmeraldShilpi/MasterEmeraldShilpi';
 
 const DataUploadMaster = () => {
   const { supplierList, emeraldSupplierData } = UseDataUploadHook();
-  console.log('emeraldSupplierData in master', emeraldSupplierData);
+
   return (
     <>
       <div className="container mt-3">

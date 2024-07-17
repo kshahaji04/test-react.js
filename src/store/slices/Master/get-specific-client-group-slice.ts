@@ -8,7 +8,7 @@ export const getSpecificClientGroup: any = createAsyncThunk(
   async (params: any) => {
     const getSpecificClientGroupData: any =
       await getSpecificClientGroupApi(params);
-    console.log('getSpecificClientGroupData res', getSpecificClientGroupData);
+
     return getSpecificClientGroupData;
   }
 );

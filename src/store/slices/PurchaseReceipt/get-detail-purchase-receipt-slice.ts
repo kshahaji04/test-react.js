@@ -7,7 +7,7 @@ export const getDetailPurchaseReceipt: any = createAsyncThunk(
   async (params: any) => {
     const detailOfPurchaseReceiptData: any =
       await GetDetailOfPurchaseReceiptApi(params);
-    console.log('detailOfPurchaseReceiptData res', detailOfPurchaseReceiptData);
+
     return detailOfPurchaseReceiptData;
   }
 );
@@ -37,7 +37,6 @@ export const GetDetailPurchaseReceiptScreen = createSlice({
       state.docStatus = '';
     });
     builder.addCase(getDetailPurchaseReceipt.fulfilled, (state, action) => {
-      console.log('first', action?.payload?.message);
       if (action?.payload?.message?.status === 'success') {
         if (action?.payload?.message?.hasOwnProperty('data')) {
           if (action?.payload?.message?.data?.length > 0) {

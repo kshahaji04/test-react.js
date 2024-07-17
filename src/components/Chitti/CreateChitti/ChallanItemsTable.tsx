@@ -90,7 +90,6 @@ const ChallanItemsTable = ({
   };
 
   const handleKeyDown = (event: any, id: any) => {
-    console.log('add row', event.key, id);
     if (event.key === 'Tab' && id === tableData[tableData.length - 1].id) {
       event.preventDefault(); // Prevent the default tab behavior
       handleAddRow();
@@ -202,7 +201,6 @@ const ChallanItemsTable = ({
   };
 
   const handleBlur = (event: any, id: any) => {
-    console.log('add row on blur', event, id);
     if (id === tableData[tableData.length - 1].id) {
       handleAddRow();
     }

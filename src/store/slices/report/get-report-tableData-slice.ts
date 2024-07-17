@@ -5,7 +5,7 @@ export const getReportTableData: any = createAsyncThunk(
   'getReport/getReportData',
   async (token: any) => {
     const getReportData: any = await token;
-    console.log('getReportData res', getReportData);
+
     return getReportData;
   }
 );

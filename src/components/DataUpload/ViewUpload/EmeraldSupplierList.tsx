@@ -4,10 +4,7 @@ import { useSelector } from 'react-redux';
 
 const EmeraldSupplierList = ({ emeraldSupplierData }: any) => {
   const emeraldSupplierDataFromStore: any = useSelector(get_emerald_supplier);
-  console.log(
-    'EmeraldSupplierDataFromStore in tsx',
-    emeraldSupplierDataFromStore
-  );
+
   return (
     <>
       <div className="container mt-3">
@@ -24,14 +21,6 @@ const EmeraldSupplierList = ({ emeraldSupplierData }: any) => {
               </tr>
             </thead>
             <tbody>
-              {/* <div className="text-center ">
-                {emeraldSupplierDataFromStore?.isLoading === 'succeeded' &&
-                Object.keys(emeraldSupplierDataFromStore?.data)?.length > 0 ? (
-                  <div className="spinner-border text-dark text-center mt-5"></div>
-                ) : (
-                  ''
-                )}
-              </div> */}
               {emeraldSupplierData?.length > 0 &&
               emeraldSupplierData !== null ? (
                 <>

@@ -6,7 +6,7 @@ export const getEmeraldChallan: any = createAsyncThunk(
   'challanEmerald/getChallanEmerald',
   async (token: any) => {
     const EmeraldChallanData: any = await GetEmeraldList(token);
-    console.log('EmeraldChallanData res', EmeraldChallanData);
+
     return EmeraldChallanData;
   }
 );

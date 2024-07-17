@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from '../general/error-handler';
 
 const AddClientGroupApi: any = async (token: any, title: any) => {
   let response: any;
@@ -18,11 +19,10 @@ const AddClientGroupApi: any = async (token: any, title: any) => {
   await axios
     .post(`${BASE_URL}/api/resource/Client Group`, body, config)
     .then((res: any) => {
-      console.log('create chitti res', res);
       response = res;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

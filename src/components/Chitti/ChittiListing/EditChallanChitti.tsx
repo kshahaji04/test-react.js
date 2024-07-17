@@ -13,25 +13,19 @@ import { buttonLoadingState } from '../../../store/slices/btn-loading-slice';
 
 const EditChallanChitti = () => {
   const {
+    topSectionInputData,
     challanDetail,
     setNarrationTableData,
     subCategoryList,
     productList,
-    selectedDropdownValue,
     setTableData,
-    handleDateChange,
     clientNameList,
-    setSelectedDropdownValue,
     handleUpdateChallanSubmit,
-    handleGoldRate,
-    handleRemarks,
     tableData,
     narrationTableData,
     clientGroupList,
     stateForDocStatus,
     setStateForDocStatus,
-    setRemarks,
-    setGoldRate,
     handleSubmitChallanChitti,
     handleCancelChallanChitti,
     handleDeleteChallanChitti,
@@ -42,7 +36,7 @@ const EditChallanChitti = () => {
     showSaveButtonForAmendFlow,
     setCheckGrossAndNetWeight,
     handlePrintButton,
-    currentDate,
+    handleTopSectionData,
   }: any = useEditChallanChitti();
   const navigate = useNavigate();
   const [showButton, setShowButton] = useState<any>();
@@ -75,7 +69,6 @@ const EditChallanChitti = () => {
     setReadOnly(false);
   };
 
-  // console.log("stateForDocStatus in btn section", stateForDocStatus)
   let todayDate: any = new Date()
     .toISOString()
     .split('T')[0]
@@ -249,20 +242,12 @@ const EditChallanChitti = () => {
                           <>
                             <CreateChittiForm
                               defaultData={data}
-                              handleDateChange={handleDateChange}
-                              selectedDropdownValue={selectedDropdownValue}
+                              topSectionInputData={topSectionInputData}
                               clientNameList={clientNameList}
-                              setSelectedDropdownValue={
-                                setSelectedDropdownValue
-                              }
-                              handleGoldRate={handleGoldRate}
-                              handleRemarks={handleRemarks}
                               clientGroupList={clientGroupList}
                               setStateForDocStatus={setStateForDocStatus}
-                              setRemarks={setRemarks}
-                              setGoldRate={setGoldRate}
                               readOnly={readOnly}
-                              currentDate={currentDate}
+                              handleTopSectionData={handleTopSectionData}
                             />
                             <ChallanItemsTable
                               defaultData={data?.challan_table}

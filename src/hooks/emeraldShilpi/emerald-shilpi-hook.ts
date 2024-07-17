@@ -14,7 +14,6 @@ const useEmeraldShilpiHook: any = () => {
   const [emeraldShilpiListData, setemeraldShilpiListData] = useState<any>([]);
 
   const emeraldShilpiDataFromStore: any = useSelector(get_Emerald_shilpi_list);
-  console.log('emeraldShilpiDataFromStore', emeraldShilpiDataFromStore);
 
   useEffect(() => {
     dispatch(getEmeraldShilpiList(accessToken?.token));

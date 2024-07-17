@@ -6,7 +6,7 @@ export const getPurchaseReceiptListing: any = createAsyncThunk(
   'purchaseReceiptListing/getPurchaseReceiptListing',
   async (token: any) => {
     const purchaseReceiptData: any = await GetPurchaseReceiptListingApi(token);
-    console.log('purchase receipt data', purchaseReceiptData);
+
     return purchaseReceiptData;
   }
 );

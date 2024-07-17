@@ -8,7 +8,7 @@ export const getSpecificChittiChallan: any = createAsyncThunk(
   async (params: any) => {
     const SpecificChittiChallanData: any =
       await GetSpecificChallanListData(params);
-    console.log('ChittiChallanDataspecific res', SpecificChittiChallanData);
+
     return SpecificChittiChallanData;
   }
 );
@@ -38,7 +38,6 @@ export const GetSpecificChittiChallanScreen = createSlice({
       state.docStatus = '';
     });
     builder.addCase(getSpecificChittiChallan.fulfilled, (state, action) => {
-      console.log('first', action?.payload?.message?.data?.data);
       if (action?.payload?.message?.status === 'success') {
         if (action?.payload?.message?.hasOwnProperty('data')) {
           if (action?.payload?.message?.data?.data?.length > 0) {

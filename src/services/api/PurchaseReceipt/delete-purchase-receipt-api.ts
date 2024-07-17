@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
+import { handleApiError } from '../general/error-handler';
 
 const DeletePurchaseReceiptApi = async (token: any, name: any) => {
   let response: any;
@@ -21,7 +22,7 @@ const DeletePurchaseReceiptApi = async (token: any, name: any) => {
       response = res.data;
     })
     .catch((err: any) => {
-      console.log(err);
+      response = handleApiError(err);
     });
   return response;
 };

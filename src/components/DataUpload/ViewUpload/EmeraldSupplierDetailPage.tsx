@@ -12,7 +12,6 @@ const EmeraldSupplierDetailPage = () => {
   const EmeraldSupplierDetailsFromStore: any = useSelector(
     get_emerald_supplier_details
   );
-  console.log('emeraldSupplierDetail in tsx', EmeraldSupplierDetailsFromStore);
 
   const { id } = useParams();
 

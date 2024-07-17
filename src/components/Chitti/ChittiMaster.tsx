@@ -11,15 +11,10 @@ const ChittiMaster = () => {
   const {
     chittiListingData,
     handleCreateChittiSubmit,
-    currentDate,
-    selectedDropdownValue,
-    handleGoldRate,
-    handleRemarks,
     tableData,
     setTableData,
     narrationTableData,
     setNarrationTableData,
-    setSelectedDropdownValue,
     clientNameList,
     subCategoryList,
     productList,
@@ -30,8 +25,6 @@ const ChittiMaster = () => {
     setStateForDocStatus,
     stateForDocStatus,
     handleEmptyChallanChittiTable,
-    goldRate,
-    remarks,
     showSubmitButtonAfterCreateChitti,
     handleSubmitChallanChitti,
     handleCancelChallanChitti,
@@ -40,6 +33,8 @@ const ChittiMaster = () => {
     setTotalHuidWeightOfHuidTable,
     checkGrossAndNetWeight,
     setCheckGrossAndNetWeight,
+    topSectionInputData,
+    handleTopSectionData,
   }: any = useChittiHook();
 
   const {
@@ -78,15 +73,12 @@ const ChittiMaster = () => {
                 <div className="col-lg-9 col-12 mx-auto mt-2">
                   <CreateChittiMaster
                     handleCreateChittiSubmit={handleCreateChittiSubmit}
-                    currentDate={currentDate}
-                    selectedDropdownValue={selectedDropdownValue}
-                    handleGoldRate={handleGoldRate}
-                    handleRemarks={handleRemarks}
+                    topSectionInputData={topSectionInputData}
+                    handleTopSectionData={handleTopSectionData}
                     tableData={tableData}
                     setTableData={setTableData}
                     narrationTableData={narrationTableData}
                     setNarrationTableData={setNarrationTableData}
-                    setSelectedDropdownValue={setSelectedDropdownValue}
                     clientNameList={clientNameList}
                     subCategoryList={subCategoryList}
                     productList={productList}
@@ -99,8 +91,6 @@ const ChittiMaster = () => {
                     handleEmptyChallanChittiTable={
                       handleEmptyChallanChittiTable
                     }
-                    goldRate={goldRate}
-                    remarks={remarks}
                     showSubmitButtonAfterCreateChitti={
                       showSubmitButtonAfterCreateChitti
                     }
