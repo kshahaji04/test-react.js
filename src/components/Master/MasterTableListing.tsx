@@ -53,6 +53,8 @@ const MasterTableListing = ({
     </Tooltip>
   );
 
+  console.log('filter list', filteredList);
+
   return (
     <>
       {filteredList?.length > 0 ? (
@@ -70,7 +72,7 @@ const MasterTableListing = ({
                         key.slice(1)?.split('_')?.join(' ')}
                     </th>
                   ))}
-                <th scope="col" className="text-center "></th>
+                <th scope="col" className="text-center"></th>
                 <th scope="col" className="text-center"></th>
               </tr>
             </thead>

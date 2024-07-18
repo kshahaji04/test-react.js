@@ -19,7 +19,7 @@ const ChittiSubCategoryReportListing = ({ reportData }: any) => {
               </tr>
             </thead>
             <tbody>
-              {reportData.map((data: any, index: any) => {
+              {reportData.slice(0, -1).map((data: any, index: any) => {
                 const subCategory = data.sub_category;
                 const textColor =
                   subCategory === reportData[index - 1]?.sub_category

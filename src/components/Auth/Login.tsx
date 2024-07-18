@@ -37,7 +37,7 @@ const Login = () => {
         ) as any
       );
     } else {
-      showToast('Invalid Credentials', 'error');
+      showToast(`${accessTokenApiRes.payload.error}`, 'error');
     }
   };
 
@@ -83,8 +83,9 @@ const Login = () => {
                         />
                         <div onClick={handleShowPassword}>
                           <i
-                            className={`fa fa-eye p-1 fs-6 pswd-eye-icon ${showPassword ? 'text-primary' : ''
-                              }`}
+                            className={`fa fa-eye p-1 fs-6 pswd-eye-icon ${
+                              showPassword ? 'text-primary' : ''
+                            }`}
                           ></i>
                         </div>
                       </div>
