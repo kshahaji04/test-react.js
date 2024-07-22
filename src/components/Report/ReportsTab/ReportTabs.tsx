@@ -1,8 +1,10 @@
 import { NavLink, useLocation } from 'react-router-dom';
+import useReportHook from '../../../hooks/report/report-hook';
 import '../../../Style/report.css';
 
 const ReportTabs = () => {
   const {} = useLocation();
+  const { userRolesData } = useReportHook();
 
   const reportlist: any = [
     'Purchase Receipt',
@@ -11,15 +13,21 @@ const ReportTabs = () => {
     'Sales Return',
   ];
 
+  const reportListBasedOnUserRole: any = reportlist.filter(
+    (report: any) =>
+      userRolesData.length > 0 &&
+      userRolesData.some((userRole: any) => {
+        return userRole?.includes(report);
+      })
+  );
+
   return (
     <>
       <div className="container mt-3 mb-3">
         <div className="d-flex justify-content-center flex-wrap  card-listing-container">
-          {reportlist?.length > 0 &&
-            reportlist.map((data: any, index: any) => {
+          {reportListBasedOnUserRole?.length > 0 ? (
+            reportListBasedOnUserRole.map((data: any, index: any) => {
               const processedStr: any = data.replace(/\s+/g, '').toLowerCase();
-
-              console.log('process', processedStr);
 
               const isActive = location.pathname
                 .split('/')
@@ -48,7 +56,12 @@ const ReportTabs = () => {
                   </NavLink>
                 </div>
               );
-            })}
+            })
+          ) : (
+            <div className="d-flex justify-content-center mt-5 fs-5">
+              You Don't have Access for the Reports
+            </div>
+          )}
         </div>
       </div>
 

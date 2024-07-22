@@ -37,72 +37,35 @@
     padding: 2px !important;
 }
 
-
-@media screen and (min-width: 1650px) {
+@media only screen and (max-width:2380px) {
     .custom-select-container {
-        width: 28%;
+        width: 10%;
     }
 
     .custom-select-huid-container {
-        width: 23%;
-    }
-
-    .custom-select-emerald-category {
-        width: 17%;
-    }
-
-}
-
-@media screen and (max-width: 1649px) {
-    .custom-select-container {
-        width: 28%;
-    }
-
-    .custom-select-huid-container {
-        width: 33%;
-    }
-
-    .custom-select-emerald-category {
-        width: 17%;
-    }
-
-    .challan_sub_cat_col {
-        width: 44%;
-    }
-
-    .challan_gr_wt_col {
-        width: 13%;
-    }
-}
-
-@media screen and (min-width: 1280px) {
-    .custom-select-container {
         width: 22%;
     }
 
-    .custom-select-huid-container {
-        width: 33%;
-    }
-
     .custom-select-emerald-category {
         width: 17%;
     }
 
-
     .challan_sub_cat_col {
-        width: 40%;
+        width: 32%;
     }
 
     .challan_gr_wt_col {
-        width: 14%;
+        width: 16%;
     }
 
-
+    .huid_wt_header_col {
+        width: 16%;
+    }
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1980px) {
     .custom-select-container {
-        width: 15%;
+        width: 17%;
     }
 
     .custom-select-huid-container {
@@ -124,8 +87,58 @@
     .huid_wt_header_col {
         width: 16%;
     }
+}
 
+@media only screen and (max-width: 1980px) {
+    .custom-select-container {
+        width: 12%;
+    }
 
+    .custom-select-huid-container {
+        width: 27%;
+    }
+
+    .custom-select-emerald-category {
+        width: 17%;
+    }
+
+    .challan_sub_cat_col {
+        width: 32%;
+    }
+
+    .challan_gr_wt_col {
+        width: 16%;
+    }
+
+    .huid_wt_header_col {
+        width: 16%;
+    }
+}
+
+@media only screen and (max-width: 1880px) {
+    .custom-select-container {
+        width: 17%;
+    }
+
+    .custom-select-huid-container {
+        width: 29%;
+    }
+
+    .custom-select-emerald-category {
+        width: 17%;
+    }
+
+    .challan_sub_cat_col {
+        width: 32%;
+    }
+
+    .challan_gr_wt_col {
+        width: 16%;
+    }
+
+    .huid_wt_header_col {
+        width: 16%;
+    }
 }
 
 @media only screen and (max-width: 980px) {

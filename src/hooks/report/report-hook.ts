@@ -35,6 +35,7 @@ import {
   chittiCategorySummaryPrintApi,
   chittiSubcategoryPrintApi,
 } from '../../services/api/report/get-chitti-print-api';
+import getUserRoleApi from '../../services/api/general/user-role-api';
 
 const useReportHook = () => {
   const location = useLocation();
@@ -44,6 +45,7 @@ const useReportHook = () => {
 
   const [reportData, setReportData] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [userRolesData, setUserRolesData] = useState<any>([]);
   const [searchInputValues, setSearchInputValues] = useState<any>({
     from_date: todayDate,
     to_date: todayDate,
@@ -52,11 +54,20 @@ const useReportHook = () => {
   const accessToken: any = useSelector(get_access_token);
   useEffect(() => {
     getReportData('date');
+    getUserRoles();
     setSearchInputValues({
       from_date: todayDate,
       to_date: todayDate,
     });
   }, [path]);
+
+  const getUserRoles: any = async () => {
+    let userRolesData: any = await getUserRoleApi(accessToken?.token);
+
+    if (userRolesData?.data?.message?.status === 'success') {
+      setUserRolesData(userRolesData?.data?.message?.data);
+    }
+  };
 
   const getReportData: any = async (date?: any) => {
     let reportData;
@@ -219,6 +230,7 @@ const useReportHook = () => {
 
   return {
     reportData,
+    userRolesData,
     searchInputValues,
     setSearchInputValues,
     handleSearchInput,

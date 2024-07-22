@@ -1,6 +1,6 @@
 import { Tab, Tabs } from 'react-bootstrap';
 import useSalesReturnMasterHook from '../../hooks/SalesReturn/sales-return-master-hook';
-import ListingFilterSection from '../Chitti/ChittiListing/SearchListingTable';
+import ListingFilterSection from '../General/SearchListingTable';
 import useListingFilterHook from '../../hooks/listing-filter-hook';
 import ListingTable from '../General/ListingTable';
 import CreateSalesReturnMaster from './CreateSalesReturn/CreateSalesReturnMaster';

@@ -4,7 +4,7 @@ import '../../Style/chitti.css';
 import useChittiHook from '../../hooks/Chitti/chitti-page-hook';
 import useListingFilterHook from '../../hooks/listing-filter-hook';
 import ListingTable from '../General/ListingTable';
-import SearchListingTable from './ChittiListing/SearchListingTable';
+import SearchListingTable from '../General/SearchListingTable';
 import CreateChittiMaster from './CreateChitti/CreateChittiMaster';
 
 const ChittiMaster = () => {
@@ -71,9 +71,7 @@ const ChittiMaster = () => {
                     searchClientName={searchClientName}
                     searchInputValues={searchInputValues}
                   />
-                  <ListingTable
-                    tableListingData={filteredList}
-                  />
+                  <ListingTable tableListingData={filteredList} />
                 </div>
               </Tab>
               <Tab eventKey="longer-tab" title="Create Chitti">
