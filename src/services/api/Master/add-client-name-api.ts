@@ -18,6 +18,7 @@ const AddClientNameApi: any = async (
   let body = {
     title: title,
     client_group: clientGroup,
+    can_be_deleted: 1
   };
 
   await axios

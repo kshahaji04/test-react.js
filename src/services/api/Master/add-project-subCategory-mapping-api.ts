@@ -23,6 +23,7 @@ const AddProjectSubCategoryMappingApi: any = async (
     project: project,
     stone: stone,
     plain: plain,
+    can_be_deleted: 1
   };
 
   await axios
