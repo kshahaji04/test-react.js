@@ -19,6 +19,7 @@ const AddSubCategoryApi: any = async (
   let body = {
     title: title,
     category: category,
+    can_be_deleted: 1
   };
 
   await axios

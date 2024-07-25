@@ -15,6 +15,7 @@ const AddHuidProductApi: any = async (token: any, request: any) => {
   let body = {
     title: request.title,
     custom_hm_pcs: request.hm_pcs,
+    can_be_deleted: 1
   };
 
   await axios

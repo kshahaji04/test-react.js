@@ -14,6 +14,7 @@ const AddCategoryApi: any = async (token: any, title: any) => {
 
   let body = {
     title: title,
+    can_be_deleted: 1
   };
 
   await axios
