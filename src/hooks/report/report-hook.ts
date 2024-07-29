@@ -62,10 +62,14 @@ const useReportHook = () => {
   }, [path]);
 
   const getUserRoles: any = async () => {
+    setIsLoading(true);
     let userRolesData: any = await getUserRoleApi(accessToken?.token);
 
     if (userRolesData?.data?.message?.status === 'success') {
+      setIsLoading(false);
       setUserRolesData(userRolesData?.data?.message?.data);
+    } else {
+      setIsLoading(false);
     }
   };
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../../config/api-config';
+import { BASE_URL, headerGenerator } from '../../config/api-config';
 import { handleApiError } from '../general/error-handler';
 
 export const UpdatePurchaseReceiptDocStatusApi = async (
@@ -15,14 +15,10 @@ export const UpdatePurchaseReceiptDocStatusApi = async (
     docstatus: docStatus,
   };
 
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
+  const getHeaders = headerGenerator(token);
 
   await axios
-    .put(`${BASE_URL}${params}`, body, config)
+    .put(`${BASE_URL}${params}`, body, getHeaders)
     .then((res: any) => {
       response = res;
     })
@@ -47,14 +43,10 @@ export const updatePurchaseReceiptSubmitDocStatusApi = async (
     submitted_date: submitted_date,
   };
 
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
+  const getHeaders = headerGenerator(token);
 
   await axios
-    .put(`${BASE_URL}${params}`, body, config)
+    .put(`${BASE_URL}${params}`, body, getHeaders)
     .then((res: any) => {
       response = res;
     })

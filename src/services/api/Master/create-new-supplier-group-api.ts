@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../../config/api-config';
+import { BASE_URL, headerGenerator } from '../../config/api-config';
 import { handleApiError } from '../general/error-handler';
 
 const CreateNewSupplierGroupApi: any = async (token: any, title: any) => {
@@ -18,15 +18,10 @@ const CreateNewSupplierGroupApi: any = async (token: any, title: any) => {
     parent_supplier_group: parent_supplier_grp,
   };
 
-  const config = {
-    headers: {
-      Accept: 'application/json',
-      Authorization: token,
-    },
-  };
+  const getHeaders = headerGenerator(token);
 
   await axios
-    .post(`${BASE_URL}/api/method/challan.sdk.api`, body, config)
+    .post(`${BASE_URL}/api/method/challan.sdk.api`, body, getHeaders)
     .then((res: any) => {
       response = res;
     })

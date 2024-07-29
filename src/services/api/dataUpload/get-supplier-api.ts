@@ -1,27 +1,11 @@
-import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
-import { handleApiError } from '../general/error-handler';
+import { callGetAPI } from '../utils';
 
 const GetSupplierList = async (token: any) => {
-  let response: any;
+  const url: any = `${BASE_URL}/api/resource/Supplier`;
 
-  const params = `/api/resource/Supplier`;
-
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
-
-  await axios
-    .get(`${BASE_URL}${params}`, config)
-    .then((res: any) => {
-      response = res;
-    })
-    .catch((err: any) => {
-      response = handleApiError(err);
-    });
-  return response;
+  const response = await callGetAPI(url, token);
+  return response.data;
 };
 
 export default GetSupplierList;

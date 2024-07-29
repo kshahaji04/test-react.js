@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../../config/api-config';
+import { BASE_URL, headerGenerator } from '../../config/api-config';
 import { handleApiError } from '../general/error-handler';
 
 const UpdatePurchaseReceiptApi = async (request: any) => {
@@ -20,14 +20,10 @@ const UpdatePurchaseReceiptApi = async (request: any) => {
     purchase_receipt_table: request.purchaseReceiptTableData,
   };
 
-  const config = {
-    headers: {
-      Authorization: request.token,
-    },
-  };
+  const getHeaders = headerGenerator(request.token);
 
   await axios
-    .put(`${BASE_URL}${params}`, body, config)
+    .put(`${BASE_URL}${params}`, body, getHeaders)
     .then((res: any) => {
       response = res;
     })

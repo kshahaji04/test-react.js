@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../../config/api-config';
+import { BASE_URL, headerGenerator } from '../../config/api-config';
 import { handleApiError } from '../general/error-handler';
 
 const CreatePurchaseReceiptApi = async (request: any) => {
@@ -22,15 +22,10 @@ const CreatePurchaseReceiptApi = async (request: any) => {
     purchase_receipt_table: request.challanTableData,
   };
 
-  const config = {
-    headers: {
-      Accept: 'application/json',
-      Authorization: request.token,
-    },
-  };
+  const getHeaders = headerGenerator(request.token);
 
   await axios
-    .post(`${BASE_URL}/api/method/challan.sdk.api`, body, config)
+    .post(`${BASE_URL}/api/method/challan.sdk.api`, body, getHeaders)
     .then((res: any) => {
       response = res;
     })

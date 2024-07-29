@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../../config/api-config';
+import { BASE_URL, headerGenerator } from '../../config/api-config';
 import { handleApiError } from '../general/error-handler';
 
 const GetDetailOfPurchaseReceiptApi = async (request: any) => {
@@ -11,14 +11,10 @@ const GetDetailOfPurchaseReceiptApi = async (request: any) => {
 
   const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}&name=${request.name}`;
 
-  const config = {
-    headers: {
-      Authorization: request.token,
-    },
-  };
+  const getHeaders = headerGenerator(request.token);
 
   await axios
-    .get(`${BASE_URL}${params}`, config)
+    .get(`${BASE_URL}${params}`, getHeaders)
     .then((res: any) => {
       response = res.data;
     })

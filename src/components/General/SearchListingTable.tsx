@@ -1,5 +1,7 @@
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import SelectedInputDropdown from '../SelectedInputDropdown';
+import { get_access_token } from '../../store/slices/auth/token-login-slice';
 
 const SearchListingTable = ({
   clientNameList,
@@ -9,6 +11,7 @@ const SearchListingTable = ({
   searchInputValues,
 }: any) => {
   const location = useLocation();
+  const userData: any = useSelector(get_access_token);
 
   return (
     <>
@@ -30,6 +33,7 @@ const SearchListingTable = ({
             style={{ backgroundColor: '#E0E1F5' }}
             value={searchInputValues?.from_date}
             onChange={handleSearchInput}
+            readOnly={userData?.username === 'prsr'}
           />
         </div>
         <div
@@ -49,6 +53,7 @@ const SearchListingTable = ({
             style={{ backgroundColor: '#E0E1F5' }}
             value={searchInputValues?.to_date}
             onChange={handleSearchInput}
+            readOnly={userData?.username === 'prsr'}
           />
         </div>
         {!location?.pathname?.includes('/purchase-receipt') &&

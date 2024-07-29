@@ -1,6 +1,6 @@
+import { useSelector } from 'react-redux';
 import PurchaseReceiptTopSection from './PurchaseReceiptTopSection';
 import PurchaseReceiptTable from './PurchaseReceiptTable';
-import { useSelector } from 'react-redux';
 import { buttonLoadingState } from '../../../store/slices/btn-loading-slice';
 
 const CreatePurchaseReceiptMaster = ({
@@ -27,7 +27,7 @@ const CreatePurchaseReceiptMaster = ({
           type="submit"
           onClick={handleCreatePR}
           disabled={buttonLoadingStateFromStore.loading}
-          className="btn btn-outline-primary  px-2 py-0 form-submit-button"
+          className="btn btn-outline-primary px-2 py-0 form-submit-button"
         >
           {buttonLoadingStateFromStore?.loading === true && (
             <i className="fa fa-spinner fa-spin me-1"></i>

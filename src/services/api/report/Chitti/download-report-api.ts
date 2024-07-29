@@ -1,10 +1,7 @@
-import axios from 'axios';
 import { BASE_URL } from '../../../config/api-config';
-import { handleApiError } from '../../general/error-handler';
+import { callGetAPI } from '../../utils';
 
 const DownloadReportApi = async (request: any) => {
-  console.log('request', request);
-  let response: any;
   const version = 'v1';
   let method = request.method;
   let entity = request.entity;
@@ -24,25 +21,10 @@ const DownloadReportApi = async (request: any) => {
   if (request?.supplier) queryParams?.append('supplier', request?.supplier);
   if (request?.project) queryParams?.append('project', request?.project);
 
-  const params = `/api/method/challan.sdk.api?${queryParams.toString()}`;
+  const url = `${BASE_URL}/api/method/challan.sdk.api?${queryParams.toString()}`;
 
-  // const params = `/api/method/challan.sdk.api?version=${version}&method=${request.method}&entity=${request.entity}`;
-
-  const config = {
-    headers: {
-      Authorization: request.token,
-    },
-  };
-
-  await axios
-    .get(`${BASE_URL}${params}`, config)
-    .then((res: any) => {
-      response = res.data.message;
-    })
-    .catch((err: any) => {
-      response = handleApiError(err);
-    });
-  return response;
+  const response = await callGetAPI(url, request.token);
+  return response.data.message;
 };
 
 export default DownloadReportApi;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../../config/api-config';
+import { BASE_URL, headerGenerator } from '../../config/api-config';
 import { handleApiError } from '../general/error-handler';
 
 export const AmendSalesReturnApi: any = async (token: any, data: any) => {
@@ -7,14 +7,10 @@ export const AmendSalesReturnApi: any = async (token: any, data: any) => {
 
   const params = `/api/resource/Sales Return`;
 
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
+  const getHeaders = headerGenerator(token);
 
   await axios
-    .post(`${BASE_URL}${params}`, data, config)
+    .post(`${BASE_URL}${params}`, data, getHeaders)
     .then((res: any) => {
       response = res;
     })

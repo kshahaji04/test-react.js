@@ -80,11 +80,11 @@ const NotificationToggle = () => {
                   aria-labelledby="nav-home-tab"
                 >
                   <div className="text-start py-3">
-                    <span className="fw-bold fs-6">Pending Submissions</span>
+                    <p className="fw-bold fs-6">Pending Submissions</p>
                     {pendingSubmission?.PR?.length > 0 ? (
                       pendingSubmission?.PR.map((data: any, index: any) => {
                         return (
-                          <ul key={index} className="py-3">
+                          <ul key={index} className="mb-2">
                             <li className="fs-6">{data}</li>
                           </ul>
                         );
@@ -103,11 +103,11 @@ const NotificationToggle = () => {
                   aria-labelledby="nav-profile-tab"
                 >
                   <div className="text-start py-3">
-                    <span className="fw-bold fs-6">Pending Submissions</span>
+                    <p className="fw-bold fs-6">Pending Submissions</p>
                     {pendingSubmission?.SR?.length > 0 ? (
                       pendingSubmission?.SR.map((data: any, index: any) => {
                         return (
-                          <ul key={index} className="py-3">
+                          <ul key={index} className="mb-2">
                             <li className="fs-6">{data}</li>
                           </ul>
                         );

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import CreatePurchaseReceiptApi from '../../services/api/PurchaseReceipt/create-purchase-receipt-api';
 import { UpdatePurchaseReceiptDocStatusApi } from '../../services/api/PurchaseReceipt/update-docStatus-api';
 import UpdatePurchaseReceiptApi from '../../services/api/PurchaseReceipt/update-purchase-receipt-api';
@@ -61,11 +61,7 @@ const usePurchaseReceiptMasterHook = () => {
     totalGrossWeightOfChallanTable,
     totalHuidWeightOfHuidTable,
     checkGrossAndNetWeight,
-    checkObjectHasValues,
-    // setTotalGrossWeightOfChallanTable,
-    // setTotalHuidWeightOfHuidTable,
-    // setCheckGrossAndNetWeight,
-    // checkObjectHasValuesInHuid,
+    checkObjectHasValuesForPR,
   } = useCustomChittiHook();
 
   useEffect(() => {
@@ -88,39 +84,28 @@ const usePurchaseReceiptMasterHook = () => {
     fieldName: any,
     id: any
   ) => {
-    const numericFields = [
-      'gross_weight',
-      'less_weight',
-      'net_weight',
-      'amount',
-    ];
-
     const updatedTable = purchaseReceiptTable.map((item: any) => {
       if (item.idx === id) {
-        const updatedValue = numericFields.includes(fieldName)
-          ? parseFloat(value) || 0
-          : value;
-
-        let updatedItem = { ...item, [fieldName]: updatedValue };
+        let updatedItem = { ...item, [fieldName]: value };
 
         // If the field is 'gross_weight', recalculate 'net_weight'
         if (fieldName === 'gross_weight') {
           const lessWeight = item.less_weight || 0;
-          const netWeight = updatedValue - lessWeight;
+          const netWeight = value - lessWeight;
           updatedItem = { ...updatedItem, net_weight: netWeight };
         }
 
         // If the field is 'less_weight', recalculate 'net_weight'
         if (fieldName === 'less_weight') {
           const grossWeight = item.gross_weight || 0;
-          const netWeight = grossWeight - updatedValue;
+          const netWeight = grossWeight - value;
           updatedItem = { ...updatedItem, net_weight: netWeight };
         }
 
         // If the field is 'net_weight', recalculate 'less_weight'
         if (fieldName === 'net_weight') {
           const grossWeight = item.gross_weight || 0;
-          const lessWeight = grossWeight - updatedValue;
+          const lessWeight = grossWeight - value;
           updatedItem = { ...updatedItem, less_weight: lessWeight };
         }
 
@@ -190,7 +175,8 @@ const usePurchaseReceiptMasterHook = () => {
       (item: any) => Object?.keys(item)?.length === 0
     );
 
-    const filteredChallanTable = checkObjectHasValues(purchaseReceiptTable);
+    const filteredChallanTable =
+      checkObjectHasValuesForPR(purchaseReceiptTable);
 
     let errMsgList = [];
 
@@ -223,7 +209,7 @@ const usePurchaseReceiptMasterHook = () => {
   };
 
   const handleCreatePR: any = async () => {
-    const filteredChallanTable = checkObjectHasValues(purchaseReceiptTable);
+    const filteredPRTable = checkObjectHasValuesForPR(purchaseReceiptTable);
 
     const errMsgList: any = validateForm(
       topSectionInputData,
@@ -239,7 +225,7 @@ const usePurchaseReceiptMasterHook = () => {
         checkGrossAndNetWeight.gross_weight < checkGrossAndNetWeight.net_weight
       ) {
         toast.error('Net weight cannot be greater than Gross weight');
-      } else if (filteredChallanTable?.length === 0) {
+      } else if (filteredPRTable?.length === 0) {
         toast.error('No values inserted');
       } else {
         const addGrossWeightKey = (item: any) => {
@@ -250,7 +236,7 @@ const usePurchaseReceiptMasterHook = () => {
         };
 
         const challanTableWithGrossWeight =
-          filteredChallanTable.map(addGrossWeightKey);
+          filteredPRTable.map(addGrossWeightKey);
 
         // Additional check for gross_weight less than net_weight
         const hasGrossWeightLessThanNetWeight =
@@ -296,8 +282,7 @@ const usePurchaseReceiptMasterHook = () => {
   };
 
   const handleUpdateRecord: any = async () => {
-    const filteredChallanTable: any =
-      checkObjectHasValues(purchaseReceiptTable);
+    const filterPRTable: any = checkObjectHasValuesForPR(purchaseReceiptTable);
     const hasSubCategoryKey =
       purchaseReceiptTable?.length > 0 &&
       purchaseReceiptTable.every(
@@ -312,19 +297,18 @@ const usePurchaseReceiptMasterHook = () => {
       toast.error('Net weight cannot be greater than Gross weight');
     } else if (!hasSubCategoryKey) {
       toast.error('Sub Category in Challan table');
-    } else if (filteredChallanTable?.length === 0) {
+    } else if (filterPRTable?.length === 0) {
       toast.error('No values inserted');
     } else {
       dispatch(btnLoadingStart());
       const BodyData: any = {
         name: id,
-        // date: date,
         clientName: topSectionInputData?.karigar_name,
         // clientGroup: clientGroupName,
         goldRate: topSectionInputData?.gold_rate,
         check_916: topSectionInputData?.check_916,
         check_75: topSectionInputData?.check_75,
-        purchaseReceiptTableData: filteredChallanTable,
+        purchaseReceiptTableData: filterPRTable,
         token: accessToken?.token,
       };
       let updateChittiApi: any = await UpdatePurchaseReceiptApi(BodyData);

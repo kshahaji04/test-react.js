@@ -1,29 +1,14 @@
-import axios from 'axios';
 import { BASE_URL } from '../../config/api-config';
-import { handleApiError } from '../general/error-handler';
+import { callGetAPI } from '../utils';
 
 const GetEmeraldShilpiDetailsApi = async (request: any) => {
-  let response: any;
-
   const version = 'v1';
   const method = 'get_emeralds_shilpi';
   const entity = 'emerald_shilpi';
 
-  const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}&name=${request.id}`;
-  const config = {
-    headers: {
-      Authorization: request.token,
-    },
-  };
+  const url: any = `${BASE_URL}/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}&name=${request.id}`;
 
-  await axios
-    .get(`${BASE_URL}${params}`, config)
-    .then((res: any) => {
-      response = res;
-    })
-    .catch((err: any) => {
-      response = handleApiError(err);
-    });
+  const response = await callGetAPI(url, request.token);
   return response;
 };
 

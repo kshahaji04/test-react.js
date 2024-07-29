@@ -1,14 +1,11 @@
 import axios from 'axios';
-import { BASE_URL } from '../../config/api-config';
+import { BASE_URL, headerGenerator } from '../../config/api-config';
 import { handleApiError } from '../general/error-handler';
+import { callGetAPI } from '../utils';
 
 export const PRCategorySummaryPrintApi = async (request: any, params: any) => {
   let response: any;
-  const config = {
-    headers: {
-      Authorization: request.token,
-    },
-  };
+  const getHeaders = headerGenerator(request.token);
 
   const urlParams: any = [];
 
@@ -24,7 +21,7 @@ export const PRCategorySummaryPrintApi = async (request: any, params: any) => {
   }
 
   await axios
-    .get(`${BASE_URL}${url}`, config)
+    .get(`${BASE_URL}${url}`, getHeaders)
     .then((res: any) => {
       response = res;
     })
@@ -39,11 +36,8 @@ export const PRCategoryPartywisePrintApi = async (
   params: any
 ) => {
   let response: any;
-  const config = {
-    headers: {
-      Authorization: request.token,
-    },
-  };
+  const getHeaders = headerGenerator(request.token);
+
   const urlParams: any = [];
 
   Object?.keys(params).forEach((key: any) => {
@@ -58,7 +52,7 @@ export const PRCategoryPartywisePrintApi = async (
   }
 
   await axios
-    .get(`${BASE_URL}${url}`, config)
+    .get(`${BASE_URL}${url}`, getHeaders)
     .then((res: any) => {
       response = res;
     })
@@ -69,33 +63,18 @@ export const PRCategoryPartywisePrintApi = async (
 };
 
 export const PRSubcategoryPrintApi = async (request: any, params: any) => {
-  let response: any;
-  const config = {
-    headers: {
-      Authorization: request.token,
-    },
-  };
-
   const urlParams: any = [];
 
   Object?.keys(params).forEach((key: any) => {
     urlParams.push(`${key}=${params[key]}`);
   });
 
-  let url: any =
-    '/api/method/challan.sdk.api?version=v1&method=get_pr_subcategory_report_print&entity=report_print&';
+  let url: any = `${BASE_URL}/api/method/challan.sdk.api?version=v1&method=get_pr_subcategory_report_print&entity=report_print&`;
 
   if (urlParams.length > 0) {
     url += `${urlParams.join('&')}`;
   }
 
-  await axios
-    .get(`${BASE_URL}${url}`, config)
-    .then((res: any) => {
-      response = res;
-    })
-    .catch((err: any) => {
-      response = handleApiError(err);
-    });
+  const response = await callGetAPI(url, request.token);
   return response;
 };

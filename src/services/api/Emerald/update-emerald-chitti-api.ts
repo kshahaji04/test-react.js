@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../../config/api-config';
+import { BASE_URL, headerGenerator } from '../../config/api-config';
 import { handleApiError } from '../general/error-handler';
 
 const UpdateEmeraldChittiApi = async (request: any) => {
@@ -17,14 +17,10 @@ const UpdateEmeraldChittiApi = async (request: any) => {
     emerald_chitti_table: request.challanTableData,
   };
 
-  const config = {
-    headers: {
-      Authorization: request.token,
-    },
-  };
+  const getHeaders = headerGenerator(request.token);
 
   await axios
-    .put(`${BASE_URL}${params}`, body, config)
+    .put(`${BASE_URL}${params}`, body, getHeaders)
     .then((res: any) => {
       response = res;
     })

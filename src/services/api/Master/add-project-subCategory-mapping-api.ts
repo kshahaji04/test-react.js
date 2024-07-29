@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../../config/api-config';
+import { BASE_URL, headerGenerator } from '../../config/api-config';
 import { handleApiError } from '../general/error-handler';
 
 const AddProjectSubCategoryMappingApi: any = async (
@@ -10,12 +10,7 @@ const AddProjectSubCategoryMappingApi: any = async (
 ) => {
   let response: any;
 
-  const config = {
-    headers: {
-      Accept: 'application/json',
-      Authorization: token,
-    },
-  };
+  const getHeaders = headerGenerator(token);
 
   let body = {
     version: 'v1',
@@ -24,11 +19,11 @@ const AddProjectSubCategoryMappingApi: any = async (
     project: project,
     stone: stone,
     plain: plain,
-    can_be_deleted: 1
+    can_be_deleted: 1,
   };
 
   await axios
-    .post(`${BASE_URL}/api/method/challan.sdk.api`, body, config)
+    .post(`${BASE_URL}/api/method/challan.sdk.api`, body, getHeaders)
     .then((res: any) => {
       response = res;
     })

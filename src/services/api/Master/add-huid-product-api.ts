@@ -1,25 +1,20 @@
 import axios from 'axios';
-import { BASE_URL } from '../../config/api-config';
+import { BASE_URL, headerGenerator } from '../../config/api-config';
 import { handleApiError } from '../general/error-handler';
 
 const AddHuidProductApi: any = async (token: any, request: any) => {
   let response: any;
 
-  const config = {
-    headers: {
-      Accept: 'application/json',
-      Authorization: token,
-    },
-  };
+  const getHeaders = headerGenerator(token);
 
   let body = {
     title: request.title,
     custom_hm_pcs: request.hm_pcs,
-    can_be_deleted: 1
+    can_be_deleted: 1,
   };
 
   await axios
-    .post(`${BASE_URL}/api/resource/HUID Product`, body, config)
+    .post(`${BASE_URL}/api/resource/HUID Product`, body, getHeaders)
     .then((res: any) => {
       response = res;
     })

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../../config/api-config';
+import { BASE_URL, headerGenerator } from '../../config/api-config';
 import { handleApiError } from '../general/error-handler';
 
 const DeletePurchaseReceiptApi = async (token: any, name: any) => {
@@ -10,14 +10,10 @@ const DeletePurchaseReceiptApi = async (token: any, name: any) => {
 
   const params = `/api/method/challan.sdk.api?version=${version}&method=${method}&entity=${entity}&name=${name}`;
 
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
+  const getHeaders = headerGenerator(token);
 
   await axios
-    .delete(`${BASE_URL}${params}`, config)
+    .delete(`${BASE_URL}${params}`, getHeaders)
     .then((res: any) => {
       response = res.data;
     })

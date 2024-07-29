@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import useMasterUpdateHook from '../../hooks/Master/master-update-hook';
-import Loader from '../Loader';
+
 import DeleteAlertModal from '../Modal/DeleteAlertModal';
 import MasterUpdateModal from '../Modal/MasterUpdateModal';
 import LoadMoreTableDataInMaster from './MasterListing/LoadMoreTableDataInMaster';
+import Loader from '../General/Loader';
 
 const MasterTableListing = ({
   filteredList,

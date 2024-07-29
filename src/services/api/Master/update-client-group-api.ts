@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../../config/api-config';
+import { BASE_URL, headerGenerator } from '../../config/api-config';
 import { handleApiError } from '../general/error-handler';
 
 const UpdateClientGroup: any = async (
@@ -10,19 +10,14 @@ const UpdateClientGroup: any = async (
   let response: any;
   const params = `api/resource/Client Name/${name}`;
 
-  const config = {
-    headers: {
-      Accept: 'application/json',
-      Authorization: token,
-    },
-  };
+  const getHeaders = headerGenerator(token);
 
   let body = {
     client_group: clientGroup,
   };
 
   await axios
-    .put(`${BASE_URL}/${params}`, body, config)
+    .put(`${BASE_URL}/${params}`, body, getHeaders)
     .then((res: any) => {
       response = res;
     })

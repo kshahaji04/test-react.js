@@ -1,19 +1,14 @@
 import axios from 'axios';
-import { BASE_URL } from '../../config/api-config';
+import { BASE_URL, headerGenerator } from '../../config/api-config';
 import { handleApiError } from '../general/error-handler';
 
 const InternalLoginApi: any = async (token: any) => {
   let response: any;
 
   const params: any = `/api/method/frappe.auth.get_logged_user`;
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
-
+  const getHeaders = headerGenerator(token);
   await axios
-    .post(`${BASE_URL}${params}`, undefined, config)
+    .post(`${BASE_URL}${params}`, undefined, getHeaders)
     .then((res: any) => {
       response = res;
     })

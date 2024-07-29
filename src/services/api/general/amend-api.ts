@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../../config/api-config';
+import { BASE_URL, headerGenerator } from '../../config/api-config';
 import { handleApiError } from './error-handler';
 
 export const challanAmendApi: any = async (request: any) => {
@@ -16,14 +16,10 @@ export const challanAmendApi: any = async (request: any) => {
     narration_huid: request.narration_data,
   };
 
-  const config = {
-    headers: {
-      Authorization: request.token,
-    },
-  };
+  const getHeaders = headerGenerator(request.token);
 
   await axios
-    .post(`${BASE_URL}${params}`, body, config)
+    .post(`${BASE_URL}${params}`, body, getHeaders)
     .then((res: any) => {
       response = res;
     })
