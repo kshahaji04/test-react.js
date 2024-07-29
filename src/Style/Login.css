@@ -3,11 +3,11 @@
 }
 
 .login-input-field {
-    line-height: 26px !important;
+    line-height: 27px !important;
 }
 
 .login-card {
-    width: 30rem !important;
+    width: 33rem !important;
 }
 
 @media screen and (max-width:768px) {
@@ -42,4 +42,8 @@
 
 .login-username-input:focus {
     border-color: #2f308c6e;
+}
+
+.login_btn {
+    border-radius: 9px;
 }

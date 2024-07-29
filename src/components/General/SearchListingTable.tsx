@@ -33,7 +33,7 @@ const SearchListingTable = ({
             style={{ backgroundColor: '#E0E1F5' }}
             value={searchInputValues?.from_date}
             onChange={handleSearchInput}
-            readOnly={userData?.username === 'prsr'}
+            readOnly={userData?.username === 'PRSR'}
           />
         </div>
         <div
@@ -53,7 +53,7 @@ const SearchListingTable = ({
             style={{ backgroundColor: '#E0E1F5' }}
             value={searchInputValues?.to_date}
             onChange={handleSearchInput}
-            readOnly={userData?.username === 'prsr'}
+            readOnly={userData?.username === 'PRSR'}
           />
         </div>
         {!location?.pathname?.includes('/purchase-receipt') &&

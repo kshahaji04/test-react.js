@@ -48,11 +48,11 @@ const Login = () => {
   return (
     <>
       <div className="container mt-5">
-        <div className="container  d-flex justify-content-center login-page-container">
+        <div className="container d-flex justify-content-center login-page-container">
           <div className="row">
-            <div className="col-lg-12 card login-card">
-              <div className="  p-lg-5 p-0">
-                <p className="text-uppercase fs-3 text-center">login </p>
+            <div className="col-lg-12 card login-card ">
+              <div className="p-lg-5 p-0 border">
+                <p className="fs-3 text-center">Log In</p>
                 <div className="card-body p-0">
                   <form
                     onSubmit={handleFormSubmit}
@@ -93,7 +93,7 @@ const Login = () => {
 
                     <button
                       type="submit"
-                      className="btn btn-primary mt-3 py-1 px-4"
+                      className="btn btn-primary mt-4 fs-5 py-1 px-4 login_btn"
                     >
                       Login
                     </button>
