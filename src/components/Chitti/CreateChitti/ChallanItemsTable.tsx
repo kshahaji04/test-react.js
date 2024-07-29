@@ -201,6 +201,7 @@ const ChallanItemsTable = ({
   };
 
   const handleBlur = (event: any, id: any) => {
+    console.log(event);
     if (id === tableData[tableData.length - 1].id) {
       handleAddRow();
     }

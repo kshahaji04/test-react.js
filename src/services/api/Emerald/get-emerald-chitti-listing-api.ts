@@ -1,4 +1,4 @@
-import { BASE_URL, headerGenerator } from '../../config/api-config';
+import { BASE_URL } from '../../config/api-config';
 import { callGetAPI } from '../utils';
 
 const GetEmeraldList = async (token: any) => {

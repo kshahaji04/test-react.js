@@ -1,6 +1,4 @@
-import axios from 'axios';
-import { BASE_URL, headerGenerator } from '../../config/api-config';
-import { handleApiError } from '../general/error-handler';
+import { BASE_URL } from '../../config/api-config';
 import { callGetAPI } from '../utils';
 
 export const PRCategoryPartywiseReportApi = async (

@@ -6,10 +6,6 @@ import GetClientNameReducer from './slices/Chitti/get-client-name-slice';
 import GetProductListReducer from './slices/Chitti/get-product-list-slice';
 import GetSpecificChittiChallanReducer from './slices/Chitti/get-specific-chitti-listing-data-slice';
 import GetSubCategoryListReducer from './slices/Chitti/get-subcategory-slice';
-import GetEmeraldSupplierDetailsReducer from './slices/dataUpload/get-emerald-supplier-details-slice';
-import GetEmeraldSupplierReducer from './slices/dataUpload/get-emerald-supplier-slice';
-import GetEmeraldTableDataReducer from './slices/dataUpload/get-emerald-table-data-slice';
-import GetSupplierListReducer from './slices/dataUpload/get-supplier-slice';
 import GetEmeraldShilpiDetailsReducer from './slices/emerald-shilpi/get-emerald-shilpi-details-slice';
 import GetEmeraldShilpiListReducer from './slices/emerald-shilpi/get-emerald-shilpi-slice';
 import GetEmeraldChallanReducer from './slices/Emerald/get-emerald-list-slice';
@@ -50,12 +46,9 @@ const appReducer = combineReducers({
   GetCategoryListScreen: GetCategoryListReducer,
   GetHuidProductListScreen: GetHuidProductListReducer,
   GetProductItemScreen: GetProductItemReducer,
-  GetSupplierListScreen: GetSupplierListReducer,
-  GetEmeraldTableDataScreen: GetEmeraldTableDataReducer,
   GetSpecificEmeraldScreen: GetSpecificEmeraldReducer,
   GetSpecificClientGroupScreen: GetSpecificClientGroupReducer,
   GetSpecificCategoryScreen: GetSpecificCategoryReducer,
-  GetEmeraldSupplierScreen: GetEmeraldSupplierReducer,
   GetClientNameClientGroupScreen: GetClientNameClientGroupReducer,
   GetSubCategoryCategoryScreen: GetSubCategoryCategoryReducer,
   GetReportTableDataScreen: GetReportTableDataReducer,
@@ -63,7 +56,6 @@ const appReducer = combineReducers({
   GetCategorySummaryReportScreen: GetCategorySummaryReportReducer,
   GetCategoryPartywiseReportScreen: GetCategoryPartywiseReportReducer,
   GetEmeraldReportScreen: GetEmeraldReportReducer,
-  GetEmeraldSupplierDetailsScreen: GetEmeraldSupplierDetailsReducer,
   GetEmeraldShilpiListScreen: GetEmeraldShilpiListReducer,
   GetEmeraldShilpiDetailsScreen: GetEmeraldShilpiDetailsReducer,
   GetProjectSubCategoryMappingScreen: GetProjectSubCategoryMappingReducer,

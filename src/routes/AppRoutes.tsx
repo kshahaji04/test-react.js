@@ -1,10 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Login from '../components/Auth/Login';
 import EditChallanChitti from '../components/Chitti/ChittiListing/EditChallanChitti';
-import DataUploadMaster from '../components/DataUpload/DataUploadMaster';
-import EmeraldShilpiDetails from '../components/DataUpload/EmeraldShilpi/EmeraldShilpiDetails';
-import EmeraldShilpiListing from '../components/DataUpload/EmeraldShilpi/EmeraldShilpiListing';
-import EmeraldSupplierDetailPage from '../components/DataUpload/ViewUpload/EmeraldSupplierDetailPage';
 import EmeraldChittiMaster from '../components/EmeraldChitti/EmeraldChittiMaster';
 import EditEmeraldChitti from '../components/EmeraldChitti/EmeraldListing/EditEmeraldChitti';
 import MasterListing from '../components/Master/MasterListing';
@@ -133,16 +129,6 @@ const AppRoutes = () => {
             <ProtectedRoute>
               <MasterPage />
               <EmeraldChittiMaster />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/master/emerald"
-          element={
-            <ProtectedRoute>
-              <MasterPage />
-              <EmeraldShilpiListing />
             </ProtectedRoute>
           }
         />
@@ -289,14 +275,6 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/dataupload/:id"
-          element={
-            <ProtectedRoute>
-              <EmeraldSupplierDetailPage />
-            </ProtectedRoute>
-          }
-        />
 
         <Route
           path="/report"
@@ -370,22 +348,6 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <Emerald />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/dataupload"
-          element={
-            <ProtectedRoute>
-              <DataUploadMaster />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/dataupload/emerald-shilpi/:id"
-          element={
-            <ProtectedRoute>
-              <EmeraldShilpiDetails />
             </ProtectedRoute>
           }
         />
