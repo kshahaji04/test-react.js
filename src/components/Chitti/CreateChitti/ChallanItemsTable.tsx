@@ -108,10 +108,16 @@ const ChallanItemsTable = ({
     // Calculate column totals whenever tableData changes
     const newColumnTotals = tableData.reduce(
       (totals: any, row: any) => {
-        totals.gross_weight += row.gross_weight || 0;
-        totals.less_wt += row.less_wt || 0;
-        totals.net_weight += row.net_weight || 0;
-        totals.amount += row.amount || 0;
+        const grossWeight = Number(row.gross_weight) || 0;
+        const lessWeight = Number(row.less_weight) || 0;
+        const netWeight = Number(row.net_weight) || 0;
+        const amount = Number(row.amount) || 0;
+
+        totals.gross_weight += grossWeight;
+        totals.less_wt += lessWeight;
+        totals.net_weight += netWeight;
+        totals.amount += amount;
+
         return totals;
       },
       { gross_weight: 0, less_wt: 0, net_weight: 0, amount: 0 }
@@ -145,7 +151,11 @@ const ChallanItemsTable = ({
 
       const updatedData = tableData.map((row: any) =>
         row.id === id
-          ? { ...row, gross_weight: inputValue, net_weight: netWeight }
+          ? {
+              ...row,
+              gross_weight: inputValue,
+              net_weight: netWeight?.toFixed(3),
+            }
           : row
       );
 
@@ -164,7 +174,11 @@ const ChallanItemsTable = ({
 
       const updatedData = tableData.map((row: any) =>
         row.id === id
-          ? { ...row, net_weight: netWeight, less_wt: inputValue }
+          ? {
+              ...row,
+              net_weight: netWeight?.toFixed(3),
+              less_wt: inputValue,
+            }
           : row
       );
 
@@ -184,7 +198,7 @@ const ChallanItemsTable = ({
 
       const updatedData = tableData.map((row: any) =>
         row.id === id
-          ? { ...row, less_wt: lessWeight, net_weight: inputValue }
+          ? { ...row, less_wt: lessWeight?.toFixed(3), net_weight: inputValue }
           : row
       );
       setTableData(updatedData);
@@ -279,7 +293,9 @@ const ChallanItemsTable = ({
                         type="number"
                         className="form-control custom-input-field-t text-end"
                         defaultValue={row.gross_weight}
-                        value={row.gross_weight}
+                        value={
+                          parseFloat(row.gross_weight) ? row.gross_weight : ''
+                        }
                         onChange={(e) => handleGrossWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
@@ -289,7 +305,7 @@ const ChallanItemsTable = ({
                         type="number"
                         className="form-control custom-input-field-t text-end"
                         defaultValue={row.less_wt}
-                        value={row.less_wt}
+                        value={parseFloat(row.less_wt) ? row.less_wt : ''}
                         onChange={(e) => handleLessWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
@@ -299,7 +315,7 @@ const ChallanItemsTable = ({
                         type="number"
                         className="form-control custom-input-field-t text-end"
                         defaultValue={row.net_weight}
-                        value={row.net_weight}
+                        value={parseFloat(row.net_weight) ? row.net_weight : ''}
                         onChange={(e) => handleNetWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
@@ -309,7 +325,7 @@ const ChallanItemsTable = ({
                         type="number"
                         className="form-control custom-input-field-t text-end"
                         defaultValue={row.amount}
-                        value={row.amount}
+                        value={parseFloat(row.amount) ? row.amount : ''}
                         onKeyDown={(e) => handleKeyDown(e, row.id)}
                         onChange={(e) => handleAmountValue(e, row.id)}
                         onBlur={(e) => handleBlur(e, row.id)}

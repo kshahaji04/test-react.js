@@ -84,29 +84,40 @@ const usePurchaseReceiptMasterHook = () => {
     fieldName: any,
     id: any
   ) => {
+    const numericFields = [
+      'gross_weight',
+      'less_weight',
+      'net_weight',
+      'amount',
+    ];
+
     const updatedTable = purchaseReceiptTable.map((item: any) => {
       if (item.idx === id) {
-        let updatedItem = { ...item, [fieldName]: value };
+        const updatedValue = numericFields.includes(fieldName)
+          ? parseFloat(value)
+          : value;
+
+        let updatedItem = { ...item, [fieldName]: updatedValue };
 
         // If the field is 'gross_weight', recalculate 'net_weight'
         if (fieldName === 'gross_weight') {
-          const lessWeight = item.less_weight || 0;
-          const netWeight = value - lessWeight;
-          updatedItem = { ...updatedItem, net_weight: netWeight };
+          const lessWeight = parseFloat(item.less_weight) || 0;
+          const netWeight = updatedValue - lessWeight;
+          updatedItem = { ...updatedItem, net_weight: netWeight.toFixed(3) };
         }
 
         // If the field is 'less_weight', recalculate 'net_weight'
         if (fieldName === 'less_weight') {
-          const grossWeight = item.gross_weight || 0;
-          const netWeight = grossWeight - value;
-          updatedItem = { ...updatedItem, net_weight: netWeight };
+          const grossWeight = parseFloat(item.gross_weight) || 0;
+          const netWeight = grossWeight - updatedValue;
+          updatedItem = { ...updatedItem, net_weight: netWeight.toFixed(3) };
         }
 
         // If the field is 'net_weight', recalculate 'less_weight'
         if (fieldName === 'net_weight') {
-          const grossWeight = item.gross_weight || 0;
-          const lessWeight = grossWeight - value;
-          updatedItem = { ...updatedItem, less_weight: lessWeight };
+          const grossWeight = parseFloat(item.gross_weight) || 0;
+          const lessWeight = grossWeight - updatedValue;
+          updatedItem = { ...updatedItem, less_weight: lessWeight.toFixed(3) };
         }
 
         return updatedItem;
@@ -119,13 +130,19 @@ const usePurchaseReceiptMasterHook = () => {
   };
 
   useEffect(() => {
-    // Calculate column totals whenever tableData changes
     const newColumnTotals = purchaseReceiptTable.reduce(
       (totals: any, row: any) => {
-        totals.gross_weight += row.gross_weight || 0;
-        totals.less_wt += row.less_weight || 0;
-        totals.net_weight += row.net_weight || 0;
-        totals.amount += row.amount || 0;
+        // Ensure row values are numbers and handle negative values correctly
+        const grossWeight = Number(row.gross_weight) || 0;
+        const lessWeight = Number(row.less_weight) || 0;
+        const netWeight = Number(row.net_weight) || 0;
+        const amount = Number(row.amount) || 0;
+
+        totals.gross_weight += grossWeight;
+        totals.less_wt += lessWeight;
+        totals.net_weight += netWeight;
+        totals.amount += amount;
+
         return totals;
       },
       { gross_weight: 0, less_wt: 0, net_weight: 0, amount: 0 }
