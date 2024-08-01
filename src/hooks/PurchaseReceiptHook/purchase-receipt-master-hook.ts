@@ -290,7 +290,7 @@ const usePurchaseReceiptMasterHook = () => {
 
             dispatch(btnLoadingStop());
           } else {
-            toast.error('Failed to create Purchase Receipt');
+            toast.error(`${purchaseReceiptApiRes?.data?.message?.error}`);
             dispatch(btnLoadingStop());
           }
         }
