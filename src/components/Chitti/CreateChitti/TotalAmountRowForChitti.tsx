@@ -1,5 +1,4 @@
 const TotalAmountRowForChitti = ({ amountValue, hideWeights }: any) => {
-  console.log('amount', amountValue);
   return (
     <tr>
       <td></td>

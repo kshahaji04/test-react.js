@@ -4,7 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import CreatePurchaseReceiptApi from '../../services/api/PurchaseReceipt/create-purchase-receipt-api';
 import { UpdatePurchaseReceiptDocStatusApi } from '../../services/api/PurchaseReceipt/update-docStatus-api';
+import { get_access_token } from '../../store/slices/auth/token-login-slice';
+import useCustomChittiHook from '../Chitti/custom-chitti-page-hook';
+import useCustomPurchaseReceiptHook from './custom-purchase-receipt-hook';
+import getUserRoleApi from '../../services/api/general/user-role-api';
 import UpdatePurchaseReceiptApi from '../../services/api/PurchaseReceipt/update-purchase-receipt-api';
+import { getDetailPurchaseReceipt } from '../../store/slices/PurchaseReceipt/get-detail-purchase-receipt-slice';
 import {
   getClientName,
   get_client_name,
@@ -13,15 +18,10 @@ import {
   getSubCategoryList,
   get_subcategory_list,
 } from '../../store/slices/Chitti/get-subcategory-slice';
-import { getDetailPurchaseReceipt } from '../../store/slices/PurchaseReceipt/get-detail-purchase-receipt-slice';
 import {
   getPurchaseReceiptListing,
   get_purchase_receipt_listing,
 } from '../../store/slices/PurchaseReceipt/get-purchase-receipt-listing-slice';
-import { get_access_token } from '../../store/slices/auth/token-login-slice';
-import useCustomChittiHook from '../Chitti/custom-chitti-page-hook';
-import useCustomPurchaseReceiptHook from './custom-purchase-receipt-hook';
-import getUserRoleApi from '../../services/api/general/user-role-api';
 import {
   btnLoadingStart,
   btnLoadingStop,
@@ -103,21 +103,30 @@ const usePurchaseReceiptMasterHook = () => {
         if (fieldName === 'gross_weight') {
           const lessWeight = parseFloat(item.less_weight) || 0;
           const netWeight = updatedValue - lessWeight;
-          updatedItem = { ...updatedItem, net_weight: netWeight.toFixed(3) };
+          updatedItem = {
+            ...updatedItem,
+            net_weight: parseFloat(netWeight?.toFixed(3)),
+          };
         }
 
         // If the field is 'less_weight', recalculate 'net_weight'
         if (fieldName === 'less_weight') {
           const grossWeight = parseFloat(item.gross_weight) || 0;
           const netWeight = grossWeight - updatedValue;
-          updatedItem = { ...updatedItem, net_weight: netWeight.toFixed(3) };
+          updatedItem = {
+            ...updatedItem,
+            net_weight: parseFloat(netWeight?.toFixed(3)),
+          };
         }
 
         // If the field is 'net_weight', recalculate 'less_weight'
         if (fieldName === 'net_weight') {
           const grossWeight = parseFloat(item.gross_weight) || 0;
           const lessWeight = grossWeight - updatedValue;
-          updatedItem = { ...updatedItem, less_weight: lessWeight.toFixed(3) };
+          updatedItem = {
+            ...updatedItem,
+            less_weight: parseFloat(lessWeight?.toFixed(3)),
+          };
         }
 
         return updatedItem;
@@ -225,6 +234,7 @@ const usePurchaseReceiptMasterHook = () => {
     return errMsgList;
   };
 
+  console.log('purchase table data', purchaseReceiptTable);
   const handleCreatePR: any = async () => {
     const filteredPRTable = checkObjectHasValuesForPR(purchaseReceiptTable);
 
