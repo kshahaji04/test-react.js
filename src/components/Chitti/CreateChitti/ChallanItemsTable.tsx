@@ -294,8 +294,11 @@ const ChallanItemsTable = ({
                         className="form-control custom-input-field-t text-end"
                         defaultValue={row.gross_weight}
                         value={
-                          parseFloat(row.gross_weight) ? row.gross_weight : ''
+                          row.gross_weight !== undefined ? row.gross_weight : ''
                         }
+                        // value={
+                        //   parseFloat(row.gross_weight) ? row.gross_weight : ''
+                        // }
                         onChange={(e) => handleGrossWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
@@ -305,7 +308,7 @@ const ChallanItemsTable = ({
                         type="number"
                         className="form-control custom-input-field-t text-end"
                         defaultValue={row.less_wt}
-                        value={parseFloat(row.less_wt) ? row.less_wt : ''}
+                        value={row.less_wt !== undefined ? row.less_wt : ''}
                         onChange={(e) => handleLessWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
@@ -315,7 +318,9 @@ const ChallanItemsTable = ({
                         type="number"
                         className="form-control custom-input-field-t text-end"
                         defaultValue={row.net_weight}
-                        value={parseFloat(row.net_weight) ? row.net_weight : ''}
+                        value={
+                          row.net_weight !== undefined ? row.net_weight : ''
+                        }
                         onChange={(e) => handleNetWeightValue(e, row.id)}
                         readOnly={readOnly === true ? true : false}
                       />
@@ -325,7 +330,7 @@ const ChallanItemsTable = ({
                         type="number"
                         className="form-control custom-input-field-t text-end"
                         defaultValue={row.amount}
-                        value={parseFloat(row.amount) ? row.amount : ''}
+                        value={row.amount !== undefined ? row.amount : ''}
                         onKeyDown={(e) => handleKeyDown(e, row.id)}
                         onChange={(e) => handleAmountValue(e, row.id)}
                         onBlur={(e) => handleBlur(e, row.id)}
