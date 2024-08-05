@@ -36,6 +36,8 @@ import {
   chittiSubcategoryPrintApi,
 } from '../../services/api/report/get-chitti-print-api';
 import getUserRoleApi from '../../services/api/general/user-role-api';
+import { dayToDaySummaryPrintApi } from '../../services/api/report/day-to-day-summary-report-print-api';
+import { dayToDaySummaryReportAPI } from '../../services/api/report/day-to-day-summary-reports-api';
 
 const useReportHook = () => {
   const location = useLocation();
@@ -77,8 +79,12 @@ const useReportHook = () => {
     let reportData;
     setIsLoading(true);
     const currentDate: any = { from_date: todayDate, to_date: todayDate };
-
-    if (path === '/report/purchasereceipt/subcategory') {
+    if (path === '/report/daytodaysummary/') {
+      reportData = await dayToDaySummaryReportAPI(
+        accessToken.token,
+        date ? currentDate : searchInputValues
+      );
+    } else if (path === '/report/purchasereceipt/subcategory') {
       reportData = await PRSubcategoryReportApi(
         accessToken.token,
         date ? currentDate : searchInputValues
@@ -147,6 +153,12 @@ const useReportHook = () => {
     try {
       let reportPrint;
       switch (path) {
+        case '/report/daytodaysummary/':
+          reportPrint = await dayToDaySummaryPrintApi(
+            accessToken.token,
+            searchInputValues
+          );
+          break;
         case '/report/purchasereceipt/subcategory':
           reportPrint = await PRSubcategoryPrintApi(
             accessToken.token,

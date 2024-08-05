@@ -39,7 +39,7 @@ const ReportListingTable = ({ reportData, isLoading }: any) => {
                     <tr
                       key={index}
                       className={`row row-cols-7 justify-content-center text-center ${
-                        isTotalRow ? 'fw-bold bg-warning ' : ''
+                        isTotalRow ? 'fw-bold bg-warning mx-1' : ''
                       }`}
                     >
                       <td scope="col" className="col-1 table_row py-1 py-auto">

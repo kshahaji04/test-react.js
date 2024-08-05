@@ -34,6 +34,7 @@ import PurchaseReceipt from '../pages/purchaseReceipt';
 import Report from '../pages/report';
 import SalesReturn from '../pages/salesReturn';
 import ProtectedRoute from './ProtectedRoute';
+import DayToDaySummaryReport from '../components/Report/ReportsTab/DayToDaySummaryReport';
 
 const AppRoutes = () => {
   return (
@@ -289,6 +290,14 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <ChittiReportsTab />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/report/daytodaysummary"
+          element={
+            <ProtectedRoute>
+              <DayToDaySummaryReport />
             </ProtectedRoute>
           }
         />

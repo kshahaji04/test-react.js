@@ -7,6 +7,7 @@ const ReportTabs = () => {
   const { isLoading, userRolesData } = useReportHook();
 
   const reportlist: any = [
+    'Day to Day Summary',
     'Purchase Receipt',
     'Chitti',
     'Emerald Chitti',
@@ -22,9 +23,6 @@ const ReportTabs = () => {
   );
 
   const showTabSection: any = () => {
-    // if (isLoading) {
-    //   return <Loader />;
-    // }
     if (isLoading === false && reportListBasedOnUserRole?.length === 0) {
       return (
         <div className="d-flex justify-content-center mt-5 fs-5">
@@ -38,6 +36,7 @@ const ReportTabs = () => {
         const processedStr: any = data.replace(/\s+/g, '').toLowerCase();
 
         const isActive = location.pathname.split('/').includes(processedStr);
+
         return (
           <div
             className={`mx-lg-3 my-lg-0 my-1 master-heading  px-lg-2  ${
@@ -49,6 +48,8 @@ const ReportTabs = () => {
               to={`/report/${processedStr}/${
                 processedStr === 'emeraldchitti'
                   ? 'categorypartywise'
+                  : processedStr === 'daytodaysummary'
+                  ? ''
                   : 'subcategory'
               }`}
               className={`text-decoration-none navlink-class ${
