@@ -84,49 +84,47 @@ const usePurchaseReceiptMasterHook = () => {
     fieldName: any,
     id: any
   ) => {
-    const numericFields = [
-      'gross_weight',
-      'less_weight',
-      'net_weight',
-      'amount',
-    ];
+    // Convert value to a number or default to 0 if it's invalid
+    const updatedValue = Number(value) || 0;
 
     const updatedTable = purchaseReceiptTable.map((item: any) => {
       if (item.idx === id) {
-        const updatedValue = numericFields.includes(fieldName)
-          ? parseFloat(value)
-          : value;
-
         let updatedItem = { ...item, [fieldName]: updatedValue };
 
-        // If the field is 'gross_weight', recalculate 'net_weight'
-        if (fieldName === 'gross_weight') {
-          const lessWeight = parseFloat(item.less_weight) || 0;
-          const netWeight = updatedValue - lessWeight;
-          updatedItem = {
-            ...updatedItem,
-            net_weight: parseFloat(netWeight?.toFixed(3)),
-          };
-        }
+        // Recalculate related fields based on updated field
+        if (
+          fieldName === 'gross_weight' ||
+          fieldName === 'less_weight' ||
+          fieldName === 'net_weight'
+        ) {
+          const grossWeight = Number(item.gross_weight) || 0;
+          const lessWeight = Number(item.less_weight) || 0;
+          let netWeight;
 
-        // If the field is 'less_weight', recalculate 'net_weight'
-        if (fieldName === 'less_weight') {
-          const grossWeight = parseFloat(item.gross_weight) || 0;
-          const netWeight = grossWeight - updatedValue;
-          updatedItem = {
-            ...updatedItem,
-            net_weight: parseFloat(netWeight?.toFixed(3)),
-          };
-        }
-
-        // If the field is 'net_weight', recalculate 'less_weight'
-        if (fieldName === 'net_weight') {
-          const grossWeight = parseFloat(item.gross_weight) || 0;
-          const lessWeight = grossWeight - updatedValue;
-          updatedItem = {
-            ...updatedItem,
-            less_weight: parseFloat(lessWeight?.toFixed(3)),
-          };
+          // If gross_weight is updated, recalculate net_weight
+          if (fieldName === 'gross_weight') {
+            netWeight = updatedValue - lessWeight;
+            updatedItem = {
+              ...updatedItem,
+              net_weight: Number(netWeight.toFixed(3)),
+            };
+          }
+          // If less_weight is updated, recalculate net_weight
+          else if (fieldName === 'less_weight') {
+            netWeight = grossWeight - updatedValue;
+            updatedItem = {
+              ...updatedItem,
+              net_weight: Number(netWeight.toFixed(3)),
+            };
+          }
+          // If net_weight is updated, recalculate less_weight
+          else if (fieldName === 'net_weight') {
+            const newLessWeight = grossWeight - updatedValue;
+            updatedItem = {
+              ...updatedItem,
+              less_weight: Number(newLessWeight.toFixed(3)),
+            };
+          }
         }
 
         return updatedItem;

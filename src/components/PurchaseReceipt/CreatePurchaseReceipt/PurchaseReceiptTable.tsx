@@ -77,10 +77,10 @@ const PurchaseReceiptTable = ({
                     <td className="table-data-input">
                       <input
                         type="number"
+                        step="any" // Allows any decimal values
                         className="form-control custom-input-field-t text-end"
-                        defaultValue={row.gross_weight}
                         value={
-                          parseFloat(row.gross_weight) ? row.gross_weight : ''
+                          row.gross_weight !== undefined ? row.gross_weight : ''
                         }
                         onChange={(e) =>
                           handlePurchaseTableFieldChange(
@@ -95,10 +95,10 @@ const PurchaseReceiptTable = ({
                     <td className="table-data-input">
                       <input
                         type="number"
+                        step="any" // Allows any decimal values
                         className="form-control custom-input-field-t text-end"
-                        defaultValue={row.less_weight}
                         value={
-                          parseFloat(row.less_weight) ? row.less_weight : ''
+                          row.less_weight !== undefined ? row.less_weight : ''
                         }
                         onChange={(e) =>
                           handlePurchaseTableFieldChange(
@@ -113,9 +113,11 @@ const PurchaseReceiptTable = ({
                     <td className="table-data-input">
                       <input
                         type="number"
+                        step="any" // Allows any decimal values
                         className="form-control custom-input-field-t text-end"
-                        defaultValue={row.net_weight}
-                        value={parseFloat(row.net_weight) ? row.net_weight : ''}
+                        value={
+                          row.net_weight !== undefined ? row.net_weight : ''
+                        }
                         onChange={(e) =>
                           handlePurchaseTableFieldChange(
                             e.target.value,
@@ -129,10 +131,9 @@ const PurchaseReceiptTable = ({
                     <td className="table-data-input">
                       <input
                         type="number"
+                        step="any" // Allows any decimal values
                         className="form-control custom-input-field-t text-end"
-                        defaultValue={row.amount}
-                        value={parseFloat(row.amount) ? row.amount : ''}
-                        onKeyDown={(e) => handleKeyDown(e, row.idx)}
+                        value={row.amount !== undefined ? row.amount : ''}
                         onChange={(e) =>
                           handlePurchaseTableFieldChange(
                             e.target.value,
@@ -140,7 +141,6 @@ const PurchaseReceiptTable = ({
                             row.idx
                           )
                         }
-                        //   onBlur={(e) => handleBlur(e, row.id)}
                         readOnly={readOnlyFields}
                       />
                     </td>
