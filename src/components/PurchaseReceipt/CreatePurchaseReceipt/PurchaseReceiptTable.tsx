@@ -134,6 +134,7 @@ const PurchaseReceiptTable = ({
                         step="any" // Allows any decimal values
                         className="form-control custom-input-field-t text-end"
                         value={row.amount !== undefined ? row.amount : ''}
+                        onKeyDown={(e) => handleKeyDown(e, row.idx)}
                         onChange={(e) =>
                           handlePurchaseTableFieldChange(
                             e.target.value,
