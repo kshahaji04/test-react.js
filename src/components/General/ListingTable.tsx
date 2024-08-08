@@ -183,7 +183,7 @@ const ListingTable = ({ tableListingData, userRolesData }: any) => {
                             <div className="col-lg-4 col-md-4 col-12">
                               <a
                                 onClick={() => handleCancelChitti(data.name)}
-                                className="button-section-text text-danger "
+                                className="button-section-text text-danger"
                               >
                                 Cancel
                               </a>
