@@ -130,12 +130,11 @@ const ReportsFilters = ({
             </div>
           </>
         )}
-        <div className="col-lg-2 col-md-4 col-4 d-flex align-items-center">
+        <div className="col-lg-2 col-md-4 col-4 d-flex align-items-end report-search-btn">
           <button
-            className="btn btn-primary m-0 px-2 py-0"
+            className="btn btn-primary m-0 px-4 py-0"
             onClick={handleSearchBtn}
           >
-            <i className="fa-solid fa-magnifying-glass pe-2 "></i>
             Search
           </button>
         </div>
