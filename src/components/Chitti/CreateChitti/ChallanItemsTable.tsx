@@ -106,10 +106,11 @@ const ChallanItemsTable = ({
 
   useEffect(() => {
     // Calculate column totals whenever tableData changes
+    console.log('tabledata', tableData);
     const newColumnTotals = tableData.reduce(
       (totals: any, row: any) => {
         const grossWeight = Number(row.gross_weight) || 0;
-        const lessWeight = Number(row.less_weight) || 0;
+        const lessWeight = Number(row.less_wt) || 0;
         const netWeight = Number(row.net_weight) || 0;
         const amount = Number(row.amount) || 0;
 
