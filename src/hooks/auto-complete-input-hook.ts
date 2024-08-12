@@ -50,10 +50,12 @@ const useAutoCompleteInputHook = ({
     setShowDropdown(true);
     setSelectedDropdownValue(e.target.value);
     const query = e.target.value;
+    console.log('drowpdownlist', drowpdownlist, typeof query);
 
     const updatedFilterList: any = drowpdownlist?.filter((item: any) => {
       return item?.toLowerCase()?.indexOf(query?.toLowerCase()) !== -1;
     });
+    console.log('drowpdownlist up', updatedFilterList);
 
     if (updatedFilterList?.length > 0) {
       setFilterDropdownList(updatedFilterList);
@@ -63,7 +65,8 @@ const useAutoCompleteInputHook = ({
         setSelectedIndex(-1);
       }
     } else {
-      // setFilterDropdownList([]);
+      const data: any = ['No Record Match'];
+      setFilterDropdownList(data);
     }
 
     // handleKeyDown(e, fieldname);

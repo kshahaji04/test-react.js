@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { BASE_URL, headerGenerator } from '../../config/api-config';
-import { handleApiError } from '../general/error-handler';
+import { BASE_URL } from '../../config/api-config';
+import { callPostAPI } from '../utils';
 
 const CreateEmeraldChittiApi = async (request: any) => {
   let response: any;
@@ -23,16 +22,9 @@ const CreateEmeraldChittiApi = async (request: any) => {
     emerald_chitti_table: request.emeraldChittiTableData,
   };
 
-  const getHeaders = headerGenerator(request.token);
+  const url: any = `${BASE_URL}${params}`;
 
-  await axios
-    .post(`${BASE_URL}${params}`, body, getHeaders)
-    .then((res: any) => {
-      response = res;
-    })
-    .catch((err: any) => {
-      response = handleApiError(err);
-    });
+  response = await callPostAPI(url, body, request.token);
   return response;
 };
 

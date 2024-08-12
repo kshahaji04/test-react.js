@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { BASE_URL, headerGenerator } from '../../config/api-config';
-import { handleApiError } from '../general/error-handler';
+import { BASE_URL } from '../../config/api-config';
+import { callPostAPI } from '../utils';
 
 const AddProjectSubCategoryMappingApi: any = async (
   token: any,
@@ -9,8 +8,6 @@ const AddProjectSubCategoryMappingApi: any = async (
   plain: any
 ) => {
   let response: any;
-
-  const getHeaders = headerGenerator(token);
 
   let body = {
     version: 'v1',
@@ -22,14 +19,9 @@ const AddProjectSubCategoryMappingApi: any = async (
     can_be_deleted: 1,
   };
 
-  await axios
-    .post(`${BASE_URL}/api/method/challan.sdk.api`, body, getHeaders)
-    .then((res: any) => {
-      response = res;
-    })
-    .catch((err: any) => {
-      response = handleApiError(err);
-    });
+  const url: any = `${BASE_URL}/api/method/challan.sdk.api`;
+
+  response = await callPostAPI(url, body, token);
   return response;
 };
 

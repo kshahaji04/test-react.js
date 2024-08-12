@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { BASE_URL, headerGenerator } from '../../config/api-config';
-import { handleApiError } from '../general/error-handler';
+import { BASE_URL } from '../../config/api-config';
+import { callPostAPI } from '../utils';
 
 const AddSubCategoryApi: any = async (
   token: any,
@@ -9,22 +8,15 @@ const AddSubCategoryApi: any = async (
 ) => {
   let response: any;
 
-  const getHeaders = headerGenerator(token);
-
   let body = {
     title: title,
     category: category,
     can_be_deleted: 1,
   };
 
-  await axios
-    .post(`${BASE_URL}/api/resource/Sub Category`, body, getHeaders)
-    .then((res: any) => {
-      response = res;
-    })
-    .catch((err: any) => {
-      response = handleApiError(err);
-    });
+  const url: any = `${BASE_URL}/api/resource/Sub Category`;
+
+  response = await callPostAPI(url, body, token);
   return response;
 };
 

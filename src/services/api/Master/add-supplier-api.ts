@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { BASE_URL, headerGenerator } from '../../config/api-config';
-import { handleApiError } from '../general/error-handler';
+import { BASE_URL } from '../../config/api-config';
+import { callPostAPI } from '../utils';
 
 const CreateNewSupplierApi: any = async (
   token: any,
@@ -13,8 +12,6 @@ const CreateNewSupplierApi: any = async (
   let method: any = 'create_supplier_name_supplier_group';
   let entity: any = 'post_supplier_name_supplier_group';
 
-  const getHeaders = headerGenerator(token);
-
   let body = {
     version: version,
     method: method,
@@ -23,14 +20,9 @@ const CreateNewSupplierApi: any = async (
     supplier_group: groupName,
   };
 
-  await axios
-    .post(`${BASE_URL}/api/method/challan.sdk.api`, body, getHeaders)
-    .then((res: any) => {
-      response = res;
-    })
-    .catch((err: any) => {
-      response = handleApiError(err);
-    });
+  const url: any = `${BASE_URL}/api/method/challan.sdk.api`;
+
+  response = await callPostAPI(url, body, token);
   return response;
 };
 
