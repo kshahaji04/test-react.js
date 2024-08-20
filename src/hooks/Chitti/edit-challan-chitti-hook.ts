@@ -107,16 +107,8 @@ const useEditChallanChitti: any = () => {
   };
 
   const handleUpdateChallanSubmit = async () => {
-    const isHUIDHasData = narrationTableData.map((obj: any) => {
-      if (obj.hasOwnProperty('product')) {
-        return { ...obj, huid_pieces: 0, huid_weight: 0 };
-      } else {
-        return obj;
-      }
-    });
-
     const checkObjectHasValuesInHuid = () => {
-      return isHUIDHasData.filter((item: any) => {
+      return narrationTableData.filter((item: any) => {
         return (
           item.hasOwnProperty('product') &&
           item.product !== null &&

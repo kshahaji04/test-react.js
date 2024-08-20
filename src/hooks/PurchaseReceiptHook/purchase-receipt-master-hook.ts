@@ -85,7 +85,7 @@ const usePurchaseReceiptMasterHook = () => {
     id: any
   ) => {
     // Convert value to a number or default to 0 if it's invalid
-    const updatedValue = Number(value) || 0;
+    const updatedValue = fieldName !== "sub_category" ? Number(value) || 0 : value;
 
     const updatedTable = purchaseReceiptTable.map((item: any) => {
       if (item.idx === id) {
