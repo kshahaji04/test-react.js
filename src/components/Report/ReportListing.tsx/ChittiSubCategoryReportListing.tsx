@@ -1,8 +1,11 @@
 import NoRecord from '../../NoRecord';
-import ShowTotalAmountOfReportData from './ShowTotalAmountOfReportData';
 
 const ChittiSubCategoryReportListing = ({ reportData }: any) => {
+  const headers =
+    reportData.length > 0 && reportData[0] ? Object.keys(reportData[0]) : [];
   let lastSubCategoryColor: any = 'text-dark';
+
+  console.log("data", reportData)
   return (
     <div className="col-lg-12 col-12 mx-auto table-responsive report-table-container">
       {reportData?.length > 0 && reportData !== null ? (
@@ -25,8 +28,8 @@ const ChittiSubCategoryReportListing = ({ reportData }: any) => {
                   subCategory === reportData[index - 1]?.sub_category
                     ? lastSubCategoryColor
                     : lastSubCategoryColor === 'text-danger'
-                    ? 'text-dark'
-                    : 'text-danger';
+                      ? 'text-dark'
+                      : 'text-danger';
                 lastSubCategoryColor = textColor; // Update the color for the next iteration
                 return (
                   <tr className="report-table-row" key={index}>
@@ -36,15 +39,33 @@ const ChittiSubCategoryReportListing = ({ reportData }: any) => {
                       {data.sub_category}
                     </td>
                     <td>{data.client_name}</td>
-                    <td>{data.total_gross_weight?.toFixed(3)}</td>
-                    <td>{data.total_net_weight?.toFixed(3)}</td>
-                    <td>{data.total_amount?.toFixed(2)}</td>
+                    <td>{data.gross_weight?.toFixed(3)}</td>
+                    <td>{data.net_weight?.toFixed(3)}</td>
+                    <td>{data.amount?.toFixed(2)}</td>
                   </tr>
                 );
               })}
-              <ShowTotalAmountOfReportData data={reportData} colSpan="3" />
             </tbody>
           </table>
+          {reportData.length > 0 && (
+            <div className={`sticky-bottom report-total-row-at-bottom`}>
+              <table className={`table table-hover table-striped cursor`}>
+                <tbody>
+                  <tr className="row justify-content-center text-center fw-bold total_row_container">
+                    {/* Empty cells for alignment */}
+                    <td className="col"></td>
+                    <td className="col"></td>
+
+                    {/* Align the total values under the appropriate columns */}
+                    <td className="col text-start">{reportData[reportData.length - 1].client_name}</td>
+                    <td className="col">{reportData[reportData.length - 1].gross_weight?.toFixed(3)}</td>
+                    <td className="col">{reportData[reportData.length - 1].net_weight?.toFixed(3)}</td>
+                    <td className="col">{reportData[reportData.length - 1].amount?.toFixed(2)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )}
         </>
       ) : (
         <NoRecord />
