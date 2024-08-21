@@ -51,17 +51,17 @@ const ChittiSubCategoryReportListing = ({ reportData }: any) => {
             <div className={`sticky-bottom report-total-row-at-bottom`}>
               <table className={`table table-hover table-striped cursor`}>
                 <tbody>
-                  <tr className="row justify-content-center text-center fw-bold total_row_container">
-                    {/* Empty cells for alignment */}
-                    <td className="col"></td>
+                  <tr className="row justify-content-center mx-0 text-center fw-bold total_row_container">
                     <td className="col"></td>
                     <td className="col"></td>
 
                     {/* Align the total values under the appropriate columns */}
                     <td className="col text-start">{reportData[reportData.length - 1].client_name}</td>
-                    <td className="col">{reportData[reportData.length - 1].gross_weight?.toFixed(3)}</td>
-                    <td className="col">{reportData[reportData.length - 1].net_weight?.toFixed(3)}</td>
-                    <td className="col">{reportData[reportData.length - 1].amount?.toFixed(2)}</td>
+                    <td className="col"></td>
+                    <td className="col"></td>
+                    <td className="col text-end">{reportData[reportData.length - 1].gross_weight?.toFixed(3)}</td>
+                    <td className="col text-end">{reportData[reportData.length - 1].net_weight?.toFixed(3)}</td>
+                    <td className="col text-center">{reportData[reportData.length - 1].amount?.toFixed(2)}</td>
                   </tr>
                 </tbody>
               </table>
