@@ -54,6 +54,7 @@ const ChittiSubCategoryReportListing = ({ reportData }: any) => {
                     {/* Empty cells for alignment */}
                     <td className="col"></td>
                     <td className="col"></td>
+                    <td className="col"></td>
 
                     {/* Align the total values under the appropriate columns */}
                     <td className="col text-start">{reportData[reportData.length - 1].client_name}</td>
