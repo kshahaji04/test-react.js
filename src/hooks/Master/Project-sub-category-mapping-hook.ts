@@ -6,10 +6,14 @@ import {
   getProjectSubCategoryMapping,
   get_project_sub_category_mapping,
 } from '../../store/slices/Master/get-project-subcategory-mapping-slice';
+import useHandleStateUpdateHook from '../handle-state-update-hook';
 
 const useProjectSubCategoryMappingHook: any = () => {
   const dispatch = useDispatch();
   const accessToken: any = useSelector(get_access_token);
+
+  const { isLoading, setIsLoading } = useHandleStateUpdateHook();
+
 
   const projectSubCategoryMappingDataFromStore: any = useSelector(
     get_project_sub_category_mapping
@@ -23,6 +27,7 @@ const useProjectSubCategoryMappingHook: any = () => {
   }, []);
 
   useEffect(() => {
+    setIsLoading(true)
     if (
       projectSubCategoryMappingDataFromStore?.data?.length > 0 &&
       projectSubCategoryMappingDataFromStore?.data !== null
@@ -30,11 +35,13 @@ const useProjectSubCategoryMappingHook: any = () => {
       setProjectSubCategoryMappingList([
         ...projectSubCategoryMappingDataFromStore?.data,
       ]);
+      setIsLoading(false)
     } else {
       setProjectSubCategoryMappingList([]);
+      setIsLoading(false)
     }
   }, [projectSubCategoryMappingDataFromStore]);
-  return { ProjectSubCategoryMappingList };
+  return { ProjectSubCategoryMappingList, isLoading };
 };
 
 export default useProjectSubCategoryMappingHook;

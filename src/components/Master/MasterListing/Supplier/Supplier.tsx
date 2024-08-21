@@ -7,7 +7,7 @@ import AddSupplier from './AddSupplier';
 import MasterTableListing from '../../MasterTableListing';
 
 const Supplier = () => {
-  const { supplierNameSupplierGroupList, supplierGroupList }: any =
+  const { supplierNameSupplierGroupList, supplierGroupList, isLoading }: any =
     useSupplierHook();
 
   const [inputName, setInputName] = useState('');
@@ -60,6 +60,7 @@ const Supplier = () => {
                 handleTableViewRows={handleTableViewRows}
                 tableViewData={tableViewData}
                 dropdownData={supplierGroupList}
+                isLoading={isLoading}
               />
             </Tab>
             <Tab eventKey="longer-tab" title="Add Supplier">

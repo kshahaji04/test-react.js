@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { get_access_token } from '../../store/slices/auth/token-login-slice';
-import { useSelector } from 'react-redux';
 import {
   get_supplier_name_supplier_group,
   getsupplierAndSupplierGroup,
@@ -10,10 +9,13 @@ import {
   getSupplierGroupList,
   get_supplier_group_data,
 } from '../../store/slices/Master/get-supplier-group-slice';
+import useHandleStateUpdateHook from '../handle-state-update-hook';
 
 const useSupplierHook = () => {
   const dispatch = useDispatch();
+  const { isLoading, setIsLoading } = useHandleStateUpdateHook();
   const accessToken: any = useSelector(get_access_token);
+
 
   const getSupplierGroupDataFromStore: any = useSelector(
     get_supplier_group_data
@@ -28,35 +30,42 @@ const useSupplierHook = () => {
   const [supplierGroupList, setSupplierGroupList] = useState<any>([]);
 
   useEffect(() => {
+    setIsLoading(true);
     dispatch(getsupplierAndSupplierGroup(accessToken?.token));
     dispatch(getSupplierGroupList(accessToken?.token));
-  }, []);
+  }, [dispatch, accessToken?.token]);
 
   useEffect(() => {
-    if (
-      supplierAndSupplierGroupDataFromStore?.data?.length > 0 &&
-      supplierAndSupplierGroupDataFromStore?.data !== null
-    ) {
+    if (supplierAndSupplierGroupDataFromStore?.data) {
       setSupplierNameSupplierGroupList([
         ...supplierAndSupplierGroupDataFromStore?.data,
       ]);
-    } else {
+      setIsLoading(false); // Data is fetched, stop loading
+    } else if (
+      supplierAndSupplierGroupDataFromStore?.data === null ||
+      supplierAndSupplierGroupDataFromStore?.data?.length === 0
+    ) {
       setSupplierNameSupplierGroupList([]);
+      setIsLoading(false); // No data, stop loading
     }
   }, [supplierAndSupplierGroupDataFromStore]);
 
   useEffect(() => {
-    if (
-      getSupplierGroupDataFromStore?.data?.length > 0 &&
-      getSupplierGroupDataFromStore?.data !== null
-    ) {
+    if (getSupplierGroupDataFromStore?.data) {
       setSupplierGroupList([...getSupplierGroupDataFromStore?.data]);
-    } else {
+      setIsLoading(false); // Data is fetched, stop loading
+    } else if (
+      getSupplierGroupDataFromStore?.data === null ||
+      getSupplierGroupDataFromStore?.data?.length === 0
+    ) {
       setSupplierGroupList([]);
+      setIsLoading(false); // No data, stop loading
     }
   }, [getSupplierGroupDataFromStore]);
 
-  return { supplierNameSupplierGroupList, supplierGroupList };
+  console.log("sett", isLoading)
+
+  return { supplierNameSupplierGroupList, supplierGroupList, isLoading };
 };
 
 export default useSupplierHook;

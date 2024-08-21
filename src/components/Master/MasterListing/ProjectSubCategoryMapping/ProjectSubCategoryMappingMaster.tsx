@@ -8,7 +8,7 @@ import AddProjectSubCategoryMapping from './AddProjectSubCategoryMapping';
 import MasterTableListing from '../../MasterTableListing';
 
 const ProjectSubCategoryMappingMaster = () => {
-  const { ProjectSubCategoryMappingList }: any =
+  const { ProjectSubCategoryMappingList, isLoading }: any =
     useProjectSubCategoryMappingHook();
 
   const { subCategoryCategoryData } = useSubCategoryHook();
@@ -78,6 +78,7 @@ const ProjectSubCategoryMappingMaster = () => {
                 tableViewData={tableViewData}
                 handleTableViewRows={handleTableViewRows}
                 dropdownData={subCategoryCategoryData}
+                isLoading={isLoading}
               />
             </Tab>
             <Tab eventKey="longer-tab" title="Add Project Sub Category Mapping">

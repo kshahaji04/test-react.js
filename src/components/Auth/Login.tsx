@@ -50,8 +50,8 @@ const Login = () => {
       <div className="container mt-5">
         <div className="container d-flex justify-content-center login-page-container">
           <div className="row">
-            <div className="col-lg-12 card login-card ">
-              <div className="p-lg-5 p-0 border">
+            <div className="col-lg-12 card login-card">
+              <div className="p-lg-5 p-0 ">
                 <p className="fs-3 text-center">Log In</p>
                 <div className="card-body p-0">
                   <form
@@ -83,9 +83,8 @@ const Login = () => {
                         />
                         <div onClick={handleShowPassword}>
                           <i
-                            className={`fa fa-eye p-1 fs-6 pswd-eye-icon ${
-                              showPassword ? 'text-primary' : ''
-                            }`}
+                            className={`fa fa-eye p-1 fs-6 pswd-eye-icon ${showPassword ? 'text-primary' : ''
+                              }`}
                           ></i>
                         </div>
                       </div>

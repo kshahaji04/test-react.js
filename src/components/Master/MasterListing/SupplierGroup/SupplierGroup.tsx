@@ -7,7 +7,7 @@ import CreateNewSupplierGroup from './CreateNewSupplierGroup';
 import MasterTableListing from '../../MasterTableListing';
 
 const SupplierGroup = () => {
-  const { supplierGroupList } = useSupplierHook();
+  const { supplierGroupList, isLoading } = useSupplierHook();
 
   const [searchField, setSearchField] = useState<any>('');
   const [tableViewData, setTableViewData] = useState<any>(20);
@@ -47,6 +47,7 @@ const SupplierGroup = () => {
                 filteredList={filterList}
                 handleTableViewRows={handleTableViewRows}
                 tableViewData={tableViewData}
+                isLoading={isLoading}
               />
             </Tab>
             <Tab eventKey="longer-tab" title="Add Supplier Group">

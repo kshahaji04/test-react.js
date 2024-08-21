@@ -7,6 +7,30 @@
   font-family: 'Nunito' !important;
 }
 
+/* Toast notification*/
+.Toastify__toast-container {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: end !important;
+}
+
+.Toastify__toast {
+  font-size: 13px !important;
+  padding: 8px !important;
+  min-height: 30px !important;
+  line-height: 1.2 !important;
+  width: 80%;
+}
+
+.Toastify__toast-body {
+  margin: 0 !important;
+}
+
+.Toastify__close-button {
+  font-size: 13px !important;
+}
+
+
 .form-label-bold {
   font-weight: 600;
 }
