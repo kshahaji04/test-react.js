@@ -13,6 +13,7 @@ const ChittiSubCategoryReportListing = ({ reportData }: any) => {
             <thead className="report-table-head-row sticky-top">
               <tr className="report-table-head-tr text-uppercase">
                 <th scope="col">Sr No.</th>
+                <th scope="col">Date</th>
                 <th scope="col">Sub Category</th>
                 <th scope="col">Client Name</th>
                 <th scope="col">Gross Weight</th>
@@ -33,7 +34,7 @@ const ChittiSubCategoryReportListing = ({ reportData }: any) => {
                 return (
                   <tr className="report-table-row" key={index}>
                     <td>{index + 1}</td>
-
+                    <td>{data.date}</td>
                     <td className={`${textColor} subcategory-title`}>
                       {data.sub_category}
                     </td>
