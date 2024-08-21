@@ -1,9 +1,7 @@
 import NoRecord from '../../NoRecord';
 
 const ChittiSubCategoryReportListing = ({ reportData }: any) => {
-  const headers =
-    reportData.length > 0 && reportData[0] ? Object.keys(reportData[0]) : [];
-  let lastSubCategoryColor: any = 'text-dark';
+
 
   console.log("data", reportData)
   return (
