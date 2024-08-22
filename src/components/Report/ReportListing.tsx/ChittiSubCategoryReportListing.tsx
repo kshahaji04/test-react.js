@@ -1,10 +1,8 @@
 import NoRecord from '../../NoRecord';
 
 const ChittiSubCategoryReportListing = ({ reportData }: any) => {
-
   let lastSubCategoryColor: any = 'text-dark';
 
-  console.log("data", reportData)
   return (
     <div className="col-lg-12 col-12 mx-auto table-responsive report-table-container">
       {reportData?.length > 0 && reportData !== null ? (
@@ -45,33 +43,23 @@ const ChittiSubCategoryReportListing = ({ reportData }: any) => {
                   </tr>
                 );
               })}
+              <tr className='sticky-bottom report-total-row-at-bottom text-light'>
+                <td></td>
+                <td>{reportData[reportData.length - 1].date}</td>
+                <td>{reportData[reportData.length - 1].client_name}</td>
+                <td>{reportData[reportData.length - 1].sub_category}</td>
+                <td>{reportData[reportData.length - 1].gross_weight?.toFixed(3)}</td>
+                <td>{reportData[reportData.length - 1].net_weight?.toFixed(3)}</td>
+                <td>{reportData[reportData.length - 1].amount?.toFixed(2)}</td>
+              </tr>
             </tbody>
           </table>
-          {reportData.length > 0 && (
-            <div className={`sticky-bottom report-total-row-at-bottom`}>
-              <table className={`table table-hover table-striped cursor`}>
-                <tbody>
-                  <tr className="row justify-content-center mx-0 text-center fw-bold total_row_container">
-                    <td className="col"></td>
-                    <td className="col"></td>
-
-                    {/* Align the total values under the appropriate columns */}
-                    <td className="col text-start">{reportData[reportData.length - 1].client_name}</td>
-                    <td className="col"></td>
-                    <td className="col"></td>
-                    <td className="col text-end">{reportData[reportData.length - 1].gross_weight?.toFixed(3)}</td>
-                    <td className="col text-end">{reportData[reportData.length - 1].net_weight?.toFixed(3)}</td>
-                    <td className="col text-center">{reportData[reportData.length - 1].amount?.toFixed(2)}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          )}
         </>
       ) : (
         <NoRecord />
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 
